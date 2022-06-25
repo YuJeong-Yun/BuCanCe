@@ -13,7 +13,7 @@
 	<!-- Application Loggers -->
 	<logger name="com.bcc.web">
 		<level value="info" />
-	</logger>
+	</logger> 
 	
 	<logger name="com.bcc.persistence">
 		<level value="info" />
