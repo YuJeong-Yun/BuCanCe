@@ -37,7 +37,7 @@ public class testController {
 		Elements e1 = doc.getElementsByAttributeValue("class", "ResizableImage_image__1_8js SingleImage_horizontal__2SBaY");
 //		Element e2 = e1.get(0);
 //		Elements e3 = e2.select("span");
-		
+		//ㅇㅇ
 		log.info(e1.html()+"");
 //		log.info(e1.get(0)+"");
 //		log.info(e2.select("span")+"");
