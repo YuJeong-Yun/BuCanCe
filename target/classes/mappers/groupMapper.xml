@@ -6,8 +6,10 @@
   
   <mapper namespace="com.bcc.mapper.groupMapper">
   
-  	<select id="getNow" resultType="string">
-  		select now() 
+  	<select id="getMemberList" resultType="MemberVO">
+  		select id, name, license
+  		from bcc_member 
+  		where id like concat('%', #{id}, '%')
   	</select>
   	
   </mapper>
