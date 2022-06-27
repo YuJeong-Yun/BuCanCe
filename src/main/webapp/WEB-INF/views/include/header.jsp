@@ -9,7 +9,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
+    <title>부산바캉스</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -61,10 +61,10 @@
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./rooms.html">Rooms</a></li>
-                <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="./pages.html">Pages</a>
+                <li class="active"><a href="./index.jsp">Home</a></li>
+                <li><a href="#">관광지 소개</a></li>
+                <li><a href="#">숙박업소</a></li>
+                <li><a href="#">여행 플래너</a>
                     <ul class="dropdown">
                         <li><a href="./room-details.html">Room Details</a></li>
                         <li><a href="#">Deluxe Room</a></li>
@@ -72,8 +72,6 @@
                         <li><a href="#">Premium Room</a></li>
                     </ul>
                 </li>
-                <li><a href="./blog.html">News</a></li>
-                <li><a href="./contact.html">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -139,10 +137,10 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                                    <li class="active"><a href="./index.html">Home</a></li>
-                                    <li><a href="./rooms.html">Rooms</a></li>
-                                    <li><a href="./about-us.html">About Us</a></li>
-                                    <li><a href="./pages.html">Pages</a>
+                <li class="active"><a href="./index.jsp">Home</a></li>
+                <li><a href="#">관광지 소개</a></li>
+                <li><a href="#">숙박업소</a></li>
+                <li><a href="#">여행 플래너</a>
                                         <ul class="dropdown">
                                             <li><a href="./room-details.html">Room Details</a></li>
                                             <li><a href="./blog-details.html">Blog Details</a></li>
@@ -150,8 +148,6 @@
                                             <li><a href="#">Premium Room</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="./blog.html">News</a></li>
-                                    <li><a href="./contact.html">Contact</a></li>
                                 </ul>
                             </nav>
                             <div class="nav-right search-switch">
