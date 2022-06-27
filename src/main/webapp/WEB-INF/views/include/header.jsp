@@ -61,19 +61,38 @@
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="./index">Home</a></li>
-                <li><a href="./rooms">Rooms</a></li>
-                <li><a href="./about-us">About Us</a></li>
-                <li><a href="./pages">Pages</a>
-                    <ul class="dropdown">
-                        <li><a href="./room-details">Room Details</a></li>
-                        <li><a href="#">Deluxe Room</a></li>
-                        <li><a href="#">Family Room</a></li>
-                        <li><a href="#">Premium Room</a></li>
+                <li class="active"><a href="./index.html">NOTICE</a>
+                   <ul class="dropdown">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
                     </ul>
                 </li>
-                <li><a href="./blog">News</a></li>
-                <li><a href="./contact">Contact</a></li>
+                <li><a href="./rooms.html">TOUR</a>
+	                <ul class="dropdown">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+	                    </ul>
+	                </li>
+                <li><a href="./about-us.html">HOTEL</a>
+	                <ul class="dropdown">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+	                    </ul>
+	                </li>
+                <li><a href="./pages.html">PLAN</a>
+                    <ul class="dropdown">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -130,7 +149,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="./index.jsp">
+                            <a href="./index.html">
                                 <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="">
                             </a>
                         </div>
@@ -139,20 +158,39 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                                    <li class="active"><a href="./index">Home</a></li>
-                                    <li><a href="./rooms">Rooms</a></li>
-                                    <li><a href="./about-us">About Us</a></li>
-                                    <li><a href="./pages">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="./room-details">Room Details</a></li>
-                                            <li><a href="./blog-details">Blog Details</a></li>
-                                            <li><a href="#">Family Room</a></li>
-                                            <li><a href="#">Premium Room</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="./blog">News</a></li>
-                                    <li><a href="./contact">Contact</a></li>
-                                </ul>
+					                <li class="active"><a href="./index.html">NOTICE</a>
+					                   <ul class="dropdown">
+					                        <li><a href="#">1</a></li>
+					                        <li><a href="#">2</a></li>
+					                        <li><a href="#">3</a></li>
+					                        <li><a href="#">4</a></li>
+					                    </ul>
+					                </li>
+					                <li><a href="./rooms.html">TOUR</a>
+						                <ul class="dropdown">
+					                        <li><a href="#">1</a></li>
+					                        <li><a href="#">2</a></li>
+					                        <li><a href="#">3</a></li>
+					                        <li><a href="#">4</a></li>
+						                    </ul>
+						                </li>
+					                <li><a href="./about-us.html">HOTEL</a>
+						                <ul class="dropdown">
+					                        <li><a href="#">1</a></li>
+					                        <li><a href="#">2</a></li>
+					                        <li><a href="#">3</a></li>
+					                        <li><a href="#">4</a></li>
+						                    </ul>
+						                </li>
+					                <li><a href="./pages.html">PLAN</a>
+					                    <ul class="dropdown">
+					                        <li><a href="#">1</a></li>
+					                        <li><a href="#">2</a></li>
+					                        <li><a href="#">3</a></li>
+					                        <li><a href="#">4</a></li>
+					                    </ul>
+					                </li>
+					             </ul>
                             </nav>
                             <div class="nav-right search-switch">
                                 <i class="icon_search"></i>

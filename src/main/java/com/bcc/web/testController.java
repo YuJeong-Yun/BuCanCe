@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/accomodation/*")
+@RequestMapping("/accomodation1/*")
 public class testController {
 
 	
@@ -26,27 +26,27 @@ public class testController {
 	
 	// roomSearch 페이지
 	// http://localhost:8088/accomodation/roomSearch
-	@RequestMapping(value = "/roomSearch",method = RequestMethod.GET)
-	public void roomSearchGET(Model model) throws IOException {
-		log.info(" roomSearchGET() 호출 ");
-		
-		String url ="https://finance.naver.com/item/main.naver?code=377300";
-		
-		Document doc = Jsoup.connect(url).get();
-		
-		Elements e1 = doc.getElementsByAttributeValue("class", "ResizableImage_image__1_8js SingleImage_horizontal__2SBaY");
-//		Element e2 = e1.get(0);
-//		Elements e3 = e2.select("span");
-		//ㅇㅇ
-		log.info(e1.html()+"");
-//		log.info(e1.get(0)+"");
-//		log.info(e2.select("span")+"");
-		
-//		log.info(e3.get(0).text()+"");
-		
-//		model.addAttribute("e3", e3);
-		
-	}
+//	@RequestMapping(value = "/roomSearch",method = RequestMethod.GET)
+//	public void roomSearchGET(Model model) throws IOException {
+//		log.info(" roomSearchGET() 호출 ");
+//		
+//		String url ="https://finance.naver.com/item/main.naver?code=377300";
+//		
+//		Document doc = Jsoup.connect(url).get();
+//		
+//		Elements e1 = doc.getElementsByAttributeValue("class", "ResizableImage_image__1_8js SingleImage_horizontal__2SBaY");
+////		Element e2 = e1.get(0);
+////		Elements e3 = e2.select("span");
+//		//ㅇㅇ
+//		log.info(e1.html()+"");
+////		log.info(e1.get(0)+"");
+////		log.info(e2.select("span")+"");
+//		
+////		log.info(e3.get(0).text()+"");
+//		
+////		model.addAttribute("e3", e3);
+//		
+//	}
 		
 	// about-us 페이지
 	// http://localhost:8088/templateView/about-us
