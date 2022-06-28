@@ -190,28 +190,29 @@
                  <a style="padding-left: 30px">오늘 날짜 : <span id="today"></span></a>
        
             </div>
-            <form >
+            
+            
+            
+            <form action="/accomodation/roomList" method="post">
+            
           <select name="area">  
             <optgroup label="지역">
-            <option >지역선택</option>
+            <option value="favorite""">지역선택</option>
+            <option value="favorite">인기</option>
             <option value="haeundae">해운대</option>
-            <option value="gwanganri">광안리</option>
-            <option value="seomern">서면</option>
-            <option value="dongrae">동래</option>
             </optgroup>
             </select>
            
            &nbsp;
            
-            <select name="person_select">  
-            <optgroup label="객실인원">
-            <option>객실인원선택</option>
-            <option value="2">1~2인</option>
-            <option value="4">3~4인</option>
-            <option value="6">5~6인</option>
-            
-            </optgroup>
-            </select>
+<!--             <select name="person_select">   -->
+<!--             <optgroup label="객실인원"> -->
+<!--             <option>객실인원선택</option> -->
+<!--             <option value="2">1~2인</option> -->
+<!--             <option value="4">3~4인</option> -->
+<!--             <option value="6">5~6인</option> -->
+<!--             </optgroup> -->
+<!--             </select> -->
             
             
            <input type="text" placeholder="원하는 숙소명" name="place_name">
@@ -299,10 +300,10 @@
         <div class="container">
             <div class="row">
             <c:set var="a" />
-               <c:forEach items="${roomList}" begin="1" end="9">
+               <c:forEach items="${roomList}" begin="1" end="${roomList.size()}">
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                    <a href="/accomodation/roomInfo${roomList.get(a).room_link}">
+                    <a href="/accomodation/roomInfo?bno=${roomList.get(a).room_link}">
                     <img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200">
                     </a>
                         <div class="ri-text">
@@ -342,12 +343,15 @@
                 
                 <div class="col-lg-12">
                     <div class="room-pagination">
-                    <c:forEach begin="1" end="${roomList.size()/9}">
+                    
+                     <a href="#"><i class="fa fa-long-arrow-left"> Pre </i></a>
+                    
+                    <c:forEach begin="1" end="${Math.ceil(roomList.size()/9)}">
                     <c:set var="PageNum" value="${PageNum+1 }"/>
                      	
-                     	<c:if test="${PageNum<5}">
+                     	<c:if test="${PageNum<=5}">
                      	
-                     	<a href="#">${PageNum}</a>
+                     	<a href="/accomodation/roomList?PageNum=${PageNum}">${PageNum}</a>
                      	
                      	</c:if>
                      	
@@ -355,6 +359,7 @@
                     </c:forEach>
                        
                         <a href="#">Next <i class="fa fa-long-arrow-right"></i></a>
+                        
                     </div>
                 </div>
             </div>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bcc.domain.roomSearch;
 import com.bcc.service.roomService;
 
 //숙박컨트롤러 
@@ -60,26 +61,42 @@ public class accomodationController {
 
 	}
 
-	// roomList 페이지
+	// roomList 페이지 방목록페이지
 	// http://localhost:8088/accomodation/roomList
 	@RequestMapping(value = "/roomList", method = RequestMethod.GET)
 	public void roomListGET(Model model) throws IOException {
 
 		log.info(" roomListGET() 호출 ");
 
-		// Jsoup를 이용해서 크롤링 - 여기어때
-//						String url = "https://www.goodchoice.kr/product/detail?ano=61754&adcno=2&sel_date=2022-06-27&sel_date2=2022-06-30"; // 크롤링할 url지정
-		String url = "https://www.goodchoice.kr/product/home/12";
+			
+			JSONArray roomList = service.roomList();
 
-		Document doc = null; // Document에 페이지의 전체 소스가 저장됨
+			model.addAttribute("roomList", roomList);
 
-		JSONArray roomList = service.roomSearch();
-
-		model.addAttribute("roomList", roomList);
-
+	
+	
+		
 	}
 	
-	// roomInfo 페이지
+	// roomList 페이지 방목록검색
+	// http://localhost:8088/accomodation/roomList
+	@RequestMapping(value = "/roomList", method = RequestMethod.POST)
+	public void roomListPOST(Model model,roomSearch rs) throws IOException {
+
+		log.info(" roomListPOST() 호출 ");
+
+		
+		JSONArray roomList = service.roomSearchList(rs);
+//
+		model.addAttribute("roomList", roomList);
+		
+		
+			
+	}
+	
+	
+	
+	// roomInfo 페이지 방정보페이지
 	// http://localhost:8088/accomodation/roomInfo
 	@RequestMapping(value = "/roomInfo", method = RequestMethod.GET)
 	public void roomInfoGET(Model model,@RequestParam("bno") String bno) throws IOException {
@@ -87,13 +104,9 @@ public class accomodationController {
 			log.info(" roomInfoGET() 호출 ");
 
 			// Jsoup를 이용해서 크롤링 - 여기어때
-			String url = "bno";
+			String url = bno;
 
-			Document doc = null; // Document에 페이지의 전체 소스가 저장됨
-
-			JSONArray roomList = service.roomSearch();
-
-			model.addAttribute("roomList", roomList);
+			log.info(url);
 
 		}
 	
