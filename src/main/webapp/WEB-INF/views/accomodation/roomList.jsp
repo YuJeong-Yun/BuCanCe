@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
     <meta charset="UTF-8">
@@ -295,7 +295,74 @@
 	<!-- Breadcrumb Section End -->
 	
     <!-- Rooms Section Begin -->
-    ${roomList.get(0).room_title}
+	 <section class="rooms-section spad">
+        <div class="container">
+            <div class="row">
+            <c:set var="a" />
+               <c:forEach items="${roomList}" begin="1" end="9">
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-item">
+                    <a href="/accomodation/roomInfo${roomList.get(a).room_link}">
+                    <img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200">
+                    </a>
+                        <div class="ri-text">
+                            <h4> ${roomList.get(a).room_title}</h4>              
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Rank:</td>
+                                        <td> ${roomList.get(a).room_rank}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Capacity:</td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Bed:</td>
+                                        <td>King Beds</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Services:</td>
+                                        <td>Wifi, Television, Bathroom,...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="#" class="primary-btn">More Details</a>
+                              ${a=a+1}
+                              
+                            </div>
+                      </div> 
+                    </div>     
+                              
+                       </c:forEach>
+                     
+                     
+                
+                
+                <div class="col-lg-12">
+                    <div class="room-pagination">
+                    <c:forEach begin="1" end="${roomList.size()/9}">
+                    <c:set var="PageNum" value="${PageNum+1 }"/>
+                     	
+                     	<c:if test="${PageNum<5}">
+                     	
+                     	<a href="#">${PageNum}</a>
+                     	
+                     	</c:if>
+                     	
+                     	
+                    </c:forEach>
+                       
+                        <a href="#">Next <i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	
+	
     <!-- Rooms Section End -->
 
     <!-- Footer Section Begin -->
