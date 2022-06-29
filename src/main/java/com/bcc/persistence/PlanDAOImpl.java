@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bcc.domain.MemberVO;
+import com.bcc.domain.PlanVO;
 
 @Repository
 public class PlanDAOImpl implements PlanDAO {
@@ -26,5 +27,15 @@ public class PlanDAOImpl implements PlanDAO {
 		List<MemberVO> memberList = sqlSession.selectList(NAMESPACE+".getMemberList", id);
 		
 		return memberList;
+	}
+
+	@Override
+	public Integer getGrpNum() {
+		return sqlSession.selectOne(NAMESPACE+".getGrpNum");
+	}
+
+	@Override
+	public void createGrp(PlanVO vo) {
+		sqlSession.insert(NAMESPACE+".createGrp", vo);
 	}
 }

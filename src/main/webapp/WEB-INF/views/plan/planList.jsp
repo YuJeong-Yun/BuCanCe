@@ -34,7 +34,7 @@
                         <div class="rd-text">
 		                    <div class="room-booking">
 		                    	<div class="col-lg-4">
-			                        <form action="/plan/planContent">
+			                        <form action="/plan/planContent" method="post">
 			                        	<!-- Button trigger modal -->
 										<button class="add-group" type="submit" class="btn btn-primary">
 										  플랜 생성하기

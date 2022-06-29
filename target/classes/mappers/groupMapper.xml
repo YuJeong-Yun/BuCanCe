@@ -12,5 +12,15 @@
   		where id like concat('%', #{id}, '%')
   	</select>
   	
+  	<select id="getGrpNum" resultType="int">
+  		select max(num) 
+  		from bcc_plan 
+  	</select>
+  	
+  	<insert id="createGrp">
+  		insert into bcc_plan(num, leader) 
+  		values(#{num}, #{id}) 
+  	</insert>
+  	
   </mapper>
   
