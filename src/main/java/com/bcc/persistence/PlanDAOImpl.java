@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.bcc.domain.GrpAcceptListVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanVO;
 
@@ -37,5 +38,15 @@ public class PlanDAOImpl implements PlanDAO {
 	@Override
 	public void createGrp(PlanVO vo) {
 		sqlSession.insert(NAMESPACE+".createGrp", vo);
+	}
+
+	@Override
+	public String getLicense(String id) {
+		return sqlSession.selectOne(NAMESPACE+".getLicense", id);
+	}
+
+	@Override
+	public List<GrpAcceptListVO> getGrpAcceptList(String receiver) {
+		return sqlSession.selectList(NAMESPACE+".getGrpAcceptList", receiver);
 	}
 }

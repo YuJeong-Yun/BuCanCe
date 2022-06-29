@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.bcc.domain.GrpAcceptListVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanVO;
 import com.bcc.persistence.PlanDAO;
@@ -33,6 +34,16 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public void createGrp(PlanVO vo) {
 		dao.createGrp(vo);
+	}
+
+	@Override
+	public String getLicense(String id) {
+		return dao.getLicense(id);
+	}
+
+	@Override
+	public List<GrpAcceptListVO> getGrpAcceptList(String receiver) {
+		return dao.getGrpAcceptList(receiver);
 	}
 
 }

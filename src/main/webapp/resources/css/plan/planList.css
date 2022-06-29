@@ -1,0 +1,46 @@
+/* 그룹 초대받은 리스트 */
+.no-accept-list {
+	color: #777;
+}
+.grp-accept-list {
+	list-style: none;
+}
+.grp-accept-list li {
+	display: flex;
+	height: 40px;
+	line-height: 40px;
+	position: relative;
+	border-bottom: 1px dotted #eee;
+}
+.grp-accept-list li:last-child {
+	border-bottom: none;
+}
+.grp-accept-list li form {
+	display: flex;
+	position: absolute;
+	right: 0;
+}
+.grp-accept-list li form .btn {
+	width: 48px;
+	height: 33px;
+	margin: 0;
+	font-size: 11px;
+}
+.grp-accept-list li form .btn:hover {
+	transform: scale(1.05);
+}
+.grp-accept-list li form .btn.accept {
+	background-color: #dfa974;
+	margin-right: 5px;
+	color: #fff;
+}
+.grp-accept-list li form .btn.refusal {
+	color: #dfa974;
+}
+
+	
+	
+/* 구독권 구매 이동 링크 */
+.buy-subscription:hover {
+	color: #01579b;
+}
