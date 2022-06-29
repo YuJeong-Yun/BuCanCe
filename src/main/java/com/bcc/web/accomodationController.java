@@ -32,32 +32,7 @@ public class accomodationController {
 	// http://localhost:8088/accomodation/roomSearch
 	@RequestMapping(value = "/roomSearch", method = RequestMethod.GET)
 	public void roomSearchGET(Model model) throws IOException {
-		log.info(" roomSearchGET() 호출 ");
-
-		// 서비스 주입
-
-		// roomSearch 페이지
-		// http://localhost:8088/accomodation/roomSearch
-//			@RequestMapping(value = "/roomSearch",method = RequestMethod.GET)
-//			public void roomSearchGET(Model model) throws IOException {
-//				log.info(" roomSearchGET() 호출 ");
-//				
-//				String url ="https://finance.naver.com/item/main.naver?code=377300";
-//				
-//				Document doc = Jsoup.connect(url).get();
-//				
-//				Elements e1 = doc.getElementsByAttributeValue("class", "ResizableImage_image__1_8js SingleImage_horizontal__2SBaY");
-////				Element e2 = e1.get(0);
-////				Elements e3 = e2.select("span");
-//				//ㅇㅇ
-//				log.info(e1.html()+"");
-////				log.info(e1.get(0)+"");
-////				log.info(e2.select("span")+"");
-//				
-////				log.info(e3.get(0).text()+"");
-//				
-////				model.addAttribute("e3", e3);
-//				
+		log.info(" roomSearchGET() 호출 ");		
 
 	}
 
@@ -68,7 +43,7 @@ public class accomodationController {
 
 		log.info(" roomListGET() 호출 ");
 
-			
+		
 			JSONArray roomList = service.roomList();
 
 			model.addAttribute("roomList", roomList);
@@ -86,9 +61,12 @@ public class accomodationController {
 		log.info(" roomListPOST() 호출 ");
 
 		
+		
 		JSONArray roomList = service.roomSearchList(rs);
 //
 		model.addAttribute("roomList", roomList);
+		model.addAttribute("select_area", rs.getArea() );
+		model.addAttribute("select_place", rs.getPlace_name() );
 		
 		
 			
