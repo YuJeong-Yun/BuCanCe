@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.bcc.service.GroupService;
+import com.bcc.service.PlanService;
 
 @Controller
 @RequestMapping(value="/plan/*")
@@ -18,7 +18,7 @@ public class PlanController {
 
 	// 서비스 객체 주입
 	@Inject
-	private GroupService service;
+	private PlanService service;
 	
 	// 플랜 목록 페이지 - GET
 	// http://localhost:8088/plan/planList

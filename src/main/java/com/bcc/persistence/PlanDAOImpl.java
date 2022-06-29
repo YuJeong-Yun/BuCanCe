@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository;
 import com.bcc.domain.MemberVO;
 
 @Repository
-public class GroupDAOImpl implements GroupDAO {
+public class PlanDAOImpl implements PlanDAO {
 
-	private static final Logger log = LoggerFactory.getLogger(GroupDAOImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(PlanDAOImpl.class);
 
 	@Inject
 	private SqlSession sqlSession;

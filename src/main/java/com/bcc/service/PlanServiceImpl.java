@@ -9,15 +9,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.bcc.domain.MemberVO;
-import com.bcc.persistence.GroupDAO;
+import com.bcc.persistence.PlanDAO;
 
 @Service
-public class GroupServiceImpl implements GroupService {
+public class PlanServiceImpl implements PlanService {
 	
-	private static final Logger log = LoggerFactory.getLogger(GroupServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(PlanServiceImpl.class);
 	
 	@Inject
-	private GroupDAO dao;
+	private PlanDAO dao;
 
 	@Override
 	public List<MemberVO> getMemberList(String id) {

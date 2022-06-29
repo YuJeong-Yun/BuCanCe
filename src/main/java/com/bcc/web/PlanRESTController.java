@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bcc.domain.MemberVO;
-import com.bcc.service.GroupService;
+import com.bcc.service.PlanService;
 
 @RestController
 public class PlanRESTController {
@@ -23,7 +23,7 @@ public class PlanRESTController {
 
 	// 서비스 객체 주입
 	@Inject
-	private GroupService service;
+	private PlanService service;
 
 	
 	@RequestMapping(value = "/memberID", method = RequestMethod.POST)
