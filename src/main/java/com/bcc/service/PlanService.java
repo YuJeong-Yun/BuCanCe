@@ -2,8 +2,9 @@ package com.bcc.service;
 
 import java.util.List;
 
-import com.bcc.domain.GrpAcceptListVO;
+import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.MemberVO;
+import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
 
 public interface PlanService {
@@ -21,6 +22,12 @@ public interface PlanService {
 	public String getLicense(String id);
 
 	// 회원 초대받은 목록 
-	public List<GrpAcceptListVO> getGrpAcceptList(String receiver);
+	public List<GrpAcceptVO> getGrpAcceptList(String receiver);
+
+	// 회원이 소속된 그룹 정보 저장
+	public void insertGrpMember(PlanMemberVO member);
+
+	// 그룹 초대 수락 리스트에서 제거
+	public void deleteInvitation(GrpAcceptVO vo);
 
 }

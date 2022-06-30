@@ -24,9 +24,6 @@
 
 
 	
-
-
-
 	<!-- 플랜 생성 -->	
     <section class="room-details-section spad">
         <div class="container">
@@ -35,16 +32,17 @@
                     <div class="room-details-item">
                         <div class="rd-text">
 		                    <div class="room-booking">
+		                    	<!-- 초대 목록 확인 -->
 		                    	<div class="col-lg-8">
-		                    		<!-- 초대 목록 확인 -->
 		                    		<p>
 										<button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
 											aria-expanded="false" aria-controls="collapseExample">
 											초대 목록 확인
 										</button>
+										<span class="acceptListCnt">${grpAcceptList.size() }</span>
 									</p>
 									<div class="collapse" id="collapseExample">
-										<div class="card card-body">
+										<div class="card card-body acceptListBox">
 											<c:if test="${grpAcceptList.size() == 0 }">
 												<div class="no-accept-list">받은 그룹 초대 내역이 없습니다.</div>
 											</c:if>
@@ -54,24 +52,53 @@
 													<div class="grp--sender">${grpAccept.sender } 님이 <strong>${grpAccept.grp_name }</strong> 에 초대하셨습니다.</div>
 													<form action="javascript:void(0)">
 														<button class="btn accept" onclick="acceptGrp(event, ${grpAccept.grp_num})">수락</button>
-														<button class="btn refusal" onclick="">거절</button>
+														<button class="btn refusal" onclick="refuseGrp(event, ${grpAccept.grp_num})">거절</button>
 													</form>
 												</li>
 											</c:forEach>
 											</ul>
 										</div>
 									</div>
-									<!-- 초대 목록 확인 -->
 								</div>
+								<!-- 초대 목록 확인 -->
+								<!-- 플랜 생성 -->
 		                    	<div class="col-lg-4">
 			                        <form action="/plan/planContent" method="post">
 			                        	<!-- Button trigger modal -->
-										<button class="add-group" type="submit" class="btn btn-primary">
+										<button type="button" class="add-group" data-bs-toggle="modal" data-bs-target="#exampleModal">
 										  플랜 생성하기
 										</button>
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h5 class="modal-title" id="exampleModalLabel">Plan Name</h5>
+										      </div>
+										      <div class="modal-body">
+										        <div class="input-group input-group-sm mb-3">
+												  <input type="text" name="grp_name" placeholder="플랜명을 작성하세요" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+												</div>
+										      </div>
+										      <div class="modal-footer">
+										        <input type="submit" class="btn btn-primary" data-bs-dismiss="modal" value="확인">
+										      </div>
+										    </div>
+										  </div>
+										</div>
 			                        </form>
 		                        </div>
+		                        <!-- 플랜 생성 -->
+		                        <!-- 플랜 목록 -->
+		                    	<div class="col-lg-12">
+		                    	</div>
+		                    	<!-- 프랜 목록 -->
 		                    </div>
+		                    
+		                    
+		                    
+		                    
+		                    
                             <br>
                             <c:if test="${license eq 'free' }">
                             	<p class="f-para">더 많은 플랜을 작성하고 싶다면?</p>

@@ -6,6 +6,7 @@ import com.google.protobuf.Timestamp;
 
 public class PlanVO {
 	private int num;
+	private String grp_name;
 	private Date tour_date_start;
 	private Date tour_date_end;
 	private String tour_plan;
@@ -18,6 +19,14 @@ public class PlanVO {
 
 	public void setNum(int num) {
 		this.num = num;
+	}
+
+	public String getGrp_name() {
+		return grp_name;
+	}
+
+	public void setGrp_name(String grp_name) {
+		this.grp_name = grp_name;
 	}
 
 	public Date getTour_date_start() {
@@ -62,8 +71,9 @@ public class PlanVO {
 
 	@Override
 	public String toString() {
-		return "PlanVO [num=" + num + ", tour_date_start=" + tour_date_start + ", tour_date_end=" + tour_date_end
-				+ ", tour_plan=" + tour_plan + ", date=" + date + ", leader=" + leader + "]";
+		return "PlanVO [num=" + num + ", grp_name=" + grp_name + ", tour_date_start=" + tour_date_start
+				+ ", tour_date_end=" + tour_date_end + ", tour_plan=" + tour_plan + ", date=" + date + ", leader="
+				+ leader + "]";
 	}
 
 }

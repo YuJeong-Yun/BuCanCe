@@ -1,6 +1,6 @@
 package com.bcc.domain;
 
-public class GrpAcceptListVO {
+public class GrpAcceptVO {
 	private int grp_num;
 	private String sender;
 	private String receiver;

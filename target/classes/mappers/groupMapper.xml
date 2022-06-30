@@ -18,8 +18,8 @@
   	</select>
   	
   	<insert id="createGrp">
-  		insert into bcc_plan(num, leader) 
-  		values(#{num}, #{leader}) 
+  		insert into bcc_plan(num, grp_name, leader) 
+  		values(#{num}, #{grp_name}, #{leader}) 
   	</insert>
   	
   	<select id="getLicense" resultType="string">
@@ -28,12 +28,21 @@
   		where id = #{id}
   	</select>
   	
-  	<select id="getGrpAcceptList" resultType="GrpAcceptListVO">
+  	<select id="getGrpAcceptList" resultType="GrpAcceptVO">
  		select grp_num, sender, grp_name 
   		from bcc_grp_accept a join bcc_plan b
         on a.grp_num = b.num
   		where receiver = #{receiver};
   	</select>
   	
+  	<insert id="insertGrpMember">
+  		insert into bcc_plan_member(id, grp_num)
+  		values(#{id}, #{grp_num})
+  	</insert>
+  	
+  	<delete id="deleteInvitation">
+  		delete from bcc_grp_accept
+  		where grp_num=#{grp_num} and receiver=#{receiver}
+  	</delete>
   </mapper>
   

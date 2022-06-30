@@ -1,4 +1,12 @@
 /* 그룹 초대받은 리스트 */
+.acceptListCnt {
+	display: inline-block;
+    background-color: #ddd;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    border-radius: 50%;
+}
 .no-accept-list {
 	color: #777;
 }
@@ -38,8 +46,18 @@
 	color: #dfa974;
 }
 
+
+/* 플랜 추가 */
+.room-booking form button.add-group {
+	border: 2px solid #0288d1;
+	color: #0288d1;
+}
+/* 플랜 목록 */
+
+
 	
 	
+
 /* 구독권 구매 이동 링크 */
 .buy-subscription:hover {
 	color: #01579b;

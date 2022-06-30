@@ -3,6 +3,7 @@ package com.bcc.web;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.MemberVO;
+import com.bcc.domain.PlanMemberVO;
 import com.bcc.service.PlanService;
 
 @RestController
@@ -27,11 +30,38 @@ public class PlanRESTController {
 	@Inject
 	private PlanService service;
 
+	// 그룹 초대 수락
 	@RequestMapping(value = "/accept/{grp_num}")
-	public void acceptREST(@PathVariable("grp_num") int grp_num) {
-		log.info("받아온 그룹 넘버 : " + grp_num);
+	public void acceptREST(@PathVariable("grp_num") int grp_num, HttpSession session) {
+		log.info("초대 수락 받아온 그룹 넘버 : " + grp_num);
+
+		String id = (String) session.getAttribute("id");
 		
+		// 초대 수락 리스트에서 제거
+		GrpAcceptVO vo = new GrpAcceptVO();
+		vo.setReceiver(id);
+		vo.setGrp_num(grp_num);
+		service.deleteInvitation(vo);
 		
+		// 그룹에 멤버 추가
+		PlanMemberVO member = new PlanMemberVO();
+		member.setId(id);
+		member.setGrp_num(grp_num);
+		service.insertGrpMember(member);
+	}
+
+	// 그룹 초대 거절
+	@RequestMapping(value = "/refusal/{grp_num}")
+	public void refusalREST(@PathVariable("grp_num") int grp_num, HttpSession session) {
+		log.info("초대 거절 받아온 그룹 넘버 : " + grp_num);
+		
+		String id = (String) session.getAttribute("id");
+
+		GrpAcceptVO vo = new GrpAcceptVO();
+		vo.setReceiver(id);
+		vo.setGrp_num(grp_num);
+		// 초대 수락 리스트에서 제거
+		service.deleteInvitation(vo);
 	}
 
 	@RequestMapping(value = "/memberID", method = RequestMethod.POST)
