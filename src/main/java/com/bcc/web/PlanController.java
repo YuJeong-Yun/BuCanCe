@@ -31,7 +31,7 @@ public class PlanController {
 	// 플랜 목록 페이지 - GET
 	// http://localhost:8088/plan/planList
 	@RequestMapping(value = "/planList", method = RequestMethod.GET)
-	public void planListGET(HttpSession session, Model model ) {
+	public void planListGET(HttpSession session, Model model) throws Exception {
 		log.info(" planListGET() 호출 ");
 
 		session.setAttribute("id", "yun1");
@@ -40,16 +40,21 @@ public class PlanController {
 		// 회원 license 가져오기
 		String license = service.getLicense(id);
 		model.addAttribute("license", license);
-		
+
 		// 초대받은 그룹 목록 가져오기
 		List<GrpAcceptVO> grpAcceptList = service.getGrpAcceptList(id);
 		model.addAttribute("grpAcceptList", grpAcceptList);
+
+		// 소속된 그룹 정보 가져오기
+		List<PlanMemberVO> grpList = service.getMemberGrpList(id);
+		log.info("소속된 그룹 정보 : " + grpList);
+		model.addAttribute("grpList", grpList);
 	}
 
 	// 플랜 작성 페이지 - POST
 	// http://localhost:8088/plan/planContent
 	@RequestMapping(value = "/planContent", method = RequestMethod.POST)
-	public String planContentPOST(HttpSession session, @ModelAttribute("grp_name") String grp_name) {
+	public String planContentPOST(HttpSession session, @ModelAttribute("grp_name") String grp_name) throws Exception {
 		log.info(" planContentPOST() 호출 ");
 
 		String id = (String) session.getAttribute("id");
@@ -58,14 +63,14 @@ public class PlanController {
 		if (service.getGrpNum() != null) {
 			num = service.getGrpNum() + 1;
 		}
-		
+
 		// 그룹 생성
 		PlanVO vo = new PlanVO();
 		vo.setLeader(id);
 		vo.setNum(num);
 		vo.setGrp_name(grp_name);
 		service.createGrp(vo);
-		
+
 		// 소속된 그룹 정보 저장
 		PlanMemberVO member = new PlanMemberVO();
 		member.setGrp_num(num);
@@ -78,7 +83,7 @@ public class PlanController {
 	// 플랜 작성 페이지 - GET
 	// http://localhost:8088/plan/planContent
 	@RequestMapping(value = "/planContent", method = RequestMethod.GET)
-	public void planContentGET() {
+	public void planContentGET() throws Exception {
 		log.info(" planContentGET() 호출 ");
 	}
 

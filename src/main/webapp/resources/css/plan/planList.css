@@ -1,5 +1,9 @@
 /* 그룹 초대받은 리스트 */
-.acceptListCnt {
+.invitation-list > .col-lg-8 {
+	margin-bottom: 50px;
+	border-bottom: 1px dotted #eee;
+}
+.invitation-list .acceptListCnt {
 	display: inline-block;
     background-color: #ddd;
     width: 30px;
@@ -7,42 +11,42 @@
     margin-left: 10px;
     border-radius: 50%;
 }
-.no-accept-list {
+.invitation-list .no-accept-list {
 	color: #777;
 }
-.grp-accept-list {
+.invitation-list .grp-accept-list {
 	list-style: none;
 }
-.grp-accept-list li {
+.invitation-list .grp-accept-list li {
 	display: flex;
 	height: 40px;
 	line-height: 40px;
 	position: relative;
 	border-bottom: 1px dotted #eee;
 }
-.grp-accept-list li:last-child {
+.invitation-list .grp-accept-list li:last-child {
 	border-bottom: none;
 }
-.grp-accept-list li form {
+.invitation-list .grp-accept-list li form {
 	display: flex;
 	position: absolute;
 	right: 0;
 }
-.grp-accept-list li form .btn {
+.invitation-list .grp-accept-list li form .btn {
 	width: 48px;
 	height: 33px;
 	margin: 0;
 	font-size: 11px;
 }
-.grp-accept-list li form .btn:hover {
+.invitation-list .grp-accept-list li form .btn:hover {
 	transform: scale(1.05);
 }
-.grp-accept-list li form .btn.accept {
+.invitation-list .grp-accept-list li form .btn.accept {
 	background-color: #dfa974;
 	margin-right: 5px;
 	color: #fff;
 }
-.grp-accept-list li form .btn.refusal {
+.invitation-list .grp-accept-list li form .btn.refusal {
 	color: #dfa974;
 }
 
@@ -51,10 +55,20 @@
 .room-booking form button.add-group {
 	border: 2px solid #0288d1;
 	color: #0288d1;
+	margin-bottom: 50px;
 }
 /* 플랜 목록 */
-
-
+.plan-list .plan {
+	background-color: #0288d1;
+	height: 50px;
+	line-height: 50px;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	font-size: 20px;
+	font-weight: 700;
+	margin: 30px 0;
+}
 	
 	
 

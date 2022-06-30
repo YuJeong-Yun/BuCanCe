@@ -30,4 +30,7 @@ public interface PlanService {
 	// 그룹 초대 수락 리스트에서 제거
 	public void deleteInvitation(GrpAcceptVO vo);
 
+	// 소속된 그룹 번호 가져오기
+	public List<PlanMemberVO> getMemberGrpList(String id);
+
 }

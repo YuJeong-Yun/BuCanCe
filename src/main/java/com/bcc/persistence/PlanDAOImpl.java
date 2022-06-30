@@ -60,4 +60,9 @@ public class PlanDAOImpl implements PlanDAO {
 	public void deleteInvitation(GrpAcceptVO vo) {
 		sqlSession.delete(NAMESPACE+".deleteInvitation", vo);
 	}
+
+	@Override
+	public List<PlanMemberVO> getMemberGrpList(String id) {
+		return sqlSession.selectList(NAMESPACE+".getMemberGrpList", id);
+	}
 }

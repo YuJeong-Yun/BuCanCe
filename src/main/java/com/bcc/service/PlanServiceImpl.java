@@ -57,4 +57,10 @@ public class PlanServiceImpl implements PlanService {
 		dao.deleteInvitation(vo);
 	}
 
+	@Override
+	public List<PlanMemberVO> getMemberGrpList(String id) {
+		return dao.getMemberGrpList(id);
+	}
+
+
 }

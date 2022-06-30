@@ -44,5 +44,13 @@
   		delete from bcc_grp_accept
   		where grp_num=#{grp_num} and receiver=#{receiver}
   	</delete>
+  	
+  	<select id="getMemberGrpList" resultType="PlanMemberVO">
+		select grp_num, grp_name
+		from bcc_plan_member a join bcc_plan b
+		on a.grp_num = b.num
+		where id = #{id}
+		order by grp_num desc
+  	</select>
   </mapper>
   
