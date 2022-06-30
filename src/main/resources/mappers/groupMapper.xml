@@ -52,5 +52,11 @@
 		where id = #{id}
 		order by grp_num desc
   	</select>
+  	
+  	<select id="getGrpName" resultType="string">
+  		select grp_name
+  		from bcc_plan
+  		where num = #{num}
+  	</select>
   </mapper>
   

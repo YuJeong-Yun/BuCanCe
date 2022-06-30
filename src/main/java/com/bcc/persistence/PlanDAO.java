@@ -1,5 +1,6 @@
 package com.bcc.persistence;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.bcc.domain.GrpAcceptVO;
@@ -32,4 +33,8 @@ public interface PlanDAO {
 
 	// 소속된 그룹 리스트 가져오기
 	public List<PlanMemberVO> getMemberGrpList(String id);
+
+	// 그룹 이름 가져오기
+	public String getGrpName(int num);
+
 }

@@ -42,6 +42,7 @@
 											</button>
 											<span class="acceptListCnt">${grpAcceptList.size() }</span>
 										</p>
+										<c:if test="${(license eq 'free' and grpList.size() < 1) || (license eq 'premium' and grpList.size() < 10) }">
 										<div class="collapse" id="collapseExample">
 											<div class="card card-body acceptListBox">
 												<c:if test="${grpAcceptList.size() == 0 }">
@@ -60,6 +61,15 @@
 												</ul>
 											</div>
 										</div>
+										</c:if>
+										<!-- 생성 가능한 최대 플랜 수인 경우 초대 받을 수 없음 -->
+										<c:if test="${(license eq 'free' and grpList.size() >= 1) || (license eq 'premium' and grpList.size() == 10) }">
+											<div class="collapse" id="collapseExample">
+												<div class="card card-body acceptListBox">
+													<div class="no-accept-list">생성 가능한 최대 플랜 수 입니다.<br>초대를 받을 수 없습니다.</div>
+												</div>
+											</div>
+										</c:if>
 									</div>
 								</section>
 								<!-- 초대 목록 확인 -->
@@ -67,10 +77,12 @@
 								<section class="new-plan">
 			                    	<div class="col-lg-4">
 				                        <form action="/plan/planContent" method="post">
-				                        	<!-- Button trigger modal -->
-											<button type="button" class="add-group" data-bs-toggle="modal" data-bs-target="#exampleModal">
-											  플랜 생성하기
-											</button>
+				                        	<c:if test="${(license eq 'free' and grpList.size() == 0) or (license eq 'premium' and grpList.size() < 10)}">
+					                        	<!-- Button trigger modal -->
+												<button type="button" class="add-group" data-bs-toggle="modal" data-bs-target="#exampleModal">
+												  플랜 생성하기
+												</button>
+											</c:if>
 											<!-- Modal -->
 											<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											  <div class="modal-dialog">
@@ -96,11 +108,13 @@
 		                        <!-- 플랜 목록 -->
 		                        <section class="plan-list">
 			                    	<div class="col-lg-6">
-		                    			<c:forEach var="grp" items="${grpList }">
-			                    			<a href="/plan/planContent/${grp.grp_num }">
-			                    				<div class="plan">${grp.grp_name }</div>
-			                    			</a>
-		                    			</c:forEach>
+			                    		<ul class="plan-container">
+			                    			<c:forEach var="grp" items="${grpList }">
+			                    				<li class="${grp.grp_num }">
+					                    			<input type="button" class="plan" value="${grp.grp_name }" onclick="location.href='/plan/planContent/${grp.grp_num }';">
+				                    			</li>
+			                    			</c:forEach>
+		                    			</ul>
 			                    	</div>
 		                    	</section>
 		                    	<!-- 플랜 목록 -->
@@ -126,4 +140,19 @@
     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath }/resources/js/plan/planList.js"></script>
+<script type="text/javascript">
+	//무료 회원일 경우 최신 1개 빼고 선택 불가 처리(유료->무료 전환됐을 경우 이전 플랜은 삭제하지 않고 표시해줌)
+	const license = '${license}';
+	const planButtons = document.querySelectorAll('.plan-container li input');
+	
+	if(license == "free") {
+		for (let i = 1; i < planButtons.length; i++) {
+			planButtons[i].disabled = 'true';
+			planButtons[i].style.backgroundColor = '#777';
+			planButtons[i].style.color = '#ddd';
+			planButtons[i].style.cursor = 'not-allowed';
+			
+		} // for
+	};
+</script>
 <jsp:include page="../include/footer.jsp" />

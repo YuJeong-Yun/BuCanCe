@@ -58,10 +58,15 @@
 	margin-bottom: 50px;
 }
 /* 플랜 목록 */
-.plan-list .plan {
+.plan-list .plan-container {
+	list-style: none;
+}
+.plan-list .plan-container .plan {
 	background-color: #0288d1;
-	height: 50px;
-	line-height: 50px;
+	display: block;
+	width: 100%;
+	height: 55px;
+	line-height: 55px;
 	color: #fff;
 	border: none;
 	border-radius: 10px;

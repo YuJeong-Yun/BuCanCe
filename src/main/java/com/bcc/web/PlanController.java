@@ -1,5 +1,6 @@
 package com.bcc.web;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -47,7 +48,6 @@ public class PlanController {
 
 		// 소속된 그룹 정보 가져오기
 		List<PlanMemberVO> grpList = service.getMemberGrpList(id);
-		log.info("소속된 그룹 정보 : " + grpList);
 		model.addAttribute("grpList", grpList);
 	}
 

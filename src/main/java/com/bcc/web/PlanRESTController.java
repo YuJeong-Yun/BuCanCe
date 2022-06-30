@@ -31,8 +31,8 @@ public class PlanRESTController {
 	private PlanService service;
 
 	// 그룹 초대 수락
-	@RequestMapping(value = "/accept/{grp_num}")
-	public void acceptREST(@PathVariable("grp_num") int grp_num, HttpSession session) {
+	@RequestMapping(value = "/accept/{grp_num}", produces = "application/text; charset=utf8")
+	public String acceptREST(@PathVariable("grp_num") int grp_num, HttpSession session) {
 		log.info("초대 수락 받아온 그룹 넘버 : " + grp_num);
 
 		String id = (String) session.getAttribute("id");
@@ -48,6 +48,10 @@ public class PlanRESTController {
 		member.setId(id);
 		member.setGrp_num(grp_num);
 		service.insertGrpMember(member);
+		
+		// 그룹 이름 가져오기
+		return service.getGrpName(grp_num);
+		
 	}
 
 	// 그룹 초대 거절

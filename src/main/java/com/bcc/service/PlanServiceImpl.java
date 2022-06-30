@@ -1,5 +1,6 @@
 package com.bcc.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -61,6 +62,13 @@ public class PlanServiceImpl implements PlanService {
 	public List<PlanMemberVO> getMemberGrpList(String id) {
 		return dao.getMemberGrpList(id);
 	}
+
+	@Override
+	public String getGrpName(int num) {
+		return dao.getGrpName(num);
+	}
+
+
 
 
 }
