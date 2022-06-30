@@ -63,13 +63,23 @@ public class PlanDAOImpl implements PlanDAO {
 	}
 
 	@Override
-	public List<PlanMemberVO> getMemberGrpList(String id) {
-		return sqlSession.selectList(NAMESPACE+".getMemberGrpList", id);
+	public List<PlanMemberVO> getGrpList(String id) {
+		return sqlSession.selectList(NAMESPACE+".getGrpList", id);
 	}
 
 	@Override
 	public String getGrpName(int num) {
 		return sqlSession.selectOne(NAMESPACE+".getGrpName", num);
+	}
+
+	@Override
+	public List<MemberVO> getGrpMemberList(int grp_num) {
+		return sqlSession.selectList(NAMESPACE+".getGrpMemberList", grp_num);
+	}
+
+	@Override
+	public void delPlanMem(PlanMemberVO vo) {
+		sqlSession.delete(NAMESPACE+".delPlanMem", vo);
 	}
 
 	

@@ -45,7 +45,7 @@
   		where grp_num=#{grp_num} and receiver=#{receiver}
   	</delete>
   	
-  	<select id="getMemberGrpList" resultType="PlanMemberVO">
+  	<select id="getGrpList" resultType="PlanMemberVO">
 		select grp_num, grp_name
 		from bcc_plan_member a join bcc_plan b
 		on a.grp_num = b.num
@@ -58,5 +58,17 @@
   		from bcc_plan
   		where num = #{num}
   	</select>
+  	
+  	<select id="getGrpMemberList" resultType="MemberVO">
+		select a.id, name, profile 
+		from bcc_plan_member a join bcc_member b
+		on a.id = b.id
+		where grp_num = #{grp_num}
+  	</select>
+  	
+  	<delete id="delPlanMem">
+  		delete from bcc_plan_member 
+  		where id = #{id} and grp_num = #{grp_num}
+  	</delete>
   </mapper>
   

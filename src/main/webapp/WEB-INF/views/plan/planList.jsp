@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../include/header.jsp" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|
+Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planList.css" />
 
 	<!-- 타이틀 -->
@@ -42,34 +44,32 @@
 											</button>
 											<span class="acceptListCnt">${grpAcceptList.size() }</span>
 										</p>
-										<c:if test="${(license eq 'free' and grpList.size() < 1) || (license eq 'premium' and grpList.size() < 10) }">
 										<div class="collapse" id="collapseExample">
 											<div class="card card-body acceptListBox">
-												<c:if test="${grpAcceptList.size() == 0 }">
+											    <!-- 받은 초대 내역 없으면서, 생성 가능 최대 플랜 수 미만일 경우 출력  -->
+												<c:if test="${grpAcceptList.size() == 0 and ((license eq 'free' and grpList.size() < 1) || (license eq 'premium' and grpList.size() < 10)) }">
 													<div class="no-accept-list">받은 그룹 초대 내역이 없습니다.</div>
 												</c:if>
 												<ul class="grp-accept-list">
-												<c:forEach var="grpAccept" items="${grpAcceptList }">
+													<!-- 생성 가능한 최대 플랜 수인 경우 초대 받을 수 없음 -->
+													<c:if test="${(license eq 'free' and grpList.size() >= 1) || (license eq 'premium' and grpList.size() >= 10) }">
+														<div class="no-accept-list">
+															생성 가능한 최대 플랜 수 입니다.<br>초대를 수락할 수 없습니다.<br><br>
+														</div>
+													</c:if>
+													<c:forEach var="grpAccept" items="${grpAcceptList }">
 													<li>
 														<div class="grp--sender">${grpAccept.sender } 님이 <strong>${grpAccept.grp_name }</strong> 에 초대하셨습니다.</div>
 														<form action="javascript:void(0)">
-															<button class="btn accept" onclick="acceptGrp(event, ${grpAccept.grp_num})">수락</button>
+															<button class="btn accept" onclick="acceptGrp(event, ${grpAccept.grp_num}, '${license}')">수락</button>
 															<button class="btn refusal" onclick="refuseGrp(event, ${grpAccept.grp_num})">거절</button>
 														</form>
 													</li>
-												</c:forEach>
+													</c:forEach>
 												</ul>
 											</div>
 										</div>
-										</c:if>
-										<!-- 생성 가능한 최대 플랜 수인 경우 초대 받을 수 없음 -->
-										<c:if test="${(license eq 'free' and grpList.size() >= 1) || (license eq 'premium' and grpList.size() == 10) }">
-											<div class="collapse" id="collapseExample">
-												<div class="card card-body acceptListBox">
-													<div class="no-accept-list">생성 가능한 최대 플랜 수 입니다.<br>초대를 받을 수 없습니다.</div>
-												</div>
-											</div>
-										</c:if>
+
 									</div>
 								</section>
 								<!-- 초대 목록 확인 -->
@@ -107,11 +107,23 @@
 		                        <!-- 플랜 생성 -->
 		                        <!-- 플랜 목록 -->
 		                        <section class="plan-list">
-			                    	<div class="col-lg-6">
+			                    	<div class="col-lg-7">
 			                    		<ul class="plan-container">
-			                    			<c:forEach var="grp" items="${grpList }">
+			                    		    <!-- 소속 그룹 목록 출력 -->
+			                    			<c:forEach var="grp" items="${grpList }" varStatus="status">
 			                    				<li class="${grp.grp_num }">
 					                    			<input type="button" class="plan" value="${grp.grp_name }" onclick="location.href='/plan/planContent/${grp.grp_num }';">
+					                    			<ul class="member-container">
+					                    			    <!-- 해당 그룹 소속된 멤버 출력 -->
+														<c:forEach var="member" items="${grpMemberList.get(status.index) }">
+															<li>
+														        <div class="member--profile"><img src="${pageContext.request.contextPath }/resources/img/who.jpg" /></div>
+													        	<div class="member--name">${member.name}</div>
+													      	</li>
+												        </c:forEach>
+					                    			</ul>
+					                    			<!-- 플랜 삭제 버튼 -->
+					                    			<div class="material-icons-outlined delete-plan" onclick="delPlan(event, ${grp.grp_num });">clear</div>
 				                    			</li>
 			                    			</c:forEach>
 		                    			</ul>

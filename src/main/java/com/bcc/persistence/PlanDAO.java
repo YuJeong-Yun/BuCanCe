@@ -32,9 +32,15 @@ public interface PlanDAO {
 	public void deleteInvitation(GrpAcceptVO vo);
 
 	// 소속된 그룹 리스트 가져오기
-	public List<PlanMemberVO> getMemberGrpList(String id);
+	public List<PlanMemberVO> getGrpList(String id);
 
 	// 그룹 이름 가져오기
 	public String getGrpName(int num);
+
+	// 그룹에 소속된 멤버 리스트 가져오기
+	public List<MemberVO> getGrpMemberList(int grp_num);
+
+	// 플랜 멤버 삭제
+	public void delPlanMem(PlanMemberVO vo);
 
 }

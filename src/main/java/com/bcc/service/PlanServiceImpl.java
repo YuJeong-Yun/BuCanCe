@@ -59,13 +59,23 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public List<PlanMemberVO> getMemberGrpList(String id) {
-		return dao.getMemberGrpList(id);
+	public List<PlanMemberVO> getGrpList(String id) {
+		return dao.getGrpList(id);
 	}
 
 	@Override
 	public String getGrpName(int num) {
 		return dao.getGrpName(num);
+	}
+
+	@Override
+	public List<MemberVO> getGrpMemberList(int grp_num) {
+		return dao.getGrpMemberList(grp_num);
+	}
+
+	@Override
+	public void delPlanMem(PlanMemberVO vo) {
+		dao.delPlanMem(vo);
 	}
 
 

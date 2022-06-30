@@ -1,6 +1,6 @@
 package com.bcc.web;
 
-import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bcc.domain.GrpAcceptVO;
+import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
 import com.bcc.service.PlanService;
@@ -47,8 +48,15 @@ public class PlanController {
 		model.addAttribute("grpAcceptList", grpAcceptList);
 
 		// 소속된 그룹 정보 가져오기
-		List<PlanMemberVO> grpList = service.getMemberGrpList(id);
+		List<PlanMemberVO> grpList = service.getGrpList(id);
 		model.addAttribute("grpList", grpList);
+		// 해당 그룹의 멤버 정보 가져오기
+		List<List<MemberVO>> grpMemberList = new ArrayList<>();
+		for (int i = 0; i < grpList.size(); i++) {
+			List<MemberVO> member = service.getGrpMemberList(grpList.get(i).getGrp_num());
+			grpMemberList.add(member);
+		}
+		model.addAttribute("grpMemberList", grpMemberList);
 	}
 
 	// 플랜 작성 페이지 - POST
