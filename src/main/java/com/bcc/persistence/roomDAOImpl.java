@@ -105,15 +105,16 @@ public class roomDAOImpl implements roomDAO {
 		JSONArray roomList = new JSONArray();
 //			[log.info](http://log.info/)(room_title+"");
 
-			//제목검색
-			String[] titleArr = rs.transTitle(room_title, rs.getPlace_name());
-			String title = rs.getPlace_name();
-			//제목검색
 			
 			//지역검색
 			String[] areas = rs.getArea().split("/");
 			String[] areaArr = rs.transArea(room_area);
 			
+			//제목검색
+			String[] titleArr = rs.transTitle(room_title, rs.getPlace_name());
+			String title = rs.getPlace_name();
+			//제목검색
+		
 		//지역을 선택하지않은 경우
 		if(rs.getArea().equals("favorite")) {	
 			
@@ -152,33 +153,40 @@ public class roomDAOImpl implements roomDAO {
 		}		//여기까지
 		
 		
-		}else {
+		}
+		else {//지역을 선택한경우
 			
 			
 			//검색어는 입력하지않고 지역만 선택한 경우
 			if(title == null) {
-			for(int j = 0; j <areas.length; j++) {
+				for(int j = 0; j <areas.length; j++) {
 				
-				for (int i = 0; i < room_title.size(); i++) {
+					for (int i = 0; i < room_title.size(); i++) {
 					// JSONObject에 키:값 형태로 데이터 저장
-					JSONObject obj = new JSONObject();
+						JSONObject obj = new JSONObject();
 
-					if (areaArr[i].contains(areas[j])) {
+						if (areaArr[i].contains(areas[j])) {
 
 						
-						obj.put("room_title", room_title.get(i).text());
-						obj.put("room_pic", room_pic.get(i).attr("data-original"));
-						obj.put("room_rank", room_rank.get(i).text());
-						obj.put("room_area", room_area.get(i).text());
-						obj.put("room_price", room_price.get(i).text());
-						obj.put("room_price2", room_price2.get(i).text());
-						obj.put("room_link", room_link.get(i).attr("href"));
+							obj.put("room_title", room_title.get(i).text());
+							obj.put("room_pic", room_pic.get(i).attr("data-original"));
+							obj.put("room_rank", room_rank.get(i).text());
+							obj.put("room_area", room_area.get(i).text());
+							obj.put("room_price", room_price.get(i).text());
+							obj.put("room_price2", room_price2.get(i).text());
+							obj.put("room_link", room_link.get(i).attr("href"));
 
-						roomList.add(obj);
-					} 
-				}	
-			}//String[] t3 = rs.transArea(room_area);
-		}else {//숙소명을 선택후 검색어를 입력한 경우 숙소명과 검색어를 비교
+							roomList.add(obj);
+						} 
+					}	
+				}//String[] t3 = rs.transArea(room_area);
+		}
+		else {//숙소명을 선택후 검색어를 입력한 경우 숙소명과 검색어를 비교
+			
+			//지역검색
+//			String[] areas = rs.getArea().split("/"); 입력받은 지역명을 나눈것
+//			String[] areaArr = rs.transArea(room_area); 크롤링받은 지역명
+			
 			
 				for(int j = 0; j <areas.length; j++) {
 					
@@ -199,8 +207,8 @@ public class roomDAOImpl implements roomDAO {
 							obj.put("room_price2", room_price2.get(i).text());
 							obj.put("room_link", room_link.get(i).attr("href"));
 
-						roomList.add(obj);
-
+							roomList.add(obj);
+//						log.info("받아온 검색어 : "+title+" 크롤링한 데이터 : "+ titleArr[i]);
 						}
 					} 
 
@@ -218,6 +226,7 @@ public class roomDAOImpl implements roomDAO {
 		
 		
 		System.out.println(" roomList : " + roomList);
+		
 		return roomList;
 }
 }

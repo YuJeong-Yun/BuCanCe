@@ -248,7 +248,6 @@ function selectArea(){
 </script>
 
 			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm">
-				
 				<select name="area" onchange="selectArea()" id="area">
 					<optgroup label="지역">
 						<option value="favorite"
@@ -292,15 +291,15 @@ function selectArea(){
 						<c:if test="${select_area=='덕천/만덕/구포/화명/북구'}">selected</c:if>
 						>덕천/만덕/구포/화명/북구</option>
 					</optgroup>
-				</select> &nbsp; <input type="text" placeholder="숙소명" name="place_name" id="place_name" value="${select_place}">
+				</select> &nbsp; 
 
 
+<input type="text" placeholder="숙소명" name="place_name" id="place_name" value="${select_place}">
+<input type="submit" value="검색">
 
-				<input type="submit" value="검색">
+	</form>
 
-
-
-			</form>
+		
 
 
 
@@ -316,7 +315,7 @@ function selectArea(){
 		<div class="container">
 			<div class="row">
 				<c:set var="a" />
-				<c:forEach items="${roomList}" begin="1" end="${roomList.size()}">
+				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
 					<div class="col-lg-4 col-md-6">
 						<div class="room-item">
 							<a href="/accomodation/roomInfo?bno=${roomList.get(a).room_link}">

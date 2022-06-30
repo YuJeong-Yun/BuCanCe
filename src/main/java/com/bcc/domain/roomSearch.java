@@ -12,6 +12,7 @@ public class roomSearch {
 	private String place_name;
 	private String formDate;
 	private String toDate;
+	private String check;
 	
 	//elements를 문자열로 바꾸는 형태 (숙소이름)
 	public String[] transTitle(Elements room1,String room2) {
@@ -78,13 +79,25 @@ public class roomSearch {
 	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
-	
-	
+
+
+	public String getCheck() {
+		return check;
+	}
+
+
+	public void setCheck(String check) {
+		this.check = check;
+	}
+
+
 	@Override
 	public String toString() {
 		return "roomSearch [area=" + area + ", place_name=" + place_name + ", formDate=" + formDate + ", toDate="
-				+ toDate + "]";
+				+ toDate + ", check=" + check + "]";
 	}
+	
+	
 	
 	
 	
