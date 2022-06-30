@@ -10,4 +10,7 @@ public interface roomDAO {
 
 	public JSONArray roomDAO(roomSearch rs);
 	
+	public JSONArray roomDetailDAO(String bno);
+
+	public JSONArray roomReserveDAO(String bno);
 }

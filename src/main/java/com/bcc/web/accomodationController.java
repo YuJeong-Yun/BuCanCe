@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import org.json.simple.JSONArray;
-import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -27,14 +26,7 @@ public class accomodationController {
 	@Inject
 	private roomService service;
 	
-	
-	// roomSearch 페이지
-	// http://localhost:8088/accomodation/roomSearch
-	@RequestMapping(value = "/roomSearch", method = RequestMethod.GET)
-	public void roomSearchGET(Model model) throws IOException {
-		log.info(" roomSearchGET() 호출 ");		
 
-	}
 
 	// roomList 페이지 방목록페이지
 	// http://localhost:8088/accomodation/roomList
@@ -73,22 +65,40 @@ public class accomodationController {
 	}
 	
 	
+
 	
-	// roomInfo 페이지 방정보페이지
-	// http://localhost:8088/accomodation/roomInfo
-	@RequestMapping(value = "/roomInfo", method = RequestMethod.GET)
-	public void roomInfoGET(Model model,@RequestParam("bno") String bno) throws IOException {
+	// 방정보상세보기
+	// roomDetail 페이지
+		// http://localhost:8088/accomodation/roomDetail
+		@RequestMapping(value = "/roomDetail" ,method = RequestMethod.GET)
+		public void roomDetailGET(Model model,@RequestParam("bno")
+		String bno) throws IOException {
 
-			log.info(" roomInfoGET() 호출 ");
+			log.info("roomDetailGET() 호출");
 
-			// Jsoup를 이용해서 크롤링 - 여기어때
-			String url = bno;
 
-			log.info(url);
-
+			JSONArray roomdetail = service.roomDetail(bno);
+				
+			model.addAttribute("roomdetail", roomdetail);
+			model.addAttribute("bno", bno);
 		}
 	
 	
-	
+		
+		
+		// 예약 roomReserve 페이지
+		// http://localhost:8088/accomodation/roomReserve
+		@RequestMapping(value = "/roomReserve" ,method = RequestMethod.GET)
+			public void roomReserveGET(Model model,@RequestParam("bno")
+			String bno) throws IOException {
 
+			log.info("roomReserveGET() 호출");
+
+
+			JSONArray roomReserve = service.roomReserve(bno);
+			
+			model.addAttribute("roomReserve", roomReserve);
+			
+						
+	}
 }

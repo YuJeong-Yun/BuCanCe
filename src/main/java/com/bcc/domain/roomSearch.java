@@ -51,6 +51,27 @@ public class roomSearch {
 			return t2;
 		}
 		
+		//가격정보 불러오기
+		public String[] transPrice(Elements room) {
+			List list = new ArrayList();
+			
+			String jsonString = room.toString(); 
+				
+			list.add(jsonString);
+//			System.out.println(list);
+			// roomList에 생성한 JSONObject 추가
+			jsonString = jsonString.replace("<td>", "");
+			
+			jsonString  = jsonString.replace("</td>", "");
+				
+			jsonString  = jsonString.replace("<span>", "");
+			
+			jsonString  = jsonString.replace("</span>", "");
+			
+			String[] ab = jsonString.split("\n");
+			
+			return ab;
+		}
 		
 		
 	

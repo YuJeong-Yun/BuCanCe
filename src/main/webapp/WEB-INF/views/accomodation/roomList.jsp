@@ -219,16 +219,7 @@ img.ui-datepicker-trigger {
 <script type="text/javascript">
 
 
-// if('${select_area}'){
-// 	alert('${select_area}');
-// 	var dd = '${select_area}';
-	
-// 	$(document).ready(function(){
-// 		$("#area").val(dd).attr("selected", "selected");
-// 		});
-	
-// }
-
+//지역 select 고를때 동작
 function selectArea(){
 	
 	
@@ -301,11 +292,6 @@ function selectArea(){
 
 		
 
-
-
-
-
-
 		</div>
 	</div>
 	<!-- Breadcrumb Section End -->
@@ -318,7 +304,7 @@ function selectArea(){
 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
 					<div class="col-lg-4 col-md-6">
 						<div class="room-item">
-							<a href="/accomodation/roomInfo?bno=${roomList.get(a).room_link}">
+							<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
 								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster"
 								height="200">
 							</a>
@@ -358,21 +344,21 @@ function selectArea(){
 				<div class="col-lg-12">
 					<div class="room-pagination">
 
-						<a href="#"><i class="fa fa-long-arrow-left"> Pre </i></a>
+<!-- 						<a href="#"><i class="fa fa-long-arrow-left"> Pre </i></a> -->
 
-						<c:forEach begin="1" end="${Math.ceil(roomList.size()/9)}">
-							<c:set var="PageNum" value="${PageNum+1 }" />
+<%-- 						<c:forEach begin="1" end="${Math.ceil(roomList.size()/9)}"> --%>
+<%-- 							<c:set var="PageNum" value="${PageNum+1 }" /> --%>
 
-							<c:if test="${PageNum<=5}">
+<%-- 							<c:if test="${PageNum<=5}"> --%>
 
-								<a href="/accomodation/roomList?PageNum=${PageNum}">${PageNum}</a>
+<%-- 								<a href="/accomodation/roomList?PageNum=${PageNum}">${PageNum}</a> --%>
 
-							</c:if>
+<%-- 							</c:if> --%>
 
 
-						</c:forEach>
+<%-- 						</c:forEach> --%>
 
-						<a href="#">Next <i class="fa fa-long-arrow-right"></i></a>
+<!-- 						<a href="#">Next <i class="fa fa-long-arrow-right"></i></a> -->
 
 					</div>
 				</div>

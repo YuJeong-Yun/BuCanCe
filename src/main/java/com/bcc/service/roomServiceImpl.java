@@ -37,6 +37,21 @@ public class roomServiceImpl implements roomService{
 		return roomList;
 	}
 
+	@Override
+	public JSONArray roomDetail(String bno) {
+
+		JSONArray detailList =dao.roomDetailDAO(bno);
+		return detailList;
+	}
+
+	@Override
+	public JSONArray roomReserve(String bno) {
+
+		JSONArray reserveList =dao.roomReserveDAO(bno);
+		return reserveList;
+	}
+	
+	
 	
 	
 }

@@ -10,4 +10,8 @@ public interface roomService {
 	
 	public JSONArray roomSearchList(roomSearch rs);
 	
+	public JSONArray roomDetail(String bno);
+
+	public JSONArray roomReserve(String bno);
+	
 }
