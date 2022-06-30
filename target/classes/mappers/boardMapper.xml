@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bcc.mapper.BoardMapper">
+
+<!-- 	<insert id="create">
+		insert into mytable (title, content, id)
+		values(#{title},#{content},#{id})
+	</insert>
+ -->
+	<select id="listAll" resultType="BoardVO">
+		<![CDATA[
+		select * from mytable
+		where num > 0
+		order by num asc
+		]]>
+	</select>
+
+	<select id="getBoard" resultType="BoardVO">
+		select
+		*
+		from
+		mytable
+		where num =
+		#{num}
+	</select>
+
+	<select id="updateBoardCnt">
+		update mytale set totalCount = totalCount + 1
+		where
+		num = #{num}
+
+	</select>
+
+
+</mapper>
+  
