@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 <meta charset="UTF-8">
 <meta name="description" content="Sona Template">
 <meta name="keywords" content="Sona, unica, creative, html">
@@ -207,127 +205,169 @@ img.ui-datepicker-trigger {
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text">
-						<h2>방 정보 검색 페이지</h2>
+						<h2>부산 숙소</h2>
 						<div class="bt-option">
-							<a href="./home.html">Home</a> <span>Rooms</span>
+							<a href="./home.html">Home</a> <span>숙소 정보</span>
 						</div>
 					</div>
 				</div>
-				<a style="padding-left: 30px">오늘 날짜 : <span id="today"></span></a>
 
 			</div>
-			<form>
-				<select name="area">
+
+
+
+<script type="text/javascript">
+
+
+//지역 select 고를때 동작
+function selectArea(){
+	
+	
+	
+	idForm.submit();
+	
+	
+	var input = document.getElementById("place_name"); 
+
+	input.value = null;
+	${select_place=""}
+	
+}
+
+
+	
+</script>
+
+			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm">
+				<select name="area" onchange="selectArea()" id="area">
 					<optgroup label="지역">
-						<option>지역선택</option>
-						<option value="haeundae">해운대</option>
-						<option value="gwanganri">광안리</option>
-						<option value="seomern">서면</option>
-						<option value="dongrae">동래</option>
+						<option value="favorite"
+						<c:if test="${select_area=='favorite'}">selected</c:if>
+						>지역을 선택하세요.</option>
+						<option value="favorite"
+						<c:if test="${select_area=='favorite'}">selected</c:if>
+						>인기순</option>
+						<option 
+						<c:if test="${select_area=='해운대/재송'}">selected</c:if>
+						value="해운대/재송" >해운대/재송
+						</option>
+						<option value="송정/기장/정관"
+						<c:if test="${select_area=='송정/기장/정관'}">selected</c:if>
+						>송정/기장/정관</option>
+						<option value="서면/초읍/양정"
+						<c:if test="${select_area=='서면/초읍/양정'}">selected</c:if>
+						>서면/초읍/양정</option>
+						<option value="남포동/부산역/송도/영도/범일동"
+						<c:if test="${select_area=='남포동/부산역/송도/영도/범일동'}">selected</c:if>
+						>남포동/부산역/송도/영도/범일동</option>
+						<option value="광안리/수영/민락"
+						<c:if test="${select_area=='광안리/수영/민락'}">selected</c:if>
+						>광안리/수영/민락</option>
+						<option value="경성대/대연/용호/문현"
+						<c:if test="${select_area=='경성대/대연/용호/문현'}">selected</c:if>
+						>경성대/대연/용호/문현</option>
+						<option value="동래/온천장/부산대/구서/사직"
+						<c:if test="${select_area=='동래/온천장/부산대/구서/사직'}">selected</c:if>
+						>동래/온천장/부산대/구서/사직</option>
+						<option value="연산/토곡"
+						<c:if test="${select_area=='연산/토곡'}">selected</c:if>
+						>연산/토곡</option>
+						<option value="사상/"
+						<c:if test="${select_area=='사상/'}">selected</c:if>
+						>사상</option>
+						<option value="강서/하단/사하/명지/신호"
+						<c:if test="${select_area=='강서/하단/사하/명지/신호'}">selected</c:if>
+						>강서/하단/사하/명지/신호</option>
+						<option value="덕천/만덕/구포/화명/북구"
+						<c:if test="${select_area=='덕천/만덕/구포/화명/북구'}">selected</c:if>
+						>덕천/만덕/구포/화명/북구</option>
 					</optgroup>
-				</select> &nbsp; <select name="person_select">
-					<optgroup label="객실인원">
-						<option>객실인원선택</option>
-						<option value="2">1~2인</option>
-						<option value="4">3~4인</option>
-						<option value="6">5~6인</option>
-
-					</optgroup>
-				</select> <input type="text" placeholder="원하는 숙소명" name="place_name">
+				</select> &nbsp; 
 
 
-				<label for="fromDate">시작일</label> <input type="text" name="fromDate"
-					id="fromDate"> &nbsp; <label for="toDate">종료일</label> <input
-					type="text" name="toDate" id="toDate"> &nbsp; <input
-					type="submit" value="검색">
+<input type="text" placeholder="숙소명" name="place_name" id="place_name" value="${select_place}">
+<input type="submit" value="검색">
 
+	</form>
 
-
-			</form>
-
-
-
-
-
-			<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-			<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-			<!-- datepicker 한국어로 -->
-			<script
-				src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
-			<script>
-				$(function() {
-
-					//오늘 날짜를 출력
-					$("#today").text(new Date().toLocaleDateString());
-
-					//datepicker 한국어로 사용하기 위한 언어설정
-					$.datepicker.setDefaults($.datepicker.regional['ko']);
-
-					// 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
-					// 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
-
-					//시작일.
-					$('#fromDate').datepicker(
-							{
-								showOn : "both", // 달력을 표시할 타이밍 (both: focus or button)
-								//                     buttonImage: "images/calendar.gif", // 버튼 이미지
-								//                     buttonImageOnly : true,             // 버튼 이미지만 표시할지 여부
-								buttonText : "체크인", // 버튼의 대체 텍스트
-								dateFormat : "yy-mm-dd", // 날짜의 형식
-								changeMonth : true, // 월을 이동하기 위한 선택상자 표시여부
-								//minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
-								onClose : function(selectedDate) {
-									// 시작일(fromDate) datepicker가 닫힐때
-									// 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-									$("#toDate").datepicker("option",
-											"minDate", selectedDate);
-								}
-							});
-
-					//종료일
-					$('#toDate').datepicker(
-							{
-								showOn : "both",
-								//                     buttonImage: "images/calendar.gif", 
-								//                     buttonImageOnly : true,
-								buttonText : "체크아웃",
-								dateFormat : "yy-mm-dd",
-								changeMonth : true,
-								//minDate: 0, // 오늘 이전 날짜 선택 불가
-								onClose : function(selectedDate) {
-									// 종료일(toDate) datepicker가 닫힐때
-									// 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
-									$("#fromDate").datepicker("option",
-											"maxDate", selectedDate);
-								}
-							});
-				});
-			</script>
-
-
-
-
-
+		
 
 		</div>
 	</div>
 	<!-- Breadcrumb Section End -->
 
 	<!-- Rooms Section Begin -->
+	<section class="rooms-section spad">
+		<div class="container">
+			<div class="row">
+				<c:set var="a" />
+				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
+					<div class="col-lg-4 col-md-6">
+						<div class="room-item">
+							<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
+								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster"
+								height="200">
+							</a>
+							<div class="ri-text">
+								<h4>${roomList.get(a).room_title}</h4>
+								<table>
+									<tbody>
+										<tr>
+											<td class="r-o">평점:</td>
+											<td>${roomList.get(a).room_rank}</td>
+										</tr>
+										<tr>
+											<td class="r-o">지역:</td>
+											<td>${roomList.get(a).room_area}</td>
+										</tr>
+										<tr>
+											<td class="r-o" style="color: blue">대실:</td>
+											<td  style="color: blue">${roomList.get(a).room_price}</td>
+										</tr>
+										<tr>
+											<td class="r-o" style="color: red">숙박:</td>
+											<td style="color: red">${roomList.get(a).room_price2}</td>
+										</tr>
+									</tbody>
+								</table>
+								<a href="#" class="primary-btn">More Details</a> ${a=a+1}
 
-	${roomList.get(0).room_title}
-	<br>
-	<img src="${roomList.get(0).room_pic}" alt="movie" class="poster"
-		width="200" height="200" /> ${roomList.get(0).room_price}
-	${roomList.get(0).room_price2}
-	<br> ${roomList.get(0).room_star} 평점
-	<br> ${roomList.get(0).room_area}
-	<br>
+							</div>
+						</div>
+					</div>
+
+				</c:forEach>
 
 
 
 
-	<br>
+				<div class="col-lg-12">
+					<div class="room-pagination">
+
+<!-- 						<a href="#"><i class="fa fa-long-arrow-left"> Pre </i></a> -->
+
+<%-- 						<c:forEach begin="1" end="${Math.ceil(roomList.size()/9)}"> --%>
+<%-- 							<c:set var="PageNum" value="${PageNum+1 }" /> --%>
+
+<%-- 							<c:if test="${PageNum<=5}"> --%>
+
+<%-- 								<a href="/accomodation/roomList?PageNum=${PageNum}">${PageNum}</a> --%>
+
+<%-- 							</c:if> --%>
+
+
+<%-- 						</c:forEach> --%>
+
+<!-- 						<a href="#">Next <i class="fa fa-long-arrow-right"></i></a> -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
 	<!-- Rooms Section End -->
 
 	<!-- Footer Section Begin -->
@@ -353,7 +393,6 @@ img.ui-datepicker-trigger {
 									class="fa fa-tripadvisor"></i></a> <a href="#"><i
 									class="fa fa-instagram"></i></a> <a href="#"><i
 									class="fa fa-youtube-play"></i></a>
-
 							</div>
 						</div>
 					</div>

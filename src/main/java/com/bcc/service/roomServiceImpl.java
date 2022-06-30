@@ -3,10 +3,12 @@ package com.bcc.service;
 import javax.inject.Inject;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.bcc.domain.roomSearch;
 import com.bcc.persistence.roomDAO;
 
 @Service
@@ -20,13 +22,38 @@ public class roomServiceImpl implements roomService{
 			LoggerFactory.getLogger(roomServiceImpl.class);
 	
 	@Override
-	public JSONArray roomSearch() {
+	public JSONArray roomList() {
 		
 		JSONArray roomList = dao.roomDAO();
 		
 		 return roomList;
 	}
 
+	@Override
+	public JSONArray roomSearchList(roomSearch rs) {
+
+		JSONArray roomList = dao.roomDAO(rs);
+		
+		
+		return roomList;
+	}
+
+	@Override
+	public JSONArray roomDetail(String bno) {
+
+		JSONArray detailList =dao.roomDetailDAO(bno);
+		return detailList;
+	}
+
+	@Override
+	public JSONObject roomReserve(String bno) {
+
+		JSONObject reserveList =dao.roomReserveDAO(bno);
+		
+		return reserveList;
+	}
+	
+	
 	
 	
 }
