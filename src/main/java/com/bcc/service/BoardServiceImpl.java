@@ -31,13 +31,18 @@ public class BoardServiceImpl implements BoardService{
 
 		//글 번호에 해당 되는 페이지 상세보기
 		@Override
-		public BoardVO readBoard(int bno) {
-			BoardVO vo = dao.getBoard(bno);
+		public BoardVO readBoard(int num) {
+			BoardVO vo = dao.getBoard(num);
 			return vo;
 		}	
 		// 조회수
 		@Override
-		public void updateBoardCount(Integer bno) {
-			dao.updateBoardCnt(bno);
+		public void updateBoardCount(Integer num) {
+			dao.updateBoardCnt(num);
+		}
+		//카테고리
+		@Override
+		public List<BoardVO> category() throws Exception {
+			return dao.category();
 		}
 	}

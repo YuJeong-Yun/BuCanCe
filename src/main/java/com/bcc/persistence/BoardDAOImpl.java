@@ -43,4 +43,11 @@ public class BoardDAOImpl implements BoardDAO {
 	public void updateBoardCnt(Integer num) {
 		session.update(namespace + ".updateBoardCnt", num);
 	}
+	//카테고리
+
+	@Override
+	public List<BoardVO> category() throws Exception {
+		return session.selectList(namespace+".category");
+	}
+	
 }

@@ -27,6 +27,7 @@ public class BoardVO {
 	private int pageNo;
 	private int totalCount;
 
+	public BoardVO() {}
 	public BoardVO(Integer num, String mAIN_TITLE, double lNG, String mIDDLE_SIZE_RM1, String uSAGE_AMOUNT,
 			String cNTCT_TEL, String mAIN_IMG_NORMAL, String tRFC_INFO, String hLDY_INFO, String iTEMCNTNTS,
 			String pLACE, String sUBTITLE, String uSAGE_DAY, String uSAGE_DAY_WEEK_AND_TIME, String gUGUN_NM,

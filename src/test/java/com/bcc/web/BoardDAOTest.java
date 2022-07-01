@@ -17,21 +17,12 @@ public class BoardDAOTest {
 	@Inject
 	private BoardDAO dao;
 
-	@Test
+	//@Test
 	public void testInsertBoard() throws Exception {
 		BoardVO vo = new BoardVO();
-		vo.setId("관리자");
-		vo.setPw("1234");
-		vo.setTitle("test");
-		vo.setContent("test111");
-		vo.setReadcount(1);
-		vo.setBno(1);
-		vo.setcom_cnt(1);
-		vo.setHeart_cnt(1);
-		
-		
+
 		dao.create(vo);
-		
+
 	}
 
 }

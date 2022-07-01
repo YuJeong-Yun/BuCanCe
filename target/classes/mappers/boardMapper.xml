@@ -6,14 +6,9 @@
 
 <mapper namespace="com.bcc.mapper.BoardMapper">
 
-<!-- 	<insert id="create">
-		insert into mytable (title, content, id)
-		values(#{title},#{content},#{id})
-	</insert>
- -->
 	<select id="listAll" resultType="BoardVO">
 		<![CDATA[
-		select * from mytable
+		select * from tourist_spot
 		where num > 0
 		order by num asc
 		]]>
@@ -23,18 +18,23 @@
 		select
 		*
 		from
-		mytable
+		tourist_spot
 		where num =
 		#{num}
 	</select>
 
 	<select id="updateBoardCnt">
-		update mytale set totalCount = totalCount + 1
+		update tourist_spot set totalCount = totalCount + 1
 		where
 		num = #{num}
 
 	</select>
-
+	
+	<select id="category" resultType="BoardVO">
+	select *
+	from tourist_spot
+	where GUGUN_NM= #{GUGUN_NM}
+	</select>
 
 </mapper>
   

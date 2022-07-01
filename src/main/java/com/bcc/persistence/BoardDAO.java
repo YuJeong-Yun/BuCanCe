@@ -18,6 +18,9 @@ public interface BoardDAO {
 	
 	//조회수 1 증가
 	public void updateBoardCnt(Integer bno);
+	
+	//카테고리
+	public List<BoardVO> category() throws Exception;
 
 	
 
