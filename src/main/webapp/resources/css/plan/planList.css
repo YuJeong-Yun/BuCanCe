@@ -1,6 +1,7 @@
 /* 그룹 초대받은 리스트 */
 .invitation-list {
 	border-bottom: 1px dotted #ccc;
+	margin-bottom: 50px;
 }
 .invitation-list > .col-lg-8 {
 	margin-bottom: 50px;
@@ -57,9 +58,21 @@
 .room-booking form button.add-group {
 	border: 2px solid #0288d1;
 	color: #0288d1;
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 }
 /* 플랜 목록 */
+.plan-list .plan-cnt {
+    width: 300px;
+    height: 40px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+    text-align: center;
+    line-height: 40px;
+    color: #333;
+    font-weight: 700;
+    font-size: 20px;
+}
 .plan-list .plan-container {
 	list-style: none;
 }

@@ -46,6 +46,7 @@ public class PlanController {
 		// 초대받은 그룹 목록 가져오기
 		List<GrpAcceptVO> grpAcceptList = service.getGrpAcceptList(id);
 		model.addAttribute("grpAcceptList", grpAcceptList);
+		log.info("초대받은 그룹 목록 : "+grpAcceptList);
 
 		// 소속된 그룹 정보 가져오기
 		List<PlanMemberVO> grpList = service.getGrpList(id);
