@@ -78,37 +78,24 @@ public class accomodationController {
 
 	}
 
-	// roomInfo 페이지
-	// http://localhost:8088/accomodation/roomInfo
-	@RequestMapping(value = "/roomInfo", method = RequestMethod.GET)
-	public void roomInfoGET(Model model, @RequestParam("bno") String bno) throws IOException {
-
-		log.info(" roomInfoGET() 호출 ");
-
-		// Jsoup를 이용해서 크롤링 - 여기어때
-		String url = bno;
-
-		Document doc = null; // Document에 페이지의 전체 소스가 저장됨
-
-		JSONArray roomList = service.roomSearch();
-
-		model.addAttribute("roomList", roomList);
-
-	}
-
 	// roomDetail 페이지
 	// http://localhost:8088/accomodation/roomDetail
-	@RequestMapping(value = "/roomDetail" ,method = RequestMethod.GET)
-	public void roomDetailGET(Model model,@RequestParam("bno") String bno) throws IOException {
+	@RequestMapping(value = "/roomDetail", method = RequestMethod.GET)
+	public void roomDetailGET(Model model, @RequestParam("bno") String bno) throws IOException {
 
 		log.info("roomDetailGET() 호출");
 
-	
-	
-
 		JSONArray roomdetail = service.roomDetail(bno);
-		
+		JSONArray roomdetail2 = service.roomDetail2(bno);
+		JSONArray roomdetail3 = service.roomDetail3(bno);
+		JSONArray roomdetail4 = service.roomDetail4(bno);
+		JSONArray roomdetail5 = service.roomDetail5(bno);
+
 		model.addAttribute("roomdetail", roomdetail);
+		model.addAttribute("roomdetail2", roomdetail2);
+		model.addAttribute("roomdetail3", roomdetail3);
+		model.addAttribute("roomdetail4", roomdetail4);
+		model.addAttribute("roomdetail5", roomdetail5);
 	}
 
 }
