@@ -10,11 +10,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.bcc.domain.roomDate;
 import com.bcc.domain.roomSearch;
 
 @Repository
@@ -299,11 +301,11 @@ public class roomDAOImpl implements roomDAO {
 
 
 	@Override
-	public JSONArray roomReserveDAO(String bno) {
+	public JSONArray roomPriceDAO(String bno) {
 		
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
-				String url = "https://www.goodchoice.kr/product/detail?ano=66536&adcno=1&sel_date=2022-06-30&sel_date2=2022-07-01";
+				String url = bno;
 
 				Document doc = null; // Document에 페이지의 전체 소스가 저장됨
 
@@ -314,54 +316,39 @@ public class roomDAOImpl implements roomDAO {
 					e.printStackTrace();
 				}
 				
-				Elements room_grade //객실등급
-				= doc.select(".table_wrap > .normal_day > .table_type_02 > tbody > tr > td:first-child");
+				Element roomToday //대실정보
+				= doc.selectFirst(".normal_day > table");
 				
-				Elements room_price1 //객실등급
-				= doc.select(".table_wrap > .normal_day > .table_type_02 > tbody > tr > td:nth-child(2) > span");
-				Elements room_price2 //객실등급
-				= doc.select(".table_wrap > .normal_day > .table_type_02 > tbody > tr > td:nth-child(2) > span");
-				Elements room_price3 //객실등급
-				= doc.select(".table_wrap > .normal_day > .table_type_02 > tbody > tr > td:nth-child(2) > span");
-				Elements room_price4 //객실등급
-				= doc.select(".table_wrap > .normal_day > .table_type_02 > tbody > tr > td:nth-child(2) > span");
-
+				Element roomTimeTo //대실시간
+				= doc.selectFirst(".normal_day > table:last-child");
 				
-				// JSON 형태로 숙소 가격 정보 불러오기
-				JSONArray reserveList = new JSONArray();
+				Element roomOneTo //숙박정보
+				= doc.selectFirst(".normal_day:last-child > table");
 				
+				Element roomTimeOne //숙박시간
+				= doc.selectFirst(".normal_day:last-child > table:last-child");
+				
+				JSONObject obj1 = new JSONObject();
+				JSONObject obj2 = new JSONObject();
+				JSONObject obj3 = new JSONObject();
+				JSONObject obj4 = new JSONObject();
+				
+				obj1.put("roomToday", roomToday);
+				obj2.put("roomOneTo", roomOneTo);
+				obj3.put("roomTimeTo", roomTimeTo);
+				obj4.put("roomTimeOne", roomTimeOne);
 
-				// JSONObject에 키:값 형태로 데이터 저장
-				roomSearch rs = new roomSearch();
-					
-				String[] ab = rs.transPrice(room_grade);
-				String[] ab2 = rs.transPrice(room_price1);
-				String[] ab3 = rs.transPrice(room_price2);
-				String[] ab4 = rs.transPrice(room_price3);
-				String[] ab5 = rs.transPrice(room_price4);
-					
-				for(int i =0; i<ab.length-1; i++){
-					JSONObject obj = new JSONObject();
-						
-					obj.put("room_grade", ab[i]);
-					obj.put("room_price1", ab2[i]);
-					obj.put("room_price2", ab3[i]);
-					obj.put("room_price3", ab4[i]);
-					obj.put("room_price4", ab5[i]);
-					
-					
-					System.out.println(obj);
-						
-					reserveList.add(obj);
-				}
-					
-					
-					
-					
-					
-				System.out.println(" reserveList : " + reserveList);
+				JSONArray arr = new JSONArray();
+				
+				arr.add(obj1);
+				arr.add(obj2);
+				arr.add(obj3);
+				arr.add(obj4);
+				
+				
+				log.info(arr+"");
 
-		return reserveList;
+		return arr;
 	}
 
 	
@@ -369,7 +356,75 @@ public class roomDAOImpl implements roomDAO {
 	
 	
 	
-	
+	@Override
+	public JSONArray roomReserveDAO(String bno,roomDate rd,String ano) {
+
+		log.info("크롤링 처리불러오기");
+		// Jsoup를 이용해서 크롤링 - 여기어때
+		String url = "https://www.goodchoice.kr/product/detail?ano=66035&adcno=1&sel_date=2022-07-01&sel_date2=2022-07-02";
+//		https%3A%2F%2Fwww.goodchoice.kr
+//		%2Fproduct%2Fdetail%3Fano%3D66035
+//		&sel_date=2022-07-01&sel_date2=2022-07-02
+		log.info(url);
+		
+		//임의의 날짜
+		String sel_date="2022-07-01";
+		String sel_date2="2022-07-02";
+		//첫번째 날짜와 두번째 날짜값
+		String ch_date=rd.getSel_date();
+		String ch_date2=rd.getSel_date2();
+		String ch_ano=ano;
+		
+		int date_idx = url.indexOf("sel_date=");
+		int date2_idx = url.indexOf("sel_date2=");
+		int ano_idx = url.indexOf("ano=");
+		
+		log.info(date_idx+"");
+		log.info(date2_idx+"");
+		log.info(ano_idx+"");
+		
+		String aa = url.substring(date_idx+9,date_idx+19);
+		String bb = url.substring(date2_idx+10,date2_idx+20);
+		String cc = url.substring(ano_idx+4,url.indexOf("&"));
+		
+		log.info(url.indexOf("&")+"");
+		
+		url = url.replace(aa, rd.getSel_date());
+		url = url.replace(bb, rd.getSel_date2());
+		url = url.replace(cc, ch_ano);
+		
+		log.info(url);
+		
+		
+//		Document doc = null; // Document에 페이지의 전체 소스가 저장됨
+//
+//		try {
+//			doc = Jsoup.connect(url).get();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		// select를 이용하여 원하는 태그를 선택
+//		Elements room_title = doc.select(".list_2.adcno1 .name strong");
+//		// JSON 형태로 영화 정보 저장
+//		JSONArray roomList = new JSONArray();
+//
+//		for (int i = 0; i < room_title.size(); i++) {
+//			// JSONObject에 키:값 형태로 데이터 저장
+//			JSONObject obj = new JSONObject();
+//
+//			obj.put("room_title", room_title.get(i).text());
+//
+//			// roomList에 생성한 JSONObject 추가
+////				log.info(obj+"");
+//			roomList.add(obj);
+//		}
+//		System.out.println(" roomList : " + roomList);
+
+		return null;
+//		return roomList;
+	}
 	
 	
 }
