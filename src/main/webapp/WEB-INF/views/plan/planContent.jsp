@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <jsp:include page="../include/header.jsp" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|
 Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planContent.css" />
+	
+
 
 	<!--그룹 멤버 보여주기 메뉴-->
 	<section class="show-grp-menu">
@@ -16,16 +19,16 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	<section class="grp-member">
 	  <div class="container">
 	    <ul class="member-container">
-	      <li>
-	        <div class="member--profile"><img src="${pageContext.request.contextPath }/resources/img/who.jpg" /></div>
-	        <div class="member--id">yun1</div>
-	        <div class="member--name">유정</div>
-	      </li>
-	      <li>
-	        <div class="member--profile"><img src="${pageContext.request.contextPath }/resources/img/who.jpg" /></div>
-	        <div class="member--id">yun1</div>
-	        <div class="member--name">유정</div>
-	      </li>
+	      <c:forEach var="member" items="${grpMemberList }">
+	      	<!-- 방장은 별 표시 -->
+	      	<c:if test="">
+		     </c:if>
+		      <li>
+		        <div class="member--profile"><img src="${pageContext.request.contextPath }/resources/img/who.jpg" /></div>
+		        <div class="member--id">${member.id }</div>
+		        <div class="member--name">${member.name }</div>
+		      </li>
+	      </c:forEach>
 	      <li class="add-member">
 	      	<!-- Button trigger modal -->
 		    <span class="material-icons-outlined add-group" data-bs-toggle="modal" data-bs-target="#exampleModal">add_circle</span>
@@ -79,7 +82,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 		let searchID = searchInput.value;
 		
 		$.ajax({
-	  		url: "${pageContext.request.contextPath}/memberID",
+	  		url: "${pageContext.request.contextPath}/planREST/memberID",
 	  		type: "post",
 	  		data: {
 	  			id : searchID

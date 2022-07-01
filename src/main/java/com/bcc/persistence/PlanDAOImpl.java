@@ -1,6 +1,5 @@
 package com.bcc.persistence;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -80,6 +79,31 @@ public class PlanDAOImpl implements PlanDAO {
 	@Override
 	public void delPlanMem(PlanMemberVO vo) {
 		sqlSession.delete(NAMESPACE+".delPlanMem", vo);
+	}
+
+	@Override
+	public String getLeader(int num) {
+		return sqlSession.selectOne(NAMESPACE+".getLeader", num);
+	}
+
+	@Override
+	public List<GrpAcceptVO> getInvitingList(int grp_num) {
+		return sqlSession.selectList(NAMESPACE+".getInvitingList", grp_num);
+	}
+
+	@Override
+	public void inviteMember(GrpAcceptVO vo) {
+		sqlSession.insert(NAMESPACE+".inviteMember", vo);
+	}
+
+	@Override
+	public String getName(String id) {
+		return sqlSession.selectOne(NAMESPACE+".getName", id);
+	}
+
+	@Override
+	public String getGrpLeader(int num) {
+		return sqlSession.selectOne(NAMESPACE+".getGrpLeader", num);
 	}
 
 	

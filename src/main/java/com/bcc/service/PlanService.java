@@ -43,6 +43,21 @@ public interface PlanService {
 	// 플랜 멤버 삭제
 	public void delPlanMem(PlanMemberVO vo);
 
+	// 방장 정보 가져오기
+	public String getLeader(int num);
+
+	// 해당 그룹의 초대 중인 멤버
+	public List<GrpAcceptVO> getInvitingList(int grp_num);
+
+	// 그룹에 멤버 초대
+	public void inviteMember(GrpAcceptVO vo);
+
+	// 회원 이름 가져오기
+	public String getName(String id);
+
+	// 그룹 리더 가져오기
+	public String getGrpLeader(int num);
+
 
 
 }

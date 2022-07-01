@@ -13,7 +13,7 @@
   	</select>
   	
   	<select id="getGrpNum" resultType="int">
-  		select max(num) 
+  		select max(num)
   		from bcc_plan 
   	</select>
   	
@@ -46,7 +46,7 @@
   	</delete>
   	
   	<select id="getGrpList" resultType="PlanMemberVO">
-		select grp_num, grp_name
+		select grp_num, grp_name, leader 
 		from bcc_plan_member a join bcc_plan b
 		on a.grp_num = b.num
 		where id = #{id}
@@ -64,11 +64,43 @@
 		from bcc_plan_member a join bcc_member b
 		on a.id = b.id
 		where grp_num = #{grp_num}
+		order by num asc
   	</select>
   	
   	<delete id="delPlanMem">
   		delete from bcc_plan_member 
   		where id = #{id} and grp_num = #{grp_num}
   	</delete>
+  	
+  	<select id="getLeader" resultType="string">
+  		select leader
+  		from bcc_plan
+  		where num = #{num}
+  	</select>
+  	
+  	<select id="getInvitingList" resultType="GrpAcceptVO">
+	  	select receiver, name
+		from bcc_grp_accept a join bcc_member b
+        on a.receiver = b.id
+		where grp_num = #{grp_num}
+		order by num asc
+	</select>
+	
+	<insert id="inviteMember">
+		insert into bcc_grp_accept(grp_num, sender, receiver) 
+		values(#{grp_num}, #{sender}, #{receiver})
+	</insert>
+	
+	<select id="getName" resultType="string">
+		select name
+		from bcc_member
+		where id = #{id}
+	</select>
+	
+	<select id="getGrpLeader" resultType="string">
+	select leader
+	from bcc_plan
+	where num = #{num}
+	</select>
   </mapper>
   

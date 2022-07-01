@@ -1,5 +1,7 @@
 package com.bcc.web;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,29 +36,30 @@ public class PlanRESTController {
 
 	// 그룹 초대 수락
 	@RequestMapping(value = "/accept/{grp_num}", produces = "application/json; charset=utf8")
-	public JSONObject acceptREST(@PathVariable("grp_num") int grp_num, HttpSession session) {
-		log.info("초대 수락 받아온 그룹 넘버 : " + grp_num);
+	public JSONObject acceptREST(@PathVariable("grp_num") int grpNum, HttpSession session) {
+		log.info("초대 수락 받아온 그룹 넘버 : " + grpNum);
 
 		String id = (String) session.getAttribute("id");
 
 		// 초대 수락 리스트에서 제거
 		GrpAcceptVO vo = new GrpAcceptVO();
 		vo.setReceiver(id);
-		vo.setGrp_num(grp_num);
+		vo.setGrp_num(grpNum);
 		service.deleteInvitation(vo);
 
 		// 그룹에 멤버 추가
 		PlanMemberVO member = new PlanMemberVO();
 		member.setId(id);
-		member.setGrp_num(grp_num);
+		member.setGrp_num(grpNum);
 		service.insertGrpMember(member);
 
 		// 해당 그룹 소속 멤버 리스트 가져오기
-		List<MemberVO> grpMember = service.getGrpMemberList(grp_num);
-		// 멤버 리스트랑 그룹 이름 저장
+		List<MemberVO> grpMember = service.getGrpMemberList(grpNum);
+		// 멤버 리스트, 그룹 이름, 그룹 리더 저장
 		JSONObject obj = new JSONObject();
 		obj.put("grpMember", grpMember);
-		obj.put("grpName", service.getGrpName(grp_num));
+		obj.put("grpName", service.getGrpName(grpNum));
+		obj.put("leader", service.getGrpLeader(grpNum));
 
 		return obj;
 
@@ -64,50 +67,99 @@ public class PlanRESTController {
 
 	// 그룹 초대 거절
 	@RequestMapping(value = "/refusal/{grp_num}")
-	public void refusalREST(@PathVariable("grp_num") int grp_num, HttpSession session) {
-		log.info("초대 거절 받아온 그룹 넘버 : " + grp_num);
+	public void refusalREST(@PathVariable("grp_num") int grpNum, HttpSession session) {
+		log.info("초대 거절 받아온 그룹 넘버 : " + grpNum);
 
 		String id = (String) session.getAttribute("id");
 
 		GrpAcceptVO vo = new GrpAcceptVO();
 		vo.setReceiver(id);
-		vo.setGrp_num(grp_num);
+		vo.setGrp_num(grpNum);
 		// 초대 수락 리스트에서 제거
 		service.deleteInvitation(vo);
 	}
 
 	// 플랜 삭제
 	@RequestMapping(value = "/delete/{grp_num}")
-	public void deletePlanREST(@PathVariable("grp_num") int grp_num, HttpSession session) {
-		log.info("플랜 삭제 : " + grp_num);
-		
+	public void deletePlanREST(@PathVariable("grp_num") int grpNum, HttpSession session) {
+		log.info("플랜 삭제 : " + grpNum);
+
 		String id = (String) session.getAttribute("id");
-		
-		PlanMemberVO vo =new PlanMemberVO();
+
+		PlanMemberVO vo = new PlanMemberVO();
 		vo.setId(id);
-		vo.setGrp_num(grp_num);
+		vo.setGrp_num(grpNum);
 		// 플랜 멤버 삭제
 		service.delPlanMem(vo);
-		
+
 	}
 
-	@RequestMapping(value = "/memberID", method = RequestMethod.POST)
-	public JSONArray memberID(String id) {
+	// 아이디 검색
+	@RequestMapping(value = "/memberID", produces = "application/json; charset=utf8")
+	public JSONObject memberID(String id, int grpNum) {
 		log.info("memberID() 데이터 받기 : " + id);
 
-		List<MemberVO> memberList = service.getMemberList(id);
+		JSONObject total = new JSONObject();
 
+		// 아이디 검색 결과
+		List<MemberVO> memberList = service.getMemberList(id);
 		JSONArray memberArr = new JSONArray();
 		for (MemberVO vo : memberList) {
-			JSONObject member = new JSONObject();
+			JSONObject obj = new JSONObject();
 
-			member.put("id", vo.getId());
-			member.put("name", vo.getName());
+			obj.put("id", vo.getId());
+			obj.put("name", vo.getName());
 
-			memberArr.add(member);
+			memberArr.add(obj);
 		}
 
-		return memberArr;
+		// 그룹의 초대중인 회원
+		List<GrpAcceptVO> invitingList = service.getInvitingList(grpNum);
+		String[] invitingArr = new String[invitingList.size()];
+		for (int i = 0; i < invitingList.size(); i++) {
+			invitingArr[i] = invitingList.get(i).getReceiver();
+		}
+
+		// 그룹의 멤버
+		List<MemberVO> grpMemberList = service.getGrpMemberList(grpNum);
+		String[] grpMemberArr = new String[grpMemberList.size()];
+		for (int i = 0; i < grpMemberList.size(); i++) {
+			grpMemberArr[i] = grpMemberList.get(i).getId();
+		}
+
+		total.put("memberArr", memberArr);
+		total.put("invitingArr", invitingArr);
+		total.put("grpMemberArr", grpMemberArr);
+
+		return total;
+	}
+
+	// 그룹에 초대
+	@RequestMapping(value = "/invite", produces = "application/text; charset=utf8")
+	public String inviteREST(String id, int grpNum, HttpSession session) {
+		String sender = (String) session.getAttribute("id");
+
+		System.out.println("grpNum : "+grpNum);
+		// 그룹 멤버 + 초대중 멤버 10명 이상이면 초대 불가
+		int grpMemberCnt = service.getGrpMemberList(grpNum).size();
+		System.out.println("gm : "+grpMemberCnt);
+		int invitingMemberCnt = service.getInvitingList(grpNum).size();
+		System.out.println("im : "+invitingMemberCnt);
+		if ((grpMemberCnt + invitingMemberCnt) >= 10) {
+			return "더 이상 초대할 수 없습니다.";
+		}
+
+		// 초대 리스트에 추가
+		GrpAcceptVO vo = new GrpAcceptVO();
+		vo.setGrp_num(grpNum);
+		vo.setSender(sender);
+		vo.setReceiver(id);
+
+		service.inviteMember(vo);
+
+		// 회원 이름 전달
+		return service.getName(id);
+
 	}
 
 }

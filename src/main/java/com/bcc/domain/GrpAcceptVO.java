@@ -5,6 +5,7 @@ public class GrpAcceptVO {
 	private String sender;
 	private String receiver;
 	private String grp_name;
+	private String name;
 
 	public int getGrp_num() {
 		return grp_num;
@@ -38,10 +39,18 @@ public class GrpAcceptVO {
 		this.grp_name = grp_name;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public String toString() {
-		return "GrpAcceptListVO [grp_num=" + grp_num + ", sender=" + sender + ", receiver=" + receiver + ", grp_name="
-				+ grp_name + "]";
+		return "GrpAcceptVO [grp_num=" + grp_num + ", sender=" + sender + ", receiver=" + receiver + ", grp_name="
+				+ grp_name + ", name=" + name + "]";
 	}
 
 }

@@ -55,7 +55,7 @@
 
 
 /* 플랜 추가 */
-.room-booking form button.add-group {
+.room-booking form button.add-plan {
 	border: 2px solid #0288d1;
 	color: #0288d1;
 	margin-bottom: 100px;
@@ -120,22 +120,84 @@
 	align-items: center;
 	list-style: none;
 }
-.member-container li {
-	width: calc(100%/10);
+.member-container > li {
+	width: calc(100%/11);
+	position: relative;
 	text-align: center;
 }
-.member-container li .member--profile img {
+.member-container > li .leader {
+	position: absolute;
+	top:-10px;
+	left:10px;
+	margin: auto;
+	font-size: 30px;
+	color: #dad285;
+	z-index: 1;
+}
+.member-container > li .member--profile img {
 	width: 40px;
 	height: 40px;
 	margin: 0;
 	border-radius: 50%;
 }
-.member-container li .member--id {
-	font-size: 16px;
-	font-weight: 700;
-}
-.member-container li .member--name {
+.member-container > li .invite-cancle {
+	background-color: #bbb;
+	width: 60px;
+	height: 40px;
+	margin: auto;
+	border-radius: 10px;
+	line-height: 40px;
 	font-size: 12px;
+	color: #fff;
+}
+.member-container > li .invite-cancle:hover {
+	background-color: #999;
+}
+.member-container > li .member--id {
+	font-size: 13px;
+}
+.member-container > li .member--name {
+	font-size: 12px;
+}
+.member-container li.invite-member span.add-group {
+	font-size: 35px;
+	color: #777;
+	cursor: pointer;
+}
+.member-container li.invite-member span.add-group:hover {
+	transform: scale(1.05);
+}
+/* 회원 검색 모달 */
+.member-list {
+	list-style: none;	
+}
+.member-list > li  {
+	display: flex;
+	height: 38px;
+	position: relative;
+	padding-bottom: 5px;
+	margin: 20px 0;
+	border-bottom: 1px dotted #eee;
+}
+.member-list > li:last-child {
+	border-bottom: none;
+	margin-bottom: 0;
+}
+.member-list > li .member--id {
+	width: 90px;
+	padding-right: 10px;
+	text-align: center;
+}
+.member-list > li .member--name:before {
+	content: "|";
+	padding-right: 10px;
+	color: #ddd;
+}
+.member-list > li .member--name {
+}
+.member-list > li > button {
+	position: absolute;
+	right: 0;
 }
 	
 	

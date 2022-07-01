@@ -5,6 +5,7 @@ public class PlanMemberVO {
 	private String id;
 	private int grp_num;
 	private String grp_name;
+	private String leader;
 
 	public int getNum() {
 		return num;
@@ -38,9 +39,18 @@ public class PlanMemberVO {
 		this.grp_name = grp_name;
 	}
 
+	public String getLeader() {
+		return leader;
+	}
+
+	public void setLeader(String leader) {
+		this.leader = leader;
+	}
+
 	@Override
 	public String toString() {
-		return "PlanMemberVO [num=" + num + ", id=" + id + ", grp_num=" + grp_num + ", grp_name=" + grp_name + "]";
+		return "PlanMemberVO [num=" + num + ", id=" + id + ", grp_num=" + grp_num + ", grp_name=" + grp_name
+				+ ", leader=" + leader + "]";
 	}
 
 }

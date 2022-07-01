@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -46,7 +47,6 @@ public class PlanController {
 		// 초대받은 그룹 목록 가져오기
 		List<GrpAcceptVO> grpAcceptList = service.getGrpAcceptList(id);
 		model.addAttribute("grpAcceptList", grpAcceptList);
-		log.info("초대받은 그룹 목록 : "+grpAcceptList);
 
 		// 소속된 그룹 정보 가져오기
 		List<PlanMemberVO> grpList = service.getGrpList(id);
@@ -58,13 +58,21 @@ public class PlanController {
 			grpMemberList.add(member);
 		}
 		model.addAttribute("grpMemberList", grpMemberList);
+		// 해당 그룹의 초대중인 멤버 목록 가져오기
+		List<List<GrpAcceptVO>> invitingMemberList = new ArrayList<>();
+		for (int i = 0; i < grpList.size(); i++) {
+			List<GrpAcceptVO> member = service.getInvitingList(grpList.get(i).getGrp_num());
+			invitingMemberList.add(member);
+		}
+		model.addAttribute("invitingMemberList", invitingMemberList);
+		
 	}
 
-	// 플랜 작성 페이지 - POST
-	// http://localhost:8088/plan/planContent
-	@RequestMapping(value = "/planContent", method = RequestMethod.POST)
-	public String planContentPOST(HttpSession session, @ModelAttribute("grp_name") String grp_name) throws Exception {
-		log.info(" planContentPOST() 호출 ");
+	// 플랜 생성 - GET
+	// http://localhost:8088/plan/addPlan
+	@RequestMapping(value = "/addPlan", method = RequestMethod.GET)
+	public String addPlanGET(HttpSession session, @ModelAttribute("grp_name") String grp_name) throws Exception {
+		log.info(" addPlanGET() 호출 ");
 
 		String id = (String) session.getAttribute("id");
 		// 그룹 번호 생성
@@ -72,7 +80,6 @@ public class PlanController {
 		if (service.getGrpNum() != null) {
 			num = service.getGrpNum() + 1;
 		}
-
 		// 그룹 생성
 		PlanVO vo = new PlanVO();
 		vo.setLeader(id);
@@ -86,14 +93,21 @@ public class PlanController {
 		member.setId(id);
 		service.insertGrpMember(member);
 
-		return "redirect:/plan/planContent";
+		return "redirect:/plan/planContent/" + num;
 	}
 
-	// 플랜 작성 페이지 - GET
-	// http://localhost:8088/plan/planContent
-	@RequestMapping(value = "/planContent", method = RequestMethod.GET)
-	public void planContentGET() throws Exception {
-		log.info(" planContentGET() 호출 ");
-	}
+	// 플랜 작성 - GET
+	// http://localhost:8088/plan/planContent/1
+	@RequestMapping(value = "/planContent/{num}", method = RequestMethod.GET)
+	public String planContentGET(@PathVariable("num") int num, Model model) throws Exception {
 
+		// 그룹 번호 저장
+		model.addAttribute("num", num);
+		// 해당 그룹 소속 멤버 가져오기
+		model.addAttribute("grpMemberList", service.getGrpMemberList(num));
+		// 방장 정보 가져오기
+		model.addAttribute("leader", service.getLeader(num));
+
+		return "/plan/planContent";
+	}
 }
