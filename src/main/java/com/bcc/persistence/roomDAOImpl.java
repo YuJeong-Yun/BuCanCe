@@ -1,8 +1,12 @@
 package com.bcc.persistence;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,11 +14,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.bcc.domain.roomDate;
 import com.bcc.domain.roomSearch;
 
 @Repository
@@ -299,7 +305,7 @@ public class roomDAOImpl implements roomDAO {
 
 
 	@Override
-	public JSONObject roomReserveDAO(String bno) {
+	public JSONArray roomPriceDAO(String bno) {
 		
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
@@ -314,24 +320,145 @@ public class roomDAOImpl implements roomDAO {
 					e.printStackTrace();
 				}
 				
-				Elements room_grade //객실등급
-				= doc.select(".table_wrap");
+				Element roomToday //대실정보
+				= doc.selectFirst(".normal_day > table");
 				
-				JSONObject obj = new JSONObject();
+				Element roomTimeTo //대실시간
+				= doc.selectFirst(".normal_day > table:last-child");
 				
-				obj.put("room_grade", room_grade);
+				Element roomOneTo //숙박정보
+				= doc.selectFirst(".normal_day:last-child > table");
 				
-				log.info(obj+"");
+				Element roomTimeOne //숙박시간
+				= doc.selectFirst(".normal_day:last-child > table:last-child");
+				
+				JSONObject obj1 = new JSONObject();
+				JSONObject obj2 = new JSONObject();
+				JSONObject obj3 = new JSONObject();
+				JSONObject obj4 = new JSONObject();
+				
+				obj1.put("roomToday", roomToday);
+				obj2.put("roomOneTo", roomOneTo);
+				obj3.put("roomTimeTo", roomTimeTo);
+				obj4.put("roomTimeOne", roomTimeOne);
 
-		return obj;
+				JSONArray arr = new JSONArray();
+				
+				arr.add(obj1);
+				arr.add(obj2);
+				arr.add(obj3);
+				arr.add(obj4);
+				
+				
+				log.info(arr+"");
+
+		return arr;
 	}
 
 	
 	
 	
-	
-	
-	
+	@Override
+	public JSONArray roomReserveDAO(String bno,roomDate rd,String ano) {
+
+		log.info("크롤링 처리불러오기");
+		// Jsoup를 이용해서 크롤링 - 여기어때
+		String url = "https://www.goodchoice.kr/product/detail?ano=66035&adcno=1&sel_date=2022-07-01&sel_date2=2022-07-02";
+
+		log.info(url);
+		
+		//임의의 날짜
+		
+		//첫번째 날짜와 두번째 날짜값
+		String ch_date=rd.getSel_date();
+		String ch_date2=rd.getSel_date2();
+		String ch_ano=ano;
+		
+		int date_idx = url.indexOf("sel_date=");
+		int date2_idx = url.indexOf("sel_date2=");
+		int ano_idx = url.indexOf("ano=");
+		
+		
+		String aa = url.substring(date_idx+9,date_idx+19);
+		String bb = url.substring(date2_idx+10,date2_idx+20);
+		String cc = url.substring(ano_idx+4,url.indexOf("&"));
+		
+		
+		url = url.replace(aa, rd.getSel_date());
+		url = url.replace(bb, rd.getSel_date2());
+		url = url.replace(cc, ch_ano);
+		
+		
+		log.info(url);
+		
+		
+		Calendar cal = Calendar.getInstance();
+		String format = "yyyy-MM-dd";
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		String today = sdf.format(cal.getTime());
+		
+		
+		cal = Calendar.getInstance();
+		String format2 = "yyyy-MM-dd";
+		SimpleDateFormat sdf2 = new SimpleDateFormat(format2);
+		cal.add(cal.DATE, +1); //날짜를 하루 더한다.
+		String tomorrow = sdf.format(cal.getTime());
+		
+		
+		log.info("내일1 : " + tomorrow);
+		log.info("내일2 : " + rd.getSel_date2());
+		log.info("오늘 : " + today);
+		
+		Document doc = null; // Document에 페이지의 전체 소스가 저장됨
+
+		try {
+			doc = Jsoup.connect(url).get();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// select를 이용하여 원하는 태그를 선택
+		Elements room_pic = doc.select(".pic_view > img");
+		Elements room_title = doc.select(".title");
+		Elements room_fcost = doc.select(".info .price:nth-child(1) > div > p:last-child");
+		Elements room_reserve = doc.select(".info > div > button");
+		
+		// JSON 형태로 영화 정보 저장
+		JSONArray roomList = new JSONArray();
+
+		for (int i = 0; i < room_pic.size(); i++) {
+			// JSONObject에 키:값 형태로 데이터 저장
+			JSONObject obj = new JSONObject();
+
+			obj.put("room_pic", room_pic.get(i).attr("data-original"));
+			obj.put("room_title", room_title.get(i).text());
+
+			
+			if(!rd.getSel_date2().equals(tomorrow)) {
+				
+				obj.put("room_fcost", "미정");
+				obj.put("room_lcost", room_fcost.get((i)).text());
+				obj.put("room_reserve1", "미정");
+				obj.put("room_reserve2", room_reserve.get((i)).text());
+				
+			}else if(tomorrow.equals(rd.getSel_date2())){
+				obj.put("room_fcost", room_fcost.get(i*2).text());
+				obj.put("room_lcost", room_fcost.get((i*2)+1).text());
+				obj.put("room_reserve1", room_reserve.get((i*2)).text());
+				obj.put("room_reserve2", room_reserve.get((i*2)+1).text());
+				
+			}
+			
+
+			// roomList에 생성한 JSONObject 추가
+//				log.info(obj+"");
+			roomList.add(obj);
+		}
+		System.out.println(" roomList : " + roomList);
+
+		return roomList;
+	}
 	
 	
 }

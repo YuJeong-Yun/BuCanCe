@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.bcc.domain.roomDate;
 import com.bcc.domain.roomSearch;
 import com.bcc.persistence.roomDAO;
 
@@ -46,14 +47,20 @@ public class roomServiceImpl implements roomService{
 	}
 
 	@Override
-	public JSONObject roomReserve(String bno) {
+	public JSONArray roomPrice(String bno) {
 
-		JSONObject reserveList =dao.roomReserveDAO(bno);
+		JSONArray PriceList =dao.roomPriceDAO(bno);
 		
-		return reserveList;
+		return PriceList;
 	}
 	
 	
-	
+	@Override
+	public JSONArray roomReserve(String bno,roomDate rd,String ano) {
+
+		JSONArray reserveList =dao.roomReserveDAO(bno,rd,ano);
+		
+		return reserveList;
+	}
 	
 }

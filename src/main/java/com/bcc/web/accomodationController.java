@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bcc.domain.roomDate;
 import com.bcc.domain.roomSearch;
 import com.bcc.service.roomService;
 
@@ -78,28 +79,75 @@ public class accomodationController {
 			log.info("roomDetailGET() 호출");
 
 
+			log.info(bno);
 			JSONArray roomdetail = service.roomDetail(bno);
 				
+			
+			
 			model.addAttribute("roomdetail", roomdetail);
 			model.addAttribute("bno", bno);
+			
+			
+			int ano_idx = bno.indexOf("ano=");
+			
+			log.info(ano_idx+"");
+			
+			String cc = bno.substring(ano_idx+4,bno.length());
+			
+			log.info(cc);
+			model.addAttribute("ano", cc);
+			
+			
+			
+			
 		}
 	
 	
 		
 		
-		// 예약 roomReserve 페이지
-		// http://localhost:8088/accomodation/roomReserve
-		@RequestMapping(value = "/roomReserve" ,method = RequestMethod.GET)
-			public void roomReserveGET(Model model,@RequestParam("bno")
+		// 가격상세정보 roomPrice 페이지
+		// http://localhost:8088/accomodation/roomPrice
+		@RequestMapping(value = "/roomPrice" ,method = RequestMethod.GET)
+			public void roomPriceGET(Model model,@RequestParam("bno")
 			String bno) throws IOException {
 
-			log.info("roomReserveGET() 호출");
+			log.info("roomPriceGET() 호출");
+				
 
-
-			JSONObject roomReserve = service.roomReserve(bno);
+			JSONArray roomPrice = service.roomPrice(bno);
 			
-			model.addAttribute("roomReserve", roomReserve);
+			
+			
+			model.addAttribute("roomPrice", roomPrice);
 			
 		
 	}
+		
+		
+		
+		// 예약 roomReserve 페이지
+		// http://localhost:8088/accomodation/roomReserve 
+		@RequestMapping(value = "/roomReserve" ,method = RequestMethod.GET)
+			public void roomReserveGET(Model model,@RequestParam("bno")
+			String bno,roomDate rd,
+			@RequestParam("ano") String ano) throws IOException {
+			
+			log.info("roomReserveGET() 호출");
+
+			//날짜정보가져오기
+			log.info(rd.getSel_date());
+			log.info(rd.getSel_date2());
+			model.addAttribute("bno", bno);
+			
+//			
+			JSONArray roomReserve = service.roomReserve(bno,rd,ano);
+
+			model.addAttribute("roomReserve", roomReserve);
+				
+			}
+		
+		
+		
+		
+		
 }

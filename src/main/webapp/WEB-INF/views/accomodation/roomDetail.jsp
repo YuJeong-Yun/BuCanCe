@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -298,33 +299,41 @@
                     </div>
                   
                 </div>
+                
+              
+                
+                
                 <div class="col-lg-4">
                     <div class="room-booking">
-                      <h3>  <a href="/accomodation/roomReserve?bno=${bno}" id="reserveId">예약하기</a></h3>
-                        <form action="#">
+                      <h3>  <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId">가격상세보기</a></h3>
+                        <form action="${pageContext.request.contextPath}/accomodation/roomReserve" method="GET">
+                            <input type="hidden" name="bno" value="${bno}">
+                            <input type="hidden" name="ano" value="${ano}">
                             <div class="check-date">
-                                <label for="date-in">체크인:</label>
-                                <input type="text" class="date-input" id="date-in">
+                                <label for="date-in">체크인:${ano}</label>
+                                <input type="text" class="date-input" id="date-in" value="${param.sel_date}" name="sel_date">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
                                 <label for="date-out">체크 아웃:</label>
-                                <input type="text" class="date-input" id="date-out">
+                                <input type="text" class="date-input" id="date-out" value="${param.sel_date2}" name="sel_date2">
                                 <i class="icon_calendar"></i>
                             </div>
-                            <div class="select-option">
-                                <label for="guest">인원수:</label>
-                                <select id="guest">
-                                    <option value="">3 Adults</option>
-                                </select>
-                            </div>
-                            <div class="select-option">
-                                <label for="room">방 갯수:</label>
-                                <select id="room">
-                                    <option value="">1 Room</option>
-                                </select>
-                            </div>
-                            <button type="submit">Check Availability</button>
+<!--                             <div class="select-option"> -->
+<!--                                 <label for="guest">인원수:</label> -->
+<!--                                 <select id="guest"> -->
+<!--                                     <option value="">2 Adults</option> -->
+<!--                                     <option value="">4 Adults</option> -->
+<!--                                     <option value="">6 Adults</option> -->
+<!--                                 </select> -->
+<!--                             </div> -->
+<!--                             <div class="select-option"> -->
+<!--                                 <label for="room">방 갯수:</label> -->
+<!--                                 <select id="room"> -->
+<!--                                     <option value="">1 Room</option> -->
+<!--                                 </select> -->
+<!--                             </div> -->
+                            <button type="submit">예약하기</button>
                         </form>
                     </div>
                 </div>
