@@ -1,6 +1,5 @@
 package com.bcc.service;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -102,6 +101,17 @@ public class PlanServiceImpl implements PlanService {
 	public String getGrpLeader(int num) {
 		return dao.getGrpLeader(num);
 	}
+
+	@Override
+	public void inviteCancle(GrpAcceptVO vo) {
+		dao.inviteCancle(vo);
+	}
+
+	@Override
+	public int checkGrpMember(PlanMemberVO vo) {
+		return dao.checkGrpMember(vo);
+	}
+
 
 
 

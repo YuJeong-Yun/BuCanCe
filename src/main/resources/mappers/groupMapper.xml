@@ -98,9 +98,20 @@
 	</select>
 	
 	<select id="getGrpLeader" resultType="string">
-	select leader
-	from bcc_plan
-	where num = #{num}
+		select leader
+		from bcc_plan
+		where num = #{num}
+	</select>
+	
+	<delete id="inviteCancle">
+		delete from bcc_grp_accept
+		where grp_num = #{grp_num} and receiver = #{receiver}
+	</delete>
+	
+	<select id="checkGrpMember" resultType="int">
+		select count(*)
+		from bcc_plan_member
+		where grp_num = #{grp_num} and id = #{id}
 	</select>
   </mapper>
   

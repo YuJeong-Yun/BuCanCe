@@ -1,6 +1,5 @@
 package com.bcc.persistence;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.bcc.domain.GrpAcceptVO;
@@ -57,5 +56,12 @@ public interface PlanDAO {
 
 	// 그룹 리더 가져오기
 	public String getGrpLeader(int num);
+
+	// 초대 취소
+	public void inviteCancle(GrpAcceptVO vo);
+
+	// 그룹 멤버인지 확인
+	public int checkGrpMember(PlanMemberVO vo);
+
 
 }

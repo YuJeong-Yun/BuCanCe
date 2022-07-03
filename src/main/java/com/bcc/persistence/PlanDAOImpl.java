@@ -106,6 +106,17 @@ public class PlanDAOImpl implements PlanDAO {
 		return sqlSession.selectOne(NAMESPACE+".getGrpLeader", num);
 	}
 
+	@Override
+	public void inviteCancle(GrpAcceptVO vo) {
+		sqlSession.delete(NAMESPACE+".inviteCancle", vo);
+	}
+
+	@Override
+	public int checkGrpMember(PlanMemberVO vo) {
+		return sqlSession.selectOne(NAMESPACE+".checkGrpMember", vo);
+	}
+
+
 	
 
 }

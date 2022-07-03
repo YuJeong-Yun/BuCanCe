@@ -125,7 +125,7 @@
 														<!-- 초대중인 멤버 출력 -->
 														<c:forEach var="invitingMember" items="${invitingMemberList.get(status.index) }">
 															<li>
-																<div class="invite-cancle" onclick="inviteCancle(${grp.grp_num}, ${invitingMember.receiver });">초대 취소</div>
+																<div class="invite-cancle" onclick="inviteCancle(event, ${grp.grp_num}, '${invitingMember.receiver }');">초대 취소</div>
 																<div class="member--id">${invitingMember.receiver}</div>
 																<div class="member--name">${invitingMember.name}</div>
 															</li>

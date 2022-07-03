@@ -137,14 +137,16 @@ public class PlanRESTController {
 	// 그룹에 초대
 	@RequestMapping(value = "/invite", produces = "application/text; charset=utf8")
 	public String inviteREST(String id, int grpNum, HttpSession session) {
+		log.info("그룹에 초대 : " + grpNum + "그룹, " + id);
+
 		String sender = (String) session.getAttribute("id");
 
-		System.out.println("grpNum : "+grpNum);
+		System.out.println("grpNum : " + grpNum);
 		// 그룹 멤버 + 초대중 멤버 10명 이상이면 초대 불가
 		int grpMemberCnt = service.getGrpMemberList(grpNum).size();
-		System.out.println("gm : "+grpMemberCnt);
+		System.out.println("gm : " + grpMemberCnt);
 		int invitingMemberCnt = service.getInvitingList(grpNum).size();
-		System.out.println("im : "+invitingMemberCnt);
+		System.out.println("im : " + invitingMemberCnt);
 		if ((grpMemberCnt + invitingMemberCnt) >= 10) {
 			return "더 이상 초대할 수 없습니다.";
 		}
@@ -159,7 +161,29 @@ public class PlanRESTController {
 
 		// 회원 이름 전달
 		return service.getName(id);
+	}
 
+	// 초대 취소
+	@RequestMapping(value = "/inviteCancle")
+	public int inviteCancleREST(String id, int grpNum) {
+		log.info("초대 취소 : " + grpNum + "그룹, " + id);
+		
+		// 이미 초대 수락한 상태이면
+		PlanMemberVO member = new PlanMemberVO();
+		member.setGrp_num(grpNum);
+		member.setId(id);
+		
+		if(service.checkGrpMember(member) == 1) {
+			return 1;
+		}
+		
+		// 초대 취소
+		GrpAcceptVO vo = new GrpAcceptVO();
+		vo.setGrp_num(grpNum);
+		vo.setReceiver(id);
+		
+		service.inviteCancle(vo);
+		return 0;
 	}
 
 }

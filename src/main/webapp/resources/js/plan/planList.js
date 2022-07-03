@@ -38,19 +38,19 @@ function acceptGrp(event, grp_num) {
 
 			// 본문 그룹 리스트에 추가
 			const newPlan = document.createElement('li');
-			newPlan.classList.add('grp'+grp_num);
+			newPlan.classList.add('grp' + grp_num);
 			let newPlanInner = '<input type=button class=plan value="' + data.grpName + '" onclick=location.href="/plan/planContent/' + grp_num + '";>' +
 				'<ul class=member-container>';
 			for (let i = 0; i < data.grpMember.length; i++) {
 				newPlanInner += '<li>';
-					 
-				if(data.leader == data.grpMember[i].id) {
+
+				if (data.leader == data.grpMember[i].id) {
 					newPlanInner += '<span class="material-icons-outlined leader">star</span>';
 				}
 				newPlanInner +=
-						'<div class="member--profile"><img src="' + path + '/resources/img/who.jpg" /></div>' +
-						'<div class="member--name">' + data.grpMember[i].id + '</div>' +
-						'<div class="member--name">' + data.grpMember[i].name + '</div>' +
+					'<div class="member--profile"><img src="' + path + '/resources/img/who.jpg" /></div>' +
+					'<div class="member--name">' + data.grpMember[i].id + '</div>' +
+					'<div class="member--name">' + data.grpMember[i].name + '</div>' +
 					'</li>';
 			};
 			newPlanInner += '</ul>' +
@@ -183,7 +183,7 @@ function showMember() {
 
 // 초대
 function inviteMember(event, id) {
-	
+
 	$.ajax({
 		url: path + '/planREST/invite',
 		type: 'post',
@@ -192,12 +192,12 @@ function inviteMember(event, id) {
 			grpNum: grpNum
 		},
 		success: function(item) {
-			console.log('item : '+item);
-			if(item == "더 이상 초대할 수 없습니다.") {
+			console.log('item : ' + item);
+			if (item == "더 이상 초대할 수 없습니다.") {
 				alert(item);
 				return;
 			}
-			
+
 			// 초대클릭하면 '초대중' 으로 버튼 변경
 			event.target.classList.remove('btn-primary');
 			event.target.classList.remove('add-member');
@@ -211,7 +211,7 @@ function inviteMember(event, id) {
 
 			const addInviteMember = document.createElement('li');
 			let addInviteMemberInner =
-				'<div class="invite-cancle" onclick="inviteCancle(' + grpNum + ',"' + id + '");">초대 취소</div>' +
+				'<div class="invite-cancle" onclick="inviteCancle(event, ' + grpNum + ',\'' + id + '\');">초대 취소</div>' +
 				'<div class="member--id">' + id + '</div>' +
 				'<div class="member--name">' + item + '</div>';
 
@@ -223,12 +223,34 @@ function inviteMember(event, id) {
 		error: function() {
 			alert('초대 오류!!');
 		}
-	}); // $.getJSON
+	}); // $.ajax
 }
 
 // 초대 취소
-function inviteCancle(grpNum, id) {
-
+function inviteCancle(event, grpNum, id) {
+	if (confirm('초대를 취소하시겠습니까?')) {
+		$.ajax({
+			url: path + '/planREST/inviteCancle',
+			type: 'post',
+			data: {
+				grpNum: grpNum,
+				id: id
+			},
+			success: function(item) {
+				event.target.parentElement.remove();
+				
+				// 이미 초대 수락했을 경우
+				if(item == 1) {
+					alert('이미 상대가 초대를 수락했습니다.');
+					location.href='/plan/planList';
+				}
+				
+			},
+			error: function() {
+				alert('초대 취소 에러!!');
+			}
+		}); //ajax
+	}
 }
 
 ////////////////////////////// 플랜 생성/삭제  //////////////////////////////////
