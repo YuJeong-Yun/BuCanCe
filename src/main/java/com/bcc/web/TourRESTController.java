@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +30,8 @@ public class TourRESTController {
 	
 	
 	// Naver API
+	
+	// 블로그 검색
 	@RequestMapping(value = "/getBlog", method = RequestMethod.GET)
 	public List getBlog(@RequestParam String title, String addr, String start) throws Exception{
 		String clientId = "UedGUQNgMnXQN3xAYkO2"; //애플리케이션 클라이언트 아이디값"
@@ -39,7 +42,38 @@ public class TourRESTController {
 	    text = URLEncoder.encode(text, "UTF-8");
 
 
-	    String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text + "&display=10&start="+start;
+	    String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text + "&start="+start;
+	    //String apiURL = "<https://openapi.naver.com/v1/search/blog.xml?query=>"+ text; // xml 결과
+
+
+	    Map<String, String> requestHeaders = new HashMap<String, String>();
+	    requestHeaders.put("X-Naver-Client-Id", clientId);
+	    requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+	    
+	    JSONObject jsonObj = new JSONObject();
+	    JSONParser parser = new JSONParser();
+	    
+	    jsonObj = (JSONObject) parser.parse(get(apiURL,requestHeaders));
+	    
+	    List list = new ArrayList();
+	    list.add(jsonObj.get("items"));
+	    list.add(jsonObj.get("total"));
+		
+		return list;
+	}
+	
+	// 이미지 가져오기
+	@RequestMapping(value = "/getImages", method = RequestMethod.GET)
+	public List getImages(@RequestParam String title, String addr) throws Exception{
+		String clientId = "UedGUQNgMnXQN3xAYkO2"; //애플리케이션 클라이언트 아이디값"
+	    String clientSecret = "PKJuuL8BVC"; //애플리케이션 클라이언트 시크릿값"
+
+
+	    String text = addr+" "+title;
+	    text = URLEncoder.encode(text, "UTF-8");
+
+
+	    String apiURL = "https://openapi.naver.com/v1/search/image?query=" + text + "&display=3";
 	    //String apiURL = "<https://openapi.naver.com/v1/search/blog.xml?query=>"+ text; // xml 결과
 
 
@@ -57,6 +91,40 @@ public class TourRESTController {
 		
 		return list;
 	}
+	
+	
+	// 위치 좌표 가져오기
+	@RequestMapping(value = "/getLoca", method = RequestMethod.GET)
+	public List getLocation(@RequestParam String title, String addr) throws Exception{
+		String clientId = "UedGUQNgMnXQN3xAYkO2"; //애플리케이션 클라이언트 아이디값"
+		String clientSecret = "PKJuuL8BVC"; //애플리케이션 클라이언트 시크릿값"
+		
+		
+		String text = addr+" "+title;
+		text = URLEncoder.encode(text, "UTF-8");
+		
+		
+		String apiURL = "https://openapi.naver.com/v1/search/local?query=" + text;
+		//String apiURL = "<https://openapi.naver.com/v1/search/blog.xml?query=>"+ text; // xml 결과
+		
+		
+		Map<String, String> requestHeaders = new HashMap<String, String>();
+		requestHeaders.put("X-Naver-Client-Id", clientId);
+		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+		
+		JSONObject jsonObj = new JSONObject();
+		JSONParser parser = new JSONParser();
+		
+		jsonObj = (JSONObject) parser.parse(get(apiURL,requestHeaders));
+		
+		List list = new ArrayList();
+		list.add(jsonObj.get("items"));
+		
+		log.info(jsonObj.get("items")+"");
+		
+		return list;
+	}
+	
 	
 	private static String get(String apiUrl, Map<String, String> requestHeaders){
 	    HttpURLConnection con = connect(apiUrl);
@@ -113,7 +181,11 @@ public class TourRESTController {
 	    }
 
 	}
-	// Naver API
+	// Naver API 
+	
+	
+	
+	
 	
 	
 }
