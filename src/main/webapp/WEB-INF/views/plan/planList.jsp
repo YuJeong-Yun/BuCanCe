@@ -152,7 +152,7 @@
 										      <div class="modal-body">
 												<!-- 모달 본문 -->
 										        <div class="input-group mb-3"> <!-- 아이디 검색창 -->
-												  <input type="text" class="form-control member-search-input" placeholder="아이디를 입력하세요." aria-label="Recipient's username" aria-describedby="button-addon2">
+												  <input type="text" class="form-control member-search-input" placeholder="아이디를 입력하세요." aria-label="Recipient's username" aria-describedby="button-addon2" onKeypress="javascript:if(event.keyCode==13) {showMember();}">
 												  <button class="btn btn-outline-secondary member-serach" type="button" id="button-addon2" onclick="showMember();">검색</button>
 												</div>
 										       	<ul class="member-list"> <!-- 검색 결과 회원 리스트 -->
