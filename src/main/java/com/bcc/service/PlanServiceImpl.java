@@ -98,11 +98,6 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public String getGrpLeader(int num) {
-		return dao.getGrpLeader(num);
-	}
-
-	@Override
 	public void inviteCancle(GrpAcceptVO vo) {
 		dao.inviteCancle(vo);
 	}
@@ -110,6 +105,16 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public int checkGrpMember(PlanMemberVO vo) {
 		return dao.checkGrpMember(vo);
+	}
+
+	@Override
+	public String getNextLeader(int grp_num) {
+		return dao.getNextLeader(grp_num);
+	}
+
+	@Override
+	public void updateLeader(PlanVO plan) {
+		dao.updateLeader(plan);
 	}
 
 

@@ -97,12 +97,6 @@
 		where id = #{id}
 	</select>
 	
-	<select id="getGrpLeader" resultType="string">
-		select leader
-		from bcc_plan
-		where num = #{num}
-	</select>
-	
 	<delete id="inviteCancle">
 		delete from bcc_grp_accept
 		where grp_num = #{grp_num} and receiver = #{receiver}
@@ -113,5 +107,19 @@
 		from bcc_plan_member
 		where grp_num = #{grp_num} and id = #{id}
 	</select>
+	
+	<select id="getNextLeader" resultType="string">
+		select id
+		from bcc_plan_member
+		where grp_num = #{grp_num}
+		order by num asc;
+	</select>
+	
+	<update id="updateLeader">
+		update bcc_plan
+		set leader = #{leader}
+		where num = #{num}
+	</update>
+	
   </mapper>
   

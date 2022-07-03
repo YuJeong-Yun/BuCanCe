@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
+import com.bcc.domain.PlanVO;
 import com.bcc.service.PlanService;
 
 @RestController
@@ -59,7 +60,7 @@ public class PlanRESTController {
 		JSONObject obj = new JSONObject();
 		obj.put("grpMember", grpMember);
 		obj.put("grpName", service.getGrpName(grpNum));
-		obj.put("leader", service.getGrpLeader(grpNum));
+		obj.put("leader", service.getLeader(grpNum));
 
 		return obj;
 
@@ -86,11 +87,26 @@ public class PlanRESTController {
 
 		String id = (String) session.getAttribute("id");
 
+		// 플랜 멤버 삭제
 		PlanMemberVO vo = new PlanMemberVO();
 		vo.setId(id);
 		vo.setGrp_num(grpNum);
-		// 플랜 멤버 삭제
 		service.delPlanMem(vo);
+
+		// 방장이 그룹 나가면 방장 새로 설정
+		String leader = service.getLeader(grpNum);
+		if (id.equals(leader)) {
+			// 다음 방장 아이디 가져오기
+			String newLeader = service.getNextLeader(grpNum);
+			log.info(grpNum + "그룹 새 방장 정보 : " + newLeader);
+
+			PlanVO plan = new PlanVO();
+			plan.setLeader(newLeader);
+			plan.setNum(grpNum);
+
+			// 방장 새로 설정
+			service.updateLeader(plan);
+		}
 
 	}
 
@@ -167,21 +183,21 @@ public class PlanRESTController {
 	@RequestMapping(value = "/inviteCancle")
 	public int inviteCancleREST(String id, int grpNum) {
 		log.info("초대 취소 : " + grpNum + "그룹, " + id);
-		
+
 		// 이미 초대 수락한 상태이면
 		PlanMemberVO member = new PlanMemberVO();
 		member.setGrp_num(grpNum);
 		member.setId(id);
-		
-		if(service.checkGrpMember(member) == 1) {
+
+		if (service.checkGrpMember(member) == 1) {
 			return 1;
 		}
-		
+
 		// 초대 취소
 		GrpAcceptVO vo = new GrpAcceptVO();
 		vo.setGrp_num(grpNum);
 		vo.setReceiver(id);
-		
+
 		service.inviteCancle(vo);
 		return 0;
 	}

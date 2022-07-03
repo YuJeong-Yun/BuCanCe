@@ -54,14 +54,17 @@ public interface PlanDAO {
 	// 회원 이름 가져오기
 	public String getName(String id);
 
-	// 그룹 리더 가져오기
-	public String getGrpLeader(int num);
-
 	// 초대 취소
 	public void inviteCancle(GrpAcceptVO vo);
 
 	// 그룹 멤버인지 확인
 	public int checkGrpMember(PlanMemberVO vo);
+
+	// 다음 방장 아이디 가져오기
+	public String getNextLeader(int grp_num);
+
+	// 방장 새로 설정
+	public void updateLeader(PlanVO plan);
 
 
 }

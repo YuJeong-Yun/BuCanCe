@@ -26,97 +26,97 @@ public class PlanDAOImpl implements PlanDAO {
 
 	@Override
 	public List<MemberVO> getMemberList(String id) {
-		List<MemberVO> memberList = sqlSession.selectList(NAMESPACE+".getMemberList", id);
-		
-		return memberList;
+		return sqlSession.selectList(NAMESPACE + ".getMemberList", id);
 	}
 
 	@Override
 	public Integer getGrpNum() {
-		return sqlSession.selectOne(NAMESPACE+".getGrpNum");
+		return sqlSession.selectOne(NAMESPACE + ".getGrpNum");
 	}
 
 	@Override
 	public void createGrp(PlanVO vo) {
-		sqlSession.insert(NAMESPACE+".createGrp", vo);
+		sqlSession.insert(NAMESPACE + ".createGrp", vo);
 	}
 
 	@Override
 	public String getLicense(String id) {
-		return sqlSession.selectOne(NAMESPACE+".getLicense", id);
+		return sqlSession.selectOne(NAMESPACE + ".getLicense", id);
 	}
 
 	@Override
 	public List<GrpAcceptVO> getGrpAcceptList(String receiver) {
-		return sqlSession.selectList(NAMESPACE+".getGrpAcceptList", receiver);
+		return sqlSession.selectList(NAMESPACE + ".getGrpAcceptList", receiver);
 	}
 
 	@Override
 	public void insertGrpMember(PlanMemberVO member) {
-		sqlSession.insert(NAMESPACE+".insertGrpMember", member);
+		sqlSession.insert(NAMESPACE + ".insertGrpMember", member);
 	}
 
 	@Override
 	public void deleteInvitation(GrpAcceptVO vo) {
-		sqlSession.delete(NAMESPACE+".deleteInvitation", vo);
+		sqlSession.delete(NAMESPACE + ".deleteInvitation", vo);
 	}
 
 	@Override
 	public List<PlanMemberVO> getGrpList(String id) {
-		return sqlSession.selectList(NAMESPACE+".getGrpList", id);
+		return sqlSession.selectList(NAMESPACE + ".getGrpList", id);
 	}
 
 	@Override
 	public String getGrpName(int num) {
-		return sqlSession.selectOne(NAMESPACE+".getGrpName", num);
+		return sqlSession.selectOne(NAMESPACE + ".getGrpName", num);
 	}
 
 	@Override
 	public List<MemberVO> getGrpMemberList(int grp_num) {
-		return sqlSession.selectList(NAMESPACE+".getGrpMemberList", grp_num);
+		return sqlSession.selectList(NAMESPACE + ".getGrpMemberList", grp_num);
 	}
 
 	@Override
 	public void delPlanMem(PlanMemberVO vo) {
-		sqlSession.delete(NAMESPACE+".delPlanMem", vo);
+		sqlSession.delete(NAMESPACE + ".delPlanMem", vo);
 	}
 
 	@Override
 	public String getLeader(int num) {
-		return sqlSession.selectOne(NAMESPACE+".getLeader", num);
+		return sqlSession.selectOne(NAMESPACE + ".getLeader", num);
 	}
 
 	@Override
 	public List<GrpAcceptVO> getInvitingList(int grp_num) {
-		return sqlSession.selectList(NAMESPACE+".getInvitingList", grp_num);
+		return sqlSession.selectList(NAMESPACE + ".getInvitingList", grp_num);
 	}
 
 	@Override
 	public void inviteMember(GrpAcceptVO vo) {
-		sqlSession.insert(NAMESPACE+".inviteMember", vo);
+		sqlSession.insert(NAMESPACE + ".inviteMember", vo);
 	}
 
 	@Override
 	public String getName(String id) {
-		return sqlSession.selectOne(NAMESPACE+".getName", id);
-	}
-
-	@Override
-	public String getGrpLeader(int num) {
-		return sqlSession.selectOne(NAMESPACE+".getGrpLeader", num);
+		return sqlSession.selectOne(NAMESPACE + ".getName", id);
 	}
 
 	@Override
 	public void inviteCancle(GrpAcceptVO vo) {
-		sqlSession.delete(NAMESPACE+".inviteCancle", vo);
+		sqlSession.delete(NAMESPACE + ".inviteCancle", vo);
 	}
 
 	@Override
 	public int checkGrpMember(PlanMemberVO vo) {
-		return sqlSession.selectOne(NAMESPACE+".checkGrpMember", vo);
+		return sqlSession.selectOne(NAMESPACE + ".checkGrpMember", vo);
 	}
 
+	@Override
+	public String getNextLeader(int grp_num) {
+		return sqlSession.selectOne(NAMESPACE+".getNextLeader", grp_num);
+	}
 
-	
+	@Override
+	public void updateLeader(PlanVO plan) {
+		sqlSession.update(NAMESPACE+".updateLeader", plan);
+	}
 
 }
