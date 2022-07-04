@@ -234,8 +234,6 @@ public class roomServiceImpl implements roomService{
 		log.info("크롤링 처리불러오기");
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
-		// String url =
-		// "https://www.goodchoice.kr/product/detail?ano=61754&adcno=2&sel_date=2022-06-27&sel_date2=2022-06-30";
 		// // 크롤링할 url지정
 		String url = bno;
 
@@ -251,20 +249,10 @@ public class roomServiceImpl implements roomService{
 		// select를 이용하여 원하는 태그를 선택
 
 		Elements room_title = doc.select(".info h2"); // 1. 제목
-		Elements room_pic = doc.select(".gallery_pc .swiper-lazy"); // 2. 대표사진
-		Elements room_pica = doc.select(".lazy"); // 3.(서브)사진
-		Elements room_picb = doc.select(".item.on .owl-lazy"); // 3. (서브)사진2
-//		Elements room_picb = doc.select(".pic_view > img"); // 3. (서브)사진2
-
-		// Elements room_picc = doc.select(".pic_view > img");
-		// Elements room_star =doc.select(".score_wrap .score_star star_45");//별점 사진
-
+		Elements room_pic = doc.select(".gallery_m.index_mobile .swiper-wrapper > li > img"); // 2. 대표사진
 		Elements room_star_num = doc.select(".score_cnt span");// 4.별점(숫자)
 		Elements room_address = doc.select(".info .address"); // 5. 주소
-		Elements room_retitle = doc.select(".guest .best_review");// 10.리뷰 제목(추후 삭제 예정?)
 
-		// Elements room_review = doc.select(".guest > div.txt");//11.리뷰(10번이랑 추후삭제도가능)
-		// Elements room_map =doc.select(".map");//지도
 
 		// JSON 형태로 영화 정보 저장
 
@@ -275,27 +263,11 @@ public class roomServiceImpl implements roomService{
 			JSONObject obj = new JSONObject();
 
 			obj.put("room_title", room_title.get(i).text());
-			obj.put("room_pic", room_pic.get(i).attr("data-src"));
-			obj.put("room_pica", room_pica.get(i).attr("data-original"));
-			 obj.put("room_picb", room_picb.get(i).attr("data-src"));
+			obj.put("room_pic", room_pic.get(i).attr("src"));
 
-			//obj.put("room_picb", room_picb.get(i).attr("data-original"));
-			// obj.put("room_star", room_star.get(i).attr("png"));
 			obj.put("room_star_num", room_star_num.get(i).text());
 			obj.put("room_address", room_address.get(i).text());
-//
-//			obj.put("room_service", room_service.get(i).text());
-//
-//			obj.put("room_comment", room_comment.get(i).text());
-//
-//			obj.put("room_info", room_info.get(i).text());
-//			obj.put("room_infoa", room_infoa.get(i).text());
-			obj.put("room_retitle", room_retitle.get(i).text());
 
-			// obj.put("room_map", room_map.get(i).attr("google_maps"));
-			// obj.put("room_review", room_review.get(i).text());
-			// roomList에 생성한 JSONObject 추가
-//				log.info(obj+"");
 			detailList.add(obj);
 
 		}

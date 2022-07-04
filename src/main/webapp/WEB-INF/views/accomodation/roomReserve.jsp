@@ -230,7 +230,7 @@
                         </div>
                     </div>
                 </div>
-                <c:set var="a" value="${a=a+1 }"/>
+                <c:set var="a" value="${a=a+1}"/>
                 </c:forEach>
                 
                 
