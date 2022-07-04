@@ -198,117 +198,166 @@
                             <div class="rd-title">
                                 <h3> ${roomdetail.get(a).room_title}</h3>
                                 <div class="rdt-right">
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
-                                    <a href="#">Booking Now</a>
-                                </div>
-                            </div>
-                            <h2>${roomdetail.get(a).room_price}<span>/Won(원)</span></h2>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr><td><hr><br></td></tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 5</td>
-                                    </tr>
-                                    <tr><td><hr><br></td></tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>king beds</td>
-                                    </tr>
-                                    
-                                <tr><td><hr><br></td></tr>
-                                    <tr>
-                                        <td class="r-o">서비스:</td>
-                                        <td>${roomdetail.get(a).room_service}</td>
-                                    </tr>
-                                      <tr><td><hr><br></td></tr>
-                                    <tr>
-                                        <td class="r-o">주소:</td>
-                                        <td>${roomdetail.get(a).room_address} </td>
-                                    </tr>
-                        <tr><td><hr><br></td></tr>
-                                    <tr>
-                                        <td class="r-o">※주의사항</td>
-                                        <td>${roomdetail.get(a).room_comment}</td>
-                                    </tr>
-                                     <tr><td><hr><br></td></tr>
-                                    <tr>
-                                        <td class="r-o">주변 안내</td>
-                                        <td> ${roomdetail.get(a).room_info} </td>
-                                    </tr>
-                                </tbody>
-                               
-                            </table>
-                              <br><br><br>
-                                    <hr>
-                            <h3><b><i>상세 정보</i></b></h3><br><br>
-                            <p class="f-para">  ${roomdetail.get(a).room_infoa}    </p>
-                        </div>
-                        
-                      
-                       
-                    </div>
-                    <div class="rd-reviews">
-                        <h4>${roomdetail.get(a).room_retitle}</h4>
-                        <div class="review-item">
-                            <div class="ri-pic">
-                                <img src="${pageContext.request.contextPath}/resources/img/room/avatar/avatar-1.jpg" alt="">
-                            </div>
-                            <div class="ri-text">
-                                <span>27 Aug 2019</span>
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
-                                <h5>Brandon Kelley</h5>
-                                <p>${roomdetail.get(a).room_review}</p>
-                            </div>
-                        </div>
-                        <div class="review-item">
-                            <div class="ri-pic">
-                                <img src="${pageContext.request.contextPath}/resources/img/room/avatar/avatar-2.jpg" alt="">
-                            </div>
-                            <div class="ri-text">
-                                <span>27 Aug 2019</span>
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
-                                <h5>Brandon Kelley</h5>
-                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                    adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                                    magnam.</p>
-                            </div>
-                        </div>
-                    </div>
-                  
-                </div>
+									<div class="rating">${roomdetail.get(a).room_star} 
+										<i class="icon_star"></i> <i class="icon_star"></i> <i
+											class="icon_star"></i> <i class="icon_star"></i> <i
+											class="icon_star-half_alt"></i>
+									&nbsp; <h5> 별점 :${roomdetail.get(a).room_star_num} 점</h5></div>
+									
+									<a href="#">Booking Now</a>
+								</div>
+							</div>
+							<h2>${roomdetail.get(a).room_price}<span>/Won(원)</span>
+							</h2>
+							<table>
+								<tbody>
+									<tr>
+										<td class="r-o">Size:</td>
+										<td>30 ft</td>
+									</tr>
+									<tr>
+										<td><hr> <br></td>
+									</tr>
+									<tr>
+										<td class="r-o">Capacity:</td>
+										<td>Max persion 5</td>
+									</tr>
+									<tr>
+										<td><hr> <br></td>
+									</tr>
+									<tr>
+										<td class="r-o">Bed:</td>
+										<td>king beds</td>
+										<td>${roomdetail.get(a).room_a}</td>
+									</tr>
+
+									<tr>
+										<td><hr> <br></td>
+									</tr>
+									<c:if test="${roomdetail2.size() != 0}">
+										<tr>
+											<td class="r-o">서비스:</td>
+											<td>${roomdetail2.get(a).room_service}</td>
+										</tr>
+									</c:if>
+									<tr>
+										<td><hr> <br></td>
+									</tr>
+									<c:if test="${roomdetail.get(a).room_address!=null}">
+										<tr>
+											<td class="r-o">주소:</td>
+											<td>${roomdetail.get(a).room_address}</td>
+										</tr>
+									</c:if>
+									<tr>
+										<td><hr> <br></td>
+									</tr>
+								<c:if test="${roomdetail3.size() != 0}">
+										<tr>
+											<td class="r-o">※주의사항</td>
+											<td>${roomdetail3.get(a).room_comment}</td>
+										</tr>
+									</c:if>
+									<tr>
+										<td><hr> <br></td>
+									</tr>
+									<c:if test="${roomdetail4.size() != 0}">
+										<tr>
+											<td class="r-o">주변 안내</td>
+											<td>${roomdetail4.get(a).room_info}</td>
+										</tr>
+									</c:if>
+								</tbody>
+
+							</table>
+							<br> <br> <br>
+							<hr>
+							<c:if test="${roomdetail5.size() != 0}">
+								<h3>
+									<b><i>상세 정보</i></b>
+								</h3>
+								<br>
+								<br>
+								<p class="f-para">${roomdetail5.get(a).room_infoa}</p>
+							</c:if>
+						</div>
+					</div>
+					<div class="rd-reviews">
+						<h4>${roomdetail.get(a).room_retitle}</h4>
+						<div class="review-item">
+							<div class="ri-pic">
+								<img
+									src="${pageContext.request.contextPath}/resources/img/room/avatar/avatar-1.jpg"
+									alt="">
+							</div>
+							<div class="ri-text">
+								<span>27 Aug 2019</span>
+								<div class="rating">
+									<i class="icon_star"></i> <i class="icon_star"></i> <i
+										class="icon_star"></i> <i class="icon_star"></i> <i
+										class="icon_star-half_alt"></i>
+								</div>
+								<h5>Brandon Kelley</h5>
+								<p>${roomdetail.get(a).room_review}</p>
+							</div>
+						</div>
+						<div class="review-item">
+							<div class="ri-pic">
+								<img
+									src="${pageContext.request.contextPath}/resources/img/room/avatar/avatar-2.jpg"
+									alt="">
+							</div>
+							<div class="ri-text">
+								<span>27 Aug 2019</span>
+								<div class="rating">
+									<i class="icon_star"></i> <i class="icon_star"></i> <i
+										class="icon_star"></i> <i class="icon_star"></i> <i
+										class="icon_star-half_alt"></i>
+								</div>
+								<h5>Brandon Kelley</h5>
+								<p>Neque porro qui squam est, qui dolorem ipsum quia dolor
+									sit amet, consectetur, adipisci velit, sed quia non numquam
+									eius modi tempora. incidunt ut labore et dolore magnam.</p>
+							</div>
+						</div>
+					</div>
+					<div class="review-add">
+						<h4>Add Review</h4>
+						<form action="#" class="ra-form">
+							<div class="row">
+								<div class="col-lg-6">
+									<input type="text" placeholder="Name*">
+								</div>
+								<div class="col-lg-6">
+									<input type="text" placeholder="Email*">
+								</div>
+								<div class="col-lg-12">
+									<div>
+										<h5>You Rating:</h5>
+										<div class="rating">
+											<i class="icon_star"></i> <i class="icon_star"></i> <i
+												class="icon_star"></i> <i class="icon_star"></i> <i
+												class="icon_star-half_alt"></i>
+										</div>
+									</div>
+									<textarea placeholder="Your Review"></textarea>
+									<button type="submit">Submit Now</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+                                        
                 
               
                 
                 
                 <div class="col-lg-4">
                     <div class="room-booking">
-                      <h3>  <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId">가격상세보기</a></h3>
+                      <h3>  <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId">요금정보</a></h3>
                         <form action="${pageContext.request.contextPath}/accomodation/roomReserve" method="GET">
                             <input type="hidden" name="bno" value="${bno}">
-                            <input type="hidden" name="ano" value="${param.ano}">
+                            <input type="hidden" name="ano" value="${ano}">
                             <div class="check-date">
                                 <label for="date-in">체크인:${ano}</label>
                                 <input type="text" class="date-input" id="date-in" value="${param.sel_date}" name="sel_date">

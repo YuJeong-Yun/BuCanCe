@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -302,7 +303,7 @@ function selectArea(){
 			<div class="row">
 				<c:set var="a" />
 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
-					<div class="col-lg-4 col-md-6">
+					<div class="col-lg-4 col-md-6"  style="height: 550px">
 						<div class="room-item">
 							<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
 								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster"
@@ -310,11 +311,12 @@ function selectArea(){
 							</a>
 							<div class="ri-text">
 								<h4>${roomList.get(a).room_title}</h4>
-								<table>
+								<table >
 									<tbody>
-										<tr>
-											<td class="r-o">평점:</td>
-											<td>${roomList.get(a).room_rank}</td>
+										<tr >
+											<td class="r-o" style="color: green">평점:</td>
+											<td style="color: green">${fn:substring(roomList.get(a).room_rank,0,3)}점</td>
+<%-- 											<td>${roomList.get(a).room_rank}</td> --%>
 										</tr>
 										<tr>
 											<td class="r-o">지역:</td>
@@ -322,15 +324,19 @@ function selectArea(){
 										</tr>
 										<tr>
 											<td class="r-o" style="color: blue">대실:</td>
-											<td  style="color: blue">${roomList.get(a).room_price}</td>
+											<td  style="color: blue">${roomList.get(a).room_price} 원</td>
+<%-- 											<td  style="color: blue">${roomList.get(a).room_price}원</td> --%>
 										</tr>
 										<tr>
 											<td class="r-o" style="color: red">숙박:</td>
-											<td style="color: red">${roomList.get(a).room_price2}</td>
+											<td style="color: red">${roomList.get(a).room_price2} 원</td>
+											
 										</tr>
 									</tbody>
 								</table>
-								<a href="#" class="primary-btn">More Details</a> ${a=a+1}
+								<a href="#" class="primary-btn">상세보기</a> 
+								<c:set var="a" value="${a=a+1}"/>
+								
 
 							</div>
 						</div>

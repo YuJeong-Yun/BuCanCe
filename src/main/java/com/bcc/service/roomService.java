@@ -14,6 +14,16 @@ public interface roomService {
 	
 	public JSONArray roomDetail(String bno);
 
+	public JSONArray roomDetail2(String bno);
+	
+	public JSONArray roomDetail3(String bno);
+	
+	public JSONArray roomDetail4(String bno);
+
+	public JSONArray roomDetail5(String bno);
+	
+	
+	
 	public JSONArray roomPrice(String bno);
 
 	JSONArray roomReserve(String bno, roomDate rd,String ano);
