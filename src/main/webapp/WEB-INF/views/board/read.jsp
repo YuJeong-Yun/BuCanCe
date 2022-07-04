@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	<jsp:include page="../include/header.jsp" />
-	
+	<html>
    <!-- Breadcrumb Section Begin -->
     <div class="breadcrumb-section">
         <div class="container">
@@ -28,6 +28,11 @@
                                 </div>
                                 <br><br><br>
                                 <h6>${vo.ITEMCNTNTS }</h6>
+                                <br><br><br>
+                                <h6>오시는길 : ${vo.TRFC_INFO }</h6>
+                                <br><br><br>
+                                <h6>이용시간 : ${vo.USAGE_DAY_WEEK_AND_TIME }</h6>
+                                
                             </div>
                             
                         </div>
@@ -116,3 +121,4 @@
     </section>
     <!-- Room Details Section End -->
     <jsp:include page="../include/footer.jsp" />
+    </html>
