@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+
+	.area {
+	    position: absolute;
+	    background: #fff;
+	    border: 1px solid #888;
+	    border-radius: 3px;
+	    font-size: 18px;
+	    top: -5px;
+	    left: 15px;
+	    padding:2px;
+	}
+	
+	.info-menu {
+		font-size: 20px;
+		text-decoration: none !important;
+		color: #fff !important;
+	}
+	
+	
+	#load-more {
+		cursor: pointer;
+	
+	}
+	
+	
+	.ri-text {
+		margin-bottom: 3em;
+		border-bottom: 1px solid #e5e5e5;
+		padding-bottom: 2em;
+	}
+	
+	.ri-text h2 {
+		margin-bottom: 14px;
+		color: #01579B;
+	}
+	
+	.infoImage {
+		width: 360px;
+		height: 350px;
+		margin-right: 1em;
+	}
+	
+	.weatherPic {
+		width: 150px;
+	
+	}
+	
+	.weather {
+		display: inline-block;
+		transform : translate(-100px,40px);
+		font-size: 30px;
+		font-weight: bold;
+	}
+	
+	
+	.current {
+		font-size: 50px;
+	}
+	
+	
