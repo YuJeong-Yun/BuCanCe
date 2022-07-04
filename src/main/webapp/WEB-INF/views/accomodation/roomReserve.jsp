@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -173,10 +173,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>예약하기 페이지</h2>
+                        <h2>예약항목 선택</h2>
                         <div class="bt-option">
                             <a href="./home.html">Home</a>
-                            <span>Rooms</span>
+                            <span>예약항목</span>
                         </div>
                     </div>
                 </div>
@@ -195,26 +195,33 @@
                     <div class="room-item">
                        <a href="#">
                        <img src="${roomReserve.get(a).room_pic}" alt="acc" class="poster">
-                        <div class="ri-text">
+                        <div class="ri-text" >
                             <h4>${roomReserve.get(a).room_title}</h4>
-                            <h3 style="color: red"><span style="color: red">ㅇㅇ</span></h3>
                             <table>
                                 <tbody>
                                     <tr>
                                         <td class="r-o">대실:</td>
-                                        <td>${roomReserve.get(a).room_fcost}</td>
+                                        <td>${roomReserve.get(a).room_fcost} </td>
                                     </tr>
                                     <tr>
                                         <td class="r-o">숙박:</td>
-                                        <td>${roomReserve.get(a).room_lcost}</td>
+                                        <c:if test="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1) != 1}">
+									
+                                        <td>${fn:substring(roomReserve.get(a).room_lcost,0,roomReserve.get(a).room_reserve2.length()-1)} </td>
+									</c:if>
                                     </tr>
                                     <tr>
-                                        <td class="r-o">대실예약 :</td>
-                                        <td>${roomReserve.get(a).room_reserve1}</td>
+<!--                                         <td class="r-o">대실가격 :</td> -->
+<%--                                         <td>${roomReserve.get(a).room_reserve1}</td> --%>
                                     </tr>
                                     <tr>
-                                        <td class="r-o">숙박예약 :</td>
-                                        <td>${roomReserve.get(a).room_reserve2}</td>
+                                        <td class="r-o">총 숙박가격 :</td>
+<%--                                         <td>${roomReserve.get(a).room_reserve2}</td> --%>
+
+									<c:if test="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1) != 1}">
+									
+                                        <td>${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)} </td>
+									</c:if>
                                     </tr>
                                 </tbody>
                                 </a>
@@ -223,7 +230,7 @@
                         </div>
                     </div>
                 </div>
-                <c:set var="a" value="${a=a+1 }"/>
+                <c:set var="a" value="${a=a+1}"/>
                 </c:forEach>
                 
                 

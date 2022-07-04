@@ -80,11 +80,21 @@ public class accomodationController {
 
 
 			log.info(bno);
+			JSONArray roomdetail0 = service.roomDetail0(bno);
 			JSONArray roomdetail = service.roomDetail(bno);
-				
+			JSONArray roomdetail2 = service.roomDetail2(bno);
+			JSONArray roomdetail3 = service.roomDetail3(bno);
+			JSONArray roomdetail4 = service.roomDetail4(bno);
+			JSONArray roomdetail5 = service.roomDetail5(bno);
 			
 			
+			model.addAttribute("roomdetail0", roomdetail0);
 			model.addAttribute("roomdetail", roomdetail);
+			model.addAttribute("roomdetail2", roomdetail2);
+			model.addAttribute("roomdetail3", roomdetail3);
+			model.addAttribute("roomdetail4", roomdetail4);
+			model.addAttribute("roomdetail5", roomdetail5);
+			
 			model.addAttribute("bno", bno);
 			
 			
