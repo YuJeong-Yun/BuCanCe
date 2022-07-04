@@ -92,7 +92,10 @@ public class roomDAOImpl implements roomDAO {
 		Elements room_title = doc.select(".info h2"); // 1. 제목
 		Elements room_pic = doc.select(".gallery_pc .swiper-lazy"); // 2. 대표사진
 		Elements room_pica = doc.select(".lazy"); // 3.(서브)사진
-	//	Elements room_picb = doc.select(".gallery_m index_mobile > div:nth-child(3)"); // 3. (서브)사진2
+		Elements room_picb = doc.select(".item.on .owl-lazy"); // 3. (서브)사진2
+//		Elements room_picb = doc.select(".pic_view > img"); // 3. (서브)사진2
+
+		// Elements room_picc = doc.select(".pic_view > img");
 		// Elements room_star =doc.select(".score_wrap .score_star star_45");//별점 사진
 
 		Elements room_star_num = doc.select(".score_cnt span");// 4.별점(숫자)
@@ -113,7 +116,9 @@ public class roomDAOImpl implements roomDAO {
 			obj.put("room_title", room_title.get(i).text());
 			obj.put("room_pic", room_pic.get(i).attr("data-src"));
 			obj.put("room_pica", room_pica.get(i).attr("data-original"));
-		//	obj.put("room_picb", room_picb.get(i).attr("src"));
+			 obj.put("room_picb", room_picb.get(i).attr("data-src"));
+
+			//obj.put("room_picb", room_picb.get(i).attr("data-original"));
 			// obj.put("room_star", room_star.get(i).attr("png"));
 			obj.put("room_star_num", room_star_num.get(i).text());
 			obj.put("room_address", room_address.get(i).text());

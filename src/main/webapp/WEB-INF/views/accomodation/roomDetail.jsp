@@ -12,6 +12,32 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Sona | Template</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script>
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " w3-opacity-off";
+}
+</script>
+
+
 <!-- Google Font -->
 <link
 	href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap"
@@ -215,13 +241,41 @@
 
 				<div class="col-lg-8">
 					<div class="room-details-item">
+		
+		
+		
+<div class="w3-content" style="max-width:1000px">
+  <img class="mySlides" src="${pageContext.request.contextPath}${roomdetail.get(a).room_pic}" style="width:100%;">
+  <img class="mySlides" src="${pageContext.request.contextPath}${roomdetail.get(a).room_pica}" style="width:100%;display:none">
+  <img class="mySlides" src="${pageContext.request.contextPath}${roomdetail.get(a).room_picb}" style="width:100%;display:none">
+
+  <div class="w3-row-padding w3-section">
+    <div class="w3-col s4">
+      <img class="demo w3-opacity w3-hover-opacity-off" src="${pageContext.request.contextPath}${roomdetail.get(a).room_pic}" style="width:100%;cursor:pointer" onclick="currentDiv(1)" width="180"   height="130">
+    </div>
+    <div class="w3-col s4">
+      <img class="demo w3-opacity w3-hover-opacity-off" src="${pageContext.request.contextPath}${roomdetail.get(a).room_pica}" style="width:100%;cursor:pointer" onclick="currentDiv(2)" width="180" height="130">
+    </div>
+    <div class="w3-col s4">
+      <img class="demo w3-opacity w3-hover-opacity-off" src="${pageContext.request.contextPath}${roomdetail.get(a).room_picb}" style="width:100%;cursor:pointer" onclick="currentDiv(3)" width="180" height="130">
+    </div>
+  </div>
+</div>
+		
+		
+		
+		
+					
+					
+					
+					<%--          타이틀 사진 (수정전)
 						<img
 							src="${pageContext.request.contextPath}${roomdetail.get(a).room_pic}"
 							alt=""> <img
 							src="${pageContext.request.contextPath}${roomdetail.get(a).room_pica}"
 							alt="200">
 						<img src="${pageContext.request.contextPath}${roomdetail.get(a).room_picb}"
-							alt="200">
+							alt="200"> --%>
 						
 						<div class="rd-text">
 							<div class="rd-title">
