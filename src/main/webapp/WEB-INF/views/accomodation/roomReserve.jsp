@@ -201,11 +201,14 @@
                                 <tbody>
                                     <tr>
                                         <td class="r-o">대실:</td>
-                                        <td>${roomReserve.get(a).room_fcost}</td>
+                                        <td>${roomReserve.get(a).room_fcost} </td>
                                     </tr>
                                     <tr>
                                         <td class="r-o">숙박:</td>
-                                        <td>${roomReserve.get(a).room_lcost}</td>
+                                        <c:if test="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1) != 1}">
+									
+                                        <td>${fn:substring(roomReserve.get(a).room_lcost,0,roomReserve.get(a).room_reserve2.length()-1)} </td>
+									</c:if>
                                     </tr>
                                     <tr>
 <!--                                         <td class="r-o">대실가격 :</td> -->
@@ -214,7 +217,11 @@
                                     <tr>
                                         <td class="r-o">총 숙박가격 :</td>
 <%--                                         <td>${roomReserve.get(a).room_reserve2}</td> --%>
-                                        <td>${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)}원</td>
+
+									<c:if test="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1) != 1}">
+									
+                                        <td>${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)} </td>
+									</c:if>
                                     </tr>
                                 </tbody>
                                 </a>

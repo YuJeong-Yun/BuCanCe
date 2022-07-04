@@ -605,10 +605,10 @@ public class roomDAOImpl implements roomDAO {
 				obj.put("room_reserve2", room_reserve.get((i)).text().replaceAll("[^0-9]", ""));
 				
 			}else if(tomorrow.equals(rd.getSel_date2())){
-				obj.put("room_fcost", room_fcost.get(i*2).text());
-				obj.put("room_lcost", room_fcost.get((i*2)+1).text().replaceAll("[^0-9]", ""));
+				obj.put("room_fcost", room_fcost.get(i*2).text().replaceAll("[^0-9]", ""));
+				obj.put("room_lcost", room_fcost.get((i*2)+1).text().replaceAll("[^0-9]", "")+"1");
 				obj.put("room_reserve1", room_reserve.get((i*2)).text());
-				obj.put("room_reserve2", room_reserve.get((i*2)+1).text());
+				obj.put("room_reserve2", room_fcost.get((i*2)+1).text().replaceAll("[^0-9]", "")+"1");
 				
 			}
 			
