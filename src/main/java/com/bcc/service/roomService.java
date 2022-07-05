@@ -1,5 +1,7 @@
 package com.bcc.service;
 
+import java.text.ParseException;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -28,7 +30,7 @@ public interface roomService {
 	
 	public JSONArray roomPrice(String bno);
 
-	JSONArray roomReserve(String bno, roomDate rd,String ano);
+	JSONArray roomReserve(String bno, roomDate rd,String ano) throws ParseException;
 
 	
 }

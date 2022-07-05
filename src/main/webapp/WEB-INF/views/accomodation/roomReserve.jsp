@@ -201,7 +201,10 @@
                                 <tbody>
                                     <tr>
                                         <td class="r-o">대실:</td>
+                                        
                                         <td>${roomReserve.get(a).room_fcost} </td>
+                                        
+                                        
                                     </tr>
                                     <tr>
                                         <td class="r-o">숙박:</td>

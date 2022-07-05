@@ -1,6 +1,7 @@
 package com.bcc.web;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import javax.inject.Inject;
 
@@ -140,7 +141,7 @@ public class accomodationController {
 		@RequestMapping(value = "/roomReserve" ,method = RequestMethod.GET)
 			public void roomReserveGET(Model model,@RequestParam("bno")
 			String bno,roomDate rd,
-			@RequestParam("ano") String ano) throws IOException {
+			@RequestParam("ano") String ano) throws IOException, ParseException {
 			
 			log.info("roomReserveGET() 호출");
 

@@ -1,8 +1,12 @@
 package com.bcc.service;
 
 import java.io.IOException;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -507,7 +511,7 @@ public class roomServiceImpl implements roomService{
 	
 	
 	@Override
-	public JSONArray roomReserve(String bno,roomDate rd,String ano) {
+	public JSONArray roomReserve(String bno,roomDate rd,String ano) throws ParseException {
 
 		log.info("크롤링 처리불러오기");
 		// Jsoup를 이용해서 크롤링 - 여기어때
@@ -517,6 +521,7 @@ public class roomServiceImpl implements roomService{
 		
 		//임의의 날짜
 		
+		//주소의 날짜값을 바꿔주는 구문
 		//첫번째 날짜와 두번째 날짜값
 		String ch_date=rd.getSel_date();
 		String ch_date2=rd.getSel_date2();
@@ -531,32 +536,48 @@ public class roomServiceImpl implements roomService{
 		String bb = url.substring(date2_idx+10,date2_idx+20);
 		String cc = url.substring(ano_idx+4,url.indexOf("&"));
 		
-		
 		url = url.replace(aa, rd.getSel_date());
 		url = url.replace(bb, rd.getSel_date2());
 		url = url.replace(cc, ch_ano);
-		
+		//주소의 날짜값을 바꿔주는 구문
 		
 		log.info(url);
 		
-		
+		//컴퓨터시각 오늘
 		Calendar cal = Calendar.getInstance();
 		String format = "yyyy-MM-dd";
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		String today = sdf.format(cal.getTime());
+		//컴퓨터시각 오늘
 		
-		
-		cal = Calendar.getInstance();
+		//컴퓨터시각 내일
+		Calendar cal2 = Calendar.getInstance();
 		String format2 = "yyyy-MM-dd";
 		SimpleDateFormat sdf2 = new SimpleDateFormat(format2);
-		cal.add(cal.DATE, +1); //날짜를 하루 더한다.
-		String tomorrow = sdf.format(cal.getTime());
+		cal2.add(cal2.DATE, +1); //날짜를 하루 더한다.
+		String tomorrow = sdf.format(cal2.getTime());
+		//컴퓨터시각 내일
+
 		
 		
-		log.info("내일날짜 : " + tomorrow);
-		log.info("체크아웃날짜 : " + rd.getSel_date2());
+		//선택한 날짜값 차이를 구하는 구문
+		SimpleDateFormat transformat = new SimpleDateFormat("yyyy-MM-dd");
+		Date firstDate = (Date) transformat.parse(ch_date);
+        Date secondDate = (Date) transformat.parse(ch_date2);
+		
+        long diff = secondDate.getTime() - firstDate.getTime();
+        TimeUnit time = TimeUnit.DAYS; 
+        long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
+        System.out.println("받은날짜값 차이 : "+diffrence);
+      //선택한 날짜값 차이를 구하는 구문
+        
+        
+        
 		log.info("오늘날짜 : " + today);
+		log.info("내일날짜 : " + tomorrow);
 		log.info("체크인날짜 : " + rd.getSel_date());
+		log.info("체크아웃날짜 : " + rd.getSel_date2());
+		
 		
 		Document doc = null; // Document에 페이지의 전체 소스가 저장됨
 
@@ -584,20 +605,34 @@ public class roomServiceImpl implements roomService{
 			obj.put("room_title", room_title.get(i).text());
 
 			
+			//표준시간내일과 입력받은 내일날짜가 같지않을때
 			if(!rd.getSel_date2().equals(tomorrow)) {
 				
-				obj.put("room_fcost", "미정");
-				obj.put("room_lcost", room_fcost.get((i)).text().replaceAll("[^0-9]", "").substring(0, room_fcost.get((i)).text().replaceAll("[^0-9]", "").length()-1));
-				obj.put("room_reserve1", "미정");
-				obj.put("room_reserve2", room_reserve.get((i)).text().replaceAll("[^0-9]", ""));
+				//입력받은 날짜차이가 하루일때
+				if(diffrence==1) {
+					obj.put("room_fcost", room_fcost.get(i*2).text().replaceAll("[^0-9]", ""));
+					obj.put("room_lcost", room_fcost.get((i*2)+1).text().replaceAll("[^0-9]", "")+"1");
+					obj.put("room_reserve1", room_reserve.get((i*2)).text());
+					obj.put("room_reserve2", room_fcost.get((i*2)+1).text().replaceAll("[^0-9]", "")+"1");
+				}//아닐때
+				else{
+					obj.put("room_fcost", "미정");
+					obj.put("room_lcost", room_fcost.get((i)).text().replaceAll("[^0-9]", "").substring(0, room_fcost.get((i)).text().replaceAll("[^0-9]", "").length()-1));
+					obj.put("room_reserve1", "미정");
+					obj.put("room_reserve2", room_reserve.get((i)).text().replaceAll("[^0-9]", ""));
+				}
 				
+			//입력받은 내일날짜와 표준날짜가 내일일때
 			}else if(tomorrow.equals(rd.getSel_date2())){
 				obj.put("room_fcost", room_fcost.get(i*2).text().replaceAll("[^0-9]", ""));
 				obj.put("room_lcost", room_fcost.get((i*2)+1).text().replaceAll("[^0-9]", "")+"1");
 				obj.put("room_reserve1", room_reserve.get((i*2)).text());
 				obj.put("room_reserve2", room_fcost.get((i*2)+1).text().replaceAll("[^0-9]", "")+"1");
 				
-			}
+				
+				
+				
+			} 
 			
 
 			// roomList에 생성한 JSONObject 추가
