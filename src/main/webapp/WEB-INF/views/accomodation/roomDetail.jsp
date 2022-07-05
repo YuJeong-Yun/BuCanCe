@@ -15,30 +15,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-<script>
-function currentDiv(n) {
-  showDivs(slideIndex = n);
-}
 
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-  }
-  x[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " w3-opacity-off";
-}
-</script>
 
 
 <!-- Google Font -->
+
+
 <link
 	href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap"
 	rel="stylesheet">
@@ -47,6 +29,7 @@ function showDivs(n) {
 	rel="stylesheet">
 
 <!-- Css Styles -->
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/yd.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
 	type="text/css">
@@ -238,54 +221,59 @@ function showDivs(n) {
 		<div class="container">
 			<div class="row">
 				<c:set var="a" />
+				<c:set var="b" />
 
 				<div class="col-lg-8">
 					<div class="room-details-item">
 		
 		
 		
-<div class="w3-content" style="max-width:1000px">
-  <img class="mySlides" src="${roomdetail0.get(0).room_pic}" style="width:100%;">
+<!-- 	<div class="flexslider"> -->
+<!--   <ul class="slides"> -->
+<%--     <c:forEach items="${roomdetail0}" begin="0" end="${roomdetail0.size()}"> --%>
 
-  <div class="w3-row-padding w3-section">
-  	<c:forEach items="${roomdetail0}" begin="0" end="${roomdetail0.size()}">
-  	 <div class="w3-col s4">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="${roomdetail0.get(0).room_pic}" style="width:100%;cursor:pointer" onclick="currentDiv(2)" width="180" height="130">
-    </div>
-    <c:set var="a" value="${a=a+1 }"/>
+<%--     <li data-thumb="slide${b+1}-thumb.jpg"> --%>
+<%--        <img src="${roomdetail0.get(b).room_pic}"> --%>
+<!--     </li> -->
+   
+<%--        <c:set var="b" value="${b=b+1 }"/> --%>
+<%--   	</c:forEach> --%>
+      
+<!--     <li> -->
+    
+<!--   </ul> -->
+<!-- </div>	 -->
+		
+ <div id="slideShow">
+    <ul class="slides">
+     <c:forEach items="${roomdetail0}" begin="0" end="${roomdetail0.size()}">
+      <li><img src="${roomdetail0.get(b).room_pic}" style="width: 400px"></li>
+      <c:set var="b" value="${b=b+1 }"/>
   	</c:forEach>
+      
+    </ul>
+    <p class="controller">
+      <!-- &lang: 왼쪽 방향 화살표 &rang: 오른쪽 방향 화살표 --> 
+      <span class="prev">&lang;</span> 
+      <span class="next">&rang;</span>
+    </p>
   </div>
-</div>
-		
-		
-		
-		
+ 
 					
-					
-					
-					<%--          타이틀 사진 (수정전)
-						<img
-							src="${pageContext.request.contextPath}${roomdetail.get(a).room_pic}"
-							alt=""> <img
-							src="${pageContext.request.contextPath}${roomdetail.get(a).room_pica}"
-							alt="200">
-						<img src="${pageContext.request.contextPath}${roomdetail.get(a).room_picb}"
-							alt="200"> --%>
-						
                         <div class="rd-text">
                             <div class="rd-title">
-                                <h3> ${roomdetail.get(a).room_title}</h3>
+                                <h3> ${roomdetail.get(0).room_title}</h3>
                                 <div class="rdt-right">
-									<div class="rating">${roomdetail.get(a).room_star} 
+									<div class="rating">${roomdetail.get(0).room_star} 
 										<i class="icon_star"></i> <i class="icon_star"></i> <i
 											class="icon_star"></i> <i class="icon_star"></i> <i
 											class="icon_star-half_alt"></i>
-									&nbsp; <h5> 별점 :${roomdetail.get(a).room_star_num} 점</h5></div>
+									&nbsp; <h5> 별점 :${roomdetail.get(0).room_star_num} 점</h5></div>
 									
 									<a href="#">Booking Now</a>
 								</div>
 							</div>
-							<h2>${roomdetail.get(a).room_price}<span>/Won(원)</span>
+							<h2>${roomdetail.get(0).room_price}<span>/Won(원)</span>
 							</h2>
 							<table>
 								<tbody>
@@ -306,7 +294,7 @@ function showDivs(n) {
 									<tr>
 										<td class="r-o">Bed:</td>
 										<td>king beds</td>
-										<td>${roomdetail.get(a).room_a}</td>
+										<td>${roomdetail.get(0).room_a}</td>
 									</tr>
 
 									<tr>
@@ -315,16 +303,16 @@ function showDivs(n) {
 									<c:if test="${roomdetail2.size() != 0}">
 										<tr>
 											<td class="r-o">서비스:</td>
-											<td>${roomdetail2.get(a).room_service}</td>
+											<td>${roomdetail2.get(0).room_service}</td>
 										</tr>
 									</c:if>
 									<tr>
 										<td><hr> <br></td>
 									</tr>
-									<c:if test="${roomdetail.get(a).room_address!=null}">
+									<c:if test="${roomdetail.get(0).room_address!=null}">
 										<tr>
 											<td class="r-o">주소:</td>
-											<td>${roomdetail.get(a).room_address}</td>
+											<td>${roomdetail.get(0).room_address}</td>
 										</tr>
 									</c:if>
 									<tr>
@@ -333,7 +321,7 @@ function showDivs(n) {
 								<c:if test="${roomdetail3.size() != 0}">
 										<tr>
 											<td class="r-o">※주의사항</td>
-											<td>${roomdetail3.get(a).room_comment}</td>
+											<td>${roomdetail3.get(0).room_comment}</td>
 										</tr>
 									</c:if>
 									<tr>
@@ -342,7 +330,7 @@ function showDivs(n) {
 									<c:if test="${roomdetail4.size() != 0}">
 										<tr>
 											<td class="r-o">주변 안내</td>
-											<td>${roomdetail4.get(a).room_info}</td>
+											<td>${roomdetail4.get(0).room_info}</td>
 										</tr>
 									</c:if>
 								</tbody>
@@ -356,12 +344,12 @@ function showDivs(n) {
 								</h3>
 								<br>
 								<br>
-								<p class="f-para">${roomdetail5.get(a).room_infoa}</p>
+								<p class="f-para">${roomdetail5.get(0).room_infoa}</p>
 							</c:if>
 						</div>
 					</div>
 					<div class="rd-reviews">
-						<h4>${roomdetail.get(a).room_retitle}</h4>
+						<h4>${roomdetail.get(0).room_retitle}</h4>
 						<div class="review-item">
 							<div class="ri-pic">
 								<img
@@ -376,7 +364,7 @@ function showDivs(n) {
 										class="icon_star-half_alt"></i>
 								</div>
 								<h5>Brandon Kelley</h5>
-								<p>${roomdetail.get(a).room_review}</p>
+								<p>${roomdetail.get(0).room_review}</p>
 							</div>
 						</div>
 						<div class="review-item">
@@ -546,6 +534,7 @@ function showDivs(n) {
     <!-- Search model end -->
 
     <!-- Js Plugins -->
+    <script src="${pageContext.request.contextPath}/resources/js/slideShow.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.min.js"></script>

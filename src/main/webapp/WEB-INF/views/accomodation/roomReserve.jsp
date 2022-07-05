@@ -201,14 +201,31 @@
                                 <tbody>
                                     <tr>
                                         <td class="r-o">대실:</td>
-                                        <td>${roomReserve.get(a).room_fcost} </td>
+                                        
+                                        <td>
+                                        <c:if test='${roomReserve.get(a).room_fcost != ""}'>
+                                        ${roomReserve.get(a).room_fcost} 원
+										</c:if>
+                                        
+                                        <c:if test='${roomReserve.get(a).room_fcost == ""}'>
+                                        미정
+										</c:if>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="r-o">숙박:</td>
-                                        <c:if test="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1) != 1}">
+                                        
+                                        <td>
+                                        <c:if test="${roomReserve.get(a).room_reserve2 != 1}">
 									
-                                        <td>${fn:substring(roomReserve.get(a).room_lcost,0,roomReserve.get(a).room_reserve2.length()-1)} </td>
+                                        ${fn:substring(roomReserve.get(a).room_lcost,0,roomReserve.get(a).room_reserve2.length()-1)} 원
 									</c:if>
+									
+									 <c:if test="${roomReserve.get(a).room_reserve2 == 1}">
+									
+                                        미정
+									</c:if>
+									</td>
                                     </tr>
                                     <tr>
 <!--                                         <td class="r-o">대실가격 :</td> -->
@@ -217,11 +234,15 @@
                                     <tr>
                                         <td class="r-o">총 숙박가격 :</td>
 <%--                                         <td>${roomReserve.get(a).room_reserve2}</td> --%>
-
-									<c:if test="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1) != 1}">
+	                               <td>
+									<c:if test="${roomReserve.get(a).room_reserve2 != 1 }">
 									
-                                        <td>${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)} </td>
+                                        ${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)} 원
 									</c:if>
+									<c:if test="${roomReserve.get(a).room_reserve2 == 1}">
+                                        미정
+									</c:if>
+									</td>
                                     </tr>
                                 </tbody>
                                 </a>

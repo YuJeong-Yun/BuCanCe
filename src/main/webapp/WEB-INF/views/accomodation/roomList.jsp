@@ -324,12 +324,22 @@ function selectArea(){
 										</tr>
 										<tr>
 											<td class="r-o" style="color: blue">대실:</td>
-											<td  style="color: blue">${roomList.get(a).room_price} 원</td>
-<%-- 											<td  style="color: blue">${roomList.get(a).room_price}원</td> --%>
+											<c:if test="${roomList.get(a).room_price!='숙소에 문의'}">
+													
+											<td  style="color: blue">${roomList.get(a).room_price}원</td>
+											</c:if>
+											<c:if test="${roomList.get(a).room_price=='숙소에 문의'}">
+											<td style="color: blue"> 미정 </td>
+											</c:if>
 										</tr>
 										<tr>
 											<td class="r-o" style="color: red">숙박:</td>
+											<c:if test="${roomList.get(a).room_price2!='숙소에 문의'}">
 											<td style="color: red">${roomList.get(a).room_price2} 원</td>
+											</c:if>
+											<c:if test="${roomList.get(a).room_price2=='숙소에 문의'}">
+											<td style="color: blue"> 미정 </td>
+											</c:if>
 											
 										</tr>
 									</tbody>
