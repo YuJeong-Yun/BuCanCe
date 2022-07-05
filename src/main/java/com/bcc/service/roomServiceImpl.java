@@ -101,8 +101,8 @@ public class roomServiceImpl implements roomService{
 		Elements room_pic = doc.select(".pic .lazy.align");
 		Elements room_rank = doc.select(".name p.score");
 		Elements room_area = doc.select(".name > p:last-child");
-		Elements room_price = doc.select(".map_html > p:nth-child(1)");
-		Elements room_price2 = doc.select(".map_html > p:nth-child(2)");
+		Elements room_price = doc.select(".map_html > p:nth-child(1) > b");
+		Elements room_price2 = doc.select(".map_html > p:nth-child(2) > b");
 		Elements room_link = doc.select(".list_2.adcno1 > a");
 		// JSON 형태로 영화 정보 저장
 		JSONArray roomList = new JSONArray();
@@ -133,8 +133,8 @@ public class roomServiceImpl implements roomService{
 				obj.put("room_pic", room_pic.get(i).attr("data-original"));
 				obj.put("room_rank", room_rank.get(i).text());
 				obj.put("room_area", room_area.get(i).text());
-				obj.put("room_price", room_price.get(i).text());
-				obj.put("room_price2", room_price2.get(i).text());
+				obj.put("room_price", room_price.get(i).text().replace("원",""));
+				obj.put("room_price2", room_price2.get(i).text().replace("원",""));
 				obj.put("room_link", room_link.get(i).attr("href"));
 
 				roomList.add(obj);
@@ -145,8 +145,8 @@ public class roomServiceImpl implements roomService{
 				obj.put("room_pic", room_pic.get(i).attr("data-original"));
 				obj.put("room_rank", room_rank.get(i).text());
 				obj.put("room_area", room_area.get(i).text());
-				obj.put("room_price", room_price.get(i).text());
-				obj.put("room_price2", room_price2.get(i).text());
+				obj.put("room_price", room_price.get(i).text().replace("원",""));
+				obj.put("room_price2", room_price2.get(i).text().replace("원",""));
 				obj.put("room_link", room_link.get(i).attr("href"));
 
 				roomList.add(obj);
@@ -175,8 +175,8 @@ public class roomServiceImpl implements roomService{
 							obj.put("room_pic", room_pic.get(i).attr("data-original"));
 							obj.put("room_rank", room_rank.get(i).text());
 							obj.put("room_area", room_area.get(i).text());
-							obj.put("room_price", room_price.get(i).text());
-							obj.put("room_price2", room_price2.get(i).text());
+							obj.put("room_price", room_price.get(i).text().replace("원",""));
+							obj.put("room_price2", room_price2.get(i).text().replace("원",""));
 							obj.put("room_link", room_link.get(i).attr("href"));
 
 							roomList.add(obj);
@@ -206,8 +206,8 @@ public class roomServiceImpl implements roomService{
 							obj.put("room_pic", room_pic.get(i).attr("data-original"));
 							obj.put("room_rank", room_rank.get(i).text());
 							obj.put("room_area", room_area.get(i).text());
-							obj.put("room_price", room_price.get(i).text());
-							obj.put("room_price2", room_price2.get(i).text());
+							obj.put("room_price", room_price.get(i).text().replace("원",""));
+							obj.put("room_price2", room_price2.get(i).text().replace("원",""));
 							obj.put("room_link", room_link.get(i).attr("href"));
 
 							roomList.add(obj);
@@ -229,6 +229,48 @@ public class roomServiceImpl implements roomService{
 	}
 
 	@Override
+	public JSONArray roomDetail0(String bno) {
+
+		log.info("크롤링 처리불러오기");
+
+		String url = bno;
+
+		Document doc = null; // Document에 페이지의 전체 소스가 저장됨
+
+		try {
+			doc = Jsoup.connect(url).get();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// select를 이용하여 원하는 태그를 선택
+
+//		Elements room_pic = doc.select(".pic_view > img"); // 2. 대표사진
+		Elements room_pic = doc.select(".gallery_pc .swiper-wrapper > li > img"); // 2. 대표사진
+
+		// JSON 형태로 영화 정보 저장
+
+		JSONArray detailList0 = new JSONArray();
+
+		for (int i = 0; i < room_pic.size(); i++) {
+			// JSONObject에 키:값 형태로 데이터 저장
+			JSONObject obj = new JSONObject();
+
+//			obj.put("room_pic", room_pic.get(i).attr("data-original"));
+			obj.put("room_pic", room_pic.get(i).attr("data-src"));
+
+			detailList0.add(obj);
+
+		}
+		System.out.println(" detailList : " + detailList0);
+
+		return detailList0;
+	}
+	
+	
+	
+	@Override
 	public JSONArray roomDetail(String bno) {
 
 		log.info("크롤링 처리불러오기");
@@ -249,7 +291,7 @@ public class roomServiceImpl implements roomService{
 		// select를 이용하여 원하는 태그를 선택
 
 		Elements room_title = doc.select(".info h2"); // 1. 제목
-		Elements room_pic = doc.select(".gallery_m.index_mobile .swiper-wrapper > li > img"); // 2. 대표사진
+//		Elements room_pic = doc.select(".pic_view .lazy"); // 2. 대표사진
 		Elements room_star_num = doc.select(".score_cnt span");// 4.별점(숫자)
 		Elements room_address = doc.select(".info .address"); // 5. 주소
 
@@ -263,8 +305,7 @@ public class roomServiceImpl implements roomService{
 			JSONObject obj = new JSONObject();
 
 			obj.put("room_title", room_title.get(i).text());
-			obj.put("room_pic", room_pic.get(i).attr("src"));
-
+//			obj.put("room_pic", room_pic.get(i).attr("data-original"));
 			obj.put("room_star_num", room_star_num.get(i).text());
 			obj.put("room_address", room_address.get(i).text());
 
@@ -512,9 +553,10 @@ public class roomServiceImpl implements roomService{
 		String tomorrow = sdf.format(cal.getTime());
 		
 		
-		log.info("내일1 : " + tomorrow);
-		log.info("내일2 : " + rd.getSel_date2());
-		log.info("오늘 : " + today);
+		log.info("내일날짜 : " + tomorrow);
+		log.info("체크아웃날짜 : " + rd.getSel_date2());
+		log.info("오늘날짜 : " + today);
+		log.info("체크인날짜 : " + rd.getSel_date());
 		
 		Document doc = null; // Document에 페이지의 전체 소스가 저장됨
 
