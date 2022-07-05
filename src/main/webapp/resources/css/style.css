@@ -24,6 +24,7 @@
 8.  Blog Section
 9.  Contact
 10.  Footer Style
+11. Member Style(추가)
 
 -------------------------------------------------------------------*/
 
@@ -2334,4 +2335,46 @@ ul, ol {
 	.blog-details-text .comment-option .single-comment-item .sc-text a {
 		margin-bottom: 10px;
 	}
+	
+/*-------------------------------- Member Styles(추가) --------------------------------*/
+
+.inner {
+    position: relative;
+    margin: 0 auto;
+    width: 1300px;
+    height: 100%;
+}
+.innerwrap {
+    max-width: 1300px;
+    width: 100%;
+    margin: 50px auto;
+    overflow: hidden;
+    word-wrap: break-word;
+}	
+
+/* sns login */
+
+.login_sns {
+	padding:30px 0;
+	}
+.login_sns li {
+	margin: 7px 0; /* height: 60px; *//* background-color: black; */}    
+.login_sns li a {
+	display:block;
+	width:280px;
+	margin:0 auto;
+	padding:20px;
+	font-size:20px;
+	font-weight:500;
+	border-radius:7px;
+	position:relative; 
+	}
+.login_sns li a.kakao {
+	background-color:#ffdf01; color:#47292b; padding-left:100px;
+	}
+.login_sns li a.naver {
+	background-color: #059830;color:#fff;padding-left:100px;
+	}
+
+
 }

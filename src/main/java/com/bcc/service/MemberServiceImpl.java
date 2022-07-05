@@ -34,28 +34,6 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void kakaoInsert(MemberVO vo) {
-		log.info(" 컨트롤러 호출 ");
-		log.info(" memberInsert(vo) 호출 ");
-		
-		dao.insertMember(vo);
-		
-		log.info(" DAO 처리 완료 -> 컨트롤러 이동");
-		
-	}
-
-	@Override
-	public void naverInsert(MemberVO vo) {
-		log.info(" 컨트롤러 호출 ");
-		log.info(" memberInsert(vo) 호출 ");
-		
-		dao.insertMember(vo);
-		
-		log.info(" DAO 처리 완료 -> 컨트롤러 이동");
-		
-	}
-	
-	@Override
 	public MemberVO loginCheck(MemberVO vo) {
 		log.info("loginCheck(vo) 호출 ");
 		// DAO객체 메서드 호출
@@ -67,11 +45,11 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO getMember(String userid) {
+	public MemberVO getMember(String id) {
 
 		log.info("getMember(userid) 호출");
 		
-		MemberVO vo = dao.getMember(userid);
+		MemberVO vo = dao.getMember(id);
 		
 		return vo;
 	}
@@ -93,11 +71,20 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<MemberVO> getMemberList(String userid) {
-		log.info("getMemberList(String userid) 호출");
+	public List<MemberVO> getMemberList(String id) {
+		log.info("getMemberList(String id) 호출");
 		
-		return dao.getMemberList(userid);
+		return dao.getMemberList(id);
 	}
 
+	@Override
+	public int idCheck(String id) {
+	       
+		int cnt = dao.idCheck(id);	 
+		
+		return cnt;
+	}
+
+	
 		
 }

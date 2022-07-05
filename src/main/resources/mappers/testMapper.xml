@@ -9,6 +9,45 @@
   	<select id="getNow" resultType="string">
   		select now() 
   	</select>
+
+    <select id="countMember" resultType="int">
+      select count(*) from bcc_member
+    </select>
+    
+    <insert id="insertMember">
+    	insert into bcc_member (id, pw, user_name, email, tel, zip, address1, address2) 
+    	values(#{id}, #{pw}, #{user_name}, #{email}, #{tel}, #{zip}, #{address1}, #{address2})    
+    </insert>
+    
+    <select id="login" resultType="com.bcc.domain.MemberVO">
+        select * from bcc_member 
+        where id=#{id} and pw=#{pw}
+    </select>
+    
+    <update id="update">
+       update bcc_member 
+       set name=#{name},email=#{email},updatedate=now() 
+       where id=#{id} and pw=#{pw}    
+    </update>
+    
+    <delete id="delete">
+      delete from bcc_member 
+      where id=#{id} and pw=#{pw}
+    </delete>
+    
+	<select id="getMember" resultType="com.bcc.domain.MemberVO">
+		select * from bcc_member 
+		where id = #{id}
+	</select>
+	
+	<select id="memberList" resultType="MemberVO">
+	  select * from bcc_member 
+	  where id != #{id}	
+	</select>
+	
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT COUNT(id) FROM bcc_member WHERE id = #{id}
+    </select>
   	
   </mapper>
   

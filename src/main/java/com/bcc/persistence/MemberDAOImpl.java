@@ -1,10 +1,15 @@
 package com.bcc.persistence;
 
-import java.util.HashMap;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -27,7 +32,7 @@ public class MemberDAOImpl implements MemberDAO {
 	// DB연결,자원해제,SQL실행
 
 	// mapper의 위치값(주소) 이름
-	private static final String NAMESPACE="com.bcc.mapper.MemberMapper";
+	private static final String NAMESPACE="com.bcc.mapper.testMapper";
 
 	@Override
 	public String getTime() {
@@ -77,24 +82,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberVO loginMember(String id, String pw) {
-		// id,pw는 vo에 저장불가능한 상황(가정)
-		
-		//sqlSession.selectOne(NAMESPACE+".login", id, pw);
-		// Map 을 사용하여  key,value 쌍으로 저장
-		
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("id", id);
-		paramMap.put("pw", pw);	
-		
-		logger.info(paramMap.toString());
-		
-		return sqlSession.selectOne(NAMESPACE+".login",paramMap);
-	}
-
-	
-	
-	@Override
 	public Integer updateMember(MemberVO vo) {
 		
 		logger.info(" 수정 정보를 전달받아서 sql 호출 ");
@@ -133,7 +120,23 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.selectList(NAMESPACE+".memberList", adminID);
 	}
+
+	@Override
+	public MemberVO getEmail(String email) {
+		
+		logger.info(" getEmail(email) ");
+		
+		MemberVO vo = sqlSession.selectOne(NAMESPACE+".getEmail", email);
+		
+		return vo;
+	}
+
+	@Override
+	public int idCheck(String id) {
+        int cnt = sqlSession.selectOne(NAMESPACE+".idCheck", id);
+        return cnt;
+	}
+
 	
-	
-	
+
 }

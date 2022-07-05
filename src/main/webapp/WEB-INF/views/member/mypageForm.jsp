@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ include file = "../include/header.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -10,15 +11,27 @@
 </head>
 <body>
 
-  	<fieldset>
-  	  <form action="/delete" method="post">
-  	  	 비밀번호 : <input type="password" name="pw">
-  	  	 <input type="submit" value="회원탈퇴">
-  	  </form>  	
-  	</fieldset>
-  	
-  	
-
+<body class = "memberBody">
+<div class = "memberInputArea">
+<div class = memberForm>
+	<form action="/mypage" method="post">
+		<a href = "/update">회원정보수정</a>
+		<a href = "/delete">회원탈퇴</a>
+	</form>
+	
+<div class = "menu-box">	
+	<ul>
+		<li>내글</li>
+		<li>일정</li>
+		<li>찜한 여행지</li>
+		<li>일정</li>
+	</ul>
+</div>
+	
+	
+</div>
+</div>
 </body>
 </html>
+
 <%@ include file = "../include/footer.jsp" %>

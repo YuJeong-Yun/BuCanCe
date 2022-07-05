@@ -1,5 +1,6 @@
 package com.bcc.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.bcc.domain.MemberVO;
@@ -9,10 +10,6 @@ public interface MemberService {
 
 	// 회원가입
 	public void memberInsert(MemberVO vo);
-	
-	public void kakaoInsert(MemberVO vo);
-	
-	public void naverInsert(MemberVO vo);
 	
 	// 로그인
 	public MemberVO loginCheck(MemberVO vo);
@@ -30,5 +27,7 @@ public interface MemberService {
 	// 회원목록 조회
 	public List<MemberVO> getMemberList(String id);
 	
+	// 아이디 중복 확인
+    public int idCheck(String id);
 	
 }

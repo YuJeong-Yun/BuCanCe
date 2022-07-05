@@ -1,3 +1,5 @@
+<%@page import="com.bcc.persistence.MemberDAO"%>
+<%@page import="org.springframework.stereotype.Service"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,7 +11,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>부산바캉스</title>
+    <title>Sona | Template</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -61,15 +63,36 @@
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="./index.jsp">Home</a></li>
-                <li><a href="#">관광지 소개</a></li>
-                <li><a href="#">숙박업소</a></li>
-                <li><a href="#">여행 플래너</a>
+                <li class="active"><a href="./index.html">NOTICE</a>
+                   <ul class="dropdown">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                    </ul>
+                </li>
+                <li><a href="./rooms.html">TOUR</a>
+	                <ul class="dropdown">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+	                    </ul>
+	                </li>
+                <li><a href="./about-us.html">HOTEL</a>
+	                <ul class="dropdown">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+	                    </ul>
+	                </li>
+                <li><a href="./pages.html">PLAN</a>
                     <ul class="dropdown">
-                        <li><a href="./room-details.html">Room Details</a></li>
-                        <li><a href="#">Deluxe Room</a></li>
-                        <li><a href="#">Family Room</a></li>
-                        <li><a href="#">Premium Room</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
                     </ul>
                 </li>
             </ul>
@@ -81,6 +104,36 @@
             <a href="#"><i class="fa fa-tripadvisor"></i></a>
             <a href="#"><i class="fa fa-instagram"></i></a>
         </div>
+
+<!-- 로그인 / 회원가입 / 로그아웃 -->
+
+<%
+	String id = null;
+	if(session.getAttribute("id")!=null){
+	id = (String)session.getAttribute("id");
+}
+	if(id==null){
+%>
+	<div id="login">
+	<a href="/login">LOGIN</a> | 
+	<a href="/insert">JOIN</a>
+	</div>
+
+<%	
+	}else{ %>
+	
+
+	<div id="login">
+	<%=id%>님 로그인 중입니다!!
+	<a href="/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/logout">LOGOUT</a>
+	</div>
+<%		
+	}
+%>
+	
+<!-- 로그인 / 회원가입 / 로그아웃 -->	
+
         <ul class="top-widget">
             <li><i class="fa fa-phone"></i> (12) 345 67890</li>
             <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
@@ -107,6 +160,34 @@
                                 <a href="#"><i class="fa fa-tripadvisor"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
                             </div>
+                            
+<!-- 로그인 / 회원가입 / 로그아웃 -->
+
+<%
+
+	if(id==null){
+%>
+	<div id="login">
+	<a href="/login">LOGIN</a> | 
+	<a href="/insert">JOIN</a>
+	</div>
+
+<%	
+	}else{ %>
+	
+
+	<div id="login">
+	<%=id%>님 로그인 중입니다!!
+	<a href="/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/logout">LOGOUT</a>
+	</div>
+<%		
+	}
+%>
+	
+<!-- 로그인 / 회원가입 / 로그아웃 -->	
+
+
                             <a href="#" class="bk-btn">Booking Now</a>
                             <div class="language-option">
                                 <img src="${pageContext.request.contextPath}/resources/img/flag.jpg" alt="">
@@ -137,18 +218,39 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                <li class="active"><a href="./index.jsp">Home</a></li>
-                <li><a href="#">관광지 소개</a></li>
-                <li><a href="#">숙박업소</a></li>
-                <li><a href="#">여행 플래너</a>
-                                        <ul class="dropdown">
-                                            <li><a href="./room-details.html">Room Details</a></li>
-                                            <li><a href="./blog-details.html">Blog Details</a></li>
-                                            <li><a href="#">Family Room</a></li>
-                                            <li><a href="#">Premium Room</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+					                <li class="active"><a href="./index.html">NOTICE</a>
+					                   <ul class="dropdown">
+					                        <li><a href="#">1</a></li>
+					                        <li><a href="#">2</a></li>
+					                        <li><a href="#">3</a></li>
+					                        <li><a href="#">4</a></li>
+					                    </ul>
+					                </li>
+					                <li><a href="./rooms.html">TOUR</a>
+						                <ul class="dropdown">
+					                        <li><a href="#">1</a></li>
+					                        <li><a href="#">2</a></li>
+					                        <li><a href="#">3</a></li>
+					                        <li><a href="#">4</a></li>
+						                    </ul>
+						                </li>
+					                <li><a href="./about-us.html">HOTEL</a>
+						                <ul class="dropdown">
+					                        <li><a href="#">1</a></li>
+					                        <li><a href="#">2</a></li>
+					                        <li><a href="#">3</a></li>
+					                        <li><a href="#">4</a></li>
+						                    </ul>
+						                </li>
+					                <li><a href="./pages.html">PLAN</a>
+					                    <ul class="dropdown">
+					                        <li><a href="#">1</a></li>
+					                        <li><a href="#">2</a></li>
+					                        <li><a href="#">3</a></li>
+					                        <li><a href="#">4</a></li>
+					                    </ul>
+					                </li>
+					             </ul>
                             </nav>
                             <div class="nav-right search-switch">
                                 <i class="icon_search"></i>

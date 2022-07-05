@@ -7,7 +7,7 @@ public class MemberVO {
 	
 	private String id;
 	private String pw;
-	private String name;
+	private String user_name;
 	private String email;
 	private String tel;
 	private String zip;
@@ -19,12 +19,12 @@ public class MemberVO {
 	public MemberVO() {	} // 생성자를 오버로딩하면 기본생성자는 자동생성 X
 	// alt shift s + o
 
-	public MemberVO(String id, String pw, String name, String email, String tel, String zip, String address1,
+	public MemberVO(String id, String pw, String user_name, String email, String tel, String zip, String address1,
 			String address2, Date regdate, String license) {
 		super();
 		this.id = id;
 		this.pw = pw;
-		this.name = name;
+		this.user_name = user_name;
 		this.email = email;
 		this.tel = tel;
 		this.zip = zip;
@@ -50,12 +50,12 @@ public class MemberVO {
 		this.pw = pw;
 	}
 
-	public String getName() {
-		return name;
+	public String getuser_name() {
+		return user_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setuser_name(String user_name) {
+		this.user_name = user_name;
 	}
 
 	public String getEmail() {
@@ -116,7 +116,7 @@ public class MemberVO {
 
 	@Override
 	public String toString() {
-		return "MemberVO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", tel=" + tel + ", zip="
+		return "MemberVO [id=" + id + ", pw=" + pw + ", user_name=" + user_name + ", email=" + email + ", tel=" + tel + ", zip="
 				+ zip + ", address1=" + address1 + ", address2=" + address2 + ", regdate=" + regdate + ", license="
 				+ license + "]";
 	}

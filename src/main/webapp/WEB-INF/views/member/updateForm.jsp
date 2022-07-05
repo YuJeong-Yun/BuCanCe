@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ include file = "../include/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberPage.css" type="text/css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -13,11 +16,11 @@
 		
 		<fieldset>
 		<!-- action 속성값이 없는경우 자신의 주소를 호출 -->
-    	<form action="" method="post" >
-    	    아이디 : <input type ="text" name="userid" value="${memberVO.userid }" readonly><br>
-    	    비밀번호 : <input type ="password" name="userpw" placeholder="비밀번호를 입력하시오."><br>
-    	    이름 : <input type="text" name="username" value ="${memberVO.username }"><br>
-    	    이메일 : <input type="text" name="useremail" value="${memberVO.useremail}"><br>
+    	<form action="/update?id=<%=id %>" method="post" >
+    	    아이디 : <input type ="text" name="id" value="${memberVO.id }" readonly><br>
+    	    비밀번호 : <input type ="password" name="pw" placeholder="비밀번호를 입력하시오."><br>
+    	    이름 : <input type="text" name="user_name" value ="${memberVO.user_name }"><br>
+    	    이메일 : <input type="text" name="email" value="${memberVO.email}"><br>
     	    
     	    <input type="submit" value="회원수정하기" >
     	</form>    
@@ -26,3 +29,5 @@
 		
 </body>
 </html>
+
+<%@ include file = "../include/footer.jsp" %>
