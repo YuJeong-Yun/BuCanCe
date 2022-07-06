@@ -303,20 +303,36 @@ function selectArea(){
 			<div class="row">
 				<c:set var="a" />
 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
+				
+			
 					<div class="col-lg-4 col-md-6"  style="height: 550px">
 						<div class="room-item">
+							
+							<c:if test="${roomList.get(a).room_rank!=''}">
 							<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster"
-								height="200">
+								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200">
 							</a>
+							</c:if>
+							
+							<c:if test="${roomList.get(a).room_rank==''}">
+								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200">
+							</c:if>
+							
+							
 							<div class="ri-text">
 								<h4>${roomList.get(a).room_title}</h4>
 								<table >
 									<tbody>
 										<tr >
 											<td class="r-o" style="color: green">평점:</td>
-											<td style="color: green">${fn:substring(roomList.get(a).room_rank,0,3)}점</td>
-<%-- 											<td>${roomList.get(a).room_rank}</td> --%>
+											<td style="color: green">
+											<c:if test="${roomList.get(a).room_rank!=''}">
+											${fn:substring(roomList.get(a).room_rank,0,3)}점
+											</c:if>
+											<c:if test="${roomList.get(a).room_rank==''}">
+											미정
+											</c:if>
+											</td>
 										</tr>
 										<tr>
 											<td class="r-o">지역:</td>
@@ -344,14 +360,22 @@ function selectArea(){
 										</tr>
 									</tbody>
 								</table>
-								<a href="#" class="primary-btn">상세보기</a> 
+								<c:if test="${roomList.get(a).room_rank!=''}">
+								<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}" class="primary-btn">
+								상세보기</a> 
+								</c:if>
+								
+								<c:if test="${roomList.get(a).room_rank==''}">
+								<a class="primary-btn"> 준비중 </a> 
+								</c:if>
+																
+								
 								<c:set var="a" value="${a=a+1}"/>
 								
 
 							</div>
 						</div>
 					</div>
-
 				</c:forEach>
 
 

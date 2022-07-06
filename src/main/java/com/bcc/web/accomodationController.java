@@ -2,11 +2,13 @@ package com.bcc.web;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -139,23 +141,40 @@ public class accomodationController {
 		// 예약 roomReserve 페이지
 		// http://localhost:8088/accomodation/roomReserve 
 		@RequestMapping(value = "/roomReserve" ,method = RequestMethod.GET)
-			public void roomReserveGET(Model model,@RequestParam("bno")
-			String bno,roomDate rd,
-			@RequestParam("ano") String ano) throws IOException, ParseException {
+		public void roomReserveGET(Model model,@RequestParam("bno")
+		String bno,roomDate rd,
+		@RequestParam("ano") String ano) throws IOException, ParseException {
 			
-			log.info("roomReserveGET() 호출");
+		log.info("roomReserveGET() 호출");
 
-			//날짜정보가져오기
-			log.info(rd.getSel_date());
-			log.info(rd.getSel_date2());
-			model.addAttribute("bno", bno);
+		//날짜정보가져오기
+		log.info(rd.getSel_date());
+		log.info(rd.getSel_date2());
 			
+//		SimpleDateFormat transformat = new SimpleDateFormat("yyyy-MM-dd");
+//		Date firstDate = (Date) transformat.parse(rd.getSel_date());
+//	    Date secondDate = (Date) transformat.parse(rd.getSel_date2());
 //			
-			JSONArray roomReserve = service.roomReserve(bno,rd,ano);
-
-			model.addAttribute("roomReserve", roomReserve);
+//	    long diff = secondDate.getTime() - firstDate.getTime();
+//	    TimeUnit time = TimeUnit.DAYS; 
+//	    long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
+//	    System.out.println("받은날짜값 차이 : "+diffrence);
+//			
+//	    model.addAttribute("diffrence",diffrence);
+	   
+		model.addAttribute("bno", bno);
+		
+		model.addAttribute("checkout",rd.getSel_date2().substring(8));
 				
-			}
+//				
+		JSONArray roomReserve = service.roomReserve(bno,rd,ano);
+
+		System.out.println("roomReserve : " +roomReserve);
+		
+		model.addAttribute("roomReserve", roomReserve);
+			
+	
+		}
 		
 		
 		

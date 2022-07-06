@@ -30,7 +30,7 @@ public interface roomService {
 	
 	public JSONArray roomPrice(String bno);
 
-	JSONArray roomReserve(String bno, roomDate rd,String ano) throws ParseException;
+	public JSONArray roomReserve(String bno, roomDate rd,String ano) throws ParseException;
 
 	
 }

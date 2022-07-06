@@ -186,6 +186,14 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Rooms Section Begin -->
+    
+    <!-- 예약정보가 없을때 처리로직 -->
+    <c:if test="${roomReserve=='[]'}">
+    	<h1 style="text-align: center;">예약 마감</h1>
+    </c:if>
+    
+    
+    
     <section class="rooms-section spad">
         <div class="container">
             <div class="row">
@@ -199,32 +207,94 @@
                             <h4>${roomReserve.get(a).room_title}</h4>
                             <table>
                                 <tbody>
-                                    <tr>
+                                
+                                <tr style="color: blue">
+                                    
                                         <td class="r-o">대실:</td>
                                         
-                                        <td>${roomReserve.get(a).room_fcost} </td>
+                                        <td>
+                                        <c:if test='${roomReserve.get(a).room_fcost != ""}'>
+                                        ${roomReserve.get(a).room_fcost} 원
+										</c:if>
                                         
-                                        
+                                        <c:if test='${roomReserve.get(a).room_fcost == ""}'>
+                                        숙소에 문의
+										</c:if>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td class="r-o">숙박:</td>
-                                        <c:if test="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1) != 1}">
+                                
+                                
+  								    <tr style="color: blue">
+                                    
+                                        <td class="r-o" >(대)마감/이용:</td>
+                                       <td>
+                                         <c:if test='${roomReserve.get(a).room_fcost != ""}'>
+                                        ${roomReserve.get(a).room_endtime}시/
+                                        
+                                          ${roomReserve.get(a).room_usetime}시간
+                                        </c:if>
+                                         <c:if test='${roomReserve.get(a).room_fcost == ""}'>
+                                       숙소에 문의
+                                       
+                                        </c:if>
+                                       </td>
+                                   
+                                       
+                                    </tr>
+                                    
+                                   
+                                    
+                                    
+                                    
+                                    <tr style="color: red">
+                                        <td class="r-o" >숙박:</td>
+                                        
+                                        <td>
+                                        <c:if test="${roomReserve.get(a).room_reserve2 != 1}">
 									
-                                        <td>${fn:substring(roomReserve.get(a).room_lcost,0,roomReserve.get(a).room_reserve2.length()-1)} </td>
+                                        ${fn:substring(roomReserve.get(a).room_lcost,0,roomReserve.get(a).room_reserve2.length()-1)} 원
 									</c:if>
+									
+									 <c:if test="${roomReserve.get(a).room_reserve2 == 1}">
+									
+                                        숙소에 문의
+									</c:if>
+									</td>
                                     </tr>
-                                    <tr>
-<!--                                         <td class="r-o">대실가격 :</td> -->
-<%--                                         <td>${roomReserve.get(a).room_reserve1}</td> --%>
+                                
+                                     <tr style="color: red">
+                                    
+                                        <td class="r-o">(숙)입실/퇴실:</td>
+                                       <td>
+                                         <c:if test='${roomReserve.get(a).room_lcost != "1"}'>
+                                        ${roomReserve.get(a).room_accendtime}시/
+                                        ${checkout}일
+                                          ${roomReserve.get(a).room_accusetime}시
+                                        </c:if>
+                                         <c:if test='${roomReserve.get(a).room_lcost == "1"}'>
+                                       숙소에 문의
+                                       
+                                        </c:if>
+                                       </td>
+                                   
+                                       
                                     </tr>
-                                    <tr>
+                                    
+                                    
+                                    
+                                    
+                                    <tr style="color: red">
                                         <td class="r-o">총 숙박가격 :</td>
 <%--                                         <td>${roomReserve.get(a).room_reserve2}</td> --%>
-
-									<c:if test="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1) != 1}">
+	                               <td>
+									<c:if test="${roomReserve.get(a).room_reserve2 != 1 }">
 									
-                                        <td>${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)} </td>
+                                        ${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)} 원
 									</c:if>
+									<c:if test="${roomReserve.get(a).room_reserve2 == 1}">
+                                        숙소에 문의
+									</c:if>
+									</td>
                                     </tr>
                                 </tbody>
                                 </a>
