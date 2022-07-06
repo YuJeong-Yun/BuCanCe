@@ -255,19 +255,24 @@ function inviteCancle(event, grpNum, id) {
 }
 
 ////////////////////////////// 플랜 생성/삭제  //////////////////////////////////
+const addPlanModal = document.querySelector('#exampleModal');
 
-// 플랜 생성
-function addPlan(event, grpCnt) {
+addPlanModal.addEventListener('show.bs.modal', addPlanCheck);
+
+// 플랜 생성 시 생성 가능한 최대 플랜 수 확인
+function addPlanCheck(event){
+	const grpCnt = document.querySelector('.plan-cnt .cnt-now').innerText;
+	
+	// 생성 가능한 최대 그룹 수 확인
 	if (license == 'free' && grpCnt >= 1) {
 		alert("생성 가능한 최대 플랜 수 입니다.");
-
 		event.preventDefault();
 	} else if (license == 'premium' && grpCnt >= 10) {
 		alert("생성 가능한 최대 플랜 수 입니다.");
-
 		event.preventDefault();
-	}
+	};
 }
+
 
 // 플랜 삭제
 function delPlan(event, grp_num) {
@@ -298,7 +303,6 @@ function delPlan(event, grp_num) {
 					plans[0].firstElementChild.style.cursor = 'pointer';
 				}
 
-
 			},
 			error: function() {
 				alert("삭제 오류!");
@@ -312,14 +316,15 @@ function delPlan(event, grp_num) {
 
 
 
+// 플랜 생성
+const planForm = document.querySelector('.plan-form');
+const inputGrpName = document.querySelector('.grp-name');
 
-// 그룹 생성 - 그룹명 입력 유효성 검사
 function check() {
-	const planForm = document.querySelector('.plan-form');
-	const inputGrpName = document.querySelector('.grp-name');
-
-	if (inputGrpName.value == "") {
+	// 그룹명 공백 체크
+	if (inputGrpName.value.trim() == "") {
 		alert('그룹명을 입력하세요');
 		return false;
-	}
+	};
+	
 }

@@ -68,9 +68,9 @@
 							<!-- 플랜 생성 -->
 							<section class="new-plan">
 								<div class="col-lg-4">
-									<form action="/plan/addPlan" method="get" name="plan-form" onsubmit="return check();">
+									<form action="/plan/addPlan" method="post" name="plan-form" onsubmit="return check();">
 										<!-- Button trigger modal -->
-										<button type="button" class="add-plan" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addPlan(event, ${grpList.size() });">
+										<button type="button" class="add-plan" data-bs-toggle="modal" data-bs-target="#exampleModal">
 											플랜 생성하기</button>
 										<!-- Modal -->
 										<div class="modal fade" id="exampleModal" tabindex="-1"
