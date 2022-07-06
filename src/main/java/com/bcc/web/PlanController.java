@@ -37,7 +37,7 @@ public class PlanController {
 	public void planListGET(HttpSession session, Model model) throws Exception {
 		log.info(" planListGET() 호출 ");
 
-		session.setAttribute("id", "yun1");
+		session.setAttribute("id", "yun2");
 		String id = (String) session.getAttribute("id");
 
 		// 회원 license 가져오기
@@ -51,6 +51,7 @@ public class PlanController {
 		// 소속된 그룹 정보 가져오기
 		List<PlanMemberVO> grpList = service.getGrpList(id);
 		model.addAttribute("grpList", grpList);
+		
 		// 해당 그룹의 멤버 정보 가져오기
 		List<List<MemberVO>> grpMemberList = new ArrayList<>();
 		for (int i = 0; i < grpList.size(); i++) {

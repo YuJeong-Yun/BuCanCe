@@ -186,8 +186,6 @@
 
 
 
-<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"	crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath }/resources/js/plan/planList.js"></script>
 <script type="text/javascript">
 	const path = '${pageContext.request.contextPath}';
 	//무료 회원일 경우 플랜 최신 1개 빼고 선택 불가 처리(유료->무료 전환됐을 경우 이전 플랜은 삭제하지 않고 표시해줌)
@@ -222,4 +220,7 @@
 		nowCnt.innerText = grpCnt;
 	}
 </script>
+<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"	crossorigin="anonymous"></script>
+<script src="${pageContext.request.contextPath }/resources/js/plan/planList.js"></script>
+
 <jsp:include page="../include/footer.jsp" />

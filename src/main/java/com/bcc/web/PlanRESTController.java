@@ -1,7 +1,5 @@
 package com.bcc.web;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bcc.domain.GrpAcceptVO;
@@ -36,8 +32,9 @@ public class PlanRESTController {
 	private PlanService service;
 
 	// 그룹 초대 수락
+	// http://localhost:8088/planREST/accept/8
 	@RequestMapping(value = "/accept/{grp_num}", produces = "application/json; charset=utf8")
-	public JSONObject acceptREST(@PathVariable("grp_num") int grpNum, HttpSession session) {
+	public Map<String, Object> acceptREST(@PathVariable("grp_num") int grpNum, HttpSession session) {
 		log.info("초대 수락 받아온 그룹 넘버 : " + grpNum);
 
 		String id = (String) session.getAttribute("id");
@@ -57,13 +54,12 @@ public class PlanRESTController {
 		// 해당 그룹 소속 멤버 리스트 가져오기
 		List<MemberVO> grpMember = service.getGrpMemberList(grpNum);
 		// 멤버 리스트, 그룹 이름, 그룹 리더 저장
-		JSONObject obj = new JSONObject();
-		obj.put("grpMember", grpMember);
-		obj.put("grpName", service.getGrpName(grpNum));
-		obj.put("leader", service.getLeader(grpNum));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("grpMember", grpMember);
+		map.put("grpName", service.getGrpName(grpNum));
+		map.put("leader", service.getLeader(grpNum));
 
-		return obj;
-
+		return map;
 	}
 
 	// 그룹 초대 거절
@@ -112,40 +108,23 @@ public class PlanRESTController {
 
 	// 아이디 검색
 	@RequestMapping(value = "/memberID", produces = "application/json; charset=utf8")
-	public JSONObject memberID(String id, int grpNum) {
+	public Map<String, Object> memberID(String id, int grpNum) {
 		log.info("memberID() 데이터 받기 : " + id);
 
-		JSONObject total = new JSONObject();
+		Map<String, Object> total = new HashMap<String, Object>();
 
 		// 아이디 검색 결과
 		List<MemberVO> memberList = service.getMemberList(id);
-		JSONArray memberArr = new JSONArray();
-		for (MemberVO vo : memberList) {
-			JSONObject obj = new JSONObject();
-
-			obj.put("id", vo.getId());
-			obj.put("name", vo.getName());
-
-			memberArr.add(obj);
-		}
 
 		// 그룹의 초대중인 회원
 		List<GrpAcceptVO> invitingList = service.getInvitingList(grpNum);
-		String[] invitingArr = new String[invitingList.size()];
-		for (int i = 0; i < invitingList.size(); i++) {
-			invitingArr[i] = invitingList.get(i).getReceiver();
-		}
 
 		// 그룹의 멤버
 		List<MemberVO> grpMemberList = service.getGrpMemberList(grpNum);
-		String[] grpMemberArr = new String[grpMemberList.size()];
-		for (int i = 0; i < grpMemberList.size(); i++) {
-			grpMemberArr[i] = grpMemberList.get(i).getId();
-		}
 
-		total.put("memberArr", memberArr);
-		total.put("invitingArr", invitingArr);
-		total.put("grpMemberArr", grpMemberArr);
+		total.put("memberArr", memberList);
+		total.put("invitingArr", invitingList);
+		total.put("grpMemberArr", grpMemberList);
 
 		return total;
 	}

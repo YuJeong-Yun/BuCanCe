@@ -136,6 +136,7 @@ function showMember() {
 			grpNum: grpNum
 		},
 		success: function(item) {
+			console.log(item);
 			// 기존 id 검색 결과 제거
 			while (memberList.hasChildNodes()) {
 				memberList.removeChild(memberList.firstChild);
