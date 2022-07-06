@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!DOCTYPE html>
 <html lang="zxx">
+
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Sona Template">
@@ -11,6 +12,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Sona | Template</title>
+<script>
+
+function selectAll(selectAll)  {
+	  const checkboxes 
+	       = document.getElementsByName('checkOne');
+	  
+	  checkboxes.forEach((checkbox) => {
+	    checkbox.checked = selectAll.checked;
+	  })
+	}//약관 모두선택 
+	
+	/* 숙소이용규칙 및 취소/환불규정 Iscroll */
+	var iscroll_policy; // 지역카테고리
+
+	function iscroll_run_policy01() {
+	    iscroll_policy = new IScroll('.pop_agree_01 .fix_cont', {
+	        mouseWheel: true,
+	        interactiveScrollbars: true,
+	        shrinkScrollbars: 'scale',
+	        fadeScrollbars: true,
+	        click: true
+	    });
+	}
+
+	function pop_agree_01() {
+	    // 숙소이용규칙 및 취소/환불규정 동의
+	    prevent_on();
+	    prevent_scroll();
+	    $('.pop_agree_01').fadeIn(150);
+	    $('.bg_dimm').fadeIn(150);
+	    iscroll_run_policy01(); // iscroll
+	    $('.fix_title').bind('touchmove', function (i) {
+	        i.preventDefault();
+	    }); // 타이틀 터치 방지
+	}
+
+	/* 개인정보 제 3자 제공 Iscroll */
+	var iscroll_policy_02; // 지역카테고리
+
+	function iscroll_run_policy02() {
+	    iscroll_policy_02 = new IScroll('.pop_agree_02 .fix_cont', {
+	        mouseWheel: true,
+	        interactiveScrollbars: true,
+	        shrinkScrollbars: 'scale',
+	        fadeScrollbars: true,
+	        click: true
+	    });
+	}
+
+	function pop_agree_02() {
+	    // 개인정보 수집 및 이용동의 팝업
+	    prevent_on();
+	    prevent_scroll();
+	    $('.pop_agree_02').fadeIn(150);
+	    $('.bg_dimm').fadeIn(150);
+	    iscroll_run_policy02(); // iscroll
+	    $('.fix_title').bind('touchmove', function (i) {
+	        i.preventDefault();
+	    }); // 타이틀 터치 방지
+	}
+
+	function pop_agree_03() {
+	    // 개인정보 제 3자 제공 동의 팝업
+	    prevent_on();
+	    prevent_scroll();
+	    $('.pop_agree_03').fadeIn(150);
+	    $('.bg_dimm').fadeIn(150);
+	    // iscroll_run_policy02(); // iscroll
+	    $('.fix_title').bind('touchmove', function (i) {
+	        i.preventDefault();
+	    }); // 타이틀 터치 방지
+
+	    new IScroll('.pop_agree_03 .fix_cont', {
+	        mouseWheel: true,
+	        interactiveScrollbars: true,
+	        shrinkScrollbars: 'scale',
+	        fadeScrollbars: true,
+	        click: true
+	    });
+	}
+
+	function pop_agree_04() {
+	    // 만 14세 이상 확인
+	    prevent_on();
+	    prevent_scroll();
+	    $('.pop_agree_04').fadeIn(150);
+	    $('.bg_dimm').fadeIn(150);
+	    // iscroll_run_policy02(); // iscroll
+	    $('.fix_title').bind('touchmove', function (i) {
+	        i.preventDefault();
+	    }); // 타이틀 터치 방지
+	}
+
+	
+	
+	
+	
+</script>
 
 <!-- Google Font -->
 <link
@@ -51,16 +150,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
-
-<style>
-/*datepicker에서 사용한 이미지 버튼 style적용*/
-img.ui-datepicker-trigger {
-	margin-left: 5px;
-	vertical-align: middle;
-	cursor: pointer;
-}
-</style>
-
 </head>
 
 <body>
@@ -206,209 +295,171 @@ img.ui-datepicker-trigger {
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text">
-						<h2>부산 숙소</h2>
+						<h2>Our Rooms</h2>
 						<div class="bt-option">
-							<a href="./home.html">Home</a> <span>숙소 정보</span>
+							<a href="./home.html">Home</a> <span>Rooms</span>
 						</div>
 					</div>
 				</div>
-
 			</div>
-
-
-
-<script type="text/javascript">
-
-
-//지역 select 고를때 동작
-function selectArea(){
-	
-	
-	
-	idForm.submit();
-	
-	
-	var input = document.getElementById("place_name"); 
-
-	input.value = null;
-	${select_place=""}
-	
-}
-
-
-	
-</script>
-
-			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm">
-				<select name="area" onchange="selectArea()" id="area">
-					<optgroup label="지역">
-						<option value="favorite"
-						<c:if test="${select_area=='favorite'}">selected</c:if>
-						>지역을 선택하세요.</option>
-						<option value="favorite"
-						<c:if test="${select_area=='favorite'}">selected</c:if>
-						>인기순</option>
-						<option 
-						<c:if test="${select_area=='해운대/재송'}">selected</c:if>
-						value="해운대/재송" >해운대/재송
-						</option>
-						<option value="송정/기장/정관"
-						<c:if test="${select_area=='송정/기장/정관'}">selected</c:if>
-						>송정/기장/정관</option>
-						<option value="서면/초읍/양정"
-						<c:if test="${select_area=='서면/초읍/양정'}">selected</c:if>
-						>서면/초읍/양정</option>
-						<option value="남포동/부산역/송도/영도/범일동"
-						<c:if test="${select_area=='남포동/부산역/송도/영도/범일동'}">selected</c:if>
-						>남포동/부산역/송도/영도/범일동</option>
-						<option value="광안리/수영/민락"
-						<c:if test="${select_area=='광안리/수영/민락'}">selected</c:if>
-						>광안리/수영/민락</option>
-						<option value="경성대/대연/용호/문현"
-						<c:if test="${select_area=='경성대/대연/용호/문현'}">selected</c:if>
-						>경성대/대연/용호/문현</option>
-						<option value="동래/온천장/부산대/구서/사직"
-						<c:if test="${select_area=='동래/온천장/부산대/구서/사직'}">selected</c:if>
-						>동래/온천장/부산대/구서/사직</option>
-						<option value="연산/토곡"
-						<c:if test="${select_area=='연산/토곡'}">selected</c:if>
-						>연산/토곡</option>
-						<option value="사상/"
-						<c:if test="${select_area=='사상/'}">selected</c:if>
-						>사상</option>
-						<option value="강서/하단/사하/명지/신호"
-						<c:if test="${select_area=='강서/하단/사하/명지/신호'}">selected</c:if>
-						>강서/하단/사하/명지/신호</option>
-						<option value="덕천/만덕/구포/화명/북구"
-						<c:if test="${select_area=='덕천/만덕/구포/화명/북구'}">selected</c:if>
-						>덕천/만덕/구포/화명/북구</option>
-					</optgroup>
-				</select> &nbsp; 
-
-
-<input type="text" placeholder="숙소명" name="place_name" id="place_name" value="${select_place}">
-<input type="submit" value="검색">
-
-	</form>
-
-		
-
 		</div>
 	</div>
 	<!-- Breadcrumb Section End -->
 
-	<!-- Rooms Section Begin -->
-	<section class="rooms-section spad">
+	<!-- Room Details Section Begin -->
+	<section class="room-details-section spad">
 		<div class="container">
 			<div class="row">
-				<c:set var="a" />
-				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
-				
-			
-					<div class="col-lg-4 col-md-6"  style="height: 550px">
-						<div class="room-item">
-							
-							<c:if test="${roomList.get(a).room_rank!=''}">
-							<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200">
-							</a>
-							</c:if>
-							
-							<c:if test="${roomList.get(a).room_rank==''}">
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200">
-							</c:if>
-							
-							
-							<div class="ri-text">
-								<h4>${roomList.get(a).room_title}</h4>
-								<table >
-									<tbody>
-										<tr >
-											<td class="r-o" style="color: green">평점:</td>
-											<td style="color: green">
-											<c:if test="${roomList.get(a).room_rank!=''}">
-											${fn:substring(roomList.get(a).room_rank,0,3)}점
-											</c:if>
-											<c:if test="${roomList.get(a).room_rank==''}">
-											미정
-											</c:if>
-											</td>
-										</tr>
-										<tr>
-											<td class="r-o">지역:</td>
-											<td>${roomList.get(a).room_area}</td>
-										</tr>
-										<tr>
-											<td class="r-o" style="color: blue">대실:</td>
-											<c:if test="${roomList.get(a).room_price!='숙소에 문의'}">
-													
-											<td  style="color: blue">${roomList.get(a).room_price}원</td>
-											</c:if>
-											<c:if test="${roomList.get(a).room_price=='숙소에 문의'}">
-											<td style="color: blue"> 미정 </td>
-											</c:if>
-										</tr>
-										<tr>
-											<td class="r-o" style="color: red">숙박:</td>
-											<c:if test="${roomList.get(a).room_price2!='숙소에 문의'}">
-											<td style="color: red">${roomList.get(a).room_price2} 원</td>
-											</c:if>
-											<c:if test="${roomList.get(a).room_price2=='숙소에 문의'}">
-											<td style="color: blue"> 미정 </td>
-											</c:if>
-											
-										</tr>
-									</tbody>
-								</table>
-								<c:if test="${roomList.get(a).room_rank!=''}">
-								<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}" class="primary-btn">
-								상세보기</a> 
-								</c:if>
-								
-								<c:if test="${roomList.get(a).room_rank==''}">
-								<a class="primary-btn"> 준비중 </a> 
-								</c:if>
-																
-								
-								<c:set var="a" value="${a=a+1}"/>
-								
-
+				<div class="col-lg-8">
+					<div class="room-details-item">
+						<img
+							src="${pageContext.request.contextPath}${roomReserve.get(a).room_pic}"
+							alt="">
+						<div class="rd-text">
+							<div class="rd-title">
+								<h3>Premium King Room</h3>
+								<div class="rdt-right">
+									<div class="rating">
+										<i class="icon_star"></i> <i class="icon_star"></i> <i
+											class="icon_star"></i> <i class="icon_star"></i> <i
+											class="icon_star-half_alt"></i>
+									</div>
+									<a href="#">Booking Now</a>
+								</div>
 							</div>
+						
+							<table>
+								<tbody>
+									
+									<tr>
+									
+										<td class="r-o">서명 <input type="text" placeholder="이름을 입력해주세요"></td>
+										<td><br> <br></td>
+									</tr>
+										<tr>
+										<td> <br></td>
+									</tr>
+									<tr>
+										<td class="r-o">결제수단</td>
+									</tr>
+
+									<tr>
+										<td><select id="payment-select" class="select_type_1"
+											data-v-f785cca6=""><option data-minprice="0"
+													value="KAKAO" data-v-f785cca6="">카카오페이</option>
+												<option data-minprice="0" value="TOSS" data-v-f785cca6="">
+													토스</option>
+												<option data-minprice="0" selected="selected" value="CARD"
+													data-v-f785cca6="">신용/체크카드</option>
+												<option data-minprice="0" value="NAVER" data-v-f785cca6="">
+													네이버페이</option>
+												<option data-minprice="0" value="PAYCO" data-v-f785cca6="">
+													PAYCO</option>
+												<option data-minprice="0" value="CARD_BIZ"
+													data-v-f785cca6="">법인카드</option>
+												<option data-minprice="0" value="CELLPHONE"
+													data-v-f785cca6="">휴대폰결제</option></select></td>
+									</tr>
+								</tbody>
+							</table>
+
+
+							<p class="f-para">
+							<hr>
+							<section class="agree" data-v-d63b628c="" data-v-f785cca6="">
+								<p class="all_check" data-v-d63b628c="">
+									<label data-v-d63b628c=""><input type="checkbox"
+										name="checkAll" value="selectAll" onclick="selectAll(this)"
+										class="inp_chk_02" data-v-d63b628c=""> <span
+										data-v-d63b628c="">전체 동의</span></label>
+								</p>
+								<p data-v-d63b628c="">
+									<input type="checkbox" name="checkOne" class="inp_chk_02"
+										data-v-d63b628c=""> <span onclick="pop_agree_01();"
+										data-v-d63b628c=""><i data-v-d63b628c="">숙소이용규칙 및
+											취소/환불규정 동의</i><b data-v-d63b628c=""> (필수)</b></span>
+								</p>
+								<p data-v-d63b628c="">
+									<input type="checkbox" name="checkOne" class="inp_chk_02"
+										data-v-d63b628c=""> <span onclick="pop_agree_02();"
+										data-v-d63b628c=""><i data-v-d63b628c="">개인정보 수집 및
+											이용 동의</i><b data-v-d63b628c=""> (필수)</b></span>
+								</p>
+								<p data-v-d63b628c="">
+									<input type="checkbox" name="checkOne" class="inp_chk_02"
+										data-v-d63b628c=""> <span onclick="pop_agree_03();"
+										data-v-d63b628c=""><i data-v-d63b628c="">개인정보 제 3자
+											제공 동의</i><b data-v-d63b628c=""> (필수)</b></span>
+								</p>
+								<p class="guest_chk_area" data-v-d63b628c="">
+									<input type="checkbox" name="checkOne" class="inp_chk_02"
+										data-v-d63b628c=""> <span onclick="pop_agree_04();"
+										data-v-d63b628c=""><i data-v-d63b628c="">만 14세 이상
+											확인</i><b data-v-d63b628c=""> (필수)</b></span>
+								</p>
+							</section>
+
 						</div>
 					</div>
-				</c:forEach>
+
+				</div>
+				<div class="col-lg-4">
+					<div class="room-booking">
+						<h3>결제 정보</h3>
+						<form action="#">
+							<div class="check-date">
+								<label for="date-out">호텔명:</label> <input type="text"
+									id="date-out" value="${roomReserve.get(a).room_title}"> <i class=""></i>
+							</div>
+							<div class="check-date">
+								<label for="date-in">입실일자:</label> <input type="text"
+									id="date-in"> <i class="icon_calendar"></i>
+									
+									
+									 <c:if test='${roomReserve.get(a).room_lcost != "1"}'>
+                                        ${roomReserve.get(a).room_accendtime}시/
+                                        ${checkout}일
+                                          ${roomReserve.get(a).room_accusetime}시
+                                        </c:if>
+                                         <c:if test='${roomReserve.get(a).room_lcost == "1"}'>
+                                       숙소에 문의
+                                       
+                                        </c:if>
+									
+									
+									
+							</div>
+							<div class="check-date">
+								<label for="date-out">퇴실일자:</label> <input type="text"
+									id="date-out"> <i class="icon_calendar"></i>
+							</div>
+							<div class="check-date">
+								<label for="date-out">서명:</label> <input type="text"
+									id="date-out"> <i class=""></i>
+							</div>
+							<div class="check-date">
+								<label for="date-out"><strong>총 결제 금액</strong></label> 
+								<input type="text" id="date-out" > <i class=""></i>
+							
+									<c:if test="${roomReserve.get(a).room_reserve2 != 1 }">
+									
+                                        ${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)} 원
+									</c:if>
+									<c:if test="${roomReserve.get(a).room_reserve2 == 1}">
+                                        숙소에 문의
+									</c:if>
+                                  
+							</div>
 
 
-
-
-				<div class="col-lg-12">
-					<div class="room-pagination">
-
-<!-- 						<a href="#"><i class="fa fa-long-arrow-left"> Pre </i></a> -->
-
-<%-- 						<c:forEach begin="1" end="${Math.ceil(roomList.size()/9)}"> --%>
-<%-- 							<c:set var="PageNum" value="${PageNum+1 }" /> --%>
-
-<%-- 							<c:if test="${PageNum<=5}"> --%>
-
-<%-- 								<a href="/accomodation/roomList?PageNum=${PageNum}">${PageNum}</a> --%>
-
-<%-- 							</c:if> --%>
-
-
-<%-- 						</c:forEach> --%>
-
-<!-- 						<a href="#">Next <i class="fa fa-long-arrow-right"></i></a> -->
-
+							<button type="submit">결제하기</button>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-
-
-
-	<!-- Rooms Section End -->
+	<!-- Room Details Section End -->
 
 	<!-- Footer Section Begin -->
 	<footer class="footer-section">
@@ -500,8 +551,7 @@ function selectArea(){
 				<i class="icon_close"></i>
 			</div>
 			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">ocument
-				doc = null; // Document에 페이지의 전체
+				<input type="text" id="search-input" placeholder="Search here.....">
 			</form>
 		</div>
 	</div>

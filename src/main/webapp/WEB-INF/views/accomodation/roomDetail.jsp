@@ -14,31 +14,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-<script>
-function currentDiv(n) {
-  showDivs(slideIndex = n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-  }
-  x[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " w3-opacity-off";
-}
-</script>
-
-
 <!-- Google Font -->
+
+
 <link
 	href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap"
 	rel="stylesheet">
@@ -47,6 +25,7 @@ function showDivs(n) {
 	rel="stylesheet">
 
 <!-- Css Styles -->
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/yd.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
 	type="text/css">
@@ -77,6 +56,37 @@ function showDivs(n) {
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
+
+<script>
+		
+		$(function(){
+			
+			$('#reserveBtn').click(
+					
+			function(){
+				var dateIn = document.getElementById("date-in").value;
+				var dateOut = document.getElementById("date-out").value;
+				
+				var day1 = new Date(dateIn);
+				var day2 = new Date(dateOut);
+				
+				var difference= Math.abs(day2-day1);
+				days = difference/(1000 * 3600 * 24);
+
+				alert(days);
+				
+			});
+			
+			
+			
+		});
+		
+		
+		
+		
+		
+		
+</script>
 </head>
 
 <body>
@@ -238,59 +248,59 @@ function showDivs(n) {
 		<div class="container">
 			<div class="row">
 				<c:set var="a" />
+				<c:set var="b" />
 
 				<div class="col-lg-8">
 					<div class="room-details-item">
 		
 		
 		
-<div class="w3-content" style="max-width:1000px">
-  <img class="mySlides" src="${pageContext.request.contextPath}${roomdetail.get(a).room_pic}" style="width:100%;">
-  <img class="mySlides" src="${pageContext.request.contextPath}${roomdetail.get(a).room_pica}" style="width:100%;display:none">
-  <img class="mySlides" src="${pageContext.request.contextPath}${roomdetail.get(a).room_picb}" style="width:100%;display:none">
+<!-- 	<div class="flexslider"> -->
+<!--   <ul class="slides"> -->
+<%--     <c:forEach items="${roomdetail0}" begin="0" end="${roomdetail0.size()}"> --%>
 
-  <div class="w3-row-padding w3-section">
-    <div class="w3-col s4">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="${pageContext.request.contextPath}${roomdetail.get(a).room_pic}" style="width:100%;cursor:pointer" onclick="currentDiv(1)" width="180"   height="130">
-    </div>
-    <div class="w3-col s4">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="${pageContext.request.contextPath}${roomdetail.get(a).room_pica}" style="width:100%;cursor:pointer" onclick="currentDiv(2)" width="180" height="130">
-    </div>
-    <div class="w3-col s4">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="${pageContext.request.contextPath}${roomdetail.get(a).room_picb}" style="width:100%;cursor:pointer" onclick="currentDiv(3)" width="180" height="130">
-    </div>
+<%--     <li data-thumb="slide${b+1}-thumb.jpg"> --%>
+<%--        <img src="${roomdetail0.get(b).room_pic}"> --%>
+<!--     </li> -->
+   
+<%--        <c:set var="b" value="${b=b+1 }"/> --%>
+<%--   	</c:forEach> --%>
+      
+<!--     <li> -->
+    
+<!--   </ul> -->
+<!-- </div>	 -->
+		
+ <div id="slideShow">
+    <ul class="slides">
+     <c:forEach items="${roomdetail0}" begin="0" end="${roomdetail0.size()}">
+      <li><img src="${roomdetail0.get(b).room_pic}" style="width: 400px"></li>
+      <c:set var="b" value="${b=b+1 }"/>
+  	</c:forEach>
+      
+    </ul>
+    <p class="controller">
+      <!-- &lang: 왼쪽 방향 화살표 &rang: 오른쪽 방향 화살표 --> 
+      <span class="prev">&lang;</span> 
+      <span class="next">&rang;</span>
+    </p>
   </div>
-</div>
-		
-		
-		
-		
+ 
 					
-					
-					
-					<%--          타이틀 사진 (수정전)
-						<img
-							src="${pageContext.request.contextPath}${roomdetail.get(a).room_pic}"
-							alt=""> <img
-							src="${pageContext.request.contextPath}${roomdetail.get(a).room_pica}"
-							alt="200">
-						<img src="${pageContext.request.contextPath}${roomdetail.get(a).room_picb}"
-							alt="200"> --%>
-						
-						<div class="rd-text">
-							<div class="rd-title">
-								<h3>${roomdetail.get(a).room_title}</h3>
-								<div class="rdt-right">
-									<div class="rating">${roomdetail.get(a).room_star} 
+                        <div class="rd-text">
+                            <div class="rd-title">
+                                <h3> ${roomdetail.get(0).room_title}</h3>
+                                <div class="rdt-right">
+									<div class="rating">${roomdetail.get(0).room_star} 
 										<i class="icon_star"></i> <i class="icon_star"></i> <i
 											class="icon_star"></i> <i class="icon_star"></i> <i
 											class="icon_star-half_alt"></i>
-									&nbsp; <h5> 별점 :${roomdetail.get(a).room_star_num} 점</h5></div>
+									&nbsp; <h5> 별점 :${roomdetail.get(0).room_star_num} 점</h5></div>
 									
 									<a href="#">Booking Now</a>
 								</div>
 							</div>
-							<h2>${roomdetail.get(a).room_price}<span>/Won(원)</span>
+							<h2>${roomdetail.get(0).room_price}<span>/Won(원)</span>
 							</h2>
 							<table>
 								<tbody>
@@ -311,7 +321,7 @@ function showDivs(n) {
 									<tr>
 										<td class="r-o">Bed:</td>
 										<td>king beds</td>
-										<td>${roomdetail.get(a).room_a}</td>
+										<td>${roomdetail.get(0).room_a}</td>
 									</tr>
 
 									<tr>
@@ -320,16 +330,16 @@ function showDivs(n) {
 									<c:if test="${roomdetail2.size() != 0}">
 										<tr>
 											<td class="r-o">서비스:</td>
-											<td>${roomdetail2.get(a).room_service}</td>
+											<td>${roomdetail2.get(0).room_service}</td>
 										</tr>
 									</c:if>
 									<tr>
 										<td><hr> <br></td>
 									</tr>
-									<c:if test="${roomdetail.get(a).room_address!=null}">
+									<c:if test="${roomdetail.get(0).room_address!=null}">
 										<tr>
 											<td class="r-o">주소:</td>
-											<td>${roomdetail.get(a).room_address}</td>
+											<td>${roomdetail.get(0).room_address}</td>
 										</tr>
 									</c:if>
 									<tr>
@@ -338,7 +348,7 @@ function showDivs(n) {
 								<c:if test="${roomdetail3.size() != 0}">
 										<tr>
 											<td class="r-o">※주의사항</td>
-											<td>${roomdetail3.get(a).room_comment}</td>
+											<td>${roomdetail3.get(0).room_comment}</td>
 										</tr>
 									</c:if>
 									<tr>
@@ -347,7 +357,7 @@ function showDivs(n) {
 									<c:if test="${roomdetail4.size() != 0}">
 										<tr>
 											<td class="r-o">주변 안내</td>
-											<td>${roomdetail4.get(a).room_info}</td>
+											<td>${roomdetail4.get(0).room_info}</td>
 										</tr>
 									</c:if>
 								</tbody>
@@ -361,12 +371,12 @@ function showDivs(n) {
 								</h3>
 								<br>
 								<br>
-								<p class="f-para">${roomdetail5.get(a).room_infoa}</p>
+								<p class="f-para">${roomdetail5.get(0).room_infoa}</p>
 							</c:if>
 						</div>
 					</div>
 					<div class="rd-reviews">
-						<h4>${roomdetail.get(a).room_retitle}</h4>
+						<h4>${roomdetail.get(0).room_retitle}</h4>
 						<div class="review-item">
 							<div class="ri-pic">
 								<img
@@ -381,7 +391,7 @@ function showDivs(n) {
 										class="icon_star-half_alt"></i>
 								</div>
 								<h5>Brandon Kelley</h5>
-								<p>${roomdetail.get(a).room_review}</p>
+								<p>${roomdetail.get(0).room_review}</p>
 							</div>
 						</div>
 						<div class="review-item">
@@ -430,151 +440,174 @@ function showDivs(n) {
 						</form>
 					</div>
 				</div>
-				<div class="col-lg-4">
-					<div class="room-booking">
-						<h3>예약하기</h3>
-						<form action="#">
-							<div class="check-date">
-								<label for="date-in">체크인:</label> <input type="text"
-									class="date-input" id="date-in"> <i
-									class="icon_calendar"></i>
-							</div>
-							<div class="check-date">
-								<label for="date-out">체크 아웃:</label> <input type="text"
-									class="date-input" id="date-out"> <i
-									class="icon_calendar"></i>
-							</div>
-							<div class="select-option">
-								<label for="guest">인원수:</label> <select id="guest">
-									<option value="">3 Adults</option>
-								</select>
-							</div>
-							<div class="select-option">
-								<label for="room">방 갯수:</label> <select id="room">
-									<option value="">1 Room</option>
-								</select>
-							</div>
-							<button type="submit">Check Availability</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Room Details Section End -->
+                                        
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+                <script type="text/javascript">
+              
+                //최대 7박까지가능, 올바른 날짜 입력 유효성체크
+                $(document).ready(function(){
+            		
+            		$('#reserveBtn').click(function(){
+            			
+            				//날짜 차이를 구하는 구간
+            				function difference(date1, date2) {  
+            				  const date1utc = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+            				  const date2utc = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+            				    day = 1000*60*60*24;
+            				  return (date2utc - date1utc)/day
+            				}
+            				const date1 = new Date(document.getElementById("date-in").value);
+            				const date2 = new Date(document.getElementById("date-out").value);
+            			
+            				const time_difference = difference(date1,date2)
+							//날짜 차이를 구하는 구간	
+            				
+							
+            				//체크아웃을 당일날짜로 고르는 경우 
+            				function getFormatDate(date){
+            				    var year = date.getFullYear();              //yyyy
+            				    var month = (1 + date.getMonth());          //M
+            				    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+            				    var day = (1+date.getDate());                   //d
+            				    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+            				    return  year + '-' + month + '-' + day;
+            				}
+            				
+            				var bate = getFormatDate(date2);
+//             				alert(bate);
+            				//체크아웃을 당일날짜로 고르는 경우 
+            				
+            				if(1 <= parseInt(time_difference) && parseInt(time_difference) <= 7){
+            					dateForm.submit();
+            				}else if(parseInt(time_difference) == 0){
+            					document.getElementById("date-out").value=bate;
+            					dateForm.submit();
+            				}
+            				else{
+            					alert('올바른 날짜를 입력해주세요\n최대 7박까지 가능합니다.')
+            					
+            				}
+            			
+            		});// 버튼클릭 끝
+            		
+            		
+            	});
+                
+                
+                </script>
+                <div class="col-lg-4">
+                    <div class="room-booking">
+                      <h3>  <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId">요금정보</a></h3>
+                        <form action="${pageContext.request.contextPath}/accomodation/roomReserve" method="GET" name="dateForm">
+                            <input type="hidden" name="bno" value="${bno}">
+                            <input type="hidden" name="ano" value="${ano}">
+                            <div class="check-date">
+                                <label for="date-in">체크인</label>
+                                <input type="text" class="date-input" id="date-in" value="${param.sel_date}" name="sel_date">
+                                <i class="icon_calendar"></i>
+                            </div>
+                            <div class="check-date">
+                                <label for="date-out">체크 아웃</label>
+                                <input type="text" class="date-input" id="date-out" value="${param.sel_date2}" name="sel_date2">
+                                <i class="icon_calendar"></i>
+                            </div>
+                            <button type="button" id="reserveBtn">예약하기</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Room Details Section End -->
 
-	<!-- Footer Section Begin -->
-	<footer class="footer-section">
-		<div class="container">
-			<div class="footer-text">
-				<div class="row">
-					<div class="col-lg-4">
-						<div class="ft-about">
-							<div class="logo">
-								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/img/footer-logo.png"
-									alt="">
-								</a>
-							</div>
-							<p>
-								We inspire and reach millions of travelers<br /> across 90
-								local websites
-							</p>
-							<div class="fa-social">
-								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-									class="fa fa-twitter"></i></a> <a href="#"><i
-									class="fa fa-tripadvisor"></i></a> <a href="#"><i
-									class="fa fa-instagram"></i></a> <a href="#"><i
-									class="fa fa-youtube-play"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 offset-lg-1">
-						<div class="ft-contact">
-							<h6>Contact Us</h6>
-							<ul>
-								<li>(12) 345 67890</li>
-								<li>info.colorlib@gmail.com</li>
-								<li>856 Cordia Extension Apt. 356, Lake, United State</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-3 offset-lg-1">
-						<div class="ft-newslatter">
-							<h6>New latest</h6>
-							<p>Get the latest updates and offers.</p>
-							<form action="#" class="fn-form">
-								<input type="text" placeholder="Email">
-								<button type="submit">
-									<i class="fa fa-send"></i>
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="copyright-option">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-7">
-						<ul>
-							<li><a href="#">Contact</a></li>
-							<li><a href="#">Terms of use</a></li>
-							<li><a href="#">Privacy</a></li>
-							<li><a href="#">Environmental Policy</a></li>
-						</ul>
-					</div>
-					<div class="col-lg-5">
-						<div class="co-text">
-							<p>
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;
-								<script>
-									document.write(new Date().getFullYear());
-								</script>
-								All rights reserved | This template is made with <i
-									class="fa fa-heart" aria-hidden="true"></i> by <a
-									href="https://colorlib.com" target="_blank">Colorlib</a>
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- Footer Section End -->
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-text">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="ft-about">
+                            <div class="logo">
+                                <a href="#">
+                                    <img src="${pageContext.request.contextPath}/resources/img/footer-logo.png" alt="">
+                                </a>
+                            </div>
+                            <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
+                            <div class="fa-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 offset-lg-1">
+                        <div class="ft-contact">
+                            <h6>Contact Us</h6>
+                            <ul>
+                                <li>(12) 345 67890</li>
+                                <li>info.colorlib@gmail.com</li>
+                                <li>856 Cordia Extension Apt. 356, Lake, United State</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 offset-lg-1">
+                        <div class="ft-newslatter">
+                            <h6>New latest</h6>
+                            <p>Get the latest updates and offers.</p>
+                            <form action="#" class="fn-form">
+                                <input type="text" placeholder="Email">
+                                <button type="submit"><i class="fa fa-send"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-option">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <ul>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Terms of use</a></li>
+                            <li><a href="#">Privacy</a></li>
+                            <li><a href="#">Environmental Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="co-text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
 
-	<!-- Search model Begin -->
-	<div class="search-model">
-		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div class="search-close-switch">
-				<i class="icon_close"></i>
-			</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
-			</form>
-		</div>
-	</div>
-	<!-- Search model end -->
+    <!-- Search model Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch"><i class="icon_close"></i></div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
 
-	<!-- Js Plugins -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+    <!-- Js Plugins -->
+    <script src="${pageContext.request.contextPath}/resources/js/slideShow.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </body>
 
 </html>

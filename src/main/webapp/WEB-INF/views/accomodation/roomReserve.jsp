@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!DOCTYPE html>
 <html lang="zxx">
+
 <head>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
     <meta charset="UTF-8">
     <meta name="description" content="Sona Template">
     <meta name="keywords" content="Sona, unica, creative, html">
@@ -27,14 +28,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
-
- <style>
-            /*datepicker에서 사용한 이미지 버튼 style적용*/
-            img.ui-datepicker-trigger {
-                margin-left:5px; vertical-align:middle; cursor:pointer;
-}
-        </style>
-
 </head>
 
 <body>
@@ -140,9 +133,9 @@
                     <div class="col-lg-2">
                         <div class="logo">
                             <a href="./index.html">
-                                <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="">
-                            </a>
-                        </div>
+                              <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="">
+							</a>
+						</div>
                     </div>
                     <div class="col-lg-10">
                         <div class="nav-menu">
@@ -180,187 +173,162 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>방 정보 상세 페이지</h2>
+                        <h2>예약항목 선택</h2>
                         <div class="bt-option">
                             <a href="./home.html">Home</a>
-                            <span>Rooms</span>
+                            <span>예약항목</span>
                         </div>
                     </div>
                 </div>
-                 <a style="padding-left: 30px">오늘 날짜 : <span id="today"></span></a>
-       
             </div>
-          <!--   <form >
-          <select name="area">  
-            <optgroup label="지역">
-            <option >지역선택</option>
-            <option value="haeundae">해운대</option>
-            <option value="gwanganri">광안리</option>
-            <option value="seomern">서면</option>
-            <option value="dongrae">동래</option>
-            </optgroup>
-            </select>
-           
-           &nbsp;
-           
-            <select name="person_select">  
-            <optgroup label="객실인원">
-            <option>객실인원선택</option>
-            <option value="2">1~2인</option>
-            <option value="4">3~4인</option>
-            <option value="6">5~6인</option>
-            
-            </optgroup>
-            </select>
-            
-            
-           <input type="text" placeholder="원하는 숙소명" name="place_name">
-            
-           
-          <label for="fromDate">시작일</label>
-          <input type="text" name="fromDate" id="fromDate">
-          &nbsp;
-          <label for="toDate">종료일</label>
-          <input type="text" name="toDate" id="toDate">
-          
-          &nbsp;
-           <input type="submit" value="검색">
-          
-          
-          
-        </form>
-
-
-            
-          -->
-       
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-        <!-- datepicker 한국어로 -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
-      <script>
-            $(function() {
-                
-            
-                //오늘 날짜를 출력
-                $("#today").text(new Date().toLocaleDateString());
-
-                //datepicker 한국어로 사용하기 위한 언어설정
-                $.datepicker.setDefaults($.datepicker.regional['ko']); 
-                
-                // 시작일(fromDate)은 종료일(toDate) 이후 날짜 선택 불가
-                // 종료일(toDate)은 시작일(fromDate) 이전 날짜 선택 불가
-
-                //시작일.
-                $('#fromDate').datepicker({
-                    showOn: "both",                     // 달력을 표시할 타이밍 (both: focus or button)
-//                     buttonImage: "images/calendar.gif", // 버튼 이미지
-//                     buttonImageOnly : true,             // 버튼 이미지만 표시할지 여부
-                    buttonText: "체크인",             // 버튼의 대체 텍스트
-                    dateFormat: "yy-mm-dd",             // 날짜의 형식
-                    changeMonth: true,                  // 월을 이동하기 위한 선택상자 표시여부
-                    //minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
-                    onClose: function( selectedDate ) {    
-                        // 시작일(fromDate) datepicker가 닫힐때
-                        // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-                        $("#toDate").datepicker( "option", "minDate", selectedDate );
-                    }                
-                });
-
-                //종료일
-                $('#toDate').datepicker({
-                    showOn: "both", 
-//                     buttonImage: "images/calendar.gif", 
-//                     buttonImageOnly : true,
-                    buttonText: "체크아웃",
-                    dateFormat: "yy-mm-dd",
-                    changeMonth: true,
-                    //minDate: 0, // 오늘 이전 날짜 선택 불가
-                    onClose: function( selectedDate ) {
-                        // 종료일(toDate) datepicker가 닫힐때
-                        // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
-                        $("#fromDate").datepicker( "option", "maxDate", selectedDate );
-                    }                
-                });
-            });
-        </script>
- 
-         
-            
-            
-            
-            
         </div>
     </div>
-	<!-- Breadcrumb Section End -->
-	
+    <!-- Breadcrumb Section End -->
+
     <!-- Rooms Section Begin -->
-	 <section class="rooms-section spad">
+    
+    <!-- 예약정보가 없을때 처리로직 -->
+    <c:if test="${roomReserve=='[]'}">
+    	<h1 style="text-align: center;">예약 마감</h1>
+    </c:if>
+    
+    
+    
+    <section class="rooms-section spad">
         <div class="container">
             <div class="row">
-            <c:set var="a" /> <%--    <h4> ${roomdetail.get(0).room_title}</h4>   
-             ${roomdetail.get(0).room_rank}     
-             ${roomdetail.get(0).room_area}     
-             ${roomdetail.get(0).room_price}     
-             ${roomdetail.get(0).room_price2}      
-         ${roomdetail.get(0).room_link}     --%>
-               <c:forEach items="${roomdetail}">
+            <c:set var="a" />
+            <c:forEach items="${roomReserve}" begin="0" end="${roomReserve.size()}">
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                   <a href="/accomodation/roomDetail?bno=${roomdetail.get(a).room_link}">
-               //     <img src="${roomdetail.get(a).room_pic}" alt="acc" class="poster" height="200">
-                    </a>
-                        <div class="ri-text">
-                            <h4> ${roomdetail.get(a).room_title}</h4>              
+                       <a href="#">
+                       <img src="${roomReserve.get(a).room_pic}" alt="acc" class="poster">
+                        <div class="ri-text" >
+                            <h4>${roomReserve.get(a).room_title}</h4>
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <td class="r-o">Rank:</td>
-                                        <td> ${roomdetail.get(a).room_rank}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Map:</td>
-                                        <td> ${roomdetail.get(a).room_map}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
+                                
+                                <tr style="color: blue">
+                                    
+                                        <td class="r-o">대실:</td>
+                                        
                                         <td>
+                                        <c:if test='${roomReserve.get(a).room_fcost != ""}'>
+                                        ${roomReserve.get(a).room_fcost} 원
+										</c:if>
+                                        
+                                        <c:if test='${roomReserve.get(a).room_fcost == ""}'>
+                                        숙소에 문의
+										</c:if>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
+                                
+                                
+  								    <tr style="color: blue">
+                                    
+                                        <td class="r-o" >(대)마감/이용:</td>
+                                       <td>
+                                         <c:if test='${roomReserve.get(a).room_fcost != ""}'>
+                                        ${roomReserve.get(a).room_endtime}시/
+                                        
+                                          ${roomReserve.get(a).room_usetime}시간
+                                        </c:if>
+                                         <c:if test='${roomReserve.get(a).room_fcost == ""}'>
+                                       숙소에 문의
+                                       
+                                        </c:if>
+                                       </td>
+                                   
+                                       
                                     </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
+                                    
+                                   
+                                    
+                                    
+                                    
+                                    <tr style="color: red">
+                                        <td class="r-o" >숙박:</td>
+                                        
+                                        <td>
+                                        <c:if test="${roomReserve.get(a).room_reserve2 != 1}">
+									
+                                        ${fn:substring(roomReserve.get(a).room_lcost,0,roomReserve.get(a).room_reserve2.length()-1)} 원
+									</c:if>
+									
+									 <c:if test="${roomReserve.get(a).room_reserve2 == 1}">
+									
+                                        숙소에 문의
+									</c:if>
+									</td>
+                                    </tr>
+                                
+                                     <tr style="color: red">
+                                    
+                                        <td class="r-o">(숙)입실/퇴실:</td>
+                                       <td>
+                                         <c:if test='${roomReserve.get(a).room_lcost != "1"}'>
+                                        ${roomReserve.get(a).room_accendtime}시/
+                                        ${checkout}일
+                                          ${roomReserve.get(a).room_accusetime}시
+                                        </c:if>
+                                         <c:if test='${roomReserve.get(a).room_lcost == "1"}'>
+                                       숙소에 문의
+                                       
+                                        </c:if>
+                                       </td>
+                                   
+                                       
+                                    </tr>
+                                    
+                                    
+                                    
+                                    
+                                    <tr style="color: red">
+                                        <td class="r-o">총 숙박가격 :</td>
+<%--                                         <td>${roomReserve.get(a).room_reserve2}</td> --%>
+	                               <td>
+									<c:if test="${roomReserve.get(a).room_reserve2 != 1 }">
+									
+                                        ${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)} 원
+									</c:if>
+									<c:if test="${roomReserve.get(a).room_reserve2 == 1}">
+                                        숙소에 문의
+									</c:if>
+									</td>
                                     </tr>
                                 </tbody>
+                                </a>
                             </table>
-                            <a href="#" class="primary-btn">More Details</a>
-                              ${a=a+1}
-                              
+                            <form action="${pageContext.request.contextPath}/accomodation/roomPayment?bno=${bno}&ano=${ano}" method="get" role="form" name="dateForm">
+                           <input type="hidden" name="bno" value="${bno}">
+                                <input type="hidden" name="ano" value="${ano}">
+                            <div class="check-date">
+                                <label for="date-in"></label>
+                                <input type="hidden" class="date-input" id="date-in" value="${param.sel_date}" name="sel_date">
                             </div>
-                      </div> 
-                    </div>     
-                              
-                       </c:forEach>
-                     
-                     
-                
-                
-                <div class="col-lg-12">
-                    <div class="room-pagination">
-                       
-                        <a href="#">Next <i class="fa fa-long-arrow-right"></i></a>
+                            <div class="check-date">
+                                <label for="date-out"></label>
+                                <input type="hidden" class="date-input" id="date-out" value="${param.sel_date2}" name="sel_date2">
+                            </div>
+                            <div class="box-footer">
+						<button type="submit" class="btn btn-primary">예약하기</button>
+					</div>
+				</form>
+                          <%--   <a href="${pageContext.request.contextPath}/accomodation/roomPayment?bno=${bno}&ano=${ano}"  class="primary-btn">예약하기</a>
+                                   --%>
+                                   
+                                   
+                        </div>
                     </div>
                 </div>
+                <c:set var="a" value="${a=a+1}"/>
+                </c:forEach>
+                
+                
+               
             </div>
         </div>
     </section>
-	
-	
-	
     <!-- Rooms Section End -->
 
     <!-- Footer Section Begin -->
@@ -435,7 +403,7 @@
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch"><i class="icon_close"></i></div>
             <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">ocument doc = null; // Document에 페이지의 전체
+                <input type="text" id="search-input" placeholder="Search here.....">
             </form>
         </div>
     </div>
