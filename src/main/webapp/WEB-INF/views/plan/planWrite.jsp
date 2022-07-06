@@ -3,7 +3,7 @@
 <jsp:include page="../include/header.jsp" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|
 Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planContent.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planWrite.css" />
 
 
 
@@ -192,6 +192,6 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
 
 
-
-<script src="${pageContext.request.contextPath }/resources/js/plan/planContent.js"></script>
+<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx4c685864b69a4b71966f8bda89ed2dd3"></script>
+<script src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js"></script>
 <jsp:include page="../include/footer.jsp"></jsp:include>

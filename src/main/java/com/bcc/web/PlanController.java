@@ -37,7 +37,7 @@ public class PlanController {
 	public void planListGET(HttpSession session, Model model) throws Exception {
 		log.info(" planListGET() 호출 ");
 
-		session.setAttribute("id", "yun2");
+		session.setAttribute("id", "yun1");
 		String id = (String) session.getAttribute("id");
 
 		// 회원 license 가져오기
@@ -66,14 +66,14 @@ public class PlanController {
 			invitingMemberList.add(member);
 		}
 		model.addAttribute("invitingMemberList", invitingMemberList);
-		
 	}
 
-	// 플랜 생성 - GET
+	
+	// 플랜 생성 - POST
 	// http://localhost:8088/plan/addPlan
-	@RequestMapping(value = "/addPlan", method = RequestMethod.GET)
-	public String addPlanGET(HttpSession session, @ModelAttribute("grp_name") String grp_name) throws Exception {
-		log.info(" addPlanGET() 호출 ");
+	@RequestMapping(value = "/addPlan", method = RequestMethod.POST)
+	public String addPlanPOST(HttpSession session, @ModelAttribute("grp_name") String grp_name) throws Exception {
+		log.info(" addPlanPOST() 호출 ");
 
 		String id = (String) session.getAttribute("id");
 		// 그룹 번호 생성
@@ -82,6 +82,7 @@ public class PlanController {
 			num = service.getGrpNum() + 1;
 		}
 		// 그룹 생성
+		grp_name = grp_name.trim();
 		PlanVO vo = new PlanVO();
 		vo.setLeader(id);
 		vo.setNum(num);
@@ -94,12 +95,13 @@ public class PlanController {
 		member.setId(id);
 		service.insertGrpMember(member);
 
-		return "redirect:/plan/planContent/" + num;
+		return "redirect:/plan/planWrite/" + num;
 	}
 
+	
 	// 플랜 작성 - GET
-	// http://localhost:8088/plan/planContent/1
-	@RequestMapping(value = "/planContent/{num}", method = RequestMethod.GET)
+	// http://localhost:8088/plan/planWrite/1
+	@RequestMapping(value = "/planWrite/{num}", method = RequestMethod.GET)
 	public String planContentGET(@PathVariable("num") int num, Model model) throws Exception {
 
 		// 그룹 번호 저장
@@ -109,6 +111,6 @@ public class PlanController {
 		// 방장 정보 가져오기
 		model.addAttribute("leader", service.getLeader(num));
 
-		return "/plan/planContent";
+		return "/plan/planWrite";
 	}
 }
