@@ -299,7 +299,7 @@
                                 </tbody>
                                 </a>
                             </table>
-                            <a href="#" class="primary-btn">예약하기</a>
+                            <a href="${pageContext.request.contextPath}/accomodation/roomPayment" class="primary-btn">예약하기</a>
                         </div>
                     </div>
                 </div>

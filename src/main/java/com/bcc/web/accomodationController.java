@@ -177,6 +177,16 @@ public class accomodationController {
 		}
 		
 		
+		// 가격상세정보 roomPrice 페이지
+		// http://localhost:8088/accomodation/roomPayment
+		@RequestMapping(value = "/roomPayment" ,method = RequestMethod.GET)
+		public void roomPaymentGET() throws IOException {
+
+		log.info("roomPriceGET() 호출");
+						
+					
+				
+		}
 		
 		
 		

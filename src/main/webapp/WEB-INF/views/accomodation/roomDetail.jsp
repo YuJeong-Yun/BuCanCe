@@ -297,32 +297,12 @@
 											class="icon_star-half_alt"></i>
 									&nbsp; <h5> 별점 :${roomdetail.get(0).room_star_num} 점</h5></div>
 									
-									<a href="#">Booking Now</a>
+<!-- 									<a href="#">Booking Now</a> -->
 								</div>
 							</div>
-							<h2>${roomdetail.get(0).room_price}<span>/Won(원)</span>
-							</h2>
 							<table>
 								<tbody>
-									<tr>
-										<td class="r-o">Size:</td>
-										<td>30 ft</td>
-									</tr>
-									<tr>
-										<td><hr> <br></td>
-									</tr>
-									<tr>
-										<td class="r-o">Capacity:</td>
-										<td>Max persion 5</td>
-									</tr>
-									<tr>
-										<td><hr> <br></td>
-									</tr>
-									<tr>
-										<td class="r-o">Bed:</td>
-										<td>king beds</td>
-										<td>${roomdetail.get(0).room_a}</td>
-									</tr>
+									
 
 									<tr>
 										<td><hr> <br></td>
