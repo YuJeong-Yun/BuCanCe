@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping("/tour/*")
 public class TourRESTController {
 	
 
@@ -59,74 +60,13 @@ public class TourRESTController {
 	    JSONObject jsonObj = new JSONObject();
 	    JSONParser parser = new JSONParser();
 	    
+	    //log.info(get(apiURL,requestHeaders));
+	    
 	    jsonObj = (JSONObject) parser.parse(get(apiURL,requestHeaders));
 	    
 	    List list = new ArrayList();
 	    list.add(jsonObj.get("items"));
 	    list.add(jsonObj.get("total"));
-		
-		return list;
-	}
-	
-	// 이미지 가져오기
-	@RequestMapping(value = "/getImages", method = RequestMethod.GET)
-	public List getImages(@RequestParam String title, String addr) throws Exception{
-		String clientId = "UedGUQNgMnXQN3xAYkO2"; //애플리케이션 클라이언트 아이디값"
-	    String clientSecret = "PKJuuL8BVC"; //애플리케이션 클라이언트 시크릿값"
-
-
-	    String text = addr+" "+title;
-	    text = URLEncoder.encode(text, "UTF-8");
-
-
-	    String apiURL = "https://openapi.naver.com/v1/search/image?query=" + text + "&display=3";
-	    //String apiURL = "<https://openapi.naver.com/v1/search/blog.xml?query=>"+ text; // xml 결과
-
-
-	    Map<String, String> requestHeaders = new HashMap<String, String>();
-	    requestHeaders.put("X-Naver-Client-Id", clientId);
-	    requestHeaders.put("X-Naver-Client-Secret", clientSecret);
-	    
-	    JSONObject jsonObj = new JSONObject();
-	    JSONParser parser = new JSONParser();
-	    
-	    jsonObj = (JSONObject) parser.parse(get(apiURL,requestHeaders));
-	    
-	    List list = new ArrayList();
-	    list.add(jsonObj.get("items"));
-		
-		return list;
-	}
-	
-	
-	// 위치 좌표 가져오기
-	@RequestMapping(value = "/getLoca", method = RequestMethod.GET)
-	public List getLocation(@RequestParam String title, String addr) throws Exception{
-		String clientId = "UedGUQNgMnXQN3xAYkO2"; //애플리케이션 클라이언트 아이디값"
-		String clientSecret = "PKJuuL8BVC"; //애플리케이션 클라이언트 시크릿값"
-		
-		
-		String text = addr+" "+title;
-		text = URLEncoder.encode(text, "UTF-8");
-		
-		
-		String apiURL = "https://openapi.naver.com/v1/search/local?query=" + text;
-		//String apiURL = "<https://openapi.naver.com/v1/search/blog.xml?query=>"+ text; // xml 결과
-		
-		
-		Map<String, String> requestHeaders = new HashMap<String, String>();
-		requestHeaders.put("X-Naver-Client-Id", clientId);
-		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
-		
-		JSONObject jsonObj = new JSONObject();
-		JSONParser parser = new JSONParser();
-		
-		jsonObj = (JSONObject) parser.parse(get(apiURL,requestHeaders));
-		
-		List list = new ArrayList();
-		list.add(jsonObj.get("items"));
-		
-		log.info(jsonObj.get("items")+"");
 		
 		return list;
 	}

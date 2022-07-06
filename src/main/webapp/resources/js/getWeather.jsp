@@ -7,7 +7,7 @@
 	$(function(){
 		
 		$.ajax({
-			url : "/getWeather",
+			url : "/tour/getWeather",
 			success : function(data){
 				$(data).each(function(i,obj){
 					if(obj.category == "TMP"){

@@ -13,18 +13,38 @@
             <div class="row">
                     <div class="room-details-item">
                     	<div id="imageZone">
+                    		<img src="${resVO.img }">
     					</div>
+    				<div class="rd-text">	
                         <div class="rd-title">
-                            <h3>${resVO.title }</h3>
+                            <h3 style="font-family: 'NanumSquareBold' !important;">${resVO.title }</h3>
                         </div>
+                      <table id="resInfo">
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">전화번호</td>
+                                        <td>${resVO.tel }</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">운영시간</td>
+                                        <td>${resVO.usage_day }</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">상세주소</td>
+                                        <td>${resVO.addr_full }</td>
+                                    </tr>
+                                </tbody>
+                     </table>
+                     <p class="f-para">${resVO.content }</p> 
+                     </div>  
                         <br>
      			 <div class="menu-item">
                         <div class="nav-menu" style="text-align: left !important; cursor: pointer;">
                             <nav class="mainmenu">
                                 <ul>
-                                    <li class="active" id="review"><a>리뷰</a></li>
-                                    <li id="blogReview"><a>블로그리뷰</a></li>
-                                    <li id="loca"><a>위치</a></li>
+                                    <li class="active" id="review"><a style="font-family: 'NanumBarunGothicLight' !important;">리뷰</a></li>
+                                    <li id="blogReview" style="font-family: 'NanumBarunGothicLight' !important;"><a>블로그리뷰</a></li>
+                                    <li id="loca" style="font-family: 'NanumBarunGothicLight' !important;"><a>위치</a></li>
                                 </ul>
                             </nav>
                         </div>

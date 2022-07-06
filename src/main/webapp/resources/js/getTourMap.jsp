@@ -7,7 +7,7 @@
 var container = document.getElementById('map');
 var options = {
 		center : new kakao.maps.LatLng(35.198362,129.053922),
-		level : 10
+		level : 9.7
 };
 var map = new kakao.maps.Map(container,options),
 customOverlay = new kakao.maps.CustomOverlay({});
@@ -89,11 +89,10 @@ function makePolygon(name,coordinates){
         customOverlay.setMap(null);
     }); 
 
-   /* // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
+    // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
     kakao.maps.event.addListener(polygon, 'click', function(mouseEvent) {
-    	
-    	
-    }); */
+    	location.href = '/tourInfo?addr='+name;
+    });
 }
 
 
@@ -144,10 +143,10 @@ function makeMultiPolygon(name,coordinates){
         customOverlay.setMap(null);
     }); 
 
-  /*  // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
+  	 // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
     kakao.maps.event.addListener(polygon, 'click', function(mouseEvent) {
-    	
-    }); */
+    	location.href = '/tourInfo?addr='+name;
+    }); 
 }
 
 

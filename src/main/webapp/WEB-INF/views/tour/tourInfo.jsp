@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2 style="display: inline-block; margin-left: 5em;">${resVO[0].addr }</h2>
+                        <h2 class="nanumFont" style="display: inline-block; margin-left: 5em;">${addr }</h2>
                     <div id="weatherInfo" style="display: inline-block; margin-left: 2em;">
                		</div>
                     </div>
@@ -33,8 +33,8 @@
                 <c:forEach var="vo" items="${resVO }">
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                        <a href="/tour/infoDetail?title=${vo.title }"><img src="${vo.img }" alt=""></a>
-                        <div class="ri-text">
+                        <a href="/infoDetail?title=${vo.title }"><img src="${vo.thumb_img }" alt=""></a>
+                        <div class="info">
                             <h4>${vo.title }</h4>
                             <div>
 	                            <i class="fa fa-hand-pointer-o" aria-hidden="true"></i> 조회수

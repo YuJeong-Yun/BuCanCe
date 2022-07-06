@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
+@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css");
 
 	.area {
 	    position: absolute;
@@ -59,4 +61,39 @@
 		font-size: 50px;
 	}
 	
+	.info {
+		margin-bottom: 3em;
+		border-bottom: 1px solid #e5e5e5;
+		padding-bottom: 2em;
+		font-family: 'NanumSquare' !important;
+	}
+	
+	.room-item .info {
+		border: 1px solid #ebebeb;
+		border-top: none;
+		padding: 24px 24px 30px 28px;
+		font-family: 'NanumSquare' !important;
+	}
+	
+	.room-item .info h4 {
+		color: #19191a;
+		margin-bottom: 17px;
+		font-family: 'NanumSquare' !important;
+	}
+	
+	.nanumFont {
+		font-family: 'NanumSquare' !important;
+	}
+	
+	#blogList * {
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	
+	#resInfo {
+		margin-top: 2em;
+	}
+	
+	#resInfo tr{
+		margin: 2em 0;
+	}
 	
