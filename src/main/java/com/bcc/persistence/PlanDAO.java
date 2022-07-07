@@ -6,6 +6,8 @@ import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
+import com.bcc.domain.RestaurantVO;
+import com.bcc.domain.TourPlaceVO;
 
 public interface PlanDAO {
 
@@ -65,6 +67,12 @@ public interface PlanDAO {
 
 	// 방장 새로 설정
 	public void updateLeader(PlanVO plan);
+
+	// 전체 관광지 정보 가져오기
+	public List<TourPlaceVO> getTourList();
+
+	// 전체 맛집 정보 가져오기
+	public List<RestaurantVO> getRestaurantList();
 
 
 }

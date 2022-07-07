@@ -6,7 +6,7 @@
 	margin: 0 auto;
 }
 .hidden {
-	display: none;
+	display: none !important;
 }
 .date-active {
 	background-color: #f5f5f5 !important;
@@ -20,14 +20,11 @@
 /* 그룹 메뉴 보여주기 버튼 */
 .show-grp-menu {
 }
-.show-grp-menu .container {
-	position: relative;
-}
 .show-grp-menu .show-grp {
 	background-color: #fff;
 	position: absolute;
 	top: 30px;
-	left: -30px;
+	left: -50px;
 	padding: 5px;
 	box-shadow: 3px 3px 7px #aaa;
 	border-radius: 50%;
@@ -50,6 +47,16 @@
 .grp-member .member-container li {
 	width: 80px;
 	text-align: center;
+	position: relative;
+}
+.grp-member .member-container li .leader {
+	position: absolute;
+	top:-10px;
+	left:10px;
+	margin: auto;
+	font-size: 30px;
+	color: #dad285;
+	z-index: 1;
 }
 .grp-member .member-container li .member--profile img {
 	width: 40px;
@@ -221,6 +228,7 @@
 	position: absolute;
 	left: 0;
 	list-style: none;
+	overflow: auto;
 	z-index: 1;
 }
 .make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul > li {
@@ -306,6 +314,10 @@
 .make-plan .date-plan-container .plan .plan__contents > ul > li:last-child {
 	margin-right: 0;
 }
+.make-plan .date-plan-container .plan .plan__contents > ul > li > * {
+	
+	
+}
 .make-plan .date-plan-container .plan .plan__contents > ul > li .tour-wrapper {
 
 }
@@ -314,6 +326,7 @@
 	height: 80px;
 	margin: 10px 0;
 	border-radius: 50%;
+	pointer-events: none;
 }
 .make-plan .date-plan-container .plan .plan__contents > ul > li .content__title {
 	height: 40px;

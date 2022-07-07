@@ -12,6 +12,8 @@ import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
+import com.bcc.domain.RestaurantVO;
+import com.bcc.domain.TourPlaceVO;
 import com.bcc.persistence.PlanDAO;
 
 @Service
@@ -115,6 +117,16 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public void updateLeader(PlanVO plan) {
 		dao.updateLeader(plan);
+	}
+
+	@Override
+	public List<TourPlaceVO> getTourList() {
+		return dao.getTourList();
+	}
+
+	@Override
+	public List<RestaurantVO> getRestaurantList() {
+		return dao.getRestaurantList();
 	}
 
 

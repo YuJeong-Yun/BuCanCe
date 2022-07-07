@@ -121,5 +121,17 @@
 		where num = #{num}
 	</update>
 	
+	<select id="getTourList" resultType="TourPlaceVO">
+		select num, main_title, main_img_thumb, lng, lat
+		from tourist_spot 
+		order by num asc
+	</select>
+	
+	<select id="getRestaurantList" resultType="RestaurantVO">
+		select num, title, thumb_img, lng, lat
+		from busan_restaurants
+		order by num asc
+	</select>
+	
   </mapper>
   

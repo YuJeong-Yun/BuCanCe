@@ -13,6 +13,8 @@ import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
+import com.bcc.domain.RestaurantVO;
+import com.bcc.domain.TourPlaceVO;
 
 @Repository
 public class PlanDAOImpl implements PlanDAO {
@@ -117,6 +119,16 @@ public class PlanDAOImpl implements PlanDAO {
 	@Override
 	public void updateLeader(PlanVO plan) {
 		sqlSession.update(NAMESPACE+".updateLeader", plan);
+	}
+
+	@Override
+	public List<TourPlaceVO> getTourList() {
+		return sqlSession.selectList(NAMESPACE+".getTourList");
+	}
+
+	@Override
+	public List<RestaurantVO> getRestaurantList() {
+		return sqlSession.selectList(NAMESPACE+".getRestaurantList");
 	}
 
 }

@@ -103,13 +103,21 @@ public class PlanController {
 	// http://localhost:8088/plan/planWrite/1
 	@RequestMapping(value = "/planWrite/{num}", method = RequestMethod.GET)
 	public String planContentGET(@PathVariable("num") int num, Model model) throws Exception {
-
+		
 		// 그룹 번호 저장
 		model.addAttribute("num", num);
 		// 해당 그룹 소속 멤버 가져오기
 		model.addAttribute("grpMemberList", service.getGrpMemberList(num));
 		// 방장 정보 가져오기
 		model.addAttribute("leader", service.getLeader(num));
+		
+		// 관광지 정보 저장
+		model.addAttribute("tourlist", service.getTourList());
+		// 맛집 정보
+		model.addAttribute("restlist", service.getRestaurantList());
+		// 숙소 정보
+		
+		
 
 		return "/plan/planWrite";
 	}

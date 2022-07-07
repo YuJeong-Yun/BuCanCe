@@ -104,7 +104,7 @@
 										<!-- 소속 그룹 목록 출력 -->
 										<c:forEach var="grp" items="${grpList }" varStatus="status">
 											<li class="grp${grp.grp_num }">
-												<input type="button" class="plan" value="${grp.grp_name }" onclick="location.href='/plan/planContent/${grp.grp_num }';">
+												<input type="button" class="plan" value="${grp.grp_name }" onclick="location.href='/plan/planWrite/${grp.grp_num }';">
 												<ul class="member-container">
 													<!-- 해당 그룹 소속된 멤버 출력 -->
 													<c:forEach var="member" items="${grpMemberList.get(status.index) }">
