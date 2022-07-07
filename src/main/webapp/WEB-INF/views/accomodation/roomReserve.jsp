@@ -176,7 +176,7 @@
                         <h2>예약항목 선택</h2>
                         <div class="bt-option">
                             <a href="./home.html">Home</a>
-                            <span>예약항목</span>
+                            <span>${room_title}</span>
                         </div>
                     </div>
                 </div>
@@ -299,7 +299,52 @@
                                 </tbody>
                                 </a>
                             </table>
-                            <a href="${pageContext.request.contextPath}/accomodation/roomPayment" class="primary-btn">예약하기</a>
+                          
+                           
+                          <c:if test="${roomReserve.get(a).room_fcost != ''}">
+                            <form action="${pageContext.request.contextPath}/accomodation/roomPayment" style='display:inline'>
+                           	<input type="hidden" name="room_title" value="${room_title}">
+                           	<input type="hidden" name="room_reserve2" value="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)}">
+                           	<input type="hidden" name="accendtime" value="${roomReserve.get(a).room_accendtime}">
+                           	<input type="hidden" name="accusetime" value="${roomReserve.get(a).room_accusetime}">
+                           	<input type="hidden" name="room_lcost" value="${roomReserve.get(a).room_lcost}">
+                           	<input type="hidden" name="room_fcost" value="${roomReserve.get(a).room_fcost}">
+                           	<input type="hidden" name="room_endtime" value="${roomReserve.get(a).room_endtime}">
+                           	<input type="hidden" name="room_usetime" value="${roomReserve.get(a).room_usetime}">
+                           	<input type="hidden" name="room_pic" value="${roomReserve.get(a).room_pic}">
+                           	<input type="hidden" name="checkout" value="${checkout}">
+                           	<input type="hidden" name="checkin" value="${checkin}">
+                          
+                            <button type="submit" class="btn btn-primary">대실 예약하기</button> &nbsp; 
+                         
+                         </form>
+                         
+                         </c:if>
+                         
+                          <c:if test="${roomReserve.get(a).room_reserve2 != 1 }">
+                           
+                          <form action="${pageContext.request.contextPath}/accomodation/roomPayment2" style="display:inline">
+                           	<input type="hidden" name="room_title" value="${room_title}">
+                           	<input type="hidden" name="room_reserve2" value="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)}">
+                           	<input type="hidden" name="accendtime" value="${roomReserve.get(a).room_accendtime}">
+                           	<input type="hidden" name="accusetime" value="${roomReserve.get(a).room_accusetime}">
+                           	<input type="hidden" name="room_lcost" value="${roomReserve.get(a).room_lcost}">
+                           	<input type="hidden" name="room_fcost" value="${roomReserve.get(a).room_fcost}">
+                           	<input type="hidden" name="room_endtime" value="${roomReserve.get(a).room_endtime}">
+                           	<input type="hidden" name="room_usetime" value="${roomReserve.get(a).room_usetime}">
+                           	<input type="hidden" name="room_pic" value="${roomReserve.get(a).room_pic}">
+                           	<input type="hidden" name="checkout" value="${checkout}">
+                           	<input type="hidden" name="checkin" value="${checkin}">
+                          
+                           
+                            <button type="submit" class="btn btn-primary">숙박 예약하기</button>
+                            
+                              </form>
+                            
+                            </c:if>
+<%--                       <a href="${pageContext.request.contextPath}/accomodation/roomPayment" class="primary-btn">예약하기</a> --%>
+                            
+                           
                         </div>
                     </div>
                 </div>

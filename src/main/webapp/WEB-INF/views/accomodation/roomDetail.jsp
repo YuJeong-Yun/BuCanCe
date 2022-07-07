@@ -481,6 +481,7 @@
                         <form action="${pageContext.request.contextPath}/accomodation/roomReserve" method="GET" name="dateForm">
                             <input type="hidden" name="bno" value="${bno}">
                             <input type="hidden" name="ano" value="${ano}">
+                            <input type="hidden" name="room_title" value="${roomdetail.get(0).room_title}">
                             <div class="check-date">
                                 <label for="date-in">체크인</label>
                                 <input type="text" class="date-input" id="date-in" value="${param.sel_date}" name="sel_date">

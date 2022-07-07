@@ -338,9 +338,8 @@ function selectAll(selectAll)  {
 			    	  pg: $("#payment-select option:selected").val(),
 // 			          pay_method: "card",
 			          merchant_uid: "${priId}",  //고유 id
-			          name: '${vo.room_title}',  //상품이름
-// 			          amount: '${vo.room_fcost}', //가격
-			          amount: 100, //가격
+			          name: '${vo.room_title} 예약',  //상품이름
+			          amount: '${vo.room_fcost}', //가격
 			          buyer_email: "${useremail}",
 			          buyer_name: "${username}",
 			          buyer_tel: "${usertel}",
@@ -351,46 +350,21 @@ function selectAll(selectAll)  {
 			             
 			              // 결제 성공 시 로직,
 			             alert('결제완료');
-			             $.ajax({
-			 				type:"POST",
-			 				url :"${pageContext.request.contextPath}/accomodation/roomPaymentDB",
-			 				data : {
-			 					pg: $("#payment-select option:selected").val(),
-			 					merchant_uid: "${priId}",  //고유 id
-						        name: '${vo.room_title}',  //상품이름
-// 						        amount: '${vo.room_fcost}', //가격
-						        amount: 100, //가격
-						        buyer_email: "${useremail}",
-						        buyer_name: "${username}",
-						        buyer_tel: "${usertel}",
-						        buyer_addr: "${userAddress}",
-						        buyer_postcode: "${userPostCode}"
-			 				},
-			 				contentType: "application/json",
-			 				success : function(data){
-			 					
-			 				}
-			 				
-			 				
-			 			}); //ajax끝
-			              
+			             
 			              
 			          } else {
 			         
 			              // 결제 실패 시 로직, 뒤로가기
 			              alert('취소');
+// 			              location.href="/accomodation/roomPayment";
+			              history.go(-2);
 			          }
 			      });
 			}
 			
-			
-	   
 	    }
 
-		
-		
-		
-	    function cancelPay() {
+function cancelPay() {
 	    	
 	    	alert('예약목록창으로 이동');
 	    	history.go(-1);
@@ -402,6 +376,8 @@ function selectAll(selectAll)  {
 	<!-- 아임포트 -->
 				
 				
+			
+				
 				
 				<div class="col-lg-4">
 					<div class="room-booking">
@@ -410,20 +386,20 @@ function selectAll(selectAll)  {
 							<div class="check-date">
 								<label for="date-out">호텔명:</label> 
 								<input type="text" id="date-out"
-								value="${vo.room_title}" readonly
+								value="${vo.room_title}" readOnly
 								> <i class=""></i> 
 							</div>
 							<div class="check-date">
-								<label for="date-in">마감시간:</label>
-								 <input type="text"id="date-in" readonly
-								value="당일 ${vo.room_endtime} 시까지"
+								<label for="date-in">입실시간:</label>
+								 <input type="text"id="date-in" readOnly
+								value="${vo.checkin} 일 ${vo.accendtime} 시부터"
 								> <i class="icon_calendar"></i>
 							</div>
 							
 							<div class="check-date">
-								<label for="date-out">이용시간:</label> 
-								<input type="text"id="date-out" readonly
-								value="${vo.room_usetime} 시간"
+								<label for="date-out">퇴실시간:</label> 
+								<input type="text"id="date-out" readOnly
+								value="${vo.checkout}일 ${vo.accusetime} 시까지"
 								
 								> <i class="icon_calendar"></i>
 							</div>
@@ -437,7 +413,7 @@ function selectAll(selectAll)  {
 							<div class="check-date">
 								<label for="date-out"><strong>총 결제 금액</strong></label> 
 								<input type="text" id="date-out"
-								value="${vo.room_fcost} 원" readonly> <i class=""></i>
+								value="${vo.room_reserve2} 원" readonly> <i class=""></i>
 							</div>
 
 
@@ -445,11 +421,8 @@ function selectAll(selectAll)  {
 							
 							<button type="button" onclick="cancelPay()">취소하기</button>
 						</form>
-						
-						
 					</div>
 				</div>
-			
 				
 				
 			</div>
@@ -460,6 +433,8 @@ function selectAll(selectAll)  {
 		
 	</section>
 	<!-- Room Details Section End -->
+
+
 
 
 
