@@ -321,6 +321,20 @@
 .make-plan .date-plan-container .plan .plan__contents > ul > li .tour-wrapper {
 
 }
+.make-plan .date-plan-container .plan .plan__contents > ul > li .restaurant {
+    position: absolute;
+    left: 5px;
+    top: 70px;
+    z-index: 1;
+    color: #666;
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li .hotel {
+    position: absolute;
+    left: 5px;
+    top: 70px;
+    z-index: 1;
+    color: #507cdf;
+}
 .make-plan .date-plan-container .plan .plan__contents > ul > li .content__img {
 	width: 80px;
 	height: 80px;

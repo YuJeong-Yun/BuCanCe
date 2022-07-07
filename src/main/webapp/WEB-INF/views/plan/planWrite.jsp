@@ -122,22 +122,6 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
       <!--일정별 관광지 선택-->
       <ul class="date-plan-container">
-        <li class="plan">
-          <div class="plan__date date-active" onclick="selectDate()">7 / 4</div>
-          <div class="plan__contents">
-            <!-- 일정 내 관광지 리스트 -->
-            <ul class="inner">
-              <li class="plan-item draggable" draggable="true">
-                <div class="tour-wrapper">
-                  <img src="./img/who.jpg" alt="" class="content__img" />
-                  <div class="content__title">관광지1</div>
-                  <button class="delBtn" onclick="delSelectedTour(event, 1)">x</button>
-                  <input type="hidden" value="10" class="num">
-                </div>
-              </li>
-            </ul>
-          </div>
-        </li>
       </ul>
 
 
@@ -150,7 +134,9 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
 
 
-
+<script type="text/javascript">
+	const path = '${pageContext.request.contextPath}';
+</script>
 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx4c685864b69a4b71966f8bda89ed2dd3"></script>
 <script src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js"></script>
 <jsp:include page="../include/footer.jsp"></jsp:include>
