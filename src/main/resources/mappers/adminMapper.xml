@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="com.bcc.mapper.adminMapper">
+
+
+	<select id="pmInfo" parameterType="hashMap" resultType="PremiumOrderVO">
+		select * from premium_order
+		where year(success_date)=#{year} and month(success_date)=#{month}
+		order by id
+	</select>
+	
+	<select id="periodicPm" parameterType="hashMap" resultType="String">
+		select periodic_pm from premium_member 
+		where id in (select id from premium_order where year(success_date)=#{year} and month(success_date)=#{month})
+		order by id
+	</select>
+	
+	<select id="onlyPeriodMems" parameterType="hashMap" resultType="PremiumOrderVO">
+		select * from premium_order
+		where id in (select id from premium_member where periodic_pm = 'y') 
+		and year(success_date)=#{year} and month(success_date)=#{month}
+		order by id
+	</select>
+
+</mapper>  

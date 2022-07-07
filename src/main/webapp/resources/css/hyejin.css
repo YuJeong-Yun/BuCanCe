@@ -49,18 +49,6 @@
 	
 	}
 	
-	.weather {
-		display: inline-block;
-		transform : translate(-100px,40px);
-		font-size: 30px;
-		font-weight: bold;
-	}
-	
-	
-	.current {
-		font-size: 50px;
-	}
-	
 	.info {
 		margin-bottom: 3em;
 		border-bottom: 1px solid #e5e5e5;
@@ -95,5 +83,81 @@
 	
 	#resInfo tr{
 		margin: 2em 0;
+	}
+	
+	
+	.table-wrapper {
+		-webkit-overflow-scrolling: touch;
+    	overflow-x: auto;
+	}
+	
+	.table-wrapper table {
+		margin: 0 0 2em 0;
+   		width: 100%;
+   		border-collapse: collapse;
+   	 	border-spacing: 0;
+	}
+	
+	.table-wrapper thead {
+		border-bottom: solid 2px rgba(210, 215, 217, 0.75);
+	}
+	
+	.table-wrapper th {
+		color: #3d4449;
+	    font-size: 1.1em;
+	    font-weight: 600;
+	    padding: 0 0.75em 0.75em 0.75em;
+	    text-align: left;
+	}
+	
+	.table-wrapper td {
+		padding: 0.75em 0.75em;
+	}
+	
+	.table-wrapper tbody tr:nth-child(2n + 1) {
+		background-color: rgba(230, 235, 237, 0.25);
+	}
+	
+	.table-wrapper tbody tr {
+		border: solid 1px rgba(210, 215, 217, 0.75);
+	    border-left: 0;
+	    border-right: 0;
+	}
+	
+	.table-wrapper tfoot {
+		border-top: solid 2px rgba(210, 215, 217, 0.75);
+	}
+	
+	.table-wrapper tfoot th {
+		padding: 1em 0.75em 0.75em 0.75em;
+	}
+	
+	#total {
+		font-style: italic;
+	}
+	
+	#pmSort {
+		margin-top: 1em;
+	} 
+	
+	.w-btn {
+	    position: relative;
+	    border: none;
+	    display: inline-block;
+	    padding: 10px 10px;
+	    border-radius: 15px;
+	    font-family: 'Noto Sans KR', sans-serif;
+	    text-decoration: none;
+	    font-weight: 600;
+	    transition: 0.25s;
+	    width: 130;
+	    height: 30;
+	    margin-right: 0.5em;
+	    
+	}
+	
+	.w-btn-indigo {
+	    background-color: aliceblue;
+	    color: #1e6b7b;
 	}
 	
