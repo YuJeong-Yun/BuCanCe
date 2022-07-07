@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -295,9 +295,9 @@ function selectAll(selectAll)  {
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text">
-						<h2>Our Rooms</h2>
+						<h2>예약 정보</h2>
 						<div class="bt-option">
-							<a href="./home.html">Home</a> <span>Rooms</span>
+							<a href="./home.html">home</a><span>결제</span>
 						</div>
 					</div>
 				</div>
@@ -317,27 +317,21 @@ function selectAll(selectAll)  {
 							alt="">
 						<div class="rd-text">
 							<div class="rd-title">
-								<h3>Premium King Room</h3>
-								<div class="rdt-right">
-									<div class="rating">
-										<i class="icon_star"></i> <i class="icon_star"></i> <i
-											class="icon_star"></i> <i class="icon_star"></i> <i
-											class="icon_star-half_alt"></i>
-									</div>
-									<a href="#">Booking Now</a>
-								</div>
+								<h3><b><i>객실타입: ${roomReserve.get(a).room_title}</i></b></h3>
+								
 							</div>
-						
+
 							<table>
 								<tbody>
-									
+
 									<tr>
-									
-										<td class="r-o">서명 <input type="text" placeholder="이름을 입력해주세요"></td>
+
+										<td class="r-o"><br>서명 <input type="text"
+											placeholder="이름을 입력해주세요"></td>
 										<td><br> <br></td>
 									</tr>
-										<tr>
-										<td> <br></td>
+									<tr>
+										<td><br></td>
 									</tr>
 									<tr>
 										<td class="r-o">결제수단</td>
@@ -407,52 +401,45 @@ function selectAll(selectAll)  {
 					<div class="room-booking">
 						<h3>결제 정보</h3>
 						<form action="#">
-							<div class="check-date">
-								<label for="date-out">호텔명:</label> <input type="text"
-									id="date-out" value="${roomReserve.get(a).room_title}"> <i class=""></i>
+							<div class="check-date"><hr>
+								<label for="date-out">호텔명</label>${roomList.get(a).room_title} 
 							</div>
+						<hr>
 							<div class="check-date">
-								<label for="date-in">입실일자:</label> <input type="text"
-									id="date-in"> <i class="icon_calendar"></i>
-									
-									
-									 <c:if test='${roomReserve.get(a).room_lcost != "1"}'>
-                                        ${roomReserve.get(a).room_accendtime}시/
-                                        ${checkout}일
-                                          ${roomReserve.get(a).room_accusetime}시
+								<label for="date-in">입실일자</label> ${param.sel_date} &nbsp;&nbsp; <c:if test='${roomReserve.get(a).room_lcost != "1"}'>
+                                       (  ${roomReserve.get(a).room_accendtime}시 부터)
+                                        </c:if>
+                                         <c:if test='${roomReserve.get(a).room_lcost == "1"}'>
+                                       숙소에 문의
+                                        </c:if> <i class="icon_calendar"></i>
+							</div>
+							<hr>
+							<div class="check-date">
+								<label for="date-out">퇴실일자</label> ${param.sel_date2} &nbsp; &nbsp;<c:if test='${roomReserve.get(a).room_lcost != "1"}'>
+                                         ( ${roomReserve.get(a).room_accusetime}시 까지)
                                         </c:if>
                                          <c:if test='${roomReserve.get(a).room_lcost == "1"}'>
                                        숙소에 문의
                                        
                                         </c:if>
-									
-									
-									
+								<i class="icon_calendar"></i>
 							</div>
+						<hr>
 							<div class="check-date">
-								<label for="date-out">퇴실일자:</label> <input type="text"
-									id="date-out"> <i class="icon_calendar"></i>
-							</div>
-							<div class="check-date">
-								<label for="date-out">서명:</label> <input type="text"
-									id="date-out"> <i class=""></i>
-							</div>
-							<div class="check-date">
-								<label for="date-out"><strong>총 결제 금액</strong></label> 
-								<input type="text" id="date-out" > <i class=""></i>
-							
-									<c:if test="${roomReserve.get(a).room_reserve2 != 1 }">
+								<label for="date-out"><strong>총 결제 금액</strong></label>
+								<c:if test="${roomReserve.get(a).room_reserve2 != 1 }">
 									
                                         ${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)} 원
 									</c:if>
-									<c:if test="${roomReserve.get(a).room_reserve2 == 1}">
+								<c:if test="${roomReserve.get(a).room_reserve2 == 1}">
                                         숙소에 문의
 									</c:if>
-                                  
+									 <i class=""></i>
+
 							</div>
 
 
-							<button type="submit">결제하기</button>
+							<button type="submit" class="btn btn-primary">결제하기</button>
 						</form>
 					</div>
 				</div>
