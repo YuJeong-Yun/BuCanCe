@@ -88,7 +88,7 @@
 
 /* 플랜 작성 */
 .make-plan {
-	margin-bottom: 10px;
+	margin-bottom: 50px;
 }
 .make-plan .container {
 }
@@ -151,8 +151,7 @@
 	color: #fff;
 }
 /* 지도  */
-.make-plan .tour-container .tour-map {
-
+.make-plan .tour-container .tour-map .map-wrapper {
 }
 
 /* 관광지 목록 */

@@ -55,7 +55,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
               <button class="save">저장</button>
             </div>
           </div>
-          <div class="tour-map">
+          <div class="map-wrapper">
             <div id="map_div">
             </div>        
           </div>
@@ -121,7 +121,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
       </div>
 
       <!--일정별 관광지 선택-->
-      <ul class="date-plan-container">
+      <ul class="date-plan-container hidden">
       </ul>
 
 
