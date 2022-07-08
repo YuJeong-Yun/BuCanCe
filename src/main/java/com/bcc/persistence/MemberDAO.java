@@ -30,7 +30,7 @@ public interface MemberDAO {
 	// 회원정보 조회
 	public MemberVO getMember(String id);
 	
-	// 회윈정보 조회
+	// 전체 회원정보 조회
 	public List<MemberVO> getMemberList(String adminID);
 	
 	// sns email 조회
@@ -38,5 +38,11 @@ public interface MemberDAO {
 	
 	// id 중복 검사
     public int idCheck(String id);
+    
+    // license up
+    public int licenseUp(String license);
+    
+    // license down
+    public int licenseDown(String license);
 
 }

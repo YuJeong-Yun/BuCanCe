@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.bcc.domain.LikeVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.persistence.MemberDAO;
 
@@ -83,6 +84,22 @@ public class MemberServiceImpl implements MemberService{
 		int cnt = dao.idCheck(id);	 
 		
 		return cnt;
+	}
+
+	@Override
+	public int liUp(String id) {
+		
+		int liUp = dao.licenseUp(id);
+		
+		return liUp;
+	}
+
+	@Override
+	public int liDown(String id) {
+		
+		int liDown = dao.licenseDown(id);
+		
+		return liDown;
 	}
 
 	

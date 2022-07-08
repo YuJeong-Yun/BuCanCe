@@ -1,8 +1,10 @@
 package com.bcc.service;
 
-import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.bcc.domain.LikeVO;
 import com.bcc.domain.MemberVO;
 
 
@@ -29,5 +31,13 @@ public interface MemberService {
 	
 	// 아이디 중복 확인
     public int idCheck(String id);
-	
+    
+    // license UP
+    public int liUp(String id);
+    
+    // license Down
+	public int liDown(String id);
+    
+    
+    
 }

@@ -48,6 +48,20 @@
 	<select id="idCheck" parameterType="String" resultType="int">
 		SELECT COUNT(id) FROM bcc_member WHERE id = #{id}
     </select>
+
+	<update id="licenseUp">
+       update bcc_member 
+       set license=1, updatedate=now()
+       where id=#{id} and pw=#{pw}
+	</update>
+	
+	<update id="licenseDown">
+       update bcc_member 
+       set license=0, updatedate=now()
+       where id=#{id} and pw=#{pw}
+	</update>
+
+	
   	
   </mapper>
   

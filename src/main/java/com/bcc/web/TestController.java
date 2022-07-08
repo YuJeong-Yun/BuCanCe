@@ -26,7 +26,7 @@ public class TestController {
 	
 	private static final Logger log = LoggerFactory.getLogger(TestController.class);
 	
-	@Inject
+	@Inject	
 	private MemberService service;
 	
 	// http://localhost:8088/index
@@ -74,7 +74,7 @@ public class TestController {
 			
 			return "/member/loginForm";
 		}
-		
+
 		
 		@RequestMapping(value = "/login",method = RequestMethod.POST)
 		public String loginPOST(MemberVO vo,HttpSession session) {
@@ -203,6 +203,17 @@ public class TestController {
 			// 페이지 이동
 			return "redirect:/index";
 		}
+		
+		// http://localhost:8088/favorite
+		// 찜목록 보기
+		@RequestMapping(value = "/favorite",method = RequestMethod.GET)
+		public String favoriteGET(HttpSession session) {
+			log.info(" favoriteGET() 호출 ");
+			log.info(" view 페이지 출력 -> 정보 입력 ");
+			
+			// 페이지이동
+			return "/member/favorite";
+		}
 
 	    @Autowired
 	    private KakaoService ks;
@@ -235,6 +246,17 @@ public class TestController {
 	        log.info("확인 결과:"+cnt);
 	        
 	        return cnt;
+	    }
+	    
+	    // 라이센스 수정
+	    @PostMapping("/license")
+	    @ResponseBody
+	    public int license(@RequestParam("lisence") String license){
+	   
+	        int liCnt = service.idCheck(license);
+	        log.info("확인 결과:"+liCnt);
+	        
+	        return liCnt;
 	    }
 	    
 }

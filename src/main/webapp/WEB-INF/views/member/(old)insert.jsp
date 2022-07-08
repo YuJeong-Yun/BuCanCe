@@ -64,7 +64,7 @@ function daumPostcode() {
 <!-- Daum postcode API -->
 	
 function checkForm(){
-	
+
 	var regId = /^[a-z0-9]{4,12}$/; // id 유효성검사
 	var regPw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,12}$/; // 비번 유효성검사
 	var regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; // 메일 유효성검사
@@ -79,14 +79,13 @@ function checkForm(){
     
     var pwd1 = document.getElementById("pw").value;
     var pwd2 = document.getElementById("pw2").value;
-    
+
 	if($("#id").val()==""){ // 아이디 공백 검사
 	    alert("아이디를 입력하지 않으셨습니다.");
 		$("#id").focus();
 		return false;
 	} else if(!regId.test(id.value)){ // 아이디 유효성검사
 		alert("아이디는 4~12자의 영문 소문자와 숫자로만 입력하여 주세요.");
-		$("#id").focus();
 		return false;
 	} else if($("#pw").val()==""){ // 비밀번호 공백 검사
     	alert("비밀번호를 입력하지 않으셨습니다.");
@@ -94,7 +93,6 @@ function checkForm(){
     	return false;
     } else if(!regPw.test(pw.value)){ // 비밀번호 유효성검사 
 		alert("비밀번호는 8~12자의 영문 대소문자와 숫자, 특수문자를 사용해주세요.");
-		$("#pw").focus();
 		return false;
 	} else if($("#pw").val()!=$("#pw2").val()) { // 비밀번호 확인 검사
         alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
@@ -106,7 +104,6 @@ function checkForm(){
 		return false;
     } else if(!regName.test(name.value)){ // 이름 유효성검사
 		alert("한글만 입력해주세요.");
-    	$("#user_name").focus();
 		return false;
 	} else if($("#email").val()==""){ // 이메일 공백 검사
 		alert("메일주소를 입력하지 않으셨습니다.");
@@ -120,8 +117,7 @@ function checkForm(){
 		$("#tel").focus();
 		return false;
 	} else if(!regTel.test(tel.value)){ // 전화번호 유효성 검사
-		alert("숫자로만 입력하세요.");
-		$("#tel").focus();
+		alert("숫자로만 입력하세요."); 
 		return false;
 	} else if($("#address2").val()==""){
 		alert("나머지 주소를 입력하지 않으셨습니다.");
@@ -133,14 +129,13 @@ function checkForm(){
     
     }
     
-}
+};
 
 function checkId(){
     var id = $("#id").val(); //id값이 "id"인 입력란의 값을 저장
     var checkUserId = $("#checkId1");
     var reId = /^[a-z0-9]{4,12}$/;
-
-    if(!reId.test(id)){
+    	if(!reId.test(id)){
      		checkUserId.html("<font color='red'><b>아이디는 영문, 숫자로 4-12 글자 입니다.</b></font>");
      	}else{
      	   $.ajax({
@@ -148,7 +143,7 @@ function checkId(){
      	        type:'POST', //POST 방식으로 전달
      	        data:{id:id},
      	        success:function(cnt){
-     	        if(cnt != 1){
+     	        if(cnt != 1){ 
      	         		checkUserId.html("<font color='green'><b>사용 가능한 아이디 입니다.</b></font>");
      	            } else {
      	         		checkUserId.html("<font color='red'><b>이미 사용중인 아이디 입니다.</b></font>");
@@ -162,7 +157,7 @@ function checkId(){
 //     	         return;
      	    })
      	}
-     	}
+     	};
     	
 function checkPwd(){
 	var pwd1 = $("#pw").val();
@@ -190,7 +185,7 @@ function checkPwd2(){
 	   		result_pwd = true;
 	   	}
   }
-}
+};
 
 function checkName(){
 	    	var name = $("#user_name").val();
@@ -203,7 +198,7 @@ function checkName(){
 	     		checkSpan3.html("<font color='green'><b>사용가능한 성명</b></font>");
 	     		result_pwd = true;
 	     	}
-	    }
+	    };
 
 function checkMtel(){
 	    	var mTel = $("#tel").val();
@@ -216,7 +211,7 @@ function checkMtel(){
 	     		checkSpan4.html("<font color='green'><b>사용가능한 전화번호</b></font>");
 	     		result_pwd = true;
 	     	}
-	    }
+	    };
 
 function checkEmail(){
 	    	var email = $("#email").val();
@@ -229,7 +224,7 @@ function checkEmail(){
 	     		checkSpan5.html("<font color='green'><b>사용가능한 메일주소</b></font>");
 	     		result_pwd = true;
 	     	}
-	    }
+	    };
 
 </script>
 </head>

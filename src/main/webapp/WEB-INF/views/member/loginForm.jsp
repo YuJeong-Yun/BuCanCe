@@ -20,7 +20,7 @@
 			out.println( " location.href='./loginForm' " );
 		}
 		out.println( "  " );
-	}
+	};
 %>
 
 <!DOCTYPE html>

@@ -1,15 +1,8 @@
 package com.bcc.persistence;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -135,6 +128,18 @@ public class MemberDAOImpl implements MemberDAO {
 	public int idCheck(String id) {
         int cnt = sqlSession.selectOne(NAMESPACE+".idCheck", id);
         return cnt;
+	}
+
+	@Override
+	public int licenseUp(String license) {
+		int liUp = sqlSession.selectOne(NAMESPACE+".licenseUp", license);
+		return liUp;
+	}
+
+	@Override
+	public int licenseDown(String license) {
+		int liDown = sqlSession.selectOne(NAMESPACE+".licenseDown", license);
+		return liDown;
 	}
 
 	
