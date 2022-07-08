@@ -207,9 +207,8 @@ function selectAll(selectAll)  {
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text">
-						<h2>Our Rooms</h2>
 						<div class="bt-option">
-							<a href="./home.html">Home</a> <span>Rooms</span>
+							<a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a> <span>결제페이지</span>
 						</div>
 					</div>
 				</div>
@@ -239,7 +238,7 @@ function selectAll(selectAll)  {
 									
 									<tr>
 									
-										<td class="r-o">서명 <input type="text" placeholder="이름을 입력해주세요"
+										<td class="r-o">예약명 <input type="text" placeholder="이름을 입력해주세요"
 											value="${username}"
 										></td>
 										<td><br> <br></td>
@@ -340,7 +339,7 @@ function selectAll(selectAll)  {
 			          merchant_uid: "${priId}",  //고유 id
 			          name: '${vo.room_title}',  //상품이름
 // 			          amount: '${vo.room_fcost}', //가격
-			          amount: 100, //가격
+			          amount: 1, //가격
 			          buyer_email: "${useremail}",
 			          buyer_name: "${username}",
 			          buyer_tel: "${usertel}",
@@ -350,16 +349,16 @@ function selectAll(selectAll)  {
 			          if (rsp.success) {
 			             
 			              // 결제 성공 시 로직,
-			             alert('결제완료');
+			             alert('결제성공');
 			             $.ajax({
-			 				type:"POST",
+			 				type:"GET",
 			 				url :"${pageContext.request.contextPath}/accomodation/roomPaymentDB",
 			 				data : {
 			 					pg: $("#payment-select option:selected").val(),
 			 					merchant_uid: "${priId}",  //고유 id
 						        name: '${vo.room_title}',  //상품이름
 // 						        amount: '${vo.room_fcost}', //가격
-						        amount: 100, //가격
+						        amount: 1, //가격
 						        buyer_email: "${useremail}",
 						        buyer_name: "${username}",
 						        buyer_tel: "${usertel}",
@@ -376,9 +375,13 @@ function selectAll(selectAll)  {
 			              
 			              
 			          } else {
-			         
+			         	
 			              // 결제 실패 시 로직, 뒤로가기
-			              alert('취소');
+			              alert('결제실패');
+<%-- 			              alert(<%=request.getHeader("REFERER")%>); --%>
+			              
+			              //결제 실패시 뒤로가기
+			              location.href=document.getElementById("reload").value;
 			          }
 			      });
 			}
@@ -393,7 +396,7 @@ function selectAll(selectAll)  {
 	    function cancelPay() {
 	    	
 	    	alert('예약목록창으로 이동');
-	    	history.go(-1);
+	    	location.href=document.getElementById("reload").value;
 	    	
 	    }
 		
@@ -407,6 +410,9 @@ function selectAll(selectAll)  {
 					<div class="room-booking">
 						<h3>결제 정보</h3>
 						<form onSubmit="return false;">
+						<!-- 뒤로가기 할 주소 -->
+						<input type="hidden" value="<%=request.getHeader("REFERER")%>" id="reload">
+						<!-- 뒤로가기 할 주소 -->
 							<div class="check-date">
 								<label for="date-out">호텔명:</label> 
 								<input type="text" id="date-out"

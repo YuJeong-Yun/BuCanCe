@@ -234,7 +234,7 @@
 					<div class="breadcrumb-text">
 						<h2>방 상세정보</h2>
 						<div class="bt-option">
-							<a href="./home.html">Home</a> <span>Rooms</span>
+							<a href="<%=request.getHeader("REFERER")%>">뒤로가기</a> <span>Rooms</span>
 						</div>
 					</div>
 				</div>

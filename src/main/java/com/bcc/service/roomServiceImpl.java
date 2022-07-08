@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.bcc.domain.roomDate;
+import com.bcc.domain.roomPayVO;
 import com.bcc.domain.roomSearch;
 import com.bcc.persistence.roomDAO;
 
@@ -664,5 +665,22 @@ public class roomServiceImpl implements roomService{
 
 		return roomList;
 	}
+
+	
+	//결제 성공시 db에 입력
+	@Override
+	public void roomPay(roomPayVO vo) {
+		
+		dao.roomPaySuc(vo);
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

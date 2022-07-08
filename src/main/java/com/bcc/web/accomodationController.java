@@ -183,13 +183,12 @@ public class accomodationController {
 						
 		log.info("vo : "+vo);
 //		log.info(vo.getRoom_title());			
-		
 		model.addAttribute("vo", vo);
 		
 		session.setAttribute("userid", "admin");
 		session.setAttribute("username", "김영수");
 		session.setAttribute("useremail", "kld9223@naver.com");
-		session.setAttribute("priId", "ORD20180131-00000121");
+		session.setAttribute("priId", "O23213331231c");
 		session.setAttribute("usertel", "010-3795-9228");
 		session.setAttribute("userAddress", "부산광역시 금정구 금정로 233-21번길 한진스카이 아파트 1003호");
 		session.setAttribute("userPostCode", "46243");
@@ -210,11 +209,10 @@ public class accomodationController {
 //		log.info(vo.getRoom_title());			
 				
 		model.addAttribute("vo", vo);
-				
 		session.setAttribute("userid", "admin");
 		session.setAttribute("username", "김영수");
 		session.setAttribute("useremail", "kld9223@naver.com");
-		session.setAttribute("priId", "ORD20180131-00000121");
+		session.setAttribute("priId", "12312312dd-00000122");
 		session.setAttribute("usertel", "010-3795-9228");
 		session.setAttribute("userAddress", "부산광역시 금정구 금정로 233-21번길 한진스카이 아파트 1003호");
 		session.setAttribute("userPostCode", "46243");
@@ -226,14 +224,15 @@ public class accomodationController {
 		
 		// 결제 완료시 DB에 담기
 		// http://localhost:8088/accomodation/roomPaymentDB
-		@RequestMapping(value = "/roomPaymentDB" ,method = RequestMethod.POST)
-		public void roomPaymentDB(
+		@RequestMapping(value = "/roomPaymentDB" ,method = RequestMethod.GET)
+		public void roomPaymentDBGET(
 		roomPayVO vo) throws IOException {
 
-		log.info("roomPaymentDB() 호출");
+		log.info("roomPaymentDBGET() 호출");
 										
 		log.info("vo : "+vo);	
 						
+		service.roomPay(vo);
 						
 		}
 		

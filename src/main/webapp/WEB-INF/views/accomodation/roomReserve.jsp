@@ -175,7 +175,7 @@
                     <div class="breadcrumb-text">
                         <h2>예약항목 선택</h2>
                         <div class="bt-option">
-                            <a href="./home.html">Home</a>
+                            <a href="<%=request.getHeader("REFERER")%>">뒤로가기</a>
                             <span>${room_title}</span>
                         </div>
                     </div>
@@ -335,7 +335,6 @@
                            	<input type="hidden" name="room_pic" value="${roomReserve.get(a).room_pic}">
                            	<input type="hidden" name="checkout" value="${checkout}">
                            	<input type="hidden" name="checkin" value="${checkin}">
-                          
                            
                             <button type="submit" class="btn btn-primary">숙박 예약하기</button>
                             

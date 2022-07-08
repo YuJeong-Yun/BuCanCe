@@ -97,7 +97,7 @@ function selectAll(selectAll)  {
 		</div>
 		<nav class="mainmenu mobile-menu">
 			<ul>
-				<li class="active"><a href="./index.html">Home</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a></li>
 				<li><a href="./rooms.html">Rooms</a></li>
 				<li><a href="./about-us.html">About Us</a></li>
 				<li><a href="./pages.html">Pages</a>
@@ -356,8 +356,8 @@ function selectAll(selectAll)  {
 			         
 			              // 결제 실패 시 로직, 뒤로가기
 			              alert('취소');
-// 			              location.href="/accomodation/roomPayment";
-			              history.go(-2);
+			              //결제 실패시 뒤로가기
+			              location.href=document.getElementById("reload").value;
 			          }
 			      });
 			}
@@ -367,7 +367,8 @@ function selectAll(selectAll)  {
 function cancelPay() {
 	    	
 	    	alert('예약목록창으로 이동');
-	    	history.go(-1);
+	    	 //결제 실패시 뒤로가기
+            location.href=document.getElementById("reload").value;
 	    	
 	    }
 		

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+  <mapper namespace="com.bcc.mapper.RoomMapper">
+  
+
+  
+  	<insert id="insertRoom">
+  		insert into bcc_payment (merchant_uid,amount,pg,name
+  		,buyer_email,buyer_name,buyer_tel,buyer_addr,buyer_postcode)
+  		values(#{merchant_uid},#{amount},#{pg},#{name},#{buyer_email},#{buyer_name},#{buyer_tel},#{buyer_addr},#{buyer_postcode})
+  	</insert>
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
+  
