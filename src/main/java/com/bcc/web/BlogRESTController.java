@@ -1,6 +1,9 @@
 package com.bcc.web;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping(value = "/blog/*")
 public class BlogRESTController {
 
 
@@ -30,16 +34,16 @@ public class BlogRESTController {
 
 	// Naver API
 	@RequestMapping(value = "/getBlog", method = RequestMethod.GET)
-	public List getBlog(@RequestParam String TITLE, String GUGUN_NM, String start) throws Exception{
+	public List getBlog(@RequestParam String title, String start) throws Exception{
 		String clientId = "UedGUQNgMnXQN3xAYkO2"; //애플리케이션 클라이언트 아이디값"
 	    String clientSecret = "PKJuuL8BVC"; //애플리케이션 클라이언트 시크릿값"
 
 
-	    String text ="";
+	    String text = title;
 	    text = URLEncoder.encode(text, "UTF-8");
 
 
-	    String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text;
+	    String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text+"&start="+start;
 	    //String apiURL = "<https://openapi.naver.com/v1/search/blog.xml?query=>"+ text; // xml 결과
 
 
@@ -49,11 +53,16 @@ public class BlogRESTController {
 
 	    JSONObject jsonObj = new JSONObject();
 	    JSONParser parser = new JSONParser();
+	    
+	    log.info(get(apiURL,requestHeaders));
 
 	    jsonObj = (JSONObject) parser.parse(get(apiURL,requestHeaders));
 
 	    List list = new ArrayList();
-	    list.add(jsonObj.get(""));
+	    list.add(jsonObj.get("items"));
+	    list.add(jsonObj.get("total")); 
+	    
+	    log.info(jsonObj.get("items")+"");
 
 		return list;
 	}

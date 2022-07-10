@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.bcc.domain.BoardVO;
-import com.bcc.domain.Criteria;
+import com.bcc.domain.SearchCriteria;
 import com.bcc.persistence.BoardDAO;
 
 @Service
@@ -48,14 +48,13 @@ public class BoardServiceImpl implements BoardService{
 		}
 		//게시물 목록 조회
 		@Override
-		public List<BoardVO> list(Criteria cri) throws Exception {
-			return dao.list(cri);
+		public List<BoardVO> list(SearchCriteria scri) throws Exception {
+			return dao.list(scri);
 		}
 		//게시물 총 갯수
-
 		@Override
-		public int listCount() throws Exception {
-			return dao.listCount();
+		public int listCount(SearchCriteria scri) throws Exception {
+			return dao.listCount(scri);
 		}
 		
 	}

@@ -29,9 +29,10 @@ li {
 	<form class="navbar-form">
 		<div class="input-group">
 			<div class="form-group navbar-left">
-				<select id="category" name="category" onchange="search()">
-					<option value="전체">카테고리 선택</option>
-					<option value="강서구">강서구</option>
+				<select id="category" name="searchType" onchange="search()" >
+					<option value="tc"
+						<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>카테고리 선택</option>
+					<option value="강서구" value2="tc" <c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>강서구</option>
 					<option value="금정구">금정구</option>
 					<option value="기장군">기장군</option>
 					<option value="남구">남구</option>
@@ -49,15 +50,15 @@ li {
 					<option value="해운대구">해운대구</option>
 				</select>
 			</div>
-			<input type="text" class="form-control" placeholder="검색어를 입력하세요">
+			<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"  placeholder="검색어를 입력하세요"/>
 		</div>
 		<div class="input-group-btn">
-			<button class="btn btn-default" type="submit">
+			<button class="btn btn-default" type="submit" id="searchBtn">
 				검색 <i class="glyphicon glyphicon-search"></i>
 			</button>
-		</div>
+  </div>
 	</form>
-</div>
+		</div>
 <!-- Rooms Section Begin -->
 <section class="rooms-section spad">
 	<div class="container">
@@ -71,35 +72,37 @@ li {
 							<h4>${vo.PLACE }</h4>
 							<div>
 								<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>${vo.totalCount }<i
-									class="fa fa-commenting-o" aria-hidden="true"></i> 댓글 <i
+									class="fa fa-commenting-o" aria-hidden="true"></i><%-- ${vo.cno } --%> <i
 									class="fa fa-heart-o" aria-hidden="true"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
+</div>
 			<div class="box-footer clearfix">
-				<ul>
-					<c:if test="${pageMaker.prev}">
-						<li><a href="list?page=${pageMaker.startPage - 1}">이전</a></li>
-					</c:if>
+				<div>
+					<ul>
+						<c:if test="${pageMaker.prev}">
+							<li><a
+								href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+						</c:if>
 
-					<c:forEach begin="${pageMaker.startPage}"
-						end="${pageMaker.endPage}" var="idx">
-						<li
-							<c:out value=" ${pageMaker.cri.page == idx? 'class=active':''}"/>>
-							<a href="list?page=${idx}">${idx}</a>
-						</li>
-					</c:forEach>
+						<c:forEach begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}" var="idx">
+							<li><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
+						</c:forEach>
 
-					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-						<li><a href="list?page=${pageMaker.endPage + 1}">다음</a></li>
-					</c:if>
-				</ul>
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li><a
+								href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+						</c:if>
+					</ul>
+				</div>
+
+				<div></div>
 			</div>
-			<div></div>
 		</div>
-	</div>
 </section>
 <!-- Rooms Section End -->
 <jsp:include page="../include/footer.jsp" />
@@ -121,8 +124,12 @@ li {
 					$('#b-list').empty();
 					$.each(list, function(index, item) {
 						var listHTML = getListHTML(item);
-						$('#b-list').append(listHTML);
+						console.log(item);
+						if ((list.length - 1) == index) {
+						} else {
+							$('#b-list').append(listHTML);
 
+						}
 					});
 				},
 				error : function(err) {
@@ -138,9 +145,18 @@ li {
 				},
 				success : function(list) {
 					$('#b-list').empty();
+				 if(list[list.length-1].totalCount < list[list.length-1].cri.perPageNum){
+					
+						$('.clearfix').attr("hidden","true");
+					}else{
+						$('.clearfix').removeAttr("hidden");
+					}
+				 
 					$.each(list, function(index, item) {
+						if((list.length-1) !=index){
 						var listHTML = getListHTML(item);
 						$('#b-list').append(listHTML);
+						}
 
 					});
 				},
@@ -166,4 +182,11 @@ li {
 				+ '</div>' + '</div>' + '</div>';
 	}
 </script>
+  <script  type="text/javascript">
+      $(function(){
+        $('#searchBtn').click(function() {
+          self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
+        });
+      });   
+    </script>
 </html>

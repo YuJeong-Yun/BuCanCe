@@ -38,7 +38,7 @@
 		where GUGUN_NM = #{category}
 	</select>
 
-	<select id="listPage" resultType="BoardVO" >
+	<select id="listPage" resultType="BoardVO">
  		<![CDATA[
  		select * from tourist_spot
  		where num > 0
@@ -46,33 +46,38 @@
  		limit 0, 10
  		]]>
 	</select>
-	
+
 	<select id="listCri" resultType="BoardVO">
  		<![CDATA[
  		select * from tourist_spot
- 		where num > 0
+ 		where 1=1
+ 		]]>
+		<include refid="search"></include>	
+ 			<![CDATA[
+ 		and num > 0
  		order by num asc
  		limit #{pageStart}, #{perPageNum}
  		]]>
 	</select>
-	
+
 	<select id="listCount" resultType="int">
 	<![CDATA[
 		select count(num)
-		from tourist_spot where num > 0	
+		from tourist_spot where 1=1
 	]]>
+		<include refid="search"></include>	
+			<![CDATA[
+		and num > 0	
+		 ]]>
 	</select>
-
-<!-- 	<select id="search" resultType="BoardVO" parameterType="String">
+	
+	
+	<sql id="search">
 		<if test="searchType != null">
-			<if test="searchType == 't'.toString()">AND TITLE LIKE '%' || #{keyword} || '%'</if>
-			<if test="searchType == 'c'.toString()">AND CONTENT LIKE '%' || #{keyword} || '%'</if>
-			<if test="searchType == 'g'.toString()">AND GUGUN_NM LIKE '%' || #{keyword} || '%'</if>
-			<if test="searchType == 'tc'.toString()">AND (TITLE LIKE '%' || #{keyword} || '%') or (CONTENT
-				LIKE '%' || #{keyword} || '%')</if>
+			<if test="searchType == 't'.toString()">AND MAIN_TITLE LIKE CONCAT('%', #{keyword} ,'%')</if>
+			<if test="searchType == 'c'.toString()">AND ADDR1 LIKE '%' #{keyword} '%'</if>
+			<if test="searchType == 'tc'.toString()">AND (MAIN_TITLE LIKE '%' #{keyword} '%') or (ADDR1 LIKE '%' #{keyword} '%')</if>
 		</if>
-	</select>
- -->
+	</sql>
 
 </mapper>
-  
