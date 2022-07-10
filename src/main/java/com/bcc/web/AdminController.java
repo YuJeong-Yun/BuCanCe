@@ -42,5 +42,12 @@ public class AdminController {
 		
 		return "/admin/pmMembers";
 	}
+	
+	@RequestMapping(value = "/profitChart", method = RequestMethod.GET)
+	public String profitChartGET() {
+		
+		
+		return "/admin/profitChart";
+	}
 
 }

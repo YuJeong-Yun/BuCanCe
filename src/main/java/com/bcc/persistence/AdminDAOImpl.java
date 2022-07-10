@@ -50,6 +50,15 @@ public class AdminDAOImpl implements AdminDAO{
 		
 		return session.selectList(NAMESPACE+".onlyPeriodMems",dateMap);
 	}
+
+	@Override
+	public Integer getTrendChart(String date) {
+		Map<String, String> dateMap = new HashMap<String, String>();
+		dateMap.put("year", date.split(" ")[0]);
+		dateMap.put("month", date.split(" ")[1]);
+		
+		return session.selectOne(NAMESPACE+".trendChart",dateMap);
+	}
 	
 
 	

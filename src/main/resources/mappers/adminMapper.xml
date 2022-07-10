@@ -14,6 +14,11 @@
 		order by id
 	</select>
 	
+	<select id="trendChart" parameterType="hashMap" resultType="Integer">
+		select count(*) from premium_order
+		where year(success_date)=#{year} and month(success_date)=#{month}
+	</select>
+	
 	<select id="periodicPm" parameterType="hashMap" resultType="String">
 		select periodic_pm from premium_member 
 		where id in (select id from premium_order where year(success_date)=#{year} and month(success_date)=#{month})
@@ -26,5 +31,11 @@
 		and year(success_date)=#{year} and month(success_date)=#{month}
 		order by id
 	</select>
+	
+	
+	<!-- <select id="trendChart" parameterType="hashMap" resultType="hashMap">
+		select * from premium_order
+		where year(success_date)=#{year} and month(success_date) between (#{month}-4) and #{month}
+	</select> -->
 
 </mapper>  
