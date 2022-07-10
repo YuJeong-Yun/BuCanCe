@@ -1,10 +1,8 @@
 package com.bcc.service;
 
+import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
-import com.bcc.domain.LikeVO;
 import com.bcc.domain.MemberVO;
 
 
@@ -38,6 +36,10 @@ public interface MemberService {
     // license Down
 	public int liDown(String id);
     
-    
+	// 카카오 관련
+    // 토큰 받아오기
+	public String getAccessToken (String authorize_code);
+	
+	public HashMap<String, Object> getUserInfo(String access_Token);
     
 }

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bcc.domain.MemberVO;
-import com.bcc.service.KakaoService;
 import com.bcc.service.MemberService;
 
 @Controller
@@ -215,28 +213,7 @@ public class TestController {
 			return "/member/favorite";
 		}
 
-	    @Autowired
-	    private KakaoService ks;
-	    
-		// http://localhost:8088/kakao_login
-	    
-	    @RequestMapping("/kakao_login")
-	    public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception{
-	    	log.info("#########" + code);
-	        String access_Token = ks.getAccessToken(code);
-	        
-	        HashMap<String, Object> userInfo = ks.getUserInfo(access_Token);
-	        
-	        log.info("###access_Token#### : " + access_Token);
-	        log.info("###userInfo#### : " + userInfo.get("email"));
-	        log.info("###nickname#### : " + userInfo.get("nickname"));
-	        log.info("###profile_image#### : " + userInfo.get("profile_image"));
-	        
-//	        return "testPage";
-	        return "/member/loginForm";
-	    }
-	    
-	    // 아이디 체크
+		// 아이디 체크
 	    @PostMapping("/idCheck")
 	    @ResponseBody
 	    public int idCheck(@RequestParam("id") String id){
@@ -259,4 +236,18 @@ public class TestController {
 	        return liCnt;
 	    }
 	    
+		// http://localhost:8088/login	    
+		// http://localhost:8088/kakao_login
+		@RequestMapping(value="/kakao_login", method=RequestMethod.GET)
+		public String kakao_login(@RequestParam(value = "code", required = false) String code) throws Exception {
+			System.out.println("#########" + code);
+			String access_Token = service.getAccessToken(code);
+			HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
+			System.out.println("###access_Token#### : " + access_Token);
+			System.out.println("###nickname#### : " + userInfo.get("nickname"));
+			System.out.println("###email#### : " + userInfo.get("email"));
+
+			return "/member/loginForm";
+			
+	    	}
 }

@@ -47,24 +47,12 @@
 			<input type="submit" value="로그인" >
 			<input type="button" value="회원가입" onclick=" location.href='/insert';" >
 		</span>
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=c30d4acffaf14e6c0a33f269940ff070&redirect_uri=http://localhost:8088/kakao_login
+&response_type=code">
+		<img src="/resources/img/kakao_login_medium_narrow.png" style="height:60px"></a><br>
+		<a href="https://kauth.kakao.com/oauth/authorize?client_id=c30d4acffaf14e6c0a33f269940ff070&redirect_uri=http://localhost:8088/kakao_logout
+&response_type=code"><img src="/resources/img/kakao_login_medium_narrow.png" style="height:60px"></a>
 	</form>
-	    <a id="kakao-login-btn"></a>
-		<a href="http://developers.kakao.com/logout">Logout</a>
-	    <script type='text/javascript'>
-        Kakao.init('6f4aa7a7f682933ec08dc156f29cb9cf');
-        // 카카오 로그인 버튼을 생성합니다.
-        Kakao.Auth.createLoginButton({
-            container: '#kakao-login-btn',
-            success: function (authObj) {
-                alert(JSON.stringify(authObj));
-            },
-            fail: function (err) {
-                alert(JSON.stringify(err));
-            }
-        });
-
-		</script>
-
 </div>
 </div>
 </body>
