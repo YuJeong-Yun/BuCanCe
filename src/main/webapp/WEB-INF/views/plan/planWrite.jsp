@@ -50,9 +50,9 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
               <br>
               <input type="button" value="일정 선택" class="set-date">
             </div>
-            <div class="button-container">
-              <button class="reset">초기화</button>
-              <button class="save">저장</button>
+            <div class="btn-container">
+              <button class="btn--reset">초기화</button>
+              <button class="btn--save">저장</button>
             </div>
           </div>
           <div class="map-wrapper">
@@ -133,9 +133,12 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
       <ul class="date-plan-container hidden">
       </ul>
 
-
-
+      <div class="btn-container">
+      	<input type="button" value="최적 경로 찾기" class="best-path">
+    	<input type="button" value="길찾기" class="path">
+      </div>
     </div>
+    <p id="result"></p>
   </section>
 
 

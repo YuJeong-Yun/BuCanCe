@@ -75,14 +75,6 @@
 .grp-member .member-container li.menu span{
 	color: #efefef;
 }
-.grp-member .member-container li.add-member span{
-	font-size: 35px;
-	color: #efefef;
-	cursor: pointer;
-}
-.grp-member .member-container li.add-member span:hover {
-	transform: scale(1.05);
-}
 
 
 
@@ -129,7 +121,7 @@
 .make-plan .tour-container .tour-map .menu .choice-date .set-date:hover {
 	background-color: #ccc;
 }
-.make-plan .tour-container .tour-map .menu .button-container {
+.make-plan .tour-container .tour-map .menu .btn-container {
 	height: 35px;
 	position: absolute;
 	top: 0;
@@ -137,16 +129,16 @@
 	right: 10px;
 	margin: auto;
 }
-.make-plan .tour-container .tour-map .menu .button-container button {
+.make-plan .tour-container .tour-map .menu .btn-container button {
 	border: none;
 	box-shadow: 2px 2px 3px #bbb;
 	padding: 5px 10px;
 }
-.make-plan .tour-container .tour-map .menu .button-container .reset {
+.make-plan .tour-container .tour-map .menu .btn-container .btn--reset {
 	background-color: #efefef;
 	margin-right: 5px;
 }
-.make-plan .tour-container .tour-map .menu .button-container .save {
+.make-plan .tour-container .tour-map .menu .btn-container .btn--save {
 	background-color: #2679df;
 	color: #fff;
 }
@@ -263,7 +255,7 @@
 	background-color: #ddd;
 	display: flex;
 	position: relative;
-	height: 200px;
+	height: 210px;
 	box-shadow: 2px 2px 3px #aaa;
 	list-style: none;
 }
@@ -272,14 +264,14 @@
 .make-plan .date-plan-container .plan .plan__date {
 	background-color: #ddd;
 	width: 80px;
-	height: 30px;
+	height: 40px;
 	margin-right: 5px;
 	box-shadow: 2px 2px 3px #ccc;
 	text-align: center;
-	line-height: 30px;
+	line-height: 40px;
 }
 .make-plan .date-plan-container .plan .plan__date:hover {
-	background-color: #fff;
+	background-color: #f5f5f5;
 
 }
 .make-plan .date-plan-container .plan .plan__contents {
@@ -368,4 +360,27 @@
 }
 .make-plan .date-plan-container .plan .plan__contents > ul > li .delBtn:hover {
 	background-color: #bbb;
+}
+
+
+/* 길찾기 버튼 */
+.btn-container {
+	display: flex;
+	position: absolute;
+	bottom: 175px;
+	right: 10px;
+}
+.btn-container input {
+	background-color: #2679df;
+	color: #fff;
+	border: none;
+	height: 30px;
+	box-shadow: 2px 2px 3px #bbb;
+	font-size: 15px;
+}
+.btn-container .best-path {
+	margin-right: 7px;
+	background-color: #4fc3f7;
+}
+.btn-container .path {
 }
