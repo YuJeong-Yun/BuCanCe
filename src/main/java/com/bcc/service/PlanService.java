@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.bcc.domain.GrpAcceptVO;
+import com.bcc.domain.HotelVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
@@ -74,6 +75,9 @@ public interface PlanService {
 
 	// 전체 맛집 정보 가져오기
 	public List<RestaurantVO> getRestaurantList();
+
+	// 숙소 리스트 가져오기
+	public List<HotelVO> getHotelList();
 
 
 

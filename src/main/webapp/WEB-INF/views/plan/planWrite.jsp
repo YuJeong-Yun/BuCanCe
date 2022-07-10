@@ -94,6 +94,15 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
               </div>
               <div class="tour__contents hidden">
                 <ul>
+                	<c:forEach var="hotel" items="${hotellist }">
+	                  <li class="tour-item a${hotel.num }" onclick="selectTour(event)">
+	                    <img src="${hotel.img }" alt="" class="content__img" />
+	                    <div class="content__title">${hotel.title }</div>
+	                    <input type="hidden" value="${hotel.num }" class="num">
+	                    <input type="hidden" value="${hotel.lng }" class="lng">
+	                    <input type="hidden" value="${hotel.lat }" class="lat">
+	                  </li>
+	                </c:forEach>
                 </ul>
               </div>
             </li>

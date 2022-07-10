@@ -114,9 +114,9 @@ public class PlanController {
 		// 관광지 정보 저장
 		model.addAttribute("tourlist", service.getTourList());
 		// 맛집 정보
-		model.addAttribute("restlist", service.getRestaurantList());
+		model.addAttribute("restlist", service.getRestaurantList()); 
 		// 숙소 정보
-		
+		model.addAttribute("hotellist", service.getHotelList());
 		
 
 		return "/plan/planWrite";

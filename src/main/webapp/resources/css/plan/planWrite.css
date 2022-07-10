@@ -329,7 +329,7 @@
 }
 .make-plan .date-plan-container .plan .plan__contents > ul > li .hotel {
     position: absolute;
-    left: 5px;
+    right: 5px;
     top: 70px;
     z-index: 1;
     color: #507cdf;
