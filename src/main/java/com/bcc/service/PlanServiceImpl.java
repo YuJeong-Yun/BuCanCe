@@ -160,7 +160,6 @@ public class PlanServiceImpl implements PlanService {
 			vo.setLng(Double.parseDouble(lngLat.get(i).attr("data-alng")));
 			vo.setImg(titleImg.get(i).attr("data-original"));
 			vo.setTitle( titleImg.get(i).attr("alt"));
-			System.out.println(vo.getImg());
 			hotelList.add(vo);
 		}
 		return hotelList;

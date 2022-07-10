@@ -245,7 +245,7 @@ function selectTour(event) {
     '<img src="' + img + '" alt="" class="content__img" />' +
     '<div class="content__title">' + title + '</div>' +
     '<button class="delBtn" onclick="delSelectedTour(event,\'' + cNum + '\',\'lat\', \'lng\' )">x</button>' +
-    '<input type="hidden" value="' + num + '" class="num">' +
+    '<input type="hidden" value="' + cNum + '" class="num">' +
     '</div>';
   newTour.innerHTML = newTourInner;
   // 드래그 이벤트 추가 - 드래그한 요소 투명도 0.5로 설정
@@ -265,11 +265,36 @@ function selectTour(event) {
   const seq = calcDateSeq(); // 선택한 날짜가 몇 번째 날짜인지 계산
   addMarker(cNum, title, lng, lat, markerIcon, seq); // 지도에 마커 추가 & 해당하는 날짜 순서의 배열에 마커 정보 추가
 }; // selectTour()
+// 지도에서 마커 순서 다시 계산하는 함수 ---------------------------------------------------------------------------------------------------------------
+function calcTourSeq(seq) {
+  const tourListContainer = document.querySelectorAll('.date-plan-container > li')[seq];
+  const tourList = tourListContainer.querySelectorAll('li.plan-item .num');
+  // 사용자가 선택한 관광지 순서대로 cNum 담을 배열
+  let tourItems = [];
+  for(let i=0; i<tourList.length; i++) {
+    const cNum = tourList[i].value;
+    tourItems.push(cNum);
+  }
+  // 마커 순서 변경
+  let marker;
+  for (let i = 0; i < tourList.length; i++) {
+    const cNum = Object.keys(positions[seq])[i];
+    marker = positions[seq][cNum];
+
+    const label = "<span style='background-color: #46414E; color:white; padding:3px 8px; border-radius: 50%;'>" + (tourItems.indexOf(cNum)+1) + "</span>";
+    marker.setLabel(label);
+  }
+}; //calcTourSeq()
 function addDragging(event) {
   event.target.classList.add("dragging");
 }; // addDragging()
 function delDragging(event) {
   event.target.classList.remove("dragging");
+  // 지도에서 마커 순서 다시 표시
+  const seq = calcDateSeq();
+  calcTourSeq(seq);
+//  delDateMarker(seq);
+//  printDateMarker(seq);
 }; //delDragging()
 
 
@@ -299,12 +324,15 @@ var map = new Tmapv2.Map("map_div", {
 
 // 관광지 클릭하면 마커 추가하는 함수
 function addMarker(cNum, title, lng, lat, markerIcon, seq) {
+  // 선택한 날짜의 관광지 수
+  let length = Object.keys(positions[seq]).length + 1;
+
   // 마커 지도에 표시
   const newMarker = new Tmapv2.Marker({
     title: title,
     position: new Tmapv2.LatLng(lat, lng), //Marker의 중심좌표 설정.
     icon: markerIcon,
-    label: "<span style='background-color: #46414E;color:white'>" + title + "</span>", // 라벨 설정
+    label: "<span style='background-color: #46414E; color:white; padding:3px 8px; border-radius: 50%;'>" + length + "</span>", // 라벨 설정
     map: map //Marker가 표시될 Map 설정.
   });
 
@@ -317,6 +345,7 @@ function addMarker(cNum, title, lng, lat, markerIcon, seq) {
 function delDateMarker(seq) {
   // 기존 마커 지도에서 제거
   let delMarkers = Object.values(positions[seq]);
+  let delMarker;
   for (let i = 0; i < delMarkers.length; i++) { //for문을 통하여 배열 안에 있는 값을 마커 생성
     delMarker = delMarkers[i];
     delMarker.setMap(null);
@@ -329,11 +358,14 @@ function delOneMarker(seq, cNum) {
   markers.setMap(null);
   // 배열에서 제거
   delete positions[seq][cNum];
+  // 마커 순서 다시 설정
+  calcTourSeq(seq);
 }; // delOneMarker
 
 // 날짜 선택하면 해당 날짜에 선택한 일정 지도에 마커로 표시하는 함수
 function printDateMarker(seq) {
   let markers = Object.values(positions[seq]);
+  let marker;
   for (let i = 0; i < markers.length; i++) { //for문을 통하여 배열 안에 있는 값을 마커 생성
     marker = markers[i];
     marker.setMap(map);
