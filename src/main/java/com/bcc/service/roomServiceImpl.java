@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -21,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.bcc.domain.roomDate;
+import com.bcc.domain.roomPayVO;
 import com.bcc.domain.roomSearch;
 import com.bcc.persistence.roomDAO;
 
@@ -593,6 +595,14 @@ public class roomServiceImpl implements roomService{
 		Elements room_title = doc.select(".title");
 		Elements room_fcost = doc.select(".info .price:nth-child(1) > div > p:last-child");
 		Elements room_reserve = doc.select(".info > div > button");
+		Elements room_endtime = doc.select(".info .half:first-child .price > ul > li:first-child");
+		Elements room_usetime = doc.select(".info .half:first-child .price > ul > li:last-child");
+		Elements room_accendtime = doc.select(".info .half:last-child .price > ul > li:first-child");
+		Elements room_accusetime = doc.select(".info .half:last-child .price > ul > li:last-child");
+	
+		Elements room_accendtimes = doc.select(".info .fast .price > ul > li:first-child");
+		Elements room_accusetimes = doc.select(".info .fast .price > ul > li:last-child");
+		
 		
 		// JSON 형태로 영화 정보 저장
 		JSONArray roomList = new JSONArray();
@@ -603,23 +613,32 @@ public class roomServiceImpl implements roomService{
 
 			obj.put("room_pic", room_pic.get(i).attr("data-original"));
 			obj.put("room_title", room_title.get(i).text());
-
+			
 			
 			//표준시간내일과 입력받은 내일날짜가 같지않을때
 			if(!rd.getSel_date2().equals(tomorrow)) {
 				
 				//입력받은 날짜차이가 하루일때
 				if(diffrence==1) {
+					
 					obj.put("room_fcost", room_fcost.get(i*2).text().replaceAll("[^0-9]", ""));
 					obj.put("room_lcost", room_fcost.get((i*2)+1).text().replaceAll("[^0-9]", "")+"1");
 					obj.put("room_reserve1", room_reserve.get((i*2)).text());
 					obj.put("room_reserve2", room_fcost.get((i*2)+1).text().replaceAll("[^0-9]", "")+"1");
+					obj.put("room_endtime",room_endtime.get(i).text().replaceAll("[^0-9]",""));
+					obj.put("room_usetime",room_usetime.get(i).text().replaceAll("[^0-9]",""));
+					obj.put("room_accendtime",room_accendtime.get(i).text().replaceAll("[^0-9]",""));
+					obj.put("room_accusetime",room_accusetime.get(i).text().replaceAll("[^0-9]",""));
 				}//아닐때
 				else{
 					obj.put("room_fcost", "");
 					obj.put("room_lcost", room_fcost.get((i)).text().replaceAll("[^0-9]", "").substring(0, room_fcost.get((i)).text().replaceAll("[^0-9]", "").length()-1));
 					obj.put("room_reserve1", "");
 					obj.put("room_reserve2", room_reserve.get((i)).text().replaceAll("[^0-9]", ""));
+					obj.put("room_endtime","");
+					obj.put("room_usetime","");
+					obj.put("room_accendtime",room_accendtimes.get(i).text().replaceAll("[^0-9]",""));
+					obj.put("room_accusetime",room_accusetimes.get(i).text().replaceAll("[^0-9]","").substring(2));
 				}
 				
 			//입력받은 내일날짜와 표준날짜가 내일일때
@@ -628,6 +647,10 @@ public class roomServiceImpl implements roomService{
 				obj.put("room_lcost", room_fcost.get((i*2)+1).text().replaceAll("[^0-9]", "")+"1");
 				obj.put("room_reserve1", room_reserve.get((i*2)).text());
 				obj.put("room_reserve2", room_fcost.get((i*2)+1).text().replaceAll("[^0-9]", "")+"1");
+				obj.put("room_endtime",room_endtime.get(i).text().replaceAll("[^0-9]",""));
+				obj.put("room_usetime",room_usetime.get(i).text().replaceAll("[^0-9]",""));
+				obj.put("room_accendtime",room_accendtime.get(i).text().replaceAll("[^0-9]",""));
+				obj.put("room_accusetime",room_accusetime.get(i).text().replaceAll("[^0-9]",""));
 				
 				
 				
@@ -643,5 +666,33 @@ public class roomServiceImpl implements roomService{
 
 		return roomList;
 	}
+
+	
+	//결제 성공시 db에 입력
+	@Override
+	public void roomPay(roomPayVO vo) {
+		
+		dao.roomPaySuc(vo);
+		
+		
+	}
+
+	@Override
+	public roomPayVO roomPayInfo(String accId) {
+		
+		return dao.roomPayInfo(accId);
+	}
+
+	@Override
+	public List<roomPayVO> roomUserPayInfo(String userId) {
+		return dao.roomUserPayInfo(userId);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

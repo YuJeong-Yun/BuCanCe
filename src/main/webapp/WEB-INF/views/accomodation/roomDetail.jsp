@@ -14,10 +14,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-
-
-
 <!-- Google Font -->
 
 
@@ -60,6 +56,37 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
+
+<script>
+		
+		$(function(){
+			
+			$('#reserveBtn').click(
+					
+			function(){
+				var dateIn = document.getElementById("date-in").value;
+				var dateOut = document.getElementById("date-out").value;
+				
+				var day1 = new Date(dateIn);
+				var day2 = new Date(dateOut);
+				
+				var difference= Math.abs(day2-day1);
+				days = difference/(1000 * 3600 * 24);
+
+				alert(days);
+				
+			});
+			
+			
+			
+		});
+		
+		
+		
+		
+		
+		
+</script>
 </head>
 
 <body>
@@ -207,7 +234,7 @@
 					<div class="breadcrumb-text">
 						<h2>방 상세정보</h2>
 						<div class="bt-option">
-							<a href="./home.html">Home</a> <span>Rooms</span>
+							<a href="<%=request.getHeader("REFERER")%>">뒤로가기</a> <span>Rooms</span>
 						</div>
 					</div>
 				</div>
@@ -270,32 +297,12 @@
 											class="icon_star-half_alt"></i>
 									&nbsp; <h5> 별점 :${roomdetail.get(0).room_star_num} 점</h5></div>
 									
-									<a href="#">Booking Now</a>
+<!-- 									<a href="#">Booking Now</a> -->
 								</div>
 							</div>
-							<h2>${roomdetail.get(0).room_price}<span>/Won(원)</span>
-							</h2>
 							<table>
 								<tbody>
-									<tr>
-										<td class="r-o">Size:</td>
-										<td>30 ft</td>
-									</tr>
-									<tr>
-										<td><hr> <br></td>
-									</tr>
-									<tr>
-										<td class="r-o">Capacity:</td>
-										<td>Max persion 5</td>
-									</tr>
-									<tr>
-										<td><hr> <br></td>
-									</tr>
-									<tr>
-										<td class="r-o">Bed:</td>
-										<td>king beds</td>
-										<td>${roomdetail.get(0).room_a}</td>
-									</tr>
+									
 
 									<tr>
 										<td><hr> <br></td>
@@ -414,39 +421,78 @@
 					</div>
 				</div>
                                         
-            
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+                <script type="text/javascript">
+              
+                //최대 7박까지가능, 올바른 날짜 입력 유효성체크
+                $(document).ready(function(){
+            		
+            		$('#reserveBtn').click(function(){
+            			
+            				//날짜 차이를 구하는 구간
+            				function difference(date1, date2) {  
+            				  const date1utc = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+            				  const date2utc = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+            				    day = 1000*60*60*24;
+            				  return (date2utc - date1utc)/day
+            				}
+            				const date1 = new Date(document.getElementById("date-in").value);
+            				const date2 = new Date(document.getElementById("date-out").value);
+            			
+            				const time_difference = difference(date1,date2)
+							//날짜 차이를 구하는 구간	
+            				
+							
+            				//체크아웃을 당일날짜로 고르는 경우 
+            				function getFormatDate(date){
+            				    var year = date.getFullYear();              //yyyy
+            				    var month = (1 + date.getMonth());          //M
+            				    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+            				    var day = (1+date.getDate());                   //d
+            				    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+            				    return  year + '-' + month + '-' + day;
+            				}
+            				
+            				var bate = getFormatDate(date2);
+//             				alert(bate);
+            				//체크아웃을 당일날짜로 고르는 경우 
+            				
+            				if(1 <= parseInt(time_difference) && parseInt(time_difference) <= 7){
+            					dateForm.submit();
+            				}else if(parseInt(time_difference) == 0){
+            					document.getElementById("date-out").value=bate;
+            					dateForm.submit();
+            				}
+            				else{
+            					alert('올바른 날짜를 입력해주세요\n최대 7박까지 가능합니다.')
+            					
+            				}
+            			
+            		});// 버튼클릭 끝
+            		
+            		
+            	});
                 
+                
+                </script>
                 <div class="col-lg-4">
                     <div class="room-booking">
                       <h3>  <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId">요금정보</a></h3>
-                        <form action="${pageContext.request.contextPath}/accomodation/roomReserve" method="GET">
+                        <form action="${pageContext.request.contextPath}/accomodation/roomReserve" method="GET" name="dateForm">
                             <input type="hidden" name="bno" value="${bno}">
                             <input type="hidden" name="ano" value="${ano}">
+                            <input type="hidden" name="room_title" value="${roomdetail.get(0).room_title}">
                             <div class="check-date">
-                                <label for="date-in">체크인:${ano}</label>
+                                <label for="date-in">체크인</label>
                                 <input type="text" class="date-input" id="date-in" value="${param.sel_date}" name="sel_date">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
-                                <label for="date-out">체크 아웃:</label>
+                                <label for="date-out">체크 아웃</label>
                                 <input type="text" class="date-input" id="date-out" value="${param.sel_date2}" name="sel_date2">
                                 <i class="icon_calendar"></i>
                             </div>
-<!--                             <div class="select-option"> -->
-<!--                                 <label for="guest">인원수:</label> -->
-<!--                                 <select id="guest"> -->
-<!--                                     <option value="">2 Adults</option> -->
-<!--                                     <option value="">4 Adults</option> -->
-<!--                                     <option value="">6 Adults</option> -->
-<!--                                 </select> -->
-<!--                             </div> -->
-<!--                             <div class="select-option"> -->
-<!--                                 <label for="room">방 갯수:</label> -->
-<!--                                 <select id="room"> -->
-<!--                                     <option value="">1 Room</option> -->
-<!--                                 </select> -->
-<!--                             </div> -->
-                            <button type="submit">예약하기</button>
+                            <button type="button" id="reserveBtn">예약하기</button>
                         </form>
                     </div>
                 </div>

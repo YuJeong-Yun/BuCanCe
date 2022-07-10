@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+  <mapper namespace="com.bcc.mapper.RoomMapper">
+  
+
+  
+  	<insert id="insertRoom">
+  		insert into bcc_acc_payment (accId,accKind,accName,accAmount,userEmail,userName,userTel,userAddr,userPostcode,userId,sort,roomSort,endTime,useTime,checkIn,checkOut)
+  		values(#{accId},#{accKind},#{accName},#{accAmount},#{userEmail},#{userName},#{userTel},#{userAddr},#{userPostcode},#{userId},#{sort},#{roomSort},#{endTime},#{useTime},#{checkIn},#{checkOut})
+  	</insert>
+  
+  
+  
+  <select id="selectRoom" resultType="roomPayVO">
+  	select * from bcc_acc_payment where accId=#{accId}
+  </select>
+  
+  <select id="userPayList" resultType="roomPayVO">
+  	select * from bcc_acc_payment where userId=#{userId}
+  </select>
+  
+  
+  
+  </mapper>
+  

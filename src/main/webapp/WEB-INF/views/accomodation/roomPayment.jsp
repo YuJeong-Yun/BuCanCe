@@ -1,16 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
+<!-- <script type="text/javascript"> -->
+
+<!-- history.replaceState({}, null, location.pathname); -->
+
+<!-- </script> -->
+
 <meta charset="UTF-8">
 <meta name="description" content="Sona Template">
 <meta name="keywords" content="Sona, unica, creative, html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Sona | Template</title>
+<script>
+
+function selectAll(selectAll)  {
+	  const checkboxes 
+	       = document.getElementsByName('checkOne');
+	  
+	  checkboxes.forEach((checkbox) => {
+	    checkbox.checked = selectAll.checked;
+	  })
+	}
+</script>
 
 <!-- Google Font -->
 <link
@@ -51,16 +67,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
-
-<style>
-/*datepicker에서 사용한 이미지 버튼 style적용*/
-img.ui-datepicker-trigger {
-	margin-left: 5px;
-	vertical-align: middle;
-	cursor: pointer;
-}
-</style>
-
 </head>
 
 <body>
@@ -206,209 +212,276 @@ img.ui-datepicker-trigger {
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text">
-						<h2>부산 숙소</h2>
 						<div class="bt-option">
-							<a href="./home.html">Home</a> <span>숙소 정보</span>
+							<a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a> <span>결제페이지</span>
 						</div>
 					</div>
 				</div>
-
 			</div>
-
-
-
-<script type="text/javascript">
-
-
-//지역 select 고를때 동작
-function selectArea(){
-	
-	
-	
-	idForm.submit();
-	
-	
-	var input = document.getElementById("place_name"); 
-
-	input.value = null;
-	${select_place=""}
-	
-}
-
-
-	
-</script>
-
-			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm">
-				<select name="area" onchange="selectArea()" id="area">
-					<optgroup label="지역">
-						<option value="favorite"
-						<c:if test="${select_area=='favorite'}">selected</c:if>
-						>지역을 선택하세요.</option>
-						<option value="favorite"
-						<c:if test="${select_area=='favorite'}">selected</c:if>
-						>인기순</option>
-						<option 
-						<c:if test="${select_area=='해운대/재송'}">selected</c:if>
-						value="해운대/재송" >해운대/재송
-						</option>
-						<option value="송정/기장/정관"
-						<c:if test="${select_area=='송정/기장/정관'}">selected</c:if>
-						>송정/기장/정관</option>
-						<option value="서면/초읍/양정"
-						<c:if test="${select_area=='서면/초읍/양정'}">selected</c:if>
-						>서면/초읍/양정</option>
-						<option value="남포동/부산역/송도/영도/범일동"
-						<c:if test="${select_area=='남포동/부산역/송도/영도/범일동'}">selected</c:if>
-						>남포동/부산역/송도/영도/범일동</option>
-						<option value="광안리/수영/민락"
-						<c:if test="${select_area=='광안리/수영/민락'}">selected</c:if>
-						>광안리/수영/민락</option>
-						<option value="경성대/대연/용호/문현"
-						<c:if test="${select_area=='경성대/대연/용호/문현'}">selected</c:if>
-						>경성대/대연/용호/문현</option>
-						<option value="동래/온천장/부산대/구서/사직"
-						<c:if test="${select_area=='동래/온천장/부산대/구서/사직'}">selected</c:if>
-						>동래/온천장/부산대/구서/사직</option>
-						<option value="연산/토곡"
-						<c:if test="${select_area=='연산/토곡'}">selected</c:if>
-						>연산/토곡</option>
-						<option value="사상/"
-						<c:if test="${select_area=='사상/'}">selected</c:if>
-						>사상</option>
-						<option value="강서/하단/사하/명지/신호"
-						<c:if test="${select_area=='강서/하단/사하/명지/신호'}">selected</c:if>
-						>강서/하단/사하/명지/신호</option>
-						<option value="덕천/만덕/구포/화명/북구"
-						<c:if test="${select_area=='덕천/만덕/구포/화명/북구'}">selected</c:if>
-						>덕천/만덕/구포/화명/북구</option>
-					</optgroup>
-				</select> &nbsp; 
-
-
-<input type="text" placeholder="숙소명" name="place_name" id="place_name" value="${select_place}">
-<input type="submit" value="검색">
-
-	</form>
-
-		
-
 		</div>
 	</div>
 	<!-- Breadcrumb Section End -->
 
-	<!-- Rooms Section Begin -->
-	<section class="rooms-section spad">
+	<!-- Room Details Section Begin -->
+	<section class="room-details-section spad">
 		<div class="container">
 			<div class="row">
-				<c:set var="a" />
-				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
-				
-			
-					<div class="col-lg-4 col-md-6"  style="height: 550px">
-						<div class="room-item">
-							
-							<c:if test="${roomList.get(a).room_rank!=''}">
-							<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200">
-							</a>
-							</c:if>
-							
-							<c:if test="${roomList.get(a).room_rank==''}">
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200">
-							</c:if>
-							
-							
-							<div class="ri-text">
-								<h4>${roomList.get(a).room_title}</h4>
-								<table >
-									<tbody>
-										<tr >
-											<td class="r-o" style="color: green">평점:</td>
-											<td style="color: green">
-											<c:if test="${roomList.get(a).room_rank!=''}">
-											${fn:substring(roomList.get(a).room_rank,0,3)}점
-											</c:if>
-											<c:if test="${roomList.get(a).room_rank==''}">
-											미정
-											</c:if>
-											</td>
-										</tr>
-										<tr>
-											<td class="r-o">지역:</td>
-											<td>${roomList.get(a).room_area}</td>
-										</tr>
-										<tr>
-											<td class="r-o" style="color: blue">대실:</td>
-											<c:if test="${roomList.get(a).room_price!='숙소에 문의'}">
-													
-											<td  style="color: blue">${roomList.get(a).room_price}원</td>
-											</c:if>
-											<c:if test="${roomList.get(a).room_price=='숙소에 문의'}">
-											<td style="color: blue"> 미정 </td>
-											</c:if>
-										</tr>
-										<tr>
-											<td class="r-o" style="color: red">숙박:</td>
-											<c:if test="${roomList.get(a).room_price2!='숙소에 문의'}">
-											<td style="color: red">${roomList.get(a).room_price2} 원</td>
-											</c:if>
-											<c:if test="${roomList.get(a).room_price2=='숙소에 문의'}">
-											<td style="color: blue"> 미정 </td>
-											</c:if>
-											
-										</tr>
-									</tbody>
-								</table>
-								<c:if test="${roomList.get(a).room_rank!=''}">
-								<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}" class="primary-btn">
-								상세보기</a> 
-								</c:if>
-								
-								<c:if test="${roomList.get(a).room_rank==''}">
-								<a class="primary-btn"> 준비중 </a> 
-								</c:if>
-																
-								
-								<c:set var="a" value="${a=a+1}"/>
-								
-
+				<div class="col-lg-8">
+					<div class="room-details-item">
+						<img src="${vo.room_pic}" alt="" width="400">
+						<div class="rd-text">
+							<div class="rd-title">
+								<h3>${vo.room_title}</h3>
+								<div class="rdt-right">
+									
+									
+								</div>
 							</div>
+						
+							<table>
+								<tbody>
+									
+									<tr>
+									
+										<td class="r-o">예약명 <input type="text" placeholder="이름을 입력해주세요"
+											value="${username}"
+										></td>
+										<td><br> <br></td>
+									</tr>
+										<tr>
+										<td> <br></td>
+									</tr>
+									<tr>
+										<td class="r-o">결제수단</td>
+									</tr>
+
+									<tr>
+										<td><select id="payment-select" class="select_type_1" data-v-f785cca6="">
+										<option data-minprice="0" value="kakaopay" data-v-f785cca6="">
+										카카오페이</option>
+										<option data-minprice="0" value="tosspay" data-v-f785cca6="">
+										토스</option>
+										<option data-minprice="0" value="html5_inicis"  selected="selected"  data-v-f785cca6="">
+										신용/체크카드</option>
+										<option data-minprice="0" value="payco" data-v-f785cca6="">
+										PAYCO</option>
+										<option data-minprice="0" value="danal_tpay" data-v-f785cca6="">
+										휴대폰결제</option></select></td>
+									</tr>
+								</tbody>
+							</table>
+
+
+							<p class="f-para">
+							<hr>
+							<section class="agree" data-v-d63b628c="" data-v-f785cca6="">
+								<p class="all_check" data-v-d63b628c="">
+									<label data-v-d63b628c=""><input type="checkbox"
+										name="checkAll" value="selectAll" onclick="selectAll(this)"
+										class="inp_chk_02" data-v-d63b628c=""> <span
+										data-v-d63b628c="">전체 동의</span></label>
+								</p>
+								<p data-v-d63b628c="">
+									<input type="checkbox" name="checkOne" class="inp_chk_02" id="checkOne"
+										data-v-d63b628c=""> <span onclick="pop_agree_01();"
+										data-v-d63b628c=""><i data-v-d63b628c="">숙소이용규칙 및
+											취소/환불규정 동의</i><b data-v-d63b628c=""> (필수)</b></span>
+								</p>
+								<p data-v-d63b628c="">
+									<input type="checkbox" name="checkOne" class="inp_chk_02" id="checkTwo"
+										data-v-d63b628c=""> <span onclick="pop_agree_02();"
+										data-v-d63b628c=""><i data-v-d63b628c="">개인정보 수집 및
+											이용 동의</i><b data-v-d63b628c=""> (필수)</b></span>
+								</p>
+								<p data-v-d63b628c="">
+									<input type="checkbox" name="checkOne" class="inp_chk_02" id="checkThree"
+										data-v-d63b628c=""> <span onclick="pop_agree_03();"
+										data-v-d63b628c=""><i data-v-d63b628c="">개인정보 제 3자
+											제공 동의</i><b data-v-d63b628c=""> (필수)</b></span>
+								</p>
+								<p class="guest_chk_area" data-v-d63b628c="">
+									<input type="checkbox" name="checkOne" class="inp_chk_02" id="checkFour"
+										data-v-d63b628c=""> <span onclick="pop_agree_04();"
+										data-v-d63b628c=""><i data-v-d63b628c="">만 14세 이상
+											확인</i><b data-v-d63b628c=""> (필수)</b></span>
+								</p>
+							</section>
+
 						</div>
 					</div>
-				</c:forEach>
+
+				</div>
+				
+				
+				<!-- 아임포트 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript">
+
+		var IMP = window.IMP; // 생략 가능
+		IMP.init("imp49919207"); // 예: imp00000000
+
+		
+	    function requestPay() {
+			
+			if(!$('#checkOne').is(':checked')){
+				alert('숙소이용규칙 및 취소/환불규정에 동의가 필요합니다.');
+				
+			}else if(!$('#checkTwo').is(':checked')){
+				alert('개인정보 수집 및 이용 동의가 필요합니다.');
+			}
+			else if(!$('#checkThree').is(':checked')){
+				alert('개인정보 제 3자 제공 동의가 필요합니다.');
+			}
+			else if(!$('#checkFour').is(':checked')){
+				alert('만 14세 이상의 확인이 필요합니다.');
+			}else{
+				alert('결제를 시작합니다.');
+				   // IMP.request_pay(param, callback) 결제창 호출
+			      IMP.request_pay({ // param
+			    	  pg: $("#payment-select option:selected").val(),
+// 			          pay_method: "card",
+			          merchant_uid: "${priId}",  //고유 id
+			          name: '${vo.room_title}',  //상품이름
+// 			          amount: '${vo.room_fcost}', //가격
+			          amount: 100, //가격
+			          buyer_email: "${useremail}",
+			          buyer_name: "${username}",
+			          buyer_tel: "${usertel}",
+			          buyer_addr: "${userAddress}",
+			          buyer_postcode: "${userPostCode}",
+			      }, function (rsp) { // callback
+			          if (rsp.success) {
+			        	// http://localhost:8088/accomodation/roomList
+			              // 결제 성공 시 로직,
+			             alert('결제성공');
+			             $.ajax({
+			 				type:"GET",
+			 				url :"${pageContext.request.contextPath}/accomodation/roomPayDB",
+			 				data : {
+			 					accId: "${priId}",  //고유 id
+			 					accKind: $("#payment-select option:selected").val(),
+			 					accName: '${vo.room_title}',  //상품이름
+// 						        amount: '${vo.room_fcost}', //가격
+						        accAmount: 100, //가격
+						        userEmail: "${useremail}",
+						        userName: "${username}",
+						        userTel: "${usertel}",
+						        userAddr: "${userAddress}",
+						        userPostcode: "${userPostCode}",
+						        userId : "${userid}",
+						        sort : "ds",
+						        roomSort : "${vo.room_subTitle}",
+						        endTime : "${vo.endtime}",
+						        useTime : "${vo.usetime}",
+						        checkIn : "${vo.checkin}",
+						        checkOut : "${vo.checkout}"
+			 				},
+			 				contentType: "application/json",
+			 				success : function(data){
+			 					alert('성공');
+			 					
+			 					
+			 				}
+			 			
+			 			}); //ajax끝
+			 			
+			              //결제내역페이지로이동
+			             location.href= "${pageContext.request.contextPath}/accomodation/roomReComplete?accId="+"${priId}";	
+			          } else {
+			         	
+			              // 결제 실패 시 로직, 뒤로가기
+			              alert('결제실패');
+<%-- 			              alert(<%=request.getHeader("REFERER")%>); --%>
+			              
+			              //결제 실패시 뒤로가기
+			              location.href=document.getElementById("reload").value;
+			          }
+			      });
+			}
+			
+			
+	   
+	    }
+
+		
+		
+		
+	    function cancelPay() {
+	    	
+	    	alert('예약목록창으로 이동');
+	    	location.href=document.getElementById("reload").value;
+	    	
+	    }
+		
+		
+</script>
+	<!-- 아임포트 -->
+				
+				
+				
+				<div class="col-lg-4">
+					<div class="room-booking">
+						<h3>결제 정보</h3>
+						<form onSubmit="return false;">
+						<!-- 뒤로가기 할 주소 -->
+						<input type="hidden" value="<%=request.getHeader("REFERER")%>" id="reload">
+						<!-- 뒤로가기 할 주소 -->
+							<div class="check-date">
+								<label for="date-out">호텔명:</label> 
+								<input type="text" id="date-out"
+								value="${vo.room_title}" readonly
+								> <i class=""></i> 
+							</div>
+							<div class="check-date">
+								<label for="date-in">마감시간:</label>
+								 <input type="text"id="date-in" readonly
+								value="당일 ${vo.room_endtime} 시까지"
+								> <i class="icon_calendar"></i>
+							</div>
+							
+							<div class="check-date">
+								<label for="date-out">이용시간:</label> 
+								<input type="text"id="date-out" readonly
+								value="${vo.room_usetime} 시간"
+								
+								> <i class="icon_calendar"></i>
+							</div>
+							
+							<div class="check-date">
+								<label for="date-out">서명:</label> <input type="text"
+								value=${username }
+								
+									id="date-out"> <i class=""></i>
+							</div>
+							<div class="check-date">
+								<label for="date-out"><strong>총 결제 금액</strong></label> 
+								<input type="text" id="date-out"
+								value="${vo.room_fcost} 원" readonly> <i class=""></i>
+							</div>
 
 
-
-
-				<div class="col-lg-12">
-					<div class="room-pagination">
-
-<!-- 						<a href="#"><i class="fa fa-long-arrow-left"> Pre </i></a> -->
-
-<%-- 						<c:forEach begin="1" end="${Math.ceil(roomList.size()/9)}"> --%>
-<%-- 							<c:set var="PageNum" value="${PageNum+1 }" /> --%>
-
-<%-- 							<c:if test="${PageNum<=5}"> --%>
-
-<%-- 								<a href="/accomodation/roomList?PageNum=${PageNum}">${PageNum}</a> --%>
-
-<%-- 							</c:if> --%>
-
-
-<%-- 						</c:forEach> --%>
-
-<!-- 						<a href="#">Next <i class="fa fa-long-arrow-right"></i></a> -->
-
+							<button type="button" onclick="requestPay()">결제하기</button>
+							
+							<button type="button" onclick="cancelPay()">취소하기</button>
+						</form>
+						
+						
 					</div>
 				</div>
+			
+				
+				
 			</div>
 		</div>
+		
+		
+		
+		
 	</section>
+	<!-- Room Details Section End -->
 
 
-
-	<!-- Rooms Section End -->
 
 	<!-- Footer Section Begin -->
 	<footer class="footer-section">
@@ -500,8 +573,7 @@ function selectArea(){
 				<i class="icon_close"></i>
 			</div>
 			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">ocument
-				doc = null; // Document에 페이지의 전체
+				<input type="text" id="search-input" placeholder="Search here.....">
 			</form>
 		</div>
 	</div>
