@@ -18,6 +18,7 @@ public class roomPayVO {
 	private String useTime;
 	private String checkIn;
 	private String checkOut;
+	
 	public String getAccId() {
 		return accId;
 	}

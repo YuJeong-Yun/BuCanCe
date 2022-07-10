@@ -278,9 +278,23 @@ public class accomodationController {
 		
 		List<roomPayVO> list = service.roomUserPayInfo(userId);	
 				
+		log.info("payList : "+list);
+		
 		//해당 유저의 예약정보
 		model.addAttribute("UserPayList", list);
 				
 		}
+		
+		
+		//결제환불
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 }

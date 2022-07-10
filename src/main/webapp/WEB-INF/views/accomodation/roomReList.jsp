@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Sona Template">
@@ -187,40 +187,108 @@
     <section class="rooms-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
+            <c:set var="a" />
+				<c:forEach items="${UserPayList}" begin="0" end="${UserPayList.size()}">
+                <div class="col-lg-4 col-md-6" style="height: 550px">
                     <div class="room-item">
-<%--                         <img src="${pageContext.request.contextPath}/resources/img/room/room-1.jpg" alt=""> --%>
+                        <img src="${pageContext.request.contextPath}/resources/img/room/room-1.jpg" alt="">
                         <div class="ri-text">
-                            <h4>${UserPayList.get(0).accName}</h4>
-                            <h5>${UserPayList.get(0).roomSort }</h5>
+                            <h4>${UserPayList.get(a).accName}</h4>
+                            <h5>${UserPayList.get(a).roomSort}</h5>
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
+                                        <td class="r-o">예약명:</td>
+                                        <td>${UserPayList.get(a).userName}</td>
                                     </tr>
+                                   
+                                        <c:if test="${UserPayList.get(a).sort=='ds'}">
+                                        <tr>
+                                        <td class="r-o">종류:</td>
+                                        <td>대실</td>
+                                        </tr>
+                                        </c:if>
+                                        
+                                        
+                                        <c:if test="${UserPayList.get(a).sort=='acc'}">
+                                        <tr>
+                                        <td class="r-o">종류:</td>
+                                       <td>숙박</td>
+                               		  </tr>
+                               		  
+                               		   </c:if>
+                                    
+                                    
+                                    
                                     <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 3</td>
+                                        <td class="r-o">기간 :</td>
+                                        <td>${UserPayList.get(a).checkIn} ~ ${UserPayList.get(a).checkOut}</td>
                                     </tr>
+                                    
+                                    
                                     <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
+                                    
+                                    <c:if test="${UserPayList.get(a).sort=='ds'}">
+                                        <td class="r-o">마감/이용시간 :</td>
+                                        <td>${UserPayList.get(a).endTime}시 , ${UserPayList.get(a).useTime}시간</td>
+                                 	</c:if>
+                                 	
+                                    <c:if test="${UserPayList.get(a).sort=='acc'}">
+                                        <td class="r-o">입실/퇴실시간 :</td>
+                                        <td>${UserPayList.get(a).useTime}시 , ${UserPayList.get(a).endTime}시</td>
+                                 	</c:if>
+                                 	
                                     </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
+                                    
+                                    
+                                     <tr>
+                                        <td class="r-o">비용 :</td>
+                                        <td>${UserPayList.get(a).accAmount}원</td>
                                     </tr>
+                                    
                                 </tbody>
                             </table>
-                            <a href="#" class="primary-btn">예약취소</a>
+                            <button onclick="cancelPay()">환불하기</button>
+                       
+                          <c:set var="a" value="${a=a+1}"/>
+                       </div>
+						</div>
                         </div>
+             <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script><!-- jQuery CDN --->
+<script>
+  function cancelPay() {
+    jQuery.ajax({
+//       "url": "{환불요청을 받을 서비스 URL}", // 예: http://www.myservice.com/payments/cancel
+      "type": "POST",
+      "contentType": "application/json",
+      "data": JSON.stringify({
+        "merchant_uid": "{결제건의 주문번호}", // 예: ORD20180131-0000011
+        "cancel_request_amount": "${UserPayList.get(a).accAmount}", // 환불금액
+        "reason": "테스트 결제 환불" // 환불사유
+        "refund_holder": "${UserPayList.get(a).userName}", // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
+        "refund_bank": "88" // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
+        "refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
+      }),
+      "dataType": "json"
+    });
+  }
+</script>           
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </c:forEach>
+                        <div class="col-lg-12">
+					<div class="room-pagination">
+                        
                     </div>
                 </div>
-                
-               
-                  
-               
+             
             </div>
         </div>
     </section>
