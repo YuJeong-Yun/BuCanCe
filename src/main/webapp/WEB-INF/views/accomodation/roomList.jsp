@@ -52,6 +52,11 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
 
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/yd.css"
+	type="text/css">
+
+
 <style>
 /*datepicker에서 사용한 이미지 버튼 style적용*/
 img.ui-datepicker-trigger {
@@ -201,14 +206,14 @@ img.ui-datepicker-trigger {
 	<!-- Header End -->
 
 	<!-- Breadcrumb Section Begin -->
-	<div class="breadcrumb-section" >
+	<div class="breadcrumb-section" style="">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text">
 						<h2>부산 숙소</h2>
 						<div class="bt-option">
-							<a href="./home.html">Home</a> <span>숙소 정보</span>
+							<a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a> <span>숙소 정보</span>
 						</div>
 					</div>
 				</div>
@@ -286,8 +291,14 @@ function selectArea(){
 				</select> &nbsp; &nbsp; &nbsp; 
 
 
-<input type="text" placeholder="숙소명" name="place_name" id="place_name" value="${select_place}" style="height: 37px">
-<input type="submit" value="검색" style="height: 37px">
+<input type="text" name="place_name" id="place_name" value="${select_place}" required spellcheck="false">
+
+
+<script type="text/javascript">
+
+</script>
+
+<input type="submit" value="검색" style="height: 37px;">
 
 	</form>
 
@@ -298,15 +309,15 @@ function selectArea(){
 	<!-- Breadcrumb Section End -->
 
 	<!-- Rooms Section Begin -->
-	<section class="rooms-section spad">
+	<section class="rooms-section spad" >
 		<div class="container">
 			<div class="row">
 				<c:set var="a" />
 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
 				
 			
-					<div class="col-lg-4 col-md-6"  style="height: 550px">
-						<div class="room-item">
+					<div class="col-lg-4 col-md-6"  style="height: 550px;">
+						<div class="room-item" style="border-radius: 2em;">
 							
 							<c:if test="${roomList.get(a).room_rank!=''}">
 							<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
@@ -384,21 +395,7 @@ function selectArea(){
 				<div class="col-lg-12">
 					<div class="room-pagination">
 
-<!-- 						<a href="#"><i class="fa fa-long-arrow-left"> Pre </i></a> -->
 
-<%-- 						<c:forEach begin="1" end="${Math.ceil(roomList.size()/9)}"> --%>
-<%-- 							<c:set var="PageNum" value="${PageNum+1 }" /> --%>
-
-<%-- 							<c:if test="${PageNum<=5}"> --%>
-
-<%-- 								<a href="/accomodation/roomList?PageNum=${PageNum}">${PageNum}</a> --%>
-
-<%-- 							</c:if> --%>
-
-
-<%-- 						</c:forEach> --%>
-
-<!-- 						<a href="#">Next <i class="fa fa-long-arrow-right"></i></a> -->
 
 					</div>
 				</div>
