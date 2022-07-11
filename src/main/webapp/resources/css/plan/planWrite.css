@@ -175,6 +175,7 @@
 	right: 30px;
 	bottom: 0;
 	margin: auto;
+	cursor: pointer;
 }
 /* 관광지 목록 */
 .make-plan .tour-container .tour-list-container ul.tour-list {
@@ -221,6 +222,10 @@
 	list-style: none;
 	overflow: auto;
 	z-index: 1;
+}
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul.search-result {
+	background-color: #8fb1db;
+	z-index: 2;
 }
 .make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul > li {
 	display: flex;

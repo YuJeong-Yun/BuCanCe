@@ -79,7 +79,8 @@ public interface PlanService {
 	// 숙소 리스트 가져오기
 	public List<HotelVO> getHotelList();
 
-
-
+	// 카테고리별 검색 결과 가져오기
+	public List<Object> getSearchList(String category, String keyword, List<HotelVO> hotellist);
+	
 
 }

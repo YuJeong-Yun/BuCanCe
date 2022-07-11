@@ -115,14 +115,13 @@ public class PlanController {
 		// 맛집 정보
 		model.addAttribute("restlist", service.getRestaurantList());
 
+		// 숙소 정보
 		// 크롤링에 시간이 오래 걸려서 세션에 저장하고 사용
 		if (session.getAttribute("hotellist") == null) {
 			// 숙소 정보 세션에 저장
 			session.setAttribute("hotellist", service.getHotelList());
 			log.info("숙소 정보 세션 저장 완료");
 		}
-		// 숙소 정보
-		model.addAttribute("hotellist", session.getAttribute("hotellist"));
 
 		return "/plan/planWrite";
 	}

@@ -184,6 +184,98 @@ function selectDate(event) {
 
 
 
+/////////////////////////////////////////// 검색 ////////////////////////////////////////////////
+const searchIcon = document.querySelector('.search-container .search-icon');
+
+searchIcon.addEventListener('click', showSearhResult);
+
+// 검색 결과 보여주는 함수
+function showSearhResult() {
+  // 입력값 받아오기
+  const userInput = document.querySelector('.search-container .search').value.trim();
+  // 공백 입력하면 작동 xx
+  if (userInput == '') {
+    alert('검색어를 입력하세요.');
+    return;
+  }
+
+  // 현재 선택된 카테고리
+  const selectedCategory = document.querySelector('.tour__title.tour-active'); // 현재 선택된 카테고리
+  let category = selectedCategory.innerText.substring(0, 1); // 관광지:m , 숙소:b, 맛집:r
+  if (category == 'm') {
+    category = 't';
+  } else if (category == 'b') {
+    category = 'a';
+  }
+  // 선택한 카테고리 검색 결과창 보이기
+  const resultContainer = selectedCategory.nextElementSibling.querySelector('.search-result');
+  resultContainer.classList.remove('hidden');
+
+  // 기존 검색 결과값 삭제
+  while (resultContainer.firstChild) {
+    resultContainer.removeChild(resultContainer.lastChild);
+  }
+
+  $.ajax({
+    url: path + '/planREST/searchTour',
+    type: 'get',
+    data: {
+      category: category,
+      keyword: userInput
+    },
+    success: function (data) {
+      addSearchResultTour(data, category, resultContainer);
+      if(data.length == 0) {
+        resultContainer.innerHTML = '<div style="padding:20px; color: #fff;">검색 결과가 없습니다.</div>';
+      }
+    },
+    error: function () {
+      alert('검색 오류!!');
+    }
+  }); //ajax
+}; //showSearchResult()
+// 검색 결과 관광지 출력하는 함수
+function addSearchResultTour(data, category, resultContainer) {
+  let tour;
+  let tourItem; // 관광지에서 선택되어있는지 확인하기 위해 쓰는 변수
+  for (let i = 0; i < data.length; i++) {
+    tour = data[i];
+
+    // 이미 선택된 관광지는 출력 X
+    tourItem = document.querySelector('.tour-item.' + category + tour.num);
+    console.log('.tour-item.' + category + tour.num);
+    if (tourItem.classList.contains('hidden')) {
+      continue;
+    }
+
+    let img;
+    let title = tour.title;
+    if (category == 't') { // 관광지
+      img = tour.main_img_thumb;
+      title = tour.main_title;
+    } else if (category == 'a') { // 숙소
+      img = tour.img;
+    } else { // category == 'r'  맛집
+      img = tour.thumb_img;
+    }
+
+    const searchPlan = document.createElement('li');
+    searchPlan.classList.add('tour-item');
+    searchPlan.classList.add(category + tour.num);
+    searchPlan.addEventListener('click', selectTour);
+    let searchPlanInner =
+      '<img src ="' + img + '" alt="" class="content__img" />' +
+      '<div class="content__title">' + title + '</div>' +
+      '<input type="hidden" value="' + tour.num + '" class="num">' +
+      '<input type="hidden" value="' + tour.lng + '" class="lng">' +
+      '<input type="hidden" value="' + tour.lat + '" class="lat">';
+    searchPlan.innerHTML = searchPlanInner;
+    console.log(searchPlan);
+    resultContainer.append(searchPlan);
+  }
+}
+
+
 /////////////////////////////////////////// 관광지 리스트 ////////////////////////////////////////
 let selectedTourArr = [];
 
@@ -194,9 +286,19 @@ function selectCategory(event) {
     item.classList.remove('tour-active');
     item.nextElementSibling.classList.add('hidden');
   });
-
+  // 선택한 카테고리 관광지 리스트 출력
   event.target.classList.add('tour-active');
   event.target.nextElementSibling.classList.remove('hidden');
+
+  const resultContainer = document.querySelectorAll('.tour-list .tour__contents .search-result');
+  resultContainer.forEach(item => {
+    // 검색 결과창 비우기
+    while (item.firstChild) {
+      item.removeChild(item.lastChild);
+    }
+    // 검색 결과창 닫기
+    item.classList.add('hidden');
+  });
 }; // selectCategory()
 
 
@@ -229,6 +331,7 @@ function selectTour(event) {
   const cNum = event.target.classList[1]; // 카테고리+num
   // 선택한 관광지는 리스트에서 숨기기
   event.target.classList.add('hidden');
+  document.querySelector('.tour-item.' + cNum).classList.add('hidden'); // 검색 결과에서 선택했을 경우 전체 관광 리스트에서도 제거해야됨
 
   // 관광지 li 태그 생성해서 일정칸에 추가
   const newTour = document.createElement('li');

@@ -113,22 +113,32 @@ public class PlanDAOImpl implements PlanDAO {
 
 	@Override
 	public String getNextLeader(int grp_num) {
-		return sqlSession.selectOne(NAMESPACE+".getNextLeader", grp_num);
+		return sqlSession.selectOne(NAMESPACE + ".getNextLeader", grp_num);
 	}
 
 	@Override
 	public void updateLeader(PlanVO plan) {
-		sqlSession.update(NAMESPACE+".updateLeader", plan);
+		sqlSession.update(NAMESPACE + ".updateLeader", plan);
 	}
 
 	@Override
 	public List<TourPlaceVO> getTourList() {
-		return sqlSession.selectList(NAMESPACE+".getTourList");
+		return sqlSession.selectList(NAMESPACE + ".getTourList");
 	}
 
 	@Override
 	public List<RestaurantVO> getRestaurantList() {
-		return sqlSession.selectList(NAMESPACE+".getRestaurantList");
+		return sqlSession.selectList(NAMESPACE + ".getRestaurantList");
+	}
+
+	@Override
+	public List<TourPlaceVO> getTourSearch(String keyword) {
+		return sqlSession.selectList(NAMESPACE + ".getTourSearch", keyword);
+	}
+
+	@Override
+	public List<RestaurantVO> getRestaurantSearch(String keyword) {
+		return sqlSession.selectList(NAMESPACE + ".getRestaurantSearch", keyword);
 	}
 
 }

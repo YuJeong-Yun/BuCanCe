@@ -63,8 +63,8 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
         <div class="tour-list-container">
           <!--검색창-->
           <div class="search-container">
-            <input type="text" name="search" class="search">
-            <span class="material-icons-outlined search-icon">search</span>
+           	<input type="text" name="search" class="search"  onKeypress="javascript:if(event.keyCode==13) {showSearhResult();}">
+           	<span class="material-icons-outlined search-icon">search</span>
           </div>
           <!--관광지 리스트-->
           <ul class="tour-list">
@@ -85,6 +85,8 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	                  </li>
 	                </c:forEach>
                 </ul>
+                <ul class="search-result hidden">
+                </ul>
               </div>
             </li>
             <!--숙박-->
@@ -104,6 +106,8 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	                  </li>
 	                </c:forEach>
                 </ul>
+                <ul class="search-result hidden">
+                </ul>
               </div>
             </li>
             <!--맛집-->
@@ -122,6 +126,8 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	                    <input type="hidden" value="${rest.lat }" class="lat">
 	                  </li>
 	                </c:forEach>
+                </ul>
+                <ul class="search-result hidden">
                 </ul>
               </div>
             </li>

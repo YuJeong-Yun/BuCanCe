@@ -74,5 +74,11 @@ public interface PlanDAO {
 	// 전체 맛집 정보 가져오기
 	public List<RestaurantVO> getRestaurantList();
 
+	// 관광지 검색 결과
+	public List<TourPlaceVO> getTourSearch(String keyword);
+
+	// 맛집 검색 결과
+	public List<RestaurantVO> getRestaurantSearch(String keyword);
+
 
 }

@@ -165,6 +165,28 @@ public class PlanServiceImpl implements PlanService {
 		return hotelList;
 	}
 
+	@Override
+	public List<Object> getSearchList(String category, String keyword, List<HotelVO> hotellist) {
+		List searchList;
+		// 선택 카테고리별로 검색 결과 반환
+		if(category.equals("t")) { // 관광지 검색
+			searchList = dao.getTourSearch(keyword);
+			
+		}else if(category.equals("a")) { // 숙소 검색
+			searchList = new ArrayList<HotelVO>();
+			for(HotelVO vo : hotellist) {
+				String title = vo.getTitle();
+				if(title.contains(keyword)) {
+					searchList.add(vo);
+				}
+			} //for
+			
+		}else { // category.equals("r") -> 맛집 검색
+			searchList = dao.getRestaurantSearch(keyword);
+		}
+		return searchList;
+	}
+
 
 
 
