@@ -51,7 +51,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
               <input type="button" value="일정 선택" class="set-date">
             </div>
             <div class="btn-container">
-              <button class="btn--reset">초기화</button>
+              <button class="btn--reset">선택 초기화</button>
               <button class="btn--save">저장</button>
             </div>
           </div>

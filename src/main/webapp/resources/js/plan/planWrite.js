@@ -61,14 +61,13 @@ function checkDate() {
   while (datePlanContainer.firstChild) {
     datePlanContainer.removeChild(datePlanContainer.lastChild);
   }
+  // 경로 제거
+  if (new_polyLine.length > 0) {
+    delPath();
+  }
 
   // 지도에 생성한 마커 초기화
-  for (let i = 0; i < positions.length; i++) {
-    delDateMarker(i);
-  }
-  positions = []; // 마커 배열 초기화
-  orderedTour = []; // 마커 순서 담은 배열 초기화
-
+  delAllMarker();
 
   const year = startDateS.substring(0, 4);
   let month = Number(startDateS.substring(5, 7)); // 07 -> 7 로 받아옴 (숫자 앞에 0 제거)
@@ -346,6 +345,17 @@ function addMarker(cNum, title, lng, lat, markerIcon, seq) {
 }; // addMarker()
 
 
+
+// 지도에서 전체 마커 제거
+function delAllMarker() {
+  // 지도에 생성한 마커 초기화
+  for (let i = 0; i < positions.length; i++) {
+    delDateMarker(i);
+  }
+  positions = []; // 마커 배열 초기화
+  orderedTour = []; // 마커 순서 담은 배열 초기화
+}; //delAllMarker()
+
 // 선택 날짜의 지도에 보이던 마커 제거하는 함수
 function delDateMarker(seq) {
   // 기존 마커 지도에서 제거
@@ -356,6 +366,7 @@ function delDateMarker(seq) {
     delMarker.setMap(null);
   }
 }; // delDateMarker
+
 // 단일 마커 제거하는 함수
 function delOneMarker(seq, cNum) {
   // 지도에서 마커 제거
@@ -386,6 +397,45 @@ function printDateMarker(seq) {
 const resetBtn = document.querySelector('.btn-container .btn--reset');
 const saveBtn = document.querySelector('.btn-container .btn--save');
 
+resetBtn.addEventListener('click', resetSelectedTour);
+saveBtn.addEventListener('click', savePlan);
+
+// 선택한 관광지 초기화 (일정은 그대로 둠)
+function resetSelectedTour() {
+  // 지도에서 전체 마커 초기화
+  delAllMarker();
+
+  // 마커 초기화하면서 마커 담을 배열 칸도 사라짐.
+  // -> 마커 정보 담을 배열 칸 생성
+  const length = document.querySelectorAll('.date-plan-container li.plan').length;
+  for (let i = 0; i < length; i++) {
+    positions.push({}); // 마커 객체 일정 만큼 추가
+    orderedTour.push([]); // 마커 순서 담은 배열 일정만큼 추가
+  }
+
+  // 선택한 관광지 제거
+  const allSelectedTour = document.querySelectorAll('.date-plan-container .plan__contents .plan-item');
+  for (let i = 0; i < allSelectedTour.length; i++) {
+    allSelectedTour[i].remove();
+  }
+
+  // 숨겨진 관광지 목록에 다시 출력
+  const allHiddenTour = document.querySelectorAll('.tour .tour__contents .tour-item.hidden');
+  for (let i = 0; i < allHiddenTour.length; i++) {
+    allHiddenTour[i].classList.remove('hidden');
+  }
+
+  // 경로 제거
+  if (new_polyLine.length > 0) {
+    delPath();
+  }
+}; //resetSelectedTour()
+
+
+// 선택한 관광지 저장
+function savePlan() {
+
+}; //savePlan
 
 
 
@@ -427,6 +477,7 @@ function drawData(data) {
         strokeWeight: 6,
         map: map
       });
+      console.log(new_polyLine.indexOf(polyline));
       new_polyLine.push(polyline);
     }
     var pointId2 = feature.properties.viaPointId;
@@ -561,8 +612,6 @@ function showPath() {
         title: "this is a red line"
       };
       drawData(prtcl);
-
-
     },
     error: function (request, status, error) {
       console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
