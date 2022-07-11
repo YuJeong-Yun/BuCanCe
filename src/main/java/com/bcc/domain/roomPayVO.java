@@ -2,79 +2,145 @@ package com.bcc.domain;
 
 public class roomPayVO {
 
-	private String pg;
-	private String merchant_uid;
-	private String name;
-	private int amount;
-	private String buyer_email;
-	private String buyer_name;
-	private String buyer_tel;
-	private String buyer_addr;
-	private String  buyer_postcode;
+	private String accId;
+	private String accKind;
+	private String accName;
+	private int accAmount;
+	private String userEmail;
+	private String userName;
+	private String userTel;
+	private String userAddr;
+	private String userPostcode;
+	private String userId;
+	private String sort;
+	private String roomSort;
+	private String endTime;
+	private String useTime;
+	private String checkIn;
+	private String checkOut;
+	private String status;
+	private String accDate;
 	
-	
-	
-	public int getAmount() {
-		return amount;
+	public String getAccId() {
+		return accId;
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setAccId(String accId) {
+		this.accId = accId;
 	}
-	public String getPg() {
-		return pg;
+	public String getAccKind() {
+		return accKind;
 	}
-	public void setPg(String pg) {
-		this.pg = pg;
+	public void setAccKind(String accKind) {
+		this.accKind = accKind;
 	}
-	public String getMerchant_uid() {
-		return merchant_uid;
+	public String getAccName() {
+		return accName;
 	}
-	public void setMerchant_uid(String merchant_uid) {
-		this.merchant_uid = merchant_uid;
+	public void setAccName(String accName) {
+		this.accName = accName;
 	}
-	public String getName() {
-		return name;
+	public int getAccAmount() {
+		return accAmount;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setAccAmount(int accAmount) {
+		this.accAmount = accAmount;
 	}
-	public String getBuyer_email() {
-		return buyer_email;
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setBuyer_email(String buyer_email) {
-		this.buyer_email = buyer_email;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
-	public String getBuyer_name() {
-		return buyer_name;
+	public String getUserName() {
+		return userName;
 	}
-	public void setBuyer_name(String buyer_name) {
-		this.buyer_name = buyer_name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public String getBuyer_tel() {
-		return buyer_tel;
+	public String getUserTel() {
+		return userTel;
 	}
-	public void setBuyer_tel(String buyer_tel) {
-		this.buyer_tel = buyer_tel;
+	public void setUserTel(String userTel) {
+		this.userTel = userTel;
 	}
-	public String getBuyer_addr() {
-		return buyer_addr;
+	public String getUserAddr() {
+		return userAddr;
 	}
-	public void setBuyer_addr(String buyer_addr) {
-		this.buyer_addr = buyer_addr;
+	public void setUserAddr(String userAddr) {
+		this.userAddr = userAddr;
 	}
-	public String getBuyer_postcode() {
-		return buyer_postcode;
+	public String getUserPostcode() {
+		return userPostcode;
 	}
-	public void setBuyer_postcode(String buyer_postcode) {
-		this.buyer_postcode = buyer_postcode;
+	public void setUserPostcode(String userPostcode) {
+		this.userPostcode = userPostcode;
 	}
-	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+	public String getRoomSort() {
+		return roomSort;
+	}
+	public void setRoomSort(String roomSort) {
+		this.roomSort = roomSort;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	public String getUseTime() {
+		return useTime;
+	}
+	public void setUseTime(String useTime) {
+		this.useTime = useTime;
+	}
+	public String getCheckIn() {
+		return checkIn;
+	}
+	public void setCheckIn(String checkIn) {
+		this.checkIn = checkIn;
+	}
+	public String getCheckOut() {
+		return checkOut;
+	}
+	public void setCheckOut(String checkOut) {
+		this.checkOut = checkOut;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getAccDate() {
+		return accDate;
+	}
+	public void setAccDate(String accDate) {
+		this.accDate = accDate;
+	}
 	@Override
 	public String toString() {
-		return "roomPayVO [pg=" + pg + ", merchant_uid=" + merchant_uid + ", name=" + name + ", amount=" + amount
-				+ ", buyer_email=" + buyer_email + ", buyer_name=" + buyer_name + ", buyer_tel=" + buyer_tel
-				+ ", buyer_addr=" + buyer_addr + ", buyer_postcode=" + buyer_postcode + "]";
+		return "roomPayVO [accId=" + accId + ", accKind=" + accKind + ", accName=" + accName + ", accAmount="
+				+ accAmount + ", userEmail=" + userEmail + ", userName=" + userName + ", userTel=" + userTel
+				+ ", userAddr=" + userAddr + ", userPostcode=" + userPostcode + ", userId=" + userId + ", sort=" + sort
+				+ ", roomSort=" + roomSort + ", endTime=" + endTime + ", useTime=" + useTime + ", checkIn=" + checkIn
+				+ ", checkOut=" + checkOut + ", status=" + status + ", accDate=" + accDate + "]";
 	}
+	
+	
+	
+	
 	
 	
 }

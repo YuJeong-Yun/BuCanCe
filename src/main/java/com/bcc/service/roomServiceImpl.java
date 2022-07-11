@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import com.bcc.domain.roomDate;
 import com.bcc.domain.roomPayVO;
+import com.bcc.domain.roomRefundVO;
 import com.bcc.domain.roomSearch;
 import com.bcc.persistence.roomDAO;
 
@@ -675,6 +677,59 @@ public class roomServiceImpl implements roomService{
 		
 		
 	}
+
+	@Override
+	public roomPayVO roomPayInfo(String accId) {
+		
+		return dao.roomPayInfo(accId);
+	}
+
+	@Override
+	public List<roomPayVO> roomUserPayInfo(String userId) {
+		return dao.roomUserPayInfo(userId);
+	}
+
+	
+	//최대 주문번호에 1을 더해준다
+	@Override  
+	public String SearchPayId() {
+		String a = dao.roomSearchPay();
+		
+		log.info("a = "+a);
+		
+		//a 문자부분
+		String b = "bccPayId";
+		
+		//a 숫자부분
+		int c = Integer.parseInt(a.replaceAll("[^0-9]",""));
+		
+		String d = b+(c+1);
+		
+		log.info(d);
+		
+		return d;
+	}
+
+	
+	
+	
+	//환불시 결제 상태 변경
+	@Override
+	public void payStatus(String accId) {
+		
+		dao.payStatus(accId);
+	}
+
+	
+	
+	//환불시 환불테이블에 데이터입력
+	@Override
+	public void inRoomRefund(roomRefundVO vo2) {
+		dao.inRoomRefund(vo2);
+		
+	}
+	
+	
 	
 	
 	

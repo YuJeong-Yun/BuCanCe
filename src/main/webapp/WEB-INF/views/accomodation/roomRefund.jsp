@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
+
     <meta charset="UTF-8">
     <meta name="description" content="Sona Template">
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sona | Template</title>
-
+	
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
@@ -132,16 +132,16 @@
                     <div class="col-lg-2">
                         <div class="logo">
                             <a href="./index.html">
-                              <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="">
-							</a>
-						</div>
+                                <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="">
+                            </a>
+                        </div>
                     </div>
                     <div class="col-lg-10">
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
                                     <li><a href="./index.html">Home</a></li>
-                                    <li class="active"><a href="./rooms.html">Rooms</a></li>
+                                    <li><a href="./rooms.html">Rooms</a></li>
                                     <li><a href="./about-us.html">About Us</a></li>
                                     <li><a href="./pages.html">Pages</a>
                                         <ul class="dropdown">
@@ -152,7 +152,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="./blog.html">News</a></li>
-                                    <li><a href="./contact.html">Contact</a></li>
+                                    <li class="active"><a href="./contact.html">Contact</a></li>
                                 </ul>
                             </nav>
                             <div class="nav-right search-switch">
@@ -166,202 +166,135 @@
     </header>
     <!-- Header End -->
 
-    <!-- Breadcrumb Section Begin -->
-    <div class="breadcrumb-section">
+    <!-- Contact Section Begin -->
+    <section class="contact-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <h2>예약항목 선택</h2>
-                        <div class="bt-option">
-                            <a href="<%=request.getHeader("REFERER")%>">뒤로가기</a>
-                            <span>${room_title}</span>
-                        </div>
+                <div class="col-lg-4">
+                    <div class="contact-text">
+                        <h2>환불페이지</h2>
+                        <p>
+                        이용해주셔서 감사합니다!
+                        
+                        
+                        </p>
+                        <table border="1">
+                            <tbody>
+                                <tr>
+                                    <td >숙소명: </td>
+                                    <td>${vo.accName}</td>
+                                </tr>
+                                <tr>
+                                    <td >종류: </td>
+                                    <c:if test="${vo.sort=='ds'}">
+                                    <td>대실</td>
+                                    </c:if>
+                                    <c:if test="${vo.sort=='acc'}">
+                                    <td>숙박</td>
+                                    </c:if>
+                                </tr>
+                                <tr>
+                                    <td >물품명: </td>
+                                    <td>${vo.roomSort }</td>
+                                </tr>
+                                <tr>
+                                    <td>예약기간: </td>
+                                    <td>${vo.checkIn} ~ <br>  ${vo.checkOut}</td>
+                                </tr>
+                              
+                              	<c:if test="${vo.sort=='ds'}">
+                                <tr>
+                                    <td>마감/이용시간:</td>
+                                    <td >${vo.endTime}시까지/${vo.useTime}시간</td>
+                                    
+                                </tr>
+                              	</c:if>
+                              
+                              <c:if test="${vo.sort=='acc'}">
+                                <tr>
+                                    <td>입실/퇴실시간:</td>
+                                    <td >${vo.useTime}시부터/${vo.endTime}시까지</td>
+                                    
+                                </tr>
+                              	</c:if>
+                              
+                                <tr>
+                                    <td>예약명: </td>
+                                    <td>${vo.userName }</td>
+                                </tr>
+                                <tr>
+                                    <td>비용: </td>
+                                    <td>${vo.accAmount}원</td>
+                                </tr>
+                                
+                                
+                            </tbody>
+                        </table>
+                        <br><br>
+                         <button type="button" onclick="refundPay()" class="btn btn-primary">환불하기</button>
+                         <button type="button" onclick="cancelPay()" class="btn btn-primary">취소하기</button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Section End -->
-
-    <!-- Rooms Section Begin -->
-    
-    <!-- 예약정보가 없을때 처리로직 -->
-    <c:if test="${roomReserve=='[]'}">
-    	<h1 style="text-align: center;">예약 마감</h1>
-    </c:if>
-    
-    
-    
-    <section class="rooms-section spad">
-        <div class="container">
-            <div class="row">
-            <c:set var="a" />
-            <c:forEach items="${roomReserve}" begin="0" end="${roomReserve.size()}">
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                       <a href="#">
-                       <img src="${roomReserve.get(a).room_pic}" alt="acc" class="poster">
-                        <div class="ri-text" >
-                            <h4>${roomReserve.get(a).room_title}</h4>
-                            <table>
-                                <tbody>
-                                
-                                <tr style="color: blue">
-                                    
-                                        <td class="r-o">대실:</td>
-                                        
-                                        <td>
-                                        <c:if test='${roomReserve.get(a).room_fcost != ""}'>
-                                        ${roomReserve.get(a).room_fcost} 원
-										</c:if>
-                                        
-                                        <c:if test='${roomReserve.get(a).room_fcost == ""}'>
-                                        숙소에 문의
-										</c:if>
-                                        </td>
-                                    </tr>
-                                
-                                
-  								    <tr style="color: blue">
-                                    
-                                        <td class="r-o" >(대)마감/이용:</td>
-                                       <td>
-                                         <c:if test='${roomReserve.get(a).room_fcost != ""}'>
-                                        ${roomReserve.get(a).room_endtime}시/
-                                        
-                                          ${roomReserve.get(a).room_usetime}시간
-                                        </c:if>
-                                         <c:if test='${roomReserve.get(a).room_fcost == ""}'>
-                                       숙소에 문의
-                                       
-                                        </c:if>
-                                       </td>
-                                   
-                                       
-                                    </tr>
-                                    
-                                   
-                                    
-                                    
-                                    
-                                    <tr style="color: red">
-                                        <td class="r-o" >숙박:</td>
-                                        
-                                        <td>
-                                        <c:if test="${roomReserve.get(a).room_reserve2 != 1}">
-									
-                                        ${fn:substring(roomReserve.get(a).room_lcost,0,roomReserve.get(a).room_reserve2.length()-1)} 원
-									</c:if>
-									
-									 <c:if test="${roomReserve.get(a).room_reserve2 == 1}">
-									
-                                        숙소에 문의
-									</c:if>
-									</td>
-                                    </tr>
-                                
-                                     <tr style="color: red">
-                                    
-                                        <td class="r-o">(숙)입실/퇴실:</td>
-                                       <td>
-                                         <c:if test='${roomReserve.get(a).room_lcost != "1"}'>
-                                        ${roomReserve.get(a).room_accendtime}시/
-                                        ${checkout}일
-                                          ${roomReserve.get(a).room_accusetime}시
-                                        </c:if>
-                                         <c:if test='${roomReserve.get(a).room_lcost == "1"}'>
-                                       숙소에 문의
-                                       
-                                        </c:if>
-                                       </td>
-                                   
-                                       
-                                    </tr>
-                                    
-                                    
-                                    
-                                    
-                                    <tr style="color: red">
-                                        <td class="r-o">총 숙박가격 :</td>
-<%--                                         <td>${roomReserve.get(a).room_reserve2}</td> --%>
-	                               <td>
-									<c:if test="${roomReserve.get(a).room_reserve2 != 1 }">
-									
-                                        ${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)} 원
-									</c:if>
-									<c:if test="${roomReserve.get(a).room_reserve2 == 1}">
-                                        숙소에 문의
-									</c:if>
-									</td>
-                                    </tr>
-                                </tbody>
-                                </a>
-                            </table>
-                          
-                           
-                          <c:if test="${roomReserve.get(a).room_fcost != ''}">
-                            <form action="${pageContext.request.contextPath}/accomodation/roomPayment" style='display:inline'>
-                           	<input type="hidden" name="room_title" value="${room_title}">
-                           	<input type="hidden" name="room_reserve2" value="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)}">
-                           	<input type="hidden" name="accendtime" value="${roomReserve.get(a).room_accendtime}">
-                           	<input type="hidden" name="accusetime" value="${roomReserve.get(a).room_accusetime}">
-                           	<input type="hidden" name="room_lcost" value="${roomReserve.get(a).room_lcost}">
-                           	<input type="hidden" name="room_fcost" value="${roomReserve.get(a).room_fcost}">
-                           	<input type="hidden" name="room_endtime" value="${roomReserve.get(a).room_endtime}">
-                           	<input type="hidden" name="room_usetime" value="${roomReserve.get(a).room_usetime}">
-                           	<input type="hidden" name="room_pic" value="${roomReserve.get(a).room_pic}">
-                           	<input type="hidden" name="room_subTitle" value="${roomReserve.get(a).room_title}">
-                           	<input type="hidden" name="checkout" value="${checkoutFull}">
-                           	<input type="hidden" name="checkin" value="${checkinFull}">
-                           	<input type="hidden" name="endtime" value="	${roomReserve.get(a).room_endtime}">
-                           	<input type="hidden" name="usetime" value="${roomReserve.get(a).room_usetime}">
-                           
-<%--                            	${roomReserve.get(a).room_endtime}시 --%>
-<%-- `			                ${roomReserve.get(a).room_usetime}시간 --%>
-                          
-                            <button type="submit" class="btn btn-primary">대실 예약하기</button> &nbsp; 
-                         
-                         </form>
-                         
-                         </c:if>
-                         
-                          <c:if test="${roomReserve.get(a).room_reserve2 != 1 }">
-                           
-                          <form action="${pageContext.request.contextPath}/accomodation/roomPayment2" style="display:inline">
-                           	<input type="hidden" name="room_title" value="${room_title}">
-                           	<input type="hidden" name="room_reserve2" value="${fn:substring(roomReserve.get(a).room_reserve2,0,roomReserve.get(a).room_reserve2.length()-1)}">
-                           	<input type="hidden" name="accendtime" value="${roomReserve.get(a).room_accendtime}">
-                           	<input type="hidden" name="accusetime" value="${roomReserve.get(a).room_accusetime}">
-                           	<input type="hidden" name="room_lcost" value="${roomReserve.get(a).room_lcost}">
-                           	<input type="hidden" name="room_fcost" value="${roomReserve.get(a).room_fcost}">
-                           	<input type="hidden" name="room_endtime" value="${roomReserve.get(a).room_endtime}">
-                           	<input type="hidden" name="room_usetime" value="${roomReserve.get(a).room_usetime}">
-                           	<input type="hidden" name="room_pic" value="${roomReserve.get(a).room_pic}">
-                           	<input type="hidden" name="room_subTitle" value="${roomReserve.get(a).room_title}">
-                           	<input type="hidden" name="checkout" value="${checkoutFull}">
-                           	<input type="hidden" name="checkin" value="${checkinFull}">
-                           
-                            <button type="submit" class="btn btn-primary">숙박 예약하기</button>
-                            
-                              </form>
-                            
-                            </c:if>
-<%--                       <a href="${pageContext.request.contextPath}/accomodation/roomPayment" class="primary-btn">예약하기</a> --%>
-                            
-                           
-                        </div>
-                    </div>
-                </div>
-                <c:set var="a" value="${a=a+1}"/>
-                </c:forEach>
-                
-                
-               
-            </div>
+               </div>
         </div>
     </section>
-    <!-- Rooms Section End -->
+    <!-- Contact Section End -->
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script>
+  function refundPay() {
+	  
+alert('환불시 3일이내에 환불이 완료됩니다.');
+var result = confirm("정말로 환불 하시겠습니까?");
+	
+if(result){ //result == true 
+		 
+		  
+	$.ajax({
+	   	url : "${pageContext.request.contextPath}/accomodation/roomRfDB", // 예: http://www.myservice.com/payments/cancel
+	      type : "GET",
+	      contentType : "application/json",
+	      data : {
+	        accId : "${vo.accId}", // 예: ORD20180131-0000011
+	        accAmount : "${vo.accAmount}", // 환불금액
+	        reason : "테스트 결제 환불", // 환불사유
+	        accName : "${vo.accName}", //환불한 숙소 이름
+	        roomSort : "${vo.roomSort}", //환불한 상품 이름
+	        sort : "${vo.sort}", //대실 or 숙박
+	        accKind : "${vo.accKind}", //결제방법
+	        checkIn : "${vo.checkIn}", //체크인 
+	        checkOut : "${vo.checkOut}", //체크아웃
+	        userId : "${vo.userId}"
+//	         "refund_holder": "${UserPayList.get(a).userName}", // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
+//	         "refund_bank": "88" // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
+//	         "refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
+	      },
+	      "dataType": "json"
+	      
+	    });
+		  
+		  alert('환불성공')
+		  location.href="${pageContext.request.contextPath}/accomodation/roomReList";
+	  }else{
+		  return;		  
+	  }
+
+   
+  }
+  
+  
+  function cancelPay(){
+	  alert('환불취소');
+	  location.href="${pageContext.request.contextPath}/accomodation/roomReList";
+// 	  location.href=document.getElementById("reload").value;
+  }
+  
+	
+</script>     
+
+
+
+
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">

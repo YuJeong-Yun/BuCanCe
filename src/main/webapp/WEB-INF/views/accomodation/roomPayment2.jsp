@@ -338,37 +338,75 @@ function selectAll(selectAll)  {
 			    	  pg: $("#payment-select option:selected").val(),
 // 			          pay_method: "card",
 			          merchant_uid: "${priId}",  //고유 id
-			          name: '${vo.room_title} 예약',  //상품이름
-			          amount: '${vo.room_fcost}', //가격
+			          name: '${vo.room_title}',  //상품이름
+// 			          amount: '${vo.room_fcost}', //가격
+			          amount: 100, //가격
 			          buyer_email: "${useremail}",
 			          buyer_name: "${username}",
 			          buyer_tel: "${usertel}",
 			          buyer_addr: "${userAddress}",
-			          buyer_postcode: "${userPostCode}"
+			          buyer_postcode: "${userPostCode}",
 			      }, function (rsp) { // callback
 			          if (rsp.success) {
-			             
+			        	// http://localhost:8088/accomodation/roomList
 			              // 결제 성공 시 로직,
-			             alert('결제완료');
-			             
-			              
+			             alert('결제성공');
+			             $.ajax({
+			 				type:"GET",
+			 				url :"${pageContext.request.contextPath}/accomodation/roomPayDB",
+			 				data : {
+			 					accId: "${priId}",  //고유 id
+			 					accKind: $("#payment-select option:selected").val(),
+			 					accName: '${vo.room_title}',  //상품이름
+// 						        amount: '${vo.room_fcost}', //가격
+						        accAmount: 100, //가격
+						        userEmail: "${useremail}",
+						        userName: "${username}",
+						        userTel: "${usertel}",
+						        userAddr: "${userAddress}",
+						        userPostcode: "${userPostCode}",
+						        userId : "${userid}",
+						        sort : "acc",
+						        roomSort : "${vo.room_subTitle}",
+						        endTime : "${vo.accendtime}",
+						        useTime : "${vo.accusetime}",
+						        checkIn : "${vo.checkin}",
+						        checkOut : "${vo.checkout}"
+			 				},
+			 				contentType: "application/json",
+			 				success : function(data){
+			 					alert('성공');
+			 					
+			 					
+			 				}
+			 			
+			 			}); //ajax끝
+			 			
+			              //결제내역페이지로이동
+			             location.href= "${pageContext.request.contextPath}/accomodation/roomReComplete?accId="+"${priId}";	
 			          } else {
-			         
+			         	
 			              // 결제 실패 시 로직, 뒤로가기
-			              alert('취소');
+			              alert('결제실패');
+<%-- 			              alert(<%=request.getHeader("REFERER")%>); --%>
+			              
 			              //결제 실패시 뒤로가기
 			              location.href=document.getElementById("reload").value;
 			          }
 			      });
 			}
 			
+			
+	   
 	    }
 
-function cancelPay() {
+		
+		
+		
+	    function cancelPay() {
 	    	
 	    	alert('예약목록창으로 이동');
-	    	 //결제 실패시 뒤로가기
-            location.href=document.getElementById("reload").value;
+	    	location.href=document.getElementById("reload").value;
 	    	
 	    }
 		

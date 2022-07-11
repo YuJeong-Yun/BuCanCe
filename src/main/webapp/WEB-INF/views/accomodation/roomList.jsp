@@ -201,7 +201,7 @@ img.ui-datepicker-trigger {
 	<!-- Header End -->
 
 	<!-- Breadcrumb Section Begin -->
-	<div class="breadcrumb-section">
+	<div class="breadcrumb-section" >
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -283,11 +283,11 @@ function selectArea(){
 						<c:if test="${select_area=='덕천/만덕/구포/화명/북구'}">selected</c:if>
 						>덕천/만덕/구포/화명/북구</option>
 					</optgroup>
-				</select> &nbsp; 
+				</select> &nbsp; &nbsp; &nbsp; 
 
 
-<input type="text" placeholder="숙소명" name="place_name" id="place_name" value="${select_place}">
-<input type="submit" value="검색">
+<input type="text" placeholder="숙소명" name="place_name" id="place_name" value="${select_place}" style="height: 37px">
+<input type="submit" value="검색" style="height: 37px">
 
 	</form>
 

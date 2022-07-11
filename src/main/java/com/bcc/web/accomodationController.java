@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bcc.domain.roomDate;
 import com.bcc.domain.roomPayVO;
 import com.bcc.domain.roomReVO;
+import com.bcc.domain.roomRefundVO;
 import com.bcc.domain.roomSearch;
 import com.bcc.service.roomService;
 
@@ -160,6 +162,11 @@ public class accomodationController {
 		model.addAttribute("checkout",rd.getSel_date2().substring(8));
 		model.addAttribute("checkin",rd.getSel_date().substring(8));
 				
+		model.addAttribute("checkoutFull",rd.getSel_date2());
+		model.addAttribute("checkinFull",rd.getSel_date());
+		
+		
+		
 //				
 		JSONArray roomReserve = service.roomReserve(bno,rd,ano);
 
@@ -185,10 +192,12 @@ public class accomodationController {
 //		log.info(vo.getRoom_title());			
 		model.addAttribute("vo", vo);
 		
+		String priId = service.SearchPayId();
+		
 		session.setAttribute("userid", "admin");
 		session.setAttribute("username", "김영수");
 		session.setAttribute("useremail", "kld9223@naver.com");
-		session.setAttribute("priId", "O23213331231c");
+		session.setAttribute("priId", priId);
 		session.setAttribute("usertel", "010-3795-9228");
 		session.setAttribute("userAddress", "부산광역시 금정구 금정로 233-21번길 한진스카이 아파트 1003호");
 		session.setAttribute("userPostCode", "46243");
@@ -208,11 +217,13 @@ public class accomodationController {
 		log.info("vo : "+vo);
 //		log.info(vo.getRoom_title());			
 				
+		String priId = service.SearchPayId();
+		
 		model.addAttribute("vo", vo);
 		session.setAttribute("userid", "admin");
 		session.setAttribute("username", "김영수");
 		session.setAttribute("useremail", "kld9223@naver.com");
-		session.setAttribute("priId", "12312312dd-00000122");
+		session.setAttribute("priId", priId);
 		session.setAttribute("usertel", "010-3795-9228");
 		session.setAttribute("userAddress", "부산광역시 금정구 금정로 233-21번길 한진스카이 아파트 1003호");
 		session.setAttribute("userPostCode", "46243");
@@ -222,19 +233,106 @@ public class accomodationController {
 		
 		
 		
-		// 결제 완료시 DB에 담기
-		// http://localhost:8088/accomodation/roomPaymentDB
-		@RequestMapping(value = "/roomPaymentDB" ,method = RequestMethod.GET)
-		public void roomPaymentDBGET(
-		roomPayVO vo) throws IOException {
+		// 결제 완료시 DB
+		// http://localhost:8088/accomodation/roomPayDB
+		@RequestMapping(value = "/roomPayDB" ,method =RequestMethod.GET)
+		public void roomPayDBGET(roomPayVO vo,Model model) throws IOException {
 
-		log.info("roomPaymentDBGET() 호출");
+		log.info("roomPayDBGET() 호출");
 										
 		log.info("vo : "+vo);	
 						
 		service.roomPay(vo);
+		
+		model.addAttribute("vo", vo);
+		
+		
+		}
+		
+		
+		// 결제완료후 내역 페이지
+		// http://localhost:8088/accomodation/roomReComplete
+		@RequestMapping(value = "/roomReComplete" ,method =RequestMethod.GET)
+		public void roomReCompleteGET(Model model,
+				@RequestParam("accId") String accId  
+				) throws IOException {
+		
+		log.info("accId : "+accId);
+	    //결제내역
+		log.info("roomReCompleteGET() 호출");
+				
+		roomPayVO vo = service.roomPayInfo(accId);	
+		
+		//해당 예약정보
+		model.addAttribute("vo", vo);
+		
+		}
+				
+		
+		// 유저 결제내역
+		// http://localhost:8088/accomodation/roomReList
+		@RequestMapping(value = "/roomReList" ,method =RequestMethod.GET)
+		public void roomReListGET(Model model) throws IOException {
+				
+			
+		//결제내역
+		log.info("roomReListGET() 호출");
+		
+		
+		String userId="admin";
+		
+		List<roomPayVO> list = service.roomUserPayInfo(userId);	
+				
+		log.info("payList : "+list);
+		
+		//해당 유저의 예약정보
+		model.addAttribute("UserPayList", list);
+				
+		}
+		
+		
+		//결제환불
+		//http://localhost:8088/accomodation/roomRefund
+		@RequestMapping(value = "/roomRefund" ,method =RequestMethod.POST)
+		public void roomRefundPOST(roomPayVO vo, Model model) throws IOException {
+						
+					
+		//결제내역
+		log.info("roomRefundPOST() 호출");
+				
+		
+		log.info("vo : "+vo);
+		
+		model.addAttribute("vo", vo);
 						
 		}
+		
+		
+		//결제환불
+		//http://localhost:8088/accomodation/roomRfDB
+		@RequestMapping(value = "/roomRfDB" ,method =RequestMethod.GET)
+		public void roomRefundGET(roomRefundVO vo,Model model) throws IOException {
+								
+							
+		//결제내역
+		log.info("roomRfDBGET() 호출");
+						
+		//첫번째로 결제테이블의 정보를 환불됨으로 바꾸기
+		service.payStatus(vo.getAccId());
+		
+		//두번째로 환불테이블 정보입력
+		service.inRoomRefund(vo);
+		
+		
+		log.info("vo : "+vo);
+				
+		model.addAttribute("vo", vo);
+	
+		
+								
+		}
+		
+		
 		
 		
 		

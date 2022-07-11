@@ -3,8 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
+<!-- <script type="text/javascript"> -->
+
+<!-- history.replaceState({}, null, location.pathname); -->
+
+<!-- </script> -->
+
 <meta charset="UTF-8">
 <meta name="description" content="Sona Template">
 <meta name="keywords" content="Sona, unica, creative, html">
@@ -339,41 +344,50 @@ function selectAll(selectAll)  {
 			          merchant_uid: "${priId}",  //고유 id
 			          name: '${vo.room_title}',  //상품이름
 // 			          amount: '${vo.room_fcost}', //가격
-			          amount: 1, //가격
+			          amount: 100, //가격
 			          buyer_email: "${useremail}",
 			          buyer_name: "${username}",
 			          buyer_tel: "${usertel}",
 			          buyer_addr: "${userAddress}",
-			          buyer_postcode: "${userPostCode}"
+			          buyer_postcode: "${userPostCode}",
 			      }, function (rsp) { // callback
 			          if (rsp.success) {
-			             
+			        	// http://localhost:8088/accomodation/roomList
 			              // 결제 성공 시 로직,
 			             alert('결제성공');
 			             $.ajax({
 			 				type:"GET",
-			 				url :"${pageContext.request.contextPath}/accomodation/roomPaymentDB",
+			 				url :"${pageContext.request.contextPath}/accomodation/roomPayDB",
 			 				data : {
-			 					pg: $("#payment-select option:selected").val(),
-			 					merchant_uid: "${priId}",  //고유 id
-						        name: '${vo.room_title}',  //상품이름
+			 					accId: "${priId}",  //고유 id
+			 					accKind: $("#payment-select option:selected").val(),
+			 					accName: '${vo.room_title}',  //상품이름
 // 						        amount: '${vo.room_fcost}', //가격
-						        amount: 1, //가격
-						        buyer_email: "${useremail}",
-						        buyer_name: "${username}",
-						        buyer_tel: "${usertel}",
-						        buyer_addr: "${userAddress}",
-						        buyer_postcode: "${userPostCode}"
+						        accAmount: 100, //가격
+						        userEmail: "${useremail}",
+						        userName: "${username}",
+						        userTel: "${usertel}",
+						        userAddr: "${userAddress}",
+						        userPostcode: "${userPostCode}",
+						        userId : "${userid}",
+						        sort : "ds",
+						        roomSort : "${vo.room_subTitle}",
+						        endTime : "${vo.endtime}",
+						        useTime : "${vo.usetime}",
+						        checkIn : "${vo.checkin}",
+						        checkOut : "${vo.checkout}"
 			 				},
 			 				contentType: "application/json",
 			 				success : function(data){
+			 					alert('성공');
+			 					
 			 					
 			 				}
-			 				
-			 				
+			 			
 			 			}); //ajax끝
-			              
-			              
+			 			
+			              //결제내역페이지로이동
+			             location.href= "${pageContext.request.contextPath}/accomodation/roomReComplete?accId="+"${priId}";	
 			          } else {
 			         	
 			              // 결제 실패 시 로직, 뒤로가기

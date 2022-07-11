@@ -201,7 +201,7 @@
 						<div class="nav-menu">
 							<nav class="mainmenu">
 								<ul>
-									<li><a href="./index.html">Home</a></li>
+									<li><a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a></li>
 									<li class="active"><a href="./rooms.html">Rooms</a></li>
 									<li><a href="./about-us.html">About Us</a></li>
 									<li><a href="./pages.html">Pages</a>

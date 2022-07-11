@@ -8,16 +8,33 @@
 
   
   	<insert id="insertRoom">
-  		insert into bcc_payment (merchant_uid,amount,pg,name
-  		,buyer_email,buyer_name,buyer_tel,buyer_addr,buyer_postcode)
-  		values(#{merchant_uid},#{amount},#{pg},#{name},#{buyer_email},#{buyer_name},#{buyer_tel},#{buyer_addr},#{buyer_postcode})
+  		insert into bcc_acc_payment (accId,accKind,accName,accAmount,userEmail,userName,userTel,userAddr,userPostcode,userId,sort,roomSort,endTime,useTime,checkIn,checkOut)
+  		values(#{accId},#{accKind},#{accName},#{accAmount},#{userEmail},#{userName},#{userTel},#{userAddr},#{userPostcode},#{userId},#{sort},#{roomSort},#{endTime},#{useTime},#{checkIn},#{checkOut})
   	</insert>
   
   
   
+  <select id="selectRoom" resultType="roomPayVO">
+  	select * from bcc_acc_payment where accId=#{accId}
+  </select>
   
+  <select id="userPayList" resultType="roomPayVO">
+  	select * from bcc_acc_payment where userId=#{userId} order by accDate desc
+  </select>
+   
+   <select id="selectRoomId" resultType="String">
+  	select accId from bcc_acc_payment order by accDate desc limit 1
+  </select>
   
-  
+   <update id="payStatusRoom">
+  	update bcc_acc_payment set status="refund" where accId=#{accId}
+  </update>
+
+	<insert id="RoomInRefund">
+  		insert into bcc_acc_refund (accId,accAmount,reason,accName,roomSort,sort,accKind,checkIn,checkOut,userId)
+  		values(#{accId},#{accAmount},#{reason},#{accName},#{roomSort},#{sort},#{accKind},#{checkIn},#{checkOut},#{userId})
+  	</insert>
+
   
   </mapper>
   

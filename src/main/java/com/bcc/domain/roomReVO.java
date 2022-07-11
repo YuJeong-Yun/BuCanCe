@@ -13,26 +13,9 @@ public class roomReVO {
 	private String room_pic;
 	private String checkout;
 	private String checkin;
-	
-	
-	public String getCheckin() {
-		return checkin;
-	}
-	public void setCheckin(String checkin) {
-		this.checkin = checkin;
-	}
-	public String getCheckout() {
-		return checkout;
-	}
-	public void setCheckout(String checkout) {
-		this.checkout = checkout;
-	}
-	public String getRoom_pic() {
-		return room_pic;
-	}
-	public void setRoom_pic(String room_pic) {
-		this.room_pic = room_pic;
-	}
+	private String room_subTitle;
+	private String endtime;
+	private String usetime;
 	public String getRoom_title() {
 		return room_title;
 	}
@@ -81,13 +64,52 @@ public class roomReVO {
 	public void setRoom_usetime(String room_usetime) {
 		this.room_usetime = room_usetime;
 	}
+	public String getRoom_pic() {
+		return room_pic;
+	}
+	public void setRoom_pic(String room_pic) {
+		this.room_pic = room_pic;
+	}
+	public String getCheckout() {
+		return checkout;
+	}
+	public void setCheckout(String checkout) {
+		this.checkout = checkout;
+	}
+	public String getCheckin() {
+		return checkin;
+	}
+	public void setCheckin(String checkin) {
+		this.checkin = checkin;
+	}
+	public String getRoom_subTitle() {
+		return room_subTitle;
+	}
+	public void setRoom_subTitle(String room_subTitle) {
+		this.room_subTitle = room_subTitle;
+	}
+	public String getEndtime() {
+		return endtime;
+	}
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+	public String getUsetime() {
+		return usetime;
+	}
+	public void setUsetime(String usetime) {
+		this.usetime = usetime;
+	}
 	@Override
 	public String toString() {
 		return "roomReVO [room_title=" + room_title + ", room_reserve2=" + room_reserve2 + ", accendtime=" + accendtime
 				+ ", accusetime=" + accusetime + ", room_lcost=" + room_lcost + ", room_fcost=" + room_fcost
 				+ ", room_endtime=" + room_endtime + ", room_usetime=" + room_usetime + ", room_pic=" + room_pic
-				+ ", checkout=" + checkout + ", checkin=" + checkin + "]";
+				+ ", checkout=" + checkout + ", checkin=" + checkin + ", room_subTitle=" + room_subTitle + ", endtime="
+				+ endtime + ", usetime=" + usetime + "]";
 	}
+	
+	
 	
 	
 	
