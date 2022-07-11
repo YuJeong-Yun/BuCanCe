@@ -134,8 +134,8 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
       </ul>
 
       <div class="btn-container">
-      	<input type="button" value="최적 경로 찾기" class="best-path">
-    	<input type="button" value="길찾기" class="path">
+      	<input type="button" value="경로 삭제" class="del-path">
+    	<input type="button" value="경로 확인" class="check-path">
       </div>
     </div>
     <p id="result"></p>

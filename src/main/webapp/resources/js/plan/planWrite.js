@@ -389,13 +389,16 @@ const saveBtn = document.querySelector('.btn-container .btn--save');
 
 
 
-// 최적화 경로 찾기
-const bestPath = document.querySelector('.best-path');
+// 경로 확인 & 삭제
+const checkPathBtn = document.querySelector('.check-path');
+const delPathBtn = document.querySelector('.del-path');
 
-bestPath.addEventListener('click', showBestPath);
+checkPathBtn.addEventListener('click', showPath);
+delPathBtn.addEventListener('click', delPath);
 
 var new_polyLine = [];
 
+// 지도에 폴리라인 출력
 function drawData(data) {
   // 지도위에 선은 다 지우기
   routeData = data;
@@ -436,70 +439,86 @@ function drawData(data) {
       equalData.push(feature);
     }
   }
-  geoData = newData;
-  var markerCnt = 1;
-  for (var i = 0; i < newData.length; i++) {
-    var mData = newData[i];
-    var type = mData[0].geometry.type;
-    var pointType = mData[0].properties.pointType;
-    var pointTypeCheck = false; // 경유지 일때만 true
-    if (mData[0].properties.pointType == "S") {
-      var img = 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png';
-      var lon = mData[0].geometry.coordinates[0];
-      var lat = mData[0].geometry.coordinates[1];
-    } else if (mData[0].properties.pointType == "E") {
-      var img = 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png';
-      var lon = mData[0].geometry.coordinates[0];
-      var lat = mData[0].geometry.coordinates[1];
-    } else {
-      markerCnt = i;
-      var lon = mData[0].geometry.coordinates[0];
-      var lat = mData[0].geometry.coordinates[1];
-    }
-  }
+  // geoData = newData;
+  // var markerCnt = 1;
+  // for (var i = 0; i < newData.length; i++) {
+  //   var mData = newData[i];
+  //   var type = mData[0].geometry.type;
+  //   var pointType = mData[0].properties.pointType;
+  //   var pointTypeCheck = false; // 경유지 일때만 true
+  //   if (mData[0].properties.pointType == "S") {
+  //     var img = 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png';
+  //     var lon = mData[0].geometry.coordinates[0];
+  //     var lat = mData[0].geometry.coordinates[1];
+  //   } else if (mData[0].properties.pointType == "E") {
+  //     var img = 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png';
+  //     var lon = mData[0].geometry.coordinates[0];
+  //     var lat = mData[0].geometry.coordinates[1];
+  //   } else {
+  //     markerCnt = i;
+  //     var lon = mData[0].geometry.coordinates[0];
+  //     var lat = mData[0].geometry.coordinates[1];
+  //   }
+  // }
 }; // drawData()
 
-
 // 선택한 관광지 자동차 경로 확인
-function showBestPath() {
+function showPath() {
   const seq = calcDateSeq();
   const length = orderedTour[seq].length;
 
   // 경로 표시중일 때 다시 클릭하면 경로 제거
-  if (new_polyLine.length != 0) {
-    delPolyLine();
-    return;
-  }
+  // if (new_polyLine.length != 0) {
+  //   delPolyLine();
+  //  return;
+  //}
   // 경로 2개 이상 선택해야 경로 확인 가능
-  if (Object.keys(positions[seq]).length < 2) {
+  if (length < 2) {
     alert('관광지를 2개 이상 선택 후 경로를 확인해 주세요.');
     return;
   }
 
   // 경유지 있을 경우
   let passList = '';
-  if (orderedTour[seq].length > 2) {
-    if (orderedTour[seq].length > 2) {
-      for (let i = 1; i < orderedTour[seq].length - 1; i++) {
+  if (length >= 3) {
+    // 선택한 관광지 3~7개 일 경우 -> 경로 7개 까지만 확인 가능
+    if (length <= 7) {
+      for (let i = 1; i < length - 1; i++) {
         const cNum = orderedTour[seq][i];
         const lng = positions[seq][cNum].getPosition()._lng;
         const lat = positions[seq][cNum].getPosition()._lat;
         passList += lng + "," + lat + "_";
-        console.log(i+"-"+passList);
       }
-      passList = passList.substring(0, passList.length - 1);
+      // 선택한 관광지 7개 초과일 경우
+    } else {
+      for (let i = length - 6; i < length - 1; i++) {
+        const cNum = orderedTour[seq][i];
+        const lng = positions[seq][cNum].getPosition()._lng;
+        const lat = positions[seq][cNum].getPosition()._lat;
+        passList += lng + "," + lat + "_";
+      }
     }
+    passList = passList.substring(0, passList.length - 1);
   }
-  
+
   // 4. 경로탐색 API 사용요청
-  var startX = positions[seq][orderedTour[seq][0]].getPosition()._lng;
-  var startY = positions[seq][orderedTour[seq][0]].getPosition()._lat;
-  var endX = positions[seq][orderedTour[seq][length - 1]].getPosition()._lng;
-  var endY = positions[seq][orderedTour[seq][length - 1]].getPosition()._lat;
-  console.log(startX);
-  console.log(startY);
-  console.log(endX);
-  console.log(endY);
+  var startX;
+  var startY;
+  var endX;
+  var endY;
+  // 선택한 관광지 7개 이하일 경우
+  if (orderedTour[seq].length <= 7) {
+    startX = positions[seq][orderedTour[seq][0]].getPosition()._lng;
+    startY = positions[seq][orderedTour[seq][0]].getPosition()._lat;
+    endX = positions[seq][orderedTour[seq][length - 1]].getPosition()._lng;
+    endY = positions[seq][orderedTour[seq][length - 1]].getPosition()._lat;
+    // 선택한 관광지 7개 초과일 경우
+  } else {
+    startX = positions[seq][orderedTour[seq][length - 7]].getPosition()._lng;
+    startY = positions[seq][orderedTour[seq][length - 7]].getPosition()._lat;
+    endX = positions[seq][orderedTour[seq][length - 1]].getPosition()._lng;
+    endY = positions[seq][orderedTour[seq][length - 1]].getPosition()._lat;
+  }
   var prtcl;
   var headers = {};
   headers["appKey"] = "l7xx4c685864b69a4b71966f8bda89ed2dd3";
@@ -553,7 +572,7 @@ function showBestPath() {
 
 
 // 경로 제거 
-function delPolyLine() {
+function delPath() {
   let polyline;
   for (let i = 0; i < new_polyLine.length; i++) {
     polyline = new_polyLine[i];

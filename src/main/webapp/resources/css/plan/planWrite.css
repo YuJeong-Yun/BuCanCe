@@ -363,14 +363,14 @@
 }
 
 
-/* 길찾기 버튼 */
-.btn-container {
+/* 경로 확인 버튼 */
+.make-plan .inner > .btn-container {
 	display: flex;
 	position: absolute;
 	bottom: 175px;
 	right: 10px;
 }
-.btn-container input {
+.make-plan .inner > .btn-container input {
 	background-color: #2679df;
 	color: #fff;
 	border: none;
@@ -378,9 +378,9 @@
 	box-shadow: 2px 2px 3px #bbb;
 	font-size: 15px;
 }
-.btn-container .best-path {
+.make-plan .inner > .btn-container .del-path {
 	margin-right: 7px;
 	background-color: #4fc3f7;
 }
-.btn-container .path {
+.make-plan .inner > .btn-container .check-pah {
 }

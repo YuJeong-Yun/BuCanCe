@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bcc.domain.GrpAcceptVO;
+import com.bcc.domain.HotelVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
@@ -51,7 +52,7 @@ public class PlanController {
 		// 소속된 그룹 정보 가져오기
 		List<PlanMemberVO> grpList = service.getGrpList(id);
 		model.addAttribute("grpList", grpList);
-		
+
 		// 해당 그룹의 멤버 정보 가져오기
 		List<List<MemberVO>> grpMemberList = new ArrayList<>();
 		for (int i = 0; i < grpList.size(); i++) {
@@ -68,7 +69,6 @@ public class PlanController {
 		model.addAttribute("invitingMemberList", invitingMemberList);
 	}
 
-	
 	// 플랜 생성 - POST
 	// http://localhost:8088/plan/addPlan
 	@RequestMapping(value = "/addPlan", method = RequestMethod.POST)
@@ -98,26 +98,31 @@ public class PlanController {
 		return "redirect:/plan/planWrite/" + num;
 	}
 
-	
 	// 플랜 작성 - GET
 	// http://localhost:8088/plan/planWrite/1
 	@RequestMapping(value = "/planWrite/{num}", method = RequestMethod.GET)
-	public String planContentGET(@PathVariable("num") int num, Model model) throws Exception {
-		
+	public String planContentGET(@PathVariable("num") int num, Model model, HttpSession session) throws Exception {
+
 		// 그룹 번호 저장
 		model.addAttribute("num", num);
 		// 해당 그룹 소속 멤버 가져오기
 		model.addAttribute("grpMemberList", service.getGrpMemberList(num));
 		// 방장 정보 가져오기
 		model.addAttribute("leader", service.getLeader(num));
-		
+
 		// 관광지 정보 저장
 		model.addAttribute("tourlist", service.getTourList());
 		// 맛집 정보
-		model.addAttribute("restlist", service.getRestaurantList()); 
+		model.addAttribute("restlist", service.getRestaurantList());
+
+		// 크롤링에 시간이 오래 걸려서 세션에 저장하고 사용
+		if (session.getAttribute("hotellist") == null) {
+			// 숙소 정보 세션에 저장
+			session.setAttribute("hotellist", service.getHotelList());
+			log.info("숙소 정보 세션 저장 완료");
+		}
 		// 숙소 정보
-		model.addAttribute("hotellist", service.getHotelList());
-		
+		model.addAttribute("hotellist", session.getAttribute("hotellist"));
 
 		return "/plan/planWrite";
 	}
