@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -21,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.bcc.domain.roomDate;
+import com.bcc.domain.roomPayVO;
 import com.bcc.domain.roomSearch;
 import com.bcc.persistence.roomDAO;
 
@@ -664,5 +666,33 @@ public class roomServiceImpl implements roomService{
 
 		return roomList;
 	}
+
+	
+	//결제 성공시 db에 입력
+	@Override
+	public void roomPay(roomPayVO vo) {
+		
+		dao.roomPaySuc(vo);
+		
+		
+	}
+
+	@Override
+	public roomPayVO roomPayInfo(String accId) {
+		
+		return dao.roomPayInfo(accId);
+	}
+
+	@Override
+	public List<roomPayVO> roomUserPayInfo(String userId) {
+		return dao.roomUserPayInfo(userId);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.slf4j.Logger;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bcc.domain.roomDate;
+import com.bcc.domain.roomPayVO;
+import com.bcc.domain.roomReVO;
 import com.bcc.domain.roomSearch;
 import com.bcc.service.roomService;
 
@@ -142,8 +146,8 @@ public class accomodationController {
 		// http://localhost:8088/accomodation/roomReserve 
 		@RequestMapping(value = "/roomReserve" ,method = RequestMethod.GET)
 		public void roomReserveGET(Model model,@RequestParam("bno")
-		String bno,roomDate rd,
-		@RequestParam("ano") String ano) throws IOException, ParseException {
+		String bno,roomDate rd, @RequestParam("ano") String ano,
+		@RequestParam("room_title") String room_title) throws IOException, ParseException {
 			
 		log.info("roomReserveGET() 호출");
 
@@ -151,65 +155,145 @@ public class accomodationController {
 		log.info(rd.getSel_date());
 		log.info(rd.getSel_date2());
 			
-//		SimpleDateFormat transformat = new SimpleDateFormat("yyyy-MM-dd");
-//		Date firstDate = (Date) transformat.parse(rd.getSel_date());
-//	    Date secondDate = (Date) transformat.parse(rd.getSel_date2());
-//			
-//	    long diff = secondDate.getTime() - firstDate.getTime();
-//	    TimeUnit time = TimeUnit.DAYS; 
-//	    long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
-//	    System.out.println("받은날짜값 차이 : "+diffrence);
-//			
-//	    model.addAttribute("diffrence",diffrence);
 	   
 		model.addAttribute("bno", bno);
-		model.addAttribute("ano", ano);
 		
 		model.addAttribute("checkout",rd.getSel_date2().substring(8));
+		model.addAttribute("checkin",rd.getSel_date().substring(8));
 				
+		model.addAttribute("checkoutFull",rd.getSel_date2());
+		model.addAttribute("checkinFull",rd.getSel_date());
+		
+		
+		
 //				
 		JSONArray roomReserve = service.roomReserve(bno,rd,ano);
 
 		System.out.println("roomReserve : " +roomReserve);
 		
 		model.addAttribute("roomReserve", roomReserve);
+		model.addAttribute("room_title", room_title);
 			
 	
 		}
 		
-		// roomPayment 페이지 방목록페이지
-				// http://localhost:8088/accomodation/roomPayment
-				@RequestMapping(value = "/roomPayment", method = RequestMethod.GET)
-				public void roomPayGET(Model model,@RequestParam("bno")
-				String bno,roomDate rd,
-				@RequestParam("ano") String ano) throws IOException, ParseException {
+		
+		// 대실예약페이지
+		// http://localhost:8088/accomodation/roomPayment
+		@RequestMapping(value = "/roomPayment" ,method = RequestMethod.GET)
+		public void roomPaymentGET(roomReVO vo,Model model,
+		HttpSession session
+				) throws IOException {
 
-					//날짜정보가져오기
-					log.info(rd.getSel_date());
-					log.info(rd.getSel_date2());
-					
-					log.info(" roomPayGET() 호출 ");
-					
-					
-						JSONArray roomList = service.roomList();
-
-						model.addAttribute("roomList", roomList);
+		log.info("roomPaymentGET() 호출");
 						
-//						
-						
-						model.addAttribute("bno", bno);
-						model.addAttribute("checkout",rd.getSel_date2().substring(8));
+		log.info("vo : "+vo);
+//		log.info(vo.getRoom_title());			
+		model.addAttribute("vo", vo);
+		
+		session.setAttribute("userid", "admin");
+		session.setAttribute("username", "김영수");
+		session.setAttribute("useremail", "kld9223@naver.com");
+		session.setAttribute("priId", "ddfv45fvfvdvs3a");
+		session.setAttribute("usertel", "010-3795-9228");
+		session.setAttribute("userAddress", "부산광역시 금정구 금정로 233-21번길 한진스카이 아파트 1003호");
+		session.setAttribute("userPostCode", "46243");
+		
+		
+		}
+		
+		// 숙박예약페이지
+		// http://localhost:8088/accomodation/roomPayment2
+		@RequestMapping(value = "/roomPayment2" ,method = RequestMethod.GET)
+		public void roomPayment2GET(roomReVO vo,Model model,
+		HttpSession session
+				) throws IOException {
 
-						JSONArray roomReserve = service.roomReserve(bno,rd,ano);
-
-						System.out.println("roomReserve : " +roomReserve);
-						
-						model.addAttribute("roomReserve", roomReserve);
-							
+		log.info("roomPayment2GET() 호출");
+								
+		log.info("vo : "+vo);
+//		log.info(vo.getRoom_title());			
 				
-					
-				}
+		model.addAttribute("vo", vo);
+		session.setAttribute("userid", "admin");
+		session.setAttribute("username", "김영수");
+		session.setAttribute("useremail", "kld9223@naver.com");
+		session.setAttribute("priId", "1234432fgg0000122");
+		session.setAttribute("usertel", "010-3795-9228");
+		session.setAttribute("userAddress", "부산광역시 금정구 금정로 233-21번길 한진스카이 아파트 1003호");
+		session.setAttribute("userPostCode", "46243");
 				
+				
+		}
+		
+		
+		
+		// 결제 완료시 DB
+		// http://localhost:8088/accomodation/roomPayDB
+		@RequestMapping(value = "/roomPayDB" ,method =RequestMethod.GET)
+		public void roomPayDBGET(roomPayVO vo,Model model) throws IOException {
+
+		log.info("roomPayDBGET() 호출");
+										
+		log.info("vo : "+vo);	
+						
+		service.roomPay(vo);
+		
+		model.addAttribute("vo", vo);
+		
+		
+		}
+		
+		
+		// 결제완료후 내역 페이지
+		// http://localhost:8088/accomodation/roomPaymentDB
+		@RequestMapping(value = "/roomReComplete" ,method =RequestMethod.GET)
+		public void roomReCompleteGET(Model model,
+				@RequestParam("accId") String accId  
+				) throws IOException {
+		
+		log.info("accId : "+accId);
+	    //결제내역
+		log.info("roomReCompleteGET() 호출");
+				
+		roomPayVO vo = service.roomPayInfo(accId);	
+		
+		//해당 예약정보
+		model.addAttribute("vo", vo);
+		
+		}
+				
+		
+		// 유저 결제내역
+		// http://localhost:8088/accomodation/roomReList
+		@RequestMapping(value = "/roomReList" ,method =RequestMethod.GET)
+		public void roomReListGET(Model model) throws IOException {
+				
+			
+		//결제내역
+		log.info("roomReListGET() 호출");
+		
+		
+		String userId="admin";
+		
+		List<roomPayVO> list = service.roomUserPayInfo(userId);	
+				
+		log.info("payList : "+list);
+		
+		//해당 유저의 예약정보
+		model.addAttribute("UserPayList", list);
+				
+		}
+		
+		
+		//결제환불
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

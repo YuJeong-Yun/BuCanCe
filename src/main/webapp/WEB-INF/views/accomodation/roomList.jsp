@@ -59,6 +59,29 @@ img.ui-datepicker-trigger {
 	vertical-align: middle;
 	cursor: pointer;
 }
+
+
+
+
+/* 숙소명 입력창  버튼클릭시 테두리 효과 style 적용  */
+input[type=text]{
+
+width: 38%;
+border:2px solid #aaa;
+border-radius:4px;
+margin:8px 0;
+outline:none;
+padding:8px;
+box-sizing:border-box;
+transition:.3s;
+}
+
+input[type=text]:focus{
+border-color:dodgerBlue;
+box-shadow:0 0 8px 0 dogerBlue;
+}
+
+
 </style>
 
 </head>
@@ -236,8 +259,12 @@ function selectArea(){
 }
 
 
+
+
+
 	
 </script>
+
 
 			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm">
 				<select name="area" onchange="selectArea()" id="area">
@@ -287,7 +314,7 @@ function selectArea(){
 
 
 <input type="text" placeholder="숙소명" name="place_name" id="place_name" value="${select_place}">
-<input type="submit" value="검색">
+<input type="submit" value="검색" class="btn btn-primary">
 
 	</form>
 
@@ -321,9 +348,11 @@ function selectArea(){
 							
 							<div class="ri-text">
 								<h4>${roomList.get(a).room_title}</h4>
+		
+							
 								<table >
 									<tbody>
-										<tr >
+										<tr>
 											<td class="r-o" style="color: green">평점:</td>
 											<td style="color: green">
 											<c:if test="${roomList.get(a).room_rank!=''}">
@@ -361,7 +390,7 @@ function selectArea(){
 									</tbody>
 								</table>
 								<c:if test="${roomList.get(a).room_rank!=''}">
-								<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}" class="primary-btn">
+								<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}" class="btn btn-primary">
 								상세보기</a> 
 								</c:if>
 								

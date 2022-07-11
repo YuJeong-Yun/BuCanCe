@@ -1,11 +1,13 @@
 package com.bcc.service;
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.bcc.domain.roomDate;
+import com.bcc.domain.roomPayVO;
 import com.bcc.domain.roomSearch;
 
 public interface roomService {
@@ -26,11 +28,14 @@ public interface roomService {
 
 	public JSONArray roomDetail5(String bno);
 	
-	
-	
 	public JSONArray roomPrice(String bno);
 
 	public JSONArray roomReserve(String bno, roomDate rd,String ano) throws ParseException;
 
+	public void roomPay(roomPayVO vo);
+
+	public roomPayVO roomPayInfo(String accId);
+
+	public List<roomPayVO> roomUserPayInfo(String userId);
 	
 }

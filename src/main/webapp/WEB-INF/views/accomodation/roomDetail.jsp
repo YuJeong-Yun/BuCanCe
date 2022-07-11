@@ -234,7 +234,7 @@
 					<div class="breadcrumb-text">
 						<h2>방 상세정보</h2>
 						<div class="bt-option">
-							<a href="./home.html">Home</a> <span>Rooms</span>
+							<a href="<%=request.getHeader("REFERER")%>">뒤로가기</a> <span>예약상품</span>
 						</div>
 					</div>
 				</div>
@@ -297,32 +297,12 @@
 											class="icon_star-half_alt"></i>
 									&nbsp; <h5> 별점 :${roomdetail.get(0).room_star_num} 점</h5></div>
 									
-									<a href="#">Booking Now</a>
+<!-- 									<a href="#">Booking Now</a> -->
 								</div>
 							</div>
-							<h2>${roomdetail.get(0).room_price}<span>/Won(원)</span>
-							</h2>
 							<table>
 								<tbody>
-									<tr>
-										<td class="r-o">Size:</td>
-										<td>30 ft</td>
-									</tr>
-									<tr>
-										<td><hr> <br></td>
-									</tr>
-									<tr>
-										<td class="r-o">Capacity:</td>
-										<td>Max persion 5</td>
-									</tr>
-									<tr>
-										<td><hr> <br></td>
-									</tr>
-									<tr>
-										<td class="r-o">Bed:</td>
-										<td>king beds</td>
-										<td>${roomdetail.get(0).room_a}</td>
-									</tr>
+									
 
 									<tr>
 										<td><hr> <br></td>
@@ -495,12 +475,23 @@
                 
                 
                 </script>
+                
+             <!--//////////////////////////////////////////////////////////////////////////  -->
+
+		
+             <!--//////////////////////////////////////////////////////////////////////////  -->
+
+                
+                
+                
+                
                 <div class="col-lg-4">
                     <div class="room-booking">
-                      <h3>  <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId">요금정보</a></h3>
+                      <h3> <b> <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId">요금정보</a></h3></b>
                         <form action="${pageContext.request.contextPath}/accomodation/roomReserve" method="GET" name="dateForm">
                             <input type="hidden" name="bno" value="${bno}">
                             <input type="hidden" name="ano" value="${ano}">
+                            <input type="hidden" name="room_title" value="${roomdetail.get(0).room_title}">
                             <div class="check-date">
                                 <label for="date-in">체크인</label>
                                 <input type="text" class="date-input" id="date-in" value="${param.sel_date}" name="sel_date">
@@ -511,7 +502,7 @@
                                 <input type="text" class="date-input" id="date-out" value="${param.sel_date2}" name="sel_date2">
                                 <i class="icon_calendar"></i>
                             </div>
-                            <button type="button" id="reserveBtn">예약하기</button>
+                            <button type="button" id="reserveBtn" class="btn btn-primary">예약하기</button>
                         </form>
                     </div>
                 </div>

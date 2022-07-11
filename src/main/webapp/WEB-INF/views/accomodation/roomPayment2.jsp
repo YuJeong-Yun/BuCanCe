@@ -3,14 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx">
+
 <head>
-
-<!-- <script type="text/javascript"> -->
-
-<!-- history.replaceState({}, null, location.pathname); -->
-
-<!-- </script> -->
-
 <meta charset="UTF-8">
 <meta name="description" content="Sona Template">
 <meta name="keywords" content="Sona, unica, creative, html">
@@ -27,22 +21,23 @@ function selectAll(selectAll)  {
 	    checkbox.checked = selectAll.checked;
 	  })
 	}
-
-	
-	
-
-	
 </script>
 
-<!--유의사항 팝업창  ........................................................................................... -->
+
+<!--유의사항 팝업창   ........................................................................................... -->
 <script src="http://wooshin.mireene.co.kr/g5/js/jquery-1.8.3.min.js"></script>
 <style type="text/css">
 
-/* a태그 (유의사항)  하이퍼링크 파랑색표시되는거 제거 */
+/* a태그 (유의사항) 하이퍼링크 파랑색표시되는거 제거 */
 A:link {text-decoration:none; color:#646464;}
 A:visited {text-decoration:none; color:#646464;}
 A:active {text-decoration:none; color:#646464;}
 A:hover {text-decoration:none; color:#646464;}
+
+
+
+
+
 
 
 /* 유의사항 클릭시 효과  */
@@ -178,28 +173,27 @@ function closeLayer( IdName ){
 <!--유의사항 팝업창  ........................................................................................... -->
 
 
-
-
-
-
 <style>
-/* 서명란 클릭시 테두리(blue) 강조 효과  */
-input[type=text] {
-	width: 100%;
-	border: 2px solid #aaa;
-	border-radius: 2px;
-	margin: 4px 0;
-	outline: none;
-	padding: 4px;
-	box-sizing: border-box;
-	transition: .3s;
+/*서명란 클릭시 테두리(blue) 강조 효과  */
+input[type=text]{
+
+width: 100%;
+border:2px solid #aaa;
+border-radius:2px;
+margin:4px 0;
+outline:none;
+padding:4px;
+box-sizing:border-box;
+transition:.3s;
 }
 
-input[type=text]:focus {
-	border-color: dodgerBlue;
-	box-shadow: 0 0 8px 0 dogerBlue;
+input[type=text]:focus{
+border-color:dodgerBlue;
+box-shadow:0 0 8px 0 dogerBlue;
 }
+
 </style>
+
 <!-- Google Font -->
 <link
 	href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap"
@@ -274,7 +268,7 @@ input[type=text]:focus {
 		</div>
 		<nav class="mainmenu mobile-menu">
 			<ul>
-				<li class="active"><a href="./index.html">Home</a></li>
+				<li class="active"><a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a></li>
 				<li><a href="./rooms.html">Rooms</a></li>
 				<li><a href="./about-us.html">About Us</a></li>
 				<li><a href="./pages.html">Pages</a>
@@ -386,9 +380,7 @@ input[type=text]:focus {
 					<div class="breadcrumb-text">
 						<h2>결제 페이지</h2>
 						<div class="bt-option">
-							<a
-								href="${pageContext.request.contextPath}/accomodation/roomList">Home</a>
-							<span>결제페이지</span>
+						<a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a> <span>결제페이지</span>
 						</div>
 					</div>
 				</div>
@@ -407,39 +399,41 @@ input[type=text]:focus {
 						<div class="rd-text">
 							<div class="rd-title">
 								<h3>${vo.room_title}</h3>
-								<div class="rdt-right"></div>
+								<div class="rdt-right">
+									
+									
+								</div>
 							</div>
-
+						
 							<table>
 								<tbody>
-
+									
 									<tr>
-
-										<td class="r-o">예약명 <input type="text" placeholder="서명란"
-											value="${username}"></td>
+									
+										<td class="r-o">서명 <input type="text" placeholder="서명란"
+											value="${username}"
+										></td>
 										<td><br> <br></td>
 									</tr>
-									<tr>
-										<td><br></td>
+										<tr>
+										<td> <br></td>
 									</tr>
 									<tr>
 										<td class="r-o">결제수단</td>
 									</tr>
 
 									<tr>
-										<td><select id="payment-select" class="select_type_1"
-											data-v-f785cca6="">
-												<option data-minprice="0" value="kakaopay"
-													data-v-f785cca6="">카카오페이</option>
-												<option data-minprice="0" value="tosspay" data-v-f785cca6="">
-													토스</option>
-												<option data-minprice="0" value="html5_inicis"
-													selected="selected" data-v-f785cca6="">신용/체크카드</option>
-												<option data-minprice="0" value="payco" data-v-f785cca6="">
-													PAYCO</option>
-												<option data-minprice="0" value="danal_tpay"
-													data-v-f785cca6="">휴대폰결제</option>
-										</select></td>
+										<td><select id="payment-select" class="select_type_1" data-v-f785cca6="">
+										<option data-minprice="0" value="kakaopay" data-v-f785cca6="">
+										카카오페이</option>
+										<option data-minprice="0" value="tosspay" data-v-f785cca6="">
+										토스</option>
+										<option data-minprice="0" value="html5_inicis"  selected="selected"  data-v-f785cca6="">
+										신용/체크카드</option>
+										<option data-minprice="0" value="payco" data-v-f785cca6="">
+										PAYCO</option>
+										<option data-minprice="0" value="danal_tpay" data-v-f785cca6="">
+										휴대폰결제</option></select></td>
 									</tr>
 								</tbody>
 							</table>
@@ -463,20 +457,20 @@ input[type=text]:focus {
 									<input type="checkbox" name="checkOne" class="inp_chk_02"
 										id="checkTwo"> <span onclick="pop_agree_02();"><i><a
 											href="javascript:void(0)" onclick="openLayer('hd_pops_2',540,540)"><u>개인정보 수집
-												및 이용 동의</a></i><b style="color: red"> (필수)</b></span></u>
+												및 이용 동의</a></i><b  style="color: red"> (필수)</u></b></span>
 								</p>
 								<p>
 									<input type="checkbox" name="checkOne" class="inp_chk_02"
 										id="checkThree"> <span onclick="pop_agree_03();"><i><a
 											href="javascript:void(0)" onclick="openLayer('hd_pops_3',570,270)"><u>개인정보 제
-												3자 제공 동의</a></i><b style="color: red"> (필수)</b></span></u>
+												3자 제공 동의</a></i><b style="color: red"> (필수)</u></b></span>
 								</p>
 
 								<p>
 									<input type="checkbox" name="checkOne" class="inp_chk_02"
 										id="checkFour"> <span onclick="pop_agree_04();"><i><a
 											href="javascript:void(0)" onclick="openLayer('hd_pops_4',600,600)"><u>만 14세
-												이상 확인</a></i><b style="color: red"> (필수)</b></span></u>
+												이상 확인</a></i><b style="color: red"> (필수)</b></u></span>
 								</p>
 							</section>
 
@@ -487,7 +481,7 @@ input[type=text]:focus {
 
 
 				<!-- 팝업내용 -->
-				<div id="wrapper_popup">
+				<div id="wrapper_popup" >
 					<div id="hd_pops_1" class="c1 layer-shadow">
 						<!-- 이 아래부터 레이어팝업 본문 -->
 						<h2>숙소이용규칙 및 취소/환불 규정(필수)</h2>
@@ -642,14 +636,11 @@ input[type=text]:focus {
 
 
 
-
-
+				
 				<!-- 아임포트 -->
-				<script type="text/javascript"
-					src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-				<script type="text/javascript"
-					src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-				<script type="text/javascript">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript">
 
 		var IMP = window.IMP; // 생략 가능
 		IMP.init("imp49919207"); // 예: imp00000000
@@ -703,10 +694,10 @@ input[type=text]:focus {
 						        userAddr: "${userAddress}",
 						        userPostcode: "${userPostCode}",
 						        userId : "${userid}",
-						        sort : "ds",
+						        sort : "acc",
 						        roomSort : "${vo.room_subTitle}",
-						        endTime : "${vo.endtime}",
-						        useTime : "${vo.usetime}",
+						        endTime : "${vo.accendtime}",
+						        useTime : "${vo.accusetime}",
 						        checkIn : "${vo.checkin}",
 						        checkOut : "${vo.checkout}"
 			 				},
@@ -749,67 +740,68 @@ input[type=text]:focus {
 		
 		
 </script>
-				<!-- 아임포트 -->
-
-
-
+	<!-- 아임포트 -->
+				
+				
+			
+				
+				
 				<div class="col-lg-4">
 					<div class="room-booking">
 						<h3>결제 정보</h3>
 						<form onSubmit="return false;">
-							<!-- 뒤로가기 할 주소 -->
-							<input type="hidden" value="<%=request.getHeader("REFERER")%>"
-								id="reload">
-							<!-- 뒤로가기 할 주소 -->
 							<div class="check-date">
-								<label for="date-out">호텔명:</label> <input type="text"
-									id="date-out" value="${vo.room_title}" readonly> <i
-									class=""></i>
+								<label for="date-out">호텔명:</label> 
+								<input type="text" id="date-out"
+								value="${vo.room_title}" readOnly
+								> <i class=""></i> 
 							</div>
 							<div class="check-date">
-								<label for="date-in">마감시간:</label> <input type="text"
-									id="date-in" readonly value="당일 ${vo.room_endtime} 시까지">
-								<i class="icon_calendar"></i>
+								<label for="date-in">입실시간:</label>
+								 <input type="text"id="date-in" readOnly
+								value="${vo.checkin} 일 ${vo.accendtime} 시부터"
+								> <i class="icon_calendar"></i>
 							</div>
-
+							
 							<div class="check-date">
-								<label for="date-out">이용시간:</label> <input type="text"
-									id="date-out" readonly value="${vo.room_usetime} 시간"> <i
-									class="icon_calendar"></i>
+								<label for="date-out">퇴실시간:</label> 
+								<input type="text"id="date-out" readOnly
+								value="${vo.checkout}일 ${vo.accusetime} 시까지"
+								
+								> <i class="icon_calendar"></i>
 							</div>
-
+							
 							<div class="check-date">
 								<label for="date-out">서명:</label> <input type="text"
-									value=${username } id="date-out"> <i class=""></i>
+								value=${username }
+								
+									id="date-out"> <i class=""></i>
 							</div>
 							<div class="check-date">
-								<label for="date-out"><strong>총 결제 금액</strong></label> <input
-									type="text" id="date-out" value="${vo.room_fcost} 원" readonly>
-								<i class=""></i>
+								<label for="date-out"><strong>총 결제 금액</strong></label> 
+								<input type="text" id="date-out"
+								value="${vo.room_reserve2} 원" readonly> <i class=""></i>
 							</div>
 
 
-							<button type="button" onclick="requestPay()"
-								class="btn btn-primary">결제하기</button>
-
-							<button type="button" onclick="cancelPay()"
-								class="btn btn-primary">취소하기</button>
+							<button type="button" onclick="requestPay()">결제하기</button>
+							
+							<button type="button" onclick="cancelPay()">취소하기</button>
 						</form>
-
-
 					</div>
 				</div>
-
-
-
+				
+				
 			</div>
 		</div>
-
-
-
-
+		
+		
+		
+		
 	</section>
 	<!-- Room Details Section End -->
+
+
 
 
 
