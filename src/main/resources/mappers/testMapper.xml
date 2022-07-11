@@ -26,7 +26,7 @@
     
     <update id="update">
        update bcc_member 
-       set name=#{name},email=#{email},updatedate=now() 
+       set name=#{name},email=#{email}
        where id=#{id} and pw=#{pw}    
     </update>
     
@@ -50,15 +50,15 @@
     </select>
 
 	<update id="licenseUp">
-       update bcc_member 
-       set license=1, updatedate=now()
-       where id=#{id} and pw=#{pw}
+		update bcc_member
+		set license=1
+		where id=#{id} 
 	</update>
 	
 	<update id="licenseDown">
-       update bcc_member 
-       set license=0, updatedate=now()
-       where id=#{id} and pw=#{pw}
+		update bcc_member
+		set license=0
+		where id=#{id} 
 	</update>
 
 	

@@ -12,18 +12,49 @@
 
 window.onload = function checkLi(){
 	var liSpan = $("#checkLicense");
+	var liBtn = $("#licenseBtn");
         if(${memberVO.license } == 1){
 			liSpan.html("<font color='green'><b>현재 구독중입니다.</b></font>");
+			$("#liOnBtn").hide();
 		} else {
 			liSpan.html("<font color='red'><b>구독상태가 아닙니다.</b></font>");
+			$("#liOffBtn").hide();
 		}
 };
+
+function liUp(){
+	var li = $("#license").val()
+	$.ajax({
+	        url:'/liUp', //Controller에서 인식할 주소
+ 	        type:'POST', //POST 방식으로 전달
+ 	        data:{li:li},
+ 	        success:function(){
+ 	        	alert("구독을 시작했습니다."); 
+ 	        },
+ 	       error:function(){
+ 	    	  alert("liUp에러");   
+ 	       }
+	})
+	};
+	
+	function liDown(){
+		var li = $("#license").val()
+		$.ajax({
+		        url:'/liDown', //Controller에서 인식할 주소
+	 	        type:'POST', //POST 방식으로 전달
+	 	        data:{li:li},
+	 	        success:function(){
+	 	        	alert("구독을 취소하였습니다."); 
+	 	        },
+	 	       error:function(){
+	 	    	  alert("Lidown에러");
+	 	       }
+		})
+		};
 
 </script>
 </head>
 <body>
-		<h1>updateForm.jsp</h1>
-		
 		<h2>회원정보 수정</h2>
 		
 		<fieldset>
@@ -34,9 +65,9 @@ window.onload = function checkLi(){
     	    이름 : <input type="text" name="user_name" value ="${memberVO.user_name }"><br>
     	    전화번호 : <input type="text" name="tel" value="${memberVO.tel}"><br>
     	    이메일 : <input type="text" name="email" value="${memberVO.email}"><br>
-    	    구독 상태 : <input type = "hidden" id = "license" name ="license"><span id="checkLicense">&nbsp;</span><br>
-    	    <a href="#"><input type="button" value = "구독하기"></a><br>
-    	    
+    	    구독 상태 : <input type = "hidden" id = "license" name ="license"><span id="checkLicense">&nbsp;</span>
+    	    <input type = "button" id = "liOnBtn" onclick = "liUp()" value = "구독하기">
+    	    <input type = "button" id = "liOffBtn" onclick = "liDown()" value = "구독취소"><br>
     	    <input type="submit" value="수정완료" >
     	</form>    
     </fieldset>

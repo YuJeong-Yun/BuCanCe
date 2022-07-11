@@ -30,6 +30,9 @@ public interface MemberService {
 	// 아이디 중복 확인
     public int idCheck(String id);
     
+	// 라이센스 확인
+    public int getLicense(String id);
+    
     // license UP
     public int liUp(String id);
     

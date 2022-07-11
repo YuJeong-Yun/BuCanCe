@@ -97,7 +97,17 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
+	public int getLicense(String id) {
+		
+		int liCnt = dao.getLicense(id);
+		
+		return liCnt;
+	}
+
+	@Override
 	public int liUp(String id) {
+		
+		log.info("liUp(id) 호출");
 		
 		int liUp = dao.licenseUp(id);
 		
@@ -106,6 +116,8 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int liDown(String id) {
+		
+		log.info("liDown(id) 호출");
 		
 		int liDown = dao.licenseDown(id);
 		

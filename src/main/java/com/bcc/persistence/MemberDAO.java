@@ -39,6 +39,9 @@ public interface MemberDAO {
 	// id 중복 검사
     public int idCheck(String id);
     
+	// 라이센스 조회
+	public int getLicense(String id);
+    
     // license up
     public int licenseUp(String license);
     

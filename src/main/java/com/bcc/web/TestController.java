@@ -175,6 +175,48 @@ public class TestController {
 		}
 		
 
+	    // 라이센스 받아오기
+		@RequestMapping(value = "/license",method = RequestMethod.GET)
+		public void licenseGET(HttpSession session,Model model) {
+			
+			log.info(" licenseGET() 호출 ");
+			
+			String id = (String)session.getAttribute("id");
+
+			model.addAttribute(service.getMember(id));
+			
+		}
+//
+//		// 라이센스 수정
+//		@RequestMapping(value = "/license", method = RequestMethod.POST)
+//		public String licensePOST(String id) {
+//			// 수정할 정보를 저장(전달)
+//			log.info("수정 데이터 :"+id);
+//			
+//			// 서비스 - 정보 수정동작 호출
+//			int result = service.getLicense(id);
+//			
+//			if(result != 1) {
+//				return "redirect:/liUp";
+//			}
+//			
+//			return "redirect:/liDown";
+//		}
+//		
+
+	    // GET으로 license 값 가져온다.
+	    // => POST로 license UP or DOWN 보낸다.
+		@RequestMapping(value = "/liUp", method = RequestMethod.POST)
+		public String liUpPOST(String id) {
+			
+			log.info(" liUpPOST() 호출 ");
+			
+
+			
+			return "redirect:/update";
+			
+		}
+		
 		// 회원정보 삭제(탈퇴)
 		@RequestMapping(value = "/delete", method = RequestMethod.GET)
 		public String deleteGET() {
