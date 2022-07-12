@@ -161,3 +161,104 @@
 	    color: #1e6b7b;
 	}
 	
+	
+	#adminMenu {
+		margin-left: 1em;
+		display: inline-block;
+		vertical-align: sub;
+	}
+	
+	
+	#adminMenu li {
+		list-style: none;
+		padding: 1em 0;
+		border-bottom: 1px solid rgba(210, 215, 217, 0.75);
+	}
+	
+
+	#profitBtn {
+	  -webkit-appearance: none;
+	  -moz-appearance: none;
+	  appearance: none;
+	  
+	  background: #0d6efd;
+	  color: #fff;
+	  
+	  margin: 0;
+	  padding: 0.3rem 1.3rem;
+	  
+	  font-family: 'Noto Sans KR', sans-serif;
+	  font-size: 0.9rem;
+	  font-weight: 400;
+	  text-align: center;
+	  text-decoration: none;
+	  
+	  border: none;
+	  border-radius: 4px;
+	  
+	  display: inline-block;
+	  width: auto;
+	  
+	  cursor: pointer;
+	  
+	  transition: 0.5s;
+	}
+
+
+	#profitBtn:active,
+	#profitBtn:hover,
+	#profitBtn:focus {
+	  background: #025ce2;
+	  outline: 0;
+	}
+	#profitBtn:disabled {
+	  opacity: 0.5;
+	}
+	
+	
+	 .periodBtn {
+	  -webkit-appearance: none;
+	  -moz-appearance: none;
+	  appearance: none;
+	  
+	  background: #fff;
+	  color: black;
+	  
+	  margin: -0.2em;
+	  padding: 0.2rem 1rem;
+	  
+	  font-family: 'Noto Sans KR', sans-serif;
+	  font-size: 0.9rem;
+	  font-weight: 400;
+	  text-align: center;
+	  text-decoration: none;
+	  
+	  display: inline-block;
+	  width: auto;
+	  
+	  cursor: pointer;
+	  
+	  transition: 0.5s;
+	  
+	  border: 1px solid #858796;
+	}
+
+
+	.periodBtn:active,
+	.periodBtn:hover,
+	.periodBtn:focus {
+	  background: #f0f0f5;
+	  outline: 0;
+	}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -33,14 +33,13 @@
                 <c:forEach var="vo" items="${resVO }">
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                        <a href="/infoDetail?title=${vo.title }"><img src="${vo.thumb_img }" alt=""></a>
+                        <a href="/infoDetail?title=${vo.title }"><img src="${vo.thumbnail }" alt=""></a>
                         <div class="info">
                             <h4>${vo.title }</h4>
                             <div>
-	                            <i class="fa fa-hand-pointer-o" aria-hidden="true"></i> 조회수
-	                            <i class="fa fa-commenting-o" aria-hidden="true"></i> 댓글
-	                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-	                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+	                            <i class="fa fa-hand-pointer-o" aria-hidden="true"></i> ${vo.totalCnt }
+	                            <i class="fa fa-commenting-o" aria-hidden="true"></i> ${vo.commentCnt }
+	                            <i class="fa fa-heart-o" aria-hidden="true"></i> ${vo.thumbCnt }
                             </div>
                         </div>
                     </div>

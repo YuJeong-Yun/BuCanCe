@@ -18,6 +18,7 @@
     				<div class="rd-text">	
                         <div class="rd-title">
                             <h3 style="font-family: 'NanumSquareBold' !important;">${resVO.title }</h3>
+                            <img id="like_img"> 찜하기
                         </div>
                       <table id="resInfo">
                                 <tbody>
@@ -35,7 +36,7 @@
                                     </tr>
                                 </tbody>
                      </table>
-                     <p class="f-para">${resVO.content }</p> 
+                     <p class="f-para">${resVO.contents }</p> 
                      </div>  
                         <br>
      			 <div class="menu-item">

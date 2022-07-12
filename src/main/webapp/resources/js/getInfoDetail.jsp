@@ -9,7 +9,7 @@
 	var total = document.getElementsByClassName('ri-text').length+10;
 	var rePageCheck = false;
 	var size = 3;
-	
+	var s_id = '${sessionScope.id}';
 	
 	$(function(){
 		
@@ -145,6 +145,12 @@
 		 
 		 
 	}); // jQuery
+	
+	
+	
+	function checkThumb(){
+		
+	}
 	
 	
 		

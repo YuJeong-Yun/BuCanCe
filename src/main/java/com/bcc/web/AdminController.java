@@ -29,6 +29,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/pmMembers", method = RequestMethod.GET)
 	public String pmMemberGET(@RequestParam("date") String date, Model model) {
+		log.info(date);
 		
 		model.addAttribute("periodic", service.getPm(date));
 		model.addAttribute("pmMems", service.getPmInfo(date));
