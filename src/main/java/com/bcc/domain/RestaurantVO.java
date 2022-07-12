@@ -92,7 +92,5 @@ public class RestaurantVO {
 				+ ", usage_day=" + usage_day + ", addr=" + addr + ", addr_full=" + addr_full + ", img=" + img
 				+ ", thumb_img=" + thumb_img + ", lng=" + lng + ", lat=" + lat + "]";
 	}
-	
-	
 
 }
