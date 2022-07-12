@@ -2,12 +2,11 @@ package com.bcc.persistence;
 
 import java.util.List;
 
+import com.bcc.domain.BoardVO;
 import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
-import com.bcc.domain.RestaurantVO;
-import com.bcc.domain.TourPlaceVO;
 
 public interface PlanDAO {
 
@@ -21,7 +20,7 @@ public interface PlanDAO {
 	public void createGrp(PlanVO vo);
 
 	// 회원 라이센스 가져오기
-	public String getLicense(String id);
+	public Integer getLicense(String id);
 
 	// 회원 그룹 초대받은 목록
 	public List<GrpAcceptVO> getGrpAcceptList(String receiver);
@@ -69,16 +68,16 @@ public interface PlanDAO {
 	public void updateLeader(PlanVO plan);
 
 	// 전체 관광지 정보 가져오기
-	public List<TourPlaceVO> getTourList();
+	public List<BoardVO> getTourList();
 
 	// 전체 맛집 정보 가져오기
-	public List<RestaurantVO> getRestaurantList();
+	public List<BoardVO> getRestaurantList();
 
 	// 관광지 검색 결과
-	public List<TourPlaceVO> getTourSearch(String keyword);
+	public List<BoardVO> getTourSearch(String keyword);
 
 	// 맛집 검색 결과
-	public List<RestaurantVO> getRestaurantSearch(String keyword);
+	public List<BoardVO> getRestaurantSearch(String keyword);
 
 
 }

@@ -10,27 +10,15 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
 
 	<!--그룹 멤버 보여주기 메뉴-->
-	<section class="show-grp-menu">
+	<section class="show-title-btn">
 	  <div class="inner">
-	    <span class="material-icons-outlined show-grp">menu</span>
+	    <span class="material-icons-outlined show-title">menu</span>
 	  </div>
 	</section>
 	<!--그룹 멤버-->
-	<section class="grp-member">
+	<section class="plan-title">
 	  <div class="inner">
-	    <ul class="member-container">
-	      <c:forEach var="member" items="${grpMemberList }">
-		    <li>
-		      	<!-- 방장은 별 표시 -->
-		      	<c:if test="${leader eq member.id }">
-		      		<span class="material-icons-outlined leader">star</span>
-			    </c:if>
-			    <div class="member--profile"><img src="${pageContext.request.contextPath }/resources/img/who.jpg" /></div>
-			    <div class="member--id">${member.id }</div>
-			    <div class="member--name">${member.name }</div>
-		    </li>
-	      </c:forEach>
-	    </ul>
+	  	<div class="title-content">${param.grp_name }</div>
 	  </div>
 	</section>
 
@@ -77,8 +65,8 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
                 <ul>
                 	<c:forEach var="tour" items="${tourlist }">
 	                  <li class="tour-item t${tour.num }" onclick="selectTour(event)">
-	                    <img src="${tour.main_img_thumb }" alt="" class="content__img" />
-	                    <div class="content__title">${tour.main_title }</div>
+	                    <img src="${tour.thumbnail }" alt="" class="content__img" />
+	                    <div class="content__title">${tour.title }</div>
 	                    <input type="hidden" value="${tour.num }" class="num">
 	                    <input type="hidden" value="${tour.lng }" class="lng">
 	                    <input type="hidden" value="${tour.lat }" class="lat">
@@ -119,7 +107,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
                 <ul>
                    <c:forEach var="rest" items="${restlist }">
 	                  <li class="tour-item r${rest.num }" onclick="selectTour(event)">
-	                    <img src="${rest.thumb_img }" alt="" class="content__img" />
+	                    <img src="${rest.thumbnail }" alt="" class="content__img" />
 	                    <div class="content__title">${rest.title }</div>
 	                    <input type="hidden" value="${rest.num }" class="num">
 	                    <input type="hidden" value="${rest.lng }" class="lng">

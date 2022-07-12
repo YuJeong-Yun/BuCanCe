@@ -9,12 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.bcc.domain.BoardVO;
 import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
-import com.bcc.domain.RestaurantVO;
-import com.bcc.domain.TourPlaceVO;
 
 @Repository
 public class PlanDAOImpl implements PlanDAO {
@@ -42,7 +41,7 @@ public class PlanDAOImpl implements PlanDAO {
 	}
 
 	@Override
-	public String getLicense(String id) {
+	public Integer getLicense(String id) {
 		return sqlSession.selectOne(NAMESPACE + ".getLicense", id);
 	}
 
@@ -122,22 +121,22 @@ public class PlanDAOImpl implements PlanDAO {
 	}
 
 	@Override
-	public List<TourPlaceVO> getTourList() {
+	public List<BoardVO> getTourList() {
 		return sqlSession.selectList(NAMESPACE + ".getTourList");
 	}
 
 	@Override
-	public List<RestaurantVO> getRestaurantList() {
+	public List<BoardVO> getRestaurantList() {
 		return sqlSession.selectList(NAMESPACE + ".getRestaurantList");
 	}
 
 	@Override
-	public List<TourPlaceVO> getTourSearch(String keyword) {
+	public List<BoardVO> getTourSearch(String keyword) {
 		return sqlSession.selectList(NAMESPACE + ".getTourSearch", keyword);
 	}
 
 	@Override
-	public List<RestaurantVO> getRestaurantSearch(String keyword) {
+	public List<BoardVO> getRestaurantSearch(String keyword) {
 		return sqlSession.selectList(NAMESPACE + ".getRestaurantSearch", keyword);
 	}
 

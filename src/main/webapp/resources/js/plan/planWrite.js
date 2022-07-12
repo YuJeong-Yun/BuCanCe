@@ -1,11 +1,11 @@
-const menu = document.querySelector('.show-grp-menu .show-grp');
-const member = document.querySelector('.grp-member');
+const menu = document.querySelector('.show-title-btn .show-title');
+const planTitle = document.querySelector('.plan-title');
 
-menu.addEventListener('click', hideMember);
+menu.addEventListener('click', hideTitle);
 
-// 그룹 멤버 숨기기 버튼
-function hideMember() {
-  member.classList.toggle("hidden");
+// 타이틀 숨기기 버튼
+function hideTitle() {
+  planTitle.classList.toggle("hidden");
 };
 
 
@@ -243,20 +243,14 @@ function addSearchResultTour(data, category, resultContainer) {
 
     // 이미 선택된 관광지는 출력 X
     tourItem = document.querySelector('.tour-item.' + category + tour.num);
-    console.log('.tour-item.' + category + tour.num);
     if (tourItem.classList.contains('hidden')) {
       continue;
     }
 
-    let img;
+    let img = tour.thumbnail;
     let title = tour.title;
-    if (category == 't') { // 관광지
-      img = tour.main_img_thumb;
-      title = tour.main_title;
-    } else if (category == 'a') { // 숙소
+    if (category == 'a') { // 관광지
       img = tour.img;
-    } else { // category == 'r'  맛집
-      img = tour.thumb_img;
     }
 
     const searchPlan = document.createElement('li');
@@ -270,7 +264,6 @@ function addSearchResultTour(data, category, resultContainer) {
       '<input type="hidden" value="' + tour.lng + '" class="lng">' +
       '<input type="hidden" value="' + tour.lat + '" class="lat">';
     searchPlan.innerHTML = searchPlanInner;
-    console.log(searchPlan);
     resultContainer.append(searchPlan);
   }
 }

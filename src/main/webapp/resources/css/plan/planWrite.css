@@ -17,13 +17,13 @@
 }
 
 
-/* 그룹 메뉴 보여주기 버튼 */
-.show-grp-menu {
+/* 타이틀 보여주기 버튼 */
+.show-title-btn {
 }
-.show-grp-menu .show-grp {
+.show-title-btn .show-title {
 	background-color: #fff;
 	position: absolute;
-	top: 30px;
+	top: 35px;
 	left: -50px;
 	padding: 5px;
 	box-shadow: 3px 3px 7px #aaa;
@@ -31,50 +31,26 @@
 	font-size: 20px;
 	cursor: pointer;
 }
-.show-grp-menu .show-grp:hover {
+.show-title-btn .show-title:hover {
 	transform: scale(1.05);
 }
-/* 그룹 멤버 */
-.grp-member {
+/* 타이틀 */
+.plan-title {
 	background-color: #0288d1;
 }
-.grp-member .member-container {
-	display: flex;
+.plan-title > .inner {
 	height: 100px;
-	align-items: center;
-	list-style: none;
 }
-.grp-member .member-container li {
-	width: 80px;
-	text-align: center;
-	position: relative;
-}
-.grp-member .member-container li .leader {
-	position: absolute;
-	top:-10px;
-	left:10px;
-	margin: auto;
-	font-size: 30px;
-	color: #dad285;
-	z-index: 1;
-}
-.grp-member .member-container li .member--profile img {
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-}
-.grp-member .member-container li .member--id {
-	font-size: 16px;
+.plan-title .title-content {
+	height: 100px;
+	padding: 0 10px;
+	line-height: 100px;
+	font-size: 25px;
 	font-weight: 700;
-	color: #fff;
-}
-.grp-member .member-container li .member--name {
-	font-size: 12px;
-	color: #fff;
-}
-.grp-member .member-container li.menu span{
-	color: #efefef;
-}
+	color: #efefef;	
+	
+
+	}
 
 
 
