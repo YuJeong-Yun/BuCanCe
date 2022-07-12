@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file = "../include/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberPage.css" >
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -44,6 +48,7 @@ function kakaoLogin() {
       },
     })
   }
+  
 //카카오로그아웃  
 function kakaoLogout() {
     if (Kakao.Auth.getAccessToken()) {
@@ -60,7 +65,9 @@ function kakaoLogout() {
     }
   }  
 </script>
+
 <!-- 카카오 스크립트 -->
 
 </body>
 </html>
+<%@ include file = "../include/footer.jsp" %>

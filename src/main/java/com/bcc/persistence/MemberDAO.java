@@ -40,12 +40,12 @@ public interface MemberDAO {
     public int idCheck(String id);
     
 	// 라이센스 조회
-	public int getLicense(String id);
+	public int getLicense(String license);
     
     // license up
     public int licenseUp(String license);
     
     // license down
-    public int licenseDown(String license);
+    public int licenseDown(String id);
 
 }

@@ -58,7 +58,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberVO getMember(String id) {
 
-		log.info("getMember(userid) 호출");
+		log.info("getMember(id) 호출");
 		
 		MemberVO vo = dao.getMember(id);
 		
@@ -97,9 +97,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int getLicense(String id) {
+	public int getLicense(String license) {
 		
-		int liCnt = dao.getLicense(id);
+		int liCnt = dao.getLicense(license);
 		
 		return liCnt;
 	}

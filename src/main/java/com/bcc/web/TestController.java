@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bcc.domain.MemberVO;
+import com.bcc.service.KakaoService;
 import com.bcc.service.MemberService;
 
 @Controller
@@ -72,7 +74,6 @@ public class TestController {
 			
 			return "/member/loginForm";
 		}
-
 		
 		@RequestMapping(value = "/login",method = RequestMethod.POST)
 		public String loginPOST(MemberVO vo,HttpSession session) {
@@ -114,33 +115,12 @@ public class TestController {
 		// http://localhost:8088/mypage
 		// 마이페이지
 		@RequestMapping(value = "/mypage",method = RequestMethod.GET)
-		public String mypageGET(HttpSession session) {
+		public String mypageGET(MemberVO vo,HttpSession session) {
 			log.info(" mypageGET() 호출 ");
 			log.info(" view 페이지 출력 -> 정보 입력 ");
 			
 			// 페이지이동
 			return "/member/mypageForm";
-		}
-		
-		// http://localhost:8088/info
-		// 회원정보 조회
-		@RequestMapping(value = "/info", method = RequestMethod.GET)
-		public void infoGET(HttpSession session,Model model) {
-			log.info("infoGET() 호출");
-			
-			// 아이디 값 가져오기(세션)
-			String id =(String)session.getAttribute("id");
-			
-			// 아이디 값에 해당하는 회원정보 모두 조회 -> 서비스 동작 호출
-			MemberVO vo = service.getMember(id);
-			
-			// 가져온 회원정보 확인
-			log.info(vo+"");
-			
-			//DB에서 전달받은 정보를 view 페이지로 전달
-			//model.addAttribute("memberVO", vo);
-			model.addAttribute(vo);
-			
 		}
 		
 		// http://localhost:8088/update
@@ -155,7 +135,6 @@ public class TestController {
 			
 			return "/member/updateForm";
 		}
-		
 		
 		// 회원정보 수정
 		@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -173,20 +152,20 @@ public class TestController {
 			// 페이지 이동(main)
 			return "redirect:/mypage";
 		}
-		
 
 	    // 라이센스 받아오기
 		@RequestMapping(value = "/license",method = RequestMethod.GET)
 		public void licenseGET(HttpSession session,Model model) {
-			
+
 			log.info(" licenseGET() 호출 ");
-			
+
 			String id = (String)session.getAttribute("id");
 
 			model.addAttribute(service.getMember(id));
-			
+
 		}
-//
+		
+		
 //		// 라이센스 수정
 //		@RequestMapping(value = "/license", method = RequestMethod.POST)
 //		public String licensePOST(String id) {
@@ -201,9 +180,9 @@ public class TestController {
 //			}
 //			
 //			return "redirect:/liDown";
-//		}
-//		
-
+//		}	
+		
+		
 	    // GET으로 license 값 가져온다.
 	    // => POST로 license UP or DOWN 보낸다.
 		@RequestMapping(value = "/liUp", method = RequestMethod.POST)
@@ -211,12 +190,24 @@ public class TestController {
 			
 			log.info(" liUpPOST() 호출 ");
 			
+			int liUp = service.liUp(id);
 
+			return "redirect:/update";
+			
+		}
+
+		// http://localhost:8088/login
+		@RequestMapping(value = "/liDown", method = RequestMethod.POST)
+		public String liDownPOST(String id) {
+			
+			log.info(" liDownPOST() 호출 ");
+			
+			int liDown = service.liDown(id);
 			
 			return "redirect:/update";
 			
 		}
-		
+
 		// 회원정보 삭제(탈퇴)
 		@RequestMapping(value = "/delete", method = RequestMethod.GET)
 		public String deleteGET() {
@@ -255,7 +246,32 @@ public class TestController {
 			return "/member/favorite";
 		}
 
+
 		// 아이디 체크
+
+	    @Inject
+	    private KakaoService ks;
+	    
+		// http://localhost:8088/kakaoLogin
+	    
+	    @RequestMapping("/kakaoLogin")
+	    public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception{
+	    	log.info("#########" + code);
+	        String access_Token = ks.getAccessToken(code);
+	        
+	        HashMap<String, Object> userInfo = ks.getUserInfo(access_Token);
+	        
+	        log.info("###access_Token#### : " + access_Token);
+	        log.info("###userInfo#### : " + userInfo.get("email"));
+	        log.info("###nickname#### : " + userInfo.get("nickname"));
+	        log.info("###profile_image#### : " + userInfo.get("profile_image"));
+	        
+			return "/member/main";
+	        
+	    }
+	    
+	    // 아이디 체크
+
 	    @PostMapping("/idCheck")
 	    @ResponseBody
 	    public int idCheck(@RequestParam("id") String id){
@@ -267,16 +283,22 @@ public class TestController {
 	        return cnt;
 	    }
 	    
-	    // 라이센스 수정
-	    @PostMapping("/license")
-	    @ResponseBody
-	    public int license(@RequestParam("lisence") String license){
-	   
-	        int liCnt = service.idCheck(license);
-	        log.info("확인 결과:"+liCnt);
-	        
-	        return liCnt;
-	    }
+//	    @PostMapping("/license")
+//	    @ResponseBody
+//	    public String license(@RequestParam("lisence") String id){
+//	   
+//	        int liCnt = service.liCheck(id);
+//	        log.info("확인 결과:"+liCnt);
+//	        
+//	        if(liCnt != 1) {
+//	        	return "redirect:/liUp";
+//	        }
+//	        return "redirect:/liDown";
+//	    }
+//		
+//	    // GET으로 license 값 가져온다.
+//	    // => POST로 license UP or DOWN 보낸다.
+
 	    
 		// http://localhost:8088/login	    
 		// http://localhost:8088/kakao_login
@@ -292,4 +314,5 @@ public class TestController {
 			return "/member/loginForm";
 			
 	    	}
+		
 }

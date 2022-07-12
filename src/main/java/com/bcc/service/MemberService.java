@@ -31,7 +31,7 @@ public interface MemberService {
     public int idCheck(String id);
     
 	// 라이센스 확인
-    public int getLicense(String id);
+    public int getLicense(String license);
     
     // license UP
     public int liUp(String id);

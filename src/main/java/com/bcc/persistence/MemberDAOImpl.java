@@ -126,13 +126,20 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public int idCheck(String id) {
+		
         int cnt = sqlSession.selectOne(NAMESPACE+".idCheck", id);
+        
         return cnt;
 	}
+	
 
 	@Override
-	public int getLicense(String id) {
-		int liCnt = sqlSession.selectOne(NAMESPACE+".liCheck", id);
+	public int getLicense(String license) {
+		
+		logger.info(" getLicense(license) ");
+		
+		int liCnt = sqlSession.selectOne(NAMESPACE+".liCheck", license);
+		
 		return liCnt;
 	}
 

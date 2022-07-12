@@ -49,15 +49,20 @@
 		SELECT COUNT(id) FROM bcc_member WHERE id = #{id}
     </select>
 
+	<select id="liCheck" parameterType="String" resultType="int">
+		SELECT license FROM bccdb.bcc_member
+		where id = #{id}
+    </select>
+
 	<update id="licenseUp">
 		update bcc_member
-		set license=1
+		set license="premium"
 		where id=#{id} 
 	</update>
 	
 	<update id="licenseDown">
 		update bcc_member
-		set license=0
+		set license="free"
 		where id=#{id} 
 	</update>
 

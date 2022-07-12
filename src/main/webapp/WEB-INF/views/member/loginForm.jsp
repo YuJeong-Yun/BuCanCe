@@ -53,6 +53,7 @@
 		<a href="https://kauth.kakao.com/oauth/authorize?client_id=c30d4acffaf14e6c0a33f269940ff070&redirect_uri=http://localhost:8088/kakao_logout
 &response_type=code"><img src="/resources/img/kakao_login_medium_narrow.png" style="height:60px"></a>
 	</form>
+
 </div>
 </div>
 </body>

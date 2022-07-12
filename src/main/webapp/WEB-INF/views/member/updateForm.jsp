@@ -23,34 +23,39 @@ window.onload = function checkLi(){
 };
 
 function liUp(){
+	var id = $("#id").val()
 	var li = $("#license").val()
 	$.ajax({
 	        url:'/liUp', //Controller에서 인식할 주소
  	        type:'POST', //POST 방식으로 전달
- 	        data:{li:li},
+ 	        data:{li:id},
  	        success:function(){
- 	        	alert("구독을 시작했습니다."); 
+ 	        	alert("구독을 시작했습니다.");
+ 	        	location.href="/update";
  	        },
- 	       error:function(){
- 	    	  alert("liUp에러");   
- 	       }
+			error:function(){
+				alert("liUp에러");
+			}
 	})
 	};
 	
-	function liDown(){
-		var li = $("#license").val()
-		$.ajax({
-		        url:'/liDown', //Controller에서 인식할 주소
-	 	        type:'POST', //POST 방식으로 전달
-	 	        data:{li:li},
-	 	        success:function(){
-	 	        	alert("구독을 취소하였습니다."); 
-	 	        },
-	 	       error:function(){
-	 	    	  alert("Lidown에러");
-	 	       }
-		})
-		};
+function liDown(){
+	var id = $("#id").val(); 
+	var li = $("#license").val()
+
+	$.ajax({
+	        url:'/liDown', //Controller에서 인식할 주소
+ 	        type:'POST', //POST 방식으로 전달
+ 	        data: {li:li},
+ 	        success:function(data){
+ 	        	alert("구독을 취소하였습니다.");
+ 	        	location.href="/update";
+ 	        },
+			error:function(){
+				alert("Lidown에러");
+			}
+	})
+	};
 
 </script>
 </head>
