@@ -193,13 +193,20 @@
                     <div class="room-item">
                         <img src="${pageContext.request.contextPath}/resources/img/room/room-1.jpg" alt="">
                         <div class="ri-text">
-                            <h4>${UserPayList.get(a).accName}</h4>
+							<h5>주문번호 : ${UserPayList.get(a).accId}</h5>
+							<br>
+                            <h4>${UserPayList.get(a).accName}
+                            
+                             <c:if test="${UserPayList.get(a).license==1}">
+                            	<br><a style="color :red">(할인)</a>
+                            </c:if>
+                            </h4>
                             <h5>${UserPayList.get(a).roomSort}</h5>
                             <table>
-                                <tbody>
+                                <tbody >
                                     <tr>
                                         <td class="r-o">예약명:</td>
-                                        <td>${UserPayList.get(a).userName}</td>
+                                        <td>${UserPayList.get(a).user_name}</td>
                                     </tr>
                                    
                                         <c:if test="${UserPayList.get(a).sort=='ds'}">
@@ -259,13 +266,16 @@
                             <input type="hidden" name="accId" value="${UserPayList.get(a).accId}">
                             <input type="hidden" name="accName" value="${UserPayList.get(a).accName}">
                             <input type="hidden" name="roomSort" value="${UserPayList.get(a).roomSort}">
-                           	<input type="hidden" name="userName" value="${UserPayList.get(a).userName}">
+                           	<input type="hidden" name="user_name" value="${UserPayList.get(a).user_name}">
                            	<input type="hidden" name="sort" value="${UserPayList.get(a).sort}">
                            	<input type="hidden" name="checkIn" value="${UserPayList.get(a).checkIn}">
                            	<input type="hidden" name="checkOut" value="${UserPayList.get(a).checkOut}">
                            	<input type="hidden" name="useTime" value="${UserPayList.get(a).useTime}">
                            	<input type="hidden" name="endTime" value="${UserPayList.get(a).endTime}">
                            	<input type="hidden" name="accAmount" value="${UserPayList.get(a).accAmount}">
+                            <input type="hidden" name="accKind" value="${UserPayList.get(a).accKind}">
+							<input type="hidden" name="id" value="${UserPayList.get(a).id}">
+							<input type="hidden" name="license" value="${UserPayList.get(a).license}">
                             
                             <c:if test="${UserPayList.get(a).status!='refund'}">
                             <button type="submit" style="color : blue">환불하기</button>

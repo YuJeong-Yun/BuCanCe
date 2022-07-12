@@ -37,10 +37,12 @@ public class roomServiceImpl implements roomService{
 	private static final Logger log =
 			LoggerFactory.getLogger(roomServiceImpl.class);
 	
+	
+	//숙소목록 페이지
 	@Override
 	public JSONArray roomList() {
 		
-		log.info("크롤링 처리불러오기");
+		log.info("service : 숙소목록불러오기");
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
 		String url = "https://www.goodchoice.kr/product/home/12";
@@ -55,14 +57,15 @@ public class roomServiceImpl implements roomService{
 		}
 
 		// select를 이용하여 원하는 태그를 선택
-		Elements room_title = doc.select(".list_2.adcno1 .name strong");
-		Elements room_pic = doc.select(".pic .lazy.align");
-		Elements room_rank = doc.select(".name p.score");
-		Elements room_area = doc.select(".name > p:last-child");
-		Elements room_price = doc.select(".map_html > p:nth-child(1) > b");
-		Elements room_price2 = doc.select(".map_html > p:nth-child(2) > b");
-		Elements room_link = doc.select(".list_2.adcno1 > a");
-		// JSON 형태로 영화 정보 저장
+		Elements room_title = doc.select(".list_2.adcno1 .name strong"); //숙소명
+		Elements room_pic = doc.select(".pic .lazy.align");    //숙소그림
+		Elements room_rank = doc.select(".name p.score");   //별점
+		Elements room_area = doc.select(".name > p:last-child");  //숙소지역
+		Elements room_price = doc.select(".map_html > p:nth-child(1) > b");  //숙소대실가격
+		Elements room_price2 = doc.select(".map_html > p:nth-child(2) > b"); //숙소숙박가격
+		Elements room_link = doc.select(".list_2.adcno1 > a"); //페이지이동후 크롤링할 페이지주소
+		
+		// JSON 형태로 숙소 정보 저장
 		JSONArray roomList = new JSONArray();
 
 		for (int i = 0; i < room_title.size(); i++) {
@@ -86,10 +89,14 @@ public class roomServiceImpl implements roomService{
 		 return roomList;
 	}
 
+	
+	
+	
+	//숙소목록페이지에서 검색한 정보만 불러오게함
 	@Override
 	public JSONArray roomSearchList(roomSearch rs) {
 
-		log.info("크롤링을 검색한 결과불러오기");
+		log.info("숙소를 검색한 페이지만 불러오기");
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
 		String url = "https://www.goodchoice.kr/product/home/12";
@@ -104,13 +111,13 @@ public class roomServiceImpl implements roomService{
 		}
 
 		// select를 이용하여 원하는 태그를 선택
-		Elements room_title = doc.select(".list_2.adcno1 .name strong");
-		Elements room_pic = doc.select(".pic .lazy.align");
-		Elements room_rank = doc.select(".name p.score");
-		Elements room_area = doc.select(".name > p:last-child");
-		Elements room_price = doc.select(".map_html > p:nth-child(1) > b");
-		Elements room_price2 = doc.select(".map_html > p:nth-child(2) > b");
-		Elements room_link = doc.select(".list_2.adcno1 > a");
+		Elements room_title = doc.select(".list_2.adcno1 .name strong"); //숙소이름
+		Elements room_pic = doc.select(".pic .lazy.align");  //숙소사진
+		Elements room_rank = doc.select(".name p.score");   //평점
+		Elements room_area = doc.select(".name > p:last-child"); //숙소지역
+		Elements room_price = doc.select(".map_html > p:nth-child(1) > b"); //대실가격
+		Elements room_price2 = doc.select(".map_html > p:nth-child(2) > b"); //숙박가격
+		Elements room_link = doc.select(".list_2.adcno1 > a");  //이후에 크롤링할페이지를 저장
 		// JSON 형태로 영화 정보 저장
 		JSONArray roomList = new JSONArray();
 //			[log.info](http://log.info/)(room_title+"");
@@ -133,6 +140,7 @@ public class roomServiceImpl implements roomService{
 			// JSONObject에 키:값 형태로 데이터 저장
 			JSONObject obj = new JSONObject();
 
+			//검색어를 입력할때 숙소명이 있는 경우
 			if (titleArr[i].contains(title)) {
 
 				
@@ -146,6 +154,7 @@ public class roomServiceImpl implements roomService{
 
 				roomList.add(obj);
 
+			//검색을하지않은 경우
 			} else if (title == null) {
 
 				obj.put("room_title", room_title.get(i).text());
@@ -235,6 +244,9 @@ public class roomServiceImpl implements roomService{
 		return roomList;
 	}
 
+	
+	
+	//roomDetail0~5까지 방상세정보를 불러오는 동작
 	@Override
 	public JSONArray roomDetail0(String bno) {
 
@@ -459,6 +471,11 @@ public class roomServiceImpl implements roomService{
 
 		return detailList5;
 	}
+	//roomDetail0~5까지 방상세정보를 불러오는 동작
+	
+	
+	  
+	
 	
 	
 	
@@ -604,6 +621,8 @@ public class roomServiceImpl implements roomService{
 		Elements room_accendtimes = doc.select(".info .fast .price > ul > li:first-child");
 		Elements room_accusetimes = doc.select(".info .fast .price > ul > li:last-child");
 		
+		Elements room_tf = doc.select(".info > div:first-child > button");
+		Elements room_df = doc.select(".info > div:last-child > button");
 		
 		// JSON 형태로 영화 정보 저장
 		JSONArray roomList = new JSONArray();
@@ -630,6 +649,9 @@ public class roomServiceImpl implements roomService{
 					obj.put("room_usetime",room_usetime.get(i).text().replaceAll("[^0-9]",""));
 					obj.put("room_accendtime",room_accendtime.get(i).text().replaceAll("[^0-9]",""));
 					obj.put("room_accusetime",room_accusetime.get(i).text().replaceAll("[^0-9]",""));
+					obj.put("room_tf",room_tf.get(i).text());
+					obj.put("room_df",room_df.get(i).text());
+					
 				}//아닐때
 				else{
 					obj.put("room_fcost", "");
@@ -652,9 +674,8 @@ public class roomServiceImpl implements roomService{
 				obj.put("room_usetime",room_usetime.get(i).text().replaceAll("[^0-9]",""));
 				obj.put("room_accendtime",room_accendtime.get(i).text().replaceAll("[^0-9]",""));
 				obj.put("room_accusetime",room_accusetime.get(i).text().replaceAll("[^0-9]",""));
-				
-				
-				
+				obj.put("room_tf",room_tf.get(i).text());
+				obj.put("room_df",room_df.get(i).text());
 				
 			} 
 			
@@ -698,7 +719,7 @@ public class roomServiceImpl implements roomService{
 		log.info("a = "+a);
 		
 		//a 문자부분
-		String b = "bccPayId";
+		String b = "bcc";
 		
 		//a 숫자부분
 		int c = Integer.parseInt(a.replaceAll("[^0-9]",""));

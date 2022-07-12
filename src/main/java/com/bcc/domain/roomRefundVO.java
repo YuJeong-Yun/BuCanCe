@@ -4,14 +4,14 @@ public class roomRefundVO {
 
 	private String accId;
 	private int accAmount;
-	private String reason;
 	private String accName;
 	private String roomSort;
 	private String sort;
 	private String accKind;
 	private String checkIn;
 	private String checkOut;
-	private String userId;
+	private String id;
+	private int license;
 	public String getAccId() {
 		return accId;
 	}
@@ -23,12 +23,6 @@ public class roomRefundVO {
 	}
 	public void setAccAmount(int accAmount) {
 		this.accAmount = accAmount;
-	}
-	public String getReason() {
-		return reason;
-	}
-	public void setReason(String reason) {
-		this.reason = reason;
 	}
 	public String getAccName() {
 		return accName;
@@ -66,22 +60,26 @@ public class roomRefundVO {
 	public void setCheckOut(String checkOut) {
 		this.checkOut = checkOut;
 	}
-	public String getUserId() {
-		return userId;
+	public String getId() {
+		return id;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setId(String id) {
+		this.id = id;
 	}
-	
-	
+	public int getLicense() {
+		return license;
+	}
+	public void setLicense(int license) {
+		this.license = license;
+	}
 	@Override
 	public String toString() {
-		return "roomRefundVO [accId=" + accId + ", accAmount=" + accAmount + ", reason=" + reason + ", accName="
-				+ accName + ", roomSort=" + roomSort + ", sort=" + sort + ", accKind=" + accKind + ", checkIn="
-				+ checkIn + ", checkOut=" + checkOut + ", userId=" + userId + "]";
+		return "roomRefundVO [accId=" + accId + ", accAmount=" + accAmount + ", accName=" + accName + ", roomSort="
+				+ roomSort + ", sort=" + sort + ", accKind=" + accKind + ", checkIn=" + checkIn + ", checkOut="
+				+ checkOut + ", id=" + id + ", license=" + license + "]";
 	}
+
 	
-	
-	
+
 	
 }

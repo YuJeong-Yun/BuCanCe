@@ -220,7 +220,7 @@
                               
                                 <tr>
                                     <td>예약명: </td>
-                                    <td>${vo.userName }</td>
+                                    <td>${vo.user_name}</td>
                                 </tr>
                                 <tr>
                                     <td>비용: </td>
@@ -244,7 +244,7 @@
 <script>
   function refundPay() {
 	  
-alert('환불시 3일이내에 환불이 완료됩니다.');
+alert('확인후 24시간 이내에 환불이 완료됩니다.');
 var result = confirm("정말로 환불 하시겠습니까?");
 	
 if(result){ //result == true 
@@ -257,17 +257,14 @@ if(result){ //result == true
 	      data : {
 	        accId : "${vo.accId}", // 예: ORD20180131-0000011
 	        accAmount : "${vo.accAmount}", // 환불금액
-	        reason : "테스트 결제 환불", // 환불사유
 	        accName : "${vo.accName}", //환불한 숙소 이름
 	        roomSort : "${vo.roomSort}", //환불한 상품 이름
 	        sort : "${vo.sort}", //대실 or 숙박
 	        accKind : "${vo.accKind}", //결제방법
 	        checkIn : "${vo.checkIn}", //체크인 
 	        checkOut : "${vo.checkOut}", //체크아웃
-	        userId : "${vo.userId}"
-//	         "refund_holder": "${UserPayList.get(a).userName}", // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
-//	         "refund_bank": "88" // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
-//	         "refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
+	        id : "${vo.id}",
+	        license : "${vo.license}"
 	      },
 	      "dataType": "json"
 	      

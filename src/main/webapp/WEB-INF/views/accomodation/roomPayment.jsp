@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-
-<!-- <script type="text/javascript"> -->
-
-<!-- history.replaceState({}, null, location.pathname); -->
-
-<!-- </script> -->
-
 <meta charset="UTF-8">
 <meta name="description" content="Sona Template">
 <meta name="keywords" content="Sona, unica, creative, html">
@@ -27,13 +21,7 @@ function selectAll(selectAll)  {
 	    checkbox.checked = selectAll.checked;
 	  })
 	}
-
-	
-	
-
-	
 </script>
-
 <!--유의사항 팝업창  ........................................................................................... -->
 <script src="http://wooshin.mireene.co.kr/g5/js/jquery-1.8.3.min.js"></script>
 <style type="text/css">
@@ -158,30 +146,7 @@ A:hover {text-decoration:none; color:#646464;}
 	-moz-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
 }
 </style>
-<script type="text/javascript">
-<!--
-function dEI(elementID){
-	return document.getElementById(elementID);
-}
-function openLayer(IdName, tpos, lpos){
-	var pop = dEI(IdName);
-	pop.style.top = tpos + "px";
-	pop.style.left = lpos + "px";
-	pop.style.display = "block";
-}
-function closeLayer( IdName ){
-	var pop = dEI(IdName);
-	pop.style.display = "none";
-}
-//-->
-</script>
 <!--유의사항 팝업창  ........................................................................................... -->
-
-
-
-
-
-
 <style>
 /* 서명란 클릭시 테두리(blue) 강조 효과  */
 input[type=text] {
@@ -240,7 +205,6 @@ input[type=text]:focus {
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
 </head>
-
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -416,7 +380,7 @@ input[type=text]:focus {
 									<tr>
 
 										<td class="r-o">예약명 <input type="text" placeholder="서명란"
-											value="${username}"></td>
+											value="${user_name}"></td>
 										<td><br> <br></td>
 									</tr>
 									<tr>
@@ -645,18 +609,16 @@ input[type=text]:focus {
 
 
 				<!-- 아임포트 -->
-				<script type="text/javascript"
-					src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-				<script type="text/javascript"
-					src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-				<script type="text/javascript">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript">
 
 		var IMP = window.IMP; // 생략 가능
 		IMP.init("imp49919207"); // 예: imp00000000
 
 		
 	    function requestPay() {
-			
+		
 			if(!$('#checkOne').is(':checked')){
 				alert('숙소이용규칙 및 취소/환불규정에 동의가 필요합니다.');
 				
@@ -674,15 +636,15 @@ input[type=text]:focus {
 			      IMP.request_pay({ // param
 			    	  pg: $("#payment-select option:selected").val(),
 // 			          pay_method: "card",
-			          merchant_uid: "${priId}",  //고유 id
+			          merchant_uid: "${accId}",  // 숙박 주문번호
 			          name: '${vo.room_title}',  //상품이름
-// 			          amount: '${vo.room_fcost}', //가격
+// 			          amount: "document.getElementsById('date-out')", //가격
 			          amount: 100, //가격
-			          buyer_email: "${useremail}",
-			          buyer_name: "${username}",
-			          buyer_tel: "${usertel}",
-			          buyer_addr: "${userAddress}",
-			          buyer_postcode: "${userPostCode}",
+			          buyer_email: "${email}",
+			          buyer_name: "${user_name}",
+			          buyer_tel: "${tel}",
+			          buyer_addr: "${address1}",
+			          buyer_postcode: "${zip}",
 			      }, function (rsp) { // callback
 			          if (rsp.success) {
 			        	// http://localhost:8088/accomodation/roomList
@@ -692,23 +654,24 @@ input[type=text]:focus {
 			 				type:"GET",
 			 				url :"${pageContext.request.contextPath}/accomodation/roomPayDB",
 			 				data : {
-			 					accId: "${priId}",  //고유 id
+			 					accId: "${accId}",  //고유 id
 			 					accKind: $("#payment-select option:selected").val(),
 			 					accName: '${vo.room_title}',  //상품이름
-// 						        amount: '${vo.room_fcost}', //가격
+// 			 					accAmount: "document.getElementsById('date-out')", //가격
 						        accAmount: 100, //가격
-						        userEmail: "${useremail}",
-						        userName: "${username}",
-						        userTel: "${usertel}",
-						        userAddr: "${userAddress}",
-						        userPostcode: "${userPostCode}",
-						        userId : "${userid}",
+						        email: "${email}",
+						        user_name: "${user_name}",
+						        tel: "${tel}",
+						        address1: "${address1}",
+						        zip: "${zip}",
+						        id : "${id}",
 						        sort : "ds",
 						        roomSort : "${vo.room_subTitle}",
 						        endTime : "${vo.endtime}",
 						        useTime : "${vo.usetime}",
 						        checkIn : "${vo.checkin}",
-						        checkOut : "${vo.checkout}"
+						        checkOut : "${vo.checkout}",
+						        license : "${license}"
 			 				},
 			 				contentType: "application/json",
 			 				success : function(data){
@@ -720,12 +683,11 @@ input[type=text]:focus {
 			 			}); //ajax끝
 			 			
 			              //결제내역페이지로이동
-			             location.href= "${pageContext.request.contextPath}/accomodation/roomReComplete?accId="+"${priId}";	
+			             location.href= "${pageContext.request.contextPath}/accomodation/roomReComplete?accId="+"${accId}";	
 			          } else {
 			         	
 			              // 결제 실패 시 로직, 뒤로가기
 			              alert('결제실패');
-<%-- 			              alert(<%=request.getHeader("REFERER")%>); --%>
 			              
 			              //결제 실패시 뒤로가기
 			              location.href=document.getElementById("reload").value;
@@ -733,11 +695,7 @@ input[type=text]:focus {
 			      });
 			}
 			
-			
-	   
 	    }
-
-		
 		
 		
 	    function cancelPay() {
@@ -780,11 +738,23 @@ input[type=text]:focus {
 
 							<div class="check-date">
 								<label for="date-out">서명:</label> <input type="text"
-									value=${username } id="date-out"> <i class=""></i>
+									value="${user_name }" id="date-out"> <i class=""></i>
 							</div>
 							<div class="check-date">
-								<label for="date-out"><strong>총 결제 금액</strong></label> <input
-									type="text" id="date-out" value="${vo.room_fcost} 원" readonly>
+								
+								<c:if test="${license==0}">
+								<label for="date-out"><strong>총 결제 금액</strong></label> 
+								<input type="text" id="date-out" value="${vo.room_fcost} 원" readonly>
+								</c:if>
+								
+								<c:if test="${license==1}">
+								<label for="date-out"><strong style="color : red">총 결제 금액 (멤버쉽 할인)</strong></label> 
+								
+								<input type="text" id="date-out" value="<fmt:formatNumber type="number" maxFractionDigits="0"  value="${vo.room_fcost*0.9}" /> 원" style="color : red" readonly>
+<%-- 								<input type="text" id="date-out" value="${vo.room_fcost*0.9} 원" style="color : red" readonly> --%>
+								</c:if>
+								
+								
 								<i class=""></i>
 							</div>
 
@@ -804,10 +774,6 @@ input[type=text]:focus {
 
 			</div>
 		</div>
-
-
-
-
 	</section>
 	<!-- Room Details Section End -->
 

@@ -47,8 +47,8 @@ public class roomDAOImpl implements roomDAO {
 
 
 	@Override
-	public List<roomPayVO> roomUserPayInfo(String userId) {
-		return sqlSession.selectList(NAMESPACE+".userPayList",userId);
+	public List<roomPayVO> roomUserPayInfo(String id) {
+		return sqlSession.selectList(NAMESPACE+".userPayList",id);
 	}
 
 

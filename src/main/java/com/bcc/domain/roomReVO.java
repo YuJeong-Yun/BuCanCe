@@ -1,5 +1,6 @@
 package com.bcc.domain;
 
+//날짜에 따른 예약정보 불러오는 vo
 public class roomReVO {
 	
 	private String room_title;
@@ -16,6 +17,8 @@ public class roomReVO {
 	private String room_subTitle;
 	private String endtime;
 	private String usetime;
+	private String room_rf;
+	
 	public String getRoom_title() {
 		return room_title;
 	}

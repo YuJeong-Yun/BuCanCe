@@ -230,7 +230,7 @@
                               
                                 <tr>
                                     <td>예약명: </td>
-                                    <td>${vo.userName }</td>
+                                    <td>${vo.user_name}</td>
                                 </tr>
                                 <tr>
                                     <td>비용: </td>

@@ -8,31 +8,31 @@
 
   
   	<insert id="insertRoom">
-  		insert into bcc_acc_payment (accId,accKind,accName,accAmount,userEmail,userName,userTel,userAddr,userPostcode,userId,sort,roomSort,endTime,useTime,checkIn,checkOut)
-  		values(#{accId},#{accKind},#{accName},#{accAmount},#{userEmail},#{userName},#{userTel},#{userAddr},#{userPostcode},#{userId},#{sort},#{roomSort},#{endTime},#{useTime},#{checkIn},#{checkOut})
+  		insert into acc_payment (accId,accKind,accName,accAmount,email,user_name,tel,zip,id,sort,roomSort,endTime,useTime,checkIn,checkOut,license)
+  		values(#{accId},#{accKind},#{accName},#{accAmount},#{email},#{user_name},#{tel},#{zip},#{id},#{sort},#{roomSort},#{endTime},#{useTime},#{checkIn},#{checkOut},#{license})
   	</insert>
   
   
   
   <select id="selectRoom" resultType="roomPayVO">
-  	select * from bcc_acc_payment where accId=#{accId}
+  	select * from acc_payment where accId=#{accId}
   </select>
   
   <select id="userPayList" resultType="roomPayVO">
-  	select * from bcc_acc_payment where userId=#{userId} order by accDate desc
+  	select * from acc_payment where id=#{id} order by accDate desc
   </select>
    
    <select id="selectRoomId" resultType="String">
-  	select accId from bcc_acc_payment order by accDate desc limit 1
+  	select accId from acc_payment order by accDate desc limit 1
   </select>
   
    <update id="payStatusRoom">
-  	update bcc_acc_payment set status="refund" where accId=#{accId}
+  	update acc_payment set status="refund" where accId=#{accId}
   </update>
 
 	<insert id="RoomInRefund">
-  		insert into bcc_acc_refund (accId,accAmount,reason,accName,roomSort,sort,accKind,checkIn,checkOut,userId)
-  		values(#{accId},#{accAmount},#{reason},#{accName},#{roomSort},#{sort},#{accKind},#{checkIn},#{checkOut},#{userId})
+  		insert into acc_refund (accId,accAmount,accName,roomSort,sort,accKind,checkIn,checkOut,id,license)
+  		values(#{accId},#{accAmount},#{accName},#{roomSort},#{sort},#{accKind},#{checkIn},#{checkOut},#{id},#{license})
   	</insert>
 
   
