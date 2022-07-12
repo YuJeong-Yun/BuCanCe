@@ -1,0 +1,391 @@
+.inner {
+	max-width: 1300px;
+	position: relative;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+.hidden {
+	display: none !important;
+}
+.date-active {
+	background-color: #f5f5f5 !important;
+}
+.tour-active {
+	background-color: #2679df !important;
+	color: #fff;
+}
+
+
+/* 그룹 메뉴 보여주기 버튼 */
+.show-grp-menu {
+}
+.show-grp-menu .show-grp {
+	background-color: #fff;
+	position: absolute;
+	top: 30px;
+	left: -50px;
+	padding: 5px;
+	box-shadow: 3px 3px 7px #aaa;
+	border-radius: 50%;
+	font-size: 20px;
+	cursor: pointer;
+}
+.show-grp-menu .show-grp:hover {
+	transform: scale(1.05);
+}
+/* 그룹 멤버 */
+.grp-member {
+	background-color: #0288d1;
+}
+.grp-member .member-container {
+	display: flex;
+	height: 100px;
+	align-items: center;
+	list-style: none;
+}
+.grp-member .member-container li {
+	width: 80px;
+	text-align: center;
+	position: relative;
+}
+.grp-member .member-container li .leader {
+	position: absolute;
+	top:-10px;
+	left:10px;
+	margin: auto;
+	font-size: 30px;
+	color: #dad285;
+	z-index: 1;
+}
+.grp-member .member-container li .member--profile img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+.grp-member .member-container li .member--id {
+	font-size: 16px;
+	font-weight: 700;
+	color: #fff;
+}
+.grp-member .member-container li .member--name {
+	font-size: 12px;
+	color: #fff;
+}
+.grp-member .member-container li.menu span{
+	color: #efefef;
+}
+
+
+
+/* 플랜 작성 */
+.make-plan {
+	margin-bottom: 50px;
+}
+.make-plan .container {
+}
+/* 지도 + 관광지 선택 */
+.make-plan .tour-container {
+	display: flex;
+	height: 700px;
+	margin-top: 20px;
+}
+.make-plan .tour-container .tour-map {
+	background-color: royalblue;
+	width: 1000px;
+}
+/* 일정 선택 + 버튼 */
+.make-plan .tour-container .tour-map .menu {
+	background-color: #fff;
+	height: 50px;
+	position: relative;
+	padding: 10px;
+	border: 1px solid #eee;
+}
+.make-plan .tour-container .tour-map .menu .choice-date {
+	display: flex;
+	align-items: center;
+	height: 35px;
+	position: absolute;
+	left: 10px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+.make-plan .tour-container .tour-map .menu .choice-date input {
+	border: 1px solid #eee;
+}
+.make-plan .tour-container .tour-map .menu .choice-date .set-date {
+	margin-left: 10px;
+}
+.make-plan .tour-container .tour-map .menu .choice-date .set-date:hover {
+	background-color: #ccc;
+}
+.make-plan .tour-container .tour-map .menu .btn-container {
+	height: 35px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 10px;
+	margin: auto;
+}
+.make-plan .tour-container .tour-map .menu .btn-container button {
+	border: none;
+	box-shadow: 2px 2px 3px #bbb;
+	padding: 5px 10px;
+}
+.make-plan .tour-container .tour-map .menu .btn-container .btn--reset {
+	background-color: #efefef;
+	margin-right: 5px;
+}
+.make-plan .tour-container .tour-map .menu .btn-container .btn--save {
+	background-color: #2679df;
+	color: #fff;
+}
+/* 지도  */
+.make-plan .tour-container .tour-map .map-wrapper {
+}
+
+/* 관광지 목록 */
+.make-plan .tour-container .tour-list-container {
+	background-color: #ddd;
+	width: 300px;
+	height: 100%;
+	box-shadow: 2px 2px 3px #bbb;
+	z-index: 1;
+}
+/* 검색 */
+.make-plan .tour-container .tour-list-container .search-container {
+	background-color: #fff;
+	height: 50px;
+	position: relative;
+	text-align: center;
+	line-height: 50px;
+}
+.make-plan .tour-container .tour-list-container .search-container .search {
+	border: 1px solid #ddd;
+	height: 30px;
+	width: 250px;
+}
+.make-plan .tour-container .tour-list-container .search-container .search-icon {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 0;
+	right: 30px;
+	bottom: 0;
+	margin: auto;
+	cursor: pointer;
+}
+/* 관광지 목록 */
+.make-plan .tour-container .tour-list-container ul.tour-list {
+	display: flex;
+	position: relative;
+	margin-top: 5px;
+	list-style: none;
+}
+.make-plan .tour-container .tour-list-container ul.tour-list li.tour {
+
+}
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__title {
+	display: flex;
+	background-color: #eee;
+	width: 95px;
+	height: 35px;
+	margin-right: 5px;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 2px 2px 2px #bbb;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	overflow: hidden;
+	font-size: 14px;
+	cursor: pointer;
+}
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__title:hover {
+	background-color: #2679df;
+	color: #fff;
+}
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__title .icon {
+	font-size: 18px;
+	margin-right: 3px;
+	pointer-events: none;
+}
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents {
+}
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul {
+	background-color: #fafafa;
+	width: 300px;
+	height: 610px;
+	position: absolute;
+	left: 0;
+	list-style: none;
+	overflow: auto;
+	z-index: 1;
+}
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul.search-result {
+	background-color: #8fb1db;
+	z-index: 2;
+}
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul > li {
+	display: flex;
+	align-items: center;
+	background-color: #fff;
+	height: 80px;
+	margin: 5px;
+	box-shadow: 2px 2px 3px #bbb;
+	cursor: pointer;
+}
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul > li .content__img {
+	width: 70px;
+	height: 70px;
+	margin: 0 10px;
+	pointer-events: none; 
+}
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul > li .content__title {
+	width: 180px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	pointer-events: none; 
+  font-size: 13px;
+}
+
+
+
+/* 일정별 관광지 */
+.make-plan ul.date-plan-container {
+	background-color: #ddd;
+	display: flex;
+	position: relative;
+	height: 210px;
+	box-shadow: 2px 2px 3px #aaa;
+	list-style: none;
+}
+.make-plan .date-plan-container li.plan {
+}
+.make-plan .date-plan-container .plan .plan__date {
+	background-color: #ddd;
+	width: 80px;
+	height: 40px;
+	margin-right: 5px;
+	box-shadow: 2px 2px 3px #ccc;
+	text-align: center;
+	line-height: 40px;
+}
+.make-plan .date-plan-container .plan .plan__date:hover {
+	background-color: #f5f5f5;
+
+}
+.make-plan .date-plan-container .plan .plan__contents {
+}
+.make-plan .date-plan-container .plan .plan__contents > ul {
+	background-color: #f5f5f5;
+	display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+	height: 170px;
+	position: absolute;
+	left: 0;
+	padding: 5px;
+	list-style: none;
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li {
+  background-color: #fff;
+	width: calc(1245px/10);
+	height: 100%;
+	position: relative;
+	padding: 0 10px;
+	margin-right: 5px;
+	box-shadow: 3px 3px 5px #bbb;
+  border-left: 1px solid #eee;
+	text-align: center;
+  cursor: move;
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li.dragging {
+  opacity: 0.5;
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li:last-child {
+	margin-right: 0;
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li > * {
+	
+	
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li .tour-wrapper {
+
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li .restaurant {
+    position: absolute;
+    left: 5px;
+    top: 70px;
+    z-index: 1;
+    color: #666;
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li .hotel {
+    position: absolute;
+    right: 5px;
+    top: 70px;
+    z-index: 1;
+    color: #507cdf;
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li .content__img {
+	width: 80px;
+	height: 80px;
+	margin: 10px 0;
+	border-radius: 50%;
+	pointer-events: none;
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li .content__title {
+	height: 40px;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+  font-size: 14px;
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li .delBtn {
+	background-color: #ddd;
+	width: 17px;
+	height: 17px;
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	padding: 0;
+	border: none;
+	border-radius: 3px;
+	text-align: center;
+	line-height: 17px;
+	font-size: 17px;
+	font-weight: 700;
+}
+.make-plan .date-plan-container .plan .plan__contents > ul > li .delBtn:hover {
+	background-color: #bbb;
+}
+
+
+/* 경로 확인 버튼 */
+.make-plan .inner > .btn-container {
+	display: flex;
+	position: absolute;
+	bottom: 175px;
+	right: 10px;
+}
+.make-plan .inner > .btn-container input {
+	background-color: #2679df;
+	color: #fff;
+	border: none;
+	height: 30px;
+	box-shadow: 2px 2px 3px #bbb;
+	font-size: 15px;
+}
+.make-plan .inner > .btn-container .del-path {
+	margin-right: 7px;
+	background-color: #4fc3f7;
+}
+.make-plan .inner > .btn-container .check-pah {
+}

@@ -1,7 +1,6 @@
 package com.bcc.domain;
 
 public class RestaurantVO {
-	// ¸ÀÁıÁ¤º¸°´Ã¼
 	
 	private int num;
 	private String title;
@@ -93,7 +92,5 @@ public class RestaurantVO {
 				+ ", usage_day=" + usage_day + ", addr=" + addr + ", addr_full=" + addr_full + ", img=" + img
 				+ ", thumb_img=" + thumb_img + ", lng=" + lng + ", lat=" + lat + "]";
 	}
-	
-	
 
 }
