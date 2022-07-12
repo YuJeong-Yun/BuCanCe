@@ -34,10 +34,10 @@ public interface MemberService {
     public int getLicense(String license);
     
     // license UP
-    public int liUp(String id);
+    public void liUp(String license);
     
     // license Down
-	public int liDown(String id);
+	public void liDown(String license);
     
 	// 카카오 관련
     // 토큰 받아오기

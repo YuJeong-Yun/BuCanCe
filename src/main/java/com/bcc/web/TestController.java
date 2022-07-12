@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -185,27 +184,39 @@ public class TestController {
 		
 	    // GET으로 license 값 가져온다.
 	    // => POST로 license UP or DOWN 보낸다.
+//		@RequestMapping(value = "/liUp", method = RequestMethod.POST)
+//		public String liUpPOST(String id) {
+//			
+//			log.info(" liUpPOST() 호출 ");
+//			
+//			int liUp = service.liUp(id);
+//
+//			return "redirect:/update";
+//			
+//		}
+		
 		@RequestMapping(value = "/liUp", method = RequestMethod.POST)
-		public String liUpPOST(String id) {
+		public String liUpPOST(HttpSession session, String license) {
 			
-			log.info(" liUpPOST() 호출 ");
+			String id = (String)session.getAttribute("id");
 			
-			int liUp = service.liUp(id);
-
+			service.liUp(id);
+			
 			return "redirect:/update";
-			
 		}
-
+		
+		
 		// http://localhost:8088/login
 		@RequestMapping(value = "/liDown", method = RequestMethod.POST)
-		public String liDownPOST(String id) {
+		public String liDownPOST(HttpSession session, String license) {
 			
 			log.info(" liDownPOST() 호출 ");
 			
-			int liDown = service.liDown(id);
+			String id = (String)session.getAttribute("id");
+			
+			service.liDown(id);
 			
 			return "redirect:/update";
-			
 		}
 
 		// 회원정보 삭제(탈퇴)

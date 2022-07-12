@@ -15,8 +15,8 @@
     </select>
     
     <insert id="insertMember">
-    	insert into bcc_member (id, pw, user_name, email, tel, zip, address1, address2) 
-    	values(#{id}, #{pw}, #{user_name}, #{email}, #{tel}, #{zip}, #{address1}, #{address2})    
+    	insert into bcc_member (id, pw, name, email, tel, zip, address1, address2) 
+    	values(#{id}, #{pw}, #{name}, #{email}, #{tel}, #{zip}, #{address1}, #{address2})    
     </insert>
     
     <select id="login" resultType="com.bcc.domain.MemberVO">
@@ -56,13 +56,13 @@
 
 	<update id="licenseUp">
 		update bcc_member
-		set license="premium"
+		set license=1
 		where id=#{id} 
 	</update>
 	
 	<update id="licenseDown">
 		update bcc_member
-		set license="free"
+		set license=0
 		where id=#{id} 
 	</update>
 

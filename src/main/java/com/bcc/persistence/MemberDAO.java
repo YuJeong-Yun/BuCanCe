@@ -43,9 +43,9 @@ public interface MemberDAO {
 	public int getLicense(String license);
     
     // license up
-    public int licenseUp(String license);
+    public void licenseUp(String license);
     
     // license down
-    public int licenseDown(String id);
+    public void licenseDown(String license);
 
 }

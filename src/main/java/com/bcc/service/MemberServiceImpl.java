@@ -105,23 +105,21 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public int liUp(String id) {
-		
-		log.info("liUp(id) 호출");
-		
-		int liUp = dao.licenseUp(id);
-		
-		return liUp;
+	public void liUp(String license) {
+		try {
+			dao.licenseUp(license);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public int liDown(String id) {
-		
-		log.info("liDown(id) 호출");
-		
-		int liDown = dao.licenseDown(id);
-		
-		return liDown;
+	public void liDown(String license) {
+		try {
+			dao.licenseDown(license);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

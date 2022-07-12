@@ -144,25 +144,23 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int licenseUp(String id) {
+	public void licenseUp(String license) {
 		
-		logger.info(" licenseUp(String id) 호출 ");
+		logger.info(" licenseUp(String license) 호출 ");
 		
-		int liUp = sqlSession.update(NAMESPACE+".licenseUp", id);
+		sqlSession.update(NAMESPACE+".licenseUp", license);
 		
-		return liUp;
-	}
-
-	@Override
-	public int licenseDown(String id) {
-		
-		logger.info(" licenseDown(String id) 호출 ");
-		
-		int liDown = sqlSession.update(NAMESPACE+".licenseDown", id);
-		
-		return liDown;
 	}
 
 	
+	@Override
+	public void licenseDown(String license) {
+		
+		logger.info(" licenseDown(String license) 호출 ");
+		
+		sqlSession.update(NAMESPACE+".licenseDown", license);
+		
+	}
+
 
 }
