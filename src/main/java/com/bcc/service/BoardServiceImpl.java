@@ -48,5 +48,12 @@ public class BoardServiceImpl implements BoardService{
 		public int listCount(SearchCriteria scri) throws Exception {
 			return dao.listCount(scri);
 		}
+		// 게시물 댓글 수
+
+		@Override
+		public void updateCommentCnt(int num) throws Exception {
+			dao.updateCommentCnt(num);
+			
+		}
 		
 	}

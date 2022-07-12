@@ -41,5 +41,10 @@
 		writer, regdate from bcc_comment
 		where cno = #{cno}
 	</select>
+	
+	<!-- 방문 미방분 분류 -->
+	<select id="visit" resultType="com.bcc.domain.CommentVO">
+	
+	</select>
 
 </mapper>

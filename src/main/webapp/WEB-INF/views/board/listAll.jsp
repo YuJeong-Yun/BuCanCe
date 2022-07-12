@@ -72,7 +72,7 @@ li {
 							<h4>${vo.title }</h4>
 							<div>
 								<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>${vo.totalCnt }
-								<i class="fa fa-commenting-o" aria-hidden="true"></i> 
+								<i class="fa fa-commenting-o" aria-hidden="true"></i> ${vo.commentCnt }
 									 <i class="fa fa-heart-o" aria-hidden="true"></i>
 							</div>
 						</div>
@@ -145,8 +145,7 @@ li {
 				},
 				success : function(list) {
 					$('#b-list').empty();
-				 if(list[list.length-1].totalCnt < list[list.length-1].cri.perPageNum){
-					
+				 if(list[list.length-1].totalCount < list[list.length-1].cri.perPageNum){
 						$('.clearfix').attr("hidden","true");
 					}else{
 						$('.clearfix').removeAttr("hidden");

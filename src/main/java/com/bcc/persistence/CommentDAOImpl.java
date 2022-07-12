@@ -19,9 +19,8 @@ public class CommentDAOImpl implements CommentDAO {
 	SqlSession session;
 
 	private static final String namespace = "com.bcc.mapper.CommentMapper";
-	
-	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
 
+	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
 
 	// 댓글 조회
 	@Override
@@ -32,7 +31,7 @@ public class CommentDAOImpl implements CommentDAO {
 	// 댓글 작성
 	@Override
 	public void wriComment(CommentVO vo) throws Exception {
-		log.info(vo+"");
+		log.info(vo + "");
 		session.insert(namespace + ".writeComment", vo);
 	}
 
@@ -43,18 +42,18 @@ public class CommentDAOImpl implements CommentDAO {
 
 	}
 
-	//댓글 삭제
+	// 댓글 삭제
 	@Override
 	public void delete(CommentVO vo) throws Exception {
 		session.delete(namespace + ".delete", vo);
 	}
-	
-	//선택된 댓글 조회
+
+	// 선택된 댓글 조회
 	@Override
 	public CommentVO selectComment(int cno) throws Exception {
-	System.out.println(session.selectOne(namespace+".selectComment", cno)+"");
-	System.out.println(cno);
-		return session.selectOne(namespace+".selectComment", cno);
+		System.out.println(session.selectOne(namespace + ".selectComment", cno) + "");
+		System.out.println(cno);
+		return session.selectOne(namespace + ".selectComment", cno);
 	}
-	
+
 }

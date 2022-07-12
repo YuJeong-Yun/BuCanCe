@@ -3,10 +3,17 @@ package com.bcc.domain;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.bcc.web.BoardController;
+
 public class PageMaker {
+	
+	
+	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
 
 	private Criteria cri; // Criteria를 주입받는다.
 	private int totalCount; // 게시판 전체 게시글 개수
@@ -73,7 +80,6 @@ public class PageMaker {
 	}
 	// 리스트 + 검색 + 페이징
 	public String makeSearch(int page) {
-
 		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
 				.queryParam("perPageNum", cri.getPerPageNum())
 				.queryParam("searchType", ((SearchCriteria) cri).getSearchType())

@@ -13,40 +13,50 @@
 	</div>
 </div>
 <!-- 화면 -->
-  <!-- Room Details Section Begin -->
-    <section class="room-details-section spad">
-        <div class="container">
-            <div class="row">
-                    <div class="room-details-item">
-                    	<div id="imageZone">
-                    		<img src="${vo.img }">
-    					</div>
-    				<div class="rd-text">	
-                        <div class="rd-title">
-                            <h3 style="font-family: 'NanumSquareBold' !important;">${vo.title } <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 찜하기</h3>
-                        </div>
-                      <table id="resInfo">
-                                <tbody>
-                                    <tr>
-                                        <td class="r-o">전화번호</td>
-                                        <td>${vo.tel }</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">운영시간</td>
-                                        <td>${vo.usage_day }</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">상세주소</td>
-                                        <td>${vo.addr_full }</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">오시는길</td>
-                                        <td> ${vo.trfc_info}</td>
-                                    </tr>
-                                </tbody>
-                     </table>
-                     <p class="f-para">${vo.contents }</p>
-                     </div>
+<!-- Room Details Section Begin -->
+<section class="room-details-section spad">
+	<div class="container">
+		<div class="row">
+			<div class="room-details-item">
+				<div id="imageZone">
+					<img src="${vo.img }">
+				</div>
+				<div class="rd-text">
+					<div class="rd-title">
+						<h3 style="font-family: 'NanumSquareBold' !important;">${vo.title }
+							<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 찜하기
+						</h3>
+					</div>
+					<table id="resInfo">
+						<tbody>
+							<tr>
+								<td class="r-o">전화번호</td>
+								<td>${vo.tel }</td>
+							</tr>
+							<tr>
+								<td class="r-o">운영시간</td>
+								<td>${vo.usage_day }</td>
+							</tr>
+							<tr>
+								<td class="r-o">상세주소</td>
+								<td>${vo.addr_full }</td>
+							</tr>
+							<tr>
+								<td class="r-o">오시는길</td>
+								<td>${vo.trfc_info}</td>
+							</tr>
+							<tr>
+								<td class="r-o">편의</td>
+								<td>${vo.convenient}</td>
+							</tr>
+							<tr>
+								<td class="r-o">홈페이지</td>
+								<td><a href="${vo.url}">${vo.url }</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<p class="f-para">${vo.contents }</p>
+				</div>
 				<div class="menu-item">
 					<div class="nav-menu"
 						style="text-align: left !important; cursor: pointer;">
@@ -59,54 +69,43 @@
 						</nav>
 					</div>
 				</div>
-
-				<div class="review-add" id="review-add">
-					<div class="rd-reviews" id="blogList" style="display: none;">
-					</div>
-
-					<div class="col-lg-12">
-						<div class="load-more" style="display: none; cursor: pointer;"
-							id="load-more">
-							<span class="primary-btn">Load More</span>
-						</div>
-					</div>
-					<br>
-					<!-- 댓글 구현 -->
+				<!-- 댓글 구현 -->
+				<div id="comment1">
 					<div id="comment">
 						<ol class="commentList">
 							<c:forEach items="${commentList}" var="commentList">
 								<p>
-									${commentList.writer} / <fmt:formatDate value="${commentList.regdate}" pattern="yyyy-MM-dd" />
-									
+									${commentList.writer} /
+									<fmt:formatDate value="${commentList.regdate}"
+										pattern="yyyy-MM-dd" />/ <%-- ${commentList.visit } --%>
+
 								</p>
 								<p>${commentList.content}</p>
 								<div>
-								<button type="button" class="commentModifyBtn" data-cno="${commentList.cno }">수정</button>
-								<button type="button" class="commentDeleteBtn" data-cno="${commentList.cno }">삭제</button>
+									<button type="button" class="commentModifyBtn"
+										data-cno="${commentList.cno }">수정</button>
+									<button type="button" class="commentDeleteBtn"
+										data-cno="${commentList.cno }">삭제</button>
 								</div>
 								<hr>
 							</c:forEach>
 						</ol>
-					</div>
-					<!-- 리뷰 -->
-					<div class="review-add">
+						<!-- 리뷰 -->
 						<h4>Add Review</h4>
 						<p class="rev-radi">
-							<input type="radio" id="rev_visit_yn1" name="visit" value="Y"/> 
-							<label for="visit_yn1"> 방문했어요</label>
-						</p>
-						<p class="rev-radi">
-							<input type="radio" id="rev_visit_yn2" name="unvisited" value="N" />
-							<label for="visit_yn2"> 방문전입니다</label>
+							<input type="radio" id="rev_visit1" name="visit" value="1" > <label for="visit1"> 방문했어요</label>
+							</p>
+							<p>
+							<input type="radio" id="rev_visit2" name="visit" value="0" > <label for="visit2"> 방문 전입니다</label>
 						</p>
 					</div>
 					<div>
-							<form name="commentForm" method="post">
+						<form name="commentForm" method="post">
 							<input type="hidden" name="num" id="num" value="${vo.num}" /> 
-							 <input type="hidden" id="page" name="page" value="${scri.page}">
-							<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}">
-							 <input type="hidden"id="searchType" name="searchType" value="${scri.searchType}">
-							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+							<input type="hidden" id="page" name="page" value="${scri.page}">
+							<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
+							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 
 							<p>
 								<label for="id">댓글 작성자</label> <input type="text" name="id"
@@ -124,7 +123,18 @@
 				</div>
 			</div>
 		</div>
+		<div class="review-add" id="review-add">
+			<div class="rd-reviews" id="blogList" style="display: none;"></div>
+
+			<div class="col-lg-12">
+				<div class="load-more" style="display: none; cursor: pointer;"
+					id="load-more">
+					<span class="primary-btn">Load More</span>
+				</div>
+			</div>
+		</div>
 	</div>
+	<br>
 
 </section>
 <!-- Room Details Section End -->
@@ -147,10 +157,11 @@
 						function() {
 
 							document.getElementById('review').className = "";
-							document.getElementById('loca').className = "";
+							/* document.getElementById('loca').className = ""; */
 							document.getElementById('blogReview').className = "active";
 							/* document.getElementById('writeReview').style.visibility = 'hidden';
 							document.getElementById('map').style.display = 'none';*/
+							document.getElementById('comment1').style.display = 'none';
 							document.getElementById('blogList').style.display = 'inline-block';
 							document.getElementsByClassName('load-more')[0].style.display = 'inline-block';
 
@@ -163,9 +174,7 @@
 												$(data[0])
 														.each(
 																function(i, obj) {
-																	$(
-																			'.rd-reviews')
-																			.append(
+																	$('.rd-reviews').append(
 																					"<div class='ri-text'><a href="+obj.link+" target='_blank'><h2>"
 																							+ obj.title
 																							+ "</h2><p>"
@@ -185,9 +194,10 @@
 						function() {
 
 							document.getElementById('blogReview').className = "";
-							document.getElementById('loca').className = "";
+							/* document.getElementById('loca').className = ""; */
 							document.getElementById('review').className = "active";
 							document.getElementById('blogList').style.display = 'none';
+							document.getElementById('comment1').style.display = 'block';
 							document.getElementById('map').style.display = 'none';
 							document.getElementsByClassName('load-more')[0].style.display = 'none';
 							document.getElementById('writeReview').style.visibility = 'visible';
@@ -211,8 +221,7 @@
 					console.log(start);
 
 					$.ajax({
-						url : "/blog/getBlog?title=${vo.title}&start="
-								+ start,
+						url : "/blog/getBlog?title=${vo.title}&start=" + start,
 						success : function(data) {
 							$(data[0]).each(
 									function(i, obj) {
@@ -231,6 +240,10 @@
 				});
 
 	}); // jQuery
+	
+
+	
+	
 </script>
 
 <script type="text/javascript">
@@ -242,27 +255,30 @@
 			formObj.attr("action", "/board/commentWrite");
 			formObj.submit();
 		});
-		
+
 		//댓글 수정 View
-		$(".commentModifyBtn").on("click", function(){
-			location.href = "/board/commentModify?num=${vo.num}"
+		$(".commentModifyBtn").on(
+				"click",
+				function() {
+					location.href = "/board/commentModify?num=${vo.num}"
 							+ "&page=${scri.page}"
 							+ "&perPageNum=${scri.perPageNum}"
 							+ "&searchType=${scri.searchType}"
-							+ "&keyword=${scri.keyword}"
-							+ "&cno="+$(this).attr("data-cno");
-		});
-		
-		//댓글 삭제 View
-		$(".commentDeleteBtn").on("click", function(){
-			location.href = "/board/commentDelete?num=${vo.num}"
-				+ "&page=${scri.page}"
-				+ "&perPageNum=${scri.perPageNum}"
-				+ "&searchType=${scri.searchType}"
-				+ "&keyword=${scri.keyword}"
-				+ "&cno="+$(this).attr("data-cno");
-		});
+							+ "&keyword=${scri.keyword}" + "&cno="
+							+ $(this).attr("data-cno");
+				});
 
-		
+		//댓글 삭제 View
+		$(".commentDeleteBtn").on(
+				"click",
+				function() {
+					location.href = "/board/commentDelete?num=${vo.num}"
+							+ "&page=${scri.page}"
+							+ "&perPageNum=${scri.perPageNum}"
+							+ "&searchType=${scri.searchType}"
+							+ "&keyword=${scri.keyword}" + "&cno="
+							+ $(this).attr("data-cno");
+				});
+
 	});// 댓글
-</script> 
+</script>

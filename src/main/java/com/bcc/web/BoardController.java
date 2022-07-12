@@ -76,27 +76,31 @@ public class BoardController {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
 		pageMaker.setTotalCount(service.listCount(scri));
-
+		
+		log.info(pageMaker+"");
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("boardList", service.list(scri));
 
 	}
 
 	// http://localhost:8088/board/read?num=12
-	/* 글 본문 + 조회수 증가 */
-	@RequestMapping(value = "/read", method = { RequestMethod.GET, RequestMethod.POST })
+	/* 글 본문 */
+	@RequestMapping(value = "/read", method = RequestMethod.GET )
 	public String readGET(
-			@RequestParam("num"/* , required = false */) Integer num,
-			@ModelAttribute("scri") SearchCriteria scri, Model model, HttpSession session) throws Exception {
+			@RequestParam(value = "num", required = false) Integer num, @ModelAttribute("scri") SearchCriteria scri, Model model, HttpSession session) throws Exception {
 		log.info("글번호" + num);
+		
 		//조회수
 		String upFlag = (String) session.getAttribute("upFlag");
-		log.info(upFlag);
 
 		if (upFlag.equals("1")) {
 			service.updateBoardCount(num);
 			session.setAttribute("upFlag", "0");
 		}
+		
+		//게시물 댓글 수
+		service.updateCommentCnt(num); 
+		
 		BoardVO vo = service.readBoard(num);
 		model.addAttribute("vo", vo);
 		model.addAttribute("scri", scri);
@@ -180,8 +184,7 @@ public class BoardController {
 		//댓글 삭제 GET
 		@RequestMapping(value="/commentDelete", method = RequestMethod.GET)
 		public String commentDeleteView(CommentVO vo, SearchCriteria scri, Model model) throws Exception {
-			log.info("삭제#$@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-			log.info(vo+"");
+
 			model.addAttribute("commentDelete", commentservice.selectComment(vo.getCno()));
 			model.addAttribute("scri", scri);
 			
@@ -192,7 +195,6 @@ public class BoardController {
 		//댓글 삭제
 		@RequestMapping(value="/commentDelete", method = RequestMethod.POST)
 		public String commentDelete(CommentVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
-			log.info("삭제PPOSt########################");
 			
 			commentservice.delete(vo);
 			

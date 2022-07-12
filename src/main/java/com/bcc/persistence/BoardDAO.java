@@ -7,9 +7,6 @@ import com.bcc.domain.SearchCriteria;
 
 public interface BoardDAO {
 
-	// 글쓰기
-	public void create(BoardVO vo) throws Exception;
-
 	// 글 리스트
 	public List<BoardVO> listAll() throws Exception;
 
@@ -29,5 +26,7 @@ public interface BoardDAO {
 	// 게시물 총 갯수
 	public int listCount(SearchCriteria scri) throws Exception;
 
-
+	//게시글 댓글 수 
+	public void updateCommentCnt(int num) throws Exception;
+	
 }

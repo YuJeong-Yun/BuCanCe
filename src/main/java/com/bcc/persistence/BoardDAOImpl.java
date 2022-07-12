@@ -22,12 +22,6 @@ public class BoardDAOImpl implements BoardDAO {
 	// mapper의 위치 정보 저장
 	private static final String namespace = "com.bcc.mapper.BoardMapper";
 
-	// 글쓰기
-	@Override
-	public void create(BoardVO vo) throws Exception {
-		session.insert(namespace + ".create", vo);
-		System.out.println("DAO: 글쓰기메서드");
-	}
 
 	// 글 전체 목록
 	@Override
@@ -84,4 +78,11 @@ public class BoardDAOImpl implements BoardDAO {
 		param.put("perPageNum", size);
 		return session.selectList(namespace + ".listCri", param);
 	}
+	//게시글 댓글 수
+
+	@Override
+	public void updateCommentCnt(int num) throws Exception {
+		session.update(namespace+".updateCommentCnt",num);
+	}
+	
 }

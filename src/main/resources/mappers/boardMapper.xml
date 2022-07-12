@@ -5,21 +5,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bcc.mapper.BoardMapper">
-
+	<!-- 전체 글 리스트 -->
 	<select id="listAll" resultType="BoardVO">
 		<![CDATA[
 		select * from tourist_spot
-		where num > 0 and t_category = 0
+		where num < 115 and t_category = 0
 		order by num asc
 		]]>
 	</select>
-
+	<!-- 글 내용 -->
 	<select id="getBoard" resultType="BoardVO">
 		select * from tourist_spot
 		where num = #{num}
 
 	</select>
-
+	<!-- 조회수 -->
 	<select id="updateBoardCnt" resultType="BoardVO"
 		parameterType="int">
 		update tourist_spot set totalCnt = totalCnt + 1
@@ -28,7 +28,7 @@
 		and t_category = 0;
 
 	</select>
-
+	<!-- 게시판 카테고리 분류 -->
 	<select id="category" resultType="BoardVO"
 		parameterType="String">
 		select *
@@ -37,11 +37,11 @@
 		and
 		t_category = 0;
 	</select>
-
+	<!-- 게시물 페이징 -->
 	<select id="listPage" resultType="BoardVO">
  		<![CDATA[
  		select * from tourist_spot
- 		where num > 0 and t_category = 0
+ 		where num < 115 and t_category = 0
  		order by num asc
  		limit 0, 10
  		]]>
@@ -54,12 +54,13 @@
  		]]>
 		<include refid="search"></include>	
  			<![CDATA[
- 		and num > 0 
+ 		and num < 115 
  		order by num asc
  		limit #{pageStart}, #{perPageNum}
  		]]>
 	</select>
 
+	<!-- 게시물 검색 -->
 	<select id="listCount" resultType="int">
 	<![CDATA[
 		select count(num)
@@ -67,7 +68,7 @@
 	]]>
 		<include refid="search"></include>	
 			<![CDATA[
-		and num > 0
+		and num < 115
 		 ]]>
 	</select>
 
@@ -80,5 +81,16 @@
 				'%' #{keyword} '%')</if>
 		</if>
 	</sql>
+
+	<!-- 댓글 수 -->
+	<update id="updateCommentCnt" parameterType="int">
+		update tourist_spot b
+		set b.commentCnt = (select count(cno) from bcc_comment where num =
+		#{num})
+		where b.num = #{num}
+	</update>
+	
+
+
 
 </mapper>

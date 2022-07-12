@@ -15,32 +15,34 @@ public class CommentServiceImpl implements CommentService {
 	@Inject
 	private CommentDAO dao;
 
-	//댓글 조회
+	// 댓글 조회
 	@Override
 	public List<CommentVO> readComment(int num) throws Exception {
 		return dao.readComment(num);
 	}
-	//댓글 작성
+
+	// 댓글 작성
 	@Override
 	public void wriComment(CommentVO vo) throws Exception {
 		dao.wriComment(vo);
 	}
-	//댓글 수정
+
+	// 댓글 수정
 	@Override
 	public void modify(CommentVO vo) throws Exception {
-		dao.modify(vo);		
+		dao.modify(vo);
 	}
-	//댓글 삭제
+
+	// 댓글 삭제
 	@Override
 	public void delete(CommentVO vo) throws Exception {
 		dao.delete(vo);
 	}
-	//선택된 댓글 조회
+
+	// 선택된 댓글 조회
 	@Override
 	public CommentVO selectComment(int cno) throws Exception {
 		return dao.selectComment(cno);
 	}
-	
-	
 
 }
