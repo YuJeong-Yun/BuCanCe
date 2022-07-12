@@ -9,7 +9,6 @@
 	var total = document.getElementsByClassName('ri-text').length+10;
 	var rePageCheck = false;
 	var size = 3;
-	var s_id = '${sessionScope.id}';
 	
 	$(function(){
 		
@@ -149,9 +148,14 @@
 	
 	
 	function checkThumb(){
-		
+		$.ajax({
+			url : "/board/checkThumb?b_num=${resVO.num}",
+			success : function(){
+				
+			}
+		});
 	}
 	
-	
+	checkThumb();
 		
 </script>    

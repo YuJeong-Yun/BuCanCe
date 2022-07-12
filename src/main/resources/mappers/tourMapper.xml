@@ -6,12 +6,12 @@
   
   
   <mapper namespace="com.bcc.mapper.tourMapper">
-  	<select id="restaurantLists" resultType="TourSpotVO">
+  	<select id="restaurantLists" resultType="BoardVO">
   		select * from tourist_spot
   		where addr=#{addr} and t_category=1
   	</select>
   	
-  	<select id="infoDetail" resultType="TourSpotVO">
+  	<select id="infoDetail" resultType="BoardVO">
   		select * from tourist_spot
   		where title=#{title} and t_category=1
   	</select>

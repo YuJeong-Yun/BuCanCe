@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.bcc.domain.TourSpotVO;
+import com.bcc.domain.BoardVO;
 
 @Repository
 public class TourDAOImpl implements TourDAO{
@@ -18,13 +18,13 @@ public class TourDAOImpl implements TourDAO{
 	private static final String NAMESPACE = "com.bcc.mapper.tourMapper";
 
 	@Override
-	public List<TourSpotVO> restaurantLists(String addr) {
+	public List<BoardVO> restaurantLists(String addr) {
 		
 		return sqlSession.selectList(NAMESPACE+".restaurantLists", addr);
 	}
 
 	@Override
-	public TourSpotVO infoDetail(String title) {
+	public BoardVO infoDetail(String title) {
 		
 		return sqlSession.selectOne(NAMESPACE+".infoDetail", title);
 	}

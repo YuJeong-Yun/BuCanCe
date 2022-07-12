@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.bcc.domain.TourSpotVO;
+import com.bcc.domain.BoardVO;
 import com.bcc.persistence.TourDAO;
 
 @Service
@@ -26,13 +26,13 @@ public class TourServiceImpl implements TourService{
 	private TourDAO dao;
 
 	@Override
-	public List<TourSpotVO> restaurantLists(String addr) {
+	public List<BoardVO> restaurantLists(String addr) {
 		// TODO Auto-generated method stub
 		return dao.restaurantLists(addr);
 	}
 
 	@Override
-	public void getRestaurantInfo(List<TourSpotVO> restList) throws Exception {
+	public void getRestaurantInfo(List<BoardVO> restList) throws Exception {
 		 String clientId = "UedGUQNgMnXQN3xAYkO2"; //애플리케이션 클라이언트 아이디값"
 		    String clientSecret = "PKJuuL8BVC"; //애플리케이션 클라이언트 시크릿값"
 
@@ -123,7 +123,7 @@ public class TourServiceImpl implements TourService{
 	// Naver API
 
 	@Override
-	public TourSpotVO getInfoDetail(String title) {
+	public BoardVO getInfoDetail(String title) {
 		
 		return dao.infoDetail(title);
 	}
