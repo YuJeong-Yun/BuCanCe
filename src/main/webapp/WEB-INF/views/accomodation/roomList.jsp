@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!-- 180번줄부터 360번줄까지 숙소목록정보 -->
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -13,44 +14,21 @@
 <title>Sona | Template</title>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
 
 <!-- Css Styles -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/elegant-icons.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/flaticon.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/nice-select.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/magnific-popup.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/slicknav.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css"
-	type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flaticon.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/yd.css" type="text/css">
 
 <style>
 /*datepicker에서 사용한 이미지 버튼 style적용*/
@@ -59,10 +37,9 @@ img.ui-datepicker-trigger {
 	vertical-align: middle;
 	cursor: pointer;
 }
+/*datepicker에서 사용한 이미지 버튼 style적용*/
 </style>
-
 </head>
-
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -200,15 +177,16 @@ img.ui-datepicker-trigger {
 	</header>
 	<!-- Header End -->
 
-	<!-- Breadcrumb Section Begin -->
-	<div class="breadcrumb-section">
+	<!-- Breadcrumb Section Begin --> <!-- 코드 시작 -->
+	<div class="breadcrumb-section" style="">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text">
 						<h2>부산 숙소</h2>
 						<div class="bt-option">
-							<a href="./home.html">Home</a> <span>숙소 정보</span>
+							<a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a> 
+							<span>숙소 정보</span>
 						</div>
 					</div>
 				</div>
@@ -218,15 +196,10 @@ img.ui-datepicker-trigger {
 
 
 <script type="text/javascript">
-
-
 //지역 select 고를때 동작
+//해당지역을 골랐을때 지역에 해당하는 숙소목록을 보여줌
 function selectArea(){
-	
-	
-	
 	idForm.submit();
-	
 	
 	var input = document.getElementById("place_name"); 
 
@@ -234,11 +207,9 @@ function selectArea(){
 	${select_place=""}
 	
 }
-
-
-	
 </script>
 
+			<!-- 숙소목록선택,검색기능을 하는 코드 시작 -->
 			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm">
 				<select name="area" onchange="selectArea()" id="area">
 					<optgroup label="지역">
@@ -283,30 +254,34 @@ function selectArea(){
 						<c:if test="${select_area=='덕천/만덕/구포/화명/북구'}">selected</c:if>
 						>덕천/만덕/구포/화명/북구</option>
 					</optgroup>
-				</select> &nbsp; 
+				</select> &nbsp; &nbsp; &nbsp; 
+	
 
+				<input type="text" name="place_name" id="place_name" value="${select_place}" 
+				required spellcheck="false">
 
-<input type="text" placeholder="숙소명" name="place_name" id="place_name" value="${select_place}">
-<input type="submit" value="검색">
+				<input type="submit" value="검색" style="height: 37px;">
 
-	</form>
-
-		
+				</form>
+				<!-- 숙소목록선택,검색기능을 하는 코드 끝 -->
 
 		</div>
 	</div>
 	<!-- Breadcrumb Section End -->
 
+
+
+
 	<!-- Rooms Section Begin -->
-	<section class="rooms-section spad">
+	<section class="rooms-section spad" >
 		<div class="container">
 			<div class="row">
 				<c:set var="a" />
 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
 				
 			
-					<div class="col-lg-4 col-md-6"  style="height: 550px">
-						<div class="room-item">
+					<div class="col-lg-4 col-md-6"  style="height: 550px;">
+						<div class="room-item" style="border-radius: 2em;">
 							
 							<c:if test="${roomList.get(a).room_rank!=''}">
 							<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
@@ -368,47 +343,21 @@ function selectArea(){
 								<c:if test="${roomList.get(a).room_rank==''}">
 								<a class="primary-btn"> 준비중 </a> 
 								</c:if>
-																
 								
 								<c:set var="a" value="${a=a+1}"/>
-								
 
 							</div>
 						</div>
 					</div>
 				</c:forEach>
-
-
-
-
-				<div class="col-lg-12">
-					<div class="room-pagination">
-
-<!-- 						<a href="#"><i class="fa fa-long-arrow-left"> Pre </i></a> -->
-
-<%-- 						<c:forEach begin="1" end="${Math.ceil(roomList.size()/9)}"> --%>
-<%-- 							<c:set var="PageNum" value="${PageNum+1 }" /> --%>
-
-<%-- 							<c:if test="${PageNum<=5}"> --%>
-
-<%-- 								<a href="/accomodation/roomList?PageNum=${PageNum}">${PageNum}</a> --%>
-
-<%-- 							</c:if> --%>
-
-
-<%-- 						</c:forEach> --%>
-
-<!-- 						<a href="#">Next <i class="fa fa-long-arrow-right"></i></a> -->
-
-					</div>
-				</div>
 			</div>
 		</div>
 	</section>
-
-
-
 	<!-- Rooms Section End -->
+	<!-- 코드 끝 -->
+
+
+
 
 	<!-- Footer Section Begin -->
 	<footer class="footer-section">

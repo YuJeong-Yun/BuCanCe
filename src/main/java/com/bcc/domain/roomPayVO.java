@@ -6,19 +6,20 @@ public class roomPayVO {
 	private String accKind;
 	private String accName;
 	private int accAmount;
-	private String userEmail;
-	private String userName;
-	private String userTel;
-	private String userAddr;
-	private String userPostcode;
-	private String userId;
+	private String email;
+	private String user_name;
+	private String tel;
+	private String zip;
+	private String id;
 	private String sort;
 	private String roomSort;
 	private String endTime;
 	private String useTime;
 	private String checkIn;
 	private String checkOut;
-	
+	private String status;
+	private String accDate;
+	private int license;
 	public String getAccId() {
 		return accId;
 	}
@@ -43,41 +44,36 @@ public class roomPayVO {
 	public void setAccAmount(int accAmount) {
 		this.accAmount = accAmount;
 	}
-	public String getUserEmail() {
-		return userEmail;
+	public String getEmail() {
+		return email;
 	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getUserName() {
-		return userName;
+	public String getUser_name() {
+		return user_name;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
-	public String getUserTel() {
-		return userTel;
+	public String getTel() {
+		return tel;
 	}
-	public void setUserTel(String userTel) {
-		this.userTel = userTel;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
-	public String getUserAddr() {
-		return userAddr;
+	
+	public String getZip() {
+		return zip;
 	}
-	public void setUserAddr(String userAddr) {
-		this.userAddr = userAddr;
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
-	public String getUserPostcode() {
-		return userPostcode;
+	public String getId() {
+		return id;
 	}
-	public void setUserPostcode(String userPostcode) {
-		this.userPostcode = userPostcode;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getSort() {
 		return sort;
@@ -115,13 +111,31 @@ public class roomPayVO {
 	public void setCheckOut(String checkOut) {
 		this.checkOut = checkOut;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getAccDate() {
+		return accDate;
+	}
+	public void setAccDate(String accDate) {
+		this.accDate = accDate;
+	}
+	public int getLicense() {
+		return license;
+	}
+	public void setLicense(int license) {
+		this.license = license;
+	}
 	@Override
 	public String toString() {
 		return "roomPayVO [accId=" + accId + ", accKind=" + accKind + ", accName=" + accName + ", accAmount="
-				+ accAmount + ", userEmail=" + userEmail + ", userName=" + userName + ", userTel=" + userTel
-				+ ", userAddr=" + userAddr + ", userPostcode=" + userPostcode + ", userId=" + userId + ", sort=" + sort
-				+ ", roomSort=" + roomSort + ", endTime=" + endTime + ", useTime=" + useTime + ", checkIn=" + checkIn
-				+ ", checkOut=" + checkOut + "]";
+				+ accAmount + ", email=" + email + ", user_name=" + user_name + ", tel=" + tel + ", zip=" + zip
+				+ ", id=" + id + ", sort=" + sort + ", roomSort=" + roomSort + ", endTime=" + endTime + ", useTime="
+				+ useTime + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", status=" + status + ", accDate="
+				+ accDate + ", license=" + license + "]";
 	}
 	
 	

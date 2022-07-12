@@ -173,7 +173,7 @@
                     <div class="breadcrumb-text">
                         <h2>예약목록 페이지</h2>
                         <div class="bt-option">
-                            <a href="./home.html">Home</a>
+                            <a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a>
                             <span>Rooms</span>
                         </div>
                     </div>
@@ -182,24 +182,31 @@
         </div>
     </div>
     <!-- Breadcrumb Section End -->
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script><!-- jQuery CDN --->
     <!-- Rooms Section Begin -->
     <section class="rooms-section spad">
         <div class="container">
             <div class="row">
-            <c:set var="a" />
+            <c:set var="a" value="0"/>
 				<c:forEach items="${UserPayList}" begin="0" end="${UserPayList.size()}">
-                <div class="col-lg-4 col-md-6" style="height: 550px">
+                <div class="col-lg-4 col-md-6" >
                     <div class="room-item">
                         <img src="${pageContext.request.contextPath}/resources/img/room/room-1.jpg" alt="">
                         <div class="ri-text">
-                            <h4>${UserPayList.get(a).accName}</h4>
+							<h5>주문번호 : ${UserPayList.get(a).accId}</h5>
+							<br>
+                            <h4>${UserPayList.get(a).accName}
+                            
+                             <c:if test="${UserPayList.get(a).license==1}">
+                            	<br><a style="color :red">(할인)</a>
+                            </c:if>
+                            </h4>
                             <h5>${UserPayList.get(a).roomSort}</h5>
                             <table>
-                                <tbody>
+                                <tbody >
                                     <tr>
                                         <td class="r-o">예약명:</td>
-                                        <td>${UserPayList.get(a).userName}</td>
+                                        <td>${UserPayList.get(a).user_name}</td>
                                     </tr>
                                    
                                         <c:if test="${UserPayList.get(a).sort=='ds'}">
@@ -230,12 +237,12 @@
                                     
                                     <c:if test="${UserPayList.get(a).sort=='ds'}">
                                         <td class="r-o">마감/이용시간 :</td>
-                                        <td>${UserPayList.get(a).endTime}시 , ${UserPayList.get(a).useTime}시간</td>
+                                        <td>${UserPayList.get(a).endTime}시 / ${UserPayList.get(a).useTime}시간</td>
                                  	</c:if>
                                  	
                                     <c:if test="${UserPayList.get(a).sort=='acc'}">
                                         <td class="r-o">입실/퇴실시간 :</td>
-                                        <td>${UserPayList.get(a).useTime}시 , ${UserPayList.get(a).endTime}시</td>
+                                        <td>${UserPayList.get(a).useTime}시 / ${UserPayList.get(a).endTime}시</td>
                                  	</c:if>
                                  	
                                     </tr>
@@ -246,42 +253,44 @@
                                         <td>${UserPayList.get(a).accAmount}원</td>
                                     </tr>
                                     
+                                    <tr>
+                                    <td>결제시간: </td>
+                                    <td>${UserPayList.get(a).accDate}</td>
+                                </tr>
+                                    
+                                    
                                 </tbody>
                             </table>
-                            <button onclick="cancelPay()">환불하기</button>
-                       
-                          <c:set var="a" value="${a=a+1}"/>
+                            
+                            <form action="${pageContext.request.contextPath}/accomodation/roomRefund" method="post">
+                            <input type="hidden" name="accId" value="${UserPayList.get(a).accId}">
+                            <input type="hidden" name="accName" value="${UserPayList.get(a).accName}">
+                            <input type="hidden" name="roomSort" value="${UserPayList.get(a).roomSort}">
+                           	<input type="hidden" name="user_name" value="${UserPayList.get(a).user_name}">
+                           	<input type="hidden" name="sort" value="${UserPayList.get(a).sort}">
+                           	<input type="hidden" name="checkIn" value="${UserPayList.get(a).checkIn}">
+                           	<input type="hidden" name="checkOut" value="${UserPayList.get(a).checkOut}">
+                           	<input type="hidden" name="useTime" value="${UserPayList.get(a).useTime}">
+                           	<input type="hidden" name="endTime" value="${UserPayList.get(a).endTime}">
+                           	<input type="hidden" name="accAmount" value="${UserPayList.get(a).accAmount}">
+                            <input type="hidden" name="accKind" value="${UserPayList.get(a).accKind}">
+							<input type="hidden" name="id" value="${UserPayList.get(a).id}">
+							<input type="hidden" name="license" value="${UserPayList.get(a).license}">
+							
+                            
+                            <c:if test="${UserPayList.get(a).status!='refund'}">
+                            <button type="submit" style="color : blue">환불하기</button>
+                            </c:if>
+                              <c:if test="${UserPayList.get(a).status=='refund'}">
+                              <button type="button" style="color : red">환불됨</button>
+                               </c:if>
+                       		</form>
+                       		
                        </div>
 						</div>
                         </div>
-             <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script><!-- jQuery CDN --->
-<script>
-  function cancelPay() {
-    jQuery.ajax({
-//       "url": "{환불요청을 받을 서비스 URL}", // 예: http://www.myservice.com/payments/cancel
-      "type": "POST",
-      "contentType": "application/json",
-      "data": JSON.stringify({
-        "merchant_uid": "{결제건의 주문번호}", // 예: ORD20180131-0000011
-        "cancel_request_amount": "${UserPayList.get(a).accAmount}", // 환불금액
-        "reason": "테스트 결제 환불" // 환불사유
-        "refund_holder": "${UserPayList.get(a).userName}", // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
-        "refund_bank": "88" // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
-        "refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
-      }),
-      "dataType": "json"
-    });
-  }
-</script>           
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+
+    <c:set var="a" value="${a=a+1}"/>
                         </c:forEach>
                         <div class="col-lg-12">
 					<div class="room-pagination">

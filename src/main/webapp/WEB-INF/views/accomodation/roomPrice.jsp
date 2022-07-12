@@ -193,8 +193,6 @@
 		 
 	   });
 	   
-	   
-	   
 	   $('.table_type_02').css({
 // 		   'color' : 'green',
 		   'text-align' : 'center',
@@ -216,8 +214,6 @@
 	   $('th').attr('width','25%');
 	   $('td').attr('height',90);
 	   $('span').append('<br>');
-	   
-// 	   $('#abs').attr('width','200px')
 	   
    });
    

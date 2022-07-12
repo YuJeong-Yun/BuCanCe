@@ -27,6 +27,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
+<script type="text/javascript">
+
+	if("${vo.accName}"=="")
+	{
+	location.reload();
+		
+	}
+</script>
+
+
 </head>
 
 <body>
@@ -220,7 +230,7 @@
                               
                                 <tr>
                                     <td>예약명: </td>
-                                    <td>${vo.userName }</td>
+                                    <td>${vo.user_name}</td>
                                 </tr>
                                 <tr>
                                     <td>비용: </td>
@@ -230,7 +240,9 @@
                         </table>
                         <br><br>
                         <form action="${pageContext.request.contextPath}/accomodation/roomList">
-                         <button type="submit" class="btn btn-primary">메인페이지로</button>
+                         <button type="submit" class="btn btn-primary">메인페이지로</button> &nbsp;
+                         <button type="button" class="btn btn-primary" onclick="cancelBtn()">취소하기</button>
+                         
                          </form>
                     </div>
                 </div>
@@ -238,6 +250,19 @@
         </div>
     </section>
     <!-- Contact Section End -->
+
+
+	<script type="text/javascript">
+	
+	function cancelBtn(){
+		alert('예약목록으로 이동');
+		location.href="${pageContext.request.contextPath}/accomodation/roomReList";
+	}
+	
+	
+	</script>
+
+
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">

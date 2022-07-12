@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 197번줄부터 442번줄 -->
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Sona Template">
@@ -11,84 +11,79 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Sona | Template</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Google Font -->
-
-
-<link
-	href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap"
-	rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
 <!-- Css Styles -->
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/yd.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/elegant-icons.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/flaticon.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/nice-select.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/magnific-popup.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/slicknav.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css"
-	type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/yd.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flaticon.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 
-<script>
-		
-		$(function(){
-			
-			$('#reserveBtn').click(
-					
-			function(){
-				var dateIn = document.getElementById("date-in").value;
-				var dateOut = document.getElementById("date-out").value;
-				
-				var day1 = new Date(dateIn);
-				var day2 = new Date(dateOut);
-				
-				var difference= Math.abs(day2-day1);
-				days = difference/(1000 * 3600 * 24);
+<!-- 날짜 정보 입력시 유효성 체크 시작 -->
+<script type="text/javascript">
+              
+             //최대 7박까지가능, 올바른 날짜 입력 유효성체크
+             $(document).ready(function(){
+            		
+            $('#reserveBtn').click(function(){
+            			
+            //날짜 차이를 구하는 함수
+            function difference(date1, date2) {  
+            		const date1utc = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+            		const date2utc = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+            				 day = 1000*60*60*24;
+            		return (date2utc - date1utc)/day
+           	}
+            
+            		const date1 = new Date(document.getElementById("date-in").value);
+            		const date2 = new Date(document.getElementById("date-out").value);
+            			
+					//날짜 차이
+            		const time_difference = difference(date1,date2)
+            				
+            		
+            		function getFormatDate(date){
+            		    var year = date.getFullYear();              //yyyy
+            		    var month = (1 + date.getMonth());          //M
+            		    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+            		    var day = (1+date.getDate());                   //d
+            		    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+            		    return  year + '-' + month + '-' + day;
+            		}
+            				
+            		var bate = getFormatDate(date2);
+            		
+            		//날짜차이가 7일이내인 경우 submit
+            		if(1 <= parseInt(time_difference) && parseInt(time_difference) <= 7){
+            			dateForm.submit();
+            		}//날짜차이가 0인경우 내일날짜를 바꿔주는 동작
+            		else if(parseInt(time_difference) == 0){
+            			document.getElementById("date-out").value=bate;
+            			dateForm.submit();
+            		}
+            		else{
+            			alert('올바른 날짜를 입력해주세요\n최대 7박까지 가능합니다.')
+            		}});// 버튼클릭 끝
+            		
+            		
+            	});
+                
+                
+ </script>
+<!-- 날짜 정보 입력시 유효성 체크 끝 -->
 
-				alert(days);
-				
-			});
-			
-			
-			
-		});
-		
-		
-		
-		
-		
-		
-</script>
 </head>
-
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -192,8 +187,7 @@
 					<div class="col-lg-2">
 						<div class="logo">
 							<a href="./index.html"> <img
-								src="${pageContext.request.contextPath}/resources/img/logo.png"
-								alt="">
+								src="${pageContext.request.contextPath}/resources/img/logo.png" alt="">
 							</a>
 						</div>
 					</div>
@@ -201,7 +195,7 @@
 						<div class="nav-menu">
 							<nav class="mainmenu">
 								<ul>
-									<li><a href="./index.html">Home</a></li>
+									<li><a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a></li>
 									<li class="active"><a href="./rooms.html">Rooms</a></li>
 									<li><a href="./about-us.html">About Us</a></li>
 									<li><a href="./pages.html">Pages</a>
@@ -250,27 +244,16 @@
 				<c:set var="a" />
 				<c:set var="b" />
 
-				<div class="col-lg-8">
-					<div class="room-details-item">
-		
-		
-		
-<!-- 	<div class="flexslider"> -->
-<!--   <ul class="slides"> -->
-<%--     <c:forEach items="${roomdetail0}" begin="0" end="${roomdetail0.size()}"> --%>
+			<div class="col-lg-8">
+			<div class="room-details-item">
 
-<%--     <li data-thumb="slide${b+1}-thumb.jpg"> --%>
-<%--        <img src="${roomdetail0.get(b).room_pic}"> --%>
-<!--     </li> -->
-   
-<%--        <c:set var="b" value="${b=b+1 }"/> --%>
-<%--   	</c:forEach> --%>
-      
-<!--     <li> -->
-    
-<!--   </ul> -->
-<!-- </div>	 -->
-		
+
+
+
+
+
+
+<!-- 해당숙소의 방사진들을 슬라이드쇼로 보여줌  -->		
  <div id="slideShow">
     <ul class="slides">
      <c:forEach items="${roomdetail0}" begin="0" end="${roomdetail0.size()}">
@@ -285,9 +268,17 @@
       <span class="next">&rang;</span>
     </p>
   </div>
- 
+ <!-- 해당숙소의 방사진들을 슬라이드쇼로 보여줌  -->	
 					
-                        <div class="rd-text">
+					
+					
+					
+					
+					
+					
+					
+<!-- 숙소에 대한 상세 정보를 보여주는 영역 시작 -->
+                     <div class="rd-text">
                             <div class="rd-title">
                                 <h3> ${roomdetail.get(0).room_title}</h3>
                                 <div class="rdt-right">
@@ -297,7 +288,6 @@
 											class="icon_star-half_alt"></i>
 									&nbsp; <h5> 별점 :${roomdetail.get(0).room_star_num} 점</h5></div>
 									
-<!-- 									<a href="#">Booking Now</a> -->
 								</div>
 							</div>
 							<table>
@@ -420,61 +410,12 @@
 						</form>
 					</div>
 				</div>
-                                        
-            <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-                <script type="text/javascript">
-              
-                //최대 7박까지가능, 올바른 날짜 입력 유효성체크
-                $(document).ready(function(){
-            		
-            		$('#reserveBtn').click(function(){
-            			
-            				//날짜 차이를 구하는 구간
-            				function difference(date1, date2) {  
-            				  const date1utc = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
-            				  const date2utc = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
-            				    day = 1000*60*60*24;
-            				  return (date2utc - date1utc)/day
-            				}
-            				const date1 = new Date(document.getElementById("date-in").value);
-            				const date2 = new Date(document.getElementById("date-out").value);
-            			
-            				const time_difference = difference(date1,date2)
-							//날짜 차이를 구하는 구간	
-            				
-							
-            				//체크아웃을 당일날짜로 고르는 경우 
-            				function getFormatDate(date){
-            				    var year = date.getFullYear();              //yyyy
-            				    var month = (1 + date.getMonth());          //M
-            				    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-            				    var day = (1+date.getDate());                   //d
-            				    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-            				    return  year + '-' + month + '-' + day;
-            				}
-            				
-            				var bate = getFormatDate(date2);
-//             				alert(bate);
-            				//체크아웃을 당일날짜로 고르는 경우 
-            				
-            				if(1 <= parseInt(time_difference) && parseInt(time_difference) <= 7){
-            					dateForm.submit();
-            				}else if(parseInt(time_difference) == 0){
-            					document.getElementById("date-out").value=bate;
-            					dateForm.submit();
-            				}
-            				else{
-            					alert('올바른 날짜를 입력해주세요\n최대 7박까지 가능합니다.')
-            					
-            				}
-            			
-            		});// 버튼클릭 끝
-            		
-            		
-            	});
-                
-                
-                </script>
+<!-- 숙소에 대한 상세 정보를 보여주는 영역 끝 -->
+
+
+
+
+<!-- 달력을 통해 날짜 정보를 입력하여 예약페이지로 이동시킬수있음 -->
                 <div class="col-lg-4">
                     <div class="room-booking">
                       <h3>  <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId">요금정보</a></h3>
@@ -499,7 +440,10 @@
             </div>
         </div>
     </section>
-    <!-- Room Details Section End -->
+<!-- 달력을 통해 날짜 정보를 입력하여 예약페이지로 이동시킬수있음 -->   
+<!-- Room Details Section End -->
+
+
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">
