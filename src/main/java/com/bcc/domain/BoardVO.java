@@ -1,259 +1,236 @@
 package com.bcc.domain;
 
 public class BoardVO {
-	
+
 	private Integer num;
-	private String MAIN_TITLE;
-	private double LNG;
-	private String MIDDLE_SIZE_RM1;
-	private String USAGE_AMOUNT;
-	private String CNTCT_TEL;
-	private String MAIN_IMG_NORMAL;
-	private String TRFC_INFO;
-	private String HLDY_INFO;
-	private String ITEMCNTNTS;
-	private String PLACE;
-	private String SUBTITLE;
-	private String USAGE_DAY;
-	private String USAGE_DAY_WEEK_AND_TIME;
-	private String GUGUN_NM;
-	private String ADDR1;
-	private String HOMEPAGE_URL;
-	private String TITLE;
-	private String MAIN_IMG_THUMB;
+	private String title;
+	private double lng;
+	private String convenient;
+	private String price;
+	private String tel;
+	private String img;
+	private String trfc_info;
+	private String hldy_info;
+	private String contents;
+	private String subtitle;
+	private String usage_day;
+	private String addr;
+	private String addr_full;
+	private String url;
+	private String thumbnail;
+	private double lat;
+	private int t_category;
+	private int thumbCnt;
+	private int totalCnt;
+	private int commentCnt;
 
-	private double LAT;
-	private int numOfRows;
-	private int pageNo;
-	private int totalCount;
-
-	public BoardVO() {}
-	public BoardVO(Integer num, String mAIN_TITLE, double lNG, String mIDDLE_SIZE_RM1, String uSAGE_AMOUNT,
-			String cNTCT_TEL, String mAIN_IMG_NORMAL, String tRFC_INFO, String hLDY_INFO, String iTEMCNTNTS,
-			String pLACE, String sUBTITLE, String uSAGE_DAY, String uSAGE_DAY_WEEK_AND_TIME, String gUGUN_NM,
-			String aDDR1, String hOMEPAGE_URL, String tITLE, String mAIN_IMG_THUMB, int lAT, int numOfRows, int pageNo,
-			int totalCount) {
-
-		super();
-		this.num = num;
-		this.MAIN_TITLE = mAIN_TITLE;
-		this.LNG = lNG;
-		this.MIDDLE_SIZE_RM1 = mIDDLE_SIZE_RM1;
-		this.USAGE_AMOUNT = uSAGE_AMOUNT;
-		this.CNTCT_TEL = cNTCT_TEL;
-		this.MAIN_IMG_NORMAL = mAIN_IMG_NORMAL;
-		this.TRFC_INFO = tRFC_INFO;
-		this.HLDY_INFO = hLDY_INFO;
-		this.ITEMCNTNTS = iTEMCNTNTS;
-		this.PLACE = pLACE;
-		this.SUBTITLE = sUBTITLE;
-		this.USAGE_DAY = uSAGE_DAY;
-		this.USAGE_DAY_WEEK_AND_TIME = uSAGE_DAY_WEEK_AND_TIME;
-		this.GUGUN_NM = gUGUN_NM;
-		this.ADDR1 = aDDR1;
-		this.HOMEPAGE_URL = hOMEPAGE_URL;
-		this.TITLE = tITLE;
-		this.MAIN_IMG_THUMB = mAIN_IMG_THUMB;
-		this.LAT = lAT;
-		this.numOfRows = numOfRows;
-		this.pageNo = pageNo;
-		this.totalCount = totalCount;
+	public BoardVO() {
 	}
 
-	public int getNum() {
+	public BoardVO(Integer num, String title, double lng, String convenient, String price, String tel, String img,
+			String trfc_info, String hldy_info, String contents, String subtitle, String usage_day, String addr,
+			String addr_full, String url, String thumbnail, double lat, int t_category, int thumbCnt, int totalCnt,
+			int commentCnt) {
+		super();
+		this.num = num;
+		this.title = title;
+		this.lng = lng;
+		this.convenient = convenient;
+		this.price = price;
+		this.tel = tel;
+		this.img = img;
+		this.trfc_info = trfc_info;
+		this.hldy_info = hldy_info;
+		this.contents = contents;
+		this.subtitle = subtitle;
+		this.usage_day = usage_day;
+		this.addr = addr;
+		this.addr_full = addr_full;
+		this.url = url;
+		this.thumbnail = thumbnail;
+		this.lat = lat;
+		this.t_category = t_category;
+		this.thumbCnt = thumbCnt;
+		this.totalCnt = totalCnt;
+		this.commentCnt = commentCnt;
+	}
+
+	public Integer getNum() {
 		return num;
 	}
 
-	public void setNum(int num) {
+	public void setNum(Integer num) {
 		this.num = num;
 	}
 
-	public String getMAIN_TITLE() {
-		return MAIN_TITLE;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setMAIN_TITLE(String mAIN_TITLE) {
-		MAIN_TITLE = mAIN_TITLE;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public double getLNG() {
-		return LNG;
+	public double getLng() {
+		return lng;
 	}
 
-	public void setLNG(double lNG) {
-		LNG = lNG;
+	public void setLng(double lng) {
+		this.lng = lng;
 	}
 
-	public String getMIDDLE_SIZE_RM1() {
-		return MIDDLE_SIZE_RM1;
+	public String getConvenient() {
+		return convenient;
 	}
 
-	public void setMIDDLE_SIZE_RM1(String mIDDLE_SIZE_RM1) {
-		MIDDLE_SIZE_RM1 = mIDDLE_SIZE_RM1;
+	public void setConvenient(String convenient) {
+		this.convenient = convenient;
 	}
 
-	public String getUSAGE_AMOUNT() {
-		return USAGE_AMOUNT;
+	public String getPrice() {
+		return price;
 	}
 
-	public void setUSAGE_AMOUNT(String uSAGE_AMOUNT) {
-		USAGE_AMOUNT = uSAGE_AMOUNT;
+	public void setPrice(String price) {
+		this.price = price;
 	}
 
-	public String getCNTCT_TEL() {
-		return CNTCT_TEL;
+	public String getTel() {
+		return tel;
 	}
 
-	public void setCNTCT_TEL(String cNTCT_TEL) {
-		CNTCT_TEL = cNTCT_TEL;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
-	public String getMAIN_IMG_NORMAL() {
-		return MAIN_IMG_NORMAL;
+	public String getImg() {
+		return img;
 	}
 
-	public void setMAIN_IMG_NORMAL(String mAIN_IMG_NORMAL) {
-		MAIN_IMG_NORMAL = mAIN_IMG_NORMAL;
+	public void setImg(String img) {
+		this.img = img;
 	}
 
-	public String getTRFC_INFO() {
-		return TRFC_INFO;
+	public String getTrfc_info() {
+		return trfc_info;
 	}
 
-	public void setTRFC_INFO(String tRFC_INFO) {
-		TRFC_INFO = tRFC_INFO;
+	public void setTrfc_info(String trfc_info) {
+		this.trfc_info = trfc_info;
 	}
 
-	public String getHLDY_INFO() {
-		return HLDY_INFO;
+	public String getHldy_info() {
+		return hldy_info;
 	}
 
-	public void setHLDY_INFO(String hLDY_INFO) {
-		HLDY_INFO = hLDY_INFO;
+	public void setHldy_info(String hldy_info) {
+		this.hldy_info = hldy_info;
 	}
 
-	public String getITEMCNTNTS() {
-		return ITEMCNTNTS;
+	public String getContents() {
+		return contents;
 	}
 
-	public void setITEMCNTNTS(String iTEMCNTNTS) {
-		ITEMCNTNTS = iTEMCNTNTS;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
-	public String getPLACE() {
-		return PLACE;
+	public String getSubtitle() {
+		return subtitle;
 	}
 
-	public void setPLACE(String pLACE) {
-		PLACE = pLACE;
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
 	}
 
-	public String getSUBTITLE() {
-		return SUBTITLE;
+	public String getUsage_day() {
+		return usage_day;
 	}
 
-	public void setSUBTITLE(String sUBTITLE) {
-		SUBTITLE = sUBTITLE;
+	public void setUsage_day(String usage_day) {
+		this.usage_day = usage_day;
 	}
 
-	public String getUSAGE_DAY() {
-		return USAGE_DAY;
+	public String getAddr() {
+		return addr;
 	}
 
-	public void setUSAGE_DAY(String uSAGE_DAY) {
-		USAGE_DAY = uSAGE_DAY;
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
 
-	public String getUSAGE_DAY_WEEK_AND_TIME() {
-		return USAGE_DAY_WEEK_AND_TIME;
+	public String getAddr_full() {
+		return addr_full;
 	}
 
-	public void setUSAGE_DAY_WEEK_AND_TIME(String uSAGE_DAY_WEEK_AND_TIME) {
-		USAGE_DAY_WEEK_AND_TIME = uSAGE_DAY_WEEK_AND_TIME;
+	public void setAddr_full(String addr_full) {
+		this.addr_full = addr_full;
 	}
 
-	public String getGUGUN_NM() {
-		return GUGUN_NM;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setGUGUN_NM(String gUGUN_NM) {
-		GUGUN_NM = gUGUN_NM;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public String getADDR1() {
-		return ADDR1;
+	public String getThumbnail() {
+		return thumbnail;
 	}
 
-	public void setADDR1(String aDDR1) {
-		ADDR1 = aDDR1;
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 
-	public String getHOMEPAGE_URL() {
-		return HOMEPAGE_URL;
+	public double getLat() {
+		return lat;
 	}
 
-	public void setHOMEPAGE_URL(String hOMEPAGE_URL) {
-		HOMEPAGE_URL = hOMEPAGE_URL;
+	public void setLat(double lat) {
+		this.lat = lat;
 	}
 
-	public String getTITLE() {
-		return TITLE;
+	public int gett_category() {
+		return t_category;
 	}
 
-	public void setTITLE(String tITLE) {
-		TITLE = tITLE;
+	public void sett_category(int t_category) {
+		this.t_category = t_category;
 	}
 
-	public String getMAIN_IMG_THUMB() {
-		return MAIN_IMG_THUMB;
+	public int getThumbCnt() {
+		return thumbCnt;
 	}
 
-	public void setMAIN_IMG_THUMB(String mAIN_IMG_THUMB) {
-		MAIN_IMG_THUMB = mAIN_IMG_THUMB;
+	public void setThumbCnt(int thumbCnt) {
+		this.thumbCnt = thumbCnt;
 	}
 
-	public double getLAT() {
-		return LAT;
+	public int getTotalCnt() {
+		return totalCnt;
 	}
 
-	public void setLAT(int lAT) {
-		LAT = lAT;
+	public void setTotalCnt(int totalCnt) {
+		this.totalCnt = totalCnt;
 	}
 
-	public int getNumOfRows() {
-		return numOfRows;
+	public int getCommentCnt() {
+		return commentCnt;
 	}
 
-	public void setNumOfRows(int numOfRows) {
-		this.numOfRows = numOfRows;
-	}
-
-	public int getPageNo() {
-		return pageNo;
-	}
-
-	public void setPageNo(int pageNo) {
-		this.pageNo = pageNo;
-	}
-
-	public int getTotalCount() {
-		return totalCount;
-	}
-
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
 	}
 
 	@Override
 	public String toString() {
-		return "MytableVO [num=" + num + ", MAIN_TITLE=" + MAIN_TITLE + ", LNG=" + LNG + ", MIDDLE_SIZE_RM1="
-				+ MIDDLE_SIZE_RM1 + ", USAGE_AMOUNT=" + USAGE_AMOUNT + ", CNTCT_TEL=" + CNTCT_TEL + ", MAIN_IMG_NORMAL="
-				+ MAIN_IMG_NORMAL + ", TRFC_INFO=" + TRFC_INFO + ", HLDY_INFO=" + HLDY_INFO + ", ITEMCNTNTS="
-				+ ITEMCNTNTS + ", PLACE=" + PLACE + ", SUBTITLE=" + SUBTITLE + ", USAGE_DAY=" + USAGE_DAY
-				+ ", USAGE_DAY_WEEK_AND_TIME=" + USAGE_DAY_WEEK_AND_TIME + ", GUGUN_NM=" + GUGUN_NM + ", ADDR1=" + ADDR1
-				+ ", HOMEPAGE_URL=" + HOMEPAGE_URL + ", TITLE=" + TITLE + ", MAIN_IMG_THUMB=" + MAIN_IMG_THUMB
-				+ ", LAT=" + LAT + ", numOfRows=" + numOfRows + ", pageNo=" + pageNo + ", totalCount=" + totalCount
-				+ "]";
+		return "BoardVO [num=" + num + ", title=" + title + ", lng=" + lng + ", convenient=" + convenient + ", price="
+				+ price + ", tel=" + tel + ", img=" + img + ", trfc_info=" + trfc_info + ", hldy_info=" + hldy_info
+				+ ", contents=" + contents + ", subtitle=" + subtitle + ", usage_day=" + usage_day + ", addr=" + addr
+				+ ", addr_full=" + addr_full + ", url=" + url + ", thumbnail=" + thumbnail + ", lat=" + lat
+				+ ", t_category=" + t_category + ", thumbCnt=" + thumbCnt + ", totalCnt=" + totalCnt + ", commentCnt="
+				+ commentCnt + "]";
 	}
 
 }

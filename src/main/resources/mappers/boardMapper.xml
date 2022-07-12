@@ -9,25 +9,23 @@
 	<select id="listAll" resultType="BoardVO">
 		<![CDATA[
 		select * from tourist_spot
-		where num > 0
+		where num > 0 and t_category = 0
 		order by num asc
 		]]>
 	</select>
 
 	<select id="getBoard" resultType="BoardVO">
-		select
-		*
-		from
-		tourist_spot
-		where
-		num =
-		#{num}
+		select * from tourist_spot
+		where num = #{num}
+
 	</select>
 
 	<select id="updateBoardCnt" resultType="BoardVO"
 		parameterType="int">
-		update tourist_spot set totalCount = totalCount + 1
-		where num = #{num}
+		update tourist_spot set totalCnt = totalCnt + 1
+		where num
+		= #{num}
+		and t_category = 0;
 
 	</select>
 
@@ -35,13 +33,15 @@
 		parameterType="String">
 		select *
 		from tourist_spot
-		where GUGUN_NM = #{category}
+		where addr = #{category}
+		and
+		t_category = 0;
 	</select>
 
 	<select id="listPage" resultType="BoardVO">
  		<![CDATA[
  		select * from tourist_spot
- 		where num > 0
+ 		where num > 0 and t_category = 0
  		order by num asc
  		limit 0, 10
  		]]>
@@ -50,11 +50,11 @@
 	<select id="listCri" resultType="BoardVO">
  		<![CDATA[
  		select * from tourist_spot
- 		where 1=1
+ 		where 1=1 
  		]]>
 		<include refid="search"></include>	
  			<![CDATA[
- 		and num > 0
+ 		and num > 0 
  		order by num asc
  		limit #{pageStart}, #{perPageNum}
  		]]>
@@ -63,20 +63,21 @@
 	<select id="listCount" resultType="int">
 	<![CDATA[
 		select count(num)
-		from tourist_spot where 1=1
+		from tourist_spot where 1=1 
 	]]>
 		<include refid="search"></include>	
 			<![CDATA[
-		and num > 0	
+		and num > 0
 		 ]]>
 	</select>
-	
-	
+
+
 	<sql id="search">
 		<if test="searchType != null">
-			<if test="searchType == 't'.toString()">AND MAIN_TITLE LIKE CONCAT('%', #{keyword} ,'%')</if>
-			<if test="searchType == 'c'.toString()">AND ADDR1 LIKE '%' #{keyword} '%'</if>
-			<if test="searchType == 'tc'.toString()">AND (MAIN_TITLE LIKE '%' #{keyword} '%') or (ADDR1 LIKE '%' #{keyword} '%')</if>
+			<if test="searchType == 't'.toString()">AND title LIKE CONCAT('%', #{keyword} ,'%')</if>
+			<if test="searchType == 'c'.toString()">AND addr_full LIKE '%' #{keyword} '%'</if>
+			<if test="searchType == 'tc'.toString()">AND (title LIKE '%' #{keyword} '%') or (addr_full LIKE
+				'%' #{keyword} '%')</if>
 		</if>
 	</sql>
 

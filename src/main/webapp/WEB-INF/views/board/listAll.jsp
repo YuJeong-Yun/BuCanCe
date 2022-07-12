@@ -32,7 +32,7 @@ li {
 				<select id="category" name="searchType" onchange="search()" >
 					<option value="tc"
 						<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>카테고리 선택</option>
-					<option value="강서구" value2="tc" <c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>강서구</option>
+					<option value="강서구"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>강서구</option>
 					<option value="금정구">금정구</option>
 					<option value="기장군">기장군</option>
 					<option value="남구">남구</option>
@@ -67,13 +67,13 @@ li {
 				<div class="col-lg-4 col-md-6">
 					<div class="room-item">
 						<a href="/board/read?num=${vo.num }"><img
-							src="${vo.MAIN_IMG_THUMB }" alt=""></a>
+							src="${vo.thumbnail }" alt=""></a>
 						<div class="ri-text">
-							<h4>${vo.PLACE }</h4>
+							<h4>${vo.title }</h4>
 							<div>
-								<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>${vo.totalCount }<i
-									class="fa fa-commenting-o" aria-hidden="true"></i><%-- ${vo.cno } --%> <i
-									class="fa fa-heart-o" aria-hidden="true"></i>
+								<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>${vo.totalCnt }
+								<i class="fa fa-commenting-o" aria-hidden="true"></i> 
+									 <i class="fa fa-heart-o" aria-hidden="true"></i>
 							</div>
 						</div>
 					</div>
@@ -145,7 +145,7 @@ li {
 				},
 				success : function(list) {
 					$('#b-list').empty();
-				 if(list[list.length-1].totalCount < list[list.length-1].cri.perPageNum){
+				 if(list[list.length-1].totalCnt < list[list.length-1].cri.perPageNum){
 					
 						$('.clearfix').attr("hidden","true");
 					}else{
@@ -171,10 +171,10 @@ li {
 				+ '<div class="room-item">'
 				+ '<a href="/board/read?num='
 				+ obj.num
-				+ '"><img src="'+obj.main_IMG_THUMB+'" alt=""></a>'
+				+ '"><img src="'+obj.thumbnail+'" alt=""></a>'
 				+ '<div class="ri-text">'
 				+ '<h4>'
-				+ obj.place
+				+ obj.title
 				+ '</h4>'
 				+ '<div>'
 				+ '<i class="fa fa-hand-pointer-o" aria-hidden="true"></i> 조회수 <i class="fa fa-commenting-o" aria-hidden="true"></i> 댓글'
@@ -182,6 +182,7 @@ li {
 				+ '</div>' + '</div>' + '</div>';
 	}
 </script>
+
   <script  type="text/javascript">
       $(function(){
         $('#searchBtn').click(function() {

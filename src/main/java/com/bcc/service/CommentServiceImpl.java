@@ -35,6 +35,11 @@ public class CommentServiceImpl implements CommentService {
 	public void delete(CommentVO vo) throws Exception {
 		dao.delete(vo);
 	}
+	//선택된 댓글 조회
+	@Override
+	public CommentVO selectComment(int cno) throws Exception {
+		return dao.selectComment(cno);
+	}
 	
 	
 

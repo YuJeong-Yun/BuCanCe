@@ -13,30 +13,40 @@
 	</div>
 </div>
 <!-- 화면 -->
-<section class="room-details-section spad">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8">
-				<div class="room-details-item">
-					<img src="${vo.MAIN_IMG_NORMAL }" alt="">
-					<div class="rd-text">
-						<div class="rd-title">
-							<h3>${vo.MAIN_TITLE }</h3>
-							<hr>
-							<div class="rdt-right">
-								<h4>${vo.SUBTITLE }</h4>
-							</div>
-							<br> <br> <br>
-							<h6>${vo.ITEMCNTNTS }</h6>
-							<br> <br> <br>
-							<h6>오시는길 : ${vo.TRFC_INFO }</h6>
-							<br> <br> <br>
-							<h6>이용시간 : ${vo.USAGE_DAY_WEEK_AND_TIME }</h6>
-
-						</div>
-
-					</div>
-				</div>
+  <!-- Room Details Section Begin -->
+    <section class="room-details-section spad">
+        <div class="container">
+            <div class="row">
+                    <div class="room-details-item">
+                    	<div id="imageZone">
+                    		<img src="${vo.img }">
+    					</div>
+    				<div class="rd-text">	
+                        <div class="rd-title">
+                            <h3 style="font-family: 'NanumSquareBold' !important;">${vo.title } <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 찜하기</h3>
+                        </div>
+                      <table id="resInfo">
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">전화번호</td>
+                                        <td>${vo.tel }</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">운영시간</td>
+                                        <td>${vo.usage_day }</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">상세주소</td>
+                                        <td>${vo.addr_full }</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">오시는길</td>
+                                        <td> ${vo.trfc_info}</td>
+                                    </tr>
+                                </tbody>
+                     </table>
+                     <p class="f-para">${vo.contents }</p>
+                     </div>
 				<div class="menu-item">
 					<div class="nav-menu"
 						style="text-align: left !important; cursor: pointer;">
@@ -44,7 +54,6 @@
 							<ul>
 								<li class="active" id="review"><a>리뷰</a></li>
 								<li id="blogReview"><a>블로그리뷰</a></li>
-								<li id="loca"><a>위치</a></li>
 
 							</ul>
 						</nav>
@@ -67,11 +76,14 @@
 						<ol class="commentList">
 							<c:forEach items="${commentList}" var="commentList">
 								<p>
-									${commentList.writer} /
-									<fmt:formatDate value="${commentList.regdate}"
-										pattern="yyyy-MM-dd" />
+									${commentList.writer} / <fmt:formatDate value="${commentList.regdate}" pattern="yyyy-MM-dd" />
+									
 								</p>
 								<p>${commentList.content}</p>
+								<div>
+								<button type="button" class="commentModifyBtn" data-cno="${commentList.cno }">수정</button>
+								<button type="button" class="commentDeleteBtn" data-cno="${commentList.cno }">삭제</button>
+								</div>
 								<hr>
 							</c:forEach>
 						</ol>
@@ -80,8 +92,8 @@
 					<div class="review-add">
 						<h4>Add Review</h4>
 						<p class="rev-radi">
-							<input type="radio" id="rev_visit_yn1" name="visit" value="Y"
-								checked /> <label for="visit_yn1"> 방문했어요</label>
+							<input type="radio" id="rev_visit_yn1" name="visit" value="Y"/> 
+							<label for="visit_yn1"> 방문했어요</label>
 						</p>
 						<p class="rev-radi">
 							<input type="radio" id="rev_visit_yn2" name="unvisited" value="N" />
@@ -89,25 +101,21 @@
 						</p>
 					</div>
 					<div>
-
-						<form name="commentForm" method="post">
-							<input type="hidden" id="num" name="num" value="${read.num}" />
-							<input type="hidden" id="page" name="page" value="${scri.page}">
-							<input type="hidden" id="perPageNum" name="perPageNum"
-								value="${scri.perPageNum}"> <input type="hidden"
-								id="searchType" name="searchType" value="${scri.searchType}">
-							<input type="hidden" id="keyword" name="keyword"
-								value="${scri.keyword}">
+							<form name="commentForm" method="post">
+							<input type="hidden" name="num" id="num" value="${vo.num}" /> 
+							 <input type="hidden" id="page" name="page" value="${scri.page}">
+							<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}">
+							 <input type="hidden"id="searchType" name="searchType" value="${scri.searchType}">
+							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
 
 							<p>
-								<label>댓글 작성자</label> <input type="text" name="id"
-									value=" ${id }">
+								<label for="id">댓글 작성자</label> <input type="text" name="id"
+									id="id" value=" ${id }">
 							</p>
 							<p>
 								<textarea rows="5" cols="50" name="content" id="content"></textarea>
 							</p>
 							<p>
-								<input type="hidden" name="num" value="${vo.num}">
 								<button type="button" class="commentWriteBtn">댓글 작성</button>
 							</p>
 						</form>
@@ -149,7 +157,7 @@
 							if (rePageCheck == false) {
 								$
 										.ajax({
-											url : "/blog/getBlog?title=${vo.MAIN_TITLE}&start=1",
+											url : "/blog/getBlog?title=${vo.title}&start=1",
 											success : function(data) {
 												searchTotal = $(data[1]).get(0);
 												$(data[0])
@@ -203,7 +211,7 @@
 					console.log(start);
 
 					$.ajax({
-						url : "/blog/getBlog?title=${vo.MAIN_TITLE}&start="
+						url : "/blog/getBlog?title=${vo.title}&start="
 								+ start,
 						success : function(data) {
 							$(data[0]).each(
@@ -222,11 +230,39 @@
 
 				});
 
-		// 댓글 
+	}); // jQuery
+</script>
+
+<script type="text/javascript">
+	//댓글 작성
+	$(function() {
 		$(".commentWriteBtn").on("click", function() {
 			var formObj = $("form[name='commentForm']");
+			var test = $(".rev-radi:checked").val();
 			formObj.attr("action", "/board/commentWrite");
 			formObj.submit();
 		});
-	}); // jQuery
-</script>
+		
+		//댓글 수정 View
+		$(".commentModifyBtn").on("click", function(){
+			location.href = "/board/commentModify?num=${vo.num}"
+							+ "&page=${scri.page}"
+							+ "&perPageNum=${scri.perPageNum}"
+							+ "&searchType=${scri.searchType}"
+							+ "&keyword=${scri.keyword}"
+							+ "&cno="+$(this).attr("data-cno");
+		});
+		
+		//댓글 삭제 View
+		$(".commentDeleteBtn").on("click", function(){
+			location.href = "/board/commentDelete?num=${vo.num}"
+				+ "&page=${scri.page}"
+				+ "&perPageNum=${scri.perPageNum}"
+				+ "&searchType=${scri.searchType}"
+				+ "&keyword=${scri.keyword}"
+				+ "&cno="+$(this).attr("data-cno");
+		});
+
+		
+	});// 댓글
+</script> 

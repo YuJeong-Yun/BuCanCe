@@ -8,8 +8,8 @@ public class Criteria {
 	private int rowEnd;
 
 	public Criteria() {
-		this.page = 1;
-		this.perPageNum = 9;
+		this.page = 1;	
+		this.perPageNum = 15;
 	}
 
 	public void setPage(int page) {

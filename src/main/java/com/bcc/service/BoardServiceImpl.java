@@ -15,18 +15,10 @@ public class BoardServiceImpl implements BoardService{
 	@Inject
 	private BoardDAO dao;
 
-	//글쓰기
-//		@Override
-//		public void regist(BoardVO vo) throws Exception{
-//			dao.create(vo);
-//			System.out.println("S: regist메서드 "+vo);
-//		}
-
 		//글 전체 목록
 		@Override
 		public List<BoardVO> listAll() throws Exception {
 			List<BoardVO> boardList = dao.listAll();
-			System.out.println("S: listAll메서드 ");
 			return boardList;
 		}
 

@@ -17,5 +17,8 @@ public interface CommentService {
 	
 	//댓글 삭제
 	public void delete(CommentVO vo) throws Exception;
+	
+	//선택된 댓글 조회
+	public CommentVO selectComment(int cno) throws Exception;
 
 }
