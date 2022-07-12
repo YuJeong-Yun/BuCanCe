@@ -39,14 +39,27 @@ function selectAll(selectAll)  {
 <style type="text/css">
 
 /* a태그 (유의사항)  하이퍼링크 파랑색표시되는거 제거 */
-A:link {text-decoration:none; color:#646464;}
-A:visited {text-decoration:none; color:#646464;}
-A:active {text-decoration:none; color:#646464;}
-A:hover {text-decoration:none; color:#646464;}
+A:link {
+	text-decoration: none;
+	color: #646464;
+}
 
+A:visited {
+	text-decoration: none;
+	color: #646464;
+}
+
+A:active {
+	text-decoration: none;
+	color: #646464;
+}
+
+A:hover {
+	text-decoration: none;
+	color: #646464;
+}
 
 /* 유의사항 클릭시 효과  */
-
 #wrapper_popup div[id^='hd_pops_'] {
 	width: 100%;
 	margin: 10px;
@@ -403,11 +416,13 @@ input[type=text]:focus {
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="room-details-item">
-						<img src="${vo.room_pic}" alt="" width="400">
+						<img src="${vo.room_pic}" alt="" height="300" width="500"
+							style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
 						<div class="rd-text">
 							<div class="rd-title">
 								<h3>${vo.room_title}</h3>
 								<div class="rdt-right"></div>
+						
 							</div>
 
 							<table>
@@ -415,8 +430,8 @@ input[type=text]:focus {
 
 									<tr>
 
-										<td class="r-o">예약명 <input type="text" placeholder="서명란"
-											value="${username}"></td>
+										<td class="r-o"><p></p>예약명 <input type="text" placeholder="서명란"
+											value="${username}" style="border-radius: 10px;"></td>
 										<td><br> <br></td>
 									</tr>
 									<tr>
@@ -428,17 +443,12 @@ input[type=text]:focus {
 
 									<tr>
 										<td><select id="payment-select" class="select_type_1"
-											data-v-f785cca6="">
-												<option data-minprice="0" value="kakaopay"
-													data-v-f785cca6="">카카오페이</option>
-												<option data-minprice="0" value="tosspay" data-v-f785cca6="">
-													토스</option>
-												<option data-minprice="0" value="html5_inicis"
-													selected="selected" data-v-f785cca6="">신용/체크카드</option>
-												<option data-minprice="0" value="payco" data-v-f785cca6="">
-													PAYCO</option>
-												<option data-minprice="0" value="danal_tpay"
-													data-v-f785cca6="">휴대폰결제</option>
+											style="border-radius: 10px;" >
+												<option value="kakaopay">카카오페이</option>
+												<option value="tosspay">토스</option>
+												<option value="html5_inicis" selected="selected">신용/체크카드</option>
+												<option value="payco">PAYCO</option>
+												<option value="danal_tpay">휴대폰결제</option>
 										</select></td>
 									</tr>
 								</tbody>
@@ -456,27 +466,30 @@ input[type=text]:focus {
 								<p>
 									<input type="checkbox" name="checkOne" class="inp_chk_02"
 										id="checkOne"><i> <a href="javascript:void(0)"
-										onclick="openLayer('hd_pops_1',500,500)"><u>숙소이용규칙 및 취소/환불규정
-											동의</a></i><b style="color: red"> (필수)</u></b>
+										onclick="openLayer('hd_pops_1',500,500)"><u>숙소이용규칙 및
+												취소/환불규정 동의</a></i><b style="color: red"> (필수)</u></b>
 								</p>
 								<p>
 									<input type="checkbox" name="checkOne" class="inp_chk_02"
 										id="checkTwo"> <span onclick="pop_agree_02();"><i><a
-											href="javascript:void(0)" onclick="openLayer('hd_pops_2',540,540)"><u>개인정보 수집
-												및 이용 동의</a></i><b style="color: red"> (필수)</b></span></u>
+											href="javascript:void(0)"
+											onclick="openLayer('hd_pops_2',540,540)"><u>개인정보 수집 및
+													이용 동의</a></i><b style="color: red"> (필수)</b></span></u>
 								</p>
 								<p>
 									<input type="checkbox" name="checkOne" class="inp_chk_02"
 										id="checkThree"> <span onclick="pop_agree_03();"><i><a
-											href="javascript:void(0)" onclick="openLayer('hd_pops_3',570,270)"><u>개인정보 제
-												3자 제공 동의</a></i><b style="color: red"> (필수)</b></span></u>
+											href="javascript:void(0)"
+											onclick="openLayer('hd_pops_3',570,270)"><u>개인정보 제 3자
+													제공 동의</a></i><b style="color: red"> (필수)</b></span></u>
 								</p>
 
 								<p>
 									<input type="checkbox" name="checkOne" class="inp_chk_02"
 										id="checkFour"> <span onclick="pop_agree_04();"><i><a
-											href="javascript:void(0)" onclick="openLayer('hd_pops_4',600,600)"><u>만 14세
-												이상 확인</a></i><b style="color: red"> (필수)</b></span></u>
+											href="javascript:void(0)"
+											onclick="openLayer('hd_pops_4',600,600)"><u>만 14세 이상
+													확인</a></i><b style="color: red"> (필수)</b></span></u>
 								</p>
 							</section>
 
@@ -748,52 +761,76 @@ input[type=text]:focus {
 	    }
 		
 		
-</script>
+
+				</script>
 				<!-- 아임포트 -->
 
 
 
+
 				<div class="col-lg-4">
-					<div class="room-booking">
-						<h3>결제 정보</h3>
+					<div class="room-booking"
+						style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; background-color: fafafa; border-radius: 10px;">
+						<p></p>
+						<h3>
+							<b>결제 정보</b>
+						</h3>
 						<form onSubmit="return false;">
 							<!-- 뒤로가기 할 주소 -->
 							<input type="hidden" value="<%=request.getHeader("REFERER")%>"
 								id="reload">
 							<!-- 뒤로가기 할 주소 -->
 							<div class="check-date">
-								<label for="date-out">호텔명:</label> <input type="text"
-									id="date-out" value="${vo.room_title}" readonly> <i
-									class=""></i>
+								<label for="date-out"><b>호텔명</b></label> <input type="text"
+									id="date-out" value="${vo.room_title}" readonly
+									style="font-weight: bold;"> <i class=""></i>
 							</div>
 							<div class="check-date">
-								<label for="date-in">마감시간:</label> <input type="text"
-									id="date-in" readonly value="당일 ${vo.room_endtime} 시까지">
-								<i class="icon_calendar"></i>
-							</div>
-
-							<div class="check-date">
-								<label for="date-out">이용시간:</label> <input type="text"
-									id="date-out" readonly value="${vo.room_usetime} 시간"> <i
-									class="icon_calendar"></i>
+								<label for="date-in"><b>마감시간</b></label> <input type="text"
+									id="date-in" readonly value="당일 ${vo.room_endtime} 시까지"
+									style="font-weight: bold;"> <i class="icon_calendar"></i>
 							</div>
 
 							<div class="check-date">
-								<label for="date-out">서명:</label> <input type="text"
-									value=${username } id="date-out"> <i class=""></i>
+								<datalist>
+								</datalist>
+								<label for="date-out"><b>이용시간</b></label> <input type="text"
+									id="date-out" readonly value="${vo.room_usetime} 시간"
+									style="font-weight: bold;"> <i class="icon_calendar"></i>
 							</div>
+
 							<div class="check-date">
-								<label for="date-out"><strong>총 결제 금액</strong></label> <input
-									type="text" id="date-out" value="${vo.room_fcost} 원" readonly>
+								<label for="date-out"><b>서명</b></label> <input type="text"
+									value=${username } id="date-out" style="font-weight: bold;">
 								<i class=""></i>
+							</div>
+							<p></p>
+							<hr>
+							<div class="check-date">
+								<label for="date-out"><strong>총 결제 금액 (VAT포함)</strong></label> <input
+									type="text" id="date-out" value="${vo.room_fcost} 원" readonly
+									style="font-weight: bold; font-size: 20px"> <i
+									class=""></i>
+								<p></p>
+								<ul>
+									<li>해당 객실가는 세금, 봉사료가 포함된 금액입니다</li>
+									<li>결제완료 후 예약자 이름으로 바로 체크인 하시면 됩니다</li>
+								</ul>
 							</div>
 
 
 							<button type="button" onclick="requestPay()"
-								class="btn btn-primary">결제하기</button>
+								class="btn btn-primary"
+								style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
+								<span style="color: black"><b>결제하기</b></span>
+							</button>
 
 							<button type="button" onclick="cancelPay()"
-								class="btn btn-primary">취소하기</button>
+								class="btn btn-block btn-danger btn-lg"
+								style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
+								<span style="color: black"><b>취소하기</b></span>
+							</button>
+							<p></p>
 						</form>
 
 

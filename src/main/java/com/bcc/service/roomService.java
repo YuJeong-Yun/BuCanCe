@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 
 import com.bcc.domain.roomDate;
 import com.bcc.domain.roomPayVO;
+import com.bcc.domain.roomRefundVO;
 import com.bcc.domain.roomSearch;
 
 public interface roomService {
@@ -37,5 +38,15 @@ public interface roomService {
 	public roomPayVO roomPayInfo(String accId);
 
 	public List<roomPayVO> roomUserPayInfo(String userId);
+
+	public String SearchPayId();
+
+	public void payStatus(String accId);
+
+
+	public void inRoomRefund(roomRefundVO vo2);
+	
+	
+	
 	
 }

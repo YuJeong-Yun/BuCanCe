@@ -201,8 +201,8 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
                        <a href="#">
-                       <img src="${roomReserve.get(a).room_pic}" alt="acc" class="poster">
-                        <div class="ri-text" >
+                       <img src="${roomReserve.get(a).room_pic}" alt="acc" class="poster"  style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
+                    	<div class="ri-text"  style="border: solid	#65A2FF; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;"  >
                             <h4>${roomReserve.get(a).room_title}</h4>
                             <table>
                                 <tbody>
@@ -356,7 +356,7 @@
                 <c:set var="a" value="${a=a+1}"/>
                 </c:forEach>
                 
-                
+                </div>
                
             </div>
         </div>

@@ -15,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bcc.domain.roomDate;
 import com.bcc.domain.roomPayVO;
 import com.bcc.domain.roomReVO;
+import com.bcc.domain.roomRefundVO;
 import com.bcc.domain.roomSearch;
 import com.bcc.service.roomService;
 
@@ -39,7 +42,8 @@ public class accomodationController {
 
 	// roomList 페이지 방목록페이지
 	// http://localhost:8088/accomodation/roomList
-	@RequestMapping(value = "/roomList", method = RequestMethod.GET)
+//	@RequestMapping(value = "/roomList", method = RequestMethod.GET)
+	@GetMapping("/roomList")
 	public void roomListGET(Model model) throws IOException {
 
 		log.info(" roomListGET() 호출 ");
@@ -56,7 +60,8 @@ public class accomodationController {
 	
 	// roomList 페이지 방목록검색
 	// http://localhost:8088/accomodation/roomList
-	@RequestMapping(value = "/roomList", method = RequestMethod.POST)
+	//@RequestMapping(value = "/roomList", method = RequestMethod.POST)
+	@PostMapping("/roomList")
 	public void roomListPOST(Model model,roomSearch rs) throws IOException {
 
 		log.info(" roomListPOST() 호출 ");
@@ -79,7 +84,8 @@ public class accomodationController {
 	// 방정보상세보기
 	// roomDetail 페이지
 		// http://localhost:8088/accomodation/roomDetail
-		@RequestMapping(value = "/roomDetail" ,method = RequestMethod.GET)
+//		@RequestMapping(value = "/roomDetail" ,method = RequestMethod.GET)
+	@GetMapping("/roomDetail")
 		public void roomDetailGET(Model model,@RequestParam("bno")
 		String bno) throws IOException {
 
@@ -124,7 +130,8 @@ public class accomodationController {
 		
 		// 가격상세정보 roomPrice 페이지
 		// http://localhost:8088/accomodation/roomPrice
-		@RequestMapping(value = "/roomPrice" ,method = RequestMethod.GET)
+//		@RequestMapping(value = "/roomPrice" ,method = RequestMethod.GET)
+	@GetMapping("roomPrice")
 			public void roomPriceGET(Model model,@RequestParam("bno")
 			String bno) throws IOException {
 
@@ -144,7 +151,8 @@ public class accomodationController {
 		
 		// 예약 roomReserve 페이지
 		// http://localhost:8088/accomodation/roomReserve 
-		@RequestMapping(value = "/roomReserve" ,method = RequestMethod.GET)
+//		@RequestMapping(value = "/roomReserve" ,method = RequestMethod.GET)
+	@GetMapping("/roomReserve")
 		public void roomReserveGET(Model model,@RequestParam("bno")
 		String bno,roomDate rd, @RequestParam("ano") String ano,
 		@RequestParam("room_title") String room_title) throws IOException, ParseException {
@@ -180,8 +188,9 @@ public class accomodationController {
 		
 		// 대실예약페이지
 		// http://localhost:8088/accomodation/roomPayment
-		@RequestMapping(value = "/roomPayment" ,method = RequestMethod.GET)
-		public void roomPaymentGET(roomReVO vo,Model model,
+//		@RequestMapping(value = "/roomPayment" ,method = RequestMethod.GET)
+@GetMapping("/roomPayment")
+	public void roomPaymentGET(roomReVO vo,Model model,
 		HttpSession session
 				) throws IOException {
 
@@ -191,10 +200,12 @@ public class accomodationController {
 //		log.info(vo.getRoom_title());			
 		model.addAttribute("vo", vo);
 		
+		String priId = service.SearchPayId();
+		
 		session.setAttribute("userid", "admin");
 		session.setAttribute("username", "김영수");
 		session.setAttribute("useremail", "kld9223@naver.com");
-		session.setAttribute("priId", "ddfv45fvfvdvs3a");
+		session.setAttribute("priId", priId);
 		session.setAttribute("usertel", "010-3795-9228");
 		session.setAttribute("userAddress", "부산광역시 금정구 금정로 233-21번길 한진스카이 아파트 1003호");
 		session.setAttribute("userPostCode", "46243");
@@ -204,7 +215,8 @@ public class accomodationController {
 		
 		// 숙박예약페이지
 		// http://localhost:8088/accomodation/roomPayment2
-		@RequestMapping(value = "/roomPayment2" ,method = RequestMethod.GET)
+//		@RequestMapping(value = "/roomPayment2" ,method = RequestMethod.GET)
+@GetMapping("/roomPayment2")
 		public void roomPayment2GET(roomReVO vo,Model model,
 		HttpSession session
 				) throws IOException {
@@ -214,11 +226,13 @@ public class accomodationController {
 		log.info("vo : "+vo);
 //		log.info(vo.getRoom_title());			
 				
+		String priId = service.SearchPayId();
+		
 		model.addAttribute("vo", vo);
 		session.setAttribute("userid", "admin");
 		session.setAttribute("username", "김영수");
 		session.setAttribute("useremail", "kld9223@naver.com");
-		session.setAttribute("priId", "1234432fgg0000122");
+		session.setAttribute("priId", priId);
 		session.setAttribute("usertel", "010-3795-9228");
 		session.setAttribute("userAddress", "부산광역시 금정구 금정로 233-21번길 한진스카이 아파트 1003호");
 		session.setAttribute("userPostCode", "46243");
@@ -230,7 +244,8 @@ public class accomodationController {
 		
 		// 결제 완료시 DB
 		// http://localhost:8088/accomodation/roomPayDB
-		@RequestMapping(value = "/roomPayDB" ,method =RequestMethod.GET)
+//		@RequestMapping(value = "/roomPayDB" ,method =RequestMethod.GET)
+@GetMapping("/roomPayDB")
 		public void roomPayDBGET(roomPayVO vo,Model model) throws IOException {
 
 		log.info("roomPayDBGET() 호출");
@@ -246,9 +261,10 @@ public class accomodationController {
 		
 		
 		// 결제완료후 내역 페이지
-		// http://localhost:8088/accomodation/roomPaymentDB
-		@RequestMapping(value = "/roomReComplete" ,method =RequestMethod.GET)
-		public void roomReCompleteGET(Model model,
+		// http://localhost:8088/accomodation/roomReComplete
+//		@RequestMapping(value = "/roomReComplete" ,method =RequestMethod.GET)
+@GetMapping("/roomReComplete")
+public void roomReCompleteGET(Model model,
 				@RequestParam("accId") String accId  
 				) throws IOException {
 		
@@ -266,7 +282,8 @@ public class accomodationController {
 		
 		// 유저 결제내역
 		// http://localhost:8088/accomodation/roomReList
-		@RequestMapping(value = "/roomReList" ,method =RequestMethod.GET)
+//		@RequestMapping(value = "/roomReList" ,method =RequestMethod.GET)
+@GetMapping("/roomReList")
 		public void roomReListGET(Model model) throws IOException {
 				
 			
@@ -287,10 +304,47 @@ public class accomodationController {
 		
 		
 		//결제환불
+		//http://localhost:8088/accomodation/roomRefund
+//		@RequestMapping(value = "/roomRefund" ,method =RequestMethod.POST)
+@PostMapping("roomRefund")
+		public void roomRefundPOST(roomPayVO vo, Model model) throws IOException {
+						
+					
+		//결제내역
+		log.info("roomRefundPOST() 호출");
+				
+		
+		log.info("vo : "+vo);
+		
+		model.addAttribute("vo", vo);
+						
+		}
 		
 		
+		//결제환불
+		//http://localhost:8088/accomodation/roomRfDB
+//		@RequestMapping(value = "/roomRfDB" ,method =RequestMethod.GET)
+@GetMapping("/roomRfDB")
+		public void roomRefundGET(roomRefundVO vo,Model model) throws IOException {
+								
+							
+		//결제내역
+		log.info("roomRfDBGET() 호출");
+						
+		//첫번째로 결제테이블의 정보를 환불됨으로 바꾸기
+		service.payStatus(vo.getAccId());
+		
+		//두번째로 환불테이블 정보입력
+		service.inRoomRefund(vo);
 		
 		
+		log.info("vo : "+vo);
+				
+		model.addAttribute("vo", vo);
+	
+		
+								
+		}
 		
 		
 		

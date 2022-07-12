@@ -201,7 +201,7 @@
 						<div class="nav-menu">
 							<nav class="mainmenu">
 								<ul>
-									<li><a href="./index.html">Home</a></li>
+									<li><a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a></li>
 									<li class="active"><a href="./rooms.html">Rooms</a></li>
 									<li><a href="./about-us.html">About Us</a></li>
 									<li><a href="./pages.html">Pages</a>
@@ -234,7 +234,7 @@
 					<div class="breadcrumb-text">
 						<h2>방 상세정보</h2>
 						<div class="bt-option">
-							<a href="<%=request.getHeader("REFERER")%>">뒤로가기</a> <span>예약상품</span>
+							<a href="<%=request.getHeader("REFERER")%>">뒤로가기</a> <span>Rooms</span>
 						</div>
 					</div>
 				</div>
@@ -288,7 +288,7 @@
  
 					
                         <div class="rd-text">
-                            <div class="rd-title">
+                            <div class="rd-title" >
                                 <h3> ${roomdetail.get(0).room_title}</h3>
                                 <div class="rdt-right">
 									<div class="rating">${roomdetail.get(0).room_star} 
@@ -475,34 +475,24 @@
                 
                 
                 </script>
-                
-             <!--//////////////////////////////////////////////////////////////////////////  -->
-
-		
-             <!--//////////////////////////////////////////////////////////////////////////  -->
-
-                
-                
-                
-                
                 <div class="col-lg-4">
-                    <div class="room-booking">
-                      <h3> <b> <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId">요금정보</a></h3></b>
+                    <div class="room-booking" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; background-color:fafafa; border-radius:10px;">
+                     <p></p> <h3>  <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId"><b>요금정보</b></a></h3>
                         <form action="${pageContext.request.contextPath}/accomodation/roomReserve" method="GET" name="dateForm">
                             <input type="hidden" name="bno" value="${bno}">
                             <input type="hidden" name="ano" value="${ano}">
                             <input type="hidden" name="room_title" value="${roomdetail.get(0).room_title}">
                             <div class="check-date">
-                                <label for="date-in">체크인</label>
+                                <label for="date-in"><b>체크인</b></label>
                                 <input type="text" class="date-input" id="date-in" value="${param.sel_date}" name="sel_date">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
-                                <label for="date-out">체크 아웃</label>
+                                <label for="date-out"><b>체크 아웃</b></label>
                                 <input type="text" class="date-input" id="date-out" value="${param.sel_date2}" name="sel_date2">
                                 <i class="icon_calendar"></i>
                             </div>
-                            <button type="button" id="reserveBtn" class="btn btn-primary">예약하기</button>
+                            <button type="button" id="reserveBtn" class="btn btn-primary" >예약하기</button><p></p>
                         </form>
                     </div>
                 </div>

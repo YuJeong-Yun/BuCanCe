@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bcc.domain.roomPayVO;
+import com.bcc.domain.roomRefundVO;
 
 
 @Repository
@@ -34,7 +35,7 @@ public class roomDAOImpl implements roomDAO {
 	@Override
 	public void roomPaySuc(roomPayVO vo) {
 		
-		 sqlSession.selectOne(NAMESPACE+".insertRoom",vo);
+		 sqlSession.insert(NAMESPACE+".insertRoom",vo);
 		
 	}
 
@@ -48,6 +49,24 @@ public class roomDAOImpl implements roomDAO {
 	@Override
 	public List<roomPayVO> roomUserPayInfo(String userId) {
 		return sqlSession.selectList(NAMESPACE+".userPayList",userId);
+	}
+
+
+	@Override
+	public String roomSearchPay() {
+		return sqlSession.selectOne(NAMESPACE+".selectRoomId");
+	}
+
+
+	@Override
+	public void payStatus(String accId) {
+		sqlSession.update(NAMESPACE+".payStatusRoom",accId);
+	}
+
+
+	@Override
+	public void inRoomRefund(roomRefundVO vo2) {
+		sqlSession.insert(NAMESPACE+".RoomInRefund",vo2);
 	}
 
 	
