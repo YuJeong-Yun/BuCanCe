@@ -38,6 +38,29 @@ img.ui-datepicker-trigger {
 	cursor: pointer;
 }
 /*datepicker에서 사용한 이미지 버튼 style적용*/
+
+
+
+/* 숙소명 입력창  버튼클릭시 테두리 효과 style 적용  */
+input[type=text] {
+	width: 38%;
+	border: 2px solid #aaa;
+	border-radius: 4px;
+	margin: 8px 0;
+	outline: none;
+	padding: 8px;
+	box-sizing: border-box;
+	transition: .3s;
+}
+
+input[type=text]:focus {
+	border-color: dodgerBlue;
+	box-shadow: 0 0 8px 0 dogerBlue;
+}
+
+/* 숙소명 입력창  버튼클릭시 테두리 효과 style 적용  */
+
+
 </style>
 </head>
 <body>
@@ -260,7 +283,7 @@ function selectArea(){
 				<input type="text" name="place_name" id="place_name" value="${select_place}" 
 				required spellcheck="false">
 
-				<input type="submit" value="검색" style="height: 37px;">
+				<input type="submit" value="검색" class="btn btn-primary" style="height: 37px;">
 
 				</form>
 				<!-- 숙소목록선택,검색기능을 하는 코드 끝 -->
@@ -278,15 +301,15 @@ function selectArea(){
 			<div class="row">
 				<c:set var="a" />
 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
-				
+				<c:if test="${roomList.get(a).room_rank!=''}">
 			<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
-					<div class="col-lg-4 col-md-6"  style="height: 550px;">
-						<div class="room-item" style="border: solid #65A2FF; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
+			</c:if>
+					<div class="col-lg-4 col-md-6" >
+						<div class="room-item" style="border-radius: 2em; height=500px;">
 							
 							<c:if test="${roomList.get(a).room_rank!=''}">
 							
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200"
-								>
+								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
 							
 							</c:if>
 							
@@ -295,7 +318,7 @@ function selectArea(){
 							</c:if>
 							
 							
-							<div class="ri-text" >
+							<div class="ri-text"  style="border: solid	#65A2FF;  box-shadow: 5px 5px 5px 5px gray; border-radius:10px;"  >
 								<h4>${roomList.get(a).room_title}</h4>
 								<table >
 									<tbody>
@@ -338,7 +361,7 @@ function selectArea(){
 								</table>
 								<c:if test="${roomList.get(a).room_rank!=''}">
 <%-- 								<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}" class="primary-btn"> --%>
-								설명
+								<a></a>
 <!-- 								</a>  -->
 								</c:if>
 								

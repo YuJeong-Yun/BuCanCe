@@ -375,23 +375,23 @@
 
 <!-- 달력을 통해 날짜 정보를 입력하여 예약페이지로 이동시킬수있음 -->
                 <div class="col-lg-4">
-                    <div class="room-booking">
-                      <h3>  <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId">요금정보</a></h3>
+                      <div class="room-booking" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; background-color: #FAFAFA; border-radius:10px;">
+                    <p></p>  <h3>  <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId"><b>요금정보</b></a></h3>
                         <form action="${pageContext.request.contextPath}/accomodation/roomReserve" method="GET" name="dateForm">
                             <input type="hidden" name="bno" value="${bno}">
                             <input type="hidden" name="ano" value="${ano}">
                             <input type="hidden" name="room_title" value="${roomdetail.get(0).room_title}">
                             <div class="check-date">
-                                <label for="date-in">체크인</label>
+                                <label for="date-in"><b>체크인</b></label>
                                 <input type="text" class="date-input" id="date-in" value="${param.sel_date}" name="sel_date">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
-                                <label for="date-out">체크 아웃</label>
+                                <label for="date-out"><b>체크 아웃</b></label>
                                 <input type="text" class="date-input" id="date-out" value="${param.sel_date2}" name="sel_date2">
                                 <i class="icon_calendar"></i>
                             </div>
-                            <button type="button" id="reserveBtn">예약하기</button>
+                            <button type="button" id="reserveBtn" class="btn btn-primary" >예약하기</button><p></p>
                         </form>
                     </div>
                 </div>

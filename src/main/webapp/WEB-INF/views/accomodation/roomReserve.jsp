@@ -200,8 +200,8 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
                        <a href="#">
-                       <img src="${roomReserve.get(a).room_pic}" alt="acc" class="poster">
-                        <div class="ri-text" >
+                       <img src="${roomReserve.get(a).room_pic}" alt="acc" class="poster" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
+                        <div class="ri-text"style="border: solid	#65A2FF; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;"  >
                             <h4>${roomReserve.get(a).room_title}</h4>
                             <table>
                                 <tbody>
@@ -318,7 +318,7 @@
                          </c:if>
                          
                          <c:if test="${roomReserve.get(a).room_tf != '숙소에 문의 하세요' }">
-                            <button type="submit" class="btn btn-primary">대실 예약하기</button> 
+                            <button type="submit" class="btn btn-primary">대실 예약하기</button>&nbsp;  
                          	</c:if>
                          	
                          	<c:if test="${roomReserve.get(a).room_tf == '숙소에 문의 하세요' }">
