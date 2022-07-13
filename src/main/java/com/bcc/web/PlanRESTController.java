@@ -191,14 +191,18 @@ public class PlanRESTController {
 
 	// 플랜 저장
 	@RequestMapping(value = "/planModify/{num}")
-	public void planModifyREST(@PathVariable("num") int num, String plan, HttpSession session) {
+	public void planModifyREST(@PathVariable("num") int num, String plan, String startDate, String endDate, HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		
 		PlanVO vo = new PlanVO();
+		vo.setNum(num);
 		vo.setWriter(id);
 		vo.setTour_plan(plan);
+		vo.setTour_date_start(startDate);
+		vo.setTour_date_end(endDate);
 
 		log.info("플랜 저장 : " + vo);
-//		service.modifyPlan(vo);
+		
+		planService.modifyPlan(vo);
 	}
 }
