@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class payInfoController extends PaypleController {
+public class PayInfoController extends PaypleController {
 
 	/*
 	 * payInfo.jsp : 결제결과 조회 페이지
