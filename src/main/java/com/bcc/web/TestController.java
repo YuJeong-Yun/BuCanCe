@@ -122,6 +122,8 @@ public class TestController {
 			return "/member/mypageForm";
 		}
 		
+		
+		// update 수정중
 		// http://localhost:8088/update
 		// 회원정보 수정
 		@RequestMapping(value = "/update",method = RequestMethod.GET)
