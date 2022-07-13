@@ -234,7 +234,7 @@ function selectArea(){
 
 			<!-- 숙소목록선택,검색기능을 하는 코드 시작 -->
 			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm">
-				<select name="area" onchange="selectArea()" id="area">
+				<select name="area" onchange="selectArea()" id="area" style="background: blue;">
 					<optgroup label="지역">
 						<option value="favorite"
 						<c:if test="${select_area=='favorite'}">selected</c:if>
@@ -301,15 +301,18 @@ function selectArea(){
 			<div class="row">
 				<c:set var="a" />
 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
-				<c:if test="${roomList.get(a).room_rank!=''}">
+			
+					<div class="col-lg-4 col-md-6" style="height:550px;">
+					
+					
+					<c:if test="${roomList.get(a).room_rank!=''}">
 			<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
 			</c:if>
-					<div class="col-lg-4 col-md-6" >
-						<div class="room-item" style="border-radius: 2em; height=500px;">
+						<div class="room-item" style="border-radius: 2em; ">
 							
 							<c:if test="${roomList.get(a).room_rank!=''}">
 							
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
+								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200" style="border: solid #65A2FF; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
 							
 							</c:if>
 							
@@ -318,7 +321,7 @@ function selectArea(){
 							</c:if>
 							
 							
-							<div class="ri-text"  style="border: solid	#65A2FF;  box-shadow: 5px 5px 5px 5px gray; border-radius:10px;"  >
+							<div class="ri-text"  style="border: solid	#65A2FF;  box-shadow: 5px 5px 5px 5px gray; border-radius:10px; height:260px;"  >
 								<h4>${roomList.get(a).room_title}</h4>
 								<table >
 									<tbody>

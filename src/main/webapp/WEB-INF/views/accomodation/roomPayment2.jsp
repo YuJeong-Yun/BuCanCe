@@ -28,10 +28,6 @@ function selectAll(selectAll)  {
 	    checkbox.checked = selectAll.checked;
 	  })
 	}
-
-	
-	
-
 	
 </script>
 
@@ -172,28 +168,6 @@ A:hover {
 	-moz-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
 }
 </style>
-<script type="text/javascript">
-<!--
-function dEI(elementID){
-	return document.getElementById(elementID);
-}
-function openLayer(IdName, tpos, lpos){
-	var pop = dEI(IdName);
-	pop.style.top = tpos + "px";
-	pop.style.left = lpos + "px";
-	pop.style.display = "block";
-}
-function closeLayer( IdName ){
-	var pop = dEI(IdName);
-	pop.style.display = "none";
-}
-//-->
-</script>
-<!--유의사항 팝업창  ........................................................................................... -->
-
-
-
-
 
 
 <style>

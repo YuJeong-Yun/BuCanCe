@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!-- 345 ~ 779 -->
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
+
+<!-- <script type="text/javascript"> -->
+
+<!-- history.replaceState({}, null, location.pathname); -->
+
+<!-- </script> -->
+
 <meta charset="UTF-8">
 <meta name="description" content="Sona Template">
 <meta name="keywords" content="Sona, unica, creative, html">
@@ -13,7 +18,6 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Sona | Template</title>
 <script>
-
 function selectAll(selectAll)  {
 	  const checkboxes 
 	       = document.getElementsByName('checkOne');
@@ -22,32 +26,31 @@ function selectAll(selectAll)  {
 	    checkbox.checked = selectAll.checked;
 	  })
 	}
+	
+	
+	
 </script>
+
 <!--유의사항 팝업창  ........................................................................................... -->
 <script src="http://wooshin.mireene.co.kr/g5/js/jquery-1.8.3.min.js"></script>
 <style type="text/css">
-
 /* a태그 (유의사항)  하이퍼링크 파랑색표시되는거 제거 */
 A:link {
 	text-decoration: none;
 	color: #646464;
 }
-
 A:visited {
 	text-decoration: none;
 	color: #646464;
 }
-
 A:active {
 	text-decoration: none;
 	color: #646464;
 }
-
 A:hover {
 	text-decoration: none;
 	color: #646464;
 }
-
 /* 유의사항 클릭시 효과  */
 #wrapper_popup div[id^='hd_pops_'] {
 	width: 100%;
@@ -61,7 +64,6 @@ A:hover {
 	overflow: auto;
 	display: none
 }
-
 #wrapper_popup div[id^='hd_pops_'] h2 {
 	display: block;
 	margin: 10px 0 0;
@@ -70,7 +72,6 @@ A:hover {
 	font-size: 1.1em;
 	font-weight: bold
 }
-
 #wrapper_popup div[id^='hd_pops_'] p {
 	display: block;
 	padding: 20px 0 0;
@@ -78,7 +79,6 @@ A:hover {
 	font-size: 1.0em;
 	line-height: 1.5em
 }
-
 #wrapper_popup div[id^='hd_pops_'] .hour-close {
 	display: inline-block;
 	padding: 8px 20px;
@@ -88,12 +88,10 @@ A:hover {
 	border-radius: 5px;
 	margin-top: 15px
 }
-
 #wrapper_popup div[id^='hd_pops_'] .hour-close:hover {
 	background: #54A94C;
 	color: #f8f8f8
 }
-
 #wrapper_popup div[id^='hd_pops_'] img.cancel {
 	position: absolute;
 	right: 10px;
@@ -102,13 +100,11 @@ A:hover {
 	filter: alpha(opacity = 50);
 	opacity: 0.7
 }
-
 #wrapper_popup div[id^='hd_pops_'] img.cancel:hover {
 	zoom: 1;
 	filter: alpha(opacity = 100);
 	opacity: 1.0
 }
-
 #wrapper_popup .c1 {
 	border: 1px #54A94C solid;
 	border-bottom: 10px solid #54A94C
@@ -135,32 +131,50 @@ A:hover {
 	margin-top: 20px;
 	border-top: 1px #ccc solid
 }
-
 #wrapper_popup ul {
 	list-style-type: disc;
 	margin: 0 0 20px;
 	line-height: 1.5em
 }
-
 #wrapper_popup .c-green {
 	color: green !important
 }
-
 #wrapper_popup .c-blue {
 	color: blue !important
 }
-
 #wrapper_popup .c-red {
 	color: red !important
 }
-
 .layer-shadow {
 	box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
 	-webkit-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
 	-moz-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
 }
 </style>
+<script type="text/javascript">
+<!--
+function dEI(elementID){
+	return document.getElementById(elementID);
+}
+function openLayer(IdName, tpos, lpos){
+	var pop = dEI(IdName);
+	pop.style.top = tpos + "px";
+	pop.style.left = lpos + "px";
+	pop.style.display = "block";
+}
+function closeLayer( IdName ){
+	var pop = dEI(IdName);
+	pop.style.display = "none";
+}
+//-->
+</script>
 <!--유의사항 팝업창  ........................................................................................... -->
+
+
+
+
+
+
 <style>
 /* 서명란 클릭시 테두리(blue) 강조 효과  */
 input[type=text] {
@@ -173,7 +187,6 @@ input[type=text] {
 	box-sizing: border-box;
 	transition: .3s;
 }
-
 input[type=text]:focus {
 	border-color: dodgerBlue;
 	box-shadow: 0 0 8px 0 dogerBlue;
@@ -219,6 +232,7 @@ input[type=text]:focus {
 	href="${pageContext.request.contextPath}/resources/css/style.css"
 	type="text/css">
 </head>
+
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -381,12 +395,13 @@ input[type=text]:focus {
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="room-details-item">
-						<img src="${vo.room_pic}" alt=""  height="300" width="500"
+						<img src="${vo.room_pic}" alt="" height="300" width="500"
 							style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
 						<div class="rd-text">
 							<div class="rd-title">
 								<h3>${vo.room_title}</h3>
 								<div class="rdt-right"></div>
+						
 							</div>
 
 							<table>
@@ -394,7 +409,7 @@ input[type=text]:focus {
 
 									<tr>
 
-										<td class="r-o">예약명 <input type="text" placeholder="서명란"
+										<td class="r-o"><p></p>예약명 <input type="text" placeholder="서명란"
 											value="${user_name}" style="border-radius: 10px;"></td>
 										<td><br> <br></td>
 									</tr>
@@ -462,7 +477,7 @@ input[type=text]:focus {
 				</div>
 
 
-				<!-- 결제전 사전동의내용을 팝업창으로 나타냄 -->
+
 				<!-- 팝업내용 -->
 				<div id="wrapper_popup">
 					<div id="hd_pops_1" class="c1 layer-shadow">
@@ -627,13 +642,11 @@ input[type=text]:focus {
 				<script type="text/javascript"
 					src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 				<script type="text/javascript">
-
 		var IMP = window.IMP; // 생략 가능
 		IMP.init("imp49919207"); // 예: imp00000000
-
 		
 	    function requestPay() {
-		
+			
 			if(!$('#checkOne').is(':checked')){
 				alert('숙소이용규칙 및 취소/환불규정에 동의가 필요합니다.');
 				
@@ -703,6 +716,7 @@ input[type=text]:focus {
 			         	
 			              // 결제 실패 시 로직, 뒤로가기
 			              alert('결제실패');
+<%-- 			              alert(<%=request.getHeader("REFERER")%>); --%>
 			              
 			              //결제 실패시 뒤로가기
 			              location.href=document.getElementById("reload").value;
@@ -710,7 +724,10 @@ input[type=text]:focus {
 			      });
 			}
 			
+			
+	   
 	    }
+		
 		
 		
 	    function cancelPay() {
@@ -721,15 +738,19 @@ input[type=text]:focus {
 	    }
 		
 		
-</script>
+				</script>
 				<!-- 아임포트 -->
 
 
 
+
 				<div class="col-lg-4">
-					<div class="room-booking" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; background-color:  #FAFAFA; border-radius: 10px;">
+					<div class="room-booking"
+						style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; background-color: fafafa; border-radius: 10px;">
 						<p></p>
-						<h3><b>결제 정보</b></h3>
+						<h3>
+							<b>결제 정보</b>
+						</h3>
 						<form onSubmit="return false;">
 							<!-- 뒤로가기 할 주소 -->
 							<input type="hidden" value="<%=request.getHeader("REFERER")%>"
@@ -737,45 +758,35 @@ input[type=text]:focus {
 							<!-- 뒤로가기 할 주소 -->
 							<div class="check-date">
 								<label for="date-out"><b>호텔명</b></label> <input type="text"
-									id="date-out" value="${vo.room_title}" readonly style="font-weight: bold;">  <i
-									class=""></i>
+									id="date-out" value="${vo.room_title}" readonly
+									style="font-weight: bold;"> <i class=""></i>
 							</div>
 							<div class="check-date">
 								<label for="date-in"><b>마감시간</b></label> <input type="text"
-									id="date-in" readonly value="당일 ${vo.room_endtime} 시까지" style="font-weight: bold;"> 
-								<i class="icon_calendar"></i>
+									id="date-in" readonly value="당일 ${vo.room_endtime} 시까지"
+									style="font-weight: bold;"> <i class="icon_calendar"></i>
 							</div>
 
 							<div class="check-date">
+								<datalist>
+								</datalist>
 								<label for="date-out"><b>이용시간</b></label> <input type="text"
-									id="date-out" readonly value="${vo.room_usetime} 시간" style="font-weight: bold;">  <i
-									class="icon_calendar"></i>
+									id="date-out" readonly value="${vo.room_usetime} 시간"
+									style="font-weight: bold;"> <i class="icon_calendar"></i>
 							</div>
 
 							<div class="check-date">
 								<label for="date-out"><b>서명</b></label> <input type="text"
-									value="${user_name }" id="date-out" style="font-weight: bold;">  <i class=""></i>
-							</div>
-							<div class="check-date">
-
-								<c:if test="${license==0}">
-									<label for="date-out"><strong>총 결제 금액 (VAT포함)</strong></label>
-									<input type="text" id="date-out" value="${vo.room_fcost} 원"
-										readonly style="font-weight: bold; font-size: 20px"> 
-								</c:if>
-
-								<c:if test="${license==1}">
-									<label for="date-out"><strong style="color: red">총
-											결제 금액 (멤버쉽 할인)</strong></label>
-
-									<input type="text" id="date-out"
-										value="<fmt:formatNumber type="number" maxFractionDigits="0"  value="${vo.room_fcost*0.9}" /> 원"
-										style="color: red; font-weight: bold; font-size: 20px" readonly>
-									<%-- 								<input type="text" id="date-out" value="${vo.room_fcost*0.9} 원" style="color : red" readonly> --%>
-								</c:if>
-
-
+									value=${user_name } id="date-out" style="font-weight: bold;">
 								<i class=""></i>
+							</div>
+							<p></p>
+							<hr>
+							<div class="check-date">
+								<label for="date-out"><strong>총 결제 금액 (VAT포함)</strong></label> <input
+									type="text" id="date-out" value="${vo.room_fcost} 원" readonly
+									style="font-weight: bold; font-size: 20px"> <i
+									class=""></i>
 								<p></p>
 								<ul>
 									<li>해당 객실가는 세금, 봉사료가 포함된 금액입니다</li>
@@ -783,13 +794,13 @@ input[type=text]:focus {
 								</ul>
 							</div>
 
-							
+
 							<button type="button" onclick="requestPay()"
 								class="btn btn-primary"
 								style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
 								<span style="color: black"><b>결제하기</b></span>
 							</button>
-							
+
 							<button type="button" onclick="cancelPay()"
 								class="btn btn-block btn-danger btn-lg"
 								style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
@@ -806,6 +817,10 @@ input[type=text]:focus {
 
 			</div>
 		</div>
+
+
+
+
 	</section>
 	<!-- Room Details Section End -->
 
