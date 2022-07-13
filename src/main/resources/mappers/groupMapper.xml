@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bcc.mapper.groupMapper">
+
+	<select id="getMemberList" resultType="MemberVO">
+		select id, name, license
+		from bcc_member
+		where id like concat('%', #{id}, '%')
+	</select>
+
+	<select id="getGrpNum" resultType="int">
+		select max(num)
+		from plan
+	</select>
+
+	<insert id="createGrp">
+		insert into plan(num, grp_name, leader)
+		values(#{num}, #{grp_name}, #{leader})
+	</insert>
+
+	<select id="getLicense" resultType="int">
+		select license
+		from bcc_member
+		where id = #{id}
+	</select>
+
+	<select id="getGrpAcceptList" resultType="GrpAcceptVO">
+		select grp_num, sender, grp_name
+		from grp_accept a join plan b
+		on a.grp_num = b.num
+		where receiver = #{receiver};
+	</select>
+
+	<insert id="insertGrpMember">
+		insert into plan_member(id, grp_num)
+		values(#{id}, #{grp_num})
+	</insert>
+
+	<delete id="deleteInvitation">
+		delete from grp_accept
+		where grp_num=#{grp_num} and receiver=#{receiver}
+	</delete>
+
+	<select id="getGrpList" resultType="PlanMemberVO">
+		select grp_num, grp_name, leader
+		from plan_member a join plan b
+		on a.grp_num = b.num
+		where id = #{id}
+		order by grp_num desc
+	</select>
+
+	<select id="getGrpName" resultType="string">
+		select grp_name
+		from plan
+		where num = #{num}
+	</select>
+
+	<select id="getGrpMemberList" resultType="MemberVO">
+		select a.id, name, profile
+		from plan_member a join bcc_member b
+		on a.id = b.id
+		where grp_num =	#{grp_num}
+		order by num asc
+	</select>
+
+	<delete id="delPlanMem">
+		delete from plan_member
+		where id = #{id} and grp_num = #{grp_num}
+	</delete>
+
+	<select id="getLeader" resultType="string">
+		select leader
+		from plan
+		where num = #{num}
+	</select>
+
+	<select id="getInvitingList" resultType="GrpAcceptVO">
+		select receiver, name
+		from grp_accept a join bcc_member b
+		on a.receiver = b.id
+		where grp_num = #{grp_num}
+		order by num asc
+	</select>
+
+	<insert id="inviteMember">
+		insert into grp_accept(grp_num, sender, receiver)
+		values(#{grp_num}, #{sender}, #{receiver})
+	</insert>
+
+	<select id="getName" resultType="string">
+		select name
+		from bcc_member
+		where id = #{id}
+	</select>
+
+	<delete id="inviteCancle">
+		delete from grp_accept
+		where grp_num = #{grp_num}
+		and receiver = #{receiver}
+	</delete>
+
+	<select id="checkGrpMember" resultType="int">
+		select count(*)
+		from plan_member
+		where grp_num = #{grp_num} and id = #{id}
+	</select>
+
+	<select id="getNextLeader" resultType="string">
+		select id
+		from plan_member
+		where grp_num = #{grp_num}
+		order by num asc;
+	</select>
+
+	<update id="updateLeader">
+		update plan
+		set leader = #{leader}
+		where num =	#{num}
+	</update>
+
+	<select id="getTourList" resultType="BoardVO">
+		select num, title, thumbnail, lng, lat
+		from tourist_spot
+		where category = 0
+		order by num asc
+	</select>
+
+	<select id="getRestaurantList" resultType="BoardVO">
+		select num, title, thumbnail, lng, lat
+		from tourist_spot
+        where category = 1
+		order by num asc
+	</select>
+
+	<select id="getTourSearch" resultType="BoardVO">
+		select num, title, thumbnail, lng, lat
+		from tourist_spot
+		where title like concat('%', #{keyword}, '%') and category =0
+		order by num asc
+	</select>
+
+	<select id="getRestaurantSearch" resultType="BoardVO">
+		select num, title, thumbnail, lng, lat
+		from tourist_spot
+		where title like concat('%', #{keyword}, '%') and category =1
+		order by num asc
+	</select>
+
+</mapper>
+  
