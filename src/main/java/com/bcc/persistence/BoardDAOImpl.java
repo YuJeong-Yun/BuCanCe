@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BoardDAOImpl implements BoardDAO{
 	
-	// DBÁ¢±ÙÀ» À§ÇØ ÇÊ¿äÇÑ °´Ã¼
+	// DBì ‘ê·¼ì„ ìœ„í•´ í•„ìš”í•œ ê°ì²´
 	@Inject
 	private SqlSession session;
 	
 	
-	// mapperÀÇ À§Ä¡ Á¤º¸ ÀúÀå
+	// mapperì˜ ìœ„ì¹˜ ì •ë³´ ì €ì¥
 	private static final String namespace = "com.bcc.mapper.BoardMapper";
 
 

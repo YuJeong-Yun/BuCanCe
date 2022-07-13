@@ -22,7 +22,7 @@ public class TourController {
 	private TourService service;
 	
 	// http://localhost:8088/tourMap
-	// ºÎ»ê Áöµµ Ãâ·Â
+	// ë¶€ì‚° ì§€ë„ ì¶œë ¥
 	@RequestMapping(value = "/tourMap", method = RequestMethod.GET)
 	public String tourMapGET() {
 		
@@ -30,7 +30,7 @@ public class TourController {
 	}
 
 	
-	// ¸ÀÁı, °ü±¤Áö Ãâ·Â ÆäÀÌÁö
+	// ë§›ì§‘, ê´€ê´‘ì§€ ì¶œë ¥ í˜ì´ì§€
 	@RequestMapping(value = "/tourInfo", method = RequestMethod.GET)
 	public String tourInfoGET(@RequestParam("addr") String addr, Model model) {
 		
@@ -48,13 +48,13 @@ public class TourController {
 	@RequestMapping(value = "/getRest", method = RequestMethod.GET)
 	public void apiTest() {
 		try {
-			service.getRestaurantInfo(service.restaurantLists("ºÎ»êÁø±¸"));
+			service.getRestaurantInfo(service.restaurantLists("ë¶€ì‚°ì§„êµ¬"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	// ¸ÀÁı, °ü±¤Áö »ó¼¼³»¿ª
+	// ë§›ì§‘, ê´€ê´‘ì§€ ìƒì„¸ë‚´ì—­
 	@RequestMapping(value = "/infoDetail", method = RequestMethod.GET)
 	public String infoDetailGET(@RequestParam("title") String title, Model model) {
 		model.addAttribute("resVO",service.getInfoDetail(title)); 

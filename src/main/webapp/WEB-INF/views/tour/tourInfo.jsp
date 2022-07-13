@@ -14,6 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                <!-- 구역별 맛집, 관광지 출력 -->
                     <div class="breadcrumb-text">
                         <h2 class="nanumFont" style="display: inline-block;">${addr }</h2>
                         <div id="cateMenu" style="position: absolute; left: 44.2%; top: 95%;">
@@ -45,11 +46,15 @@
             </div>
         </div>
     <!-- Breadcrumb Section End -->
+    
+    
     <div class="top-nav" style="border-bottom: none; margin-bottom: 1em;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
+                    <!-- 날씨 출력 -->
                      <div id="weatherInfo" style="display: inline-block;"></div>
+                    <!-- 날씨 출력 -->
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
@@ -81,6 +86,7 @@
             </div>
         </div>
 
+	<!-- 맛집, 관광지 출력 -->
     <!-- Rooms Section Begin -->
     <section class="rooms-section spad">
         <div class="container">
@@ -104,6 +110,7 @@
         </div>
     </section>
     <!-- Rooms Section End -->
+    <!-- 맛집, 관광지 출력 -->
 <jsp:include page="../include/footer.jsp" />
 
 </html>

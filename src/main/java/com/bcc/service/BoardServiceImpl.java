@@ -23,11 +23,11 @@ public class BoardServiceImpl implements BoardService{
 		int result = dao.checkThumb(b_num, id);
 		
 		if(result == 1) {
-			// ÁÁ¾Æ¿ä ±â·Ï ÀÖÀ» ½Ã Ä«¿îÆ®-1, Å×ÀÌºí¿¡¼­ ±â·Ï »èÁ¦
+			// ì¢‹ì•„ìš” ê¸°ë¡ ìˆì„ ì‹œ ì¹´ìš´íŠ¸-1, í…Œì´ë¸”ì—ì„œ ê¸°ë¡ ì‚­ì œ
 			dao.subThumb(b_num);
 			dao.deleteThumb(b_num, id);
 		} else if (result == 0) {
-			// ÁÁ¾Æ¿ä ±â·Ï ¾øÀ» ½Ã Ä«¿îÆ®+1, Å×ÀÌºí¿¡ »ğÀÔ
+			// ì¢‹ì•„ìš” ê¸°ë¡ ì—†ì„ ì‹œ ì¹´ìš´íŠ¸+1, í…Œì´ë¸”ì— ì‚½ì…
 			dao.addThumb(b_num);
 			dao.insertThumb(b_num, b_category, id);
 		}

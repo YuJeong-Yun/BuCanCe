@@ -9,10 +9,10 @@ public interface TourService {
 	
 	public List<BoardVO> restaurantLists(String addr);
 
-	// ³×ÀÌ¹ö °Ë»ö api·Î ¸ÀÁı Á¤º¸¿Í ¸µÅ© °¡Á®¿À±â
+	// ë„¤ì´ë²„ ê²€ìƒ‰ apië¡œ ë§›ì§‘ ì •ë³´ì™€ ë§í¬ ê°€ì ¸ì˜¤ê¸°
 	public void getRestaurantInfo(List<BoardVO> restList) throws Exception;
 	
-	// ÇØ´ç ¸ÀÁı Á¤º¸ °¡Á®¿À±â
+	// í•´ë‹¹ ë§›ì§‘ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	public BoardVO getInfoDetail(String title);
 	
 	

@@ -6,10 +6,10 @@ import com.bcc.domain.BoardVO;
 
 public interface TourDAO {
 	
-	// ¸ÀÁı Á¤º¸ °¡Á®¿À±â
+	// ë§›ì§‘ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	public List<BoardVO> restaurantLists(String addr); 
-	
-	// ¸ÀÁı µğÅ×ÀÏ °¡Á®¿À±â
+
+	// ë§›ì§‘ ë””í…Œì¼ ê°€ì ¸ì˜¤ê¸°
 	public BoardVO infoDetail(String title);
 
 }

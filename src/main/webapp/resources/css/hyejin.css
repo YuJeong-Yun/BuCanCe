@@ -162,20 +162,6 @@
 	}
 	
 	
-	#adminMenu {
-		margin-left: 1em;
-		display: inline-block;
-		vertical-align: sub;
-	}
-	
-	
-	#adminMenu li {
-		list-style: none;
-		padding: 1em 0;
-		border-bottom: 1px solid rgba(210, 215, 217, 0.75);
-	}
-	
-
 	#profitBtn {
 	  -webkit-appearance: none;
 	  -moz-appearance: none;
@@ -293,4 +279,6 @@
 		transform: translate(0,80px);
 	}
 	
-	
+	#content-wrapper * {
+		font-family: 'Noto Sans KR', sans-serif !important;
+	}

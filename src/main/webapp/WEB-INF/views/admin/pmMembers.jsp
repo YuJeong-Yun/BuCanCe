@@ -38,6 +38,7 @@
 
                     <div class="row">
                     
+                    <!-- 주간, 월간 차트 출력 -->
                         <!-- Area Chart -->
                         <div class="col-xl-6">
                             <div class="card shadow mb-4">
@@ -69,12 +70,12 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 주간, 월간 차트 출력 -->
 
 
                 </div>
-                <!-- /.container-fluid -->
                 
-                
+                <!-- 프리미엄 회원 내역 조회, 총 액수 출력 -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -154,7 +155,7 @@
 
 
                 </div>
-                <!-- /.container-fluid -->
+                <!-- 프리미엄 회원 내역 조회, 총 액수 출력 -->
 
             </div>
             <!-- End of Main Content -->

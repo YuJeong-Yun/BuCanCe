@@ -36,6 +36,7 @@
 
                     <div class="row">
                     
+                    <!-- 주간, 월간 차트 출력 -->
                         <!-- Area Chart -->
                         <div class="col-xl-6">
                             <div class="card shadow mb-4">
@@ -67,12 +68,13 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 주간, 월간 차트 출력 -->
 
 
                 </div>
-                <!-- /.container-fluid -->
                 
                 
+                <!-- 프리미엄 회원 내역 조회 -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -83,13 +85,13 @@
                     
                     <div class="card mb-4">
                                 <div class="card-header">
-                                    조회할 기간을 선택해주세요.
                      			<div id="dataTable_filter" class="dataTables_filter">
+                     				조회 기간 : &nbsp;&nbsp;
                 				    <input type="button" value="오늘" class="periodBtn" id="today">
                        				<input type="button" value="7일" class="periodBtn" id="week">
                        				<input type="button" value="1개월" class="periodBtn" id="1month">
                        				<input type="button" value="3개월" class="periodBtn" id="3months">
-                       				<input type="button" value="6개월" class="periodBtn" id="6months">
+                       				<input type="button" value="6개월" class="periodBtn" id="6months">&nbsp;&nbsp;
                      				<input type="date" name=startDate id="startDate">
                      				~
                      				<input type="date" name=endDate id="endDate">
@@ -98,13 +100,9 @@
                                 </div>
                                 <div class="card-body">
                                 </div>
-                                
                             </div>
-
-
-
                 </div>
-                <!-- /.container-fluid -->
+                <!-- 프리미엄 회원 내역 조회, 총 액수 출력 -->
 
             </div>
             <!-- End of Main Content -->

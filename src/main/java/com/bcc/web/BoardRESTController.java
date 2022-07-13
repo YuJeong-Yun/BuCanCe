@@ -24,26 +24,26 @@ public class BoardRESTController {
 	private BoardService service;
 	
 	
-	// »ç¿ëÀÚ ÁÁ¾Æ¿ä À¯¹« Ã¼Å©
+	// ì‚¬ìš©ì ì¢‹ì•„ìš” ìœ ë¬´ ì²´í¬
 	@RequestMapping(value = "checkThumb", method = RequestMethod.GET)
 	public Integer checkThumbGET(@RequestParam("b_num") int b_num, HttpServletRequest request) {
 		log.info(b_num+"");
 		HttpSession session = request.getSession();
-		
+
 		return service.checkThumb(b_num,(String) session.getAttribute("id"));
 	}
-	
-	
-	// ÁÁ¾Æ¿ä ¼ö ¾÷µ¥ÀÌÆ®
+
+
+	// ì¢‹ì•„ìš” ìˆ˜ ì—…ë°ì´íŠ¸
 	@RequestMapping(value = "/updateThumb", method = RequestMethod.PUT)
 	public void updateThumbPUT(@RequestParam("b_num") int b_num,
 			@RequestParam("t_category") int t_category,HttpServletRequest request) {
 		log.info(b_num+"");
 		log.info(t_category+"");
 		HttpSession session = request.getSession();
-		
+
 		service.updateThumb(b_num, t_category, (String) session.getAttribute("id"));
-		
+
 	}
 
 }

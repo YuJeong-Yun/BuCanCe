@@ -3,18 +3,19 @@ package com.bcc.persistence;
 
 public interface BoardDAO {
 	
-	public Integer checkThumb(int b_num, String id);
 	
-	// ÁÁ¾Æ¿ä ¼ö +1
-	public void addThumb(int b_num);
+		public Integer checkThumb(int b_num, String id);
 	
-	// ÁÁ¾Æ¿ä ¼ö -1
-	public void subThumb(int b_num);
-	
-	// ÁÁ¾Æ¿ä Å×ÀÌºí¿¡ ±â·Ï Ãß°¡
-	public void insertThumb(int b_num, int b_category, String m_id);
-	
-	// ÁÁ¾Æ¿ä Å×ÀÌºí¿¡¼­ ±â·Ï »èÁ¦
-	public void deleteThumb(int b_num, String id);
+		// ì¢‹ì•„ìš” ìˆ˜ +1
+		public void addThumb(int b_num);
+
+		// ì¢‹ì•„ìš” ìˆ˜ -1
+		public void subThumb(int b_num);
+
+		// ì¢‹ì•„ìš” í…Œì´ë¸”ì— ê¸°ë¡ ì¶”ê°€
+		public void insertThumb(int b_num, int b_category, String m_id);
+
+		// ì¢‹ì•„ìš” í…Œì´ë¸”ì—ì„œ ê¸°ë¡ ì‚­ì œ
+		public void deleteThumb(int b_num, String id);
 	
 }

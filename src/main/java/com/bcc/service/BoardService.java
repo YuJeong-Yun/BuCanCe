@@ -3,10 +3,10 @@ package com.bcc.service;
 
 public interface BoardService {
 	
-	// ÁÁ¾Æ¿ä ±â·Ï Ã¼Å©
+	// ì¢‹ì•„ìš” ê¸°ë¡ ì²´í¬
 	public Integer checkThumb(int b_num, String id);
-	
-	// ÁÁ¾Æ¿ä ±â·Ï Ã¼Å© ÈÄ insert ¶Ç´Â delete ½ÇÇà 
+
+	// ì¢‹ì•„ìš” ê¸°ë¡ ì²´í¬ í›„ insert ë˜ëŠ” delete ì‹¤í–‰ 
 	public void updateThumb(int b_num, int b_category, String id);
 
 }
