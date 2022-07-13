@@ -10,5 +10,15 @@
   		select now() 
   	</select>
   	
+  	<insert id="insertPay" parameterType="PreOrderVO">
+		insert into premium_order
+		values (#{id},systimestamp,systdate+30,sysdate+29,#{pm})
+	</insert>
+	
+
+
+	
+  	
+  	
   </mapper>
   

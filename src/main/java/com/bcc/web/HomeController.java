@@ -1,5 +1,4 @@
 package com.bcc.web;
-
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -29,11 +28,12 @@ public class HomeController {
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
-		String formattedDate = dateFormat.format(date);
+		String formatedDate = dateFormat.format(date);
 		
-		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("serverTime", formatedDate );
 		
 		return "home";
 	}
+	
 	
 }
