@@ -10,32 +10,31 @@
 
 	<select id="pmInfo" parameterType="hashMap" resultType="PremiumOrderVO">
 		select * from premium_order
-		where year(success_date)=#{year} and month(success_date)=#{month}
+		where success_date between #{start} and #{end}
 		order by id
-	</select>
-	
-	<select id="trendChart" parameterType="hashMap" resultType="Integer">
-		select count(*) from premium_order
-		where year(success_date)=#{year} and month(success_date)=#{month}
 	</select>
 	
 	<select id="periodicPm" parameterType="hashMap" resultType="String">
 		select periodic_pm from premium_member 
-		where id in (select id from premium_order where year(success_date)=#{year} and month(success_date)=#{month})
+		where id in (select id from premium_order where success_date between #{start} and #{end})
 		order by id
 	</select>
 	
 	<select id="onlyPeriodMems" parameterType="hashMap" resultType="PremiumOrderVO">
 		select * from premium_order
 		where id in (select id from premium_member where periodic_pm = 'y') 
-		and year(success_date)=#{year} and month(success_date)=#{month}
+		and success_date between #{start} and #{end}
 		order by id
 	</select>
 	
+	<select id="trendChart" parameterType="hashMap" resultType="Integer">
+		select count(*) from premium_order
+		where day(success_date)=#{day} and month(success_date)=#{month}
+	</select>
 	
-	<!-- <select id="trendChart" parameterType="hashMap" resultType="hashMap">
-		select * from premium_order
-		where year(success_date)=#{year} and month(success_date) between (#{month}-4) and #{month}
-	</select> -->
-
+	<select id="monthlyChart" parameterType="hashMap" resultType="Integer">
+		select count(*) from premium_order
+		where year(success_date)=#{year} and month(success_date)=#{month}
+	</select>
+	
 </mapper>  

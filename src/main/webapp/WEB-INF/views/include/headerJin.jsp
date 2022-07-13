@@ -9,11 +9,18 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
-
+    <title>부캉스</title>
+    
+    <style type="text/css">
+    @import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
+	@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css");
+    </style>
+    
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
@@ -26,19 +33,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
-    
-    <style>
-    .area {
-    position: absolute;
-    background: #fff;
-    border: 1px solid #888;
-    border-radius: 3px;
-    font-size: 18px;
-    top: -5px;
-    left: 15px;
-    padding:2px;
-	}
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
 </head>
 
 <body>
@@ -163,7 +158,7 @@
                     <div class="col-lg-2">
                         <div class="logo">
                             <a href="./index.html">
-                                <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="">
+                                <img src="${pageContext.request.contextPath}/resources/img/Bucance-logo.png" alt="">
                             </a>
                         </div>
                     </div>
