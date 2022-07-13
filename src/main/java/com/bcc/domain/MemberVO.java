@@ -1,3 +1,4 @@
+
 package com.bcc.domain;
 
 import java.sql.Timestamp;
