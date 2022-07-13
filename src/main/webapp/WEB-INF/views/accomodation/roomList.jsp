@@ -279,14 +279,15 @@ function selectArea(){
 				<c:set var="a" />
 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
 				
-			
+			<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
 					<div class="col-lg-4 col-md-6"  style="height: 550px;">
-						<div class="room-item" style="border-radius: 2em;">
+						<div class="room-item" style="border: solid #65A2FF; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
 							
 							<c:if test="${roomList.get(a).room_rank!=''}">
-							<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200">
-							</a>
+							
+								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200"
+								>
+							
 							</c:if>
 							
 							<c:if test="${roomList.get(a).room_rank==''}">
@@ -294,7 +295,7 @@ function selectArea(){
 							</c:if>
 							
 							
-							<div class="ri-text">
+							<div class="ri-text" >
 								<h4>${roomList.get(a).room_title}</h4>
 								<table >
 									<tbody>
@@ -336,8 +337,9 @@ function selectArea(){
 									</tbody>
 								</table>
 								<c:if test="${roomList.get(a).room_rank!=''}">
-								<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}" class="primary-btn">
-								상세보기</a> 
+<%-- 								<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}" class="primary-btn"> --%>
+								설명
+<!-- 								</a>  -->
 								</c:if>
 								
 								<c:if test="${roomList.get(a).room_rank==''}">
@@ -349,6 +351,7 @@ function selectArea(){
 							</div>
 						</div>
 					</div>
+					</a>
 				</c:forEach>
 			</div>
 		</div>

@@ -255,6 +255,7 @@ if(result){ //result == true
 	      type : "GET",
 	      contentType : "application/json",
 	      data : {
+	    	rfId : "${rfId}",
 	        accId : "${vo.accId}", // 예: ORD20180131-0000011
 	        accAmount : "${vo.accAmount}", // 환불금액
 	        accName : "${vo.accName}", //환불한 숙소 이름

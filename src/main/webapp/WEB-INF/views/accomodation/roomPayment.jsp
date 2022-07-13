@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!-- 345 ~ 779 -->
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -449,7 +450,7 @@ input[type=text]:focus {
 				</div>
 
 
-
+				<!-- 결제전 사전동의내용을 팝업창으로 나타냄 -->
 				<!-- 팝업내용 -->
 				<div id="wrapper_popup">
 					<div id="hd_pops_1" class="c1 layer-shadow">
@@ -707,7 +708,7 @@ input[type=text]:focus {
 		
 		
 </script>
-				<!-- 아임포트 -->
+<!-- 아임포트 -->
 
 
 

@@ -2,6 +2,7 @@ package com.bcc.domain;
 
 public class roomRefundVO {
 
+	private String rfId;
 	private String accId;
 	private int accAmount;
 	private String accName;
@@ -72,12 +73,19 @@ public class roomRefundVO {
 	public void setLicense(int license) {
 		this.license = license;
 	}
+	public String getRfId() {
+		return rfId;
+	}
+	public void setRfId(String rfId) {
+		this.rfId = rfId;
+	}
 	@Override
 	public String toString() {
-		return "roomRefundVO [accId=" + accId + ", accAmount=" + accAmount + ", accName=" + accName + ", roomSort="
-				+ roomSort + ", sort=" + sort + ", accKind=" + accKind + ", checkIn=" + checkIn + ", checkOut="
-				+ checkOut + ", id=" + id + ", license=" + license + "]";
+		return "roomRefundVO [rfId=" + rfId + ", accId=" + accId + ", accAmount=" + accAmount + ", accName=" + accName
+				+ ", roomSort=" + roomSort + ", sort=" + sort + ", accKind=" + accKind + ", checkIn=" + checkIn
+				+ ", checkOut=" + checkOut + ", id=" + id + ", license=" + license + "]";
 	}
+	
 
 	
 

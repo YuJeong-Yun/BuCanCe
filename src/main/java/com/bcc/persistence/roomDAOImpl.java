@@ -63,11 +63,18 @@ public class roomDAOImpl implements roomDAO {
 		sqlSession.update(NAMESPACE+".payStatusRoom",accId);
 	}
 
+	@Override
+	public String roomSearchRefund() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE+".selectRfId");
+	}
 
 	@Override
 	public void inRoomRefund(roomRefundVO vo2) {
 		sqlSession.insert(NAMESPACE+".RoomInRefund",vo2);
 	}
+
+
 
 	
 	

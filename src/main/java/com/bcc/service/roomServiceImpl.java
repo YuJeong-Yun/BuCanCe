@@ -720,9 +720,17 @@ public class roomServiceImpl implements roomService{
 		
 		//a 문자부분
 		String b = "bcc";
+		int c=0;
 		
-		//a 숫자부분
-		int c = Integer.parseInt(a.replaceAll("[^0-9]",""));
+		//데이터 값이 없을때는 bcc1이 들어가고 있을때는 bcc2,bcc3....로 들어감
+		if(a==null) {
+			b = "bcc";
+			c= 0;
+		}else {
+			//a의 숫자부분
+			c = Integer.parseInt(a.replaceAll("[^0-9]",""));
+			
+		}
 		
 		String d = b+(c+1);
 		
@@ -732,20 +740,53 @@ public class roomServiceImpl implements roomService{
 	}
 
 	
-	
-	
 	//환불시 결제 상태 변경
 	@Override
 	public void payStatus(String accId) {
+		
 		
 		dao.payStatus(accId);
 	}
 
 	
 	
+	
+	//환불테이블 고유아이디값
+	@Override
+	public String roomRf() {
+		String a = dao.roomSearchRefund();
+		
+		//a 문자부분
+		String b = "rf";
+				
+		//a 숫자부분
+		int c=0;
+		
+		
+		if(a==null) {
+			
+			b = "rf";
+			c= 0;
+		}else {
+			c = Integer.parseInt(a.replaceAll("[^0-9]",""));
+			
+		}
+				
+		String d = b+(c+1);
+		
+		
+		
+		return d;
+	}
+
+
+
+
 	//환불시 환불테이블에 데이터입력
 	@Override
 	public void inRoomRefund(roomRefundVO vo2) {
+		
+		
 		dao.inRoomRefund(vo2);
 		
 	}

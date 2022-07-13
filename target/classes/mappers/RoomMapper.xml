@@ -29,11 +29,16 @@
    <update id="payStatusRoom">
   	update acc_payment set status="refund" where accId=#{accId}
   </update>
+  
+   <select id="selectRfId" resultType="String">
+  	select rfId from acc_refund order by rf_date desc limit 1
+  </select>
 
 	<insert id="RoomInRefund">
-  		insert into acc_refund (accId,accAmount,accName,roomSort,sort,accKind,checkIn,checkOut,id,license)
-  		values(#{accId},#{accAmount},#{accName},#{roomSort},#{sort},#{accKind},#{checkIn},#{checkOut},#{id},#{license})
+  		insert into acc_refund (rfId,accId,accAmount,accName,roomSort,sort,accKind,checkIn,checkOut,id,license)
+  		values(#{rfId},#{accId},#{accAmount},#{accName},#{roomSort},#{sort},#{accKind},#{checkIn},#{checkOut},#{id},#{license})
   	</insert>
+  	
 
   
   </mapper>

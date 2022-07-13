@@ -276,12 +276,13 @@
                             <input type="hidden" name="accKind" value="${UserPayList.get(a).accKind}">
 							<input type="hidden" name="id" value="${UserPayList.get(a).id}">
 							<input type="hidden" name="license" value="${UserPayList.get(a).license}">
+							
                             
                             <c:if test="${UserPayList.get(a).status!='refund'}">
                             <button type="submit" style="color : blue">환불하기</button>
                             </c:if>
                               <c:if test="${UserPayList.get(a).status=='refund'}">
-                              <button type="button" style="color : red">환불됨</button>
+                              <button type="button" style="color : red">환불처리</button>
                                </c:if>
                        		</form>
                        		

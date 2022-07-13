@@ -183,14 +183,16 @@ public class accomodationController {
 				) throws IOException {
 
 		log.info("roomPaymentGET() 호출");
+		log.info("대실예약페이지 호출");
 						
 		log.info("vo : "+vo);
 //		log.info(vo.getRoom_title());			
 		model.addAttribute("vo", vo);
 		
-		//숙박주문번호
+		//숙박주문번호 설정
 		String accId = service.SearchPayId();
 		
+		//로그인정보들(임의의값)
 		session.setAttribute("id", "admin");
 		session.setAttribute("user_name", "김영수");
 		session.setAttribute("email", "kld9223@naver.com");
@@ -202,6 +204,7 @@ public class accomodationController {
 		
 		}
 		
+		
 		// 숙박예약페이지
 		// http://localhost:8088/accomodation/roomPayment2
 		@RequestMapping(value = "/roomPayment2" ,method = RequestMethod.GET)
@@ -210,14 +213,18 @@ public class accomodationController {
 				) throws IOException {
 
 		log.info("roomPayment2GET() 호출");
-								
+		log.info("숙박예약페이지 호출");
+		
 		log.info("vo : "+vo);
 //		log.info(vo.getRoom_title());			
 				
+		//숙박 주문번호 설정
 		String accId = service.SearchPayId();
 		
 		model.addAttribute("vo", vo);
 		
+		
+		//로그인정보들(임의의값)
 		session.setAttribute("id", "admin");
 		session.setAttribute("user_name", "김영수");
 		session.setAttribute("email", "kld9223@naver.com");
@@ -280,6 +287,7 @@ public class accomodationController {
 		
 		String id="admin";
 		
+		
 		List<roomPayVO> list = service.roomUserPayInfo(id);	
 				
 		log.info("payList : "+list);
@@ -299,10 +307,13 @@ public class accomodationController {
 		//결제내역
 		log.info("roomRefundPOST() 호출");
 				
+		//환불고유아이디
+		String rfId = service.roomRf();
 		
 		log.info("vo : "+vo);
 		
 		model.addAttribute("vo", vo);
+		model.addAttribute("rfId", rfId);
 						
 		}
 		
@@ -311,16 +322,19 @@ public class accomodationController {
 		//http://localhost:8088/accomodation/roomRfDB
 		@RequestMapping(value = "/roomRfDB" ,method =RequestMethod.GET)
 		public void roomRefundGET(roomRefundVO vo,Model model) throws IOException {
-								
+			
 							
 		//결제내역
 		log.info("roomRfDBGET() 호출");
+		
 						
 		//첫번째로 결제테이블의 정보를 환불됨으로 바꾸기(status)
 		service.payStatus(vo.getAccId());
 		
 		//두번째로 환불테이블 정보입력
 		service.inRoomRefund(vo);
+		
+		
 		
 		
 		log.info("vo : "+vo);
