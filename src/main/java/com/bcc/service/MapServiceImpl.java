@@ -35,7 +35,7 @@ public class MapServiceImpl implements MapService{
 	public void tourLists() throws IOException{
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/6260000/AttractionService/getAttractionKr"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=o5qKZe2j9oe7vmdAxcZZN0KcEuO3a1rxqX%2Bcb4UO4BNvR7DiZsBK47AMFktXFNWu9%2BaaPKhVoKGLksmQ2iVN3Q%3D%3D"); /*Service Key*/
-        urlBuilder.append("&" + URLEncoder.encode("resultType","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*JSON¹æ½ÄÀ¸·Î È£Ãâ ½Ã ÆÄ¶ó¹ÌÅÍ resultType=json ÀÔ·Â*/
+        urlBuilder.append("&" + URLEncoder.encode("resultType","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*JSONï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ resultType=json ï¿½Ô·ï¿½*/
         
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -61,16 +61,16 @@ public class MapServiceImpl implements MapService{
         log.info("result : "+result);
 		
         
-        // Json parser¸¦ ¸¸µé¾î ¸¸µé¾îÁø ¹®ÀÚ¿­ µ¥ÀÌÅÍ¸¦ °´Ã¼È­ 
+        // Json parserï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½Ã¼È­ 
 		try {
 			JSONParser parser = new JSONParser(); 
 			JSONObject obj;
 			obj = (JSONObject) parser.parse(result);
-			// response Å°¸¦ °¡Áö°í µ¥ÀÌÅÍ¸¦ ÆÄ½Ì 
+			// response Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ä½ï¿½ 
 			JSONObject parse_response = (JSONObject) obj.get("response"); 
-			// response ·Î ºÎÅÍ body Ã£±â
+			// response ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ body Ã£ï¿½ï¿½
 			JSONObject parse_body = (JSONObject) parse_response.get("body"); 
-			// body ·Î ºÎÅÍ items Ã£±â 
+			// body ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ items Ã£ï¿½ï¿½ 
 			JSONObject parse_items = (JSONObject) parse_body.get("items");
 			
 			JSONArray parse_item = (JSONArray) parse_items.get("item");
@@ -88,26 +88,26 @@ public class MapServiceImpl implements MapService{
 		
 
 		
-		String WEB_DRIVER_ID = "webdriver.chrome.driver"; //µå¶óÀÌ¹ö ID
-		String WEB_DRIVER_PATH = "C:\\chromedriver.exe"; //µå¶óÀÌ¹ö °æ·Î
+		String WEB_DRIVER_ID = "webdriver.chrome.driver"; //ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ID
+		String WEB_DRIVER_PATH = "C:\\chromedriver.exe"; //ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½
 		
 		System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 		
-		// Å©·Ò ¼³Á¤À» ´ãÀº °´Ã¼ »ý¼º
+		// Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 		ChromeOptions options = new ChromeOptions();
 		
 		options.addArguments("headless");
 		
-		// À§¿¡¼­ ¼³Á¤ÇÑ ¿É¼ÇÀ» ´ãÀº µå¶óÀÌ¹ö °´Ã¼ »ý¼º
-		// WebDriver °´Ã¼°¡ °ð ÇÏ³ªÀÇ ºê¶ó¿ìÀú Ã¢ÀÌ¶ó°í »ý°¢
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+		// WebDriver ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¢ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		WebDriver driver = new ChromeDriver(options);
 		String url = "https://www.siksinhot.com/taste?upHpAreaId=8&hpAreaId=&isBestOrd=Y";
 		
 		driver.get(url);
 		
-		// ºê¶ó¿ìÀú ÀÌµ¿½Ã »ý±â´Â ·Îµå½Ã°£ ±â´Ù¸®±â
-		// HTTP ÀÀ´ä¼Óµµº¸´Ù ÀÚ¹ÙÀÇ ÄÄÆÄÀÏ ¼Óµµ°¡ ´õ ºü¸£±â ¶§¹®¿¡ ÀÓÀÇÀûÀ¸·Î 1ÃÊ ´ë±â
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½Ã°ï¿½ ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½
+		// HTTP ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {

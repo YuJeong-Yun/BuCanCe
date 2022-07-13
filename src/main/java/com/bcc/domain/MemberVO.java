@@ -1,6 +1,6 @@
 package com.bcc.domain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class MemberVO {
 	private String id;
@@ -8,8 +8,11 @@ public class MemberVO {
 	private String name;
 	private String email;
 	private String tel;
-	private Date regdate;
-	private String license;
+	private String zip;
+	private String address1;
+	private String address2;
+	private Timestamp regdate;
+	private int license;
 	private String profile;
 
 	public String getId() {
@@ -52,19 +55,43 @@ public class MemberVO {
 		this.tel = tel;
 	}
 
-	public Date getRegdate() {
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getAddress1() {
+		return address1;
+	}
+
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public Timestamp getRegdate() {
 		return regdate;
 	}
 
-	public void setRegdate(Date regdate) {
+	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
 
-	public String getLicense() {
+	public int getLicense() {
 		return license;
 	}
 
-	public void setLicense(String license) {
+	public void setLicense(int license) {
 		this.license = license;
 	}
 
@@ -78,8 +105,9 @@ public class MemberVO {
 
 	@Override
 	public String toString() {
-		return "MemberVO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", tel=" + tel
-				+ ", regdate=" + regdate + ", license=" + license + ", profile=" + profile + "]";
+		return "MemberVO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", tel=" + tel + ", zip="
+				+ zip + ", address1=" + address1 + ", address2=" + address2 + ", regdate=" + regdate + ", license="
+				+ license + ", profile=" + profile + "]";
 	}
 
 }

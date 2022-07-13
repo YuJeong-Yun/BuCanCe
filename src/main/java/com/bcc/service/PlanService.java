@@ -1,15 +1,13 @@
 package com.bcc.service;
 
-import java.sql.Date;
 import java.util.List;
 
+import com.bcc.domain.BoardVO;
 import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.HotelVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
-import com.bcc.domain.RestaurantVO;
-import com.bcc.domain.TourPlaceVO;
 
 public interface PlanService {
 
@@ -71,10 +69,10 @@ public interface PlanService {
 	public void updateLeader(PlanVO plan);
 
 	// 전체 관광지 정보 가져오기
-	public List<TourPlaceVO> getTourList();
+	public List<BoardVO> getTourList();
 
 	// 전체 맛집 정보 가져오기
-	public List<RestaurantVO> getRestaurantList();
+	public List<BoardVO> getRestaurantList();
 
 	// 숙소 리스트 가져오기
 	public List<HotelVO> getHotelList();
