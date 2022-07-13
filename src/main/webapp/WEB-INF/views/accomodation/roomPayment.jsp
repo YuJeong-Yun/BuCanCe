@@ -18,7 +18,6 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Sona | Template</title>
 <script>
-
 function selectAll(selectAll)  {
 	  const checkboxes 
 	       = document.getElementsByName('checkOne');
@@ -27,38 +26,31 @@ function selectAll(selectAll)  {
 	    checkbox.checked = selectAll.checked;
 	  })
 	}
-
 	
 	
-
 	
 </script>
 
 <!--유의사항 팝업창  ........................................................................................... -->
 <script src="http://wooshin.mireene.co.kr/g5/js/jquery-1.8.3.min.js"></script>
 <style type="text/css">
-
 /* a태그 (유의사항)  하이퍼링크 파랑색표시되는거 제거 */
 A:link {
 	text-decoration: none;
 	color: #646464;
 }
-
 A:visited {
 	text-decoration: none;
 	color: #646464;
 }
-
 A:active {
 	text-decoration: none;
 	color: #646464;
 }
-
 A:hover {
 	text-decoration: none;
 	color: #646464;
 }
-
 /* 유의사항 클릭시 효과  */
 #wrapper_popup div[id^='hd_pops_'] {
 	width: 100%;
@@ -72,7 +64,6 @@ A:hover {
 	overflow: auto;
 	display: none
 }
-
 #wrapper_popup div[id^='hd_pops_'] h2 {
 	display: block;
 	margin: 10px 0 0;
@@ -81,7 +72,6 @@ A:hover {
 	font-size: 1.1em;
 	font-weight: bold
 }
-
 #wrapper_popup div[id^='hd_pops_'] p {
 	display: block;
 	padding: 20px 0 0;
@@ -89,7 +79,6 @@ A:hover {
 	font-size: 1.0em;
 	line-height: 1.5em
 }
-
 #wrapper_popup div[id^='hd_pops_'] .hour-close {
 	display: inline-block;
 	padding: 8px 20px;
@@ -99,12 +88,10 @@ A:hover {
 	border-radius: 5px;
 	margin-top: 15px
 }
-
 #wrapper_popup div[id^='hd_pops_'] .hour-close:hover {
 	background: #54A94C;
 	color: #f8f8f8
 }
-
 #wrapper_popup div[id^='hd_pops_'] img.cancel {
 	position: absolute;
 	right: 10px;
@@ -113,13 +100,11 @@ A:hover {
 	filter: alpha(opacity = 50);
 	opacity: 0.7
 }
-
 #wrapper_popup div[id^='hd_pops_'] img.cancel:hover {
 	zoom: 1;
 	filter: alpha(opacity = 100);
 	opacity: 1.0
 }
-
 #wrapper_popup .c1 {
 	border: 1px #54A94C solid;
 	border-bottom: 10px solid #54A94C
@@ -146,25 +131,20 @@ A:hover {
 	margin-top: 20px;
 	border-top: 1px #ccc solid
 }
-
 #wrapper_popup ul {
 	list-style-type: disc;
 	margin: 0 0 20px;
 	line-height: 1.5em
 }
-
 #wrapper_popup .c-green {
 	color: green !important
 }
-
 #wrapper_popup .c-blue {
 	color: blue !important
 }
-
 #wrapper_popup .c-red {
 	color: red !important
 }
-
 .layer-shadow {
 	box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
 	-webkit-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
@@ -207,7 +187,6 @@ input[type=text] {
 	box-sizing: border-box;
 	transition: .3s;
 }
-
 input[type=text]:focus {
 	border-color: dodgerBlue;
 	box-shadow: 0 0 8px 0 dogerBlue;
@@ -431,7 +410,7 @@ input[type=text]:focus {
 									<tr>
 
 										<td class="r-o"><p></p>예약명 <input type="text" placeholder="서명란"
-											value="${username}" style="border-radius: 10px;"></td>
+											value="${user_name}" style="border-radius: 10px;"></td>
 										<td><br> <br></td>
 									</tr>
 									<tr>
@@ -663,10 +642,8 @@ input[type=text]:focus {
 				<script type="text/javascript"
 					src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 				<script type="text/javascript">
-
 		var IMP = window.IMP; // 생략 가능
 		IMP.init("imp49919207"); // 예: imp00000000
-
 		
 	    function requestPay() {
 			
@@ -687,15 +664,15 @@ input[type=text]:focus {
 			      IMP.request_pay({ // param
 			    	  pg: $("#payment-select option:selected").val(),
 // 			          pay_method: "card",
-			          merchant_uid: "${priId}",  //고유 id
+			          merchant_uid: "${accId}",  // 숙박 주문번호
 			          name: '${vo.room_title}',  //상품이름
-// 			          amount: '${vo.room_fcost}', //가격
+// 			          amount: "document.getElementsById('date-out')", //가격
 			          amount: 100, //가격
-			          buyer_email: "${useremail}",
-			          buyer_name: "${username}",
-			          buyer_tel: "${usertel}",
-			          buyer_addr: "${userAddress}",
-			          buyer_postcode: "${userPostCode}",
+			          buyer_email: "${email}",
+			          buyer_name: "${user_name}",
+			          buyer_tel: "${tel}",
+			          buyer_addr: "${address1}",
+			          buyer_postcode: "${zip}",
 			      }, function (rsp) { // callback
 			          if (rsp.success) {
 			        	// http://localhost:8088/accomodation/roomList
@@ -705,23 +682,24 @@ input[type=text]:focus {
 			 				type:"GET",
 			 				url :"${pageContext.request.contextPath}/accomodation/roomPayDB",
 			 				data : {
-			 					accId: "${priId}",  //고유 id
+			 					accId: "${accId}",  //고유 id
 			 					accKind: $("#payment-select option:selected").val(),
 			 					accName: '${vo.room_title}',  //상품이름
-// 						        amount: '${vo.room_fcost}', //가격
+// 			 					accAmount: "document.getElementsById('date-out')", //가격
 						        accAmount: 100, //가격
-						        userEmail: "${useremail}",
-						        userName: "${username}",
-						        userTel: "${usertel}",
-						        userAddr: "${userAddress}",
-						        userPostcode: "${userPostCode}",
-						        userId : "${userid}",
+						        email: "${email}",
+						        user_name: "${user_name}",
+						        tel: "${tel}",
+						        address1: "${address1}",
+						        zip: "${zip}",
+						        id : "${id}",
 						        sort : "ds",
 						        roomSort : "${vo.room_subTitle}",
 						        endTime : "${vo.endtime}",
 						        useTime : "${vo.usetime}",
 						        checkIn : "${vo.checkin}",
-						        checkOut : "${vo.checkout}"
+						        checkOut : "${vo.checkout}",
+						        license : "${license}"
 			 				},
 			 				contentType: "application/json",
 			 				success : function(data){
@@ -733,7 +711,7 @@ input[type=text]:focus {
 			 			}); //ajax끝
 			 			
 			              //결제내역페이지로이동
-			             location.href= "${pageContext.request.contextPath}/accomodation/roomReComplete?accId="+"${priId}";	
+			             location.href= "${pageContext.request.contextPath}/accomodation/roomReComplete?accId="+"${accId}";	
 			          } else {
 			         	
 			              // 결제 실패 시 로직, 뒤로가기
@@ -749,7 +727,6 @@ input[type=text]:focus {
 			
 	   
 	    }
-
 		
 		
 		
@@ -761,7 +738,6 @@ input[type=text]:focus {
 	    }
 		
 		
-
 				</script>
 				<!-- 아임포트 -->
 
@@ -801,7 +777,7 @@ input[type=text]:focus {
 
 							<div class="check-date">
 								<label for="date-out"><b>서명</b></label> <input type="text"
-									value=${username } id="date-out" style="font-weight: bold;">
+									value=${user_name } id="date-out" style="font-weight: bold;">
 								<i class=""></i>
 							</div>
 							<p></p>

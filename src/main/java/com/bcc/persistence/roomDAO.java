@@ -17,7 +17,10 @@ public interface roomDAO {
 
 	public void payStatus(String accId);
 
+	public String roomSearchRefund();
+	
 	public void inRoomRefund(roomRefundVO vo2);
+
 
 
 }

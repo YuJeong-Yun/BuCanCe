@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -27,10 +28,6 @@ function selectAll(selectAll)  {
 	    checkbox.checked = selectAll.checked;
 	  })
 	}
-
-	
-	
-
 	
 </script>
 
@@ -171,28 +168,6 @@ A:hover {
 	-moz-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
 }
 </style>
-<script type="text/javascript">
-<!--
-function dEI(elementID){
-	return document.getElementById(elementID);
-}
-function openLayer(IdName, tpos, lpos){
-	var pop = dEI(IdName);
-	pop.style.top = tpos + "px";
-	pop.style.left = lpos + "px";
-	pop.style.display = "block";
-}
-function closeLayer( IdName ){
-	var pop = dEI(IdName);
-	pop.style.display = "none";
-}
-//-->
-</script>
-<!--유의사항 팝업창  ........................................................................................... -->
-
-
-
-
 
 
 <style>
@@ -423,14 +398,12 @@ input[type=text]:focus {
 								<h3>${vo.room_title}</h3>
 								<div class="rdt-right"></div>
 							</div>
-
+							
 							<table>
 								<tbody>
-
 									<tr>
-
-										<td class="r-o"><p></p>예약명 <input type="text" placeholder="서명란"
-											value="${username}" style="border-radius: 10px;"></td>
+										<td class="r-o">예약명 <input type="text" placeholder="서명란"
+											value="${user_name}" style="border-radius: 10px;"></td>
 										<td><br> <br></td>
 									</tr>
 									<tr>
@@ -448,7 +421,7 @@ input[type=text]:focus {
 												<option value="html5_inicis" selected="selected">신용/체크카드</option>
 												<option value="payco">PAYCO</option>
 												<option value="danal_tpay">휴대폰결제</option>
-										</select></td>
+										</select>></td>
 									</tr>
 								</tbody>
 							</table>
@@ -686,15 +659,15 @@ function requestPay() {
 			      IMP.request_pay({ // param
 			    	  pg: $("#payment-select option:selected").val(),
 // 			          pay_method: "card",
-			          merchant_uid: "${priId}",  //고유 id
+			          merchant_uid: "${accId}",  //고유 id
 			          name: '${vo.room_title}',  //상품이름
 // 			          amount: '${vo.room_fcost}', //가격
 			          amount: 100, //가격
-			          buyer_email: "${useremail}",
-			          buyer_name: "${username}",
-			          buyer_tel: "${usertel}",
-			          buyer_addr: "${userAddress}",
-			          buyer_postcode: "${userPostCode}",
+			          buyer_email: "${email}",
+			          buyer_name: "${user_name}",
+			          buyer_tel: "${tel}",
+			          buyer_addr: "${address1}",
+			          buyer_postcode: "${zip}",
 			      }, function (rsp) { // callback
 			          if (rsp.success) {
 			        	// http://localhost:8088/accomodation/roomList
@@ -704,23 +677,24 @@ function requestPay() {
 			 				type:"GET",
 			 				url :"${pageContext.request.contextPath}/accomodation/roomPayDB",
 			 				data : {
-			 					accId: "${priId}",  //고유 id
+			 					accId: "${accId}",  //고유 id
 			 					accKind: $("#payment-select option:selected").val(),
 			 					accName: '${vo.room_title}',  //상품이름
 // 						        amount: '${vo.room_fcost}', //가격
 						        accAmount: 100, //가격
-						        userEmail: "${useremail}",
-						        userName: "${username}",
-						        userTel: "${usertel}",
-						        userAddr: "${userAddress}",
-						        userPostcode: "${userPostCode}",
-						        userId : "${userid}",
+						        email: "${email}",
+						        user_name: "${user_name}",
+						        tel: "${tel}",
+						        address1: "${address1}",
+						        zip: "${zip}",
+						        id : "${id}",
 						        sort : "acc",
 						        roomSort : "${vo.room_subTitle}",
 						        endTime : "${vo.accendtime}",
 						        useTime : "${vo.accusetime}",
 						        checkIn : "${vo.checkin}",
-						        checkOut : "${vo.checkout}"
+						        checkOut : "${vo.checkout}",
+						        license : "${license}"
 			 				},
 			 				contentType: "application/json",
 			 				success : function(data){
@@ -732,13 +706,11 @@ function requestPay() {
 			 			}); //ajax끝
 			 			
 			              //결제내역페이지로이동
-			             location.href= "${pageContext.request.contextPath}/accomodation/roomReComplete?accId="+"${priId}";	
+			             location.href= "${pageContext.request.contextPath}/accomodation/roomReComplete?accId="+"${accId}";	
 			          } else {
 			         	
 			              // 결제 실패 시 로직, 뒤로가기
 			              alert('결제실패');
-<%-- 			              alert(<%=request.getHeader("REFERER")%>); --%>
-			              
 			              //결제 실패시 뒤로가기
 			              location.href=document.getElementById("reload").value;
 			          }
@@ -767,11 +739,9 @@ function requestPay() {
 
 				<div class="col-lg-4">
 					<div class="room-booking"
-						style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; background-color: fafafa; border-radius: 10px;">
+						style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; background-color: #FAFAFA; border-radius: 10px;">
 						<p></p>
-						<h3>
-							<b>결제 정보</b>
-						</h3>
+						<h3><b>결제 정보</b></h3>
 						<form onSubmit="return false;">
 							<!-- 뒤로가기 할 주소 -->
 							<input type="hidden" value="<%=request.getHeader("REFERER")%>"
@@ -779,32 +749,45 @@ function requestPay() {
 							<!-- 뒤로가기 할 주소 -->
 							<div class="check-date">
 								<label for="date-out"><b>호텔명</b></label> <input type="text"
-									id="date-out" value="${vo.room_title}" readonly> <i
-									class=""></i>
+									id="date-out" value="${vo.room_title}" readonly
+									style="font-weight: bold;"> <i class=""></i>
 							</div>
 							<div class="check-date">
-								<label for="date-in"><b>마감시간</b></label> <input type="text"
-									id="date-in" readonly value="당일 ${vo.room_endtime} 시까지">
-								<i class="icon_calendar"></i>
-							</div>
-
-							<div class="check-date">
-								<label for="date-out"><b>이용시간</b></label> <input type="text"
-									id="date-out" readonly value="${vo.room_usetime} 시간"> <i
-									class="icon_calendar"></i>
+								<label for="date-in"><b>입실시간</b></label> <input type="text"
+									id="date-in" readonly
+									value="${vo.checkin } &nbsp;  ${vo.room_endtime} 시까지"
+									style="font-weight: bold;"> <i class="icon_calendar"></i>
 							</div>
 
 							<div class="check-date">
-								<label for="date-out"><b>서명</b></label> <input type="text"
-									value=${username } id="date-out"> <i class=""></i>
+								<label for="date-out">퇴실시간</label> <input type="text"
+									id="date-out" readonly
+									value="${vo.checkout} &nbsp; ${vo.room_usetime} 시까지"
+									style="font-weight: bold;"> <i class="icon_calendar"></i>
 							</div>
-							<p></p>
-							<hr>
+
 							<div class="check-date">
-								<label for="date-out"><strong>총 결제 금액 (VAT포함)</strong></label> <input
-									type="text" id="date-out" value="${vo.room_reserve2} 원"
-									readonly style="font-weight: bold; font-size: 20px"> <i
-									class=""></i>
+								<label for="date-out">서명:</label> <input type="text"
+									value=${user_name } id="date-out" style="font-weight: bold;">
+								<i class=""></i>
+							</div>
+							<div class="check-date">
+
+								<c:if test="${license==0}">
+									<label for="date-out"><strong>총 결제 금액 (VAT포함)</strong></label>
+									<input type="text" id="date-out" value="${vo.room_fcost} 원"
+										readonly style="font-weight: bold; font-size: 20px">
+								</c:if>
+
+								<c:if test="${license==1}">
+									<label for="date-out"><strong style="color: red">총
+											결제 금액 (멤버쉽 할인, VAT포함)</strong></label>
+									<input type="text" id="date-out"
+										value="<fmt:formatNumber type="number" maxFractionDigits="0"  value="${vo.room_fcost*0.9}" /> 원"
+										style="color: red; font-weight: bold; font-size: 20px"
+										readonly>
+								</c:if>
+								<i class=""></i>
 								<p></p>
 								<ul>
 									<li>해당 객실가는 세금, 봉사료가 포함된 금액입니다</li>

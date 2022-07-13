@@ -171,10 +171,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>숙소 가격 페이지</h2>
+                        <h2>예약목록 페이지</h2>
                         <div class="bt-option">
-                            <a href="./home.html">Home</a>
-                            <span>숙소 가격</span>
+                            <a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a>
+                            <span>Rooms</span>
                         </div>
                     </div>
                 </div>
@@ -182,75 +182,126 @@
         </div>
     </div>
     <!-- Breadcrumb Section End -->
-
-    <!-- Room Details Section Begin -->
-   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-   <script type="text/javascript">
-   
-   $(function(){
-	  
-	   $('#abs').attr({
-		 
-	   });
-	   
-	   $('.table_type_02').css({
-// 		   'color' : 'green',
-		   'text-align' : 'center',
-	   }).attr({
-		   'border' : '1',
-		  
-	   });
-	   
-// 	   $('.font_red').hide();
-	   $('.font_red').css({
-		   'color' : 'red',
-		   
-	   });
-	   $('.font_gr').css({
-		   'color' : 'green',
-		   
-	   });
-
-	   $('th').attr('width','25%');
-	   $('td').attr('height',90);
-	   $('span').append('<br>');
-	   
-   });
-   
-   
-   </script>
-       <!-- 내가 만드는공간  -->
-                       대실 요금 정보
-                        <div id="abs">
-                        
-                        ${roomPrice.get(0).roomToday}
-                        
-                        <br><br>
-                        대실 이용 시간
-                        
-                         ${roomPrice.get(2).roomTimeTo}
-                        
-                        <br><br>
-                       숙박 요금 정보
-                        ${roomPrice.get(1).roomOneTo}
-                        
-                        
-                        <br><br>
-                       숙박 이용시간
-                         ${roomPrice.get(3).roomTimeOne}
-                        
-                        
-                        
-                        </div>
-                        
-                                    <hr>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script><!-- jQuery CDN --->
+    <!-- Rooms Section Begin -->
+    <section class="rooms-section spad">
+        <div class="container">
+            <div class="row">
+            <c:set var="a" value="0"/>
+				<c:forEach items="${UserPayList}" begin="0" end="${UserPayList.size()}">
+                <div class="col-lg-4 col-md-6" >
+                    <div class="room-item">
+                        <img src="${pageContext.request.contextPath}/resources/img/room/room-1.jpg" alt="" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
+                        <div class="ri-text" style="border: solid #00abb9; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
+							<h5>주문번호 : ${UserPayList.get(a).accId}</h5>
+							<br>
+                            <h4>${UserPayList.get(a).accName}
                             
-                        <button style="margin:auto;">예약하기</button>
-                       <!-- 내가 만드는공간  -->   
-   
-   
-   
-    <!-- Room Details Section End -->
+                             <c:if test="${UserPayList.get(a).license==1}">
+                            	<br><a style="color :red">(할인)</a>
+                            </c:if>
+                            </h4>
+                            <h5>${UserPayList.get(a).roomSort}</h5>
+                            <table>
+                                <tbody >
+                                    <tr>
+                                        <td class="r-o">예약명:</td>
+                                        <td>${UserPayList.get(a).user_name}</td>
+                                    </tr>
+                                   
+                                        <c:if test="${UserPayList.get(a).sort=='ds'}">
+                                        <tr>
+                                        <td class="r-o">종류:</td>
+                                        <td>대실</td>
+                                        </tr>
+                                        </c:if>
+                                        
+                                        
+                                        <c:if test="${UserPayList.get(a).sort=='acc'}">
+                                        <tr>
+                                        <td class="r-o">종류:</td>
+                                       <td>숙박</td>
+                               		  </tr>
+                               		  
+                               		   </c:if>
+                                    
+                                    
+                                    
+                                    <tr>
+                                        <td class="r-o">기간 :</td>
+                                        <td>${UserPayList.get(a).checkIn} ~ ${UserPayList.get(a).checkOut}</td>
+                                    </tr>
+                                    
+                                    
+                                    <tr>
+                                    
+                                    <c:if test="${UserPayList.get(a).sort=='ds'}">
+                                        <td class="r-o">마감/이용시간 :</td>
+                                        <td>${UserPayList.get(a).endTime}시 / ${UserPayList.get(a).useTime}시간</td>
+                                 	</c:if>
+                                 	
+                                    <c:if test="${UserPayList.get(a).sort=='acc'}">
+                                        <td class="r-o">입실/퇴실시간 :</td>
+                                        <td>${UserPayList.get(a).useTime}시 / ${UserPayList.get(a).endTime}시</td>
+                                 	</c:if>
+                                 	
+                                    </tr>
+                                    
+                                    
+                                     <tr>
+                                        <td class="r-o">비용 :</td>
+                                        <td>${UserPayList.get(a).accAmount}원</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                    <td>결제시간: </td>
+                                    <td>${UserPayList.get(a).accDate}</td>
+                                </tr>
+                                    
+                                    
+                                </tbody>
+                            </table>
+                            
+                            <form action="${pageContext.request.contextPath}/accomodation/roomRefund" method="post">
+                            <input type="hidden" name="accId" value="${UserPayList.get(a).accId}">
+                            <input type="hidden" name="accName" value="${UserPayList.get(a).accName}">
+                            <input type="hidden" name="roomSort" value="${UserPayList.get(a).roomSort}">
+                           	<input type="hidden" name="user_name" value="${UserPayList.get(a).user_name}">
+                           	<input type="hidden" name="sort" value="${UserPayList.get(a).sort}">
+                           	<input type="hidden" name="checkIn" value="${UserPayList.get(a).checkIn}">
+                           	<input type="hidden" name="checkOut" value="${UserPayList.get(a).checkOut}">
+                           	<input type="hidden" name="useTime" value="${UserPayList.get(a).useTime}">
+                           	<input type="hidden" name="endTime" value="${UserPayList.get(a).endTime}">
+                           	<input type="hidden" name="accAmount" value="${UserPayList.get(a).accAmount}">
+                            <input type="hidden" name="accKind" value="${UserPayList.get(a).accKind}">
+							<input type="hidden" name="id" value="${UserPayList.get(a).id}">
+							<input type="hidden" name="license" value="${UserPayList.get(a).license}">
+							
+                            
+                            <c:if test="${UserPayList.get(a).status!='refund'}">
+                            <button type="submit" class="btn btn-block btn-success btn-lg">환불하기</button>
+                            </c:if>
+                              <c:if test="${UserPayList.get(a).status=='refund'}">
+                              <button type="button" class="btn btn-block btn-danger btn-lg">환불처리</button>
+                               </c:if>
+                       		</form>
+                       		
+                       </div>
+						</div>
+                        </div>
+
+    <c:set var="a" value="${a=a+1}"/>
+                        </c:forEach>
+                        <div class="col-lg-12">
+					<div class="room-pagination">
+                        
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </section>
+    <!-- Rooms Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">

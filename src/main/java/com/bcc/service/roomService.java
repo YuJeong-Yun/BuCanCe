@@ -45,6 +45,8 @@ public interface roomService {
 
 
 	public void inRoomRefund(roomRefundVO vo2);
+
+	public String roomRf();
 	
 	
 	

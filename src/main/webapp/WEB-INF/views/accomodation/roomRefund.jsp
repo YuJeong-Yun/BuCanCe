@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
+
     <meta charset="UTF-8">
     <meta name="description" content="Sona Template">
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sona | Template</title>
-
+	
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
@@ -140,7 +141,7 @@
                             <nav class="mainmenu">
                                 <ul>
                                     <li><a href="./index.html">Home</a></li>
-                                    <li class="active"><a href="./rooms.html">Rooms</a></li>
+                                    <li><a href="./rooms.html">Rooms</a></li>
                                     <li><a href="./about-us.html">About Us</a></li>
                                     <li><a href="./pages.html">Pages</a>
                                         <ul class="dropdown">
@@ -151,7 +152,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="./blog.html">News</a></li>
-                                    <li><a href="./contact.html">Contact</a></li>
+                                    <li class="active"><a href="./contact.html">Contact</a></li>
                                 </ul>
                             </nav>
                             <div class="nav-right search-switch">
@@ -165,92 +166,139 @@
     </header>
     <!-- Header End -->
 
-    <!-- Breadcrumb Section Begin -->
-    <div class="breadcrumb-section">
+    <!-- Contact Section Begin -->
+    <section class="contact-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <h2>숙소 가격 페이지</h2>
-                        <div class="bt-option">
-                            <a href="./home.html">Home</a>
-                            <span>숙소 가격</span>
-                        </div>
+                <div class="col-lg-4">
+                    <div class="contact-text">
+                        <h2>환불페이지</h2>
+                        <p>
+                        이용해주셔서 감사합니다!
+                        
+                        
+                        </p>
+                        
+                    <div class="room-item">
+                        <div class="ri-text" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td >숙소명:</td>
+                                    <td>${vo.accName}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td >종류: </td>
+                                    <c:if test="${vo.sort=='ds'}">
+                                    <td>대실</td>
+                                    </c:if>
+                                    <c:if test="${vo.sort=='acc'}">
+                                    <td>숙박</td>
+                                    </c:if>
+                                </tr>
+                                <tr>
+                                    <td >물품명: </td>
+                                    <td>${vo.roomSort }</td>
+                                </tr>
+                                <tr>
+                                    <td>예약기간: </td>
+                                    <td>${vo.checkIn} ~ <br>  ${vo.checkOut}</td>
+                                </tr>
+                              
+                              	<c:if test="${vo.sort=='ds'}">
+                                <tr>
+                                    <td>마감/이용시간:</td>
+                                    <td >${vo.endTime}시까지/${vo.useTime}시간</td>
+                                    
+                                </tr>
+                              	</c:if>
+                              
+                              <c:if test="${vo.sort=='acc'}">
+                                <tr>
+                                    <td>입실/퇴실시간:</td>
+                                    <td >${vo.useTime}시부터/${vo.endTime}시까지</td>
+                                    
+                                </tr>
+                              	</c:if>
+                              
+                                <tr>
+                                    <td>예약명: </td>
+                                    <td>${vo.user_name}</td>
+                                </tr>
+                                <tr>
+                                    <td>비용: </td>
+                                    <td>${vo.accAmount}원</td>
+                                </tr>
+                                
+                                
+                            </tbody>
+                        </table>
+                        <br><br>
+                         <button type="button" onclick="refundPay()" class="btn btn-block btn-success btn-lg">환불하기</button>
+                         <button type="button" onclick="cancelPay()" class="btn btn-block btn-danger btn-lg">취소하기</button>
+                    </div>
+                    </div>
                     </div>
                 </div>
-            </div>
+               </div>
         </div>
-    </div>
-    <!-- Breadcrumb Section End -->
+    </section>
+    <!-- Contact Section End -->
 
-    <!-- Room Details Section Begin -->
-   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-   <script type="text/javascript">
-   
-   $(function(){
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script>
+  function refundPay() {
 	  
-	   $('#abs').attr({
+alert('확인후 24시간 이내에 환불이 완료됩니다.');
+var result = confirm("정말로 환불 하시겠습니까?");
+	
+if(result){ //result == true 
 		 
-	   });
-	   
-	   $('.table_type_02').css({
-// 		   'color' : 'green',
-		   'text-align' : 'center',
-	   }).attr({
-		   'border' : '1',
 		  
-	   });
-	   
-// 	   $('.font_red').hide();
-	   $('.font_red').css({
-		   'color' : 'red',
-		   
-	   });
-	   $('.font_gr').css({
-		   'color' : 'green',
-		   
-	   });
+	$.ajax({
+	   	url : "${pageContext.request.contextPath}/accomodation/roomRfDB", // 예: http://www.myservice.com/payments/cancel
+	      type : "GET",
+	      contentType : "application/json",
+	      data : {
+	    	rfId : "${rfId}",
+	        accId : "${vo.accId}", // 예: ORD20180131-0000011
+	        accAmount : "${vo.accAmount}", // 환불금액
+	        accName : "${vo.accName}", //환불한 숙소 이름
+	        roomSort : "${vo.roomSort}", //환불한 상품 이름
+	        sort : "${vo.sort}", //대실 or 숙박
+	        accKind : "${vo.accKind}", //결제방법
+	        checkIn : "${vo.checkIn}", //체크인 
+	        checkOut : "${vo.checkOut}", //체크아웃
+	        id : "${vo.id}",
+	        license : "${vo.license}"
+	      },
+	      "dataType": "json"
+	      
+	    });
+		  
+		  alert('환불성공')
+		  location.href="${pageContext.request.contextPath}/accomodation/roomReList";
+	  }else{
+		  return;		  
+	  }
 
-	   $('th').attr('width','25%');
-	   $('td').attr('height',90);
-	   $('span').append('<br>');
-	   
-   });
    
-   
-   </script>
-       <!-- 내가 만드는공간  -->
-                       대실 요금 정보
-                        <div id="abs">
-                        
-                        ${roomPrice.get(0).roomToday}
-                        
-                        <br><br>
-                        대실 이용 시간
-                        
-                         ${roomPrice.get(2).roomTimeTo}
-                        
-                        <br><br>
-                       숙박 요금 정보
-                        ${roomPrice.get(1).roomOneTo}
-                        
-                        
-                        <br><br>
-                       숙박 이용시간
-                         ${roomPrice.get(3).roomTimeOne}
-                        
-                        
-                        
-                        </div>
-                        
-                                    <hr>
-                            
-                        <button style="margin:auto;">예약하기</button>
-                       <!-- 내가 만드는공간  -->   
-   
-   
-   
-    <!-- Room Details Section End -->
+  }
+  
+  
+  function cancelPay(){
+	  alert('환불취소');
+	  location.href="${pageContext.request.contextPath}/accomodation/roomReList";
+// 	  location.href=document.getElementById("reload").value;
+  }
+  
+	
+</script>     
+
+
+
+
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">
