@@ -91,6 +91,27 @@
 	</update>
 	
 
-
+	<select id="checkThumb" parameterType="hashMap" resultType="Integer">
+		select count(*) from thumb
+		where b_num=#{b_num} and m_id=#{m_id}
+	</select>
+	
+	<update id="addThumb">
+		update tourist_spot set thumbCnt = thumbCnt+1 where num=#{num}
+	</update>
+	
+	<update id="subThumb">
+		update tourist_spot set thumbCnt = thumbCnt-1 where num=#{num}
+	</update>
+	
+	<insert id="insertThumb" parameterType="hashMap">
+		insert into thumb(b_num,b_category,m_id)
+		values (#{b_num},#{b_category},#{m_id})
+	</insert>
+	
+	<delete id="deleteThumb" parameterType="hashMap">
+		delete from thumb
+		where b_num=#{b_num} and m_id=#{m_id}
+	</delete>
 
 </mapper>

@@ -85,4 +85,52 @@ public class BoardDAOImpl implements BoardDAO {
 		session.update(namespace+".updateCommentCnt",num);
 	}
 	
+	@Override
+	public Integer checkThumb(int b_num, String id) {
+		Map thuMap = new HashMap();
+		thuMap.put("m_id", id);
+		thuMap.put("b_num", b_num);
+		
+		return session.selectOne(namespace+".checkThumb",thuMap);
+	}
+
+
+	@Override
+	public void addThumb(int num) {
+		session.update(namespace+".addThumb", num);
+		
+	}
+
+
+	@Override
+	public void subThumb(int num) {
+		session.update(namespace+".subThumb",num);
+		
+	}
+
+
+	@Override
+	public void insertThumb(int b_num, int b_category, String m_id) {
+		Map thuMap = new HashMap();
+		thuMap.put("b_num", b_num);
+		thuMap.put("b_category", b_category);
+		thuMap.put("m_id", m_id);
+		
+		session.insert(namespace+".insertThumb", thuMap);
+		
+	}
+
+
+	@Override
+	public void deleteThumb(int b_num, String id) {
+		Map thuMap = new HashMap();
+		thuMap.put("m_id", id);
+		thuMap.put("b_num", b_num);
+		
+		session.delete(namespace+".deleteThumb",thuMap);
+	}
+	
+	
+
+
 }

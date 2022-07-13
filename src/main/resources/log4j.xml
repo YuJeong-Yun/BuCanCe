@@ -15,14 +15,6 @@
 		<level value="info" />
 	</logger>
 	
-	<logger name="com.bcc.persistence">
-		<level value="info" />
-	</logger>
-	
-	<logger name="com.bcc.service">
-		<level value="info" />
-	</logger>
-	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />

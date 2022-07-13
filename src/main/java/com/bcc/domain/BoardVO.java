@@ -1,7 +1,7 @@
 package com.bcc.domain;
 
-public class BoardVO {
 
+public class BoardVO {
 	private Integer num;
 	private String title;
 	private double lng;
@@ -23,10 +23,12 @@ public class BoardVO {
 	private int thumbCnt;
 	private int totalCnt;
 	private int commentCnt;
-
+	
+	
 	public BoardVO() {
 	}
-
+	
+	
 	public BoardVO(Integer num, String title, double lng, String convenient, String price, String tel, String img,
 			String trfc_info, String hldy_info, String contents, String subtitle, String usage_day, String addr,
 			String addr_full, String url, String thumbnail, double lat, int t_category, int thumbCnt, int totalCnt,
@@ -232,5 +234,4 @@ public class BoardVO {
 				+ ", t_category=" + t_category + ", thumbCnt=" + thumbCnt + ", totalCnt=" + totalCnt + ", commentCnt="
 				+ commentCnt + "]";
 	}
-
 }
