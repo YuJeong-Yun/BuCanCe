@@ -93,8 +93,8 @@
 	                </li>
                 <li><a href="./about-us.html">HOTEL</a>
 	                <ul class="dropdown">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
+                        <li><a href="${pageContext.request.contextPath }/accomodation/roomList">인기숙소</a></li>
+                        <li><a href="${pageContext.request.contextPath }/accomodation/roomReList">예약내역</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
 	                    </ul>
@@ -221,7 +221,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="./index.jsp">
+                            <a href="./index.html">
                                 <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="">
                             </a>
                         </div>
@@ -248,8 +248,8 @@
 						                </li>
 					                <li><a href="./about-us.html">HOTEL</a>
 						                <ul class="dropdown">
-					                        <li><a href="#">1</a></li>
-					                        <li><a href="#">2</a></li>
+					                        <li><a href="${pageContext.request.contextPath }/accomodation/roomList">인기숙소</a></li>
+					                        <li><a href="${pageContext.request.contextPath }/accomodation/roomReList">예약내역</a></li>
 					                        <li><a href="#">3</a></li>
 					                        <li><a href="#">4</a></li>
 						                    </ul>
