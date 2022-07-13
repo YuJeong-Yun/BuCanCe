@@ -110,9 +110,10 @@
 	box-shadow: 2px 2px 3px #bbb;
 	padding: 5px 10px;
 }
-.make-plan .tour-container .tour-map .menu .btn-container .btn--reset {
+.make-plan .tour-container .tour-map .menu .btn-container .btn--move {
 	background-color: #efefef;
-	margin-right: 5px;
+	margin-right: 7px;
+	color: #333;
 }
 .make-plan .tour-container .tour-map .menu .btn-container .btn--save {
 	background-color: #2679df;
@@ -352,16 +353,21 @@
 	right: 10px;
 }
 .make-plan .inner > .btn-container input {
-	background-color: #2679df;
 	color: #fff;
 	border: none;
 	height: 30px;
 	box-shadow: 2px 2px 3px #bbb;
 	font-size: 15px;
 }
-.make-plan .inner > .btn-container .del-path {
+.make-plan .inner > .btn-container .btn--reset {
+	background-color: #efefef;
+	margin-right: 7px;
+	color: #333;
+}
+.make-plan .inner > .btn-container .btn--del-path {
 	margin-right: 7px;
 	background-color: #4fc3f7;
 }
-.make-plan .inner > .btn-container .check-pah {
+.make-plan .inner > .btn-container .btn--check-path {
+	background-color: #2679df;
 }

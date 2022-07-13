@@ -225,7 +225,7 @@ function showSearhResult() {
     },
     success: function (data) {
       addSearchResultTour(data, category, resultContainer);
-      if(data.length == 0) {
+      if (data.length == 0) {
         resultContainer.innerHTML = '<div style="padding:20px; color: #fff;">검색 결과가 없습니다.</div>';
       }
     },
@@ -528,16 +528,56 @@ function resetSelectedTour() {
 }; //resetSelectedTour()
 
 
+
 // 선택한 관광지 저장
 function savePlan() {
+  const dateContainer = document.querySelectorAll('.date-plan-container li.plan .plan__date');
+  const planContainer = document.querySelectorAll('.date-plan-container li.plan .plan__contents > ul');
 
+  // 선택한 날짜 정보 담을 배열
+  let dates = [];
+  dateContainer.forEach(date => {
+    dates.push(date.innerText);
+  });
+
+  // 플랜 정보 문자열로 연결해서 DB저장
+  // 날짜랑 플랜은 :, 플랜끼리는 -, 날짜 끼리는 +로 구분
+  let plan = '';
+  for (let i = 0; i < dates.length; i++) {
+    // plan에 날짜 담기
+    plan += dates[i] + ':';
+    // plan에 날짜의 플랜정보 담음
+    let plans = planContainer[i].querySelectorAll('.num');
+    for (let j = 0; j < plans.length; j++) {
+      plan += plans[j].value + '-';
+    }
+    plan = plan.substring(0, plan.length - 1); // 마지막에 -는 제거
+    plan += '+';
+  }
+  plan = plan.substring(0, plan.length - 1); // 마지막에 +는 제거
+  // DB에 저장
+  
+  $.ajax({
+    url: path + '/planREST/planModify/' + grp_num,
+    type: 'post',
+    data: {
+      plan: plan
+    },
+    success: function (data) {
+      alert('플랜 저장을 완료했습니다.');
+    },
+    error: function (vo) {
+      console.log(vo);
+      alert('플랜 저장 오류!!');
+    }
+  }); //ajax
 }; //savePlan
 
 
 
 // 경로 확인 & 삭제
-const checkPathBtn = document.querySelector('.check-path');
-const delPathBtn = document.querySelector('.del-path');
+const checkPathBtn = document.querySelector('.btn-container .btn--check-path');
+const delPathBtn = document.querySelector('.btn-container .btn--del-path');
 
 checkPathBtn.addEventListener('click', showPath);
 delPathBtn.addEventListener('click', delPath);

@@ -149,6 +149,11 @@
 		where title like concat('%', #{keyword}, '%') and category =1
 		order by num asc
 	</select>
+	
+	<update id="modifyPlan">
+		update plan
+		set id
+	</update>
 
 </mapper>
   

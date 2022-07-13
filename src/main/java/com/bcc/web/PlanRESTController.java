@@ -12,7 +12,9 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bcc.domain.GrpAcceptVO;
@@ -183,7 +185,20 @@ public class PlanRESTController {
 	@RequestMapping(value = "/searchTour")
 	public List<Object> searchTourREST(String category, String keyword, HttpSession session) {
 		log.info("관광지 검색 : " + keyword);
-		  
+
 		return planService.getSearchList(category, keyword, (List<HotelVO>) session.getAttribute("hotellist"));
+	}
+
+	// 플랜 저장
+	@RequestMapping(value = "/planModify/{num}")
+	public void planModifyREST(@PathVariable("num") int num, String plan, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		
+		PlanVO vo = new PlanVO();
+		vo.setWriter(id);
+		vo.setTour_plan(plan);
+
+		log.info("플랜 저장 : " + vo);
+//		service.modifyPlan(vo);
 	}
 }

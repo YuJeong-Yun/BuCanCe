@@ -191,6 +191,11 @@ public class PlanServiceImpl implements PlanService {
 		return searchList;
 	}
 
+	@Override
+	public void modifyPlan(PlanVO vo) {
+		dao.modifyPlan(vo);
+	}
+
 
 
 

@@ -39,7 +39,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
               <input type="button" value="일정 선택" class="set-date">
             </div>
             <div class="btn-container">
-              <button class="btn--reset">선택 초기화</button>
+              <button class="btn--move">저장 경로 확인</button>
               <button class="btn--save">저장</button>
             </div>
           </div>
@@ -128,8 +128,9 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
       </ul>
 
       <div class="btn-container">
-      	<input type="button" value="경로 삭제" class="del-path">
-    	<input type="button" value="경로 확인" class="check-path">
+        <input type="button" value="선택 초기화" class="btn--reset">
+      	<input type="button" value="경로 삭제" class="btn--del-path">
+    	<input type="button" value="경로 확인" class="btn--check-path">
       </div>
     </div>
     <p id="result"></p>
@@ -142,6 +143,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
 <script type="text/javascript">
 	const path = '${pageContext.request.contextPath}';
+	const grp_num = '${num}';
 </script>
 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx4c685864b69a4b71966f8bda89ed2dd3"></script>
 <script src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js"></script>

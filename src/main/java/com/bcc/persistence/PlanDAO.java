@@ -79,5 +79,8 @@ public interface PlanDAO {
 	// 맛집 검색 결과
 	public List<BoardVO> getRestaurantSearch(String keyword);
 
+	// 여행 경로 수정
+	public void modifyPlan(PlanVO vo);
+
 
 }
