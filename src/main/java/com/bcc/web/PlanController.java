@@ -101,7 +101,7 @@ public class PlanController {
 	// 플랜 작성 - GET
 	// http://localhost:8088/plan/planWrite/1
 	@RequestMapping(value = "/planWrite/{num}", method = RequestMethod.GET)
-	public String planContentGET(@PathVariable("num") int num, Model model, HttpSession session) throws Exception {
+	public String planWriteGET(@PathVariable("num") int num, Model model, HttpSession session) throws Exception {
 
 		// 그룹 번호 저장
 		model.addAttribute("num", num);
@@ -116,7 +116,6 @@ public class PlanController {
 		model.addAttribute("restlist", service.getRestaurantList());
 
 		// 숙소 정보
-		// 크롤링에 시간이 오래 걸려서 세션에 저장하고 사용
 		if (session.getAttribute("hotellist") == null) {
 			// 숙소 정보 세션에 저장
 			session.setAttribute("hotellist", service.getHotelList());
@@ -124,5 +123,21 @@ public class PlanController {
 		}
 
 		return "/plan/planWrite";
+	}
+	
+	
+	// 플랜 확인 페이지
+	// http://localhost:8088/plan/planContent/1
+	@RequestMapping(value="/planContent/{num}", method=RequestMethod.GET)
+	public String planContentGET(@PathVariable("num") int num, HttpSession session) {
+		log.info("플랜 정보 확인 : "+num);
+		// 숙소 정보
+		if (session.getAttribute("hotellist") == null) {
+			// 숙소 정보 세션에 저장
+			session.setAttribute("hotellist", service.getHotelList());
+			log.info("숙소 정보 세션 저장 완료");
+		}
+		
+		return "/plan/planContent";
 	}
 }

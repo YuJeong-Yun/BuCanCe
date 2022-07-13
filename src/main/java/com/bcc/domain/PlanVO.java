@@ -12,6 +12,8 @@ public class PlanVO {
 	private String tour_plan;
 	private Timestamp date;
 	private String leader;
+	private String writer;
+	private Timestamp lastUpdate;
 
 	public int getNum() {
 		return num;
@@ -69,11 +71,27 @@ public class PlanVO {
 		this.leader = leader;
 	}
 
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+	public Timestamp getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(Timestamp lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
 	@Override
 	public String toString() {
 		return "PlanVO [num=" + num + ", grp_name=" + grp_name + ", tour_date_start=" + tour_date_start
 				+ ", tour_date_end=" + tour_date_end + ", tour_plan=" + tour_plan + ", date=" + date + ", leader="
-				+ leader + "]";
+				+ leader + ", writer=" + writer + ", lastUpdate=" + lastUpdate + "]";
 	}
 
 }

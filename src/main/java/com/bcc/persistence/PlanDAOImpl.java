@@ -140,4 +140,9 @@ public class PlanDAOImpl implements PlanDAO {
 		return sqlSession.selectList(NAMESPACE + ".getRestaurantSearch", keyword);
 	}
 
+	@Override
+	public void modifyPlan(PlanVO vo) {
+		sqlSession.update(NAMESPACE+".modifyPlan", vo);
+	}
+
 }

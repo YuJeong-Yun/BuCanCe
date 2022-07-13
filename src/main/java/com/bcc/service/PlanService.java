@@ -79,6 +79,9 @@ public interface PlanService {
 
 	// 카테고리별 검색 결과 가져오기
 	public List<Object> getSearchList(String category, String keyword, List<HotelVO> hotellist);
+
+	// 여행 경로 저장
+	public void modifyPlan(PlanVO vo);
 	
 
 }
