@@ -26,106 +26,88 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 @RestController
 @RequestMapping("/tour/*")
 public class TourRESTController {
-	
 
 	private static final Logger log = LoggerFactory.getLogger(TourRESTController.class);
-	
-	
+
 	// Naver API
-	
-	// ºí·Î±× °Ë»ö
+
+	// ë¸”ë¡œê·¸ ê²€ìƒ‰
 	@RequestMapping(value = "/getBlog", method = RequestMethod.GET)
-	public List getBlog(@RequestParam String title, String addr, String start) throws Exception{
-		String clientId = "UedGUQNgMnXQN3xAYkO2"; //¾ÖÇÃ¸®ÄÉÀÌ¼Ç Å¬¶óÀÌ¾ğÆ® ¾ÆÀÌµğ°ª"
-	    String clientSecret = "PKJuuL8BVC"; //¾ÖÇÃ¸®ÄÉÀÌ¼Ç Å¬¶óÀÌ¾ğÆ® ½ÃÅ©¸´°ª"
-
-
-	    String text = addr+" "+title;
-	    text = URLEncoder.encode(text, "UTF-8");
-
-
-	    String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text + "&start="+start;
-	    //String apiURL = "<https://openapi.naver.com/v1/search/blog.xml?query=>"+ text; // xml °á°ú
-
-
-	    Map<String, String> requestHeaders = new HashMap<String, String>();
-	    requestHeaders.put("X-Naver-Client-Id", clientId);
-	    requestHeaders.put("X-Naver-Client-Secret", clientSecret);
-	    
-	    JSONObject jsonObj = new JSONObject();
-	    JSONParser parser = new JSONParser();
-	    
-	    //log.info(get(apiURL,requestHeaders));
-	    
-	    jsonObj = (JSONObject) parser.parse(get(apiURL,requestHeaders));
-	    
-	    List list = new ArrayList();
-	    list.add(jsonObj.get("items"));
-	    list.add(jsonObj.get("total"));
+	public List getBlog(@RequestParam String title, String addr, String start) throws Exception {
 		
+		String clientId = "UedGUQNgMnXQN3xAYkO2"; // ì• í”Œë¦¬ì¼€ì´ì…˜ í´ë¼ì´ì–¸íŠ¸ ì•„ì´ë””ê°’"
+		String clientSecret = "PKJuuL8BVC"; // ì• í”Œë¦¬ì¼€ì´ì…˜ í´ë¼ì´ì–¸íŠ¸ ì‹œí¬ë¦¿ê°’"
+		
+		String text = addr + " " + title;
+		text = URLEncoder.encode(text, "UTF-8");
+		
+		String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text + "&start=" + start;
+		// String apiURL = "<https://openapi.naver.com/v1/search/blog.xml?query=>"+
+		
+		// text; // xml ê²°ê³¼
+		Map<String, String> requestHeaders = new HashMap<String, String>();
+		requestHeaders.put("X-Naver-Client-Id", clientId);
+		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+
+		JSONObject jsonObj = new JSONObject();
+		JSONParser parser = new JSONParser();
+
+		// log.info(get(apiURL,requestHeaders));
+
+		jsonObj = (JSONObject) parser.parse(get(apiURL, requestHeaders));
+
+		List list = new ArrayList();
+		list.add(jsonObj.get("items"));
+		list.add(jsonObj.get("total"));
+
 		return list;
 	}
-	
-	
-	private static String get(String apiUrl, Map<String, String> requestHeaders){
-	    HttpURLConnection con = connect(apiUrl);
-	    try {
-	        con.setRequestMethod("GET");
-	        for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
-	            con.setRequestProperty(header.getKey(), header.getValue());
-	        }
 
+	private static String get(String apiUrl, Map<String, String> requestHeaders) {
+		HttpURLConnection con = connect(apiUrl);
+		try {
+			con.setRequestMethod("GET");
+			for (Map.Entry<String, String> header : requestHeaders.entrySet()) {
+				con.setRequestProperty(header.getKey(), header.getValue());
+			}
 
-	        int responseCode = con.getResponseCode();
-	        if (responseCode == HttpURLConnection.HTTP_OK) { // Á¤»ó È£Ãâ
+			int responseCode = con.getResponseCode();
+			if (responseCode == HttpURLConnection.HTTP_OK) { // ì •ìƒ í˜¸ì¶œ
 	            return readBody(con.getInputStream());
-	        } else { // ¿¡·¯ ¹ß»ı
+	        } else { // ì—ëŸ¬ ë°œìƒ
 	            return readBody(con.getErrorStream());
 	        }
 	    } catch (IOException e) {
-	        throw new RuntimeException("API ¿äÃ»°ú ÀÀ´ä ½ÇÆĞ", e);
+	        throw new RuntimeException("API ìš”ì²­ê³¼ ì‘ë‹µ ì‹¤íŒ¨", e);
 	    } finally {
 	        con.disconnect();
 	    }
 	}
-
-
 	private static HttpURLConnection connect(String apiUrl){
 	    try {
 	        URL url = new URL(apiUrl);
 	        return (HttpURLConnection)url.openConnection();
 	    } catch (MalformedURLException e) {
-	        throw new RuntimeException("API URLÀÌ Àß¸øµÇ¾ú½À´Ï´Ù. : " + apiUrl, e);
+	        throw new RuntimeException("API URLì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤. : " + apiUrl, e);
 	    } catch (IOException e) {
-	        throw new RuntimeException("¿¬°áÀÌ ½ÇÆĞÇß½À´Ï´Ù. : " + apiUrl, e);
+	        throw new RuntimeException("ì—°ê²°ì´ ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. : " + apiUrl, e);
 	    }
 	}
-
-
 	private static String readBody(InputStream body){
 	    InputStreamReader streamReader = new InputStreamReader(body);
-
-
 	    try (BufferedReader lineReader = new BufferedReader(streamReader)) {
 	        StringBuilder responseBody = new StringBuilder();
-
-
 	        String line;
 	        while ((line = lineReader.readLine()) != null) {
 	            responseBody.append(line);
 	        }
-
-
 	        return responseBody.toString();
 	    } catch (IOException e) {
-	        throw new RuntimeException("API ÀÀ´äÀ» ÀĞ´Âµ¥ ½ÇÆĞÇß½À´Ï´Ù.", e);
+	        throw new RuntimeException("API ì‘ë‹µì„ ì½ëŠ”ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.", e);
 	    }
-
 	}
 	// Naver API 
 	
@@ -133,24 +115,24 @@ public class TourRESTController {
 	@RequestMapping(value = "getWeather", method = RequestMethod.GET)
 	public JSONArray getWeatherdata() throws Exception {
 		
-		// ³¯Â¥°ü·Ã º¯¼ö
-		Calendar todayCal = Calendar.getInstance(); // ¿À´Ã ³¯Â¥
-		Calendar yesCal = Calendar.getInstance(); // ¾îÁ¦ ³¯Â¥
-		String format = "yyyyMMdd"; //20220308 Çü½ÄÀ¸·Î ¹Ş¾Æ¿À±â
+		// ë‚ ì§œê´€ë ¨ ë³€ìˆ˜
+		Calendar todayCal = Calendar.getInstance(); // ì˜¤ëŠ˜ ë‚ ì§œ
+		Calendar yesCal = Calendar.getInstance(); // ì–´ì œ ë‚ ì§œ
+		String format = "yyyyMMdd"; //20220308 í˜•ì‹ìœ¼ë¡œ ë°›ì•„ì˜¤ê¸°
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
-		yesCal.add(yesCal.DATE, -1); //³¯Â¥¸¦ ÇÏ·ç »«´Ù.
-		String yesDate = sdf.format(yesCal.getTime()); // ¾îÁ¦ ³¯Â¥
-		String toDate = sdf.format(todayCal.getTime()); // ¿À´Ã ³¯Â¥
+		yesCal.add(yesCal.DATE, -1); //ë‚ ì§œë¥¼ í•˜ë£¨ ëº€ë‹¤.
+		String yesDate = sdf.format(yesCal.getTime()); // ì–´ì œ ë‚ ì§œ
+		String toDate = sdf.format(todayCal.getTime()); // ì˜¤ëŠ˜ ë‚ ì§œ
 		String baseDate = toDate;
 		
-		String type = "json";	//Á¶È¸ÇÏ°í ½ÍÀº type(json, xml Áß °í¸§)
+		String type = "json";	//ì¡°íšŒí•˜ê³  ì‹¶ì€ type(json, xml ì¤‘ ê³ ë¦„)
 		
-		// ½Ã°£°è»ê
+		// ì‹œê°„ê³„ì‚°
 		int[] hours_li = {2,5,8,11,14,17,20,23};
  	
-		// ½Ã°£°ü·Ã º¯¼ö
-		int hour = 0;	//°è»ê°á°úº¯¼ö
-		String baseTime = ""; //Á¶È¸ÇÏ°í ½ÍÀº ½Ã°£
+		// ì‹œê°„ê´€ë ¨ ë³€ìˆ˜
+		int hour = 0;	//ê³„ì‚°ê²°ê³¼ë³€ìˆ˜
+		String baseTime = ""; //ì¡°íšŒí•˜ê³  ì‹¶ì€ ì‹œê°„
 		LocalTime tnow = LocalTime.now();
  		int hourValue = tnow.getHour();
  		
@@ -158,37 +140,35 @@ public class TourRESTController {
 		 		int h = hours_li[i]-hourValue;
 		 		if(h==-2 || h==-1 || h==0){
 		 			hour = hours_li[i];
-		 		} else if(hourValue==0 || hourValue==1){// 00½Ã³ª 01½ÃÀÏ °æ¿ì Àü³¯ 23½Ã·Î ½Ã°£ Á¶È¸
+		 		} else if(hourValue==0 || hourValue==1){// 00ì‹œë‚˜ 01ì‹œì¼ ê²½ìš° ì „ë‚  23ì‹œë¡œ ì‹œê°„ ì¡°íšŒ
 		 			hour = hours_li[7];
 		 			baseDate = yesDate;
 		 		}
 		 	}
 	 	
-		 	if(hour<10){ // 10½Ã ÀÌÀü Ç¥±â ex.0900,0700
+		 	if(hour<10){ // 10ì‹œ ì´ì „ í‘œê¸° ex.0900,0700
 				baseTime = "0"+hour+"00";
 			} else { 
 				baseTime = hour+"00";
 			}
 		 	
-//			Âü°í¹®¼­¿¡ ÀÖ´Â urlÁÖ¼Ò
+//			ì°¸ê³ ë¬¸ì„œì— ìˆëŠ” urlì£¼ì†Œ
 		     String apiUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
-//		      È¨ÆäÀÌÁö¿¡¼­ ¹ŞÀº Å°
+//		      í™ˆí˜ì´ì§€ì—ì„œ ë°›ì€ í‚¤
 		     String serviceKey = "o5qKZe2j9oe7vmdAxcZZN0KcEuO3a1rxqX%2Bcb4UO4BNvR7DiZsBK47AMFktXFNWu9%2BaaPKhVoKGLksmQ2iVN3Q%3D%3D";
-
 		     StringBuilder urlBuilder = new StringBuilder(apiUrl);
 		     
 		     urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "="+serviceKey);
-		     urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode(baseDate, "UTF-8")); /* Á¶È¸ÇÏ°í½ÍÀº ³¯Â¥*/
-		     urlBuilder.append("&" + URLEncoder.encode("base_time","UTF-8") + "=" + URLEncoder.encode(baseTime, "UTF-8")); /* Á¶È¸ÇÏ°í½ÍÀº ½Ã°£ AM 02½ÃºÎÅÍ 3½Ã°£ ´ÜÀ§ */
-		     urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode(type, "UTF-8"));	/* Å¸ÀÔ */
-		     urlBuilder.append("&" + URLEncoder.encode("nx","UTF-8") + "=" + URLEncoder.encode("98", "UTF-8")); //°æµµ
-		     urlBuilder.append("&" + URLEncoder.encode("ny","UTF-8") + "=" + URLEncoder.encode("76", "UTF-8")); //À§µµ
+		     urlBuilder.append("&" + URLEncoder.encode("base_date","UTF-8") + "=" + URLEncoder.encode(baseDate, "UTF-8")); /* ì¡°íšŒí•˜ê³ ì‹¶ì€ ë‚ ì§œ*/
+		     urlBuilder.append("&" + URLEncoder.encode("base_time","UTF-8") + "=" + URLEncoder.encode(baseTime, "UTF-8")); /* ì¡°íšŒí•˜ê³ ì‹¶ì€ ì‹œê°„ AM 02ì‹œë¶€í„° 3ì‹œê°„ ë‹¨ìœ„ */
+		     urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode(type, "UTF-8"));	/* íƒ€ì… */
+		     urlBuilder.append("&" + URLEncoder.encode("nx","UTF-8") + "=" + URLEncoder.encode("98", "UTF-8")); //ê²½ë„
+		     urlBuilder.append("&" + URLEncoder.encode("ny","UTF-8") + "=" + URLEncoder.encode("76", "UTF-8")); //ìœ„ë„
 //		     log.info("baseDate : "+baseDate);
 //		     log.info("baseTime : "+baseTime);
 		     
 		     URL url = new URL(urlBuilder.toString());
 //		     log.info("url: "+url);
-
 		     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		     conn.setRequestMethod("GET");
 		     conn.setRequestProperty("Content-type", "application/json");
@@ -212,18 +192,17 @@ public class TourRESTController {
 //		     log.info(result);
 			 	
 		     
-		 	//=======ÀÌ ¹Ø¿¡ ºÎÅÍ´Â json¿¡¼­ µ¥ÀÌÅÍ ÆÄ½ÌÇØ ¿À´Â ºÎºĞÀÌ´Ù=====//
-		     // Json parser¸¦ ¸¸µé¾î ¸¸µé¾îÁø ¹®ÀÚ¿­ µ¥ÀÌÅÍ¸¦ °´Ã¼È­ 
+		 	//=======ì´ ë°‘ì— ë¶€í„°ëŠ” jsonì—ì„œ ë°ì´í„° íŒŒì‹±í•´ ì˜¤ëŠ” ë¶€ë¶„ì´ë‹¤=====//
+		     // Json parserë¥¼ ë§Œë“¤ì–´ ë§Œë“¤ì–´ì§„ ë¬¸ìì—´ ë°ì´í„°ë¥¼ ê°ì²´í™” 
      		JSONParser parser = new JSONParser(); 
      		JSONObject obj = (JSONObject) parser.parse(result); 
-     		// response Å°¸¦ °¡Áö°í µ¥ÀÌÅÍ¸¦ ÆÄ½Ì 
+     		// response í‚¤ë¥¼ ê°€ì§€ê³  ë°ì´í„°ë¥¼ íŒŒì‹± 
      		JSONObject parse_response = (JSONObject) obj.get("response"); 
-     		// response ·Î ºÎÅÍ body Ã£±â
+     		// response ë¡œ ë¶€í„° body ì°¾ê¸°
      		JSONObject parse_body = (JSONObject) parse_response.get("body"); 
-     		// body ·Î ºÎÅÍ items Ã£±â 
+     		// body ë¡œ ë¶€í„° items ì°¾ê¸° 
      		JSONObject parse_items = (JSONObject) parse_body.get("items");
-
-     		// items·Î ºÎÅÍ itemlist ¸¦ ¹Ş±â 
+     		// itemsë¡œ ë¶€í„° itemlist ë¥¼ ë°›ê¸° 
      		JSONArray parse_item = (JSONArray) parse_items.get("item");
      		//log.info(parse_item+"");
 		

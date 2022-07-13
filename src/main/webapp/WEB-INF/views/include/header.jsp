@@ -1,3 +1,5 @@
+<%@page import="com.bcc.persistence.MemberDAO"%>
+<%@page import="org.springframework.stereotype.Service"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,10 +12,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sona | Template</title>
-
+    
+    <style type="text/css">
+    @import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
+	@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css");
+    </style>
+    
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    
+    <!-- Google Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
@@ -26,6 +38,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
 </head>
 
 <body>
@@ -71,8 +85,8 @@
                 </li>
                 <li><a href="./rooms.html">TOUR</a>
 	                <ul class="dropdown">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
+                        <li><a href="#">TourList</a></li>
+                        <li><a href="#">Reviews</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
 	                    </ul>
@@ -102,6 +116,36 @@
             <a href="#"><i class="fa fa-tripadvisor"></i></a>
             <a href="#"><i class="fa fa-instagram"></i></a>
         </div>
+
+<!-- 로그인 / 회원가입 / 로그아웃 -->
+
+<%
+	String id = null;
+	if(session.getAttribute("id")!=null){
+	id = (String)session.getAttribute("id");
+}
+	if(id==null){
+%>
+	<div id="login">
+	<a href="/login">LOGIN</a> | 
+	<a href="/insert">JOIN</a>
+	</div>
+
+<%	
+	}else{ %>
+	
+
+	<div id="login">
+	<%=id%>님 로그인 중입니다!!
+	<a href="/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/logout">LOGOUT</a>
+	</div>
+<%		
+	}
+%>
+	
+<!-- 로그인 / 회원가입 / 로그아웃 -->	
+
         <ul class="top-widget">
             <li><i class="fa fa-phone"></i> (12) 345 67890</li>
             <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
@@ -128,6 +172,34 @@
                                 <a href="#"><i class="fa fa-tripadvisor"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
                             </div>
+                            
+<!-- 로그인 / 회원가입 / 로그아웃 -->
+
+<%
+
+	if(id==null){
+%>
+	<div id="login">
+	<a href="/login">LOGIN</a> | 
+	<a href="/insert">JOIN</a>
+	</div>
+
+<%	
+	}else{ %>
+	
+
+	<div id="login">
+	<%=id%>님 로그인 중입니다!!
+	<a href="/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/logout">LOGOUT</a>
+	</div>
+<%		
+	}
+%>
+	
+<!-- 로그인 / 회원가입 / 로그아웃 -->	
+
+
                             <a href="#" class="bk-btn">Booking Now</a>
                             <div class="language-option">
                                 <img src="${pageContext.request.contextPath}/resources/img/flag.jpg" alt="">
@@ -149,7 +221,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="./index.html">
+                            <a href="./index.jsp">
                                 <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="">
                             </a>
                         </div>

@@ -8,6 +8,8 @@
 	
 
     <!-- Room Details Section Begin -->
+    <!-- DB 정보 출력 -->
+
     <section class="room-details-section spad">
         <div class="container">
             <div class="row">
@@ -33,11 +35,21 @@
                                         <td class="r-o">상세주소</td>
                                         <td>${resVO.addr_full }</td>
                                     </tr>
+                                    <tr>
+                                        <td class="r-o">찜하기</td>
+                                        <td><button type="button" id="updateThumb">
+                            				<img id="like_img" src="${pageContext.request.contextPath}/resources/img/busan/empty_heart.png">
+                            				</button>
+                            			</td>
+                                    </tr>
                                 </tbody>
                      </table>
-                     <p class="f-para">${resVO.content }</p> 
+                     <p class="f-para">${resVO.contents }</p>
                      </div>  
                         <br>
+                 <!-- DB 정보 출력 -->  
+                        
+                 <!-- 리뷰 시작 -->       
      			 <div class="menu-item">
                         <div class="nav-menu" style="text-align: left !important; cursor: pointer;">
                             <nav class="mainmenu">
@@ -51,7 +63,7 @@
         		 </div>
                     </div>
                     
-                    
+                    <!-- 블로그 리뷰 출력 -->
                     <div class="review-add" id="review-add">
 	                    <div class="rd-reviews" id="blogList" style="display: none;">
 	               		</div>
@@ -61,11 +73,14 @@
 		                    	<span class="primary-btn">Load More</span>
 		                    </div>
 	               		</div>
+                    <!-- 블로그 리뷰 출력 -->
 	               		
 	               		
+                    <!-- 위치 지도 출력 -->
 	               		<div id="map" style="width:100%;height:550px; display: none;"></div>
+                    <!-- 위치 지도 출력 -->
 	               		
-	                    
+	                <!-- 리뷰 창 -->   
 	                    <div id="writeReview">
                         <h4>Add Review</h4>
                         <form action="#" class="ra-form">
@@ -93,8 +108,9 @@
                             </div>
                         </form>
                         </div>
-                        
+  	                <!-- 리뷰 창 -->      
                        </div>
+                        <!-- 리뷰 끝 -->
                     </div>
             </div>
     </section>

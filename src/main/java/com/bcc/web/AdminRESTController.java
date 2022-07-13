@@ -42,5 +42,11 @@ public class AdminRESTController {
 		return service.getTrendChart();
 	}
 	
+	@RequestMapping(value = "/monthlyChart", method = RequestMethod.GET)
+	public JSONObject monthlyChartGET() {
+		
+		return service.getMonthlyChart();
+	}
+	
 	
 }

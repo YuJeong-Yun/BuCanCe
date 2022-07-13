@@ -17,4 +17,6 @@ public interface AdminService {
 	
 	public JSONObject getTrendChart();
 	
+	public JSONObject getMonthlyChart();
+	
 }
