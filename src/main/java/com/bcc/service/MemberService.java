@@ -1,10 +1,8 @@
 package com.bcc.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.bcc.domain.MemberVO;
-
 
 public interface MemberService {
 
@@ -38,11 +36,5 @@ public interface MemberService {
     
     // license Down
 	public void liDown(String license);
-    
-	// 카카오 관련
-    // 토큰 받아오기
-	public String getAccessToken (String authorize_code);
-	
-	public HashMap<String, Object> getUserInfo(String access_Token);
     
 }

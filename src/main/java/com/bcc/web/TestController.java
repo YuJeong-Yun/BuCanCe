@@ -164,37 +164,6 @@ public class TestController {
 
 		}
 		
-		
-//		// 라이센스 수정
-//		@RequestMapping(value = "/license", method = RequestMethod.POST)
-//		public String licensePOST(String id) {
-//			// 수정할 정보를 저장(전달)
-//			log.info("수정 데이터 :"+id);
-//			
-//			// 서비스 - 정보 수정동작 호출
-//			int result = service.getLicense(id);
-//			
-//			if(result != 1) {
-//				return "redirect:/liUp";
-//			}
-//			
-//			return "redirect:/liDown";
-//		}	
-		
-		
-	    // GET으로 license 값 가져온다.
-	    // => POST로 license UP or DOWN 보낸다.
-//		@RequestMapping(value = "/liUp", method = RequestMethod.POST)
-//		public String liUpPOST(String id) {
-//			
-//			log.info(" liUpPOST() 호출 ");
-//			
-//			int liUp = service.liUp(id);
-//
-//			return "redirect:/update";
-//			
-//		}
-		
 		@RequestMapping(value = "/liUp", method = RequestMethod.POST)
 		public String liUpPOST(HttpSession session, String license) {
 			
@@ -257,30 +226,6 @@ public class TestController {
 			return "/member/favorite";
 		}
 
-
-		// 아이디 체크
-
-	    @Inject
-	    private KakaoService ks;
-	    
-		// http://localhost:8088/kakaoLogin
-	    
-	    @RequestMapping("/kakaoLogin")
-	    public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception{
-	    	log.info("#########" + code);
-	        String access_Token = ks.getAccessToken(code);
-	        
-	        HashMap<String, Object> userInfo = ks.getUserInfo(access_Token);
-	        
-	        log.info("###access_Token#### : " + access_Token);
-	        log.info("###userInfo#### : " + userInfo.get("email"));
-	        log.info("###nickname#### : " + userInfo.get("nickname"));
-	        log.info("###profile_image#### : " + userInfo.get("profile_image"));
-	        
-			return "/member/main";
-	        
-	    }
-	    
 	    // 아이디 체크
 
 	    @PostMapping("/idCheck")
@@ -293,31 +238,17 @@ public class TestController {
 	        
 	        return cnt;
 	    }
-	    
-//	    @PostMapping("/license")
-//	    @ResponseBody
-//	    public String license(@RequestParam("lisence") String id){
-//	   
-//	        int liCnt = service.liCheck(id);
-//	        log.info("확인 결과:"+liCnt);
-//	        
-//	        if(liCnt != 1) {
-//	        	return "redirect:/liUp";
-//	        }
-//	        return "redirect:/liDown";
-//	    }
-//		
-//	    // GET으로 license 값 가져온다.
-//	    // => POST로 license UP or DOWN 보낸다.
 
-	    
-		// http://localhost:8088/login	    
+	    @Inject
+	    private KakaoService ks;
+
+		// http://localhost:8088/login
 		// http://localhost:8088/kakao_login
 		@RequestMapping(value="/kakao_login", method=RequestMethod.GET)
 		public String kakao_login(@RequestParam(value = "code", required = false) String code) throws Exception {
 			System.out.println("#########" + code);
-			String access_Token = service.getAccessToken(code);
-			HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
+			String access_Token = ks.getAccessToken(code);
+			HashMap<String, Object> userInfo = ks.getUserInfo(access_Token);
 			System.out.println("###access_Token#### : " + access_Token);
 			System.out.println("###nickname#### : " + userInfo.get("nickname"));
 			System.out.println("###email#### : " + userInfo.get("email"));
