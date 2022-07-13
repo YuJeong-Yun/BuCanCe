@@ -46,7 +46,7 @@
 	
 	.weatherPic {
 		width: 150px;
-	
+		margin-right: 1em;
 	}
 	
 	.info {
@@ -251,14 +251,46 @@
 	  outline: 0;
 	}
 
+	#like_img {
+		width: 30px;
+		height: 30px;
+		margin: 0;
+	}
 
-
-
-
-
-
-
-
-
-
-
+	button {
+		all: unset;
+	}
+	
+	
+	#keywordInput {
+		width: 470px;
+		border: none;
+		border-bottom: 1px solid black;
+	}
+	
+	.b-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 10px 10px;
+    border-radius: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    width: 130;
+    height: 30;
+    margin-right: 0.5em;
+	    
+	}
+	
+	.b-btn-indigo {
+	    background-color: black;
+	    color: #fff;
+	}
+	
+	#searchMenu {
+		transform: translate(0,80px);
+	}
+	
+	

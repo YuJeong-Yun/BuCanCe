@@ -12,6 +12,20 @@
 	
 	$(function(){
 		
+		$('#updateThumb').click(function(){
+			if('${sessionScope.id}'){
+				$.ajax({
+					url : "/updateThumb?b_num=${resVO.num}&t_category=${resVO.t_category}",
+					type : "PUT",
+					success : function(){
+						checkThumb();
+					}
+				});
+			} else {
+				alert("로그인이 필요한 서비스입니다!");
+			}
+			
+		});
 		
 		$('#blogReview').click(function(){
 			
@@ -149,13 +163,19 @@
 	
 	function checkThumb(){
 		$.ajax({
-			url : "/board/checkThumb?b_num=${resVO.num}",
-			success : function(){
-				
+			url : "/checkThumb?b_num=${resVO.num}",
+			success : function(result){
+				if(result == 0){
+					$('img#like_img').attr('src','${pageContext.request.contextPath}/resources/img/busan/empty_heart.png');
+				} else {
+					$('img#like_img').attr('src','${pageContext.request.contextPath}/resources/img/busan/heart.png');
+				}
 			}
 		});
 	}
 	
 	checkThumb();
+	
+	
 		
 </script>    
