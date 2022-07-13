@@ -241,6 +241,39 @@
     <!-- Contact Section End -->
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+
+
+<!-- Node.js -->
+      <script>
+        var express = require('express');
+        var app = express();
+        var axios = require('axios');
+        /* ... 중략 ... */
+        app.post('/payments/cancel', async (req, res, next) => {
+          try {
+            /* 액세스 토큰(access token) 발급 */
+            const getToken = await axios({
+              url: "https://api.iamport.kr/users/getToken",
+              method: "post", // POST method
+              headers: { 
+                "Content-Type": "application/json" 
+              },
+              data: {
+                imp_key: "3817682477122484", // [아임포트 관리자] REST API키
+                imp_secret: "a060f160cc159fd09923a2ebfb7678adbac710c0105bedad238924b8d34a67409508e32f09830702" // [아임포트 관리자] REST API Secret
+              }
+            });
+            const { access_token } = getToken.data.response; // 엑세스 토큰
+            /* 결제정보 조회 */
+          } catch (error) {
+            res.status(400).send(error);
+          }
+        });
+      </script>
+
+
+
+
 <script>
   function refundPay() {
 	  
@@ -255,6 +288,8 @@ if(result){ //result == true
 	      type : "GET",
 	      contentType : "application/json",
 	      data : {
+	    	merchant_uid : "${accId}",
+	    	cancel_request_amount: 100,
 	    	rfId : "${rfId}",
 	        accId : "${vo.accId}", // 예: ORD20180131-0000011
 	        accAmount : "${vo.accAmount}", // 환불금액
@@ -288,7 +323,11 @@ if(result){ //result == true
   }
   
 	
+  
+  
 </script>     
+
+ 
 
 
 
