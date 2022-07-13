@@ -1,10 +1,9 @@
+
 package com.bcc.domain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class MemberVO {
-	// VO(Value Object) => DTO의 동작과 동일하게 사용
-	
 	private String id;
 	private String pw;
 	private String name;
@@ -13,26 +12,9 @@ public class MemberVO {
 	private String zip;
 	private String address1;
 	private String address2;
-	private Date regdate;
-	private String license;
-	
-	public MemberVO() {	} // 생성자를 오버로딩하면 기본생성자는 자동생성 X
-	// alt shift s + o
-
-	public MemberVO(String id, String pw, String name, String email, String tel, String zip, String address1,
-			String address2, Date regdate, String license) {
-		super();
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.email = email;
-		this.tel = tel;
-		this.zip = zip;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.regdate = regdate;
-		this.license = license;
-	}
+	private Timestamp regdate;
+	private int license;
+	private String profile;
 
 	public String getId() {
 		return id;
@@ -50,11 +32,11 @@ public class MemberVO {
 		this.pw = pw;
 	}
 
-	public String getname() {
+	public String getName() {
 		return name;
 	}
 
-	public void setname(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -98,29 +80,35 @@ public class MemberVO {
 		this.address2 = address2;
 	}
 
-	public Date getRegdate() {
+	public Timestamp getRegdate() {
 		return regdate;
 	}
 
-	public void setRegdate(Date regdate) {
+	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
 
-	public String getLicense() {
+	public int getLicense() {
 		return license;
 	}
 
-	public void setLicense(String license) {
+	public void setLicense(int license) {
 		this.license = license;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", tel=" + tel + ", zip="
 				+ zip + ", address1=" + address1 + ", address2=" + address2 + ", regdate=" + regdate + ", license="
-				+ license + "]";
+				+ license + ", profile=" + profile + "]";
 	}
-	
-	
-	
+
 }

@@ -1,0 +1,208 @@
+/* 그룹 초대받은 리스트 */
+.invitation-list {
+	border-bottom: 1px dotted #ccc;
+	margin-bottom: 50px;
+}
+.invitation-list > .col-lg-8 {
+	margin-bottom: 50px;
+}
+.invitation-list .acceptListCnt {
+	display: inline-block;
+    background-color: #ddd;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    border-radius: 50%;
+}
+.invitation-list .no-accept-list {
+	color: #777;
+}
+.invitation-list .grp-accept-list {
+	list-style: none;
+}
+.invitation-list .grp-accept-list li {
+	display: flex;
+	height: 40px;
+	line-height: 40px;
+	position: relative;
+	border-bottom: 1px dotted #eee;
+}
+.invitation-list .grp-accept-list li:last-child {
+	border-bottom: none;
+}
+.invitation-list .grp-accept-list li form {
+	display: flex;
+	position: absolute;
+	right: 0;
+}
+.invitation-list .grp-accept-list li form .btn {
+	width: 48px;
+	height: 33px;
+	margin: 0;
+	font-size: 11px;
+}
+.invitation-list .grp-accept-list li form .btn:hover {
+	transform: scale(1.05);
+}
+.invitation-list .grp-accept-list li form .btn.accept {
+	background-color: #dfa974;
+	margin-right: 5px;
+	color: #fff;
+}
+.invitation-list .grp-accept-list li form .btn.refusal {
+	color: #dfa974;
+}
+
+
+/* 플랜 추가 */
+.room-booking form button.add-plan {
+	border: 2px solid #0288d1;
+	color: #0288d1;
+	margin-bottom: 100px;
+}
+/* 플랜 목록 */
+.plan-list .plan-cnt {
+    width: 300px;
+    height: 40px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+    text-align: center;
+    line-height: 40px;
+    color: #333;
+    font-weight: 700;
+    font-size: 20px;
+}
+.plan-list .plan-container {
+	list-style: none;
+}
+.plan-list .plan-container > li {
+	position: relative;
+	box-shadow: 3px 3px 10px #aaa;
+	margin-bottom: 50px;
+}
+.plan-list .plan-container > li .plan {
+	background-color: #6e94a9;
+	display: block;
+	width: 100%;
+	height: 55px;
+	line-height: 55px;
+	color: #fff;
+	border: none;
+	font-size: 20px;
+	font-weight: 700;
+}
+.plan-list .plan-container > li .delete-plan {
+	border:1px solid #fdfdfd;
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	top:0;
+	right: -40px;
+	bottom:0;
+	margin: auto;
+	border-radius: 50%;
+	box-shadow: 2px 2px 2px #aaa;
+	text-align: center;
+	font-size: 20px;
+	line-height: 25px;
+	transition: .2s;
+	cursor:pointer;
+}
+.plan-list .plan-container > li .delete-plan:hover {
+	transform: scale(1.1);
+}
+/* 플랜 소속 멤버 */
+.member-container {
+	background-color: #e5eef5;
+	display: flex;
+	height: 100px;
+	align-items: center;
+	list-style: none;
+}
+.member-container > li {
+	width: calc(100%/11);
+	position: relative;
+	text-align: center;
+}
+.member-container > li .leader {
+	position: absolute;
+	top:-10px;
+	left:10px;
+	margin: auto;
+	font-size: 30px;
+	color: #dad285;
+	z-index: 1;
+}
+.member-container > li .member--profile img {
+	width: 40px;
+	height: 40px;
+	margin: 0;
+	border-radius: 50%;
+}
+.member-container > li .invite-cancle {
+	background-color: #bbb;
+	width: 60px;
+	height: 40px;
+	margin: auto;
+	border-radius: 10px;
+	line-height: 40px;
+	font-size: 12px;
+	color: #fff;
+}
+.member-container > li .invite-cancle:hover {
+	background-color: #999;
+}
+.member-container > li .member--id {
+	font-size: 13px;
+}
+.member-container > li .member--name {
+	font-size: 12px;
+}
+.member-container li.invite-member span.add-group {
+	font-size: 35px;
+	color: #777;
+	cursor: pointer;
+}
+.member-container li.invite-member span.add-group:hover {
+	transform: scale(1.05);
+}
+/* 회원 검색 모달 */
+.member-list {
+	list-style: none;	
+}
+.member-list > li  {
+	display: flex;
+	height: 38px;
+	position: relative;
+	padding-bottom: 5px;
+	margin: 20px 0;
+	border-bottom: 1px dotted #eee;
+}
+.member-list > li:last-child {
+	border-bottom: none;
+	margin-bottom: 0;
+}
+.member-list > li .member--id {
+	width: 90px;
+	padding-right: 10px;
+	text-align: center;
+}
+.member-list > li .member--name:before {
+	content: "|";
+	padding-right: 10px;
+	color: #ddd;
+}
+.member-list > li .member--name {
+}
+.member-list > li > button {
+	position: absolute;
+	right: 0;
+}
+	
+	
+
+/* 구독권 구매 이동 링크 */
+.buy-subscription:hover {
+	color: #01579b;
+}

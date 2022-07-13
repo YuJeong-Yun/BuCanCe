@@ -12,10 +12,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sona | Template</title>
-
+    
+    <style type="text/css">
+    @import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
+	@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css");
+    </style>
+    
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    
+    <!-- Google Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
@@ -28,6 +38,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
 </head>
 
 <body>
@@ -73,8 +85,8 @@
                 </li>
                 <li><a href="./rooms.html">TOUR</a>
 	                <ul class="dropdown">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
+                        <li><a href="#">TourList</a></li>
+                        <li><a href="#">Reviews</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
 	                    </ul>
