@@ -44,22 +44,20 @@ public class AdminServiceImpl implements AdminService{
 		return dao.getOnlyPeriod(date);
 	}
 
-	
-	
 	@Override
 	public JSONObject getTrendChart() {
 		
-		//0. ÃÖÁ¾ÀûÀ¸·Î ¸®ÅÏÇÒ json °´Ã¼
+		//0. ìµœì¢…ì ìœ¼ë¡œ ë¦¬í„´í•  json ê°ì²´
 		JSONObject data = new JSONObject();
-		//1. cols ¹è¿­¿¡ ³Ö±â
+		//1. cols ë°°ì—´ì— ë„£ê¸°
 		JSONObject col1 = new JSONObject();
 		JSONObject col2 = new JSONObject();
 		
 		JSONArray title = new JSONArray(); 
 		
-		col1.put("label", "¿ù");
+		col1.put("label", "ì¼ìž");
 		col1.put("type", "string");
-		col2.put("label", "¸ÅÃâ");
+		col2.put("label", "ë§¤ì¶œ");
 		col2.put("type", "number");
 		
 		title.add(col1);
@@ -68,14 +66,72 @@ public class AdminServiceImpl implements AdminService{
 		data.put("cols", title);
 		
 		
-		//2. rows ¹è¿­¿¡ ³Ö±â
+		//2. rows ë°°ì—´ì— ë„£ê¸°
 		JSONArray body = new JSONArray();	//rows
 		
 			
 			
-			for(int i=4;i>-1;i--) {
+			for(int i=6;i>-1;i--) {
 				Date date = new Date();
 				
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(date);
+				
+				cal.add(Calendar.DAY_OF_MONTH, -i);
+				
+				int day = cal.get(Calendar.DAY_OF_MONTH);
+				int month = cal.get(Calendar.MONTH)+1;
+				
+				JSONObject months = new JSONObject();
+				months.put("v", month+"ì›” "+day+"ì¼");
+				
+				JSONObject money = new JSONObject();
+				money.put("v", dao.getTrendChart(day+" "+month)*6000);	//ê¸ˆì•¡
+				
+				JSONArray row = new JSONArray();
+				row.add(months);
+				row.add(money);
+				
+				JSONObject cell = new JSONObject();
+				cell.put("c", row);
+				
+				body.add(cell); // ë ˆì½”ë“œ 1í–‰ ì¶”ê°€
+			}
+			
+		
+		data.put("rows", body);
+		
+		return data;
+	}
+
+	@Override
+	public JSONObject getMonthlyChart() {
+		
+		//0. ìµœì¢…ì ìœ¼ë¡œ ë¦¬í„´í•  json ê°ì²´
+		JSONObject data = new JSONObject();
+		//1. cols ë°°ì—´ì— ë„£ê¸°
+		JSONObject col1 = new JSONObject();
+		JSONObject col2 = new JSONObject();
+		
+		JSONArray title = new JSONArray(); 
+		
+		col1.put("label", "ì›”(month)");
+		col1.put("type", "string");
+		col2.put("label", "ë§¤ì¶œ");
+		col2.put("type", "number");
+		
+		title.add(col1);
+		title.add(col2);
+		
+		data.put("cols", title);
+		
+		
+		//2. rows ë°°ì—´ì— ë„£ê¸°
+		JSONArray body = new JSONArray();	//rows
+			
+			for(int i=4;i>-1;i--) {
+				
+				Date date = new Date();
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(date);
 				
@@ -88,7 +144,7 @@ public class AdminServiceImpl implements AdminService{
 				months.put("v", year+"."+month);
 				
 				JSONObject money = new JSONObject();
-				money.put("v", dao.getTrendChart(year+" "+month)*6000);	//±Ý¾×
+				money.put("v", dao.getMonthlyChart(year+" "+month)*6000);	//ê¸ˆì•¡
 				
 				JSONArray row = new JSONArray();
 				row.add(months);
@@ -97,7 +153,7 @@ public class AdminServiceImpl implements AdminService{
 				JSONObject cell = new JSONObject();
 				cell.put("c", row);
 				
-				body.add(cell); //·¹ÄÚµå 1Çà Ãß°¡
+				body.add(cell); // ë ˆì½”ë“œ 1í–‰ ì¶”ê°€
 			}
 			
 		

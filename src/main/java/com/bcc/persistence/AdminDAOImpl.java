@@ -27,8 +27,8 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public List<PremiumOrderVO> getPmInfo(String date) {
 		Map<String, String> dateMap = new HashMap<String, String>();
-		dateMap.put("year", date.split("-")[0]);
-		dateMap.put("month", date.split("-")[1]);
+		dateMap.put("start", date.split(" ")[0]);
+		dateMap.put("end", date.split(" ")[1]);
 		
 		return session.selectList(NAMESPACE+".pmInfo",dateMap);
 	}
@@ -36,8 +36,8 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public List<String> getPm(String date) {
 		Map<String, String> dateMap = new HashMap<String, String>();
-		dateMap.put("year", date.split("-")[0]);
-		dateMap.put("month", date.split("-")[1]);
+		dateMap.put("start", date.split(" ")[0]);
+		dateMap.put("end", date.split(" ")[1]);
 		
 		return session.selectList(NAMESPACE+".periodicPm",dateMap);
 	}
@@ -45,8 +45,8 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public List<PremiumOrderVO> getOnlyPeriod(String date) {
 		Map<String, String> dateMap = new HashMap<String, String>();
-		dateMap.put("year", date.split("-")[0]);
-		dateMap.put("month", date.split("-")[1]);
+		dateMap.put("start", date.split(" ")[0]);
+		dateMap.put("end", date.split(" ")[1]);
 		
 		return session.selectList(NAMESPACE+".onlyPeriodMems",dateMap);
 	}
@@ -54,10 +54,19 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public Integer getTrendChart(String date) {
 		Map<String, String> dateMap = new HashMap<String, String>();
-		dateMap.put("year", date.split(" ")[0]);
+		dateMap.put("day", date.split(" ")[0]);
 		dateMap.put("month", date.split(" ")[1]);
 		
 		return session.selectOne(NAMESPACE+".trendChart",dateMap);
+	}
+
+	@Override
+	public Integer getMonthlyChart(String date) {
+		Map<String, String> dateMap = new HashMap<String, String>();
+		dateMap.put("year", date.split(" ")[0]);
+		dateMap.put("month", date.split(" ")[1]);
+		
+		return session.selectOne(NAMESPACE+".monthlyChart",dateMap);
 	}
 	
 

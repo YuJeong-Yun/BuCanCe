@@ -13,7 +13,9 @@
                 <div class="col-lg-4">
                 </div>
             </div>
+            <!-- 지도 출력 -->
             <div class="map" id="map" style="height: 470px;">
+            <!-- 지도 출력 -->
             </div>
         </div>
     </section>

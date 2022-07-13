@@ -21,15 +21,9 @@ public class AdminController {
 	@Inject
 	private AdminService service;
 	
-	@RequestMapping(value = "/profitCal", method = RequestMethod.GET)
-	public String profitGET() {
-		
-		return "/admin/profitCal";
-	}
 	
 	@RequestMapping(value = "/pmMembers", method = RequestMethod.GET)
 	public String pmMemberGET(@RequestParam("date") String date, Model model) {
-		
 		model.addAttribute("periodic", service.getPm(date));
 		model.addAttribute("pmMems", service.getPmInfo(date));
 		

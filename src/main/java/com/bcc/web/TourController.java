@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bcc.service.TourService;
 
 @Controller
 public class TourController {
@@ -21,7 +22,7 @@ public class TourController {
 	private TourService service;
 	
 	// http://localhost:8088/tourMap
-	// �λ� ���� ���
+	// 부산 지도 출력
 	@RequestMapping(value = "/tourMap", method = RequestMethod.GET)
 	public String tourMapGET() {
 		
@@ -29,7 +30,7 @@ public class TourController {
 	}
 
 	
-	// ����, ������ ��� ������
+	// 맛집, 관광지 출력 페이지
 	@RequestMapping(value = "/tourInfo", method = RequestMethod.GET)
 	public String tourInfoGET(@RequestParam("addr") String addr, Model model) {
 		
@@ -47,13 +48,13 @@ public class TourController {
 	@RequestMapping(value = "/getRest", method = RequestMethod.GET)
 	public void apiTest() {
 		try {
-			service.getRestaurantInfo(service.restaurantLists("�λ�����"));
+			service.getRestaurantInfo(service.restaurantLists("부산진구"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	// ����, ������ �󼼳���
+	// 맛집, 관광지 상세내역
 	@RequestMapping(value = "/infoDetail", method = RequestMethod.GET)
 	public String infoDetailGET(@RequestParam("title") String title, Model model) {
 		model.addAttribute("resVO",service.getInfoDetail(title)); 

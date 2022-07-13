@@ -11,6 +11,7 @@
 			success : function(data){
 				$(data).each(function(i,obj){
 					if(obj.category == "TMP"){
+						// 현재 기온
 					 $('#weatherInfo').append("<strong class='current'>"+obj.fcstValue+"℃</strong>");		
 					}
 					

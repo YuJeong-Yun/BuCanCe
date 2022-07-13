@@ -7,15 +7,19 @@ import com.bcc.domain.PremiumOrderVO;
 
 public interface AdminDAO {
 	
+	// 프리미엄 회원 order 내역
 	public List<PremiumOrderVO> getPmInfo(String date);
 	
+	// order 내역 회원이 정기구독 회원인지 여부 판단
 	public List<String> getPm(String date);
 	
+	// 정기구독 회원만 보기
 	public List<PremiumOrderVO> getOnlyPeriod(String date);
 	
-	//public List<Map<String,Object>> getTrendChart(String today);
-	
-	// ���� �̿��� �� ����������
+	// 최근 일주일 이용자 수 가지고오기
 	public Integer getTrendChart(String date);
+	
+	// 월별 이용자 수 차트
+	public Integer getMonthlyChart(String date);
 	
 }
