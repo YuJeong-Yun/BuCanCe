@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.ri-text {
+		margin-bottom: 3em;
+		border-bottom: 1px solid #E5E5E5;
+		padding-bottom: 2em;
+	}
+	
+	.ri-text h2 {
+		margin-bottom: 14px;
+		color: #01579B;
+	}

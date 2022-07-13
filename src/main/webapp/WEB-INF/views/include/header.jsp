@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
 </head>
 
@@ -82,8 +83,8 @@
                 </li>
                 <li><a href="./rooms.html">TOUR</a>
 	                <ul class="dropdown">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
+                        <li><a href="#">TourList</a></li>
+                        <li><a href="#">Reviews</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
 	                    </ul>
