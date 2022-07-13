@@ -26,8 +26,8 @@
     
     <update id="update">
        update bcc_member 
-       set name=#{name},email=#{email}
-       where id=#{id} and pw=#{pw}    
+       set email=#{email}, pw=#{pw}, tel=#{tel}
+       where id=#{id}
     </update>
     
     <delete id="delete">
@@ -46,11 +46,8 @@
 	</select>
 	
 	<select id="idCheck" parameterType="String" resultType="int">
-		SELECT COUNT(id) FROM bcc_member WHERE id = #{id}
-    </select>
-
-	<select id="liCheck" parameterType="String" resultType="int">
-		SELECT license FROM bccdb.bcc_member
+		select count(id) 
+		from bcc_member 
 		where id = #{id}
     </select>
 
@@ -65,8 +62,6 @@
 		set license=0
 		where id=#{id} 
 	</update>
-
-	
   	
   </mapper>
   

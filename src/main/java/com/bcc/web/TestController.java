@@ -137,9 +137,9 @@ public class TestController {
 		
 		// 회원정보 수정
 		@RequestMapping(value = "/update", method = RequestMethod.POST)
-		public String updatePOST(MemberVO vo) {
-			// 수정할 정보를 저장(전달)
-			log.info("수정 데이터 :"+vo);
+		public String updatePOST(HttpSession session, MemberVO vo) {
+			
+			String id = (String)session.getAttribute("id");
 			
 			// 서비스 - 정보 수정동작 호출
 			int result = service.updateMember(vo);
@@ -148,24 +148,15 @@ public class TestController {
 				return "redirect:/update";
 			}
 			
-			// 페이지 이동(main)
+			// 페이지 이동
 			return "redirect:/mypage";
 		}
 
-	    // 라이센스 받아오기
-		@RequestMapping(value = "/license",method = RequestMethod.GET)
-		public void licenseGET(HttpSession session,Model model) {
 
-			log.info(" licenseGET() 호출 ");
-
-			String id = (String)session.getAttribute("id");
-
-			model.addAttribute(service.getMember(id));
-
-		}
-		
 		@RequestMapping(value = "/liUp", method = RequestMethod.POST)
 		public String liUpPOST(HttpSession session, String license) {
+			
+			log.info(" liUpPOST() 호출 ");
 			
 			String id = (String)session.getAttribute("id");
 			
@@ -173,7 +164,6 @@ public class TestController {
 			
 			return "redirect:/update";
 		}
-		
 		
 		// http://localhost:8088/login
 		@RequestMapping(value = "/liDown", method = RequestMethod.POST)
@@ -243,7 +233,7 @@ public class TestController {
 	    private KakaoService ks;
 
 		// http://localhost:8088/login
-		// http://localhost:8088/kakao_login
+		// http://localhost:8088/kakao_login 
 		@RequestMapping(value="/kakao_login", method=RequestMethod.GET)
 		public String kakao_login(@RequestParam(value = "code", required = false) String code) throws Exception {
 			System.out.println("#########" + code);

@@ -66,8 +66,8 @@ function liDown(){
     	    아이디 : <input type ="text" name="id" value="${memberVO.id }" readonly><br>
     	    비밀번호 : <input type ="password" name="pw" placeholder="비밀번호를 입력하시오."><br>
     	    이름 : <input type="text" name="name" value ="${memberVO.name }" readonly><br>
-    	    전화번호 : <input type="text" name="tel" value="${memberVO.tel}" readonly><br>
-    	    이메일 : <input type="text" name="email" value="${memberVO.email}" readonly><br>
+    	    전화번호 : <input type="text" name="tel" value="${memberVO.tel}" ><br>
+    	    이메일 : <input type="text" name="email" value="${memberVO.email}" ><br>
     	    구독 상태 : <input type = "hidden" id = "license" name ="license"><span id="checkLicense">&nbsp;</span>
     	    <input type = "button" id = "liOnBtn" onclick = "liUp()" value = "구독하기">
     	    <input type = "button" id = "liOffBtn" onclick = "liDown()" value = "구독취소"><br>
