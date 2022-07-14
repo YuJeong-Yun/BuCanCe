@@ -1,12 +1,28 @@
 @charset "UTF-8";
 
 .ri-text {
-		margin-bottom: 3em;
-		border-bottom: 1px solid #E5E5E5;
-		padding-bottom: 2em;
-	}
-	
-	.ri-text h2 {
-		margin-bottom: 14px;
-		color: #01579B;
+	margin-bottom: 3em;
+	border-bottom: 1px solid #E5E5E5;
+	padding-bottom: 2em;
+}
+
+.ri-text h2 {
+	margin-bottom: 14px;
+	color: #01579B;
+}
+
+select {
+   text-align-last: center;
+   text-align: center;
+   -ms-text-align-last: center;
+   -moz-text-align-last: center;
+}
+
+.category {
+	color: black;
+	text-align: center;
+}
+
+.search  {
+	text-align: center;
 	}
