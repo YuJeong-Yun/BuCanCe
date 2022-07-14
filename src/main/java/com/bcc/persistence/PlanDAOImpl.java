@@ -145,4 +145,19 @@ public class PlanDAOImpl implements PlanDAO {
 		sqlSession.update(NAMESPACE+".modifyPlan", vo);
 	}
 
+	@Override
+	public PlanVO getPlanInfo(int num) {
+		return sqlSession.selectOne(NAMESPACE+".getPlanInfo", num);
+	}
+
+	@Override
+	public BoardVO getTourInfo(int num) {
+		return sqlSession.selectOne(NAMESPACE+".getTourInfo", num);
+	}
+
+	@Override
+	public BoardVO getRestaurantInfo(int num) {
+		return sqlSession.selectOne(NAMESPACE+".getRestaurantInfo", num);
+	}
+
 }

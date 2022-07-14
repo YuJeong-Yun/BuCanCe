@@ -9,7 +9,7 @@
 	margin: 0 auto;
 }
 .hidden {
-	display: none;
+	display: none !important;
 }
 body {
   overflow-x: hidden;
@@ -151,6 +151,20 @@ body {
 .tour-plan ul.plan-container li.plan .plan__item ul.item__contents li:last-child .arrow {
   display: none;
 }
+.tour-plan ul.plan-container li.plan .plan__item ul.item__contents li .restaurant {
+    position: absolute;
+    left: 5px;
+    top: 70px;
+    z-index: 1;
+    color: #666;
+}
+.tour-plan ul.plan-container li.plan .plan__item ul.item__contents li .hotel {
+    position: absolute;
+    right: 5px;
+    top: 70px;
+    z-index: 1;
+    color: #507cdf;
+}
 /* 플랜 수정 버튼 */
 .tour-plan .update-btn {
   background-color: #fff;
@@ -176,7 +190,7 @@ body {
   width:100%;
   position:absolute;
   bottom:0;
-  left:-300px;
+  left:-500px;
   background: #015871;
   z-index: -1;
 }

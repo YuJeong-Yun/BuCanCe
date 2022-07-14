@@ -20,24 +20,13 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
   <section class="grp-member">
     <div class="inner">
       <ul class="member-container">
-        <li>
-          <div class="member--profile"><img src="img/who.jpg" /></div>
-          <div class="member--id">yun1</div>
-          <div class="member--name">유정</div>
-        </li>
-        <li>
-          <div class="member--profile"><img src="img/who.jpg" /></div>
-          <div class="member--id">yun1</div>
-          <div class="member--name">유정</div>
-        </li>
-        <li>
-          <div class="member--profile"><img src="img/who.jpg" /></div>
-          <div class="member--id">yun1</div>
-          <div class="member--name">유정</div>
-        </li>
-        <li class="add-member">
-          <span class="material-icons-outlined">add_circle</span>
-        </li>
+        <c:forEach var="member" items="${grpMemberList }">
+	        <li>
+	          <div class="member--profile"><img src="${pageContext.request.contextPath }/resources/img/who.jpg" /></div>
+	          <div class="member--id">${member.id }</div>
+	          <div class="member--name">${member.name }</div>
+	        </li>
+        </c:forEach>
       </ul>
     </div>
   </section>
@@ -50,78 +39,29 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
       <div class="title">부캉스</div>
 
       <ul class="plan-container">
-        <li class="plan">
-          <div class="plan__date">7/24</div>
-          <div class="plan__item">
-            <ul class="item__contents">
-              <li>
-                <img src="./img/who.jpg" alt="" class="item__img" />
-                <div class="item__title">타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원</div>
-                <span class="material-icons-outlined arrow">arrow_circle_right</span>
-              </li>
-              <li>
-                <img src="./img/who.jpg" alt="" class="item__img" />
-                <div class="item__title">타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원</div>
-                <span class="material-icons-outlined arrow">arrow_circle_right</span>
-              </li>
-              <li>
-                <img src="./img/who.jpg" alt="" class="item__img" />
-                <div class="item__title">타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원</div>
-                <span class="material-icons-outlined arrow">arrow_circle_right</span>
-              </li>
-              <li>
-                <img src="./img/who.jpg" alt="" class="item__img" />
-                <div class="item__title">타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원</div>
-                <span class="material-icons-outlined arrow">arrow_circle_right</span>
-              </li>
-              <li>
-                <img src="./img/who.jpg" alt="" class="item__img" />
-                <div class="item__title">타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원</div>
-                <span class="material-icons-outlined arrow">arrow_circle_right</span>
-              </li>
-              <li>
-                <img src="./img/who.jpg" alt="" class="item__img" />
-                <div class="item__title">타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원</div>
-                <span class="material-icons-outlined arrow">arrow_circle_right</span>
-              </li>
-              <li>
-                <img src="./img/who.jpg" alt="" class="item__img" />
-                <div class="item__title">타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원</div>
-                <span class="material-icons-outlined arrow">arrow_circle_right</span>
-              </li>
-              </li>
-              <li>
-                <img src="./img/who.jpg" alt="" class="item__img" />
-                <div class="item__title">타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원</div>
-                <span class="material-icons-outlined arrow">arrow_circle_right</span>
-              </li>
-              </li>
-              <li>
-                <img src="./img/who.jpg" alt="" class="item__img" />
-                <div class="item__title">타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원타이틀입니다. 수산원</div>
-                <span class="material-icons-outlined arrow">arrow_circle_right</span>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="plan">
-          <div class="plan__date">7/24</div>
-          <div class="plan__item">
-            <ul class="item__contents">
-              <li>
-                <img src="./img/who.jpg" alt="" class="item__img" />
-                <div class="item__title">관광지명</div>
-              </li>
-              <li>
-                <img src="./img/who.jpg" alt="" class="item__img" />
-                <div class="item__title">관광지명</div>
-              </li>
-            </ul>
-          </div>
-        </li>
+        <c:forEach var="datePlan"  items="${planList }">
+	        <li class="plan">
+	          <div class="plan__date">${datePlan[0] }</div>
+	          <div class="plan__item">
+	            <ul class="item__contents">
+	              <c:forEach var="planItem" items="${datePlan[1] }">
+		              <li>
+		                <img src="${planItem.thumbnail }" alt="" class="item__img" />
+		                <div class="item__title">${planItem.title }</div>
+		                <span class="material-icons-outlined arrow">arrow_circle_right</span>
+		                <c:if test="${planItem.t_category == 1 }">
+   							<div class="material-icons-outlined restaurant">restaurant</div>
+		                </c:if>
+		                <c:if test="${planItem.t_category == -1 }">
+   							<div class="material-icons-outlined hotel">bed</div>
+		                </c:if>
+		              </li>
+	              </c:forEach>
+	            </ul>
+	          </div>
+	        </li>
+        </c:forEach>
       </ul>
-
 
 
       <button class="update-btn">플랜 수정</button>
@@ -145,6 +85,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
 <script type="text/javascript">
 	const path = '${pageContext.request.contextPath}';
+	const grp_num = '${num}';
 </script>
-<script src="${pageContext.request.contextPath }/resources/css/plan/planContent.js?v=<%=System.currentTimeMillis() %>"></script>
+<script src="${pageContext.request.contextPath }/resources/js/plan/planContent.js?v=<%=System.currentTimeMillis() %>"></script>
 <jsp:include page="../include/footer.jsp"></jsp:include>

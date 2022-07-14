@@ -150,11 +150,29 @@
 		order by num asc
 	</select>
 	
+	<select id="getTourInfo" resultType="BoardVO">
+		select num, title, thumbnail, lng, lat
+		from tourist_spot
+		where num = #{num} and t_category = 0
+	</select>
+	
+	<select id="getRestaurantInfo" resultType="BoardVO">
+		select num, title, thumbnail, lng, lat
+		from tourist_spot
+		where num = #{num}  and t_category =1
+	</select>
+	
 	<update id="modifyPlan">
 		update plan
 		set writer = #{writer}, tour_plan = #{tour_plan}, tour_date_start = #{tour_date_start}, tour_date_end = #{tour_date_end}, lastUpdate = now()
 		where num = #{num}
 	</update>
+	
+	<select id="getPlanInfo" resultType="PlanVO">
+		select *
+		from plan
+		where num=#{num}
+	</select>
 
 </mapper>
   

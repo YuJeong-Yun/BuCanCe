@@ -1,6 +1,7 @@
 package com.bcc.web;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -129,14 +130,19 @@ public class PlanController {
 	// 플랜 확인 페이지
 	// http://localhost:8088/plan/planContent/1
 	@RequestMapping(value="/planContent/{num}", method=RequestMethod.GET)
-	public String planContentGET(@PathVariable("num") int num, HttpSession session) {
+	public String planContentGET(@PathVariable("num") int num, Model model,HttpSession session) {
 		log.info("플랜 정보 확인 : "+num);
-		// 숙소 정보
+		
+		// 숙소 정보 없으면 저장
 		if (session.getAttribute("hotellist") == null) {
 			// 숙소 정보 세션에 저장
 			session.setAttribute("hotellist", service.getHotelList());
 			log.info("숙소 정보 세션 저장 완료");
 		}
+		
+		// 그룹 멤버 전달
+		model.addAttribute("grpMemberList",service.getGrpMemberList(num));
+		model.addAttribute("planList", service.getPlanList(num, (List<HotelVO>) session.getAttribute("hotellist")));
 		
 		return "/plan/planContent";
 	}

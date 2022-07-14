@@ -86,7 +86,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
                 <ul>
                 	<c:forEach var="hotel" items="${hotellist }">
 	                  <li class="tour-item a${hotel.num }" onclick="selectTour(event)">
-	                    <img src="${hotel.img }" alt="" class="content__img" />
+	                    <img src="${hotel.thumbnail }" alt="" class="content__img" />
 	                    <div class="content__title">${hotel.title }</div>
 	                    <input type="hidden" value="${hotel.num }" class="num">
 	                    <input type="hidden" value="${hotel.lng }" class="lng">
@@ -146,5 +146,5 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	const grp_num = '${num}';
 </script>
 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx4c685864b69a4b71966f8bda89ed2dd3"></script>
-<script src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js?v=<%=System.currentTimeMillis() %>"></script>
 <jsp:include page="../include/footer.jsp"></jsp:include>
