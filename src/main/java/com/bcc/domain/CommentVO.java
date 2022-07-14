@@ -9,52 +9,73 @@ public class CommentVO {
 	private String content; // 댓글 내용
 	private String writer; // 댓글 작성자
 	private Date regdate; //댓글 작성 시간
+	private String visit;
 	
-	public CommentVO() {} 
-	public CommentVO(int num, int cno, String content, String writer, Date regdate) {
+	public CommentVO() {}
+	public CommentVO(Integer num, int cno, String content, String writer, Date regdate, String visit) {
 		super();
 		this.num = num;
 		this.cno = cno;
 		this.content = content;
 		this.writer = writer;
 		this.regdate = regdate;
+		this.visit = visit;
 	}
-	public int getnum() {
+
+
+	public Integer getNum() {
 		return num;
 	}
-	public void setnum(int num) {
+
+	public void setNum(Integer num) {
 		this.num = num;
 	}
+
 	public int getCno() {
 		return cno;
 	}
+
 	public void setCno(int cno) {
 		this.cno = cno;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public String getWriter() {
 		return writer;
 	}
+
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+
 	public Date getRegdate() {
 		return regdate;
 	}
+
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	
+
+	public String getVisit() {
+		return visit;
+	}
+
+	public void setVisit(String visit) {
+		this.visit = visit;
+	}
+
 	@Override
 	public String toString() {
 		return "CommentVO [num=" + num + ", cno=" + cno + ", content=" + content + ", writer=" + writer + ", regdate="
-				+ regdate + "]";
-	}	
+				+ regdate + ", visit=" + visit + "]";
+	} 
 	
-
+	
 }

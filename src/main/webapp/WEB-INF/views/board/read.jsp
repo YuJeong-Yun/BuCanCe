@@ -57,6 +57,7 @@
 					</table>
 					<p class="f-para">${vo.contents }</p>
 				</div>
+				<button type="button" class="list_btn">목록</button>
 				<div class="menu-item">
 					<div class="nav-menu"
 						style="text-align: left !important; cursor: pointer;">
@@ -77,7 +78,9 @@
 								<p>
 									${commentList.writer} /
 									<fmt:formatDate value="${commentList.regdate}"
-										pattern="yyyy-MM-dd" />/ <%-- ${commentList.visit } --%>
+										pattern="yyyy-MM-dd" />/ 
+										<c:if test="${commentList.visit==1}">방문했어요</c:if>
+										<c:if test="${commentList.visit==0}">방문 전입니다</c:if>
 
 								</p>
 								<p>${commentList.content}</p>
@@ -92,15 +95,15 @@
 						</ol>
 						<!-- 리뷰 -->
 						<h4>Add Review</h4>
-						<p class="rev-radi">
-							<input type="radio" id="rev_visit1" name="visit" value="1" > <label for="visit1"> 방문했어요</label>
-							</p>
-							<p>
-							<input type="radio" id="rev_visit2" name="visit" value="0" > <label for="visit2"> 방문 전입니다</label>
-						</p>
 					</div>
 					<div>
 						<form name="commentForm" method="post">
+						
+						<p class="rev-radi">
+							<input type="radio" id="rev_visit" name="visit" value="1" checked="checked" onchange="visited"> <label for="visit1"> 방문했어요</label><br>
+							<input type="radio" id="rev_visit" name="visit" value="0" onchange="visited"> <label for="visit2"> 방문 전입니다</label>
+						</p> 
+						
 							<input type="hidden" name="num" id="num" value="${vo.num}" /> 
 							<input type="hidden" id="page" name="page" value="${scri.page}">
 							<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
@@ -143,6 +146,7 @@
 
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+	
 <script type="text/javascript">
 	var searchTotal = '';
 	var startPage = 1;
@@ -157,10 +161,7 @@
 						function() {
 
 							document.getElementById('review').className = "";
-							/* document.getElementById('loca').className = ""; */
 							document.getElementById('blogReview').className = "active";
-							/* document.getElementById('writeReview').style.visibility = 'hidden';
-							document.getElementById('map').style.display = 'none';*/
 							document.getElementById('comment1').style.display = 'none';
 							document.getElementById('blogList').style.display = 'inline-block';
 							document.getElementsByClassName('load-more')[0].style.display = 'inline-block';
@@ -194,7 +195,6 @@
 						function() {
 
 							document.getElementById('blogReview').className = "";
-							/* document.getElementById('loca').className = ""; */
 							document.getElementById('review').className = "active";
 							document.getElementById('blogList').style.display = 'none';
 							document.getElementById('comment1').style.display = 'block';
@@ -248,7 +248,6 @@
 
 <script type="text/javascript">
 	//댓글 작성
-	$(function() {
 		$(".commentWriteBtn").on("click", function() {
 			var formObj = $("form[name='commentForm']");
 			var test = $(".rev-radi:checked").val();
@@ -278,7 +277,15 @@
 							+ "&searchType=${scri.searchType}"
 							+ "&keyword=${scri.keyword}" + "&cno="
 							+ $(this).attr("data-cno");
-				});
-
 	});// 댓글
+		// 목록 (수정중)
+		$(".list_btn").on("click", function(){
+
+		location.href = "/board/list?page=${scri.page}"
+		+"&perPageNum=${scri.perPageNum}"
+		+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
+		});
+
 </script>
+
+
