@@ -152,8 +152,8 @@
 	
 	<update id="modifyPlan">
 		update plan
-		set tour_date_start=#{tour_date_start}, tour_date_end=#{tour_date_end}, tour_plan=#{tour_plan}, writer=#{writer}, lastUpdate=now()
-		where num=#{num}
+		set writer = #{writer}, tour_plan = #{tour_plan}, tour_date_start = #{tour_date_start}, tour_date_end = #{tour_date_end}, lastUpdate = now()
+		where num = #{num}
 	</update>
 
 </mapper>
