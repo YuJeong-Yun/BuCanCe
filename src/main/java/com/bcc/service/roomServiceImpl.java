@@ -131,7 +131,9 @@ public class roomServiceImpl implements roomService{
 			String[] titleArr = rs.transTitle(room_title, rs.getPlace_name());
 			String title = rs.getPlace_name();
 			//제목검색
-		
+			log.info(titleArr+"");
+			log.info(title+"");
+			
 		//지역을 선택하지않은 경우
 		if(rs.getArea().equals("favorite")) {	
 			
@@ -719,12 +721,12 @@ public class roomServiceImpl implements roomService{
 		log.info("a = "+a);
 		
 		//a 문자부분
-		String b = "bccs";
+		String b = "bvsdvsvs";
 		int c=0;
 		
 		//데이터 값이 없을때는 bcc1이 들어가고 있을때는 bcc2,bcc3....로 들어감
 		if(a==null) {
-			b = "bccs";
+			b = "bvsdvsvs";
 			c= 0;
 		}else {
 			//a의 숫자부분
@@ -757,7 +759,7 @@ public class roomServiceImpl implements roomService{
 		String a = dao.roomSearchRefund();
 		
 		//a 문자부분
-		String b = "rfs";
+		String b = "rfsrvdvfv";
 				
 		//a 숫자부분
 		int c=0;
@@ -765,7 +767,7 @@ public class roomServiceImpl implements roomService{
 		
 		if(a==null) {
 			
-			b = "rfs";
+			b = "rfsrvdvfv";
 			c= 0;
 		}else {
 			c = Integer.parseInt(a.replaceAll("[^0-9]",""));
