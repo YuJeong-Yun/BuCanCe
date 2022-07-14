@@ -719,12 +719,12 @@ public class roomServiceImpl implements roomService{
 		log.info("a = "+a);
 		
 		//a 문자부분
-		String b = "bcd";
+		String b = "bccs";
 		int c=0;
 		
 		//데이터 값이 없을때는 bcc1이 들어가고 있을때는 bcc2,bcc3....로 들어감
 		if(a==null) {
-			b = "bcd";
+			b = "bccs";
 			c= 0;
 		}else {
 			//a의 숫자부분
@@ -757,7 +757,7 @@ public class roomServiceImpl implements roomService{
 		String a = dao.roomSearchRefund();
 		
 		//a 문자부분
-		String b = "rf";
+		String b = "rfs";
 				
 		//a 숫자부분
 		int c=0;
@@ -765,7 +765,7 @@ public class roomServiceImpl implements roomService{
 		
 		if(a==null) {
 			
-			b = "rf";
+			b = "rfs";
 			c= 0;
 		}else {
 			c = Integer.parseInt(a.replaceAll("[^0-9]",""));

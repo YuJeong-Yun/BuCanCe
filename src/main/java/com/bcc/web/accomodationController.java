@@ -193,8 +193,8 @@ public class accomodationController {
 		String accId = service.SearchPayId();
 		
 		//로그인정보들(임의의값)
-		session.setAttribute("id", "Hong");
-		session.setAttribute("user_name", "홍길동");
+		session.setAttribute("id", "admin");
+		session.setAttribute("user_name", "김영수");
 		session.setAttribute("email", "kld9223@naver.com");
 		session.setAttribute("accId", accId);
 		session.setAttribute("tel", "010-3795-9228");
@@ -335,7 +335,7 @@ public class accomodationController {
 		service.inRoomRefund(vo);
 		
 		
-		
+	
 		
 		log.info("vo : "+vo);
 				

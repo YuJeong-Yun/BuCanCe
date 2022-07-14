@@ -7,4 +7,5 @@
 	<typeAliases>
 		<package name="com.bcc.domain" />
 	</typeAliases>
+	
 </configuration>

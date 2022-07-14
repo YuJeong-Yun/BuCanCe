@@ -77,6 +77,7 @@
     <!-- Search model end -->
 
     <!-- Js Plugins -->
+
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.min.js"></script>
@@ -85,6 +86,9 @@
     <script src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/slideShow.js"></script>
+    <script src="http://wooshin.mireene.co.kr/g5/js/jquery-1.8.3.min.js"></script>
 </body>
 
 </html>
