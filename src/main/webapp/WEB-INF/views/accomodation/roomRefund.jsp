@@ -180,16 +180,16 @@
                         </p>
                         
                     <div class="room-item">
-                        <div class="ri-text" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
-                        <table>
+                        <div class="ri-text" style="border: solid #00abb9; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
+                        <table class="table"style=" box-shadow: 5px 5px 5px 5px gray; background-color: white; border-radius: 10px;" >
                             <tbody>
                                 <tr>
-                                    <td >숙소명:</td>
+                                    <td >호텔</td>
                                     <td>${vo.accName}</td>
                                 </tr>
                                 
                                 <tr>
-                                    <td >종류: </td>
+                                    <td >종류 </td>
                                     <c:if test="${vo.sort=='ds'}">
                                     <td>대실</td>
                                     </c:if>
@@ -198,43 +198,44 @@
                                     </c:if>
                                 </tr>
                                 <tr>
-                                    <td >물품명: </td>
+                                    <td >상품명 </td>
                                     <td>${vo.roomSort }</td>
                                 </tr>
                                 <tr>
-                                    <td>예약기간: </td>
+                                    <td>예약<br>기간 </td>
                                     <td>${vo.checkIn} ~ <br>  ${vo.checkOut}</td>
                                 </tr>
                               
                               	<c:if test="${vo.sort=='ds'}">
                                 <tr>
-                                    <td>마감/이용시간:</td>
-                                    <td >${vo.endTime}시까지/${vo.useTime}시간</td>
+                                    <td>이용시간 (마감)</td>
+                                    <td >${vo.useTime}시간 (${vo.endTime}시까지)</td>
                                     
                                 </tr>
                               	</c:if>
                               
                               <c:if test="${vo.sort=='acc'}">
                                 <tr>
-                                    <td>입실/퇴실시간:</td>
-                                    <td >${vo.useTime}시부터/${vo.endTime}시까지</td>
+                                    <td>이용시간 (입/퇴실)</td>
+                                    <td >${vo.useTime}시부터 (${vo.endTime}시까지)</td>
                                     
                                 </tr>
                               	</c:if>
                               
                                 <tr>
-                                    <td>예약명: </td>
+                                    <td>예약명 </td>
                                     <td>${vo.user_name}</td>
                                 </tr>
                                 <tr>
-                                    <td>비용: </td>
+                                    <td>비용 </td>
                                     <td>${vo.accAmount}원</td>
                                 </tr>
-                                
+                                <tr><td></td><td></td></tr>
+                              
                                 
                             </tbody>
                         </table>
-                        <br><br>
+                   
                          <button type="button" onclick="refundPay()" class="btn btn-block btn-success btn-lg">환불하기</button>
                          <button type="button" onclick="cancelPay()" class="btn btn-block btn-danger btn-lg">취소하기</button>
                     </div>

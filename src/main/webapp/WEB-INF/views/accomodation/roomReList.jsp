@@ -194,6 +194,7 @@
                         <img src="${pageContext.request.contextPath}/resources/img/room/room-1.jpg" alt="" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
                         <div class="ri-text" style="border: solid #00abb9; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
 							<h5>주문번호 : ${UserPayList.get(a).accId}</h5>
+							<hr>
 							<br>
                             <h4>${UserPayList.get(a).accName}
                             
@@ -201,17 +202,17 @@
                             	<br><a style="color :red">(할인)</a>
                             </c:if>
                             </h4>
-                            <h5>${UserPayList.get(a).roomSort}</h5>
-                            <table>
+                            <h5>${UserPayList.get(a).roomSort}</h5><br>
+                            <table class="table"style=" box-shadow: 5px 5px 5px 5px gray; background-color: white; border-radius: 10px;" >
                                 <tbody >
                                     <tr>
-                                        <td class="r-o">예약명:</td>
+                                        <td class="r-o">예약명</td>
                                         <td>${UserPayList.get(a).user_name}</td>
                                     </tr>
                                    
                                         <c:if test="${UserPayList.get(a).sort=='ds'}">
                                         <tr>
-                                        <td class="r-o">종류:</td>
+                                        <td class="r-o">종류</td>
                                         <td>대실</td>
                                         </tr>
                                         </c:if>
@@ -219,16 +220,15 @@
                                         
                                         <c:if test="${UserPayList.get(a).sort=='acc'}">
                                         <tr>
-                                        <td class="r-o">종류:</td>
+                                        <td class="r-o">종류</td>
                                        <td>숙박</td>
                                		  </tr>
                                		  
                                		   </c:if>
                                     
                                     
-                                    
                                     <tr>
-                                        <td class="r-o">기간 :</td>
+                                        <td class="r-o">기간 </td>
                                         <td>${UserPayList.get(a).checkIn} ~ ${UserPayList.get(a).checkOut}</td>
                                     </tr>
                                     
@@ -236,25 +236,25 @@
                                     <tr>
                                     
                                     <c:if test="${UserPayList.get(a).sort=='ds'}">
-                                        <td class="r-o">마감/이용시간 :</td>
-                                        <td>${UserPayList.get(a).endTime}시 / ${UserPayList.get(a).useTime}시간</td>
+                                        <td class="r-o">이용시간<br>퇴실시간 </td>
+                                        <td>${UserPayList.get(a).useTime}시간/${UserPayList.get(a).endTime}시 </td>
                                  	</c:if>
                                  	
                                     <c:if test="${UserPayList.get(a).sort=='acc'}">
-                                        <td class="r-o">입실/퇴실시간 :</td>
-                                        <td>${UserPayList.get(a).useTime}시 / ${UserPayList.get(a).endTime}시</td>
+                                        <td class="r-o">이용시간<br>퇴실시간</td>
+                                        <td>${UserPayList.get(a).useTime}시간/${UserPayList.get(a).endTime}시</td>
                                  	</c:if>
                                  	
                                     </tr>
                                     
                                     
                                      <tr>
-                                        <td class="r-o">비용 :</td>
+                                        <td class="r-o">비용 </td>
                                         <td>${UserPayList.get(a).accAmount}원</td>
                                     </tr>
                                     
                                     <tr>
-                                    <td>결제시간: </td>
+                                    <td>결제시간 </td>
                                     <td>${UserPayList.get(a).accDate}</td>
                                 </tr>
                                     

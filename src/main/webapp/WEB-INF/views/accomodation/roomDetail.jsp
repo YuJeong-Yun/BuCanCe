@@ -246,10 +246,20 @@
 
 			<div class="col-lg-8">
 			<div class="room-details-item">
+  <div class="rd-text">
 
-
-
-
+ <div class="rd-title" >
+                              <br>  <h3><b> ${roomdetail.get(0).room_title}</b></h3>
+                                <div class="rdt-right">
+									<div class="rating">${roomdetail.get(0).room_star} 
+										<i class="icon_star"></i> <i class="icon_star"></i> <i
+											class="icon_star"></i> <i class="icon_star"></i> <i
+											class="icon_star-half_alt"></i>
+									&nbsp; <h5> 별점 :${roomdetail.get(0).room_star_num} 점</h5><br></div>
+									
+								</div>
+							</div>
+</div>
 
 
 
@@ -279,17 +289,7 @@
 					
 <!-- 숙소에 대한 상세 정보를 보여주는 영역 시작 -->
                      <div class="rd-text">
-                            <div class="rd-title">
-                                <h3> ${roomdetail.get(0).room_title}</h3>
-                                <div class="rdt-right">
-									<div class="rating">${roomdetail.get(0).room_star} 
-										<i class="icon_star"></i> <i class="icon_star"></i> <i
-											class="icon_star"></i> <i class="icon_star"></i> <i
-											class="icon_star-half_alt"></i>
-									&nbsp; <h5> 별점 :${roomdetail.get(0).room_star_num} 점</h5></div>
-									
-								</div>
-							</div>
+                           
 							<table>
 								<tbody>
 									
@@ -374,6 +374,7 @@
 
 
 <!-- 달력을 통해 날짜 정보를 입력하여 예약페이지로 이동시킬수있음 -->
+<br>
                 <div class="col-lg-4">
                       <div class="room-booking" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; background-color: #FAFAFA; border-radius:10px;">
                     <p></p>  <h3>  <a href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}" id="reserveId"><b>요금정보</b></a></h3>
