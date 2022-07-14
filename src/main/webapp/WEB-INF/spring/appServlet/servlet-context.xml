@@ -26,6 +26,5 @@
 		<beans:property name="prefix" value="/WEB-INF/views/order/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-
 	<context:component-scan base-package="com.bcc.web" />
 </beans:beans>

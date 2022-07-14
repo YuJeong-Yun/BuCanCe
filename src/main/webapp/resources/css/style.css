@@ -24,6 +24,7 @@
 8.  Blog Section
 9.  Contact
 10.  Footer Style
+11. Member Style(추가)
 
 -------------------------------------------------------------------*/
 
@@ -265,7 +266,7 @@ ul, ol {
   Header
 -----------------------*/
 
-.header-section.header-normal .menu-item {
+.header-section .menu-item {
 	-webkit-box-shadow: 0px 12px 15px rgba(36, 11, 12, 0.05);
 	box-shadow: 0px 12px 15px rgba(36, 11, 12, 0.05);
 }
@@ -983,7 +984,7 @@ ul, ol {
 
 .breadcrumb-section {
 	padding-top: 70px;
-	padding-bottom: 80px;
+	padding-bottom: 30px;
 }
 .breadcrumb-text {
 	text-align: center;
@@ -1247,6 +1248,10 @@ ul, ol {
 .room-details-item .rd-text .rd-title .rdt-right {
 	float: right;
 	text-align: right;
+}
+.room-details-item .rd-text .rd-title .rdt-center{
+	float: none;
+	text-align: center;
 }
 .room-details-item .rd-text .rd-title .rdt-right .rating {
 	display: inline-block;
@@ -1519,6 +1524,7 @@ ul, ol {
 	height: 46px;
 	margin-top: 30px;
 }
+
 /*---------------------
   Blog Section
 -----------------------*/
@@ -2334,4 +2340,46 @@ ul, ol {
 	.blog-details-text .comment-option .single-comment-item .sc-text a {
 		margin-bottom: 10px;
 	}
+	
+/*-------------------------------- Member Styles(추가) --------------------------------*/
+
+.inner {
+    position: relative;
+    margin: 0 auto;
+    width: 1300px;
+    height: 100%;
+}
+.innerwrap {
+    max-width: 1300px;
+    width: 100%;
+    margin: 50px auto;
+    overflow: hidden;
+    word-wrap: break-word;
+}	
+
+/* sns login */
+
+.login_sns {
+	padding:30px 0;
+	}
+.login_sns li {
+	margin: 7px 0; /* height: 60px; *//* background-color: black; */}    
+.login_sns li a {
+	display:block;
+	width:280px;
+	margin:0 auto;
+	padding:20px;
+	font-size:20px;
+	font-weight:500;
+	border-radius:7px;
+	position:relative; 
+	}
+.login_sns li a.kakao {
+	background-color:#ffdf01; color:#47292b; padding-left:100px;
+	}
+.login_sns li a.naver {
+	background-color: #059830;color:#fff;padding-left:100px;
+	}
+
+
 }
