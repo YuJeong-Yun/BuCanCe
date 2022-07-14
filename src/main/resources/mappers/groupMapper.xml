@@ -151,13 +151,13 @@
 	</select>
 	
 	<select id="getTourInfo" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat
+		select num, title, thumbnail, lng, lat, t_category
 		from tourist_spot
 		where num = #{num} and t_category = 0
 	</select>
 	
 	<select id="getRestaurantInfo" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat
+		select num, title, thumbnail, lng, lat, t_category
 		from tourist_spot
 		where num = #{num}  and t_category =1
 	</select>

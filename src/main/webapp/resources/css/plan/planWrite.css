@@ -300,6 +300,7 @@
     top: 70px;
     z-index: 1;
     color: #666;
+    pointer-events: none;
 }
 .make-plan .date-plan-container .plan .plan__contents > ul > li .hotel {
     position: absolute;
@@ -307,6 +308,7 @@
     top: 70px;
     z-index: 1;
     color: #507cdf;
+    pointer-events: none;
 }
 .make-plan .date-plan-container .plan .plan__contents > ul > li .content__img {
 	width: 80px;

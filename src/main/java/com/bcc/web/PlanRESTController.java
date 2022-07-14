@@ -196,4 +196,12 @@ public class PlanRESTController {
 		log.info("플랜 저장 : " + vo);
 		planService.modifyPlan(vo); 
 	}
+	
+	// 선택한 플랜 정보
+	@RequestMapping(value="/planList/{grp_num}")
+	public List<List<Object>> planListREST(@PathVariable("grp_num") int grp_num, HttpSession session) {
+		log.info("플랜 정보 가져오기 ");
+		
+		return planService.getPlanList(grp_num, (List<HotelVO>) session.getAttribute("hotellist"));
+	}
 }

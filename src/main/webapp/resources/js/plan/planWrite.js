@@ -1,3 +1,98 @@
+let positions = []; // 일별로 마커 정보 담을 배열
+let orderedTour = []; // 사용자가 설정한 관광지 순서대로 cNum값 담을 배열
+
+///////////////////////////////// 처음 페이지 로드시 저장된 플랜 있을 경우 실행 /////////////////////////////
+const datePlanContainer = document.querySelector('.date-plan-container');
+if (datePlanContainer.childElementCount > 0) {
+  // 일정칸 보이기
+  datePlanContainer.classList.remove('hidden');
+
+  // 제일 처음 날짜칸 선택된 상태로 만들기
+  const firstContent = document.querySelector('.date-plan-container li.plan .plan__date');
+  firstContent.classList.add('date-active');
+  // 뒤에 날짜는 내용 숨기기
+  const datePlanContents = document.querySelectorAll('.date-plan-container .plan__contents');
+  datePlanContents.forEach(content => {
+    content.classList.add('hidden');
+  });
+  // 처음 날짜칸은 내용 보이기
+  firstContent.nextElementSibling.classList.remove('hidden');
+
+  // 선택된 관광지는 관광지 목록에서 숨기기
+  // 선택된 관광지 cNum(카테고리+num) 가져오기 - 관광지:t  맛집:r  숙소:a
+  const selectedCNumArr = document.querySelectorAll('.plan__contents .plan-item .num');
+  selectedCNumArr.forEach(cNum => {
+    const cNumValue = cNum.value;
+    document.querySelector('.tour-item.' + cNumValue).classList.add('hidden');
+  });
+
+  // 드래그 이벤트 추가
+  applyDragEventContainer();
+  const dragItem = document.querySelectorAll('.date-plan-container li.plan-item');
+  dragItem.forEach(item => {
+    item.addEventListener("dragstart", addDragging);
+    item.addEventListener("dragend", delDragging);
+  });
+
+  // 선택한 플랜 정보 가져오기
+  $.ajax({
+    url: path + '/planREST/planList/' + grp_num,
+    type: 'post',
+    async: false,
+    success: function (data) {
+      // positions, orderedTour 값 넣기 + 마커 생성
+      for (let i = 0; i < data.length; i++) {
+        const plan = data[i][1];
+        positions.push({}); // 마커 객체 일정 만큼 추가
+        orderedTour.push([]); // 마커 순서 담을 배열 일정만큼 추가
+
+        // 선택한 관광지 정보 없으면 넘어감
+        if (plan.length == 0) {
+          continue;
+        }
+
+        let length = 1;
+        for (let j = 0; j < plan.length; j++) {
+          // 카테고리별로 아이콘 이미지 경로 설정
+          let cNum = 't' + plan[j].num; // cNum : 카테고리+num
+          let markerIcon = path + '/resources/img/marker/markert.png'; // 관광지일 경우
+          if (plan[j].t_category == 1) { // 맛집일 경우
+            markerIcon = path + '/resources/img/marker/markerr.png';
+            cNum = 'r' + plan[j].num;
+          } else if (plan[j].t_category == -1) { // 숙소일 경우
+            markerIcon = path + '/resources/img/marker/markera.png';
+            cNum = 'a' + plan[j].num;
+          }
+
+          // 마커 positon에 저장
+          const newMarker = new Tmapv2.Marker({
+            title: plan[j].title,
+            position: new Tmapv2.LatLng(plan[j].lat, plan[j].lng), //Marker의 중심좌표 설정.
+            icon: markerIcon,
+            label: "<span style='background-color: #46414E; color:white; padding:3px 8px; border-radius: 50%;'>" + length + "</span>", // 라벨 설정
+            map: map //Marker가 표시될 Map 설정.
+          });
+          positions[i][cNum] = newMarker;
+          orderedTour[i][length - 1] = cNum;
+          length++;
+        }
+      }
+    },
+    error: function () {
+      alert('저장된 플랜 정보 가져오기 오류!!');
+    }
+  });
+  // 처음 날짜칸 마커 출력
+  printDateMarker(0);
+
+};
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+
 const menu = document.querySelector('.show-title-btn .show-title');
 const planTitle = document.querySelector('.plan-title');
 
@@ -25,8 +120,6 @@ function calcDate(dateData) {
 
 
 
-let positions = []; // 일별로 마커 정보 담을 배열
-let orderedTour = []; // 사용자가 설정한 관광지 순서대로 cNum값 담음
 // 1-7일 여행 일정 선택
 function checkDate() {
   let startDateS = document.querySelector('.start-date').value;
@@ -96,6 +189,21 @@ function checkDate() {
     datePlanContainer.append(newPlan);
   }
   // 일정 선택칸에서 관광지 드래그로 순서 변경
+  applyDragEventContainer();
+
+  // 첫 날 선택된 상태로 설정
+  const firstDate = document.querySelector('li.plan');
+  firstDate.firstElementChild.classList.add('date-active');
+  firstDate.lastElementChild.classList.remove('hidden');
+
+  // 날짜 새로 선택하면, 선택되어서 숨겨진 관광지 모두 출력
+  const hiddenTourList = document.querySelectorAll('li.tour-item.hidden');
+  hiddenTourList.forEach(item => {
+    item.classList.remove('hidden');
+  });
+}; // checkDate
+// 컨테이너에 드래그 적용
+function applyDragEventContainer() {
   const containers = document.querySelectorAll('.plan__contents > ul');
   containers.forEach(container => {
     container.addEventListener("dragover", e => {
@@ -109,18 +217,7 @@ function checkDate() {
       }
     });
   });
-
-  // 첫 날 선택된 상태로 설정
-  const firstDate = document.querySelector('li.plan');
-  firstDate.firstElementChild.classList.add('date-active');
-  firstDate.lastElementChild.classList.remove('hidden');
-
-  // 날짜 새로 선택하면, 선택되어서 숨겨진 관광지 모두 출력
-  const hiddenTourList = document.querySelectorAll('li.tour-item.hidden');
-  hiddenTourList.forEach(item => {
-    item.classList.remove('hidden');
-  });
-}; // checkDate
+}; // applyDragEventContainer
 // 드래그하는 요소가 다른 요소 사이에 들어가는 것 구현
 function getDragAfterElement(container, x) {
   const draggableElements = [
@@ -518,9 +615,9 @@ function savePlan() {
   // DB에 저장
   const vo = {
     num: grp_num,
-    tour_plan : plan,
+    tour_plan: plan,
     tour_date_start: dates[0],
-    tour_date_end: dates[dates.length-1]
+    tour_date_end: dates[dates.length - 1]
   };
   $.ajax({
     url: path + '/planREST/planModify',
@@ -539,8 +636,8 @@ function savePlan() {
 
 // 저장 경로 확인 페이지 이동 
 function movePlanCheck() {
-  if(confirm("저장 경로 확인 페이지로 이동하시겠습니까?")) {
-    location.href='/plan/planContent/'+grp_num;
+  if (confirm("저장 경로 확인 페이지로 이동하시겠습니까?")) {
+    location.href = '/plan/planContent/' + grp_num;
   }
 }; // movePlanCheck()
 
