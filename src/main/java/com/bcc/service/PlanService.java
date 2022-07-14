@@ -1,6 +1,7 @@
 package com.bcc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.GrpAcceptVO;
@@ -82,6 +83,9 @@ public interface PlanService {
 
 	// 여행 경로 저장
 	public void modifyPlan(PlanVO vo);
+
+	// 여행 경로 목록 가져오기
+	public List<List<Object>> getPlanList(int num, List<HotelVO> hotellist);
 	
 
 }

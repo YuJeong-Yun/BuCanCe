@@ -7,14 +7,11 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bcc.domain.GrpAcceptVO;
@@ -190,15 +187,21 @@ public class PlanRESTController {
 	}
 
 	// 플랜 저장
-	@RequestMapping(value = "/planModify/{num}")
-	public void planModifyREST(@PathVariable("num") int num, String plan, HttpSession session) {
+	@RequestMapping(value = "/planModify")
+	public void planModifyREST(@RequestBody PlanVO vo, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		
-		PlanVO vo = new PlanVO();
+		log.info(id);
 		vo.setWriter(id);
-		vo.setTour_plan(plan);
 
 		log.info("플랜 저장 : " + vo);
-//		service.modifyPlan(vo);
+		planService.modifyPlan(vo); 
+	}
+	
+	// 선택한 플랜 정보
+	@RequestMapping(value="/planList/{grp_num}")
+	public List<List<Object>> planListREST(@PathVariable("grp_num") int grp_num, HttpSession session) {
+		log.info("플랜 정보 가져오기 ");
+		
+		return planService.getPlanList(grp_num, (List<HotelVO>) session.getAttribute("hotellist"));
 	}
 }

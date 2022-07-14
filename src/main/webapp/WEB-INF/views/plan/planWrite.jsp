@@ -86,7 +86,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
                 <ul>
                 	<c:forEach var="hotel" items="${hotellist }">
 	                  <li class="tour-item a${hotel.num }" onclick="selectTour(event)">
-	                    <img src="${hotel.img }" alt="" class="content__img" />
+	                    <img src="${hotel.thumbnail }" alt="" class="content__img" />
 	                    <div class="content__title">${hotel.title }</div>
 	                    <input type="hidden" value="${hotel.num }" class="num">
 	                    <input type="hidden" value="${hotel.lng }" class="lng">
@@ -125,7 +125,46 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
       <!--일정별 관광지 선택-->
       <ul class="date-plan-container hidden">
-      </ul>
+      <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22 -->
+			<!-- 저장된 플랜 있을 경우 출력 -->
+			<c:forEach var="plan" items="${planList }">
+				<li class="plan">
+				  <!-- 날짜 출력 -->
+				  <div class="plan__date" onclick="selectDate(event)">${plan[0] }</div>
+				  <div class="plan__contents">
+					<ul class="inner">
+						<!-- 플랜 출력 -->
+					    <c:forEach var="planItem" items="${plan[1] }">
+						<li class="plan-item draggable" draggable="true">
+						  <div class="tour-wrapper">
+							<img src="${planItem.thumbnail }" alt="" class="content__img">
+								<div class="content__title">${planItem.title }</div>
+								<!-- 호텔 -->
+								<c:if test="${planItem.t_category == -1}"> 
+									<button class="delBtn" onclick="delSelectedTour(event,'a${planItem.num }')">x</button>
+									<input type="hidden" value="a${planItem.num }" class="num">
+									<div class="material-icons-outlined hotel">bed</div>
+								</c:if>
+								<!-- 관광지 -->
+								<c:if test="${planItem.t_category == 0}"> 
+									<button class="delBtn" onclick="delSelectedTour(event,'t${planItem.num }')">x</button>
+									<input type="hidden" value="t${planItem.num }" class="num">
+								</c:if>
+								<!-- 맛집 -->
+								<c:if test="${planItem.t_category == 1}"> 
+									<button class="delBtn" onclick="delSelectedTour(event,'r${planItem.num }')">x</button>
+									<input type="hidden" value="r${planItem.num }" class="num">
+									<div class="material-icons-outlined restaurant">restaurant</div>
+								</c:if>
+							</div>
+						 </li>
+						 </c:forEach>
+						</ul>
+					</div>
+				</li>
+			</c:forEach>
+		<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22 -->
+		</ul>
 
       <div class="btn-container">
         <input type="button" value="선택 초기화" class="btn--reset">
@@ -145,6 +184,6 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	const path = '${pageContext.request.contextPath}';
 	const grp_num = '${num}';
 </script>
-<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx4c685864b69a4b71966f8bda89ed2dd3"></script>
-<script src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js"></script>
 <jsp:include page="../include/footer.jsp"></jsp:include>
+<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx4c685864b69a4b71966f8bda89ed2dd3"></script>
+<script defer src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js"></script>
