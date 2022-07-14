@@ -1,4 +1,4 @@
-package com.bcc.controller;
+package com.bcc.web;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
