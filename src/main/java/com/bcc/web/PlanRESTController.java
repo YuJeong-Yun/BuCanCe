@@ -190,15 +190,13 @@ public class PlanRESTController {
 	}
 
 	// 플랜 저장
-	@RequestMapping(value = "/planModify/{num}")
-	public void planModifyREST(@PathVariable("num") int num, String plan, HttpSession session) {
+	@RequestMapping(value = "/planModify")
+	public void planModifyREST(@RequestBody PlanVO vo, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		
-		PlanVO vo = new PlanVO();
+		log.info(id);
 		vo.setWriter(id);
-		vo.setTour_plan(plan);
 
 		log.info("플랜 저장 : " + vo);
-//		service.modifyPlan(vo);
+		planService.modifyPlan(vo); 
 	}
 }

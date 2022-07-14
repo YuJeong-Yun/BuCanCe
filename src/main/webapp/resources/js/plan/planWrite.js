@@ -556,18 +556,21 @@ function savePlan() {
   }
   plan = plan.substring(0, plan.length - 1); // 마지막에 +는 제거
   // DB에 저장
-  
+  const vo = {
+    num: grp_num,
+    tour_plan : plan,
+    tour_date_start: dates[0],
+    tour_date_end: dates[dates.length-1]
+  };
   $.ajax({
-    url: path + '/planREST/planModify/' + grp_num,
+    url: path + '/planREST/planModify',
     type: 'post',
-    data: {
-      plan: plan
-    },
+    data: JSON.stringify(vo),
+    contentType: "application/json",
     success: function (data) {
-      alert('플랜 저장을 완료했습니다.');
+      alert('플랜을 저장했습니다.');
     },
-    error: function (vo) {
-      console.log(vo);
+    error: function () {
       alert('플랜 저장 오류!!');
     }
   }); //ajax
