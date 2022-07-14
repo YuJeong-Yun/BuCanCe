@@ -129,8 +129,5 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		session.delete(namespace+".deleteThumb",thuMap);
 	}
-	
-	
-
 
 }

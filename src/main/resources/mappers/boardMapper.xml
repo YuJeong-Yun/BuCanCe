@@ -85,7 +85,7 @@
 	<!-- 댓글 수 -->
 	<update id="updateCommentCnt" parameterType="int">
 		update tourist_spot b
-		set b.commentCnt = (select count(cno) from bcc_comment where num =
+		set b.commentCnt = (select count(cno) from comment where num =
 		#{num})
 		where b.num = #{num}
 	</update>

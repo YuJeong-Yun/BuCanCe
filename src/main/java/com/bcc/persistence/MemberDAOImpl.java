@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.bcc.domain.BoardVO;
 import com.bcc.domain.MemberVO;
 
 // @Repository : 해당 클래스를 DAO로 스프링에서 인식하도록 하는 표시
@@ -25,7 +26,7 @@ public class MemberDAOImpl implements MemberDAO {
 	// DB연결,자원해제,SQL실행
 
 	// mapper의 위치값(주소) 이름
-	private static final String NAMESPACE="com.bcc.mapper.testMapper";
+	private static final String NAMESPACE="com.bcc.mapper.memberMapper";
 
 	@Override
 	public String getTime() {
@@ -160,6 +161,14 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		sqlSession.update(NAMESPACE+".licenseDown", license);
 		
+	}
+	
+	@Override
+	public List<BoardVO> thumbListAll() throws Exception {
+		
+		List<BoardVO> thumbList = sqlSession.selectList(NAMESPACE+".thumbList");
+		
+		return thumbList;
 	}
 
 

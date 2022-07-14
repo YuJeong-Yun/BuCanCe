@@ -75,7 +75,7 @@
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">NOTICE</a>
+                <li class="active"><a href="${pageContext.request.contextPath }/index">NOTICE</a>
                    <ul class="dropdown">
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
@@ -83,7 +83,7 @@
                         <li><a href="#">4</a></li>
                     </ul>
                 </li>
-                <li><a href="./rooms.html">TOUR</a>
+                <li><a href="${pageContext.request.contextPath }/board/listAll">TOUR</a>
 	                <ul class="dropdown">
                         <li><a href="#">TourList</a></li>
                         <li><a href="#">Reviews</a></li>
@@ -99,7 +99,7 @@
                         <li><a href="#">4</a></li>
 	                    </ul>
 	                </li>
-                <li><a href="./pages.html">PLAN</a>
+                <li><a href="${pageContext.request.contextPath }/tourMap">PLAN</a>
                     <ul class="dropdown">
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
@@ -230,7 +230,7 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-					                <li class="active"><a href="./index.html">NOTICE</a>
+					                <li class="active"><a href="${pageContext.request.contextPath }/index">NOTICE</a>
 					                   <ul class="dropdown">
 					                        <li><a href="#">1</a></li>
 					                        <li><a href="#">2</a></li>
@@ -238,7 +238,7 @@
 					                        <li><a href="#">4</a></li>
 					                    </ul>
 					                </li>
-					                <li><a href="./rooms.html">TOUR</a>
+					                <li><a href="${pageContext.request.contextPath }/board/listAll">TOUR</a>
 						                <ul class="dropdown">
 					                        <li><a href="#">1</a></li>
 					                        <li><a href="#">2</a></li>
@@ -254,7 +254,7 @@
 					                        <li><a href="#">4</a></li>
 						                    </ul>
 						                </li>
-					                <li><a href="./pages.html">PLAN</a>
+                					<li><a href="${pageContext.request.contextPath }/tourMap">PLAN</a>
 					                    <ul class="dropdown">
 					                        <li><a href="#">1</a></li>
 					                        <li><a href="#">2</a></li>

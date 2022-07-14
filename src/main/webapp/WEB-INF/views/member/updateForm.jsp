@@ -37,7 +37,7 @@ function liUp(){
 			}
 	})
 	};
-	
+
 function liDown(){
 	var li = $("#license").val()
 

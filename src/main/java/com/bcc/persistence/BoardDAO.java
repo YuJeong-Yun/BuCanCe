@@ -42,5 +42,5 @@ public interface BoardDAO {
 
 		// 좋아요 테이블에서 기록 삭제
 		public void deleteThumb(int b_num, String id);
-	
+
 }

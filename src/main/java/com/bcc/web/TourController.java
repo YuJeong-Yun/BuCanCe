@@ -44,7 +44,6 @@ public class TourController {
 		return "/tour/tourInfo";
 	}
 
-	
 	@RequestMapping(value = "/getRest", method = RequestMethod.GET)
 	public void apiTest() {
 		try {

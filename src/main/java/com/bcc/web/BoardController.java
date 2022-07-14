@@ -19,10 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.CommentVO;
 import com.bcc.domain.Criteria;
+import com.bcc.domain.MemberVO;
 import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
 import com.bcc.service.BoardService;
 import com.bcc.service.CommentService;
+import com.bcc.service.MemberService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -35,6 +37,9 @@ public class BoardController {
 
 	@Inject
 	private CommentService commentservice;
+	
+	@Inject
+	private MemberService ms;
 
 	// 카테고리 화면 변환
 	@RequestMapping(value = "/ajaxListAll", method = RequestMethod.GET)
@@ -68,7 +73,7 @@ public class BoardController {
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public void listAll(@ModelAttribute("result") String result, SearchCriteria scri, Model model, HttpSession session)
 			throws Exception {
-		session.setAttribute("id", "admin");
+		
 		// 조회수
 		session.setAttribute("upFlag", "1");
 
@@ -76,7 +81,7 @@ public class BoardController {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
 		pageMaker.setTotalCount(service.listCount(scri));
-		
+
 		log.info(pageMaker+"");
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("boardList", service.list(scri));
@@ -142,7 +147,6 @@ public class BoardController {
 		// 테스트용 아이디 생성
 		
 		vo.setWriter(id);
-
 		
 		log.info(vo.getnum()+"");
 		commentservice.wriComment(vo);
@@ -187,7 +191,6 @@ public class BoardController {
 
 			model.addAttribute("commentDelete", commentservice.selectComment(vo.getCno()));
 			model.addAttribute("scri", scri);
-			
 			
 			return "board/commentDelete";
 		}

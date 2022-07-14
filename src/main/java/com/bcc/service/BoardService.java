@@ -6,6 +6,7 @@ import com.bcc.domain.BoardVO;
 import com.bcc.domain.SearchCriteria;
 
 public interface BoardService {
+
 	/* 글 전체 목록 */
 	public List<BoardVO> listAll() throws Exception;
 
@@ -27,7 +28,6 @@ public interface BoardService {
 	/* 게시물 댓글 수 */
 	public void updateCommentCnt(int num)throws Exception;
 
-	
 	// 좋아요 기록 체크
 	public Integer checkThumb(int b_num, String id);
 
