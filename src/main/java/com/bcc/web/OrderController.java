@@ -70,7 +70,7 @@ public class OrderController extends PaypleController {
 	 * orderInfo.jsp : 주문안내 페이지
 	 */
 	@RequestMapping(value = "/orderInfo")
-	// http://localhost:8088/order
+	// http://localhost:8088/orderInfo
 	public String orderInfo(Model model/* , MemberVO mv, PreMemberVO pmv, PreOrderVO ov */) {
 		model.addAttribute("payer_no", "ㅎㅎ"/*mv.getId()*/); // 파트너 회원 고유번호 > 아이디로 ?
 		model.addAttribute("payer_name","ㅎㅎ"/* mv.getName()*/); // 결제자 이름
@@ -159,6 +159,8 @@ public class OrderController extends PaypleController {
 	@RequestMapping(value = "/order_result")
 	public String order_result(HttpServletRequest request, Model model) {
 		
+		
+		// 빌링키 받아오기
 		log.info(request.getParameter("PCD_PAYER_ID"));
 
 		// 1. 결제결과 모두 출력
@@ -234,7 +236,7 @@ public class OrderController extends PaypleController {
 			refundObj.put("PCD_CST_ID", "test"); // 파트너사 cst_id
 			refundObj.put("PCD_CUST_KEY", "abcd1234567890"); // 파트너사 custKey
 			refundObj.put("PCD_AUTH_KEY", auth_key);
-			refundObj.put("PCD_PAYER_ID", payer_id);
+			refundObj.put("PCD_PAYER_ID", payer_id); //빌링키
 			refundObj.put("PCD_PAY_REQKEY", pay_reqkey);
 
 			URL url = new URL(pay_cofurl);
@@ -272,9 +274,9 @@ public class OrderController extends PaypleController {
 
 	// 정기결제 재결제(빌링키결제) (paySimpleSend.jsp)
 	@RequestMapping(value = "/paySimpleSend")
-	public String paySimpleSendRoute(Model model) {
+	public String paySimpleSendRoute(Model model/* , PreMemberVO pmv */) {
 
-		model.addAttribute("payer_id", ""); // 결제자 고유 ID (빌링키)
+		model.addAttribute("payer_id", " "/* pmv.getPCD_PAYER_ID() */); // 결제자 고유 ID (빌링키)
 		model.addAttribute("pay_goods", "휴대폰"); // 상품명
 		model.addAttribute("pay_total", "1000"); // 결제요청금액
 		model.addAttribute("payer_no", "1234"); // 결제자 고유번호 (파트너사 회원 회원번호)
@@ -296,6 +298,7 @@ public class OrderController extends PaypleController {
 		Map<String, String> bilingParams = new HashMap<>();
 		bilingParams.put("PCD_PAY_TYPE", request.getParameter("PCD_PAY_TYPE"));
 		bilingParams.put("PCD_SIMPLE_FLAG", "Y");
+		//PCD_SIMPLE_FLAG : 빌링키 결제 , 빌링키아니면"N"
 
 		JSONObject authObj = new JSONObject();
 		authObj = payAuth(bilingParams);
