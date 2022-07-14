@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bcc.domain.PremiumOrderVO;
+import com.bcc.domain.PreOrderVO;
 import com.bcc.service.AdminService;
 
 @RestController
@@ -25,7 +25,7 @@ public class AdminRESTController {
 	private AdminService service;
 	
 	@RequestMapping(value = "/getVipInfo", method = RequestMethod.GET)
-	public List<PremiumOrderVO> getVipInfo(@RequestParam("date") String date){
+	public List<PreOrderVO> getVipInfo(@RequestParam("date") String date){
 		
 		return service.getPmInfo(date);
 	}

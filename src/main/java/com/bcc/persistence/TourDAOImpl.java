@@ -15,7 +15,7 @@ public class TourDAOImpl implements TourDAO{
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String NAMESPACE = "com.bcc.mapper.tourMapper";
+	private static final String NAMESPACE = "com.bcc.mapper.BoardMapper";
 
 	@Override
 	public List<BoardVO> restaurantLists(String addr) {

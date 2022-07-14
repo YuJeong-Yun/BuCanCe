@@ -33,7 +33,6 @@ public class TourController {
 	// 맛집, 관광지 출력 페이지
 	@RequestMapping(value = "/tourInfo", method = RequestMethod.GET)
 	public String tourInfoGET(@RequestParam("addr") String addr, Model model) {
-		
 		if(service.restaurantLists(addr) == null) {
 			model.addAttribute("addr",addr);
 		} else {

@@ -3,7 +3,6 @@ package com.bcc.service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -13,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.bcc.domain.PremiumOrderVO;
+import com.bcc.domain.PreOrderVO;
 import com.bcc.persistence.AdminDAO;
 
 
@@ -27,7 +26,7 @@ public class AdminServiceImpl implements AdminService{
 	private AdminDAO dao;
 
 	@Override
-	public List<PremiumOrderVO> getPmInfo(String date) {
+	public List<PreOrderVO> getPmInfo(String date) {
 		
 		return dao.getPmInfo(date);
 	}
@@ -39,7 +38,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<PremiumOrderVO> getOnlyPeriod(String date) {
+	public List<PreOrderVO> getOnlyPeriod(String date) {
 		
 		return dao.getOnlyPeriod(date);
 	}
