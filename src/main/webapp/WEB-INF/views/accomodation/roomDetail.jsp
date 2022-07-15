@@ -83,6 +83,41 @@
  </script>
 <!-- 날짜 정보 입력시 유효성 체크 끝 -->
 
+
+<style type="text/css">
+#slidebox {
+ border:1px solid pink;
+  /*전체 컨테이너*/
+  width: 600px;}
+  
+#slideShow {
+ border:1px solid red;
+  /*전체 컨테이너*/
+  width: 600px;
+  height: 100px;
+  position: relative;
+  top:-50px;
+ margin: 0 0 -50px 0;
+  overflow: hidden; /*리스트 형식으로 이미지를 일렬로 정렬할 것이기 때문에, 500px 밖으로 튀어 나간 이미지들은 hidden으로 숨겨줘야됨*/
+}
+.slides {border:1px solid blue;
+  /*이미지들이 담겨있는 슬라이드 컨테이너*/
+  position: absolute;
+  left: 0;
+  top: 0px;
+  width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
+  transition: 0.5s ease-out; /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
+} /* 첫 번째 슬라이드 가운데에 정렬하기위해 첫번째 슬라이드만 margin-left조정 */
+.slides li:first-child {
+border:1px solid skyblue;
+  margin-left: 50px;
+} /* 슬라이드들 옆으로 정렬 */
+.slides li:not(:last-child) {
+  float: left;
+  margin-right:0;
+}
+
+</style>
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -253,14 +288,15 @@
 
 
 
-<!-- 해당숙소의 방사진들을 슬라이드쇼로 보여줌  -->		
+<!-- 해당숙소의 방사진들을 슬라이드쇼로 보여줌  -->
+<div id="slidebox"> 
+ <img src="${roomdetail0.get(b).room_pic}" style="width: 100%;">		
  <div id="slideShow">
     <ul class="slides">
      <c:forEach items="${roomdetail0}" begin="0" end="${roomdetail0.size()}">
-      <li><img src="${roomdetail0.get(b).room_pic}" style="width: 400px"></li>
+      <li><img src="${roomdetail0.get(b).room_pic}" style="width: 150px;"></li>
       <c:set var="b" value="${b=b+1 }"/>
-  	</c:forEach>
-      
+  	</c:forEach>      
     </ul>
     <p class="controller">
       <!-- &lang: 왼쪽 방향 화살표 &rang: 오른쪽 방향 화살표 --> 
@@ -268,6 +304,7 @@
       <span class="next">&rang;</span>
     </p>
   </div>
+ </div> 
  <!-- 해당숙소의 방사진들을 슬라이드쇼로 보여줌  -->	
 					
 					

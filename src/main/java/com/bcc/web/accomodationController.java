@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bcc.domain.MemberVO;
 import com.bcc.domain.roomDate;
 import com.bcc.domain.roomPayVO;
 import com.bcc.domain.roomReVO;
 import com.bcc.domain.roomRefundVO;
 import com.bcc.domain.roomSearch;
+import com.bcc.service.MemberService;
 import com.bcc.service.roomService;
 
 //숙박컨트롤러 
@@ -36,6 +38,8 @@ public class accomodationController {
 	@Inject
 	private roomService service;
 	
+	@Inject
+	private MemberService service2;
 
 
 	// 숙소목록을 보여주는 페이지로 이동
@@ -62,7 +66,7 @@ public class accomodationController {
 
 		log.info(" roomListPOST() 호출 ");
 		log.info(" 입력한 정보를 바탕으로 숙소항목을 보여줌 ");
-		
+		log.info("rs : " + rs);
 		//service에서 입력한 정보를 바탕으로 원하는 크롤링 정보만 보여줌
 		JSONArray roomList = service.roomSearchList(rs);
 		
@@ -74,6 +78,46 @@ public class accomodationController {
 		//roomList.jsp에서 input태그에 입력한 정보를 저장
 		model.addAttribute("select_place", rs.getPlace_name());
 			
+	}
+	
+	
+	
+	// 숙소목록을 보여주는 페이지로 이동2222222222222222222222222222222222222222
+	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
+	// http://localhost:8088/accomodation/roomList
+	@RequestMapping(value = "/roomList2", method = RequestMethod.GET)
+	public void roomListGET2(Model model) throws IOException {
+		
+		log.info(" roomListGET2() 호출 ");
+		log.info(" 전체숙소목록 정보 ");
+		
+		//service에서 저장한 크롤링 정보들을 JSONArray형태로 저장
+		JSONArray roomList = service.roomList();
+		
+		model.addAttribute("roomList", roomList);
+	}
+	
+	
+	
+	// 숙소목록을 지역선택이나 검색을 통해 원하는 목록만 보여줌222222222222222222222222222222222222
+	// http://localhost:8088/accomodation/roomList
+	@RequestMapping(value = "/roomList2", method = RequestMethod.POST)
+	public void roomListPOST2(Model model,roomSearch rs) throws IOException {
+		
+		log.info(" roomListPOST2() 호출 ");
+		log.info(" 입력한 정보를 바탕으로 숙소항목을 보여줌 ");
+		log.info("rs : " + rs);
+		//service에서 입력한 정보를 바탕으로 원하는 크롤링 정보만 보여줌
+		JSONArray roomList = service.roomSearchList(rs);
+		
+		model.addAttribute("roomList", roomList);
+		
+		//roomList.jsp에서 선택한 select 정보를 저장
+		model.addAttribute("select_area", rs.getArea());
+		
+		//roomList.jsp에서 input태그에 입력한 정보를 저장
+		model.addAttribute("select_place", rs.getPlace_name());
+		
 	}
 	
 	
@@ -192,15 +236,20 @@ public class accomodationController {
 		//숙박주문번호 설정
 		String accId = service.SearchPayId();
 		
+		String id = (String) session.getAttribute("id");
+		//아이디 정보에 해당하는 유저정보를 가져오는 서비스
+		MemberVO mvo = service2.getMember(id);
+		
+		
 		//로그인정보들(임의의값)
-		session.setAttribute("id", "admin");
-		session.setAttribute("user_name", "김영수");
-		session.setAttribute("email", "kld9223@naver.com");
+		session.setAttribute("id", mvo.getId());
+		session.setAttribute("user_name", mvo.getName());
+		session.setAttribute("email", mvo.getEmail());
 		session.setAttribute("accId", accId);
-		session.setAttribute("tel", "010-3795-9228");
-		session.setAttribute("address1", "부산광역시 금정구 금정로 233-21번길 한진스카이 아파트 1003호");
-		session.setAttribute("zip", "46243");
-		session.setAttribute("license", 1);
+		session.setAttribute("tel", mvo.getTel());
+		session.setAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
+		session.setAttribute("zip", mvo.getZip());
+		session.setAttribute("license", mvo.getLicense());
 		
 		}
 		
@@ -224,14 +273,20 @@ public class accomodationController {
 		model.addAttribute("vo", vo);
 		
 		
+		String id = (String) session.getAttribute("id");
+		//아이디 정보에 해당하는 유저정보를 가져오는 서비스
+		MemberVO mvo = service2.getMember(id);
+		
+		
 		//로그인정보들(임의의값)
-		session.setAttribute("id", "admin");
-		session.setAttribute("user_name", "김영수");
-		session.setAttribute("email", "kld9223@naver.com");
+		session.setAttribute("id", mvo.getId());
+		session.setAttribute("user_name", mvo.getName());
+		session.setAttribute("email", mvo.getEmail());
 		session.setAttribute("accId", accId);
-		session.setAttribute("tel", "010-3795-9228");
-		session.setAttribute("zip", "46243");
-		session.setAttribute("license", 1);
+		session.setAttribute("tel", mvo.getTel());
+		session.setAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
+		session.setAttribute("zip", mvo.getZip());
+		session.setAttribute("license", mvo.getLicense());
 				
 				
 		}
@@ -275,18 +330,18 @@ public class accomodationController {
 		}
 				
 		
-		// 유저 결제내역
+		// 유저 예약 목록
 		// http://localhost:8088/accomodation/roomReList
 		@RequestMapping(value = "/roomReList" ,method =RequestMethod.GET)
-		public void roomReListGET(Model model) throws IOException {
-				
+		public void roomReListGET(Model model, HttpSession session
+				) throws IOException {
 			
 		//결제내역
 		log.info("roomReListGET() 호출");
 		
 		
-		String id="admin";
-		
+		String id= (String) session.getAttribute("id");
+	
 		
 		List<roomPayVO> list = service.roomUserPayInfo(id);	
 				
@@ -302,7 +357,8 @@ public class accomodationController {
 		//http://localhost:8088/accomodation/roomRefund
 		@RequestMapping(value = "/roomRefund" ,method =RequestMethod.POST)
 		public void roomRefundPOST(roomPayVO vo, Model model) throws IOException {
-						
+		
+		
 					
 		//결제내역
 		log.info("roomRefundPOST() 호출");
@@ -335,14 +391,10 @@ public class accomodationController {
 		service.inRoomRefund(vo);
 		
 		
-	
-		
 		log.info("vo : "+vo);
 				
 		model.addAttribute("vo", vo);
 	
-		
-								
 		}
 		
 		

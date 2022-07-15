@@ -11,15 +11,15 @@
 	<select id="readComment" resultType="CommentVO">
 		SELECT
 		CNO, CONTENT, WRITER,
-		REGDATE, VISIT
+		REGDATE
 		FROM bcc_comment
 		WHERE num = #{num}
 	</select>
 
 	<!-- 댓글 작성 -->
 	<insert id="writeComment">
-		insert into bcc_comment(num, content, writer, visit)
-		value(#{num}, #{content}, #{writer}, #{visit})
+		insert into bcc_comment(num, content, writer)
+		value(#{num}, #{content}, #{writer})
 	</insert>
 
 	<!-- 댓글 수정 -->
@@ -42,4 +42,9 @@
 		where cno = #{cno}
 	</select>
 	
+	<!-- 방문 미방분 분류 -->
+	<select id="visit" resultType="com.bcc.domain.CommentVO">
+	
+	</select>
+
 </mapper>

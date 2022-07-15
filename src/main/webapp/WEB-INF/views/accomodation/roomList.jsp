@@ -3,77 +3,38 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<style>
-/*datepicker에서 사용한 이미지 버튼 style적용*/
-img.ui-datepicker-trigger {
-	margin-left: 5px;
-	vertical-align: middle;
-	cursor: pointer;
-}
-/*datepicker에서 사용한 이미지 버튼 style적용*/
-
-
-
-/* 숙소명 입력창  버튼클릭시 테두리 효과 style 적용  */
-input[type=text] {
-	width: 38%;
-	border: 2px solid #aaa;
-	border-radius: 4px;
-	margin: 8px 0;
-	outline: none;
-	padding: 8px;
-	box-sizing: border-box;
-	transition: .3s;
-}
-
-input[type=text]:focus {
-	border-color: dodgerBlue;
-	box-shadow: 0 0 8px 0 dogerBlue;
-}
-
-/* 숙소명 입력창  버튼클릭시 테두리 효과 style 적용  */
-
-
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|
+Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planContent.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/acc/CroomList.css" type="text/css">
+<style type="text/css">
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 </style>
 </head>
 <body>
-
-	<!-- Header Section Begin -->
 	<jsp:include page="../include/header.jsp" />
-	<!-- Header End -->
-
+	<jsp:include page="${pageContext.request.contextPath}/resources/js/acc/JroomList.jsp"/>
 	<!-- Breadcrumb Section Begin --> <!-- 코드 시작 -->
-	<div class="breadcrumb-section" style="">
+	
+	<section class="tour-plan">
+	<div class="breadcrumb-section" >
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="breadcrumb-text">
-						<h2>부산 숙소</h2>
+					<div class="breadcrumb-text" >
+						<h2   style="font-family: 'Jeju Hallasan' ">부산 숙소</h2>
 						<div class="bt-option">
-							<a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a> 
-							<span>숙소 정보</span>
+							<a href="${pageContext.request.contextPath}/index">Home</a> 
+							<span>숙소 정보</span> 
 						</div>
 					</div>
 				</div>
 
 			</div>
-
-
-
-<script type="text/javascript">
-//지역 select 고를때 동작
-//해당지역을 골랐을때 지역에 해당하는 숙소목록을 보여줌
-function selectArea(){
-	idForm.submit();
-	
-	var input = document.getElementById("place_name"); 
-
-	input.value = null;
-	${select_place=""}
-	
-}
-</script>
-
+<br><br>
 			<!-- 숙소목록선택,검색기능을 하는 코드 시작 -->
 			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm">
 				<select name="area" onchange="selectArea()" id="area" style="background: blue;">
@@ -142,7 +103,8 @@ function selectArea(){
 		<div class="container">
 			<div class="row">
 				<c:set var="a" />
-				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
+				<%-- <c:forEach items="${roomList}" begin="0" end="${roomList.size()}"> --%>
+				<c:forEach items="${roomList}" begin="0" end="5">
 			
 					<div class="col-lg-4 col-md-6" style="height:550px;">
 					
@@ -154,7 +116,7 @@ function selectArea(){
 							
 							<c:if test="${roomList.get(a).room_rank!=''}">
 							
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200" style="border: solid #65A2FF; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
+								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200" style="border: solid #00ABB9; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
 							
 							</c:if>
 							
@@ -163,7 +125,7 @@ function selectArea(){
 							</c:if>
 							
 							
-							<div class="ri-text"  style="border: solid	#65A2FF;  box-shadow: 5px 5px 5px 5px gray; border-radius:10px; height:260px;"  >
+							<div class="ri-text"  style="border: solid	#00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:10px; height:260px; background: white"  >
 								<h4>${roomList.get(a).room_title}</h4>
 								<table >
 									<tbody>
@@ -221,11 +183,23 @@ function selectArea(){
 					</div>
 					</a>
 				</c:forEach>
+				 <button type="button" class="btn" onclick="location.href='roomList2.jsp';"><b>2번 페이지</b></button><p></p>
 			</div>
 		</div>
 	</section>
+	</section>
 	<!-- Rooms Section End -->
 	<!-- 코드 끝 -->
+<div class="inner">
+  <div class="ocean">
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+</div>
 
-<jsp:include page="../include/footer.jsp" />
+	<jsp:include page="../include/footer.jsp" />
 
+	
+</body>
+
+</html>

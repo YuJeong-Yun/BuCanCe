@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
 <script type="text/javascript">
 
 	if("${vo.accName}"=="")
@@ -14,10 +16,8 @@
 
 </head>
 
-
-    <!-- Header Section Begin -->
-    <jsp:include page="../include/header.jsp" />
-    <!-- Header End -->
+<body>
+   <jsp:include page="../include/header.jsp" />
 
     <!-- Contact Section Begin -->
     <section class="contact-section spad">
@@ -86,12 +86,9 @@
                         </table>
                       
                         <form action="${pageContext.request.contextPath}/accomodation/roomList">
-                         <button type="submit" class="btn btn-block btn-primary btn"
-                          style="border-top-width: 8; border-bottom-width: 8" ><b>메인페이지로</b></button> &nbsp;
+<button type="submit" class="btn btn-block btn-primary btn" style="border-top-width: 8; border-bottom-width: 8" ><b>메인페이지로</b></button> &nbsp;
                          
-                         <button type="button" class="btn btn-block btn-danger btn"  
-                         style="border-top-width: 8; border-bottom-width: 8" onclick="cancelBtn()"><b>취소하기</b></button>
-                         
+   <button type="button" class="btn btn-block btn-danger btn" style="border-top-width: 8; border-bottom-width: 8" onclick="cancelBtn()"><b>취소하기</b></button>                         
                          </form>
                          </div>
                          </div>
@@ -115,6 +112,8 @@
 
 
 
-    <!-- Footer Section Begin -->
    <jsp:include page="../include/footer.jsp" />
-    <!-- Footer Section End -->
+
+</body>
+
+</html>

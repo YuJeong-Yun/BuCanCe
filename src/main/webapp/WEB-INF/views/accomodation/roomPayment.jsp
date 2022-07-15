@@ -3,14 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-<!-- <script type="text/javascript"> -->
-
-<!-- history.replaceState({}, null, location.pathname); -->
-
-<!-- </script> -->
-
-
 <script>
 function selectAll(selectAll)  {
 	  const checkboxes 
@@ -146,7 +138,7 @@ A:hover {
 }
 </style>
 <script type="text/javascript">
-<!--
+
 function dEI(elementID){
 	return document.getElementById(elementID);
 }
@@ -160,7 +152,7 @@ function closeLayer( IdName ){
 	var pop = dEI(IdName);
 	pop.style.display = "none";
 }
-//-->
+
 </script>
 <!--유의사항 팝업창  ........................................................................................... -->
 
@@ -634,17 +626,16 @@ input[type=text]:focus {
 							</div>
 
 
-							<button type="button"  onclick="requestPay()"
-								class="btn btn-block btn-primary btn-sm"
-								style=" border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
-								<span style="color: black"><b>결제하기</b></span>
-							</button>
+							<button type="button"  onclick="requestPay()" class="btn btn-block btn-primary btn-sm"
+style=" border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
+<span style="color: black"><b>결제하기</b></span>
+</button>
 
 							<button type="button" onclick="cancelPay()"
-								class="btn btn-block btn-danger btn-sm"
-								style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
-								<span style="color: black"><b>취소하기</b></span>
-							</button>
+class="btn btn-block btn-danger btn-sm"
+style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
+<span style="color: black"><b>취소하기</b></span>
+</button>
 							<p></p>
 						</form>
 

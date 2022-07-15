@@ -3,11 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!-- 168줄부터 ~ 365줄까지 -->
-
-
-    <!-- Header Section Begin -->
-	<jsp:include page="../include/header.jsp" />
-    <!-- Header End -->
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+</head>
+<body>
+    <jsp:include page="../include/header.jsp" />
 
     <!-- Breadcrumb Section Begin -->
     <div class="breadcrumb-section">
@@ -211,9 +212,9 @@
         </div>
     </section>
     <!-- Rooms Section End -->
-
-    <!-- Footer Section Begin -->
    <jsp:include page="../include/footer.jsp" />
-    <!-- Footer Section End -->
 
-    <!-- Search model Begin -->
+
+</body>
+
+</html>
