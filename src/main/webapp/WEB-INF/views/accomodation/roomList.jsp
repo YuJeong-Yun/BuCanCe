@@ -20,7 +20,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	<!-- Breadcrumb Section Begin --> <!-- 코드 시작 -->
 	
 	<section class="tour-plan">
-	<div class="breadcrumb-section" >
+	<div class="breadcrumb-section" style="background:  #BEEFFF">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -32,12 +32,11 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 						</div>
 					</div>
 				</div>
-
 			</div>
-<br><br>
+<br><br><br>
 			<!-- 숙소목록선택,검색기능을 하는 코드 시작 -->
 			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm">
-				<select name="area" onchange="selectArea()" id="area" style="background: blue;">
+				<select name="area" onchange="selectArea()" id="area" style="background: blue; line-height: 1.5;" >
 					<optgroup label="지역">
 						<option value="favorite"
 						<c:if test="${select_area=='favorite'}">selected</c:if>
@@ -85,8 +84,8 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
 				<input type="text" name="place_name" id="place_name" value="${select_place}" 
 				required spellcheck="false">
-
-				<input type="submit" value="검색" class="btn btn-primary" style="height: 37px;">
+&nbsp; &nbsp; &nbsp; 
+				<input type="submit" value="검색" class="btn btn-primary" style="height: 40px;">
 
 				</form>
 				<!-- 숙소목록선택,검색기능을 하는 코드 끝 -->
@@ -94,7 +93,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 		</div>
 	</div>
 	<!-- Breadcrumb Section End -->
-
+<br><br>
 
 
 
@@ -103,7 +102,8 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 		<div class="container">
 			<div class="row">
 				<c:set var="a" />
-				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
+<%-- 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}"> --%>
+				<c:forEach items="${roomList}" begin="0" end="10">
 			
 					<div class="col-lg-4 col-md-6" style="height:550px;">
 					
@@ -115,7 +115,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 							
 							<c:if test="${roomList.get(a).room_rank!=''}">
 							
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200" style="border: solid #00ABB9; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
+								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200" style=" border-bottom-style: none; border-style: solid;  border-color: #00ABB9 #00ABB9 #FFFFFF #00ABB9 ; box-shadow: 5px 0px 5px gray; border-radius:10px 10px 0px 0px;">
 							
 							</c:if>
 							
@@ -124,7 +124,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 							</c:if>
 							
 							
-							<div class="ri-text"  style="border: solid	#00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:10px; height:260px; background: white"  >
+							<div class="ri-text"  style=" border-style: solid;  border-color: #FFFFFF #00ABB9 #00ABB9 #00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:0px 0px 10px 10px; height:260px; background: white"  >
 								<h4>${roomList.get(a).room_title}</h4>
 								<table >
 									<tbody>

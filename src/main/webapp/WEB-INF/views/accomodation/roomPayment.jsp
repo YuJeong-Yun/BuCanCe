@@ -12,8 +12,12 @@ function selectAll(selectAll)  {
 	    checkbox.checked = selectAll.checked;
 	  })
 	}
-	
-	
+if("${id}"=='')
+{
+alert('로그인이 필요합니다');
+location.href="${pageContext.request.contextPath}/login";
+}
+
 	
 </script>
 
@@ -204,6 +208,7 @@ input[type=text]:focus {
 	</div>
 	<!-- Breadcrumb Section End -->
 
+	<c:if test="${id != null}">
 	<!-- Room Details Section Begin -->
 	<section class="room-details-section spad">
 		<div class="container">
@@ -652,6 +657,7 @@ style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10p
 
 
 	</section>
+	</c:if>
 	<!-- Room Details Section End -->
 
 

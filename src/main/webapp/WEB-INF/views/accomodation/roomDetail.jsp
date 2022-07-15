@@ -43,11 +43,18 @@
 			<div class="col-lg-8">
 			<div class="room-details-item">
 
+
+
+
+
 <!-- 해당숙소의 방사진들을 슬라이드쇼로 보여줌  -->		
  <div id="slideShow">
     <ul class="slides">
+    
      <c:forEach items="${roomdetail0}" begin="0" end="${roomdetail0.size()}">
-      <li><img src="${roomdetail0.get(b).room_pic}" style="width: 400px"></li>
+      <li>
+      <img src="${roomdetail0.get(b).room_pic}" style="width: 400px">
+      </li>
       <c:set var="b" value="${b=b+1 }"/>
   	</c:forEach>
       
@@ -59,6 +66,10 @@
     </p>
   </div>
  <!-- 해당숙소의 방사진들을 슬라이드쇼로 보여줌  -->	
+			
+			
+			
+			
 					
 <!-- 숙소에 대한 상세 정보를 보여주는 영역 시작 -->
                      <div class="rd-text">

@@ -42,6 +42,17 @@ public class accomodationController {
 	private MemberService service2;
 
 
+	// http://localhost:8088/accomodation/test
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public void testGET() throws IOException {
+
+		log.info(" testGET() 호출 ");
+		
+
+	}
+	
+	
+	
 	// 숙소목록을 보여주는 페이지로 이동
 	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
 	// http://localhost:8088/accomodation/roomList
@@ -196,20 +207,27 @@ public class accomodationController {
 		//숙박주문번호 설정
 		String accId = service.SearchPayId();
 		
+		
 		String id = (String) session.getAttribute("id");
-		//아이디 정보에 해당하는 유저정보를 가져오는 서비스
-		MemberVO mvo = service2.getMember(id);
 		
+		if(id==null) {
+			MemberVO mvo = null;
+		}else {
+			//아이디 정보에 해당하는 유저정보를 가져오는 서비스
+			MemberVO mvo = service2.getMember(id);
+			
+			
+			//로그인정보들(임의의값)
+			session.setAttribute("id", mvo.getId());
+			session.setAttribute("user_name", mvo.getName());
+			session.setAttribute("email", mvo.getEmail());
+			session.setAttribute("accId", accId);
+			session.setAttribute("tel", mvo.getTel());
+			session.setAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
+			session.setAttribute("zip", mvo.getZip());
+			session.setAttribute("license", mvo.getLicense());
+		}
 		
-		//로그인정보들(임의의값)
-		session.setAttribute("id", mvo.getId());
-		session.setAttribute("user_name", mvo.getName());
-		session.setAttribute("email", mvo.getEmail());
-		session.setAttribute("accId", accId);
-		session.setAttribute("tel", mvo.getTel());
-		session.setAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
-		session.setAttribute("zip", mvo.getZip());
-		session.setAttribute("license", mvo.getLicense());
 		
 		}
 		
@@ -235,18 +253,23 @@ public class accomodationController {
 		
 		String id = (String) session.getAttribute("id");
 		//아이디 정보에 해당하는 유저정보를 가져오는 서비스
-		MemberVO mvo = service2.getMember(id);
-		
-		
-		//로그인정보들(임의의값)
-		session.setAttribute("id", mvo.getId());
-		session.setAttribute("user_name", mvo.getName());
-		session.setAttribute("email", mvo.getEmail());
-		session.setAttribute("accId", accId);
-		session.setAttribute("tel", mvo.getTel());
-		session.setAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
-		session.setAttribute("zip", mvo.getZip());
-		session.setAttribute("license", mvo.getLicense());
+		if(id==null) {
+			MemberVO mvo = null;
+		}else {
+			//아이디 정보에 해당하는 유저정보를 가져오는 서비스
+			MemberVO mvo = service2.getMember(id);
+			
+			
+			//로그인정보들(임의의값)
+			session.setAttribute("id", mvo.getId());
+			session.setAttribute("user_name", mvo.getName());
+			session.setAttribute("email", mvo.getEmail());
+			session.setAttribute("accId", accId);
+			session.setAttribute("tel", mvo.getTel());
+			session.setAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
+			session.setAttribute("zip", mvo.getZip());
+			session.setAttribute("license", mvo.getLicense());
+		}
 				
 				
 		}
@@ -306,6 +329,8 @@ public class accomodationController {
 		List<roomPayVO> list = service.roomUserPayInfo(id);	
 				
 		log.info("payList : "+list);
+		
+		
 		
 		//해당 유저의 예약정보
 		model.addAttribute("UserPayList", list);
