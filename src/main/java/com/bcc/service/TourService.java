@@ -7,13 +7,13 @@ import com.bcc.domain.BoardVO;
 public interface TourService {
 	
 	
-	public List<BoardVO> restaurantLists(String addr);
+	public List<BoardVO> foodLists(String addr);
 
 	// 네이버 검색 api로 맛집 정보와 링크 가져오기
-	public void getRestaurantInfo(List<BoardVO> restList) throws Exception;
+	public void foodLists(List<BoardVO> restList) throws Exception;
 	
 	// 해당 맛집 정보 가져오기
-	public BoardVO getInfoDetail(String title);
+	public BoardVO getFood(String title);
 	
 	
 }

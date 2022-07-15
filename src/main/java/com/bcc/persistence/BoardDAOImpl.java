@@ -25,16 +25,16 @@ public class BoardDAOImpl implements BoardDAO {
 
 	// 글 전체 목록
 	@Override
-	public List<BoardVO> listAll() throws Exception {
+	public List<BoardVO> tourLists() throws Exception {
 		System.out.println("DAO: 글전체목록 메서드");
 		// sqlSession 객체 사용하여 Mapper 호출
-		return session.selectList(namespace + ".listAll");
+		return session.selectList(namespace + ".tourLists");
 	}
 
 	// 글 내용
 	@Override
-	public BoardVO getBoard(Integer num) {
-		return session.selectOne(namespace + ".getBoard", num);
+	public BoardVO getTour(Integer num) {
+		return session.selectOne(namespace + ".getTour", num);
 	}
 
 	// 조회수

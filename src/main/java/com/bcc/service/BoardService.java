@@ -7,10 +7,10 @@ import com.bcc.domain.SearchCriteria;
 
 public interface BoardService {
 	/* 글 전체 목록 */
-	public List<BoardVO> listAll() throws Exception;
+	public List<BoardVO> tourLists() throws Exception;
 
 	/* 글 번호에 해당 되는 페이지 상세보기 */
-	public BoardVO readBoard(int num) throws Exception;
+	public BoardVO getTour(int num) throws Exception;
 	
 	/* 조회수 증가 */
 	public void updateBoardCount(Integer num) throws Exception;

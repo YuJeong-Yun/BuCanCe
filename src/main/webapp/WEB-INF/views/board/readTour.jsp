@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
 <jsp:include page="../include/header.jsp" />
 
 <!-- Breadcrumb Section Begin -->
@@ -53,6 +54,16 @@
 								<td class="r-o">홈페이지</td>
 								<td><a href="${vo.url}">${vo.url }</a></td>
 							</tr>
+							<tr>
+							<td>
+							<form name="readForm" role="form" method="post">
+ 							 <input type="hidden" id="num" name="num" value="${vo.num}" />
+ 							 <input type="hidden" id="page" name="page" value="${scri.page}"> 
+							  <input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+  							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
+ 							 <input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+							</form></td>
+							</tr>
 						</tbody>
 					</table>
 					<p class="f-para">${vo.contents }</p>
@@ -70,30 +81,31 @@
 						</nav>
 					</div>
 				</div>
-				<!-- 댓글 구현 -->
+				<!-- 댓글 목록 -->
 				<div id="comment1">
 					<div id="comment">
+					<!-- 로그인 안 했을 경우 alert -->
 						<ol class="commentList">
 							<c:forEach items="${commentList}" var="commentList">
 								<p>
 									${commentList.writer} /
 									<fmt:formatDate value="${commentList.regdate}"
-										pattern="yyyy-MM-dd" />/ 
+										pattern="yyyy-MM-dd" />/
 										<c:if test="${commentList.visit==1}">방문했어요</c:if>
 										<c:if test="${commentList.visit==0}">방문 전입니다</c:if>
 
 								</p>
 								<p>${commentList.content}</p>
 								<div>
-									<button type="button" class="commentModifyBtn"
+									<button type="button" class="commentModifyBtn" onclick="openUdt()"
 										data-cno="${commentList.cno }">수정</button>
-									<button type="button" class="commentDeleteBtn"
+									<button type="button" class="commentDeleteBtn" onclick="openDel()"
 										data-cno="${commentList.cno }">삭제</button>
 								</div>
 								<hr>
 							</c:forEach>
 						</ol>
-						<!-- 리뷰 -->
+						<!-- 댓글 작성 -->
 						<h4>Add Review</h4>
 					</div>
 					<div>
@@ -109,7 +121,8 @@
 							<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
 							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
 							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
-
+							
+							 <div class="comUpdate">
 							<p>
 								<label for="id">댓글 작성자</label> <input type="text" name="id"
 									id="id" value=" ${id }">
@@ -120,8 +133,8 @@
 							<p>
 								<button type="button" class="commentWriteBtn">댓글 작성</button>
 							</p>
-						</form>
-
+							</div> 
+						</form> 
 					</div>
 				</div>
 			</div>
@@ -246,39 +259,45 @@
 	
 </script>
 
-<script type="text/javascript">
-	//댓글 작성
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+
+
+
+ <script type="text/javascript">
+ 		 //댓글 작성
 		$(".commentWriteBtn").on("click", function() {
 			var formObj = $("form[name='commentForm']");
 			var test = $(".rev-radi:checked").val();
 			formObj.attr("action", "/board/commentWrite");
 			formObj.submit();
 		});
-
-		//댓글 수정 View
-		$(".commentModifyBtn").on(
-				"click",
-				function() {
-					location.href = "/board/commentModify?num=${vo.num}"
-							+ "&page=${scri.page}"
-							+ "&perPageNum=${scri.perPageNum}"
-							+ "&searchType=${scri.searchType}"
-							+ "&keyword=${scri.keyword}" + "&cno="
-							+ $(this).attr("data-cno");
-				});
-
-		//댓글 삭제 View
-		$(".commentDeleteBtn").on(
-				"click",
-				function() {
-					location.href = "/board/commentDelete?num=${vo.num}"
-							+ "&page=${scri.page}"
-							+ "&perPageNum=${scri.perPageNum}"
-							+ "&searchType=${scri.searchType}"
-							+ "&keyword=${scri.keyword}" + "&cno="
-							+ $(this).attr("data-cno");
-	});// 댓글
-		// 목록 (수정중)
+							
+		//댓글 수정 팝업
+			$(".commentModifyBtn").on("click", function openUdt (){
+				window.name ="updateComment";
+			window.open("/board/commentModify?num=${vo.num}"
+					+ "&page=${scri.page}"
+					+ "&perPageNum=${scri.perPageNum}"
+					+ "&searchType=${scri.searchType}"
+					+ "&keyword=${scri.keyword}" + "&cno="
+					+ $(this).attr("data-cno"), "container", "width=500, height=300, resizable= no, scrollbars= no");
+		});
+							
+	//댓글 삭제 팝업
+	$(".commentDeleteBtn").on("click",function openDel() {
+		window.name = "deleteComment";
+				window.open("/board/commentDelete?num=${vo.num}"
+						+ "&page=${scri.page}"
+						+ "&perPageNum=${scri.perPageNum}"
+						+ "&searchType=${scri.searchType}"
+						+ "&keyword=${scri.keyword}" + "&cno="
+						+ $(this).attr("data-cno"),"container", "width=500, height=300, resizable= no, scrollbars= no");
+	})
+	
+	
+	
+		// 목록 
 		$(".list_btn").on("click", function(){
 
 		location.href = "/board/list?page=${scri.page}"
@@ -286,6 +305,6 @@
 		+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
 		});
 
-</script>
+</script> 
 
 

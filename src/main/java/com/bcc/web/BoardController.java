@@ -63,61 +63,58 @@ public class BoardController {
 		return boardList;
 	}
 
-	// 글 전체 목록
-	// http://localhost:8088/board/listAll
-	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
-	public void listAll(@ModelAttribute("result") String result, SearchCriteria scri, Model model, HttpSession session)
-			throws Exception {
-		session.setAttribute("id", "admin");
-		// 조회수
-		session.setAttribute("upFlag", "1");
-
-		// 글 정보를 가지고 오기
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(service.listCount(scri));
-		
-		log.info(pageMaker+"");
-		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("boardList", service.list(scri));
-
-	}
+	/*
+	 * // 글 전체 목록 // http://localhost:8088/board/listAll
+	 * 
+	 * @RequestMapping(value = "/listAll", method = RequestMethod.GET) public void
+	 * listAll(@ModelAttribute("result") String result, SearchCriteria scri, Model
+	 * model, HttpSession session) throws Exception { // 조회수
+	 * session.setAttribute("upFlag", "1");
+	 * 
+	 * // 글 정보를 가지고 오기 PageMaker pageMaker = new PageMaker();
+	 * pageMaker.setCri(scri); pageMaker.setTotalCount(service.listCount(scri));
+	 * 
+	 * log.info(pageMaker+""); model.addAttribute("pageMaker", pageMaker);
+	 * model.addAttribute("boardList", service.list(scri));
+	 * 
+	 * }
+	 */
 
 	// http://localhost:8088/board/read?num=12
 	/* 글 본문 */
-	@RequestMapping(value = "/read", method = RequestMethod.GET )
-	public String readGET(
-			@RequestParam(value = "num", required = false) Integer num, @ModelAttribute("scri") SearchCriteria scri, Model model, HttpSession session) throws Exception {
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public String readGET(@RequestParam(value = "num", required = false) Integer num,
+			@ModelAttribute("scri") SearchCriteria scri, Model model, HttpSession session) throws Exception {
 		log.info("글번호" + num);
-		
-		//조회수
+
+		// 조회수
 		String upFlag = (String) session.getAttribute("upFlag");
 
 		if (upFlag.equals("1")) {
 			service.updateBoardCount(num);
 			session.setAttribute("upFlag", "0");
 		}
-		
-		//게시물 댓글 수
-		service.updateCommentCnt(num); 
-		
-		BoardVO vo = service.readBoard(num);
+
+		BoardVO vo = service.getTour(num);
 		model.addAttribute("vo", vo);
 		model.addAttribute("scri", scri);
 
 		// 댓글리스트
-		List<CommentVO> commentList = commentservice.readComment(vo.getNum());
+		List<CommentVO> commentList = commentservice.readComment(num);
 		model.addAttribute("commentList", commentList);
 
-		return "board/read";
+		return "board/readTour";
 
 	}
 
-	// http://localhost:8088/board/list?Page=5
+	// http://localhost:8088/board/list
 	// 게시판 목록 조회
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model, @ModelAttribute("scri") SearchCriteria scri, HttpSession session) throws Exception {
 		model.addAttribute("boardList", service.list(scri));
+
+		session.setAttribute("id", "admin");
+		log.info(session.getAttribute("id") + "");
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
@@ -131,21 +128,21 @@ public class BoardController {
 	}
 
 	// 댓글 작성
+
 	@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)
 	public String commentWirte(CommentVO vo,
-			 @ModelAttribute("scri") SearchCriteria scri,  RedirectAttributes rttr,
-			HttpSession session) throws Exception {
 
+			@ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr, HttpSession session)
+			throws Exception {
 
 		// 세션에 저장된 회원의 아이디
 		String id = (String) session.getAttribute("id");
 		// 테스트용 아이디 생성
-		
+
 		vo.setWriter(id);
 
-		
-		log.info(vo.getNum()+"");
-		commentservice.wriComment(vo);
+		log.info(vo.getNum() + "");
+		commentservice.createComment(vo);
 
 		rttr.addAttribute("num", vo.getNum());
 		rttr.addAttribute("page", scri.getPage());
@@ -153,58 +150,60 @@ public class BoardController {
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
 
-		return "redirect:/board/read?num="+vo.getNum();
+		return "redirect:/board/read?num=" + vo.getNum();
 	}
-	
-	//댓글 수정 GET
-		@RequestMapping(value="/commentModify", method = RequestMethod.GET)
-		public String commentModifyView(CommentVO vo, SearchCriteria scri, Model model) throws Exception {
-			
-			model.addAttribute("commentModify", commentservice.selectComment(vo.getCno()));
-			model.addAttribute("scri", scri);
-			
-			return "board/commentModify";
-		}
-		
-		//댓글 수정 POST
-		@RequestMapping(value="/commentModify", method = RequestMethod.POST)
-		public String commentModify(CommentVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
-			
-			commentservice.modify(vo);
-			
-			rttr.addAttribute("num", vo.getNum());
-			rttr.addAttribute("page", scri.getPage());
-			rttr.addAttribute("perPageNum", scri.getPerPageNum());
-			rttr.addAttribute("searchType", scri.getSearchType());
-			rttr.addAttribute("keyword", scri.getKeyword());
-			
-			return  "redirect:/board/read?num="+vo.getNum();
-		}
-	
-		//댓글 삭제 GET
-		@RequestMapping(value="/commentDelete", method = RequestMethod.GET)
-		public String commentDeleteView(CommentVO vo, SearchCriteria scri, Model model) throws Exception {
 
-			model.addAttribute("commentDelete", commentservice.selectComment(vo.getCno()));
-			model.addAttribute("scri", scri);
-			
-			
-			return "board/commentDelete";
-		}
-		
-		//댓글 삭제
-		@RequestMapping(value="/commentDelete", method = RequestMethod.POST)
-		public String commentDelete(CommentVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
-			
-			commentservice.delete(vo);
-			
-			rttr.addAttribute("num", vo.getNum());
-			rttr.addAttribute("page", scri.getPage());
-			rttr.addAttribute("perPageNum", scri.getPerPageNum());
-			rttr.addAttribute("searchType", scri.getSearchType());
-			rttr.addAttribute("keyword", scri.getKeyword());
-			
-			return  "redirect:/board/read?num="+vo.getNum();
-		}
+	// 댓글 수정 GET
 
+	@RequestMapping(value = "/commentModify", method = RequestMethod.GET)
+	public String commentModifyView(CommentVO vo, SearchCriteria scri, Model model) throws Exception {
+
+		model.addAttribute("commentModify", commentservice.selectComment(vo.getCno()));
+		model.addAttribute("scri", scri);
+
+		return "board/commentModify";
+	}
+
+	// 댓글 수정 POST
+
+	@RequestMapping(value = "/commentModify", method = RequestMethod.POST)
+	public String commentModify(CommentVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+
+		commentservice.update(vo);
+
+		rttr.addAttribute("num", vo.getNum());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+
+		return "redirect:/board/read?num=" + vo.getNum();
+	}
+
+	// 댓글 삭제 GET
+
+	@RequestMapping(value = "/commentDelete", method = RequestMethod.GET)
+	public String commentDeleteView(CommentVO vo, SearchCriteria scri, Model model) throws Exception {
+
+		model.addAttribute("commentDelete", commentservice.selectComment(vo.getCno()));
+		model.addAttribute("scri", scri);
+
+		return "board/commentDelete";
+	}
+
+	// 댓글 삭제
+
+	@RequestMapping(value = "/commentDelete", method = RequestMethod.POST)
+	public String commentDelete(CommentVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+
+		commentservice.delete(vo);
+
+		rttr.addAttribute("num", vo.getNum());
+		rttr.addAttribute("page", scri.getPage());
+		rttr.addAttribute("perPageNum", scri.getPerPageNum());
+		rttr.addAttribute("searchType", scri.getSearchType());
+		rttr.addAttribute("keyword", scri.getKeyword());
+
+		return "redirect:/board/read?num=" + vo.getNum();
+	}
 }

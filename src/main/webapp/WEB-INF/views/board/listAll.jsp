@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <jsp:include page="../include/header.jsp" />
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
 <html>
 <style type="text/css">
 li {
@@ -32,16 +33,14 @@ li {
 				<select id="category" class="category" name="searchType"
 					onchange="search()">
 					<option value="tc"
-						<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>카테고리
-						선택</option>
-					<option value="강서구"
-						<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>강서구</option>
+						<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>카테고리 선택</option>
+					<option value="강서구">강서구</option>
 					<option value="금정구">금정구</option>
 					<option value="기장군">기장군</option>
 					<option value="남구">남구</option>
 					<option value="동구">동구</option>
 					<option value="동래구">동래구</option>
-					<option value="부산진구">부산진구</option>
+					<option value="부산진구">부산진구</option> 
 					<option value="북구">북구</option>
 					<option value="사상구">사상구</option>
 					<option value="사하구">사하구</option>
@@ -70,13 +69,10 @@ li {
 			<c:forEach var="vo" items="${boardList }">
 				<div class="col-lg-4 col-md-6">
 					<div class="room-item">
-						<a href="/board/read?num=${vo.num }"><img
+						<a href="/board/read?num=${vo.num}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><img
 							src="${vo.thumbnail }" alt=""></a>
 						<div class="ri-text">
-							<h4>${vo.title }</h4>
-						<%-- 	<a
-								href="/board/read?num=${vo.num}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out
-									value="${vo.title}" /></a> --%>
+						<h4><c:out value="${vo.title}" /></h4> 
 							<div>
 								<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>${vo.totalCnt }
 								<i class="fa fa-commenting-o" aria-hidden="true"></i>

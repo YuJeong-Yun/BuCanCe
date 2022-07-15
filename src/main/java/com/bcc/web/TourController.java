@@ -34,10 +34,10 @@ public class TourController {
 	@RequestMapping(value = "/tourInfo", method = RequestMethod.GET)
 	public String tourInfoGET(@RequestParam("addr") String addr, Model model) {
 		
-		if(service.restaurantLists(addr) == null) {
+		if(service.foodLists(addr) == null) {
 			model.addAttribute("addr",addr);
 		} else {
-			model.addAttribute("resVO",service.restaurantLists(addr));
+			model.addAttribute("resVO",service.foodLists(addr));
 			model.addAttribute("addr",addr);
 		}
 		
@@ -48,7 +48,7 @@ public class TourController {
 	@RequestMapping(value = "/getRest", method = RequestMethod.GET)
 	public void apiTest() {
 		try {
-			service.getRestaurantInfo(service.restaurantLists("부산진구"));
+			service.foodLists(service.foodLists("부산진구"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -57,7 +57,7 @@ public class TourController {
 	// 맛집, 관광지 상세내역
 	@RequestMapping(value = "/infoDetail", method = RequestMethod.GET)
 	public String infoDetailGET(@RequestParam("title") String title, Model model) {
-		model.addAttribute("resVO",service.getInfoDetail(title)); 
+		model.addAttribute("resVO",service.getFood(title)); 
 		//log.info(service.getInfoDetail(title)+"");
 		
 		return "/tour/infoDetail";

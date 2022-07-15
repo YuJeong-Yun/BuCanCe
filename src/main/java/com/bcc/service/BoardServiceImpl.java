@@ -16,15 +16,15 @@ public class BoardServiceImpl implements BoardService{
 
 		//글 전체 목록
 		@Override
-		public List<BoardVO> listAll() throws Exception {
-			List<BoardVO> boardList = dao.listAll();
+		public List<BoardVO> tourLists() throws Exception {
+			List<BoardVO> boardList = dao.tourLists();
 			return boardList;
 		}
 
 		//글 번호에 해당 되는 페이지 상세보기
 		@Override
-		public BoardVO readBoard(int num) throws Exception {
-			BoardVO vo = dao.getBoard(num);
+		public BoardVO getTour(int num) throws Exception {
+			BoardVO vo = dao.getTour(num);
 			return vo;
 		}	
 		// 조회수

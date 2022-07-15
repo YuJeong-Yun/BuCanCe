@@ -15,18 +15,18 @@ public class TourDAOImpl implements TourDAO{
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String NAMESPACE = "com.bcc.mapper.tourMapper";
+	private static final String NAMESPACE = "com.bcc.mapper.BoardMapper";
 
 	@Override
-	public List<BoardVO> restaurantLists(String addr) {
+	public List<BoardVO> foodLists(String addr) {
 		
-		return sqlSession.selectList(NAMESPACE+".restaurantLists", addr);
+		return sqlSession.selectList(NAMESPACE+".foodLists", addr);
 	}
 
 	@Override
-	public BoardVO infoDetail(String title) {
+	public BoardVO getFood(String title) {
 		
-		return sqlSession.selectOne(NAMESPACE+".infoDetail", title);
+		return sqlSession.selectOne(NAMESPACE+".getFood", title);
 	}
 	
 	

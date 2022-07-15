@@ -26,20 +26,20 @@ public class TourServiceImpl implements TourService{
 	private TourDAO dao;
 
 	@Override
-	public List<BoardVO> restaurantLists(String addr) {
+	public List<BoardVO> foodLists(String addr) {
 		// TODO Auto-generated method stub
-		return dao.restaurantLists(addr);
+		return dao.foodLists(addr);
 	}
 	
 	@Override
-	public BoardVO getInfoDetail(String title) {
+	public BoardVO getFood(String title) {
 
-		return dao.infoDetail(title);
+		return dao.getFood(title);
 	}
 
 
 	@Override
-	public void getRestaurantInfo(List<BoardVO> restList) throws Exception {
+	public void foodLists(List<BoardVO> restList) throws Exception {
 		 String clientId = "UedGUQNgMnXQN3xAYkO2"; //애플리케이션 클라이언트 아이디값"
 		    String clientSecret = "PKJuuL8BVC"; //애플리케이션 클라이언트 시크릿값"
 

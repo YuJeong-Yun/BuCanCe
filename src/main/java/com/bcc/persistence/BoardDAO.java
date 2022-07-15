@@ -8,10 +8,10 @@ import com.bcc.domain.SearchCriteria;
 public interface BoardDAO {
 
 	// 글 리스트
-	public List<BoardVO> listAll() throws Exception;
+	public List<BoardVO> tourLists() throws Exception;
 
 	// 글 내용
-	public BoardVO getBoard(Integer bno) throws Exception;
+	public BoardVO getTour(Integer bno) throws Exception;
 
 	// 조회수 1 증가
 	public void updateBoardCnt(Integer num) throws Exception;
