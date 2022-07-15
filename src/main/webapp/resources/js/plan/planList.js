@@ -126,6 +126,7 @@ function setGrpNum(num) {
 }
 // 초대 멤버 검색
 function showMember() {
+	console.log('멤버 검색');
 	let searchID = searchInput.value.trim();
 
 	$.ajax({
@@ -136,7 +137,6 @@ function showMember() {
 			grpNum: grpNum
 		},
 		success: function(item) {
-			console.log(item);
 			// 기존 id 검색 결과 제거
 			while (memberList.hasChildNodes()) {
 				memberList.removeChild(memberList.firstChild);
@@ -158,14 +158,26 @@ function showMember() {
 						"<div class=member--id>" + item.memberArr[i].id + "</div>" +
 						"<div class=member--name>" + item.memberArr[i].name + "</div>";
 
+					// 초대 중인 회원 아이디 배열
+					let invitingIDList = [];
+					item.invitingArr.forEach(member => {
+						invitingIDList.push(member.id);
+					});
+					// 그룹 회원 아이디 배열
+					let grpMemberIDList = [];
+					item.grpMemberArr.forEach(member => {
+						grpMemberIDList.push(member.id);
+					});
+					
 					// 초대 중인 회원일 경우
-					if (item.invitingArr.includes(item.memberArr[i].id)) {
+					if (invitingIDList.includes(item.memberArr[i].id)) {
 						memberInner += "<button type=button class='btn btn-light' disabled>초대중</button>";
 
-						// 이미 그룹 회원일 경우
-					} else if (item.grpMemberArr.includes(item.memberArr[i].id)) {
+					// 이미 그룹 회원일 경우
+					} else if (grpMemberIDList.includes(item.memberArr[i].id)) {
 						memberInner += "<button type=button class='btn btn-light' disabled>멤버</button>";
 
+					// 초대 가능한 회원일 경우
 					} else {
 						memberInner += "<button type=button class='btn btn-primary add-member' onclick='inviteMember(event, \"" + item.memberArr[i].id + "\")'>초대</button>";
 
