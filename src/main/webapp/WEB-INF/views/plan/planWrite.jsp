@@ -167,9 +167,12 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 		</ul>
 
       <div class="btn-container">
-        <input type="button" value="선택 초기화" class="btn--reset">
-      	<input type="button" value="경로 삭제" class="btn--del-path">
-    	<input type="button" value="경로 확인" class="btn--check-path">
+        <input type="button" value="선택 초기화" class="btn--reset" />
+        <div>|</div>
+        <input type="button" value="직선 경로 표시" class="btn--line-path" />
+        <div>|</div>
+      	<input type="button" value="경로 삭제" class="btn--del-path" />
+    	<input type="button" value="경로 확인" class="btn--check-path" />
       </div>
     </div>
     <p id="result"></p>

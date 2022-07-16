@@ -354,22 +354,29 @@
 	bottom: 175px;
 	right: 10px;
 }
+.make-plan .inner > .btn-container > * {
+	margin-right: 14px;
+}
 .make-plan .inner > .btn-container input {
 	color: #fff;
 	border: none;
+	border-radius: 5px;
 	height: 30px;
 	box-shadow: 2px 2px 3px #bbb;
 	font-size: 15px;
 }
 .make-plan .inner > .btn-container .btn--reset {
 	background-color: #efefef;
-	margin-right: 7px;
 	color: #333;
 }
+.make-plan .inner > .btn-container .btn--line-path {
+	background-color: #2679df;
+}
 .make-plan .inner > .btn-container .btn--del-path {
+	background-color: #96bbe7;
 	margin-right: 7px;
-	background-color: #4fc3f7;
 }
 .make-plan .inner > .btn-container .btn--check-path {
 	background-color: #2679df;
+	margin-right: 0;
 }
