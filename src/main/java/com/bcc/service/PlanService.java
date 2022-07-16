@@ -86,6 +86,5 @@ public interface PlanService {
 
 	// 여행 경로 목록 가져오기
 	public List<List<Object>> getPlanList(int num, List<HotelVO> hotellist);
-	
 
 }
