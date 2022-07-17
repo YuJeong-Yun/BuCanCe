@@ -27,6 +27,7 @@ import com.bcc.domain.roomRefundVO;
 import com.bcc.domain.roomSearch;
 import com.bcc.persistence.roomDAO;
 
+
 @Service
 public class roomServiceImpl implements roomService{
 
@@ -38,6 +39,57 @@ public class roomServiceImpl implements roomService{
 			LoggerFactory.getLogger(roomServiceImpl.class);
 	
 	
+//	//숙소목록 페이지
+//	@Override
+//	public JSONArray roomList() {
+//		
+//		log.info("service : 숙소목록불러오기");
+//
+//		// Jsoup를 이용해서 크롤링 - 여기어때
+//		String url = "https://www.goodchoice.kr/product/home/12";
+//
+//		Document doc = null; // Document에 페이지의 전체 소스가 저장됨
+//
+//		try {
+//			doc = Jsoup.connect(url).get();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		// select를 이용하여 원하는 태그를 선택
+//		Elements room_title = doc.select(".list_2.adcno1 .name strong"); //숙소명
+//		Elements room_pic = doc.select(".pic .lazy.align");    //숙소그림
+//		Elements room_rank = doc.select(".name p.score");   //별점
+//		Elements room_area = doc.select(".name > p:last-child");  //숙소지역
+//		Elements room_price = doc.select(".map_html > p:nth-child(1) > b");  //숙소대실가격
+//		Elements room_price2 = doc.select(".map_html > p:nth-child(2) > b"); //숙소숙박가격
+//		Elements room_link = doc.select(".list_2.adcno1 > a"); //페이지이동후 크롤링할 페이지주소
+//		
+//		// JSON 형태로 숙소 정보 저장
+//		JSONArray roomList = new JSONArray();
+//
+//		for (int i = 0; i < room_title.size(); i++) {
+//			// JSONObject에 키:값 형태로 데이터 저장
+//			JSONObject obj = new JSONObject();
+//
+//			obj.put("room_title", room_title.get(i).text());
+//			obj.put("room_pic", room_pic.get(i).attr("data-original"));
+//			obj.put("room_rank", room_rank.get(i).text());
+//			obj.put("room_area", room_area.get(i).text());
+//			obj.put("room_price", room_price.get(i).text().replace("원",""));
+//			obj.put("room_price2", room_price2.get(i).text().replace("원",""));
+//			obj.put("room_link", room_link.get(i).attr("href"));
+//
+//			// roomList에 생성한 JSONObject 추가
+////				log.info(obj+"");
+//			roomList.add(obj);
+//		}
+//		System.out.println(" roomList : " + roomList);
+//		
+//		 return roomList;
+//	}
+
 	//숙소목록 페이지
 	@Override
 	public JSONArray roomList() {
@@ -88,8 +140,6 @@ public class roomServiceImpl implements roomService{
 		
 		 return roomList;
 	}
-
-	
 	
 	
 	//숙소목록페이지에서 검색한 정보만 불러오게함
@@ -131,7 +181,9 @@ public class roomServiceImpl implements roomService{
 			String[] titleArr = rs.transTitle(room_title, rs.getPlace_name());
 			String title = rs.getPlace_name();
 			//제목검색
-		
+			log.info(titleArr+"");
+			log.info(title+"");
+			
 		//지역을 선택하지않은 경우
 		if(rs.getArea().equals("favorite")) {	
 			
@@ -719,10 +771,18 @@ public class roomServiceImpl implements roomService{
 		log.info("a = "+a);
 		
 		//a 문자부분
-		String b = "bcc";
+		String b = "bvsdvsvs";
+		int c=0;
 		
-		//a 숫자부분
-		int c = Integer.parseInt(a.replaceAll("[^0-9]",""));
+		//데이터 값이 없을때는 bcc1이 들어가고 있을때는 bcc2,bcc3....로 들어감
+		if(a==null) {
+			b = "bvsdvsvs";
+			c= 0;
+		}else {
+			//a의 숫자부분
+			c = Integer.parseInt(a.replaceAll("[^0-9]",""));
+			
+		}
 		
 		String d = b+(c+1);
 		
@@ -749,10 +809,20 @@ public class roomServiceImpl implements roomService{
 		String a = dao.roomSearchRefund();
 		
 		//a 문자부분
-		String b = "rf";
+		String b = "rfsrvdvfv";
 				
 		//a 숫자부분
-		int c = Integer.parseInt(a.replaceAll("[^0-9]",""));
+		int c=0;
+		
+		
+		if(a==null) {
+			
+			b = "rfsrvdvfv";
+			c= 0;
+		}else {
+			c = Integer.parseInt(a.replaceAll("[^0-9]",""));
+			
+		}
 				
 		String d = b+(c+1);
 		
