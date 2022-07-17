@@ -102,8 +102,13 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 		<div class="container">
 			<div class="row">
 				<c:set var="a" />
+<<<<<<< HEAD
 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
 <%-- 				<c:forEach items="${roomList}" begin="0" end="10"> --%>
+=======
+<%-- 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}"> --%>
+				<c:forEach items="${roomList}" begin="0" end="10">
+>>>>>>> 9445dd3af79695b629e81d74e1a4121a6760a8d2
 			
 					<div class="col-lg-4 col-md-6" style="height:550px;">
 					

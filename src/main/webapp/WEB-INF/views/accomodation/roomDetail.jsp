@@ -7,7 +7,10 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<<<<<<< HEAD
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/acc/yd.css" type="text/css">
+=======
+>>>>>>> 9445dd3af79695b629e81d74e1a4121a6760a8d2
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 </head>
 <body>
@@ -197,7 +200,11 @@
 <!-- Room Details Section End -->
 
 	<jsp:include page="../include/footer.jsp" />
+<<<<<<< HEAD
 <script src="${pageContext.request.contextPath}/resources/js/slideShow.js"></script>
+=======
+
+>>>>>>> 9445dd3af79695b629e81d74e1a4121a6760a8d2
 
 </body>
 

@@ -51,6 +51,7 @@ public class accomodationController {
 
 	}
 	
+<<<<<<< HEAD
 	// http://localhost:8088/accomodation/test2
 		@RequestMapping(value = "/test2", method = RequestMethod.GET)
 		public void test2GET(Model model) throws IOException {
@@ -63,6 +64,9 @@ public class accomodationController {
 			model.addAttribute("roomList", roomList);
 			
 		}
+=======
+	
+>>>>>>> 9445dd3af79695b629e81d74e1a4121a6760a8d2
 	
 	// 숙소목록을 보여주는 페이지로 이동
 	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
