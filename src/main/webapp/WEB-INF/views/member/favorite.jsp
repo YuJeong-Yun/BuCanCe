@@ -12,12 +12,6 @@ li {
 }
 </style>
 <script type = "text/javascript">
-window.onload = function thumbBase(){
-	var checkLog = $("#checkLogin");
-        if(${memberVO.id } != {id}){
-			checkLog.html("<b>정보가 없습니다.</b>");
-		}
-};
 
 </script>
 	<!-- 1조건 : 세션에 저장된 id값과 thumb 테이블에 저장된 _id 값이 동일 -->
@@ -31,7 +25,6 @@ window.onload = function thumbBase(){
 			<div class="col-lg-12">
 				<div class="breadcrumb-text">
 					<h2>favorite.jsp</h2>
-
 				</div>
 			</div>
 		</div>
@@ -51,11 +44,7 @@ window.onload = function thumbBase(){
 							src="${vo.thumbnail }" alt=""></a>
 						<div class="ri-text">
 							<h4>${vo.title }</h4>
-							<div>
-								<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>${vo.totalCnt }
-								<i class="fa fa-commenting-o" aria-hidden="true"></i> ${vo.commentCnt }
-									 <i class="fa fa-heart-o" aria-hidden="true"></i>
-							</div>
+							<input type ="button" value = "찜하기 취소">
 						</div>
 					</div>
 				</div>

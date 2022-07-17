@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.MemberVO;
+import com.bcc.domain.SearchCriteria;
 
 public interface MemberService {
 
@@ -38,6 +39,7 @@ public interface MemberService {
     // license Down
 	public void liDown(String license);
 	
-	// 좋아요 리스트
-	public List<BoardVO> getThumbList() throws Exception;
+	/* 게시물 목록 조회 */
+	public List<BoardVO> getThumbList(String id) throws Exception;
+	
 }

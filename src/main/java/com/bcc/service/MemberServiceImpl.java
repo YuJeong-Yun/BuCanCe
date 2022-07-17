@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.MemberVO;
+import com.bcc.domain.SearchCriteria;
 import com.bcc.persistence.BoardDAO;
 import com.bcc.persistence.MemberDAO;
 
@@ -116,11 +117,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<BoardVO> getThumbList() throws Exception {
+	public List<BoardVO> getThumbList(String id) throws Exception {
 		
-		List<BoardVO> thumbList = dao.thumbListAll();
-		
-		return thumbList;
+		return dao.thumbList(id);
 	}
 
 	

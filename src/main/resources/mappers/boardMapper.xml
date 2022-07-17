@@ -13,12 +13,13 @@
 		order by num asc
 		]]>
 	</select>
+	
 	<!-- 글 내용 -->
 	<select id="getBoard" resultType="BoardVO">
 		select * from tourist_spot
 		where num = #{num}
-
 	</select>
+	
 	<!-- 조회수 -->
 	<select id="updateBoardCnt" resultType="BoardVO"
 		parameterType="int">
@@ -26,8 +27,8 @@
 		where num
 		= #{num}
 		and t_category = 0;
-
 	</select>
+	
 	<!-- 게시판 카테고리 분류 -->
 	<select id="category" resultType="BoardVO"
 		parameterType="String">
@@ -37,6 +38,7 @@
 		and
 		t_category = 0;
 	</select>
+	
 	<!-- 게시물 페이징 -->
 	<select id="listPage" resultType="BoardVO">
  		<![CDATA[

@@ -82,24 +82,20 @@ public class MemberController {
 		// http://localhost:8088/index
 		// http://localhost:8088/favorite
 		@RequestMapping(value = "/favorite", method = RequestMethod.GET)
-		public String listAll(@ModelAttribute("result") String result, SearchCriteria scri, MemberVO vo, Model model, HttpSession session)
+		public String thumbList(@ModelAttribute("result") String result, SearchCriteria scri, MemberVO vo, Model model, HttpSession session)
 				throws Exception {
 			
-			// 조회수
-			session.setAttribute("upFlag", "1");
+			String id = (String)session.getAttribute("id");
 			
 			// 글 정보를 가지고 오기
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(scri);
 			pageMaker.setTotalCount(bs.listCount(scri));
 
-//			log.info(pageMaker+"");
-//			model.addAttribute("pageMaker", pageMaker);
-//			model.addAttribute("boardList", bs.list(scri));
-			
 			log.info(pageMaker+"");
 			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("boardList", bs.list(scri));
+			log.info(" 로그인중인 id : "+ id );
+			model.addAttribute("boardList", service.getThumbList(id));
 			
 			return "/member/favorite";
 
@@ -151,6 +147,7 @@ public class MemberController {
 			
 			// db동작 호출을 위해서 서비스 동작을 호출 - loginCheck()
 			MemberVO resultVO = service.loginCheck(vo);
+			
 			// 로그인 실패 - 페이지 이동(로그인페이지)
 			if(resultVO == null) {
 				log.info("로그인 정보 없음! 페이지 이동 ");
