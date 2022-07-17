@@ -61,7 +61,7 @@ public class PlanDAOImpl implements PlanDAO {
 	}
 
 	@Override
-	public List<PlanMemberVO> getGrpList(String id) {
+	public List<PlanVO> getGrpList(String id) {
 		return sqlSession.selectList(NAMESPACE + ".getGrpList", id);
 	}
 
@@ -142,22 +142,31 @@ public class PlanDAOImpl implements PlanDAO {
 
 	@Override
 	public void modifyPlan(PlanVO vo) {
-		sqlSession.update(NAMESPACE+".modifyPlan", vo);
-	}
-
-	@Override
-	public PlanVO getPlanInfo(int num) {
-		return sqlSession.selectOne(NAMESPACE+".getPlanInfo", num);
+		sqlSession.update(NAMESPACE + ".modifyPlan", vo);
 	}
 
 	@Override
 	public BoardVO getTourInfo(int num) {
-		return sqlSession.selectOne(NAMESPACE+".getTourInfo", num);
+		return sqlSession.selectOne(NAMESPACE + ".getTourInfo", num);
 	}
 
 	@Override
 	public BoardVO getRestaurantInfo(int num) {
-		return sqlSession.selectOne(NAMESPACE+".getRestaurantInfo", num);
+		return sqlSession.selectOne(NAMESPACE + ".getRestaurantInfo", num);
 	}
 
+	@Override
+	public void delPlan(int num) {
+		sqlSession.delete(NAMESPACE + ".delPlan", num);
+	}
+
+	@Override
+	public void deleteInvitingList(int grp_num) {
+		sqlSession.delete(NAMESPACE + ".deleteInvitingList", grp_num);
+	}
+
+	@Override
+	public PlanVO getPlanInfo(int num) {
+		return sqlSession.selectOne(NAMESPACE + ".getPlanInfo", num);
+	}
 }

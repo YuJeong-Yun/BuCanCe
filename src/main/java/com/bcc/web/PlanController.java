@@ -31,7 +31,7 @@ public class PlanController {
 
 	// 서비스 객체 주입
 	@Inject
-	private PlanService service;
+	private PlanService planService;
 
 	// 플랜 목록 페이지 - GET
 	// http://localhost:8088/plan/planList
@@ -39,48 +39,37 @@ public class PlanController {
 	public void planListGET(HttpSession session, Model model) throws Exception {
 		log.info(" planListGET() 호출 ");
 
-		session.setAttribute("id", "yun1");
+		session.setAttribute("id", "yun2");
 		String id = (String) session.getAttribute("id");
 
 		// 회원 license 가져오기
-		String license = service.getLicense(id);
-		model.addAttribute("license", license);
+		model.addAttribute("license", planService.getLicense(id));
 
 		// 초대받은 그룹 목록 가져오기
-		List<GrpAcceptVO> grpAcceptList = service.getGrpAcceptList(id);
-		model.addAttribute("grpAcceptList", grpAcceptList);
+		model.addAttribute("grpAcceptList", planService.getGrpAcceptList(id));
 
 		// 소속된 그룹 정보 가져오기
-		List<PlanMemberVO> grpList = service.getGrpList(id);
+		List<PlanVO> grpList = planService.getGrpList(id);
 		model.addAttribute("grpList", grpList);
 
-		// 해당 그룹의 멤버 정보 가져오기
-		List<List<MemberVO>> grpMemberList = new ArrayList<>();
-		for (int i = 0; i < grpList.size(); i++) {
-			List<MemberVO> member = service.getGrpMemberList(grpList.get(i).getGrp_num());
-			grpMemberList.add(member);
-		}
-		model.addAttribute("grpMemberList", grpMemberList);
-		// 해당 그룹의 초대중인 멤버 목록 가져오기
-		List<List<GrpAcceptVO>> invitingMemberList = new ArrayList<>();
-		for (int i = 0; i < grpList.size(); i++) {
-			List<GrpAcceptVO> member = service.getInvitingList(grpList.get(i).getGrp_num());
-			invitingMemberList.add(member);
-		}
-		model.addAttribute("invitingMemberList", invitingMemberList);
+		// 회원이 속한 모든 각 그룹의 멤버 정보 가져오기
+		model.addAttribute("grpMemberList", planService.getAllGrpMemberList(grpList));
+		
+		// 회원이 속한 모든 각 그룹의 초대중인 멤버 목록 가져오기
+		model.addAttribute("invitingMemberList", planService.getAllGrpInvitingList(grpList));
 	}
 
 	// 플랜 생성 - POST
 	// http://localhost:8088/plan/addPlan
 	@RequestMapping(value = "/addPlan", method = RequestMethod.POST)
-	public String addPlanPOST(HttpSession session, @ModelAttribute("grp_name") String grp_name) throws Exception {
+	public String addPlanPOST(HttpSession session, String grp_name) throws Exception {
 		log.info(" addPlanPOST() 호출 ");
 
 		String id = (String) session.getAttribute("id");
 		// 그룹 번호 생성
 		int num = 1;
-		if (service.getGrpNum() != null) {
-			num = service.getGrpNum() + 1;
+		if (planService.getGrpNum() != null) {
+			num = planService.getGrpNum() + 1;
 		}
 		// 그룹 생성
 		grp_name = grp_name.trim();
@@ -88,15 +77,15 @@ public class PlanController {
 		vo.setLeader(id);
 		vo.setNum(num);
 		vo.setGrp_name(grp_name);
-		service.createGrp(vo);
+		planService.createGrp(vo);
 
 		// 소속된 그룹 정보 저장
 		PlanMemberVO member = new PlanMemberVO();
 		member.setGrp_num(num);
 		member.setId(id);
-		service.insertGrpMember(member);
+		planService.insertGrpMember(member);
 
-		return "redirect:/plan/planWrite/" + num;
+		return "redirect:/plan/planContent/" + num;
 	}
 
 	// 플랜 작성 - GET
@@ -108,18 +97,18 @@ public class PlanController {
 		model.addAttribute("num", num);
 
 		// 관광지 정보 저장
-		model.addAttribute("tourlist", service.getTourList());
+		model.addAttribute("tourlist", planService.getTourList());
 		// 맛집 정보
-		model.addAttribute("restlist", service.getRestaurantList());
+		model.addAttribute("restlist", planService.getRestaurantList());
 		// 숙소 정보
 		if (session.getAttribute("hotellist") == null) {
 			// 숙소 정보 세션에 저장
-			session.setAttribute("hotellist", service.getHotelList());
+			session.setAttribute("hotellist", planService.getHotelList());
 			log.info("숙소 정보 세션 저장 완료");
 		}
 		
 		// 플랜 정보 전달 
-		model.addAttribute("planList", service.getPlanList(num, (List<HotelVO>) session.getAttribute("hotellist")));
+		model.addAttribute("planList", planService.getPlanList(num, (List<HotelVO>) session.getAttribute("hotellist")));
 
 		return "/plan/planWrite";
 	}
@@ -134,14 +123,18 @@ public class PlanController {
 		// 숙소 정보 없으면 저장
 		if (session.getAttribute("hotellist") == null) {
 			// 숙소 정보 세션에 저장
-			session.setAttribute("hotellist", service.getHotelList());
+			session.setAttribute("hotellist", planService.getHotelList());
 			log.info("숙소 정보 세션 저장 완료");
 		}
 		
 		// 그룹 멤버 전달
-		model.addAttribute("grpMemberList",service.getGrpMemberList(num));
+		model.addAttribute("grpMemberList",planService.getGrpMemberList(num));
+		// 여행 경로 정보 전달
+		model.addAttribute("planList", planService.getPlanList(num, (List<HotelVO>) session.getAttribute("hotellist")));
+		// 초대중인 멤버 리스트 전달
+		model.addAttribute("invitingList",  planService.getInvitingList(num));
 		// 플랜 정보 전달
-		model.addAttribute("planList", service.getPlanList(num, (List<HotelVO>) session.getAttribute("hotellist")));
+		model.addAttribute("plan", planService.getPlanInfo(num));
 		
 		return "/plan/planContent";
 	}

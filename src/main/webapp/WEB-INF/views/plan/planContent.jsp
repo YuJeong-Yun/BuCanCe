@@ -22,23 +22,70 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
       <ul class="member-container">
         <c:forEach var="member" items="${grpMemberList }">
 	        <li>
+			  <!-- 방장이면 별 표시 -->
+			  <c:if test="${grpLeader eq member.id }">
+				<span class="material-icons-outlined leader">star</span>
+			  </c:if>
 	          <div class="member--profile"><img src="${pageContext.request.contextPath }/resources/img/who.jpg" /></div>
 	          <div class="member--id">${member.id }</div>
 	          <div class="member--name">${member.name }</div>
 	        </li>
         </c:forEach>
+		<!-- 방장인 경우 -->
+		<c:if test="${grpLeader eq sessionScope.id }">
+			<!--초대중인 멤버 출력 -->
+			<c:forEach var="invitingMember" items="${invitingList }">
+				<li>
+					<div class="invite-cancle" onclick="inviteCancle(event, ${num}, '${invitingMember.receiver }');">초대 취소</div>
+					<div class="member--id">${invitingMember.receiver}</div>
+					<div class="member--name">${invitingMember.name}</div>
+				</li>
+			</c:forEach>
+			<!-- 초대 버튼 출력 -->
+			<li class="invite-member">
+				<!-- Button trigger modal -->
+				<span class="material-icons-outlined add-group" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setGrpNum(${num})">add_circle</span>
+			</li>
+		</c:if>
       </ul>
     </div>
   </section>
+  <!-- 회원 초대 Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Invite Member</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+			<!-- 모달 본문 -->
+	        <div class="input-group mb-3"> <!-- 아이디 검색창 -->
+			  <input type="text" class="form-control member-search-input" placeholder="아이디를 입력하세요." aria-label="Recipient's username" aria-describedby="button-addon2" onKeypress="javascript:if(event.keyCode==13) {showMember();}">
+			  <button class="btn btn-outline-secondary member-serach" type="button" id="button-addon2" onclick="showMember();">검색</button>
+			</div>
+	       	<ul class="member-list"> <!-- 검색 결과 회원 리스트 -->
+			</ul>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">완료</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 
 
   <!--여행 일정 확인-->
   <section class="tour-plan">
     <div class="inner">
-      <div class="title">부캉스</div>
+      <div class="title">${grpName }</div>
 
       <ul class="plan-container">
+        <!-- 저장된 플랜 없을 경우 출력 -->
+      	<c:if test="${planList eq null}">
+      		<div class="no-plan">그룹 멤버들과 공유할 플랜을 작성해보세요!</div>
+      	</c:if>
         <c:forEach var="datePlan"  items="${planList }">
 	        <li class="plan">
 	          <div class="plan__date">${datePlan[0] }</div>
@@ -64,7 +111,11 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
       </ul>
 
 
-      <button class="update-btn">플랜 수정</button>
+	  <div class="btn-container">
+        <button class="list-btn" onclick="location.href='/plan/planList';">목록</button>
+        <button class="del-btn" onclick="delPlan(event, ${num})">플랜 삭제</button>
+        <button class="update-btn" onclick="location.href='/plan/planWrite/${num}';">플랜 수정</button>
+      </div>
     </div>
   </section>
 
@@ -87,5 +138,6 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	const path = '${pageContext.request.contextPath}';
 	const grp_num = '${num}';
 </script>
-<script src="${pageContext.request.contextPath }/resources/js/plan/planContent.js?v=<%=System.currentTimeMillis() %>"></script>
+<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"	crossorigin="anonymous"></script>
+<script defer src="${pageContext.request.contextPath }/resources/js/plan/planContent.js"></script>
 <jsp:include page="../include/footer.jsp"></jsp:include>

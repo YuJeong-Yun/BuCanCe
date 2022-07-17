@@ -63,9 +63,12 @@ function acceptGrp(event, grp_num) {
 					break;
 				}
 			} // for
-			if (plans.length == 0) {
+			// 제일 첫 번째(생성된지 오래된) 플랜일 경우 제일 밑에 추가
+			// 또는 현재 플랜 하나도 없을 경우 그냥 추가
+			if (grp_num < plans[plans.length - 1].className.substr(3) || plans.length == 0) {
 				planContainer.append(newPlan);
 			}
+
 
 			// 현재 플랜 수 +1
 			nowCnt.innerText = parseInt(nowCnt.innerText) + 1;
@@ -126,7 +129,6 @@ function setGrpNum(num) {
 }
 // 초대 멤버 검색
 function showMember() {
-	console.log('멤버 검색');
 	let searchID = searchInput.value.trim();
 
 	$.ajax({
@@ -151,6 +153,17 @@ function showMember() {
 
 				// 검색 결과 있을 경우
 			} else {
+				// 초대 중인 회원 아이디 배열
+				let invitingIDList = [];
+				item.invitingArr.forEach(member => {
+					invitingIDList.push(member.receiver);
+				});
+				console.log(invitingIDList);
+				// 그룹 회원 아이디 배열
+				let grpMemberIDList = [];
+				item.grpMemberArr.forEach(member => {
+					grpMemberIDList.push(member.id);
+				});
 				// id 검색 결과 목록 나열
 				for (let i = 0; i < item.memberArr.length; i++) {
 					const member = document.createElement('li');
@@ -158,26 +171,16 @@ function showMember() {
 						"<div class=member--id>" + item.memberArr[i].id + "</div>" +
 						"<div class=member--name>" + item.memberArr[i].name + "</div>";
 
-					// 초대 중인 회원 아이디 배열
-					let invitingIDList = [];
-					item.invitingArr.forEach(member => {
-						invitingIDList.push(member.id);
-					});
-					// 그룹 회원 아이디 배열
-					let grpMemberIDList = [];
-					item.grpMemberArr.forEach(member => {
-						grpMemberIDList.push(member.id);
-					});
-					
+
 					// 초대 중인 회원일 경우
 					if (invitingIDList.includes(item.memberArr[i].id)) {
 						memberInner += "<button type=button class='btn btn-light' disabled>초대중</button>";
 
-					// 이미 그룹 회원일 경우
+						// 이미 그룹 회원일 경우
 					} else if (grpMemberIDList.includes(item.memberArr[i].id)) {
 						memberInner += "<button type=button class='btn btn-light' disabled>멤버</button>";
 
-					// 초대 가능한 회원일 경우
+						// 초대 가능한 회원일 경우
 					} else {
 						memberInner += "<button type=button class='btn btn-primary add-member' onclick='inviteMember(event, \"" + item.memberArr[i].id + "\")'>초대</button>";
 
@@ -191,7 +194,7 @@ function showMember() {
 			alert("검색 오류");
 		}
 	}); // $.ajax
-}
+}; // showMember()
 
 
 // 초대
@@ -251,13 +254,13 @@ function inviteCancle(event, grpNum, id) {
 			},
 			success: function(item) {
 				event.target.parentElement.remove();
-				
+
 				// 이미 초대 수락했을 경우
-				if(item == 1) {
+				if (item == 1) {
 					alert('이미 상대가 초대를 수락했습니다.');
-					location.href='/plan/planList';
+					location.href = '/plan/planList';
 				}
-				
+
 			},
 			error: function() {
 				alert('초대 취소 에러!!');
@@ -266,15 +269,16 @@ function inviteCancle(event, grpNum, id) {
 	}
 }
 
+
 ////////////////////////////// 플랜 생성/삭제  //////////////////////////////////
 const addPlanModal = document.querySelector('#exampleModal');
 
 addPlanModal.addEventListener('show.bs.modal', addPlanCheck);
 
 // 플랜 생성 시 생성 가능한 최대 플랜 수 확인
-function addPlanCheck(event){
+function addPlanCheck(event) {
 	const grpCnt = document.querySelector('.plan-cnt .cnt-now').innerText;
-	
+
 	// 생성 가능한 최대 그룹 수 확인
 	if (license == 'free' && grpCnt >= 1) {
 		alert("생성 가능한 최대 플랜 수 입니다.");
@@ -338,5 +342,5 @@ function check() {
 		alert('그룹명을 입력하세요');
 		return false;
 	};
-	
+
 }

@@ -44,9 +44,14 @@
 		delete from grp_accept
 		where grp_num=#{grp_num} and receiver=#{receiver}
 	</delete>
+	
+	<delete id="deleteInvitingList">
+		delete from grp_accept
+		where grp_num = #{grp_num}
+	</delete>
 
-	<select id="getGrpList" resultType="PlanMemberVO">
-		select grp_num, grp_name, leader
+	<select id="getGrpList" resultType="PlanVO">
+		select b.num, grp_name, leader
 		from plan_member a join plan b
 		on a.grp_num = b.num
 		where id = #{id}
@@ -113,7 +118,7 @@
 		select id
 		from plan_member
 		where grp_num = #{grp_num}
-		order by num asc;
+		order by num asc
 	</select>
 
 	<update id="updateLeader">
@@ -173,6 +178,11 @@
 		from plan
 		where num=#{num}
 	</select>
+	
+	<delete id="delPlan">
+		delete from plan
+		where num = #{num}
+	</delete>
 
 </mapper>
   

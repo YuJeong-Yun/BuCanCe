@@ -88,22 +88,10 @@ public class PlanRESTController {
 		vo.setId(id);
 		vo.setGrp_num(grpNum);
 		planService.delPlanMem(vo);
-
-		// 방장이 그룹 나가면 방장 새로 설정
-		String leader = planService.getLeader(grpNum);
-		if (id.equals(leader)) {
-			// 다음 방장 아이디 가져오기
-			String newLeader = planService.getNextLeader(grpNum);
-			log.info(grpNum + "그룹 새 방장 정보 : " + newLeader);
-
-			PlanVO plan = new PlanVO();
-			plan.setLeader(newLeader);
-			plan.setNum(grpNum);
-
-			// 방장 새로 설정
-			planService.updateLeader(plan);
-		}
-
+		
+		// 방장 여부에 따라 방장 새로 설정 - 본인이 마지막 멤버이면 플랜 삭제함
+		log.info("checkLeader 실행 ");
+		planService.checkLeader(id, grpNum);
 	}
 
 	// 아이디 검색
@@ -118,7 +106,6 @@ public class PlanRESTController {
 
 		// 그룹의 초대중인 회원
 		List<GrpAcceptVO> invitingList = planService.getInvitingList(grpNum);
-		System.out.println(invitingList);
 		
 		// 그룹의 멤버
 		List<MemberVO> grpMemberList = planService.getGrpMemberList(grpNum);

@@ -34,7 +34,7 @@ public interface PlanService {
 	public void deleteInvitation(GrpAcceptVO vo);
 
 	// 소속된 그룹 번호 가져오기
-	public List<PlanMemberVO> getGrpList(String id);
+	public List<PlanVO> getGrpList(String id);
 
 	// 그룹 이름 가져오기
 	public String getGrpName(int num);
@@ -66,8 +66,8 @@ public interface PlanService {
 	// 다음 방장 아이디 가져오기
 	public String getNextLeader(int grp_num);
 
-	// 방장 새로 설정
-	public void updateLeader(PlanVO plan);
+	// 방장 여부에 따라 방장 새로 설정
+	public void checkLeader(String id, int grpNum);
 
 	// 전체 관광지 정보 가져오기
 	public List<BoardVO> getTourList();
@@ -86,5 +86,14 @@ public interface PlanService {
 
 	// 여행 경로 목록 가져오기
 	public List<List<Object>> getPlanList(int num, List<HotelVO> hotellist);
+
+	// 회원이 속한 모든 그룹의 멤버 리스트 가져오기
+	public List<List<MemberVO>> getAllGrpMemberList(List<PlanVO> grpList);
+	
+	// 회원이 속한 모든 그룹의 초대중 멤버 리스트 가져오기
+	public List<List<GrpAcceptVO>> getAllGrpInvitingList(List<PlanVO> grpList);
+
+	// 플랜 정보 가져오기
+	public PlanVO getPlanInfo(int num);
 
 }
