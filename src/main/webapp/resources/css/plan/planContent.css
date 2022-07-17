@@ -143,7 +143,12 @@ body {
   font-size: 30px;
   margin-bottom: 30px;
   font-weight: 700;
-
+}
+.tour-plan .description {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 15px;
 }
 .tour-plan ul.plan-container {
   list-style: none;
@@ -244,9 +249,12 @@ body {
 	margin-right: 0;
 }
 .tour-plan .btn-container .list-btn {
-	margin-right: 10px;
+	margin-right: 0;
 } 
-
+.tour-plan .btn-container .separator {
+	margin: 7px;
+	color: #777;
+}
 
 
 

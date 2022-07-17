@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../include/header.jsp" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|
 Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
@@ -23,7 +24,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
         <c:forEach var="member" items="${grpMemberList }">
 	        <li>
 			  <!-- 방장이면 별 표시 -->
-			  <c:if test="${grpLeader eq member.id }">
+			  <c:if test="${plan.leader eq member.id }">
 				<span class="material-icons-outlined leader">star</span>
 			  </c:if>
 	          <div class="member--profile"><img src="${pageContext.request.contextPath }/resources/img/who.jpg" /></div>
@@ -32,7 +33,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	        </li>
         </c:forEach>
 		<!-- 방장인 경우 -->
-		<c:if test="${grpLeader eq sessionScope.id }">
+		<c:if test="${plan.leader eq sessionScope.id }">
 			<!--초대중인 멤버 출력 -->
 			<c:forEach var="invitingMember" items="${invitingList }">
 				<li>
@@ -79,7 +80,14 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
   <!--여행 일정 확인-->
   <section class="tour-plan">
     <div class="inner">
-      <div class="title">${grpName }</div>
+      <!-- 플랜 이름 -->
+      <div class="title">${plan.grp_name }</div>
+      <div class="description">
+      	<!-- 마지막 수정시간 -->
+      	<div class="last-update"><f:formatDate value="${plan.lastUpdate }" pattern="yyyy-MM-dd HH:mm"/> </div>
+      	<!-- 마지막 작성자 -->
+      	<div class="last-writer"><strong style="font-size: 17px; color: #7586c7;">${plan.writer }</strong> 님이 작성</div>
+      </div>
 
       <ul class="plan-container">
         <!-- 저장된 플랜 없을 경우 출력 -->
@@ -113,8 +121,9 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
 	  <div class="btn-container">
         <button class="list-btn" onclick="location.href='/plan/planList';">목록</button>
-        <button class="del-btn" onclick="delPlan(event, ${num})">플랜 삭제</button>
+        <span class="separator">|</span>
         <button class="update-btn" onclick="location.href='/plan/planWrite/${num}';">플랜 수정</button>
+        <button class="del-btn" onclick="delPlan(event, ${num})">플랜 삭제</button>
       </div>
     </div>
   </section>
