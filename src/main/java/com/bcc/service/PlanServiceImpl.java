@@ -267,11 +267,16 @@ public class PlanServiceImpl implements PlanService {
 				switch (planArr[j].charAt(0)) {
 				// 관광지일 경우
 				case 't':
-					planList.add(dao.getTourInfo(tourNum));
+					// 관광지 정보 삭제됐으면 정보 전달 x
+					if (dao.getTourInfo(tourNum) != null) {
+						planList.add(dao.getTourInfo(tourNum));
+					}
 					break;
 				// 맛집일 경우
 				case 'r':
-					planList.add(dao.getRestaurantInfo(tourNum));
+					if (dao.getRestaurantInfo(tourNum) != null) {
+						planList.add(dao.getRestaurantInfo(tourNum));
+					}
 					break;
 				// 숙소일 경우
 				default:
