@@ -28,63 +28,12 @@
 
                 </nav>
                 <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
+                
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">매출 현황</h1>
-                    </div>
-
-
-                    <div class="row">
-                    
-                    <!-- 주간, 월간 차트 출력 -->
-                        <!-- Area Chart -->
-                        <div class="col-xl-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">최신 현황</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                       	<div id="curve_chart" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-xl-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">월간 현황</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <div id="monthly_chart" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 주간, 월간 차트 출력 -->
-
-
-                </div>
-                
-                
-                <!-- 프리미엄 회원 내역 조회 -->
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">기간별 조회</h1>
+                        <h1 class="h3 mb-0 text-gray-800">조회할 기간을 선택해주세요</h1>
                     </div>
                     
                     <div class="card mb-4">
@@ -106,8 +55,34 @@
                                 </div>
                             </div>
                 </div>
-                <!-- 프리미엄 회원 내역 조회, 총 액수 출력 -->
 
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <div class="row">
+                    
+                    <!-- 차트 출력 -->
+                        <div class="col-xl-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">최신 현황</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                        <div id="curve_chart" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 차트 출력 -->
+                </div>
+                
+                
+                <!-- Begin Page Content -->
             </div>
             <!-- End of Main Content -->
 
@@ -117,6 +92,5 @@
     </div>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/admin/profitChart.js"></script>   	   									
 <script src="${pageContext.request.contextPath}/resources/js/admin/vipInfo.js"></script>   									
 <jsp:include page="../include/footer.jsp" />

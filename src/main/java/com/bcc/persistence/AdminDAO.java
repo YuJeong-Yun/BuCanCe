@@ -10,9 +10,6 @@ public interface AdminDAO {
 	// 프리미엄 회원 order 내역
 	public List<PreOrderVO> getPmInfo(String date);
 	
-	// order 내역 회원이 정기구독 회원인지 여부 판단
-	public List<String> getPm(String date);
-	
 	// 정기구독 회원만 보기
 	public List<PreOrderVO> getOnlyPeriod(String date);
 	

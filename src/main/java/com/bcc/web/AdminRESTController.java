@@ -16,7 +16,7 @@ import com.bcc.domain.PreOrderVO;
 import com.bcc.service.AdminService;
 
 @RestController
-@RequestMapping("/admin/*")
+@RequestMapping("/adminRest/*")
 public class AdminRESTController {
 	
 	private static final Logger log = LoggerFactory.getLogger(AdminRESTController.class);
@@ -24,24 +24,21 @@ public class AdminRESTController {
 	@Inject
 	private AdminService service;
 	
+	// 날짜에 해당하는 구독 회원 정보
 	@RequestMapping(value = "/getVipInfo", method = RequestMethod.GET)
 	public List<PreOrderVO> getVipInfo(@RequestParam("date") String date){
 		
 		return service.getPmInfo(date);
 	}
 	
-	@RequestMapping(value = "/getPm", method = RequestMethod.GET)
-	public List<String> test(@RequestParam("date") String date) {
-		
-		return service.getPm(date);
-	}
-	
+	// 일주일간의 최신 수익 차트
 	@RequestMapping(value = "/trendChart", method = RequestMethod.GET)
 	public JSONObject trendChartGET() {
 		
 		return service.getTrendChart();
 	}
 	
+	// 월간 수익 차트(5개월)
 	@RequestMapping(value = "/monthlyChart", method = RequestMethod.GET)
 	public JSONObject monthlyChartGET() {
 		

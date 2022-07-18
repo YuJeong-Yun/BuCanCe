@@ -12,8 +12,6 @@ public interface AdminService {
 	
 	public List<PreOrderVO> getPmInfo(String date);
 
-	public List<String> getPm(String date);
-	
 	public List<PreOrderVO> getOnlyPeriod(String date);
 	
 	public JSONObject getTrendChart();

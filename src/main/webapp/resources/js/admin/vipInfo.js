@@ -1,9 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
 	
 	
 	// 날짜 형식 변환
@@ -64,13 +58,10 @@
 			if(sDate == "" || eDate == ""){
 				alert("조회할 날짜를 선택해주세요");
 			} else {
-				location.href = '/pmMembers?date='+date;
+				location.href = '/admin/pmMembers?date='+date;
 			}
 			
 			
 		});
 		
 	}); // JQuery
-	
-
-</script>

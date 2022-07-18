@@ -1,9 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b3d692ed9e41ded5eedc5a2578cee55&libraries=services"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
 	var searchTotal = '';
 	var startPage = 1;
 	var total = document.getElementsByClassName('ri-text').length+10;
@@ -11,12 +5,11 @@
 	var size = 3;
 	
 	$(function(){
-		
 		// 찜하기 클릭
 		$('#updateThumb').click(function(){
-			if('${sessionScope.id}'){
+			if(id){
 				$.ajax({
-					url : "/updateThumb?b_num=${resVO.num}&t_category=${resVO.t_category}",
+					url : "/boardREST/updateThumb?b_num="+b_num+"&t_category="+t_category,
 					type : "PUT",
 					success : function(){
 						checkThumb();
@@ -35,14 +28,14 @@
 			document.getElementById('review').className = "";
 			document.getElementById('loca').className = "";
 			document.getElementById('blogReview').className = "active";
-			document.getElementById('writeReview').style.visibility = 'hidden';
+			document.getElementById('writeReview').style.display = 'none';
 			document.getElementById('map').style.display = 'none';
 			document.getElementById('blogList').style.display = 'inline-block';
 			document.getElementsByClassName('load-more')[0].style.display = 'inline-block';
 			
 			if(rePageCheck == false){
 			 $.ajax({
-				url : "/tour/getBlog?title=${resVO.title}&addr=${resVO.addr}&start=1",
+				url : "/boardREST/getBlog?title="+title+"&addr="+addr+"&start=1",
 				success : function(data){
 						searchTotal = $(data[1]).get(0);
 						$(data[0]).each(function(i,obj){
@@ -66,12 +59,12 @@
 			document.getElementById('map').style.display = 'inline-block';
 			document.getElementById('blogList').style.display = 'none';
 			document.getElementsByClassName('load-more')[0].style.display = 'none';
-			document.getElementById('writeReview').style.visibility = 'hidden';
+			document.getElementById('writeReview').style.display = 'none';
 			
 			
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
-		        center: new kakao.maps.LatLng("${resVO.lat}", "${resVO.lng}"), // 지도의 중심좌표
+		        center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
 		        level: 3 // 지도의 확대 레벨
 		    };
 			
@@ -80,7 +73,7 @@
 			var map = new kakao.maps.Map(mapContainer, mapOption); 
 			
 			// 마커가 표시될 위치입니다 
-			var markerPosition  = new kakao.maps.LatLng("${resVO.lat}", "${resVO.lng}"); 
+			var markerPosition  = new kakao.maps.LatLng(lat, lng); 
 
 			// 마커를 생성합니다
 			var marker = new kakao.maps.Marker({
@@ -92,7 +85,7 @@
 				
 				
 		        //var iwContent = "<div style='padding:5px;'><a href='https://map.kakao.com/link/to/"+title+","+result[0].y+","+result[0].x+"' style='color:blue' target='_blank'>길찾기</a></div>", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-		        var iwContent = "<div style='padding:5px;'><a href='https://map.kakao.com/link/to/${resVO.title},${resVO.lat},${resVO.lng}' style='color:blue;' target='_blank'>길찾기</a></div>", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		        var iwContent = "<div style='padding:5px;'><a href='https://map.kakao.com/link/to/'+title+','+lat+','+lng style='color:blue;' target='_blank'>길찾기</a></div>", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 		        iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 		        
 		        var infowindow = new kakao.maps.InfoWindow({
@@ -119,7 +112,7 @@
 			document.getElementById('blogList').style.display = 'none';
 			document.getElementById('map').style.display = 'none';
 			document.getElementsByClassName('load-more')[0].style.display = 'none';
-			document.getElementById('writeReview').style.visibility = 'visible';
+			document.getElementById('writeReview').style.display = 'inline-block';
 			
 		 
 		}); // review
@@ -144,7 +137,7 @@
 			 //console.log(start);
 			
 			$.ajax({
-				url : "/tour/getBlog?title=${resVO.title}&addr=${resVO.addr}&start="+start,
+				url : "/boardREST/getBlog?title="+title+"&addr="+addr+"&start="+start,
 				success : function(data){
 						$(data[0]).each(function(i,obj){
 							$('.rd-reviews').append("<div class='ri-text'><a href="+obj.link+" target='_blank'><h2>"+obj.title+"</h2><p>"+obj.description+"</p></a></div>");
@@ -165,12 +158,12 @@
 	// 페이지 클릭 시 사용자의 좋아요 기록 확인 후 표시할 이미지 결정
 	function checkThumb(){
 		$.ajax({
-			url : "/checkThumb?b_num=${resVO.num}",
+			url : "/boardREST/checkThumb?b_num="+b_num,
 			success : function(result){
 				if(result == 0){
-					$('img#like_img').attr('src','${pageContext.request.contextPath}/resources/img/busan/empty_heart.png');
+					$('img#like_img').attr('src',path+'/resources/img/busan/empty_heart.png');
 				} else {
-					$('img#like_img').attr('src','${pageContext.request.contextPath}/resources/img/busan/heart.png');
+					$('img#like_img').attr('src',path+'/resources/img/busan/heart.png');
 				}
 			}
 		});
@@ -178,6 +171,13 @@
 	
 	checkThumb();
 	
+		//댓글 작성
+		$(".commentWriteBtn").on("click", function() {
+			var formObj = $("form[name='commentForm']");
+			var test = $(".rev-radi:checked").val();
+			formObj.attr("action", "/board/commentWrite");
+			formObj.submit();
+		});
 	
-		
-</script>    
+	
+	

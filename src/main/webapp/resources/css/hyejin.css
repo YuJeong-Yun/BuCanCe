@@ -279,6 +279,70 @@
 		transform: translate(0,80px);
 	}
 	
+	#searchAllMenu {
+		transform: translate(0,130px);
+	}
+	
 	#content-wrapper * {
 		font-family: 'Noto Sans KR', sans-serif !important;
+	}
+	
+	.one h2{
+	  position: relative;
+	  padding: 0;
+	  margin: 0;
+	  font-family: "Noto Sans KR", sans-serif;
+	  font-weight: 300;
+	  font-size: 40px;
+	  color: #080808;
+	  -webkit-transition: all 0.4s ease 0s;
+	  -o-transition: all 0.4s ease 0s;
+	  transition: all 0.4s ease 0s;
+	  padding-bottom: 5px;
+	  margin-left: 2.2em;
+	}
+	
+	.one h2:before {
+	  width: 28px;
+	  height: 5px;
+	  display: block;
+	  content: "";
+	  position: absolute;
+	  bottom: 3px;
+	  left: 50%;
+	  margin-left: -14px;
+	  background-color: #b80000;
+	}
+	.one h2:after {
+	  width: 100px;
+	  height: 1px;
+	  display: block;
+	  content: "";
+	  position: relative;
+	  margin-top: 25px;
+	  left: 50%;
+	  margin-left: -50px;
+	  background-color: #b80000;
+	}
+	
+	#mapTitle {
+		display: inline-block;
+		vertical-align: top;
+		width: 49%; 
+		margin-top: 13em;
+		text-align: center;
+	}
+	
+	#mapTitle p {
+		white-space: pre;
+		margin-left: -0.5em;
+	}
+	
+	#readMenu {
+		font-family: 'Noto Sans KR' !important;
+	}
+
+	#alignText a {
+		color: black;
+		font-family: 'Noto Sans KR', sans-serif;
 	}

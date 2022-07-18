@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../include/header.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
 
 <!-- Breadcrumb Section Begin -->
 <div class="breadcrumb-section">
@@ -24,7 +26,6 @@
 				<div class="rd-text">
 					<div class="rd-title">
 						<h3 style="font-family: 'NanumSquareBold' !important;">${vo.title }
-							<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 찜하기
 						</h3>
 					</div>
 					<table id="resInfo">
@@ -53,19 +54,27 @@
 								<td class="r-o">홈페이지</td>
 								<td><a href="${vo.url}">${vo.url }</a></td>
 							</tr>
+                            <tr>
+	                         <td class="r-o">찜하기</td>
+	                         <td>
+	                         	<button type="button" id="updateThumb">
+	             				<img id="like_img" src="${pageContext.request.contextPath}/resources/img/busan/empty_heart.png">
+	             				</button>
+	             			</td>
+                          </tr>
 						</tbody>
 					</table>
 					<p class="f-para">${vo.contents }</p>
 				</div>
-				<button type="button" class="list_btn">목록</button>
+				<button type="button" class="w-btn w-btn-indigo" onclick="history.back();">뒤로가기</button>
 				<div class="menu-item">
 					<div class="nav-menu"
 						style="text-align: left !important; cursor: pointer;">
-						<nav class="mainmenu">
+						<nav class="mainmenu" id="readMenu">
 							<ul>
 								<li class="active" id="review"><a>리뷰</a></li>
 								<li id="blogReview"><a>블로그리뷰</a></li>
-
+								<li id="loca"><a>위치</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -105,14 +114,9 @@
 						</p> 
 						
 							<input type="hidden" name="num" id="num" value="${vo.num}" /> 
-							<input type="hidden" id="page" name="page" value="${scri.page}">
-							<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
-							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
-							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 
 							<p>
-								<label for="id">댓글 작성자</label> <input type="text" name="id"
-									id="id" value=" ${id }">
+								<label for="id">댓글 작성자</label> <input type="text" name="id" id="id" value=" ${id }">
 							</p>
 							<p>
 								<textarea rows="5" cols="50" name="content" id="content"></textarea>
@@ -141,110 +145,17 @@
 
 </section>
 <!-- Room Details Section End -->
-<jsp:include page="../include/footer.jsp" />
-
-
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-	
 <script type="text/javascript">
-	var searchTotal = '';
-	var startPage = 1;
-	var total = document.getElementsByClassName('ri-text').length + 10;
-	var rePageCheck = false;
-	var size = 3;
-
-	$(function() {
-
-		$('#blogReview')
-				.click(
-						function() {
-
-							document.getElementById('review').className = "";
-							document.getElementById('blogReview').className = "active";
-							document.getElementById('comment1').style.display = 'none';
-							document.getElementById('blogList').style.display = 'inline-block';
-							document.getElementsByClassName('load-more')[0].style.display = 'inline-block';
-
-							if (rePageCheck == false) {
-								$
-										.ajax({
-											url : "/blog/getBlog?title=${vo.title}&start=1",
-											success : function(data) {
-												searchTotal = $(data[1]).get(0);
-												$(data[0])
-														.each(
-																function(i, obj) {
-																	$('.rd-reviews').append(
-																					"<div class='ri-text'><a href="+obj.link+" target='_blank'><h2>"
-																							+ obj.title
-																							+ "</h2><p>"
-																							+ obj.description
-																							+ "</p></a></div>");
-																});
-											}
-										});
-							}
-
-							rePageCheck = true;
-
-						}); // blogReview
-
-		$('#review')
-				.click(
-						function() {
-
-							document.getElementById('blogReview').className = "";
-							document.getElementById('review').className = "active";
-							document.getElementById('blogList').style.display = 'none';
-							document.getElementById('comment1').style.display = 'block';
-							document.getElementById('map').style.display = 'none';
-							document.getElementsByClassName('load-more')[0].style.display = 'none';
-							document.getElementById('writeReview').style.visibility = 'visible';
-
-						}); // review
-
-		function countStartPage() {
-			console.log(searchTotal);
-			if (total < (searchTotal)) {
-				startPage = startPage + 10;
-				return startPage;
-			} else {
-				alert("페이지의 끝입니다.");
-			}
-
-		}
-
-		$('#load-more').click(
-				function() {
-					var start = countStartPage();
-					console.log(start);
-
-					$.ajax({
-						url : "/blog/getBlog?title=${vo.title}&start=" + start,
-						success : function(data) {
-							$(data[0]).each(
-									function(i, obj) {
-										$('.rd-reviews').append(
-												"<div class='ri-text'><a href="+obj.link+" target='_blank'><h2>"
-														+ obj.title
-														+ "</h2><p>"
-														+ obj.description
-														+ "</p></a></div>");
-									});
-						}
-					});
-					total = total + 10;
-					console.log(total);
-
-				});
-
-	}); // jQuery
-	
-
-	
-	
+const path = '${pageContext.request.contextPath}';
+const b_num = '${vo.num}';
+const t_category = '${vo.t_category}';
+const title = '${vo.title}';
+const addr = '${vo.addr}';
+const id = '${sessionScope.id}';
 </script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/board/InfoDetail.js"></script>
+<jsp:include page="../include/footer.jsp" />
 
 <script type="text/javascript">
 	//댓글 작성

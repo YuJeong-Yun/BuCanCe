@@ -1,17 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-    
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>   
-<script type="text/javascript">
+
 
 $(function(){
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawChart);
 	
 	function drawChart(){
-		var jsonData = $.ajax({
-			url : "/admin/trendChart",
+		let jsonData = $.ajax({
+			url : "/adminRest/trendChart",
 			dataType : "json",
 			async : false
 		}).responseText;
@@ -33,7 +28,7 @@ $(function(){
 	
 	function drawChart2(){
 		var jsonData = $.ajax({
-			url : "/admin/monthlyChart",
+			url : "/adminRest/monthlyChart",
 			dataType : "json",
 			async : false
 		}).responseText;
@@ -52,8 +47,3 @@ $(function(){
 	
 	
 });
-
-</script>
-
-
-

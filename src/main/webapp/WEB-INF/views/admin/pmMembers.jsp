@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-	<jsp:include page="../include/headerAdmin.jsp" />
-	<jsp:include page="${pageContext.request.contextPath}/resources/js/getVIPInfo.jsp"></jsp:include>
-	    <div id="wrapper">
-	<jsp:include page="../include/sideMenuAdmin.jsp" />
+<jsp:include page="../include/header.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" type="text/css">	
+
+
+
+<div id="wrapper">
+<jsp:include page="../include/sideMenuAdmin.jsp" />
 
 
 
@@ -48,7 +53,7 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                    <div class="chart-area">
                                         <div id="curve_chart" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></div>
                                     </div>
                                 </div>
@@ -63,7 +68,7 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                    <div class="chart-area">
                                         <div id="monthly_chart" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></div>
                                     </div>
                                 </div>
@@ -97,8 +102,8 @@
                      				~
                      				<input type="date" name=endDate id="endDate">
                      				<input type="button" value="조회" id="profitBtn">
-								    <input type="button" value="구독회원만 보기" class="w-btn w-btn-indigo" onclick="location.href='/periodMems?date=${param.date}';">
-								    <input type="button" value="모두보기" class="w-btn w-btn-indigo" onclick="location.href='/pmMembers?date=${param.date}';">
+								    <input type="button" value="구독회원만 보기" class="w-btn w-btn-indigo" onclick="location.href='/admin/periodMems?date=${param.date}';">
+								    <input type="button" value="모두보기" class="w-btn w-btn-indigo" onclick="location.href='/admin/pmMembers?date=${param.date}';">
                        			</div>
                                 </div>
                                 <div class="card-body">
@@ -165,6 +170,8 @@
 
     </div>
      
-									
-<jsp:include page="${pageContext.request.contextPath}/resources/js/getProfitChart.jsp"></jsp:include>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  									
+<script src="${pageContext.request.contextPath}/resources/js/admin/profitChart.js"></script>  									
+<script src="${pageContext.request.contextPath}/resources/js/admin/vipInfo.js"></script>  									
 <jsp:include page="../include/footer.jsp" />

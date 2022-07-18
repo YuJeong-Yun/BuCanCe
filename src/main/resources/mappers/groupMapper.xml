@@ -125,14 +125,14 @@
 	<select id="getTourList" resultType="BoardVO">
 		select num, title, thumbnail, lng, lat
 		from tourist_spot
-		where category = 0
+		where t_category = 0
 		order by num asc
 	</select>
 
 	<select id="getRestaurantList" resultType="BoardVO">
 		select num, title, thumbnail, lng, lat
 		from tourist_spot
-        where category = 1
+        where t_category = 1
 		order by num asc
 	</select>
 

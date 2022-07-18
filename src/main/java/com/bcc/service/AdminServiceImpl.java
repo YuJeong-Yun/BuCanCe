@@ -30,13 +30,7 @@ public class AdminServiceImpl implements AdminService{
 		
 		return dao.getPmInfo(date);
 	}
-
-	@Override
-	public List<String> getPm(String date) {
-		
-		return dao.getPm(date);
-	}
-
+	
 	@Override
 	public List<PreOrderVO> getOnlyPeriod(String date) {
 		
@@ -67,9 +61,8 @@ public class AdminServiceImpl implements AdminService{
 		
 		//2. rows 배열에 넣기
 		JSONArray body = new JSONArray();	//rows
-		
 			
-			
+		// 현재날짜로부터 7일간의 프리미엄 회원수
 			for(int i=6;i>-1;i--) {
 				Date date = new Date();
 				
@@ -125,6 +118,7 @@ public class AdminServiceImpl implements AdminService{
 		data.put("cols", title);
 		
 		
+		// 현재 달부터 5개월 간의 프리미엄 회원수
 		//2. rows 배열에 넣기
 		JSONArray body = new JSONArray();	//rows
 			

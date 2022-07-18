@@ -35,15 +35,6 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 	@Override
-	public List<String> getPm(String date) {
-		Map<String, String> dateMap = new HashMap<String, String>();
-		dateMap.put("start", date.split(" ")[0]);
-		dateMap.put("end", date.split(" ")[1]);
-		
-		return session.selectList(NAMESPACE+".periodicPm",dateMap);
-	}
-
-	@Override
 	public List<PreOrderVO> getOnlyPeriod(String date) {
 		Map<String, String> dateMap = new HashMap<String, String>();
 		dateMap.put("start", date.split(" ")[0]);

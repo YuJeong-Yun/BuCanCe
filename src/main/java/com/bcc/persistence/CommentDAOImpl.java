@@ -33,6 +33,7 @@ public class CommentDAOImpl implements CommentDAO {
 	public void wriComment(CommentVO vo) throws Exception {
 		log.info(vo + "");
 		session.insert(namespace + ".writeComment", vo);
+		session.update(namespace+".updateCommentCnt",vo.getNum());
 	}
 
 	// 댓글 수정

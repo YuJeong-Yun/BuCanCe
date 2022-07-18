@@ -7,13 +7,20 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.SearchCriteria;
 
+import jdk.internal.org.jline.utils.Log;
+
 @Repository
 public class BoardDAOImpl implements BoardDAO {
+	
+
+	private static final Logger log = LoggerFactory.getLogger(BoardDAOImpl.class);
 
 	// DB접근을 위해 필요한 객체
 	@Inject
@@ -25,16 +32,16 @@ public class BoardDAOImpl implements BoardDAO {
 
 	// 글 전체 목록
 	@Override
-	public List<BoardVO> listAll() throws Exception {
+	public List<BoardVO> tourLists() throws Exception {
 		System.out.println("DAO: 글전체목록 메서드");
 		// sqlSession 객체 사용하여 Mapper 호출
-		return session.selectList(namespace + ".listAll");
+		return session.selectList(namespace + ".tourLists");
 	}
 
 	// 글 내용
 	@Override
-	public BoardVO getBoard(Integer num) {
-		return session.selectOne(namespace + ".getBoard", num);
+	public BoardVO getTour(Integer num) {
+		return session.selectOne(namespace + ".getTour", num);
 	}
 
 	// 조회수
@@ -52,12 +59,27 @@ public class BoardDAOImpl implements BoardDAO {
 	// 게시물 목록 조회
 	@Override
 	public List<BoardVO> list(SearchCriteria scri) throws Exception {
+
+		
 		return session.selectList(namespace + ".listCri", scri);
+	}
+	
+	// 게시물 정렬결과 조회
+	@Override
+	public List<BoardVO> listAlign(SearchCriteria scri) throws Exception {
+		Map alMap = new HashMap();
+		alMap.put("t_category", scri.getT_category());
+		alMap.put("seq", scri.getSearchType());
+		alMap.put("pageStart", scri.getPageStart());
+		alMap.put("perPageNum", scri.getPerPageNum());
+		
+		return session.selectList(namespace + ".listAlign", alMap);
 	}
 
 	// 게시물 총 갯수
 	@Override
 	public int listCount(SearchCriteria scri) throws Exception {
+		
 		return session.selectOne(namespace + ".listCount", scri);
 	}
 
@@ -77,12 +99,6 @@ public class BoardDAOImpl implements BoardDAO {
 		param.put("pageStart", page);
 		param.put("perPageNum", size);
 		return session.selectList(namespace + ".listCri", param);
-	}
-	//게시글 댓글 수
-
-	@Override
-	public void updateCommentCnt(int num) throws Exception {
-		session.update(namespace+".updateCommentCnt",num);
 	}
 	
 	@Override
@@ -131,6 +147,31 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	
+	@Override
+	public List<BoardVO> foodLists(String addr) {
+		
+		return session.selectList(namespace+".foodLists", addr);
+	}
 
+	@Override
+	public BoardVO getFood(int num) {
+		
+		return session.selectOne(namespace+".getFood", num);
+	}
+
+	@Override
+	public List<BoardVO> tourLists(String addr) throws Exception {
+		
+		return session.selectList(namespace+".tourLists", addr);
+	}
+
+	@Override
+	public List<BoardVO> searchList(String keyword) {
+		
+		return session.selectList(namespace+".search",keyword);
+	}
+	
+	
+	
 
 }

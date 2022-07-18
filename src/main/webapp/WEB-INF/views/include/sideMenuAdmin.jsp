@@ -12,12 +12,11 @@
             
             
             <li class="nav-item">
-                <a class="nav-link" href="/profitChart">
+                <a class="nav-link" href="/admin/profitChart">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-
-
+            
         </ul>
         <!-- End of Sidebar -->     

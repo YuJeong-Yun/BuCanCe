@@ -1,13 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-	
 	$(function(){
 		
 		$.ajax({
-			url : "/tour/getWeather",
+			url : "/boardREST/getWeather",
 			success : function(data){
 				$(data).each(function(i,obj){
 					if(obj.category == "TMP"){
@@ -59,9 +53,3 @@
 		});
 		
 	}); //jquery
-
-					//if(obj.category == "TMP"){
-						//$('#weatherInfo').append("<img src='/resources/img/weather/눈.png' class='weatherPic'>");
-					//}
-
-</script>

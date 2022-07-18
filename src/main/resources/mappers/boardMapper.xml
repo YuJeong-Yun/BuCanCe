@@ -9,12 +9,12 @@
 	<select id="listAll" resultType="BoardVO">
 		<![CDATA[
 		select * from tourist_spot
-		where num < 115 and t_category = 0 
+		where t_category = 0 
 		order by num asc
 		]]>
-	</select><!-- num 조건 -->
+	</select>
 	<!-- 글 내용 -->
-	<select id="getBoard" resultType="BoardVO">
+	<select id="getTour" resultType="BoardVO">
 		select * from tourist_spot
 		where num = #{num}
 
@@ -23,9 +23,7 @@
 	<select id="updateBoardCnt" resultType="BoardVO"
 		parameterType="int">
 		update tourist_spot set totalCnt = totalCnt + 1
-		where num
-		= #{num}
-		and t_category = 0; <!--  -->
+		where num= #{num}; 
 
 	</select>
 	<!-- 게시판 카테고리 분류 -->
@@ -37,60 +35,44 @@
 		and
 		t_category = 0;
 	</select>
+	
 	<!-- 게시물 페이징 -->
 	<select id="listPage" resultType="BoardVO">
  		<![CDATA[
  		select * from tourist_spot
- 		where num < 115 and t_category = 0
+ 		where t_category = 0
  		order by num asc
  		limit 0, 10
  		]]>
 	</select>
-
+	
 	<select id="listCri" resultType="BoardVO">
- 		<![CDATA[
- 		select * from tourist_spot
- 		where 1=1 
- 		]]>
-		<include refid="search"></include>	
- 			<![CDATA[
- 		and num < 115 
- 		order by num asc
- 		limit #{pageStart}, #{perPageNum}
- 		]]>
+		select * from tourist_spot
+		where t_category=#{t_category} 
+		order by num asc
+		limit #{pageStart}, #{perPageNum}
 	</select>
+	
+ 	<select id="listAlign" parameterType="hashMap" resultType="BoardVO">
+		select * from tourist_spot
+		where t_category=#{t_category} 
+		order by
+		<choose>
+	        <when test="seq == 'totalCnt'">totalCnt desc</when>
+	        <when test="seq == 'thumbCnt'">thumbCnt desc</when>
+	        <when test="seq == 'commentCnt'">commentCnt desc</when>
+    	</choose>
+		limit #{pageStart}, #{perPageNum}
+	</select> 
 
 	<!-- 게시물 검색 -->
 	<select id="listCount" resultType="int">
-	<![CDATA[
 		select count(num)
-		from tourist_spot where 1=1 
-	]]>
-		<include refid="search"></include>	
-			<![CDATA[
-		and num < 115
-		 ]]>
+		from tourist_spot 
+		where t_category=#{t_category}
 	</select>
 
 
-	<sql id="search">
-		<if test="searchType != null">
-			<if test="searchType == 't'.toString()">AND title LIKE CONCAT('%', #{keyword} ,'%')</if>
-			<if test="searchType == 'c'.toString()">AND addr_full LIKE '%' #{keyword} '%'</if>
-			<if test="searchType == 'tc'.toString()">AND (title LIKE '%' #{keyword} '%') or (addr_full LIKE
-				'%' #{keyword} '%')</if>
-		</if>
-	</sql>
-
-	<!-- 댓글 수 -->
-	<update id="updateCommentCnt" parameterType="int">
-		update tourist_spot b
-		set b.commentCnt = (select count(cno) from bcc_comment where num =
-		#{num})
-		where b.num = #{num}
-	</update>
-	
-	
 	<!-- 좋아요 -->
 	<select id="checkThumb" parameterType="hashMap" resultType="Integer">
 		select count(*) from thumb
@@ -116,17 +98,29 @@
 	</delete>
 	<!-- 좋아요 -->
 	
-	<!-- 맛집 -->
-	<select id="restaurantLists" resultType="BoardVO">
+	
+	
+	<!-- 리스트 출력 -->
+	<select id="tourLists" resultType="BoardVO">
+  		select * from tourist_spot
+  		where addr=#{addr} and t_category=0
+  	</select>
+	<select id="foodLists" resultType="BoardVO">
   		select * from tourist_spot
   		where addr=#{addr} and t_category=1
   	</select>
   	
-  	<select id="infoDetail" resultType="BoardVO">
+  	<select id="getFood" resultType="BoardVO">
   		select * from tourist_spot
-  		where title=#{title} and t_category=1
+  		where num=#{num} and t_category=1
   	</select>
 	<!-- 맛집 -->
 	
+	
+	<!-- 검색 결과 -->
+	<select id="search" resultType="BoardVO">
+		select * from tourist_spot
+		where title like concat('%',#{keyword},'%')
+	</select>
 
 </mapper>
