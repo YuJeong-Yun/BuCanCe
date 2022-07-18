@@ -258,8 +258,8 @@ public class PlanServiceImpl implements PlanService {
 			}
 
 			// 플랜-플랜- ... 연결된 문자열 구분
-			String[] planArr = datePlanArr[1].split("-");
-			String[] planAccArr = allPlanAccArr[i].split("-");
+			String[] planArr = datePlanArr[1].split("@");
+			String[] planAccArr = allPlanAccArr[i].split("@");
 			// 플랜 나눠서 planList에 저장
 //			for (String plan : planArr) {
 			for (int j = 0; j < planArr.length; j++) {

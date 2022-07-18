@@ -712,7 +712,7 @@ function savePlan() {
   });
 
   // 플랜 정보 문자열로 연결해서 DB저장
-  // 날짜랑 플랜은 :, 플랜끼리는 -, 날짜 끼리는 +로 구분
+  // 날짜랑 플랜은 :, 플랜끼리는 @, 날짜 끼리는 +로 구분
   let plan = '';
   // 숙소는 타이틀, 이미지, 위도, 경도도 같이 저장 - planAcc 변수
   // 타이틀과 이미지 위도, 경도 *로 구분
@@ -726,18 +726,18 @@ function savePlan() {
     let imgs = planContainer[i].querySelectorAll('.content__img');
     let titles = planContainer[i].querySelectorAll('.content__title');
     for (let j = 0; j < plans.length; j++) {
-      plan += plans[j].value + '-';
+      plan += plans[j].value + '@';
       // 이미지와 타이틀은 숙소일 경우에만 planAcc 변수에 담아서 DB에 저장
       if (plans[j].value.charAt(0) == 'a') {
         let lat = document.querySelector('li.tour-item.' + plans[j].value + ' .lat').value;
         let lng = document.querySelector('li.tour-item.' + plans[j].value + ' .lng').value;
-        planAcc += imgs[j].src + '*' + titles[j].innerText + '*' + lat + '*' + lng + '-';
+        planAcc += imgs[j].src + '*' + titles[j].innerText + '*' + lat + '*' + lng + '@';
       } else {
-        planAcc += '0' + '-';
+        planAcc += '0' + '@';
       }
     }
-    plan = plan.substring(0, plan.length - 1); // 마지막에 -는 제거
-    planAcc = planAcc.substring(0, planAcc.length - 1); // 마지막에 -는 제거
+    plan = plan.substring(0, plan.length - 1); // 마지막에 @는 제거
+    planAcc = planAcc.substring(0, planAcc.length - 1); // 마지막에 @는 제거
     plan += '+';
     planAcc += '+';
   }
