@@ -196,20 +196,20 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public List<Object> getSearchList(String category, String keyword, List<HotelVO> hotellist) {
-		List searchList;
+	public List<BoardVO> getSearchList(String category, String keyword) {
+		List<BoardVO> searchList;
 		// 선택 카테고리별로 검색 결과 반환
 		if (category.equals("t")) { // 관광지 검색
 			searchList = dao.getTourSearch(keyword);
 
-		} else if (category.equals("a")) { // 숙소 검색
-			searchList = new ArrayList<HotelVO>();
-			for (HotelVO vo : hotellist) {
-				String title = vo.getTitle();
-				if (title.contains(keyword)) {
-					searchList.add(vo);
-				}
-			} // for
+//		} else if (category.equals("a")) { // 숙소 검색
+//			searchList = new ArrayList<HotelVO>();
+//			for (HotelVO vo : hotellist) {
+//				String title = vo.getTitle();
+//				if (title.contains(keyword)) {
+//					searchList.add(vo);
+//				}
+//			} // for
 
 		} else { // category.equals("r") -> 맛집 검색
 			searchList = dao.getRestaurantSearch(keyword);
@@ -223,7 +223,7 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public List<List<Object>> getPlanList(int num, List<HotelVO> hotellist) {
+	public List<List<Object>> getPlanList(int num) {
 		PlanVO vo = dao.getPlanInfo(num);
 
 		if (vo.getTour_plan() == null || vo.getTour_plan().equals("")) {

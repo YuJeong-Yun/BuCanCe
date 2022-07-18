@@ -18,7 +18,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	<!--그룹 멤버-->
 	<section class="plan-title">
 	  <div class="inner">
-	  	<div class="title-content">${param.grp_name }</div>
+	  	<div class="title-content">${grpName }</div>
 	  </div>
 	</section>
 
@@ -78,21 +78,22 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
               </div>
             </li>
             <!--숙박-->
-            <li class="tour">
+            <li class="tour accomodation">
               <div class="tour__title" onclick="selectCategory(event)">
                 <div class="material-icons-outlined icon">bed</div>숙소
               </div>
               <div class="tour__contents hidden">
                 <ul>
-                	<c:forEach var="hotel" items="${hotellist }">
-	                  <li class="tour-item a${hotel.num }" onclick="selectTour(event)">
-	                    <img src="${hotel.thumbnail }" alt="" class="content__img" />
-	                    <div class="content__title">${hotel.title }</div>
-	                    <input type="hidden" value="${hotel.num }" class="num">
-	                    <input type="hidden" value="${hotel.lng }" class="lng">
-	                    <input type="hidden" value="${hotel.lat }" class="lat">
-	                  </li>
-	                </c:forEach>
+                 	<li>로딩중 ...</li>
+<%--                 	<c:forEach var="hotel" items="${hotellist }"> --%>
+<%-- 	                  <li class="tour-item a${hotel.num }" onclick="selectTour(event)"> --%>
+<%-- 	                    <img src="${hotel.thumbnail }" alt="" class="content__img" /> --%>
+<%-- 	                    <div class="content__title">${hotel.title }</div> --%>
+<%-- 	                    <input type="hidden" value="${hotel.num }" class="num"> --%>
+<%-- 	                    <input type="hidden" value="${hotel.lng }" class="lng"> --%>
+<%-- 	                    <input type="hidden" value="${hotel.lat }" class="lat"> --%>
+<!-- 	                  </li> -->
+<%-- 	                </c:forEach> --%>
                 </ul>
                 <ul class="search-result hidden">
                 </ul>

@@ -2,6 +2,8 @@ let positions = []; // 일별로 마커 정보 담을 배열
 let orderedTour = []; // 사용자가 설정한 관광지 순서대로 cNum값 담을 배열
 let straightPolyLine = []; // 직선 폴리라인 담을 배열
 let checkShowLinePath = 0; // 직선 폴리라인 출력 여부 확인 변수
+let hotelList = []; // 숙소 정보 담을 배열
+let getHotelList = 0; // 숙소 정보 가져오기 완료 여부 담을 변수 0-미완 1-완료
 
 // 지도
 var map = new Tmapv2.Map("map_div", {
@@ -10,6 +12,56 @@ var map = new Tmapv2.Map("map_div", {
   height: "650px",
   zoom: 11
 });
+
+// 숙소 리스트 비동기로 가져와서 추가
+const accContainer = document.querySelector('.tour-list li.tour.accomodation .tour__contents > ul');
+$.ajax({
+  url: path + '/planREST/accomodation',
+  type: 'post',
+  success: function (data) {
+    hotelList = data;
+    // 선택된 숙소의 cNum 가져오기
+    let cNumValue = [];
+    const selectedCNumArr = document.querySelectorAll('.plan__contents .plan-item .num');
+    selectedCNumArr.forEach(cNum => {
+      if (cNum.value.charAt(0) == 'a') {
+        cNumValue.push(cNum.value);
+      }
+    });
+
+    // 로딩중... 제거
+    accContainer.removeChild(accContainer.firstElementChild);
+
+    // 숙소 태그 만들어서 추가
+    for (let i = 0; i < data.length; i++) {
+      const acc = data[i];
+      const accItem = document.createElement('li');
+      accItem.classList.add('tour-item');
+      accItem.classList.add('a' + acc.num);
+      accItem.addEventListener('click', selectTour);
+      // 선택되어 있는 숙소이면 목록에서 숨김
+      if (cNumValue.includes('a' + acc.num)) {
+        accItem.classList.add('hidden');
+      }
+
+      const accItemInner =
+        '<img src="' + acc.thumbnail + '" alt="' + acc.title + '" class="content__img" />' +
+        '<div class="content__title">' + acc.title + '</div>' +
+        '<input type="hidden" value="' + acc.num + '" class="num">' +
+        '<input type="hidden" value="' + acc.lng + '" class="lng">' +
+        '<input type="hidden" value="' + acc.lat + '" class="lat">';
+
+      accItem.innerHTML = accItemInner;
+      accContainer.append(accItem);
+
+      // 숙소 정보 가져오기 완료
+      getHotelList = 1;
+    }
+  },
+  error: function () {
+
+  }
+}); //ajax
 
 ///////////////////////////////// 처음 페이지 로드시 저장된 플랜 있을 경우 실행 /////////////////////////////
 const datePlanContainer = document.querySelector('.date-plan-container');
@@ -35,7 +87,10 @@ if (datePlanContainer.childElementCount > 0) {
   const selectedCNumArr = document.querySelectorAll('.plan__contents .plan-item .num');
   selectedCNumArr.forEach(cNum => {
     const cNumValue = cNum.value;
-    document.querySelector('.tour-item.' + cNumValue).classList.add('hidden');
+    // 숙소 정보는 비동기로 가져옴 -> 비동기로 가져올 때 처리
+    if (cNumValue.charAt(0) != 'a') {
+      document.querySelector('.tour-item.' + cNumValue).classList.add('hidden');
+    }
   });
 
   // 드래그 이벤트 추가
@@ -341,24 +396,45 @@ function showSearhResult() {
   while (resultContainer.firstChild) {
     resultContainer.removeChild(resultContainer.lastChild);
   }
-
-  $.ajax({
-    url: path + '/planREST/searchTour',
-    type: 'get',
-    data: {
-      category: category,
-      keyword: userInput
-    },
-    success: function (data) {
-      addSearchResultTour(data, category, resultContainer);
-      if (data.length == 0) {
-        resultContainer.innerHTML = '<div style="padding:20px; color: #fff;">검색 결과가 없습니다.</div>';
+  // 관광지 / 맛집 검색일 경우
+  if (category == 't' || category == 'r') {
+    $.ajax({
+      url: path + '/planREST/searchTour',
+      type: 'post',
+      data: {
+        category: category,
+        keyword: userInput,
+        hotelList: hotelList
+      },
+      success: function (data) {
+        addSearchResultTour(data, category, resultContainer);
+        // 검색 결과 없으면
+        if (resultContainer.childElementCount == 0) {
+          resultContainer.innerHTML = '<div style="padding:20px; color: #fff;">검색 결과가 없습니다.</div>';
+        }
+      },
+      error: function () {
+        alert('검색 오류!!');
       }
-    },
-    error: function () {
-      alert('검색 오류!!');
+    }); //ajax
+
+    // 숙소 검색일 경우
+  } else { // category == 'a'
+    // 검색 결과 숙소 정보 담을 배열 data
+    let data = [];
+    for (let i = 0; i < hotelList.length; i++) {
+      const title = hotelList[i].title;
+      if (title.indexOf(userInput) != -1) {
+        data.push(hotelList[i]);
+      }
+    } // for
+
+    addSearchResultTour(data, category, resultContainer);
+    // 검색 결과 없으면
+    if (resultContainer.childElementCount == 0) {
+      resultContainer.innerHTML = '<div style="padding:20px; color: #fff;">검색 결과가 없습니다.</div>';
     }
-  }); //ajax
+  }
 }; //showSearchResult()
 // 검색 결과 관광지 출력하는 함수
 function addSearchResultTour(data, category, resultContainer) {

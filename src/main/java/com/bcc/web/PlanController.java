@@ -88,22 +88,21 @@ public class PlanController {
 	@RequestMapping(value = "/planWrite/{num}", method = RequestMethod.GET)
 	public String planWriteGET(@PathVariable("num") int num, Model model, HttpSession session) throws Exception {
 
-		// 그룹 번호 저장
-		model.addAttribute("num", num);
-
+		// 플랜명 전달
+		model.addAttribute("grpName", planService.getGrpName(num));
 		// 관광지 정보 저장
 		model.addAttribute("tourlist", planService.getTourList());
 		// 맛집 정보
 		model.addAttribute("restlist", planService.getRestaurantList());
-		// 숙소 정보
-		if (session.getAttribute("hotellist") == null) {
-			// 숙소 정보 세션에 저장
-			session.setAttribute("hotellist", planService.getHotelList());
-			log.info("숙소 정보 세션 저장 완료");
-		}
+//		// 숙소 정보
+//		if (session.getAttribute("hotellist") == null) {
+//			// 숙소 정보 세션에 저장
+//			session.setAttribute("hotellist", planService.getHotelList());
+//			log.info("숙소 정보 세션 저장 완료");
+//		}
 		
 		// 플랜 정보 전달 
-		model.addAttribute("planList", planService.getPlanList(num, (List<HotelVO>) session.getAttribute("hotellist")));
+		model.addAttribute("planList", planService.getPlanList(num));
 
 		return "/plan/planWrite";
 	}
@@ -125,7 +124,7 @@ public class PlanController {
 		// 그룹 멤버 전달
 		model.addAttribute("grpMemberList",planService.getGrpMemberList(num));
 		// 여행 경로 정보 전달
-		model.addAttribute("planList", planService.getPlanList(num, (List<HotelVO>) session.getAttribute("hotellist")));
+		model.addAttribute("planList", planService.getPlanList(num));
 		// 초대중인 멤버 리스트 전달
 		model.addAttribute("invitingList",  planService.getInvitingList(num));
 		// 플랜 정보 전달

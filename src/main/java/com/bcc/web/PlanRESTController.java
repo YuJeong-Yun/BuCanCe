@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bcc.domain.BoardVO;
 import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.HotelVO;
 import com.bcc.domain.MemberVO;
@@ -88,7 +89,7 @@ public class PlanRESTController {
 		vo.setId(id);
 		vo.setGrp_num(grpNum);
 		planService.delPlanMem(vo);
-		
+
 		// 방장 여부에 따라 방장 새로 설정 - 본인이 마지막 멤버이면 플랜 삭제함
 		log.info("checkLeader 실행 ");
 		planService.checkLeader(id, grpNum);
@@ -106,10 +107,10 @@ public class PlanRESTController {
 
 		// 그룹의 초대중인 회원
 		List<GrpAcceptVO> invitingList = planService.getInvitingList(grpNum);
-		
+
 		// 그룹의 멤버
 		List<MemberVO> grpMemberList = planService.getGrpMemberList(grpNum);
-		
+
 		total.put("memberArr", memberList);
 		total.put("invitingArr", invitingList);
 		total.put("grpMemberArr", grpMemberList);
@@ -168,10 +169,11 @@ public class PlanRESTController {
 
 	// 관광지 검색
 	@RequestMapping(value = "/searchTour")
-	public List<Object> searchTourREST(String category, String keyword, HttpSession session) {
+	public List<BoardVO> searchTourREST(String category, String keyword) {
 		log.info("관광지 검색 : " + keyword);
+		
 
-		return planService.getSearchList(category, keyword, (List<HotelVO>) session.getAttribute("hotellist"));
+		return planService.getSearchList(category, keyword);
 	}
 
 	// 플랜 저장
@@ -190,6 +192,13 @@ public class PlanRESTController {
 	public List<List<Object>> planListREST(@PathVariable("grp_num") int grp_num, HttpSession session) {
 		log.info("플랜 정보 가져오기 ");
 
-		return planService.getPlanList(grp_num, (List<HotelVO>) session.getAttribute("hotellist"));
+		return planService.getPlanList(grp_num);
+	}
+
+	// 숙소 정보 크롤링
+	@RequestMapping(value = "/accomodation")
+	public List<HotelVO> getHotelList() {
+
+		return planService.getHotelList();
 	}
 }

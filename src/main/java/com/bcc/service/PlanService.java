@@ -79,13 +79,13 @@ public interface PlanService {
 	public List<HotelVO> getHotelList();
 
 	// 카테고리별 검색 결과 가져오기
-	public List<Object> getSearchList(String category, String keyword, List<HotelVO> hotellist);
+	public List<BoardVO> getSearchList(String category, String keyword);
 
 	// 여행 경로 저장
 	public void modifyPlan(PlanVO vo);
 
 	// 여행 경로 목록 가져오기
-	public List<List<Object>> getPlanList(int num, List<HotelVO> hotellist);
+	public List<List<Object>> getPlanList(int num);
 
 	// 회원이 속한 모든 그룹의 멤버 리스트 가져오기
 	public List<List<MemberVO>> getAllGrpMemberList(List<PlanVO> grpList);
