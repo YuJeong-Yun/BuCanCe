@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -92,7 +93,14 @@
 
 
 <c:set var="oneDayAfter" value="<%=new Date(new Date().getTime() - 60*60*24*1000*1)%>"/>
-<fmt:formatDate value="${UserPayList.get(a).checkIn-1}" pattern="yyyy-MM-dd" var="checkDate"/>
+
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="sysYear"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></c:set> 
+
+
+
+<fmt:parseDate var="startDate_D"  value="${startDate }" pattern="yyyy-MM-dd"/>
+<fmt:parseDate var="endDate_D" value="${endDate }"  pattern="yyyy-MM-dd"/>
 
 </tr>
                                     
@@ -145,12 +153,17 @@
                             
                             <c:if test="${UserPayList.get(a).status!='refund'}">
                             
-                            <c:if test="">
+                            <c:if test="${sysYear <= UserPayList.get(a).checkIn}">
                             <button type="submit" class="btn btn-block btn-success btn"  style="border-top-width: 8; border-bottom-width: 8"><b>환불하기</b></button>
                             </c:if>
                             
-                            
+                             <c:if test="${sysYear > UserPayList.get(a).checkIn}">
+                            		<button type="button" class="btn btn-block btn-danger btn"  style="border-top-width: 8; border-bottom-width: 8"><b>기간만료</b></button>
                             </c:if>
+                            	
+                            </c:if>
+                            
+                            
                               <c:if test="${UserPayList.get(a).status=='refund'}">
                                <button type="button" class="btn btn-block btn-danger btn"  style="border-top-width: 8; border-bottom-width: 8"><b>환불처리</b></button>
                                </c:if>

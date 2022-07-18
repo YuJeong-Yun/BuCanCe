@@ -77,7 +77,6 @@
     <!-- Search model end -->
 
     <!-- Js Plugins -->
-    <script src="${pageContext.request.contextPath}/resources/js/slideShow.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.min.js"></script>
