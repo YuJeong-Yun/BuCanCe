@@ -63,23 +63,28 @@ public class BoardController {
 		return boardList;
 	}
 
-	/*
-	 * // 글 전체 목록 // http://localhost:8088/board/listAll
-	 * 
-	 * @RequestMapping(value = "/listAll", method = RequestMethod.GET) public void
-	 * listAll(@ModelAttribute("result") String result, SearchCriteria scri, Model
-	 * model, HttpSession session) throws Exception { // 조회수
-	 * session.setAttribute("upFlag", "1");
-	 * 
-	 * // 글 정보를 가지고 오기 PageMaker pageMaker = new PageMaker();
-	 * pageMaker.setCri(scri); pageMaker.setTotalCount(service.listCount(scri));
-	 * 
-	 * log.info(pageMaker+""); model.addAttribute("pageMaker", pageMaker);
-	 * model.addAttribute("boardList", service.list(scri));
-	 * 
-	 * }
-	 */
-
+	// http://localhost:8088/board/list
+	// 게시판 전체 목록 조회
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(Model model, @ModelAttribute("scri") SearchCriteria scri, HttpSession session) throws Exception {
+		model.addAttribute("boardList", service.list(scri));
+		
+		//session.setAttribute("id", "admin");
+		session.setAttribute("id", "test");
+		
+		
+		log.info(session.getAttribute("id") + "");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(service.listCount(scri));
+		
+		model.addAttribute("pageMaker", pageMaker);
+		session.setAttribute("upFlag", "1");
+		
+		return "board/listAll";
+		
+	}
 	// http://localhost:8088/board/read?num=12
 	/* 글 본문 */
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
@@ -106,27 +111,6 @@ public class BoardController {
 		return "board/readTour";
 
 	}
-
-	// http://localhost:8088/board/list
-	// 게시판 목록 조회
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model, @ModelAttribute("scri") SearchCriteria scri, HttpSession session) throws Exception {
-		model.addAttribute("boardList", service.list(scri));
-
-		session.setAttribute("id", "admin");
-		log.info(session.getAttribute("id") + "");
-
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(service.listCount(scri));
-
-		model.addAttribute("pageMaker", pageMaker);
-		session.setAttribute("upFlag", "1");
-
-		return "board/listAll";
-
-	}
-
 	// 댓글 작성
 
 	@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)

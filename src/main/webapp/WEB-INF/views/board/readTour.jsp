@@ -2,8 +2,30 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
 <jsp:include page="../include/header.jsp" />
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css"/>
+<style>
+		textarea {
+			width: 100%;
+			height: 200px;
+			padding: 10px;
+			box-sizing: border-box;
+			border: solid 2px #1E90FF;
+			border-radius: 5px;
+			font-size: 16px;
+			resize: both;
+		}
+		input {
+			width: 13%;
+			height: 20px;
+			padding: 10px;
+			box-sizing: border-box;
+			border: solid 2px #1E90FF;
+			border-radius: 5px;
+			font-size: 16px;
+			resize: both;
+		}
+	</style>
 
 <!-- Breadcrumb Section Begin -->
 <div class="breadcrumb-section">
@@ -68,10 +90,10 @@
 					</table>
 					<p class="f-para">${vo.contents }</p>
 				</div>
+				<div id ="btn_group">
 				<button type="button" class="list_btn">목록</button>
 				<div class="menu-item">
-					<div class="nav-menu"
-						style="text-align: left !important; cursor: pointer;">
+					<div class="nav-menu" style="text-align: left !important; cursor: pointer;">
 						<nav class="mainmenu">
 							<ul>
 								<li class="active" id="review"><a>리뷰</a></li>
@@ -81,32 +103,35 @@
 						</nav>
 					</div>
 				</div>
+				</div>
 				<!-- 댓글 목록 -->
 				<div id="comment1">
 					<div id="comment">
 					<!-- 로그인 안 했을 경우 alert -->
 						<ol class="commentList">
 							<c:forEach items="${commentList}" var="commentList">
-								<p>
-									${commentList.writer} /
-									<fmt:formatDate value="${commentList.regdate}"
-										pattern="yyyy-MM-dd" />/
-										<c:if test="${commentList.visit==1}">방문했어요</c:if>
-										<c:if test="${commentList.visit==0}">방문 전입니다</c:if>
-
-								</p>
+							 <div class="sc-author">
+                                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF5muH6piXfKA2yUyMkJwm0mJq6O4lU-1mFA&usqp=CAU" 
+                                   width="60" height="60" style="border-radius : 90px"> 
+								${commentList.writer}
+									<fmt:formatDate value="${commentList.regdate}" pattern="yyyy-MM-dd" /> &nbsp;&nbsp;
+									<b><c:if test="${commentList.visit==1}">방문했어요</c:if>
+										<c:if test="${commentList.visit==0}">방문 전입니다</c:if></b>	
+                                </div>
 								<p>${commentList.content}</p>
-								<div>
-									<button type="button" class="commentModifyBtn" onclick="openUdt()"
-										data-cno="${commentList.cno }">수정</button>
-									<button type="button" class="commentDeleteBtn" onclick="openDel()"
-										data-cno="${commentList.cno }">삭제</button>
+								<div id ="btn_group">
+								<c:if test = "${sessionScope.id eq commentList.writer}">
+									<button type="button" class="commentModifyBtn" onclick="openUdt()" data-cno="${commentList.cno }">수정</button>
+									<button type="button" class="commentDeleteBtn" onclick="openDel()" data-cno="${commentList.cno }">삭제</button>
+										</c:if>
 								</div>
 								<hr>
 							</c:forEach>
 						</ol>
 						<!-- 댓글 작성 -->
 						<h4>Add Review</h4>
+						<h6>리뷰 작성은 로그인 후 가능합니다 : )</h6>
+						<br>
 					</div>
 					<div>
 						<form name="commentForm" method="post">
@@ -122,10 +147,11 @@
 							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
 							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
 							
-							 <div class="comUpdate">
+							<div id ="btn_group">
+							 <c:if test = "${not empty sessionScope.id }">
 							<p>
-								<label for="id">댓글 작성자</label> <input type="text" name="id"
-									id="id" value=" ${id }">
+								<label for="id">댓글 작성자</label> 
+								<input type="text" name="id" id="id" value=" ${id }">
 							</p>
 							<p>
 								<textarea rows="5" cols="50" name="content" id="content"></textarea>
@@ -133,6 +159,7 @@
 							<p>
 								<button type="button" class="commentWriteBtn">댓글 작성</button>
 							</p>
+							</c:if>
 							</div> 
 						</form> 
 					</div>
@@ -141,7 +168,6 @@
 		</div>
 		<div class="review-add" id="review-add">
 			<div class="rd-reviews" id="blogList" style="display: none;"></div>
-
 			<div class="col-lg-12">
 				<div class="load-more" style="display: none; cursor: pointer;"
 					id="load-more">
@@ -274,7 +300,7 @@
 		});
 							
 		//댓글 수정 팝업
-			$(".commentModifyBtn").on("click", function openUdt (){
+			$(".commentModifyBtn").on("click", function openUdt(){
 				window.name ="updateComment";
 			window.open("/board/commentModify?num=${vo.num}"
 					+ "&page=${scri.page}"

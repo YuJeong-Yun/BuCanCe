@@ -3,14 +3,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <jsp:include page="../include/header.jsp" />
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css"/>
 <html>
 <style type="text/css">
-li {
-	list-style: none;
-	float: left;
-	padding: 6px;
+.paging a {
+	font-size: 16px;
+	color: #707079;
+	border: 1px solid #EFD4B9;
+	border-radius: 2px;
+	padding: 7px 13px 5px;
+	margin-right: 7px;
+	display: inline-block;
 }
+
 </style>
 <!-- Breadcrumb Section Begin -->
 <div class="breadcrumb-section">
@@ -52,13 +57,11 @@ li {
 					<option value="해운대구">해운대구</option>
 				</select>
 			</div>
-			<input type="text" name="keyword" id="keywordInput" class="search"
-				value="${scri.keyword}" placeholder="검색어를 입력하세요" />
-		</div>
-		<div class="input-group-btn">
-			<button class="btn btn-default" type="submit" id="searchBtn">
-				검색 <i class="glyphicon glyphicon-search"></i>
+		<div class="search-box">
+			<input type="text" name="keyword" id="keywordInput" class="search" value="${scri.keyword}" placeholder="검색어를 입력하세요" />
+			<button class="BTN" type="submit" id="searchBtn"><i class="fa fa-search" aria-hidden="true"></i>
 			</button>
+		</div>
 		</div>
 	</form>
 </div>
@@ -69,8 +72,8 @@ li {
 			<c:forEach var="vo" items="${boardList }">
 				<div class="col-lg-4 col-md-6">
 					<div class="room-item">
-						<a href="/board/read?num=${vo.num}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><img
-							src="${vo.thumbnail }" alt=""></a>
+						<a href="/board/read?num=${vo.num}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}">
+						<img src="${vo.thumbnail }" alt=""></a>
 						<div class="ri-text">
 						<h4><c:out value="${vo.title}" /></h4> 
 							<div>
@@ -84,25 +87,17 @@ li {
 			</c:forEach>
 		</div>
 		<div class="box-footer clearfix">
-			<div>
-				<ul>
+			<div class = "paging" style="text-align: center; padding-top: 20px;">
 					<c:if test="${pageMaker.prev}">
-						<li><a
-							href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+						<a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a>
 					</c:if>
-
-					<c:forEach begin="${pageMaker.startPage}"
-						end="${pageMaker.endPage}" var="idx">
-						<li><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
+					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+						<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
 					</c:forEach>
-
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-						<li><a
-							href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+						<a href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a>
 					</c:if>
-				</ul>
 			</div>
-
 			<div></div>
 		</div>
 	</div>
@@ -180,7 +175,7 @@ li {
 				+ obj.title
 				+ '</h4>'
 				+ '<div>'
-				+ '<i class="fa fa-hand-pointer-o" aria-hidden="true"></i> 조회수 <i class="fa fa-commenting-o" aria-hidden="true"></i> 댓글'
+				+ '<i class="fa fa-hand-pointer-o" aria-hidden="true"></i> '+obj.totalCnt+' <i class="fa fa-commenting-o" aria-hidden="true"></i> '+obj.commentCnt+''
 				+ '<i class="fa fa-heart-o" aria-hidden="true"></i>' + '</div>'
 				+ '</div>' + '</div>' + '</div>';
 	}

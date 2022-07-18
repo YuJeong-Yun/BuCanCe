@@ -37,8 +37,8 @@
 	</delete>
 	
 	<!-- 선택된 댓글 조회 -->
-	<select id="selectComment" resultType="com.bcc.domain.CommentVO"> select
-		num, cno, content, writer, regdate from comment where cno = #{cno}
+	<select id="selectComment" resultType="com.bcc.domain.CommentVO"> 
+	select num, cno, content, writer, regdate from comment where cno = #{cno}
 	</select>
 
 

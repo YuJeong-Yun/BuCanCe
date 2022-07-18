@@ -6,7 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style type="text/css">
+#btn_group {
+	border: 1px solid skyblue;
+	background-color: rgba(0, 0, 0, 0);
+	color: skyblue;
+	padding: 5px;
+	border-radius: 10px;
+	text-align: center;	
+	}
+
+</style>
 	<script type="text/javascript">
 	
 	function popupClose(form) {
@@ -30,8 +42,8 @@
 					<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
 					<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 					<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
-					<div>
-						<p>삭제 하시겠습니까?</p>
+					<div id= "btn_group">
+						<p>삭제 후에는 복구가 불가능합니다. 삭제 하시겠습니까?</p>
 						<button type="submit" class="delete_btn" onclick="window.close()">삭제</button>
 						<button type="button" class="cancel_btn" onclick="window.close()">취소</button>
 					</div>

@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
+@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    }
+
 .ri-text {
 	margin-bottom: 3em;
 	border-bottom: 1px solid #E5E5E5;
@@ -11,18 +19,46 @@
 	color: #01579B;
 }
 
-select {
-   text-align-last: center;
-   text-align: center;
-   -ms-text-align-last: center;
-   -moz-text-align-last: center;
-}
-
 .category {
 	color: black;
 	text-align: center;
 }
 
-.search  {
-	text-align: center;
-	}
+.navbar-form {
+	position: relative;
+	left: 63%;
+	top: 200px;
+}
+
+. search-box{
+	top: 210px;
+}
+
+
+#btn_group button {
+	position: relative;
+	border: none;
+	display: inline-block;
+	padding: 15px 30px;
+	border-radius: 15px;
+	font-family: "paybooc-Light", sans-serif;
+	text-decoration: none;
+	font-weight: 600;
+	transition: 0.25s;
+	box-sizing: border-box;
+	border: 1px solid skyblue;
+	padding: 5px;
+	background-color: #6aafe6;
+	color: #d4dfe6;
+	border-radius: 10px;
+}
+
+ .navbar-form {
+	text-align: right;
+	border-radius: 10px;
+	top: 50%;
+	
+	width: 100%;
+	height: 50px;
+}
+ 

@@ -23,9 +23,7 @@
 	<select id="updateBoardCnt" resultType="BoardVO"
 		parameterType="int">
 		update tourist_spot set totalCnt = totalCnt + 1
-		where num
-		= #{num}
-		and t_category = 0;
+		where num = #{num}
 
 	</select>
 	<!-- 게시판 카테고리 분류 -->
