@@ -83,10 +83,17 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
       <!-- 플랜 이름 -->
       <div class="title">${plan.grp_name }</div>
       <div class="description">
+      	<div class="desc-title"><span class="material-icons">bookmarks</span>플랜 수정 정보</div>
       	<!-- 마지막 수정시간 -->
-      	<div class="last-update"><f:formatDate value="${plan.lastUpdate }" pattern="yyyy-MM-dd HH:mm"/> </div>
+      	<div class="last-update">
+      	  <f:formatDate value="${plan.lastUpdate }" pattern="yyyy-MM-dd HH:mm"/> 
+      	  <c:if test="${plan.lastUpdate eq null }">-</c:if>
+      	</div>
       	<!-- 마지막 작성자 -->
-      	<div class="last-writer"><strong style="font-size: 17px; color: #7586c7;">${plan.writer }</strong> 님이 작성</div>
+      	<div class="last-writer">
+      	  <strong>${plan.writer }</strong>
+      	  <c:if test="${plan.writer eq null }">-</c:if>
+      	</div>
       </div>
 
       <ul class="plan-container">
@@ -94,6 +101,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
       	<c:if test="${planList eq null}">
       		<div class="no-plan">그룹 멤버들과 공유할 플랜을 작성해보세요!</div>
       	</c:if>
+      	<!-- 플랜 출력 -->
         <c:forEach var="datePlan"  items="${planList }">
 	        <li class="plan">
 	          <div class="plan__date">${datePlan[0] }</div>

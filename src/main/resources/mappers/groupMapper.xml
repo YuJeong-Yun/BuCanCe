@@ -169,7 +169,7 @@
 	
 	<update id="modifyPlan">
 		update plan
-		set writer = #{writer}, tour_plan = #{tour_plan}, tour_date_start = #{tour_date_start}, tour_date_end = #{tour_date_end}, lastUpdate = now()
+		set writer = #{writer}, tour_plan = #{tour_plan}, tour_plan_acc = #{tour_plan_acc}, tour_date_start = #{tour_date_start}, tour_date_end = #{tour_date_end}, lastUpdate = now()
 		where num = #{num}
 	</update>
 	

@@ -131,18 +131,18 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public void checkLeader(String id, int grpNum) {
 		String leader = dao.getLeader(grpNum);
-		
+
 		// 회원이 해당 플랜의 리더이면
 		if (id.equals(leader)) {
 			// 다음 방장 아이디 가져오기
 			String newLeader = dao.getNextLeader(grpNum);
 			// 본인이 그룹의 마지막 멤버이면 플랜정보 완전 삭제
-			if(newLeader == null) {
+			if (newLeader == null) {
 				// 초대중인 리스트 삭제
 				dao.deleteInvitingList(grpNum);
 				// 플랜 삭제
 				dao.delPlan(grpNum);
-				
+
 				return;
 			}
 
@@ -233,16 +233,19 @@ public class PlanServiceImpl implements PlanService {
 		// 날짜끼리는 +, 날짜-관광지는 :, 관광지 끼리는 - 로 구분
 		// 날짜별로 나눠서 allPlanArr에 담음
 		String[] allPlanArr = (String[]) vo.getTour_plan().split("\\+");
+		// 호텔 이미지*타이틀*lat*lng 정보 담을 배열
+		String[] allPlanAccArr = (String[]) vo.getTour_plan_acc().split("\\+");
 
 		// [날짜, [플랜,플랜, ..]], [날짜, [플랜, 플랜, ..]] 형태로 datePlanContainer에 저장
 		List<List<Object>> datePlanContainer = new ArrayList<>();
 
 		// 날짜별로 관광지 담을 배열 생성해서 datePlan에 저장
-		for (String allPlan : allPlanArr) {
+//		for (String allPlan : allPlanArr) {
+		for (int i = 0; i < allPlanArr.length; i++) {
 			List<Object> datePlanList = new ArrayList<>(); // 날짜 , [플랜, 플랜, ...] 담을 리스트
 
 			// 날짜랑 플랜 구분해서 datePlanArr에 담음
-			String[] datePlanArr = allPlan.split(":");
+			String[] datePlanArr = allPlanArr[i].split(":");
 			datePlanList.add(datePlanArr[0]); // 날짜 담기
 
 			List<Object> planList = new ArrayList<Object>(); // 플랜만 담을 리스트
@@ -256,11 +259,12 @@ public class PlanServiceImpl implements PlanService {
 
 			// 플랜-플랜- ... 연결된 문자열 구분
 			String[] planArr = datePlanArr[1].split("-");
-
+			String[] planAccArr = allPlanAccArr[i].split("-");
 			// 플랜 나눠서 planList에 저장
-			for (String plan : planArr) {
-				int tourNum = Integer.parseInt(plan.substring(1));
-				switch (plan.charAt(0)) {
+//			for (String plan : planArr) {
+			for (int j = 0; j < planArr.length; j++) {
+				int tourNum = Integer.parseInt(planArr[j].substring(1));
+				switch (planArr[j].charAt(0)) {
 				// 관광지일 경우
 				case 't':
 					planList.add(dao.getTourInfo(tourNum));
@@ -269,13 +273,24 @@ public class PlanServiceImpl implements PlanService {
 				case 'r':
 					planList.add(dao.getRestaurantInfo(tourNum));
 					break;
-				// 호텔일 경우
+				// 숙소일 경우
 				default:
-					for (HotelVO hotel : hotellist) {
-						if (hotel.getNum() == tourNum) {
-							planList.add(hotel);
-						}
-					}
+//					for (HotelVO hotel : hotellist) {
+//						if (hotel.getNum() == tourNum) {
+//							planList.add(hotel);
+//						}
+//					}
+					String[] planAccInfo = planAccArr[j].split("\\*");
+
+					HotelVO hotel = new HotelVO();
+					hotel.setThumbnail(planAccInfo[0]);
+					hotel.setTitle(planAccInfo[1]);
+					hotel.setLat(Double.parseDouble(planAccInfo[2]));
+					hotel.setLng(Double.parseDouble(planAccInfo[3]));
+					hotel.setT_category(-1);
+					hotel.setNum(tourNum);
+
+					planList.add(hotel);
 					break;
 				} // switch
 			} // for

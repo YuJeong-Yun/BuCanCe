@@ -1,7 +1,5 @@
 package com.bcc.web;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,14 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.HotelVO;
-import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
 import com.bcc.service.PlanService;
@@ -39,7 +34,7 @@ public class PlanController {
 	public void planListGET(HttpSession session, Model model) throws Exception {
 		log.info(" planListGET() 호출 ");
 
-		session.setAttribute("id", "yun2");
+		session.setAttribute("id", "yun1");
 		String id = (String) session.getAttribute("id");
 
 		// 회원 license 가져오기
@@ -120,12 +115,12 @@ public class PlanController {
 	public String planContentGET(@PathVariable("num") int num, Model model,HttpSession session) {
 		log.info("플랜 정보 확인 : "+num);
 		
-		// 숙소 정보 없으면 저장
-		if (session.getAttribute("hotellist") == null) {
-			// 숙소 정보 세션에 저장
-			session.setAttribute("hotellist", planService.getHotelList());
-			log.info("숙소 정보 세션 저장 완료");
-		}
+//		// 숙소 정보 없으면 저장
+//		if (session.getAttribute("hotellist") == null) {
+//			// 숙소 정보 세션에 저장
+//			session.setAttribute("hotellist", planService.getHotelList());
+//			log.info("숙소 정보 세션 저장 완료");
+//		}
 		
 		// 그룹 멤버 전달
 		model.addAttribute("grpMemberList",planService.getGrpMemberList(num));

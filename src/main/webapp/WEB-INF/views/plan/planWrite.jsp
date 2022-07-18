@@ -166,7 +166,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 		<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22 -->
 		</ul>
 
-      <div class="btn-container">
+      <div class="btn-container hidden">
         <input type="button" value="선택 초기화" class="btn--reset" />
         <div>|</div>
         <input type="button" value="직선 경로 표시" class="btn--line-path" />

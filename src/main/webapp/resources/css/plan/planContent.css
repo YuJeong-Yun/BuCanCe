@@ -149,6 +149,15 @@ body {
 	top: 0;
 	right: 0;
 	font-size: 15px;
+	text-align: right;
+}
+.tour-plan .description .desc-title {
+	color: #2b3c7e;
+	font-size: 15px;
+	font-weight: 700;
+}
+.tour-plan .description .desc-title span {
+	color: #2b3c7e;
 }
 .tour-plan ul.plan-container {
   list-style: none;
