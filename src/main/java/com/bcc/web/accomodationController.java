@@ -51,7 +51,6 @@ public class accomodationController {
 
 	}
 	
-<<<<<<< HEAD
 	// http://localhost:8088/accomodation/test2
 		@RequestMapping(value = "/test2", method = RequestMethod.GET)
 		public void test2GET(Model model) throws IOException {
@@ -64,9 +63,7 @@ public class accomodationController {
 			model.addAttribute("roomList", roomList);
 			
 		}
-=======
 	
->>>>>>> 9445dd3af79695b629e81d74e1a4121a6760a8d2
 	
 	// 숙소목록을 보여주는 페이지로 이동
 	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
@@ -377,18 +374,28 @@ public class accomodationController {
 		//결제환불 db에 저장
 		//http://localhost:8088/accomodation/roomRfDB
 		@RequestMapping(value = "/roomRfDB" ,method =RequestMethod.GET)
-		public void roomRefundGET(roomRefundVO vo,Model model) throws IOException {
+		public void roomRefundGET(roomRefundVO vo,roomPayVO vo2,Model model) throws IOException, org.json.simple.parser.ParseException {
 			
 							
 		//결제내역
 		log.info("roomRfDBGET() 호출");
 		
-						
-		//첫번째로 결제테이블의 정보를 환불됨으로 바꾸기(status)
-		service.payStatus(vo.getAccId());
+		log.info(vo2.getAccId());
+		log.info(vo2.getAccAmount()+"");				
 		
-		//두번째로 환불테이블 정보입력
-		service.inRoomRefund(vo);
+		//아임포트 환불
+		String tf = service.payRefund(vo2);
+		
+		log.info(tf);
+		
+		if(tf.equals("OK")) {
+			//첫번째로 결제테이블의 정보를 환불됨으로 바꾸기(status)
+			service.payStatus(vo.getAccId());
+			
+			//두번째로 환불테이블 정보입력
+			service.inRoomRefund(vo);
+		}
+		
 		
 		
 		log.info("vo : "+vo);

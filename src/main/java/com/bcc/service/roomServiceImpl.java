@@ -1,7 +1,13 @@
 package com.bcc.service;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
-
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,6 +19,7 @@ import javax.inject.Inject;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,6 +30,7 @@ import org.springframework.stereotype.Service;
 
 import com.bcc.domain.roomDate;
 import com.bcc.domain.roomPayVO;
+import com.bcc.domain.roomReVO;
 import com.bcc.domain.roomRefundVO;
 import com.bcc.domain.roomSearch;
 import com.bcc.persistence.roomDAO;
@@ -39,56 +47,7 @@ public class roomServiceImpl implements roomService{
 			LoggerFactory.getLogger(roomServiceImpl.class);
 	
 	
-//	//숙소목록 페이지
-//	@Override
-//	public JSONArray roomList() {
-//		
-//		log.info("service : 숙소목록불러오기");
-//
-//		// Jsoup를 이용해서 크롤링 - 여기어때
-//		String url = "https://www.goodchoice.kr/product/home/12";
-//
-//		Document doc = null; // Document에 페이지의 전체 소스가 저장됨
-//
-//		try {
-//			doc = Jsoup.connect(url).get();
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//		// select를 이용하여 원하는 태그를 선택
-//		Elements room_title = doc.select(".list_2.adcno1 .name strong"); //숙소명
-//		Elements room_pic = doc.select(".pic .lazy.align");    //숙소그림
-//		Elements room_rank = doc.select(".name p.score");   //별점
-//		Elements room_area = doc.select(".name > p:last-child");  //숙소지역
-//		Elements room_price = doc.select(".map_html > p:nth-child(1) > b");  //숙소대실가격
-//		Elements room_price2 = doc.select(".map_html > p:nth-child(2) > b"); //숙소숙박가격
-//		Elements room_link = doc.select(".list_2.adcno1 > a"); //페이지이동후 크롤링할 페이지주소
-//		
-//		// JSON 형태로 숙소 정보 저장
-//		JSONArray roomList = new JSONArray();
-//
-//		for (int i = 0; i < room_title.size(); i++) {
-//			// JSONObject에 키:값 형태로 데이터 저장
-//			JSONObject obj = new JSONObject();
-//
-//			obj.put("room_title", room_title.get(i).text());
-//			obj.put("room_pic", room_pic.get(i).attr("data-original"));
-//			obj.put("room_rank", room_rank.get(i).text());
-//			obj.put("room_area", room_area.get(i).text());
-//			obj.put("room_price", room_price.get(i).text().replace("원",""));
-//			obj.put("room_price2", room_price2.get(i).text().replace("원",""));
-//			obj.put("room_link", room_link.get(i).attr("href"));
-//
-//			// roomList에 생성한 JSONObject 추가
-////				log.info(obj+"");
-//			roomList.add(obj);
-//		}
-//		System.out.println(" roomList : " + roomList);
-//		
-//		 return roomList;
-//	}
+
 
 	//숙소목록 페이지
 	@Override
@@ -771,12 +730,12 @@ public class roomServiceImpl implements roomService{
 		log.info("a = "+a);
 		
 		//a 문자부분
-		String b = "bvsdvsvs";
+		String b = "bcvvvsF";
 		int c=0;
 		
 		//데이터 값이 없을때는 bcc1이 들어가고 있을때는 bcc2,bcc3....로 들어감
 		if(a==null) {
-			b = "bvsdvsvs";
+			b = "bcvvvsF";
 			c= 0;
 		}else {
 			//a의 숫자부분
@@ -809,7 +768,7 @@ public class roomServiceImpl implements roomService{
 		String a = dao.roomSearchRefund();
 		
 		//a 문자부분
-		String b = "rfsrvdvfv";
+		String b = "ffqwdwqF";
 				
 		//a 숫자부분
 		int c=0;
@@ -817,7 +776,7 @@ public class roomServiceImpl implements roomService{
 		
 		if(a==null) {
 			
-			b = "rfsrvdvfv";
+			b = "ffqwdwqF";
 			c= 0;
 		}else {
 			c = Integer.parseInt(a.replaceAll("[^0-9]",""));
@@ -840,6 +799,66 @@ public class roomServiceImpl implements roomService{
 		
 		
 		dao.inRoomRefund(vo2);
+		
+	}
+
+
+	@Override
+	public String payRefund(roomPayVO vo) throws IOException, org.json.simple.parser.ParseException {
+		//access_token 발급
+				HttpURLConnection conn = null;
+				URL url = new URL("https://api.iamport.kr/users/getToken");
+				conn = (HttpURLConnection)url.openConnection();
+				conn.setRequestMethod("POST");
+				conn.setRequestProperty("Content-Type", "application/json");
+				conn.setRequestProperty("Accept", "application/json");
+				conn.setDoOutput(true);
+				JSONObject obj = new JSONObject();
+				obj.put("imp_key", "3817682477122484");
+				obj.put("imp_secret", "a060f160cc159fd09923a2ebfb7678adbac710c0105bedad238924b8d34a67409508e32f09830702");
+				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+				bw.write(obj.toString());
+				bw.flush();
+				bw.close();
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				StringBuilder sb = new StringBuilder();
+				String line = null;
+				while((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+				}
+				br.close();
+				JSONParser jsonParser = new JSONParser();
+				JSONObject jsonObj = (JSONObject)jsonParser.parse(sb.toString());
+				JSONObject responseData = (JSONObject)jsonObj.get("response");
+				String access_token = (String)responseData.get("access_token");
+				
+				log.info("액세스토큰 :"+access_token);
+				
+				//REST API(결제환불) 호출
+				HttpURLConnection conn2 = null;
+				URL url2 = new URL("https://api.iamport.kr/payments/cancel");
+				conn2 = (HttpURLConnection)url2.openConnection();
+				conn2.setRequestMethod("POST");
+				conn2.setRequestProperty("Content-Type", "application/json");
+				conn2.setRequestProperty("Authorization", access_token);
+				conn2.setDoOutput(true);
+				JSONObject obj2 = new JSONObject();
+				obj2.put("reason", "테스트 환불");
+				obj2.put("merchant_uid", vo.getAccId());
+				obj2.put("amount", vo.getAccAmount());
+				BufferedWriter bw2 = new BufferedWriter(new OutputStreamWriter(conn2.getOutputStream()));
+				bw2.write(obj2.toString());
+				bw2.flush();
+				bw2.close();
+				BufferedReader br2 = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
+				StringBuilder sb2 = new StringBuilder();
+				String line2 = null;
+				while((line2 = br2.readLine()) != null) {
+				sb2.append(line2 + "\n");
+				}
+				br2.close();
+				
+				return "OK";
 		
 	}
 	

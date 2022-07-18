@@ -7,32 +7,23 @@
   <meta name="viewport" content="width=device-width">
   <title>무한 스크롤 예제</title>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <style>
-    body { 
-      margin: 0px;
-      padding: 0px;
-    }
-    .big-box {
-      width: 100%;
-      background-color: gray;
-      height: 100vh;
-      border-top: 1px solid black;
-    }
-  </style>
+
 </head>
 <body>
-  <div class="big-box"><h1>Page 1</h1></div>
+  <div class="big-box" id="#enters"><h1>Page 1</h1></div>
   
   <script>
-    var page = 10;
+  var page = 1;
 
-    $(window).scroll(function() {
-        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-          console.log(page=page+2);
-          $("body").append('<div class="big-box"><h1>Page ' + page + '</h1></div>');
-
-        }
-    });
+  alert(page);
+  
+  $(window).scroll(function() {
+      if ($(document.body).scrollTop() == $(document).height() - $(window).height()) {
+        console.log(++page);
+        $("#enters").append("<h1>Page " + page + "</h1><BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~");
+        
+      }
+  });
   </script>
 </body>
 </html>

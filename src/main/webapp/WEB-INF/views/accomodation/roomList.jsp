@@ -16,9 +16,15 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 </head>
 <body>
 	<jsp:include page="../include/header.jsp" />
+	
+	<!-- 무한스크롤포함 -->
 	<jsp:include page="${pageContext.request.contextPath}/resources/js/acc/JroomList.jsp"/>
+	<!-- 무한스크롤포함 -->
+	
 	<!-- Breadcrumb Section Begin --> <!-- 코드 시작 -->
 	
+	 
+  
 	<section class="tour-plan">
 	<div class="breadcrumb-section" style="background:  #BEEFFF">
 		<div class="container">
@@ -95,22 +101,18 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	<!-- Breadcrumb Section End -->
 <br><br>
 
-
+  
 
 	<!-- Rooms Section Begin -->
 	<section class="rooms-section spad" >
 		<div class="container">
 			<div class="row">
 				<c:set var="a" />
-<<<<<<< HEAD
-				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}">
-<%-- 				<c:forEach items="${roomList}" begin="0" end="10"> --%>
-=======
-<%-- 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}"> --%>
-				<c:forEach items="${roomList}" begin="0" end="10">
->>>>>>> 9445dd3af79695b629e81d74e1a4121a6760a8d2
 			
-					<div class="col-lg-4 col-md-6" style="height:550px;">
+<%-- 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}"> --%>
+				<c:forEach items="${roomList}" begin="0" end="5">
+			
+					<div class="col-lg-4 col-md-6" style="height:600px;">
 					
 					
 					<c:if test="${roomList.get(a).room_rank!=''}">
@@ -131,9 +133,9 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 							
 							<div class="ri-text"  style=" border-style: solid;  border-color: #FFFFFF #00ABB9 #00ABB9 #00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:0px 0px 10px 10px; height:260px; background: white"  >
 								<h4>${roomList.get(a).room_title}</h4>
-								<table >
+								<table>
 									<tbody>
-										<tr >
+										<tr>
 											<td class="r-o" style="color: green">평점:</td>
 											<td style="color: green">
 											<c:if test="${roomList.get(a).room_rank!=''}">
@@ -191,8 +193,6 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 		</div>
 	</section>
 	</section>
-	<!-- Rooms Section End -->
-	<!-- 코드 끝 -->
 <div class="inner">
   <div class="ocean">
     <div class="wave"></div>
@@ -200,8 +200,12 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
   </div>
 </div>
 
+
+
+
 	<jsp:include page="../include/footer.jsp" />
 
+	
 	
 </body>
 
