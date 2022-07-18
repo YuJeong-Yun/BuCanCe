@@ -63,7 +63,6 @@
 		where id=#{id} 
 	</update>
 
-	<!-- 조건에 따른 썸 리스트 -->
 	<select id="thumbList" resultType="BoardVO">
         select tourist_spot.*
 		from tourist_spot left join thumb
@@ -71,6 +70,11 @@
         where thumb.m_id=#{id }
 		order by tourist_spot.num asc
 	</select>
-  	
+	
+    <delete id="deleteThumb" parameterType="int">
+		delete from thumb
+		where b_num = #{b_num} and b_category = #{b_category}
+    </delete>
+	
   </mapper>
   

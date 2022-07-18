@@ -5,6 +5,7 @@ import java.util.List;
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.SearchCriteria;
+import com.bcc.domain.ThumbVO;
 
 public interface MemberDAO {
 	
@@ -52,6 +53,8 @@ public interface MemberDAO {
 	
 	// 게시물 목록 조회
 	public List<BoardVO> thumbList(String id) throws Exception;
-
+	
+	// 좋아요 삭제
+	public void deleteThumb(ThumbVO vo) throws Exception;
 
 }

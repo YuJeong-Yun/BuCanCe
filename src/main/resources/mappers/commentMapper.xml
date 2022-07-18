@@ -12,33 +12,33 @@
 		SELECT
 		CNO, CONTENT, WRITER,
 		REGDATE
-		FROM bcc_comment
+		FROM comment
 		WHERE num = #{num}
 	</select>
 
 	<!-- 댓글 작성 -->
 	<insert id="writeComment">
-		insert into bcc_comment(num, content, writer)
+		insert into comment(num, content, writer)
 		value(#{num}, #{content}, #{writer})
 	</insert>
 
 	<!-- 댓글 수정 -->
 	<update id="modify" parameterType="com.bcc.domain.CommentVO">
-		update bcc_comment set content
+		update comment set content
 		= #{content}
 		where cno = #{cno}
 	</update>
 
 	<!-- 댓글 삭제 -->
 	<delete id="delete">
-	DELETE FROM bcc_comment
+	DELETE FROM comment
   		WHERE cno = #{cno}
 	</delete>
 
 	<!-- 선택된 댓글 조회 -->
 	<select id="selectComment" resultType="com.bcc.domain.CommentVO">
 		select num, cno, content,
-		writer, regdate from bcc_comment
+		writer, regdate from comment
 		where cno = #{cno}
 	</select>
 	

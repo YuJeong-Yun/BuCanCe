@@ -13,6 +13,24 @@ li {
 </style>
 <script type = "text/javascript">
 
+function deleteThumb(){
+	var b_num = $("#num").val()
+	var b_category = $("#t_category").val()
+
+	$.ajax({
+	        url:'/deleteThumb', //Controller에서 인식할 주소
+ 	        type:'GET', //POST 방식으로 전달
+ 	        data:{b_num:b_num, b_category:b_category},
+ 	        success:function(){
+ 	        	alert("찜 취소 성공");
+ 	        	location.href="/favorite";
+ 	        },
+			error:function(error){
+				alert("찜 취소 실패");
+			}
+	})
+	};
+
 </script>
 	<!-- 1조건 : 세션에 저장된 id값과 thumb 테이블에 저장된 _id 값이 동일 -->
 	<!-- 2조건 : thumb 테이블의 B_num과 tourist_spot 테이블의 num 컬럼값이 같고(and) -->
@@ -44,7 +62,7 @@ li {
 							src="${vo.thumbnail }" alt=""></a>
 						<div class="ri-text">
 							<h4>${vo.title }</h4>
-							<input type ="button" value = "찜하기 취소">
+							<input type = "button" id = "deleteThumb" onclick = "deleteThumb()" value = "찜 취소">
 						</div>
 					</div>
 				</div>

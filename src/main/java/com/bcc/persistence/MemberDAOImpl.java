@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.MemberVO;
-import com.bcc.domain.SearchCriteria;
+import com.bcc.domain.ThumbVO;
 
 // @Repository : 해당 클래스를 DAO로 스프링에서 인식하도록 하는 표시
 
@@ -179,5 +179,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectList(NAMESPACE + ".thumbList", id);
 	}
 
-
+	@Override
+	public void deleteThumb(ThumbVO vo) throws Exception {
+		
+		sqlSession.delete(NAMESPACE+".deleteThumb", vo);
+	}
+	
+	
+	
 }

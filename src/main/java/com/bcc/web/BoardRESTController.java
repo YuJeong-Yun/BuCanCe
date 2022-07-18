@@ -39,7 +39,7 @@ public class BoardRESTController {
 	// 좋아요 수 업데이트
 	@RequestMapping(value = "/updateThumb", method = RequestMethod.PUT)
 	public void updateThumbPUT(@RequestParam("b_num") int b_num,
-			@RequestParam("t_category") int t_category,HttpServletRequest request) {
+		@RequestParam("t_category") int t_category,HttpServletRequest request) {
 		log.info(b_num+"");
 		log.info(t_category+"");
 		HttpSession session = request.getSession();

@@ -23,6 +23,7 @@ import com.bcc.domain.Criteria;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
+import com.bcc.domain.ThumbVO;
 import com.bcc.service.BoardService;
 import com.bcc.service.KakaoService;
 import com.bcc.service.MemberService;
@@ -82,10 +83,13 @@ public class MemberController {
 		// http://localhost:8088/index
 		// http://localhost:8088/favorite
 		@RequestMapping(value = "/favorite", method = RequestMethod.GET)
-		public String thumbList(@ModelAttribute("result") String result, SearchCriteria scri, MemberVO vo, Model model, HttpSession session)
+		public String thumbList(@ModelAttribute("result") String result, SearchCriteria scri, Model model, HttpSession session)
 				throws Exception {
 			
 			String id = (String)session.getAttribute("id");
+			
+			// 조회수
+			session.setAttribute("upFlag", "1");
 			
 			// 글 정보를 가지고 오기
 			PageMaker pageMaker = new PageMaker();
@@ -100,7 +104,6 @@ public class MemberController {
 			return "/member/favorite";
 
 		}
-
 		
 		// http://localhost:8088/insert
 		// 회원가입
@@ -218,9 +221,8 @@ public class MemberController {
 			return "redirect:/mypage";
 		}
 
-
 		@RequestMapping(value = "/liUp", method = RequestMethod.POST)
-		public String liUpPOST(HttpSession session, String license) {
+		public String liUpPOST(HttpSession session) {
 			
 			log.info(" liUpPOST() 호출 ");
 			
@@ -233,7 +235,7 @@ public class MemberController {
 		
 		// http://localhost:8088/login
 		@RequestMapping(value = "/liDown", method = RequestMethod.POST)
-		public String liDownPOST(HttpSession session, String license) {
+		public String liDownPOST(HttpSession session) {
 			
 			log.info(" liDownPOST() 호출 ");
 			
@@ -243,7 +245,18 @@ public class MemberController {
 			
 			return "redirect:/update";
 		}
+		
 
+		@RequestMapping(value = "/deleteThumb", method = RequestMethod.GET)
+		public void deleteThumbPOST(@RequestParam(value = "b_num") int b_num,
+				@RequestParam(value = "b_category") int b_category, ThumbVO vo) throws Exception {
+			
+			log.info(" deleteThumbPOST() 호출 ");
+
+			service.deleteThumb(vo);
+
+		}
+		
 		// 회원정보 삭제(탈퇴)
 		@RequestMapping(value = "/delete", method = RequestMethod.GET)
 		public String deleteGET() {
