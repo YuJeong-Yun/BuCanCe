@@ -2,11 +2,7 @@ package com.bcc.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -18,59 +14,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.bcc.domain.BoardVO;
-import com.bcc.domain.GrpAcceptVO;
 import com.bcc.domain.HotelVO;
-import com.bcc.domain.MemberVO;
-import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
 import com.bcc.persistence.PlanDAO;
 
 @Service
 public class PlanServiceImpl implements PlanService {
 
-	private static final Logger log = LoggerFactory.getLogger(PlanServiceImpl.class);
-
 	@Inject
 	private PlanDAO dao;
 
 	@Override
-	public List<MemberVO> getSearchMemList(String id) {
-		return dao.getSearchMemList(id);
-	}
-
-	@Override
-	public Integer getMaxGrpNum() {
-		return dao.getMaxGrpNum();
-	}
-
-	@Override
 	public void createPlan(PlanVO vo) {
 		dao.createPlan(vo);
-	}
-
-	@Override
-	public String getLicense(String id) {
-		int result = dao.getLicense(id);
-		if (result == 0) {
-			return "free";
-		} else {
-			return "premium";
-		}
-	}
-
-	@Override
-	public List<GrpAcceptVO> getGrpAcceptList(String receiver) {
-		return dao.getGrpAcceptList(receiver);
-	}
-
-	@Override
-	public void insertGrpMember(PlanMemberVO member) {
-		dao.insertGrpMember(member);
-	}
-
-	@Override
-	public void deleteInvitation(GrpAcceptVO vo) {
-		dao.deleteInvitation(vo);
 	}
 
 	@Override
@@ -79,89 +35,13 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public String getGrpName(int num) {
-		return dao.getGrpName(num);
-	}
-
-	@Override
-	public List<MemberVO> getGrpMemberList(int grp_num) {
-		return dao.getGrpMemberList(grp_num);
-	}
-
-	@Override
-	public void delPlanMem(PlanMemberVO vo) {
-		dao.delPlanMem(vo);
-	}
-
-	@Override
-	public String getLeader(int num) {
-		return dao.getLeader(num);
-	}
-
-	@Override
-	public List<GrpAcceptVO> getInvitingList(int grp_num) {
-		return dao.getInvitingList(grp_num);
-	}
-
-	@Override
-	public void inviteMember(GrpAcceptVO vo) {
-		dao.inviteMember(vo);
-	}
-
-	@Override
-	public String getMemberName(String id) {
-		return dao.getMemberName(id);
-	}
-
-	@Override
-	public void inviteCancle(GrpAcceptVO vo) {
-		dao.inviteCancle(vo);
-	}
-
-	@Override
-	public int checkGrpMember(PlanMemberVO vo) {
-		return dao.checkGrpMember(vo);
-	}
-
-	@Override
-	public String getNextLeader(int grp_num) {
-		return dao.getNextLeader(grp_num);
-	}
-
-	@Override
-	public void checkLeader(String id, int grpNum) {
-		String leader = dao.getLeader(grpNum);
-
-		// 회원이 해당 플랜의 리더이면
-		if (id.equals(leader)) {
-			// 다음 방장 아이디 가져오기
-			String newLeader = dao.getNextLeader(grpNum);
-			// 본인이 그룹의 마지막 멤버이면 플랜정보 완전 삭제
-			if (newLeader == null) {
-				// 초대중인 리스트 삭제
-				dao.deleteInvitingList(grpNum);
-				// 플랜 삭제
-				dao.delPlan(grpNum);
-
-				return;
-			}
-
-			// 방장 새로 설정
-			PlanVO plan = new PlanVO();
-			plan.setLeader(newLeader);
-			plan.setNum(grpNum);
-			dao.updateLeader(plan);
-		}
-	}
-
-	@Override
 	public List<BoardVO> getTourList() {
-		return dao.getTourList();
+		return dao.getTourList(0);
 	}
 
 	@Override
 	public List<BoardVO> getRestaurantList() {
-		return dao.getRestaurantList();
+		return dao.getTourList(1);
 	}
 
 	@Override
@@ -198,9 +78,14 @@ public class PlanServiceImpl implements PlanService {
 	@Override
 	public List<BoardVO> getSearchList(String category, String keyword) {
 		List<BoardVO> searchList;
+		// vo에 카테고리, 키워드 저장
+		BoardVO vo = new BoardVO();
+		vo.setTitle(keyword);
 		// 선택 카테고리별로 검색 결과 반환
 		if (category.equals("t")) { // 관광지 검색
-			searchList = dao.getTourSearch(keyword);
+			vo.sett_category(0);
+			
+			searchList = dao.getTourSearch(vo);
 
 //		} else if (category.equals("a")) { // 숙소 검색
 //			searchList = new ArrayList<HotelVO>();
@@ -212,7 +97,9 @@ public class PlanServiceImpl implements PlanService {
 //			} // for
 
 		} else { // category.equals("r") -> 맛집 검색
-			searchList = dao.getRestaurantSearch(keyword);
+			vo.sett_category(1);
+			
+			searchList = dao.getTourSearch(vo);
 		}
 		return searchList;
 	}
@@ -264,6 +151,8 @@ public class PlanServiceImpl implements PlanService {
 //			for (String plan : planArr) {
 			for (int j = 0; j < planArr.length; j++) {
 				int tourNum = Integer.parseInt(planArr[j].substring(1));
+				BoardVO tour = new BoardVO();
+				
 				switch (planArr[j].charAt(0)) {
 				// 관광지일 경우
 				case 't':
@@ -274,8 +163,8 @@ public class PlanServiceImpl implements PlanService {
 					break;
 				// 맛집일 경우
 				case 'r':
-					if (dao.getRestaurantInfo(tourNum) != null) {
-						planList.add(dao.getRestaurantInfo(tourNum));
+					if (dao.getTourInfo(tourNum) != null) {
+						planList.add(dao.getTourInfo(tourNum));
 					}
 					break;
 				// 숙소일 경우
@@ -307,28 +196,6 @@ public class PlanServiceImpl implements PlanService {
 		} // for
 
 		return datePlanContainer;
-	}
-
-	@Override
-	public List<List<MemberVO>> getAllGrpMemberList(List<PlanVO> grpList) {
-		List<List<MemberVO>> allGrpMemberList = new ArrayList<>();
-		// 소속 그룹의 모든 멤버 리스트 가져오기
-		for (int i = 0; i < grpList.size(); i++) {
-			List<MemberVO> memberList = dao.getGrpMemberList(grpList.get(i).getNum());
-			allGrpMemberList.add(memberList);
-		}
-		return allGrpMemberList;
-	}
-
-	@Override
-	public List<List<GrpAcceptVO>> getAllGrpInvitingList(List<PlanVO> grpList) {
-		List<List<GrpAcceptVO>> allGrpInvitingList = new ArrayList<>();
-		// 소속 그룹의 모든 초대중 멤버 리스트 가져오기
-		for (int i = 0; i < grpList.size(); i++) {
-			List<GrpAcceptVO> invitingList = dao.getInvitingList(grpList.get(i).getNum());
-			allGrpInvitingList.add(invitingList);
-		}
-		return allGrpInvitingList;
 	}
 
 	@Override

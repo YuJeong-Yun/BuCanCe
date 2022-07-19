@@ -10,9 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bcc.domain.BoardVO;
-import com.bcc.domain.GrpAcceptVO;
-import com.bcc.domain.MemberVO;
-import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
 
 @Repository
@@ -23,41 +20,11 @@ public class PlanDAOImpl implements PlanDAO {
 	@Inject
 	private SqlSession sqlSession;
 
-	private static final String NAMESPACE = "com.bcc.mapper.groupMapper";
-
-	@Override
-	public List<MemberVO> getSearchMemList(String id) {
-		return sqlSession.selectList(NAMESPACE + ".getSearchMemList", id);
-	}
-
-	@Override
-	public Integer getMaxGrpNum() {
-		return sqlSession.selectOne(NAMESPACE + ".getMaxGrpNum");
-	}
+	private static final String NAMESPACE = "com.bcc.mapper.planMapper";
 
 	@Override
 	public void createPlan(PlanVO vo) {
 		sqlSession.insert(NAMESPACE + ".createPlan", vo);
-	}
-
-	@Override
-	public Integer getLicense(String id) {
-		return sqlSession.selectOne(NAMESPACE + ".getLicense", id);
-	}
-
-	@Override
-	public List<GrpAcceptVO> getGrpAcceptList(String receiver) {
-		return sqlSession.selectList(NAMESPACE + ".getGrpAcceptList", receiver);
-	}
-
-	@Override
-	public void insertGrpMember(PlanMemberVO member) {
-		sqlSession.insert(NAMESPACE + ".insertGrpMember", member);
-	}
-
-	@Override
-	public void deleteInvitation(GrpAcceptVO vo) {
-		sqlSession.delete(NAMESPACE + ".deleteInvitation", vo);
 	}
 
 	@Override
@@ -66,83 +33,13 @@ public class PlanDAOImpl implements PlanDAO {
 	}
 
 	@Override
-	public String getGrpName(int num) {
-		return sqlSession.selectOne(NAMESPACE + ".getGrpName", num);
+	public List<BoardVO> getTourList(int t_category) {
+		return sqlSession.selectList(NAMESPACE + ".getTourList", t_category);
 	}
 
 	@Override
-	public List<MemberVO> getGrpMemberList(int grp_num) {
-		return sqlSession.selectList(NAMESPACE + ".getGrpMemberList", grp_num);
-	}
-
-	@Override
-	public void delPlanMem(PlanMemberVO vo) {
-		sqlSession.delete(NAMESPACE + ".delPlanMem", vo);
-	}
-
-	@Override
-	public String getLeader(int num) {
-		return sqlSession.selectOne(NAMESPACE + ".getLeader", num);
-	}
-
-	@Override
-	public List<GrpAcceptVO> getInvitingList(int grp_num) {
-		return sqlSession.selectList(NAMESPACE + ".getInvitingList", grp_num);
-	}
-
-	@Override
-	public void inviteMember(GrpAcceptVO vo) {
-		sqlSession.insert(NAMESPACE + ".inviteMember", vo);
-	}
-
-	@Override
-	public String getMemberName(String id) {
-		return sqlSession.selectOne(NAMESPACE + ".getMemberName", id);
-	}
-
-	@Override
-	public void inviteCancle(GrpAcceptVO vo) {
-		sqlSession.delete(NAMESPACE + ".inviteCancle", vo);
-	}
-
-	@Override
-	public int checkGrpMember(PlanMemberVO vo) {
-		return sqlSession.selectOne(NAMESPACE + ".checkGrpMember", vo);
-	}
-
-	@Override
-	public String getNextLeader(int grp_num) {
-		return sqlSession.selectOne(NAMESPACE + ".getNextLeader", grp_num);
-	}
-
-	@Override
-	public void updateLeader(PlanVO plan) {
-		sqlSession.update(NAMESPACE + ".updateLeader", plan);
-	}
-
-	@Override
-	public List<BoardVO> getTourList() {
-		return sqlSession.selectList(NAMESPACE + ".getTourList");
-	}
-
-	@Override
-	public List<BoardVO> getRestaurantList() {
-		return sqlSession.selectList(NAMESPACE + ".getRestaurantList");
-	}
-
-	@Override
-	public List<BoardVO> getTourSearch(String keyword) {
-		return sqlSession.selectList(NAMESPACE + ".getTourSearch", keyword);
-	}
-
-	@Override
-	public List<BoardVO> getRestaurantSearch(String keyword) {
-		return sqlSession.selectList(NAMESPACE + ".getRestaurantSearch", keyword);
-	}
-
-	@Override
-	public void modifyTourPlan(PlanVO vo) {
-		sqlSession.update(NAMESPACE + ".modifyTourPlan", vo);
+	public List<BoardVO> getTourSearch(BoardVO vo) {
+		return sqlSession.selectList(NAMESPACE + ".getTourSearch", vo);
 	}
 
 	@Override
@@ -151,22 +48,17 @@ public class PlanDAOImpl implements PlanDAO {
 	}
 
 	@Override
-	public BoardVO getRestaurantInfo(int num) {
-		return sqlSession.selectOne(NAMESPACE + ".getRestaurantInfo", num);
-	}
-
-	@Override
-	public void delPlan(int num) {
-		sqlSession.delete(NAMESPACE + ".delPlan", num);
-	}
-
-	@Override
-	public void deleteInvitingList(int grp_num) {
-		sqlSession.delete(NAMESPACE + ".deleteInvitingList", grp_num);
+	public void modifyTourPlan(PlanVO vo) {
+		sqlSession.update(NAMESPACE + ".modifyTourPlan", vo);
 	}
 
 	@Override
 	public PlanVO getPlanInfo(int num) {
 		return sqlSession.selectOne(NAMESPACE + ".getPlanInfo", num);
+	}
+
+	@Override
+	public void delPlan(int num) {
+		sqlSession.delete(NAMESPACE + ".delPlan", num);
 	}
 }

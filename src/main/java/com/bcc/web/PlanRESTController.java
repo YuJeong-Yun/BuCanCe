@@ -20,6 +20,7 @@ import com.bcc.domain.HotelVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
+import com.bcc.service.GrpService;
 import com.bcc.service.PlanService;
 
 @RestController
@@ -31,6 +32,8 @@ public class PlanRESTController {
 	// 서비스 객체 주입
 	@Inject
 	private PlanService planService;
+	@Inject
+	private GrpService grpService;
 
 	// 그룹 초대 수락
 	// http://localhost:8088/planREST/accept/8
@@ -44,21 +47,21 @@ public class PlanRESTController {
 		GrpAcceptVO vo = new GrpAcceptVO();
 		vo.setReceiver(id);
 		vo.setGrp_num(grpNum);
-		planService.deleteInvitation(vo);
+		grpService.deleteInvitation(vo);
 
 		// 그룹에 멤버 추가
 		PlanMemberVO member = new PlanMemberVO();
 		member.setId(id);
 		member.setGrp_num(grpNum);
-		planService.insertGrpMember(member);
+		grpService.insertGrpMember(member);
 
 		// 해당 그룹 소속 멤버 리스트 가져오기
-		List<MemberVO> grpMember = planService.getGrpMemberList(grpNum);
+		List<MemberVO> grpMember = grpService.getGrpMemberList(grpNum);
 		// 멤버 리스트, 그룹 이름, 그룹 리더 저장
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("grpMember", grpMember);
-		map.put("grpName", planService.getGrpName(grpNum));
-		map.put("leader", planService.getLeader(grpNum));
+		map.put("grpName", grpService.getGrpName(grpNum));
+		map.put("leader", grpService.getLeader(grpNum));
 
 		return map;
 	}
@@ -74,7 +77,7 @@ public class PlanRESTController {
 		vo.setReceiver(id);
 		vo.setGrp_num(grpNum);
 		// 초대 수락 리스트에서 제거
-		planService.deleteInvitation(vo);
+		grpService.deleteInvitation(vo);
 	}
 
 	// 플랜 삭제
@@ -88,11 +91,11 @@ public class PlanRESTController {
 		PlanMemberVO vo = new PlanMemberVO();
 		vo.setId(id);
 		vo.setGrp_num(grpNum);
-		planService.delPlanMem(vo);
+		grpService.delGrpMember(vo);
 
 		// 방장 여부에 따라 방장 새로 설정 - 본인이 마지막 멤버이면 플랜 삭제함
 		log.info("checkLeader 실행 ");
-		planService.checkLeader(id, grpNum);
+		grpService.checkLeader(id, grpNum);
 	}
 
 	// 아이디 검색
@@ -103,13 +106,13 @@ public class PlanRESTController {
 		Map<String, Object> total = new HashMap<String, Object>();
 
 		// 아이디 검색 결과
-		List<MemberVO> memberList = planService.getSearchMemList(id);
+		List<MemberVO> memberList = grpService.getSearchMemList(id);
 
 		// 그룹의 초대중인 회원
-		List<GrpAcceptVO> invitingList = planService.getInvitingList(grpNum);
+		List<GrpAcceptVO> invitingList = grpService.getInvitingList(grpNum);
 
 		// 그룹의 멤버
-		List<MemberVO> grpMemberList = planService.getGrpMemberList(grpNum);
+		List<MemberVO> grpMemberList = grpService.getGrpMemberList(grpNum);
 
 		total.put("memberArr", memberList);
 		total.put("invitingArr", invitingList);
@@ -126,8 +129,8 @@ public class PlanRESTController {
 		String sender = (String) session.getAttribute("id");
 
 		// 그룹 멤버 + 초대중 멤버 10명 이상이면 초대 불가
-		int grpMemberCnt = planService.getGrpMemberList(grpNum).size();
-		int invitingMemberCnt = planService.getInvitingList(grpNum).size();
+		int grpMemberCnt = grpService.getGrpMemberList(grpNum).size();
+		int invitingMemberCnt = grpService.getInvitingList(grpNum).size();
 		if ((grpMemberCnt + invitingMemberCnt) >= 10) {
 			return "더 이상 초대할 수 없습니다.";
 		}
@@ -138,10 +141,10 @@ public class PlanRESTController {
 		vo.setSender(sender);
 		vo.setReceiver(id);
 
-		planService.inviteMember(vo);
+		grpService.inviteMember(vo);
 
 		// 회원 이름 전달
-		return planService.getMemberName(id);
+		return grpService.getMemberName(id);
 	}
 
 	// 초대 취소
@@ -154,7 +157,7 @@ public class PlanRESTController {
 		member.setGrp_num(grpNum);
 		member.setId(id);
 
-		if (planService.checkGrpMember(member) == 1) {
+		if (grpService.checkGrpMember(member) == 1) {
 			return 1;
 		}
 
@@ -163,7 +166,7 @@ public class PlanRESTController {
 		vo.setGrp_num(grpNum);
 		vo.setReceiver(id);
 
-		planService.inviteCancle(vo);
+		grpService.inviteCancle(vo);
 		return 0;
 	}
 

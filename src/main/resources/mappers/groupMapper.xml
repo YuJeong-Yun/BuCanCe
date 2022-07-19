@@ -17,11 +17,6 @@
 		from plan
 	</select>
 
-	<insert id="createPlan">
-		insert into plan(num, grp_name, leader)
-		values(#{num}, #{grp_name}, #{leader})
-	</insert>
-
 	<select id="getLicense" resultType="int">
 		select license
 		from bcc_member
@@ -50,14 +45,6 @@
 		where grp_num = #{grp_num}
 	</delete>
 
-	<select id="getPlanList" resultType="PlanVO">
-		select b.num, grp_name, leader
-		from plan_member a join plan b
-		on a.grp_num = b.num
-		where id = #{id}
-		order by grp_num desc
-	</select>
-
 	<select id="getGrpName" resultType="string">
 		select grp_name
 		from plan
@@ -72,7 +59,7 @@
 		order by num asc
 	</select>
 
-	<delete id="delPlanMem">
+	<delete id="delGrpMember">
 		delete from plan_member
 		where id = #{id} and grp_num = #{grp_num}
 	</delete>
@@ -126,63 +113,6 @@
 		set leader = #{leader}
 		where num =	#{num}
 	</update>
-
-	<select id="getTourList" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat
-		from tourist_spot
-		where t_category = 0
-		order by num asc
-	</select>
-
-	<select id="getRestaurantList" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat
-		from tourist_spot
-        where t_category = 1
-		order by num asc
-	</select>
-
-	<select id="getTourSearch" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat
-		from tourist_spot
-		where title like concat('%', #{keyword}, '%') and t_category =0
-		order by num asc
-	</select>
-
-	<select id="getRestaurantSearch" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat
-		from tourist_spot
-		where title like concat('%', #{keyword}, '%') and t_category =1
-		order by num asc
-	</select>
-	
-	<select id="getTourInfo" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat, t_category
-		from tourist_spot
-		where num = #{num} and t_category = 0
-	</select>
-	
-	<select id="getRestaurantInfo" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat, t_category
-		from tourist_spot
-		where num = #{num}  and t_category =1
-	</select>
-	
-	<update id="modifyTourPlan">
-		update plan
-		set writer = #{writer}, tour_plan = #{tour_plan}, tour_plan_acc = #{tour_plan_acc}, tour_date_start = #{tour_date_start}, tour_date_end = #{tour_date_end}, lastUpdate = now()
-		where num = #{num}
-	</update>
-	
-	<select id="getPlanInfo" resultType="PlanVO">
-		select *
-		from plan
-		where num=#{num}
-	</select>
-	
-	<delete id="delPlan">
-		delete from plan
-		where num = #{num}
-	</delete>
 
 </mapper>
   

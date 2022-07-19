@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
+import com.bcc.service.GrpService;
 import com.bcc.service.PlanService;
 
 @Controller
@@ -26,6 +27,8 @@ public class PlanController {
 	// 서비스 객체 주입
 	@Inject
 	private PlanService planService;
+	@Inject
+	private GrpService grpService;
 
 	// 플랜 목록 페이지 - GET
 	// http://localhost:8088/plan/planList
@@ -37,20 +40,20 @@ public class PlanController {
 		String id = (String) session.getAttribute("id");
 
 		// 회원 license 가져오기
-		model.addAttribute("license", planService.getLicense(id));
+		model.addAttribute("license", grpService.getLicense(id));
 
 		// 초대받은 그룹 목록 가져오기
-		model.addAttribute("grpAcceptList", planService.getGrpAcceptList(id));
+		model.addAttribute("grpAcceptList", grpService.getGrpAcceptList(id));
 
 		// 소속된 플랜 정보 가져오기
 		List<PlanVO> grpList = planService.getPlanList(id);
 		model.addAttribute("grpList", grpList);
 
 		// 회원이 속한 모든 각 그룹의 멤버 정보 가져오기
-		model.addAttribute("grpMemberList", planService.getAllGrpMemberList(grpList));
+		model.addAttribute("grpMemberList", grpService.getAllGrpMemberList(grpList));
 		
 		// 회원이 속한 모든 각 그룹의 초대중인 멤버 목록 가져오기
-		model.addAttribute("invitingMemberList", planService.getAllGrpInvitingList(grpList));
+		model.addAttribute("invitingMemberList", grpService.getAllGrpInvitingList(grpList));
 	}
 
 	// 플랜 생성 - POST
@@ -62,8 +65,8 @@ public class PlanController {
 		String id = (String) session.getAttribute("id");
 		// 그룹 번호 생성
 		int num = 1;
-		if (planService.getMaxGrpNum() != null) {
-			num = planService.getMaxGrpNum() + 1;
+		if (grpService.getMaxGrpNum() != null) {
+			num = grpService.getMaxGrpNum() + 1;
 		}
 		// 그룹 생성
 		grp_name = grp_name.trim();
@@ -77,7 +80,7 @@ public class PlanController {
 		PlanMemberVO member = new PlanMemberVO();
 		member.setGrp_num(num);
 		member.setId(id);
-		planService.insertGrpMember(member);
+		grpService.insertGrpMember(member);
 
 		return "redirect:/plan/planContent/" + num;
 	}
@@ -88,7 +91,7 @@ public class PlanController {
 	public String planWriteGET(@PathVariable("num") int num, Model model, HttpSession session) throws Exception {
 
 		// 플랜명 전달
-		model.addAttribute("grpName", planService.getGrpName(num));
+		model.addAttribute("grpName", grpService.getGrpName(num));
 		// 관광지 정보 저장
 		model.addAttribute("tourlist", planService.getTourList());
 		// 맛집 정보
@@ -121,11 +124,11 @@ public class PlanController {
 //		}
 		
 		// 그룹 멤버 전달
-		model.addAttribute("grpMemberList",planService.getGrpMemberList(num));
+		model.addAttribute("grpMemberList",grpService.getGrpMemberList(num));
 		// 여행 경로 정보 전달
 		model.addAttribute("planList", planService.getTourPlanList(num));
 		// 초대중인 멤버 리스트 전달
-		model.addAttribute("invitingList",  planService.getInvitingList(num));
+		model.addAttribute("invitingList",  grpService.getInvitingList(num));
 		// 플랜 정보 전달
 		model.addAttribute("plan", planService.getPlanInfo(num));
 		
