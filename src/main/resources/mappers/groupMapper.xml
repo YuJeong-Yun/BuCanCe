@@ -82,6 +82,12 @@
 		insert into grp_accept(grp_num, sender, receiver)
 		values(#{grp_num}, #{sender}, #{receiver})
 	</insert>
+	
+	<select id="checkInviteMember" resultType="int">
+	    select count(*)
+        from grp_accept
+        where grp_num=#{grp_num} and receiver = #{receiver};
+	</select>
 
 	<select id="getMemberName" resultType="string">
 		select name

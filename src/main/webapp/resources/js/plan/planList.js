@@ -211,6 +211,9 @@ function inviteMember(event, id) {
 			if (item == 0) {
 				alert('더 이상 초대할 수 없습니다.');
 				return;
+			} else if (item = -1) {
+				alert('이미 초대중인 회원입니다.');
+				return;
 			}
 
 			// 초대클릭하면 '초대중' 으로 버튼 변경

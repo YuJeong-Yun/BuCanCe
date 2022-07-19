@@ -97,6 +97,10 @@ public class GrpServiceImpl implements GrpService {
 			// 초대 실패하면 0 반환
 			return 0;
 		}
+		// 이미 초대중인 회원일 경우
+		if(dao.checkInviteMember(vo) == 1) {
+			return -1;
+		}
 		// 초대 리스트에 추가
 		dao.inviteMember(vo);
 

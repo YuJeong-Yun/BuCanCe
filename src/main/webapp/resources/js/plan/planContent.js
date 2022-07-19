@@ -114,6 +114,9 @@ function inviteMember(event, id) {
 			if (item == 0) {
 				alert('더 이상 초대할 수 없습니다.');
 				return;
+			} else if (item = -1) {
+				alert('이미 초대중인 회원입니다.');
+				return;
 			}
 
 			// 초대클릭하면 '초대중' 으로 버튼 변경
@@ -183,7 +186,7 @@ function delPlan(event, grp_num) {
 				event.target.parentElement.remove();
 				alert("삭제를 완료했습니다.");
 
-				location.href='/plan/planList';
+				location.href = '/plan/planList';
 			},
 			error: function() {
 				alert("삭제 오류!");

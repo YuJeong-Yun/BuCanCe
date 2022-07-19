@@ -126,7 +126,7 @@ public class PlanRESTController {
 		vo.setSender(sender);
 		vo.setReceiver(id);
 
-		// 초대 성공하면 1, 실패하면 0 반환
+		// 초대 성공하면 1, 실패하면 0, 이미 초대중이면 -1 반환
 		return grpService.inviteMember(vo);
 	}
 

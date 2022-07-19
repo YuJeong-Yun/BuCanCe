@@ -46,6 +46,9 @@ public interface GrpDAO {
 
 	// 그룹에 멤버 초대
 	public void inviteMember(GrpAcceptVO vo);
+	
+	// 초대중인지 확인
+	public Integer checkInviteMember(GrpAcceptVO vo);
 
 	// 회원 이름 가져오기
 	public String getMemberName(String id);

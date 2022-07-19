@@ -87,6 +87,11 @@ public class GrpDAOImpl implements GrpDAO {
 	public void inviteMember(GrpAcceptVO vo) {
 		sqlSession.insert(NAMESPACE + ".inviteMember", vo);
 	}
+	
+	@Override
+	public Integer checkInviteMember(GrpAcceptVO vo) {
+		return sqlSession.selectOne(NAMESPACE+".checkInviteMember", vo);
+	}
 
 	@Override
 	public String getMemberName(String id) {
@@ -112,5 +117,6 @@ public class GrpDAOImpl implements GrpDAO {
 	public void updateLeader(PlanVO plan) {
 		sqlSession.update(NAMESPACE + ".updateLeader", plan);
 	}
+
 
 }

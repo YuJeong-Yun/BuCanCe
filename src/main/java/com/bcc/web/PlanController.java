@@ -1,6 +1,10 @@
 package com.bcc.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -31,11 +35,23 @@ public class PlanController {
 	// 플랜 목록 페이지 - GET
 	// http://localhost:8088/plan/planList
 	@RequestMapping(value = "/planList", method = RequestMethod.GET)
-	public void planListGET(HttpSession session, Model model) throws Exception {
+	public String planListGET( Model model, HttpSession session, HttpServletResponse response) throws Exception {
 		log.info(" planListGET() 호출 ");
-
+		
+		///////////////////////////////////// 지울코드 //////////////////////////////////////////
 		session.setAttribute("id", "yun1");
+		
 		String id = (String) session.getAttribute("id");
+		
+		// 로그인 안하면 로그인 페이지로 이동
+		if(id == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('회원만 이용 가능합니다.'); location.href='/login';</script>");
+			out.flush();
+			
+			return "";
+		}
 
 		// 회원 license 가져오기
 		model.addAttribute("license", grpService.getLicense(id));
@@ -51,6 +67,8 @@ public class PlanController {
 		
 		// 회원이 속한 모든 각 그룹의 초대중인 멤버 목록 가져오기
 		model.addAttribute("invitingMemberList", grpService.getAllGrpInvitingList(id));
+		
+		return "plan/planList";
 	}
 
 	// 플랜 생성 - POST
@@ -83,8 +101,23 @@ public class PlanController {
 	// 플랜 작성 - GET
 	// http://localhost:8088/plan/planWrite/1
 	@RequestMapping(value = "/planWrite/{num}", method = RequestMethod.GET)
-	public String planWriteGET(@PathVariable("num") int num, Model model, HttpSession session) throws Exception {
+	public String planWriteGET(@PathVariable("num") int num, Model model, HttpSession session, HttpServletResponse response) throws Exception {
 
+		String id = (String) session.getAttribute("id");
+		
+		// 그룹 멤버만 이동 가능
+		PlanMemberVO vo = new PlanMemberVO();
+		vo.setGrp_num(num);
+		vo.setId(id);
+		if(grpService.checkGrpMember(vo) !=1 ) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('해당 그룹 멤버가 아닙니다.'); location.href='/plan/planList';</script>");
+			out.flush();
+			
+			return "";
+		}
+		
 		// 플랜명 전달
 		model.addAttribute("grpName", grpService.getGrpName(num));
 		// 관광지 정보 저장
@@ -108,8 +141,23 @@ public class PlanController {
 	// 플랜 확인 페이지
 	// http://localhost:8088/plan/planContent/1
 	@RequestMapping(value="/planContent/{num}", method=RequestMethod.GET)
-	public String planContentGET(@PathVariable("num") int num, Model model,HttpSession session) {
+	public String planContentGET(@PathVariable("num") int num, Model model,HttpSession session, HttpServletResponse response) throws IOException {
 		log.info("플랜 정보 확인 : "+num);
+		
+		String id = (String) session.getAttribute("id");
+		
+		// 그룹 멤버만 이동 가능
+		PlanMemberVO vo = new PlanMemberVO();
+		vo.setGrp_num(num);
+		vo.setId(id);
+		if(grpService.checkGrpMember(vo) !=1 ) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('해당 그룹 멤버가 아닙니다.'); location.href='/plan/planList';</script>");
+			out.flush();
+			
+			return "";
+		}
 		
 //		// 숙소 정보 없으면 저장
 //		if (session.getAttribute("hotellist") == null) {
