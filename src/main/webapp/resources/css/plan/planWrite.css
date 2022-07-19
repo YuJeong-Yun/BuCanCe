@@ -36,7 +36,7 @@
 }
 /* 타이틀 */
 .plan-title {
-	background-color: #0288d1;
+	background-color: rgb(192 228 237 / 50%);
 }
 .plan-title > .inner {
 	height: 100px;
@@ -47,16 +47,14 @@
 	line-height: 100px;
 	font-size: 25px;
 	font-weight: 700;
-	color: #efefef;	
-	
-
+	color: #333;	
 	}
 
 
 
 /* 플랜 작성 */
 .make-plan {
-	margin-bottom: 50px;
+	margin: 50px 0;
 }
 .make-plan .container {
 }
