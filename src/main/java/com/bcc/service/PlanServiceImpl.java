@@ -117,10 +117,10 @@ public class PlanServiceImpl implements PlanService {
 			return null;
 		}
 
-		// 날짜끼리는 +, 날짜-관광지는 :, 관광지 끼리는 - 로 구분
+		// 날짜끼리는 +, 날짜-관광지는 :, 관광지 끼리는 @ 로 구분
 		// 날짜별로 나눠서 allPlanArr에 담음
 		String[] allPlanArr = (String[]) vo.getTour_plan().split("\\+");
-		// 호텔 이미지*타이틀*lat*lng 정보 담을 배열
+		// 호텔 - 날짜별로 이미지*타이틀*lat*lng 정보 담을 배열
 		String[] allPlanAccArr = (String[]) vo.getTour_plan_acc().split("\\+");
 
 		// [날짜, [플랜,플랜, ..]], [날짜, [플랜, 플랜, ..]] 형태로 datePlanContainer에 저장
@@ -144,7 +144,7 @@ public class PlanServiceImpl implements PlanService {
 				continue;
 			}
 
-			// 플랜-플랜- ... 연결된 문자열 구분
+			// 플랜@플랜@ ... 연결된 문자열 구분
 			String[] planArr = datePlanArr[1].split("@");
 			String[] planAccArr = allPlanAccArr[i].split("@");
 			// 플랜 나눠서 planList에 저장

@@ -208,9 +208,8 @@ function inviteMember(event, id) {
 			grpNum: grpNum
 		},
 		success: function(item) {
-			console.log('item : ' + item);
-			if (item == "더 이상 초대할 수 없습니다.") {
-				alert(item);
+			if (item == 0) {
+				alert('더 이상 초대할 수 없습니다.');
 				return;
 			}
 

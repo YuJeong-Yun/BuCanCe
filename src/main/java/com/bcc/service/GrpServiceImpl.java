@@ -30,14 +30,19 @@ public class GrpServiceImpl implements GrpService {
 	}
 
 	@Override
-	public Integer getMaxGrpNum() {
-		return dao.getMaxGrpNum();
+	public Integer calcGrpNum() {
+		int num = 1;
+		if (dao.getMaxGrpNum() != null) {
+			num = dao.getMaxGrpNum() + 1;
+		}
+
+		return num;
 	}
 
 	@Override
 	public String getLicense(String id) {
 		int result = dao.getLicense(id);
-		
+
 		if (result == 0) {
 			return "free";
 		} else {
@@ -86,8 +91,18 @@ public class GrpServiceImpl implements GrpService {
 	}
 
 	@Override
-	public void inviteMember(GrpAcceptVO vo) {
+	public Integer inviteMember(GrpAcceptVO vo) {
+		// 그룹 멤버 + 초대중 멤버 10명 이상이면 초대 불가
+		if ((dao.getGrpMemberList(vo.getGrp_num()).size() + dao.getInvitingList(vo.getGrp_num()).size()) >= 10) {
+			// 초대 실패하면 0 반환
+			return 0;
+		}
+		// 초대 리스트에 추가
 		dao.inviteMember(vo);
+
+		// 초대 성공하면 1 반환
+		return 1;
+
 	}
 
 	@Override
@@ -96,18 +111,24 @@ public class GrpServiceImpl implements GrpService {
 	}
 
 	@Override
-	public void inviteCancle(GrpAcceptVO vo) {
+	public Integer inviteCancle(GrpAcceptVO vo) {
+
+		// 이미 초대 수락한 상태이면
+		PlanMemberVO member = new PlanMemberVO();
+		member.setGrp_num(vo.getGrp_num());
+		member.setId(vo.getReceiver());
+		if (dao.checkGrpMember(member) == 1) {
+			return 1;
+		}
+
+		// 초대 취소
 		dao.inviteCancle(vo);
+		return 0;
 	}
 
 	@Override
-	public int checkGrpMember(PlanMemberVO vo) {
+	public Integer checkGrpMember(PlanMemberVO vo) {
 		return dao.checkGrpMember(vo);
-	}
-
-	@Override
-	public String getNextLeader(int grp_num) {
-		return dao.getNextLeader(grp_num);
 	}
 
 	@Override
@@ -137,7 +158,9 @@ public class GrpServiceImpl implements GrpService {
 	}
 
 	@Override
-	public List<List<MemberVO>> getAllGrpMemberList(List<PlanVO> grpList) {
+	public List<List<MemberVO>> getAllGrpMemberList(String id) {
+		List<PlanVO> grpList = planDao.getPlanList(id);
+
 		List<List<MemberVO>> allGrpMemberList = new ArrayList<>();
 		// 소속 그룹의 모든 멤버 리스트 가져오기
 		for (int i = 0; i < grpList.size(); i++) {
@@ -148,7 +171,9 @@ public class GrpServiceImpl implements GrpService {
 	}
 
 	@Override
-	public List<List<GrpAcceptVO>> getAllGrpInvitingList(List<PlanVO> grpList) {
+	public List<List<GrpAcceptVO>> getAllGrpInvitingList(String id) {
+		List<PlanVO> grpList = planDao.getPlanList(id);
+
 		List<List<GrpAcceptVO>> allGrpInvitingList = new ArrayList<>();
 		// 소속 그룹의 모든 초대중 멤버 리스트 가져오기
 		for (int i = 0; i < grpList.size(); i++) {

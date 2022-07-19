@@ -54,6 +54,11 @@ public class GrpDAOImpl implements GrpDAO {
 	}
 
 	@Override
+	public void deleteInvitingList(int grp_num) {
+		sqlSession.delete(NAMESPACE + ".deleteInvitingList", grp_num);
+	}
+
+	@Override
 	public String getGrpName(int num) {
 		return sqlSession.selectOne(NAMESPACE + ".getGrpName", num);
 	}
@@ -108,8 +113,4 @@ public class GrpDAOImpl implements GrpDAO {
 		sqlSession.update(NAMESPACE + ".updateLeader", plan);
 	}
 
-	@Override
-	public void deleteInvitingList(int grp_num) {
-		sqlSession.delete(NAMESPACE + ".deleteInvitingList", grp_num);
-	}
 }

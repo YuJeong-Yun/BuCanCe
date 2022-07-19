@@ -1,7 +1,5 @@
 package com.bcc.web;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -46,14 +44,13 @@ public class PlanController {
 		model.addAttribute("grpAcceptList", grpService.getGrpAcceptList(id));
 
 		// 소속된 플랜 정보 가져오기
-		List<PlanVO> grpList = planService.getPlanList(id);
-		model.addAttribute("grpList", grpList);
+		model.addAttribute("grpList", planService.getPlanList(id));
 
 		// 회원이 속한 모든 각 그룹의 멤버 정보 가져오기
-		model.addAttribute("grpMemberList", grpService.getAllGrpMemberList(grpList));
+		model.addAttribute("grpMemberList", grpService.getAllGrpMemberList(id));
 		
 		// 회원이 속한 모든 각 그룹의 초대중인 멤버 목록 가져오기
-		model.addAttribute("invitingMemberList", grpService.getAllGrpInvitingList(grpList));
+		model.addAttribute("invitingMemberList", grpService.getAllGrpInvitingList(id));
 	}
 
 	// 플랜 생성 - POST
@@ -64,10 +61,8 @@ public class PlanController {
 
 		String id = (String) session.getAttribute("id");
 		// 그룹 번호 생성
-		int num = 1;
-		if (grpService.getMaxGrpNum() != null) {
-			num = grpService.getMaxGrpNum() + 1;
-		}
+		int num = grpService.calcGrpNum();
+		
 		// 그룹 생성
 		grp_name = grp_name.trim();
 		PlanVO vo = new PlanVO();
@@ -103,7 +98,7 @@ public class PlanController {
 //			log.info("숙소 정보 세션 저장 완료");
 //		}
 		
-		// 플랜 정보 전달 
+		// 선택한 관강지 플랜 정보 전달 
 		model.addAttribute("planList", planService.getTourPlanList(num));
 
 		return "/plan/planWrite";

@@ -11,8 +11,8 @@ public interface GrpService {
 	// 아이디 검색 결과 회원 목록 가져오기
 	public List<MemberVO> getSearchMemList(String id);
 
-	// 그룹 번호 계산
-	public Integer getMaxGrpNum();
+	// 다음 그룹 번호 계산
+	public Integer calcGrpNum();
 
 	// 회원 라이센스 가져오기
 	public String getLicense(String id);
@@ -42,27 +42,24 @@ public interface GrpService {
 	public List<GrpAcceptVO> getInvitingList(int grp_num);
 
 	// 그룹에 멤버 초대
-	public void inviteMember(GrpAcceptVO vo);
+	public Integer inviteMember(GrpAcceptVO vo);
 
 	// 회원 이름 가져오기
 	public String getMemberName(String id);
 
 	// 초대 취소
-	public void inviteCancle(GrpAcceptVO vo);
+	public Integer inviteCancle(GrpAcceptVO vo);
 
 	// 그룹 회원인지 확인
-	public int checkGrpMember(PlanMemberVO vo);
-
-	// 다음 방장 아이디 가져오기
-	public String getNextLeader(int grp_num);
+	public Integer checkGrpMember(PlanMemberVO vo);
 
 	// 방장 여부에 따라 방장 새로 설정
 	public void checkLeader(String id, int grpNum);
 
 	// 회원이 속한 모든 그룹의 멤버 리스트 가져오기
-	public List<List<MemberVO>> getAllGrpMemberList(List<PlanVO> grpList);
+	public List<List<MemberVO>> getAllGrpMemberList(String id);
 
 	// 회원이 속한 모든 그룹의 초대중 멤버 리스트 가져오기
-	public List<List<GrpAcceptVO>> getAllGrpInvitingList(List<PlanVO> grpList);
+	public List<List<GrpAcceptVO>> getAllGrpInvitingList(String id);
 
 }
