@@ -191,6 +191,11 @@ function calcDate(dateData) {
 
 // 1-7일 여행 일정 선택
 function checkDate() {
+  // 호텔 목록 가져오기 전이면 기다려 달라고 알림창 띄우기
+  if (getHotelList == 0) {
+    alert('숙소 목록을 가져오기까지 잠시만 기다려주세요.');
+    return;
+  }
   // 직선 경로 확인 켜져 있으면 우선 현재 직선 경로 제거
   if (checkShowLinePath == 1) {
     delLinePath();
@@ -372,6 +377,12 @@ searchIcon.addEventListener('click', showSearhResult);
 
 // 검색 결과 보여주는 함수
 function showSearhResult() {
+  // 호텔 목록 가져오기 전이면 기다려 달라고 알림창 띄우기
+  if (getHotelList == 0) {
+    alert('숙소 목록을 가져오기까지 잠시만 기다려주세요.');
+    return;
+  }
+
   // 입력값 받아오기
   const userInput = document.querySelector('.search-container .search').value.trim();
   // 공백 입력하면 작동 xx
@@ -495,6 +506,12 @@ function selectCategory(event) {
 
 // 관광지 클릭하면 선택한 일정칸에 추가
 function selectTour(event) {
+  // 호텔 목록 가져오기 전이면 기다려 달라고 알림창 띄우기
+  if (getHotelList == 0) {
+    alert('숙소 목록을 가져오기까지 잠시만 기다려주세요.');
+    return;
+  }
+
   // 관광지 : t, 숙소 : a, 맛집 : r
   const category = event.target.classList[1].substring(0, 1);
 
@@ -590,6 +607,11 @@ function addDragging(event) {
   event.target.classList.add("dragging");
 }; // addDragging()
 function delDragging(event) {
+  // 호텔 목록 가져오기 전이면 기다려 달라고 알림창 띄우기
+  if (getHotelList == 0) {
+    alert('숙소 목록을 가져오기까지 잠시만 기다려주세요.');
+    return;
+  }
 
   event.target.classList.remove("dragging");
   // 지도에서 마커 순서 다시 표시
@@ -606,6 +628,12 @@ function delDragging(event) {
 
 // 일정에서 관광지 삭제
 function delSelectedTour(event, cNum) {
+  // 호텔 목록 가져오기 전이면 기다려 달라고 알림창 띄우기
+  if (getHotelList == 0) {
+    alert('숙소 목록을 가져오기까지 잠시만 기다려주세요.');
+    return;
+  }
+
   const tours = document.querySelector('.tour-item.' + cNum);
   tours.classList.remove('hidden');
   tours.style.display = 'flex';
@@ -780,6 +808,12 @@ resetBtn.addEventListener('click', resetSelectedTour);
 
 // 선택한 관광지 초기화 (일정은 그대로 둠)
 function resetSelectedTour() {
+  // 호텔 목록 가져오기 전이면 기다려 달라고 알림창 띄우기
+  if (getHotelList == 0) {
+    alert('숙소 목록을 가져오기까지 잠시만 기다려주세요.');
+    return;
+  }
+
   // 지도에서 전체 마커 초기화
   delAllMarker();
 
@@ -885,6 +919,12 @@ function delLinePath() {
 
 // 현재 checkShowLinePath 값에 따라 직선 폴리라인 출력 / 제거 실행
 function checkLinePath() {
+  // 호텔 목록 가져오기 전이면 기다려 달라고 알림창 띄우기
+  if (getHotelList == 0) {
+    alert('숙소 목록을 가져오기까지 잠시만 기다려주세요.');
+    return;
+  }
+
   // checkShowLinePath 0 이면 출력, 1이면 제거
   if (checkShowLinePath == 0) {
     showLinePath();

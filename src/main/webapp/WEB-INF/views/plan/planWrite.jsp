@@ -190,4 +190,4 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 </script>
 <jsp:include page="../include/footer.jsp"></jsp:include>
 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx4c685864b69a4b71966f8bda89ed2dd3"></script>
-<script defer src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js"></script>
+<script defer src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js?v=<%=System.currentTimeMillis() %>"></script>
