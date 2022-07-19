@@ -113,7 +113,7 @@
 							 <div class="sc-author">
                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF5muH6piXfKA2yUyMkJwm0mJq6O4lU-1mFA&usqp=CAU" 
                                    width="60" height="60" style="border-radius : 90px"> 
-								${commentList.writer}
+								${commentList.writer}님 &nbsp;&nbsp;
 									<fmt:formatDate value="${commentList.regdate}" pattern="yyyy-MM-dd" /> &nbsp;&nbsp;
 									<b><c:if test="${commentList.visit==1}">방문했어요</c:if>
 										<c:if test="${commentList.visit==0}">방문 전입니다</c:if></b>	
@@ -325,10 +325,9 @@
 	
 		// 목록 
 		$(".list_btn").on("click", function(){
-
-		location.href = "/board/list?page=${scri.page}"
+		location.href = "/board/list?&page=${scri.page}"
 		+"&perPageNum=${scri.perPageNum}"
-		+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
+		+"&searchType=${scri.searchType}&keyword=${scri.keyword}&t_category=0";
 		});
 
 </script> 

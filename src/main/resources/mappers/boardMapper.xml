@@ -45,41 +45,35 @@
  		limit 0, 10
  		]]>
 	</select>
-
-	<select id="listCri" resultType="BoardVO">
- 		<![CDATA[
- 		select * from tourist_spot
- 		where 1=1 
- 		]]>
-		<include refid="search"></include>	
- 			<![CDATA[
- 		and num < 115 
- 		order by num asc
- 		limit #{pageStart}, #{perPageNum}
- 		]]>
+	
+ 		<select id="listCri" resultType="BoardVO">
+		select * from tourist_spot
+		where t_category=#{t_category}
+		order by num asc
+		limit #{pageStart}, #{perPageNum}
 	</select>
-
-	<!-- 게시물 검색 -->
-	<select id="listCount" resultType="int">
-	<![CDATA[
+	
+	
+<select id="listCount" resultType="int">
 		select count(num)
-		from tourist_spot where 1=1 
-	]]>
-		<include refid="search"></include>	
-			<![CDATA[
-		and num < 115
-		 ]]>
+		from tourist_spot
+		where t_category=#{t_category}
 	</select>
 
+	<!-- 검색 결과 -->
+	<!-- <select id="search" resultType="BoardVO">
+		select * from tourist_spot
+		where title like concat('%',#{keyword},'%')
+	</select> -->
 
-	<sql id="search">
+	  <sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 't'.toString()">AND (title LIKE '%', #{keyword} ,'%')</if>
 			<if test="searchType == 'c'.toString()">AND addr_full LIKE '%' #{keyword} '%'</if>
-			<if test="searchType == 'tc'.toString()">AND (title LIKE '%' #{keyword} '%')<!--  or (addr_full LIKE
-				'%' #{keyword} '%') --></if>
+			<if test="searchType == 'tc'.toString()">AND (title LIKE '%' #{keyword} '%') or (addr_full LIKE
+				'%' #{keyword} '%')</if>
 		</if>
-	</sql>
+	</sql> 
 
 	
 	<!-- 좋아요 -->

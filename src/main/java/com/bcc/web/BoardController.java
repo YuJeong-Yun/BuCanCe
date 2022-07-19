@@ -63,17 +63,19 @@ public class BoardController {
 		return boardList;
 	}
 
-	// http://localhost:8088/board/list
+	// http://localhost:8088/board/list?t_category=0
 	// 게시판 전체 목록 조회
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model, @ModelAttribute("scri") SearchCriteria scri, HttpSession session) throws Exception {
+	public String list(Model model, @ModelAttribute("scri") SearchCriteria scri, HttpSession session, @RequestParam("t_category") int cate) throws Exception {
+		
+		scri.setT_category(cate);
 		model.addAttribute("boardList", service.list(scri));
 		
 		//session.setAttribute("id", "admin");
 		session.setAttribute("id", "test");
 		
-		
 		log.info(session.getAttribute("id") + "");
+		
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
@@ -85,7 +87,7 @@ public class BoardController {
 		return "board/listAll";
 		
 	}
-	// http://localhost:8088/board/read?num=12
+	// http://localhost:8088/board/read?num=3
 	/* 글 본문 */
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String readGET(@RequestParam(value = "num", required = false) Integer num,

@@ -37,8 +37,7 @@
 			<div class="form-group navbar-left">
 				<select id="category" class="category" name="searchType"
 					onchange="search()">
-					<option value="tc"
-						<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>카테고리 선택</option>
+					<option value="">카테고리 선택</option>
 					<option value="강서구">강서구</option>
 					<option value="금정구">금정구</option>
 					<option value="기장군">기장군</option>
@@ -89,13 +88,13 @@
 		<div class="box-footer clearfix">
 			<div class = "paging" style="text-align: center; padding-top: 20px;">
 					<c:if test="${pageMaker.prev}">
-						<a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a>
+						<a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}&t_category=0">이전</a>
 					</c:if>
 					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-						<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+						<a href="list${pageMaker.makeSearch(idx)}&t_category=0">${idx}</a>
 					</c:forEach>
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-						<a href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a>
+						<a href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}&t_category=${param.t_category}">다음</a>
 					</c:if>
 			</div>
 			<div></div>
@@ -107,7 +106,7 @@
 
 <script>
 	$(document).ready(function() {
-
+		
 	});
 
 	function search() {
