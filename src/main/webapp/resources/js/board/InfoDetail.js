@@ -180,4 +180,9 @@
 		});
 	
 	
+		$("#list_btn").on("click", function(){
+		location.href = "/board/tourAll?page="+page
+		+"&perPageNum="+perPageNum
+		+"&t_category="+t_category;
+		});
 	

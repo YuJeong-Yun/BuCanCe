@@ -40,7 +40,11 @@ public class AdminController {
 	
 	// 차트 & 프리미엄 회원 조회 창으로 이동
 	@RequestMapping(value = "/profitChart", method = RequestMethod.GET)
-	public String profitChartGET() {
+	public String profitChartGET(Model model) {
+		model.addAttribute("totalMem", service.getTotalMem());
+		model.addAttribute("totalPmMem", service.getTotalPmMem());
+		model.addAttribute("totalComment", service.getTotalComment());
+		model.addAttribute("totalAcc", service.getTotalAcc());
 		
 		
 		return "/admin/profitChart";

@@ -5,20 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bcc.mapper.BoardMapper">
-	<!-- 전체 글 리스트 -->
-	<select id="listAll" resultType="BoardVO">
-		<![CDATA[
-		select * from tourist_spot
-		where t_category = 0 
-		order by num asc
-		]]>
-	</select>
-	<!-- 글 내용 -->
-	<select id="getTour" resultType="BoardVO">
-		select * from tourist_spot
-		where num = #{num}
 
-	</select>
 	<!-- 조회수 -->
 	<select id="updateBoardCnt" resultType="BoardVO"
 		parameterType="int">
@@ -26,26 +13,8 @@
 		where num= #{num}; 
 
 	</select>
-	<!-- 게시판 카테고리 분류 -->
-	<select id="category" resultType="BoardVO"
-		parameterType="String">
-		select *
-		from tourist_spot
-		where addr = #{category}
-		and
-		t_category = 0;
-	</select>
 	
-	<!-- 게시물 페이징 -->
-	<select id="listPage" resultType="BoardVO">
- 		<![CDATA[
- 		select * from tourist_spot
- 		where t_category = 0
- 		order by num asc
- 		limit 0, 10
- 		]]>
-	</select>
-	
+	<!-- 페이징 처리된 게시물 -->
 	<select id="listCri" resultType="BoardVO">
 		select * from tourist_spot
 		where t_category=#{t_category} 
@@ -53,6 +22,7 @@
 		limit #{pageStart}, #{perPageNum}
 	</select>
 	
+	<!-- 글 목록 정렬 -->
  	<select id="listAlign" parameterType="hashMap" resultType="BoardVO">
 		select * from tourist_spot
 		where t_category=#{t_category} 
@@ -110,11 +80,16 @@
   		where addr=#{addr} and t_category=1
   	</select>
   	
+  	<!-- 글 내용 -->
   	<select id="getFood" resultType="BoardVO">
   		select * from tourist_spot
   		where num=#{num} and t_category=1
   	</select>
-	<!-- 맛집 -->
+  	
+	<select id="getTour" resultType="BoardVO">
+		select * from tourist_spot
+		where num = #{num}
+	</select>
 	
 	
 	<!-- 검색 결과 -->

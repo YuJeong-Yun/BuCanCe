@@ -10,7 +10,6 @@ $(function(){
 			dataType : "json",
 			async : false
 		}).responseText;
-	console.log(jsonData);
 	
 	var data = new google.visualization.DataTable(jsonData);
  	var chart = new google.visualization.LineChart(document.getElementById("curve_chart"));
@@ -32,7 +31,7 @@ $(function(){
 			dataType : "json",
 			async : false
 		}).responseText;
-	console.log(jsonData);
+	/*console.log(jsonData);*/
 	
 	var data = new google.visualization.DataTable(jsonData);
  	var chart = new google.visualization.LineChart(document.getElementById("monthly_chart"));
@@ -40,6 +39,28 @@ $(function(){
 	
  	chart.draw(data,{
 		title:"프리미엄 결제 월간 현황",
+		legend: { position: 'bottom' }
+	});
+	
+	}
+	
+	
+	google.charts.load('current', {'packages':['corechart', 'bar']});
+	google.charts.setOnLoadCallback(drawChart3);
+	
+	function drawChart3(){
+		var jsonData = $.ajax({
+			url : "/adminRest/dailyMember",
+			dataType : "json",
+			async : false
+		}).responseText;
+	
+	var data = new google.visualization.DataTable(jsonData);
+ 	var chart = new google.visualization.ColumnChart(document.getElementById("daily_member_chart"));
+	
+	
+ 	chart.draw(data,{
+		title:"일간 회원가입자수 추이",
 		legend: { position: 'bottom' }
 	});
 	

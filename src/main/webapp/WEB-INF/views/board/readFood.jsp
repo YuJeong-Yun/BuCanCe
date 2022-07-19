@@ -46,7 +46,7 @@
                      </table>
                      <p class="f-para">${resVO.contents }</p>
                      </div>  
-                     <button type="button" class="w-btn w-btn-indigo" onclick="history.back();">뒤로가기</button>
+                     <button type="button" id="list_btn" class="w-btn w-btn-indigo">목록</button>
                         <br>
                  <!-- DB 정보 출력 -->  
                         
@@ -99,7 +99,7 @@
 							<input type="radio" id="rev_visit" name="visit" value="0" onchange="visited"> <label for="visit2"> 방문 전입니다</label>
 						</p> 
 						
-							<input type="hidden" name="num" id="num" value="${vo.num}" /> 
+							<input type="hidden" name="num" id="num" value="${resVO.num}" /> 
 
 							<p>
 								<label for="id">댓글 작성자</label> <input type="text" name="id" id="id" value=" ${id }">
@@ -147,6 +147,8 @@
 	const lat = '${resVO.lat}';
 	const lng = '${resVO.lng}';
 	const id = '${sessionScope.id}';
+	const page = "${scri.page}";
+	const perPageNum = "${scri.perPageNum}";
 	</script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b3d692ed9e41ded5eedc5a2578cee55&libraries=services"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>

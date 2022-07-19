@@ -37,29 +37,6 @@ public class BoardController {
 	private CommentService commentservice;
 
 
-
-
-	// http://localhost:8088/board/list?Page=5
-	// 게시판 목록 조회
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model, @ModelAttribute("scri") SearchCriteria scri,
-			@RequestParam("t_category") int cate, HttpSession session) throws Exception {
-		
-		
-		scri.setT_category(cate);
-		model.addAttribute("boardList", service.list(scri));
-
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(service.listCount(scri));
-
-		model.addAttribute("pageMaker", pageMaker);
-		session.setAttribute("upFlag", "1");
-
-		return "board/tourAll";
-
-	}
-
 	// 댓글 작성
 	@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)
 	public String commentWirte(CommentVO vo,
@@ -200,6 +177,7 @@ public class BoardController {
 		}
 		
 		
+
 		// 맛집, 관광지 전체 내역 출력
 		@RequestMapping(value = "/tourAll", method = RequestMethod.GET)
 		public String tourAllGET(HttpSession session, @RequestParam("t_category") int cate,
@@ -221,7 +199,6 @@ public class BoardController {
 			
 			return "board/tourAll";
 		}
-		
 		
 		
 		

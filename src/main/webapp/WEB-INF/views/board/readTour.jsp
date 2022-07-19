@@ -66,7 +66,7 @@
 					</table>
 					<p class="f-para">${vo.contents }</p>
 				</div>
-				<button type="button" class="w-btn w-btn-indigo" onclick="history.back();">뒤로가기</button>
+				<button type="button" id="list_btn" class="w-btn w-btn-indigo">목록</button>
 				<div class="menu-item">
 					<div class="nav-menu"
 						style="text-align: left !important; cursor: pointer;">
@@ -158,6 +158,10 @@ const id = '${sessionScope.id}';
 <jsp:include page="../include/footer.jsp" />
 
 <script type="text/javascript">
+
+	
+	$(function(){
+		
 	//댓글 작성
 		$(".commentWriteBtn").on("click", function() {
 			var formObj = $("form[name='commentForm']");
@@ -190,12 +194,13 @@ const id = '${sessionScope.id}';
 							+ $(this).attr("data-cno");
 	});// 댓글
 		// 목록 (수정중)
-		$(".list_btn").on("click", function(){
-
-		location.href = "/board/list?page=${scri.page}"
+		$("#list_btn").on("click", function(){
+		location.href = "/board/tourAll?page=${scri.page}"
 		+"&perPageNum=${scri.perPageNum}"
-		+"&searchType=${scri.searchType}&keyword=${scri.keyword}";
+		+"&t_category=${vo.t_category}";
 		});
+	}); // JQuery
+	
 
 </script>
 

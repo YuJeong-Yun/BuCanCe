@@ -34,19 +34,36 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">매출 현황</h1>
+                        <h1 class="h3 mb-0 text-gray-800">관리자 DashBoard</h1>
                     </div>
 
-
-                    <div class="row">
                     
-                    <!-- 주간, 월간 차트 출력 -->
-                        <!-- Area Chart -->
-                        <div class="col-xl-6">
+                    
+
+						<div class="row">
+						
+						<!-- 일자별 회원가입수(웹,카카오) -->
+						<div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">최신 현황</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">일자별 회원가입수 추이</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                       	<div id="daily_member_chart" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 일주일간 매출 -->
+						<div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">매출 최신 현황</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -57,27 +74,103 @@
                             </div>
                         </div>
                         
-                        <div class="col-xl-6">
+                        <!-- 매출 월간 현황 -->
+						<div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">월간 현황</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">매출 월간 현황</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                        <div id="monthly_chart" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></div>
+                                       	<div id="monthly_chart" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                        
+					<br><br>
+					
+					
+					
+					<!-- 회원 요약 -->
+					<div class="row">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                회원수</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">총 ${totalMem }명</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                프리미엄 회원 수</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">총 ${totalPmMem }명</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                              리뷰 수</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">총 ${totalComment }개</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                숙박 결제건(전월대비)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${totalAcc[0] } 
+                                            </div>
+                                            <c:if test="${(totalAcc[0]-totalAcc[1]) < 0 } ">
+                                             <span>${totalAcc[0]-totalAcc[1] } <i class="fa fa-arrow-up" aria-hidden="true" style="color:red;"></i></span>
+                                            </c:if>
+                                            
+                                            
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- 주간, 월간 차트 출력 -->
 
 
                 </div>
                 
-                
+                <br>
                 <!-- 프리미엄 회원 내역 조회 -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">

@@ -45,5 +45,11 @@ public class AdminRESTController {
 		return service.getMonthlyChart();
 	}
 	
+	// 일자별 회원가입수 추이
+	@RequestMapping(value = "/dailyMember", method = RequestMethod.GET)
+	public JSONObject dailyMemberGET() {
+		
+		return service.getDailyMember();
+	}
 	
 }

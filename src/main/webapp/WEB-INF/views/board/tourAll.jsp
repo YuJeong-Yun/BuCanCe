@@ -118,17 +118,17 @@ li {
 				<ul>
 					<c:if test="${pageMaker.prev}">
 						<li><a
-							href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}&t_category=${param.t_category}">이전</a></li>
+							href="tourAll${pageMaker.makeSearch(pageMaker.startPage - 1)}&t_category=${param.t_category}">이전</a></li>
 					</c:if>
 
 					<c:forEach begin="${pageMaker.startPage}"
 						end="${pageMaker.endPage}" var="idx">
-						<li><a href="list${pageMaker.makeSearch(idx)}&t_category=${param.t_category}">${idx}</a></li>
+						<li><a href="tourAll${pageMaker.makeSearch(idx)}&t_category=${param.t_category}">${idx}</a></li>
 					</c:forEach>
 
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 						<li><a
-							href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}&t_category=${param.t_category}">다음</a></li>
+							href="tourAll${pageMaker.makeSearch(pageMaker.endPage + 1)}&t_category=${param.t_category}">다음</a></li>
 					</c:if>
 				</ul>
 			</div>

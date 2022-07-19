@@ -45,23 +45,53 @@ public class AdminDAOImpl implements AdminDAO{
 
 	@Override
 	public Integer getTrendChart(String date) {
-		Map<String, String> dateMap = new HashMap<String, String>();
-		dateMap.put("day", date.split(" ")[0]);
-		dateMap.put("month", date.split(" ")[1]);
 		
-		return session.selectOne(NAMESPACE+".trendChart",dateMap);
+		return session.selectOne(NAMESPACE+".trendChart", date);
 	}
 
 	@Override
 	public Integer getMonthlyChart(String date) {
-		Map<String, String> dateMap = new HashMap<String, String>();
-		dateMap.put("year", date.split(" ")[0]);
-		dateMap.put("month", date.split(" ")[1]);
 		
-		return session.selectOne(NAMESPACE+".monthlyChart",dateMap);
+		return session.selectOne(NAMESPACE+".monthlyChart", date);
+	}
+
+	@Override
+	public Integer getWebMem(String date) {
+		
+		return session.selectOne(NAMESPACE+".webMem", date);
+	}
+
+	@Override
+	public Integer getSNSMem(String date) {
+		
+		return session.selectOne(NAMESPACE+".SNSMem", date);
+	}
+
+	@Override
+	public Integer totalMem() {
+		
+		return session.selectOne(NAMESPACE+".totalMem");
+	}
+
+	@Override
+	public Integer totalPmMem() {
+		
+		return session.selectOne(NAMESPACE+".totalPmMem");
+	}
+
+	@Override
+	public Integer totalComment() {
+		
+		return session.selectOne(NAMESPACE+".totalComment");
+	}
+
+	@Override
+	public Integer totalAcc(String date) {
+		
+		return session.selectOne(NAMESPACE+".totalAcc", date);
 	}
 	
-
+	
 	
 	
 	

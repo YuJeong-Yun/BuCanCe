@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.SearchCriteria;
 
-import jdk.internal.org.jline.utils.Log;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {

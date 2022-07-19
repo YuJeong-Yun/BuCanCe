@@ -19,4 +19,17 @@ public interface AdminDAO {
 	// 월별 이용자 수 차트
 	public Integer getMonthlyChart(String date);
 	
+	// 웹 가입자 추이
+	public Integer getWebMem(String date);
+	
+	// sns 가입자 추이
+	public Integer getSNSMem(String date);
+	
+	// profitChart 카드
+	public Integer totalMem();
+	public Integer totalPmMem();
+	public Integer totalComment();
+	public Integer totalAcc(String date);
+	
+	
 }

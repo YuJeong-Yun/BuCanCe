@@ -56,10 +56,12 @@
                 <div class="row">
                     <div class="col-lg-6">
                      <div class="weatherInfo" style="width: 227.750px; height: 150px;"></div>
+                        <button type="button" class="b-btn b-btn-indigo" id="spot" onclick="location.href='/board/tourAll?t_category=0'">관광지전체보기</button>
+                        <button type="button" class="b-btn b-btn-indigo" id="eating" onclick="location.href='/board/tourAll?t_category=1'">맛집전체보기</button>
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
-                        	<div id="searchMenu">
+                        	<div style="transform:translate(0,140px);">
 		                        <i class="fa fa-search" aria-hidden="true"></i>
 		                        <input type="text" name="keyword" id="keywordInput" placeholder="검색어를 입력하세요"/>
 		                        <button class="w-btn w-btn-indigo" type="submit" id="searchBtn">
@@ -134,6 +136,9 @@
 			location.href = "/board/tourSearch?keyword="+keyword;		
 		});
 	});
+	
+	
+	
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/board/Weather.js"></script>
 <jsp:include page="../include/footer.jsp" />

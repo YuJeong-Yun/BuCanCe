@@ -21,14 +21,49 @@
 		order by id
 	</select>
 	
-	<select id="trendChart" parameterType="hashMap" resultType="Integer">
+	<select id="trendChart" resultType="Integer">
 		select count(*) from premium_order
-		where day(create_date)=#{day} and month(create_date)=#{month}
+		where date_format(create_date, '%Y %c %e')=#{date}
 	</select>
 	
-	<select id="monthlyChart" parameterType="hashMap" resultType="Integer">
+	<select id="monthlyChart" resultType="Integer">
 		select count(*) from premium_order
-		where year(create_date)=#{year} and month(create_date)=#{month}
+		where date_format(create_date, '%Y %c')=#{date}
 	</select>
+	
+	<select id="webMem" resultType="Integer">
+		select count(*) from bcc_member
+		where date_format(regdate, '%Y %c %e')=#{date}
+	</select>
+	
+	<select id="SNSMem" resultType="Integer">
+		select count(*) from kakao_table
+		where date_format(regdate, '%Y %c %e')=#{date}
+	</select>
+	
+	<select id="totalMem" resultType="Integer">
+		select count(*)+(select count(*) from kakao_table)
+		from bcc_member
+		<![CDATA[
+		where date_format(regdate, '%Y %c %e') <= date_format(now(), '%Y %c %e')
+		]]>
+	</select>
+	
+	<select id="totalPmMem" resultType="Integer">
+		select count(*) from premium_member
+	</select>
+	
+	<select id="totalComment" resultType="Integer">
+		select count(*) from comment
+		<![CDATA[
+		where date_format(regdate, '%Y %c %e') <= date_format(now(), '%Y %c %e')
+		]]>
+	</select>
+	
+	<select id="totalAcc" resultType="Integer">
+		select count(*) from acc_payment
+		where date_format(accDate, '%Y %c')=#{date}
+	</select>
+	
 	
 </mapper>  
