@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.Criteria;
+import com.bcc.domain.KakaoVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
@@ -43,6 +45,10 @@ public class MemberController {
 	@Inject
 	private TourService ts;
 	
+    @Inject
+    private KakaoService ks;
+	
+    
 	// http://localhost:8088/index
 		@RequestMapping(value = "/index", method = RequestMethod.GET)
 		public String indexGET() {
@@ -150,7 +156,7 @@ public class MemberController {
 			
 			// db동작 호출을 위해서 서비스 동작을 호출 - loginCheck()
 			MemberVO resultVO = service.loginCheck(vo);
-			
+			System.out.println(resultVO);
 			// 로그인 실패 - 페이지 이동(로그인페이지)
 			if(resultVO == null) {
 				log.info("로그인 정보 없음! 페이지 이동 ");
@@ -200,7 +206,7 @@ public class MemberController {
 			String id = (String)session.getAttribute("id");
 
 			model.addAttribute(service.getMember(id));
-			
+
 			return "/member/updateForm";
 		}
 		
@@ -209,11 +215,11 @@ public class MemberController {
 		public String updatePOST(HttpSession session, MemberVO vo) {
 			
 			String id = (String)session.getAttribute("id");
-			
-			// 서비스 - 정보 수정동작 호출
 			int result = service.updateMember(vo);
 			
 			if(result != 1) {
+				// 서비스 - 정보 수정동작 호출
+				
 				return "redirect:/update";
 			}
 			
@@ -248,12 +254,11 @@ public class MemberController {
 		
 
 		@RequestMapping(value = "/deleteThumb", method = RequestMethod.GET)
-		public void deleteThumbPOST(@RequestParam(value = "b_num") int b_num,
-				@RequestParam(value = "b_category") int b_category, ThumbVO vo) throws Exception {
+		public void deleteThumbPOST(@RequestParam(value = "b_num") int b_num) throws Exception {
 			
 			log.info(" deleteThumbPOST() 호출 ");
 
-			service.deleteThumb(vo);
+			service.deleteThumb(b_num);
 
 		}
 		
@@ -268,7 +273,7 @@ public class MemberController {
 		
 		// 회원정보 삭제(탈퇴)
 		@RequestMapping(value = "/delete", method = RequestMethod.POST)
-		public String deletePOST(HttpSession session,MemberVO vo/* @ModelAttribute("pw") String pw, */) {
+		public String deletePOST(HttpSession session,MemberVO vo) {
 			log.info(" deletePOST() 호출 ");
 			//log.info(pw);
 			vo.setId((String)session.getAttribute("id"));
@@ -297,21 +302,29 @@ public class MemberController {
 	        return cnt;
 	    }
 
-	    @Inject
-	    private KakaoService ks;
 
 		// http://localhost:8088/login
-		// http://localhost:8088/kakao_login 
-		@RequestMapping(value="/kakao_login", method=RequestMethod.GET)
-		public String kakao_login(@RequestParam(value = "code", required = false) String code) throws Exception {
-			System.out.println("#########" + code);
-			String access_Token = ks.getAccessToken(code);
-			HashMap<String, Object> userInfo = ks.getUserInfo(access_Token);
-			System.out.println("###access_Token#### : " + access_Token);
-			System.out.println("###nickname#### : " + userInfo.get("nickname"));
-			System.out.println("###email#### : " + userInfo.get("email"));
+		// http://localhost:8088/kakao_login
+	    @RequestMapping(value="/kakao_login", method=RequestMethod.GET)
+	    public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
+	    	System.out.println("#########" + code);
+	    	
+	    	String access_Token = ks.getAccessToken(code);
+	    	KakaoVO userInfo = ks.getUserInfo(access_Token);
+	    	
+	    	System.out.println("###access_Token#### : " + access_Token);
+	    	System.out.println("###nickname#### : " + userInfo.getK_name());
+	    	System.out.println("###email#### : " + userInfo.getK_email());
+	    	
+	    	// 아래 코드가 추가되는 내용
+//	    	session.invalidate();
+	    	// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
+	    	session.setAttribute("k_name", userInfo.getK_name());
+	    	session.setAttribute("k_email", userInfo.getK_email());
+	    	// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
+	    	// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.
 
-			return "/member/loginForm";
+			return "redirect:/index";
 			
 	    	}
 		

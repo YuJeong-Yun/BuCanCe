@@ -50,8 +50,8 @@
 			<a href="https://kauth.kakao.com/oauth/authorize?client_id=c30d4acffaf14e6c0a33f269940ff070&redirect_uri=http://localhost:8088/kakao_login
 &response_type=code">
 		<img src="/resources/img/kakao_login_medium_narrow.png" style="height:60px"></a><br>
-		<a href="https://kauth.kakao.com/oauth/authorize?client_id=c30d4acffaf14e6c0a33f269940ff070&redirect_uri=http://localhost:8088/kakao_logout
-&response_type=code"><img src="/resources/img/kakao_login_medium_narrow.png" style="height:60px"></a>
+		<a href="#">
+		<img src="/resources/img/btnG_perfect.png" style="height:60px"></a><br>
 	</form>
 
 </div>

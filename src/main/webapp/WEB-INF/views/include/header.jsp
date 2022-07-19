@@ -40,9 +40,12 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
+    
+
 </head>
 
 <body>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -121,10 +124,12 @@
 
 <%
 	String id = null;
-	if(session.getAttribute("id")!=null){
+	String k_email = null;
+	if(session.getAttribute("id")!=null || session.getAttribute("k_email")!=null){
 	id = (String)session.getAttribute("id");
+	k_email = (String)session.getAttribute("k_email");
 }
-	if(id==null){
+	if(id==null && k_email==null){
 %>
 	<div id="login">
 	<a href="/login">LOGIN</a> | 
@@ -132,12 +137,22 @@
 	</div>
 
 <%	
-	}else{ %>
+	}else if(id!=null){ %>
 	
 
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
 	<a href="/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/logout">LOGOUT</a>
+	</div>
+
+<%	
+	}else{ %>
+	
+
+	<div id="login">
+	<%=k_email%>님 로그인 중입니다!!
+	<a href="/mypage?id=<%=k_email %>">MYPAGE</a>
 	<a href="/logout">LOGOUT</a>
 	</div>
 <%		
@@ -177,7 +192,7 @@
 
 <%
 
-	if(id==null){
+	if(id==null && k_email == null){
 %>
 	<div id="login">
 	<a href="/login">LOGIN</a> | 
@@ -185,12 +200,22 @@
 	</div>
 
 <%	
-	}else{ %>
+	}else if(id!=null){ %>
 	
 
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
 	<a href="/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/logout">LOGOUT</a>
+	</div>
+
+<%	
+	}else{ %>
+	
+
+	<div id="login">
+	<%=k_email%>님 로그인 중입니다!!
+	<a href="/mypage?id=<%=k_email %>">MYPAGE</a>
 	<a href="/logout">LOGOUT</a>
 	</div>
 <%		

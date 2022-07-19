@@ -123,9 +123,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void deleteThumb(ThumbVO vo) throws Exception {
+	public void deleteThumb(int b_num) throws Exception {
 		
-		dao.deleteThumb(vo);
+		dao.deleteThumb(b_num);
 	}
 	
 }

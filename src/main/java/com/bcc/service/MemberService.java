@@ -43,6 +43,6 @@ public interface MemberService {
 	public List<BoardVO> getThumbList(String id) throws Exception;
 	
 	// 찜 삭제
-	public void deleteThumb(ThumbVO vo) throws Exception;
+	public void deleteThumb(int b_num) throws Exception;
 	
 }

@@ -73,8 +73,21 @@
 	
     <delete id="deleteThumb" parameterType="int">
 		delete from thumb
-		where b_num = #{b_num} and b_category = #{b_category}
+		where b_num = #{b_num}
     </delete>
+	
+		<!-- 정보 찾기 -->
+	<select id="findKakao" parameterType="java.util.HashMap" resultType="KakaoVO">
+		select * from kakao_table
+		where k_name=#{nickname} and k_email=#{email}
+	</select>
+
+	<!-- 정보 저장 -->
+	<insert id="kakaoInsert" parameterType="java.util.HashMap">
+		insert into kakao_table(k_name, k_email)
+		values(#{nickname}, #{email})
+	</insert>
+	
 	
   </mapper>
   

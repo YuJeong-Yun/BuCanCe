@@ -55,6 +55,6 @@ public interface MemberDAO {
 	public List<BoardVO> thumbList(String id) throws Exception;
 	
 	// 좋아요 삭제
-	public void deleteThumb(ThumbVO vo) throws Exception;
+	public void deleteThumb(int b_num) throws Exception;
 
 }

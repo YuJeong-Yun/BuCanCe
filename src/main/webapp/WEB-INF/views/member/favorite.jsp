@@ -14,13 +14,11 @@ li {
 <script type = "text/javascript">
 
 function deleteThumb(){
-	var b_num = $("#num").val()
-	var b_category = $("#t_category").val()
 
 	$.ajax({
 	        url:'/deleteThumb', //Controller에서 인식할 주소
  	        type:'GET', //POST 방식으로 전달
- 	        data:{b_num:b_num, b_category:b_category},
+	        data:{b_num:b_num},
  	        success:function(){
  	        	alert("찜 취소 성공");
  	        	location.href="/favorite";

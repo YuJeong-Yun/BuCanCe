@@ -180,9 +180,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void deleteThumb(ThumbVO vo) throws Exception {
+	public void deleteThumb(int b_num) throws Exception {
 		
-		sqlSession.delete(NAMESPACE+".deleteThumb", vo);
+		sqlSession.delete(NAMESPACE+".deleteThumb", b_num);
 	}
 	
 	
