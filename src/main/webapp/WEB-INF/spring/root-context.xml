@@ -8,9 +8,9 @@
 	<!-- DataSource객체 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">	
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/bccdb" />
-		<property name="username" value="root" />
-		<property name="password" value="1234" />
+		<property name="url" value="jdbc:mysql://itwillbs5.cafe24.com/itwillbs5" />
+		<property name="username" value="itwillbs5" />
+		<property name="password" value="itwillbs8030909" />
 	</bean>
 	<!-- DataSource객체 -->
 	

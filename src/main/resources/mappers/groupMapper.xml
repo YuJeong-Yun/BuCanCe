@@ -6,21 +6,16 @@
 
 <mapper namespace="com.bcc.mapper.groupMapper">
 
-	<select id="getMemberList" resultType="MemberVO">
+	<select id="getSearchMemList" resultType="MemberVO">
 		select id, name, license
 		from bcc_member
 		where id like concat('%', #{id}, '%')
 	</select>
 
-	<select id="getGrpNum" resultType="int">
+	<select id="getMaxGrpNum" resultType="int">
 		select max(num)
 		from plan
 	</select>
-
-	<insert id="createGrp">
-		insert into plan(num, grp_name, leader)
-		values(#{num}, #{grp_name}, #{leader})
-	</insert>
 
 	<select id="getLicense" resultType="int">
 		select license
@@ -44,14 +39,11 @@
 		delete from grp_accept
 		where grp_num=#{grp_num} and receiver=#{receiver}
 	</delete>
-
-	<select id="getGrpList" resultType="PlanMemberVO">
-		select grp_num, grp_name, leader
-		from plan_member a join plan b
-		on a.grp_num = b.num
-		where id = #{id}
-		order by grp_num desc
-	</select>
+	
+	<delete id="deleteInvitingList">
+		delete from grp_accept
+		where grp_num = #{grp_num}
+	</delete>
 
 	<select id="getGrpName" resultType="string">
 		select grp_name
@@ -67,7 +59,7 @@
 		order by num asc
 	</select>
 
-	<delete id="delPlanMem">
+	<delete id="delGrpMember">
 		delete from plan_member
 		where id = #{id} and grp_num = #{grp_num}
 	</delete>
@@ -90,8 +82,14 @@
 		insert into grp_accept(grp_num, sender, receiver)
 		values(#{grp_num}, #{sender}, #{receiver})
 	</insert>
+	
+	<select id="checkInviteMember" resultType="int">
+	    select count(*)
+        from grp_accept
+        where grp_num=#{grp_num} and receiver = #{receiver};
+	</select>
 
-	<select id="getName" resultType="string">
+	<select id="getMemberName" resultType="string">
 		select name
 		from bcc_member
 		where id = #{id}
@@ -113,7 +111,7 @@
 		select id
 		from plan_member
 		where grp_num = #{grp_num}
-		order by num asc;
+		order by num asc
 	</select>
 
 	<update id="updateLeader">
@@ -121,58 +119,6 @@
 		set leader = #{leader}
 		where num =	#{num}
 	</update>
-
-	<select id="getTourList" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat
-		from tourist_spot
-		where t_category = 0
-		order by num asc
-	</select>
-
-	<select id="getRestaurantList" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat
-		from tourist_spot
-        where t_category = 1
-		order by num asc
-	</select>
-
-	<select id="getTourSearch" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat
-		from tourist_spot
-		where title like concat('%', #{keyword}, '%') and t_category =0
-		order by num asc
-	</select>
-
-	<select id="getRestaurantSearch" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat
-		from tourist_spot
-		where title like concat('%', #{keyword}, '%') and t_category =1
-		order by num asc
-	</select>
-	
-	<select id="getTourInfo" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat, t_category
-		from tourist_spot
-		where num = #{num} and t_category = 0
-	</select>
-	
-	<select id="getRestaurantInfo" resultType="BoardVO">
-		select num, title, thumbnail, lng, lat, t_category
-		from tourist_spot
-		where num = #{num}  and t_category =1
-	</select>
-	
-	<update id="modifyPlan">
-		update plan
-		set writer = #{writer}, tour_plan = #{tour_plan}, tour_date_start = #{tour_date_start}, tour_date_end = #{tour_date_end}, lastUpdate = now()
-		where num = #{num}
-	</update>
-	
-	<select id="getPlanInfo" resultType="PlanVO">
-		select *
-		from plan
-		where num=#{num}
-	</select>
 
 </mapper>
   

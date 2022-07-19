@@ -48,12 +48,35 @@ body {
 }
 .grp-member .member-container li {
 	width: 80px;
+	position: relative;
 	text-align: center;
+}
+.grp-member .member-container li .leader {
+	position: absolute;
+	top:-10px;
+	left:10px;
+	margin: auto;
+	font-size: 30px;
+	color: #dad285;
+	z-index: 1;
 }
 .grp-member .member-container li .member--profile img {
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
+}
+.grp-member .member-container li .invite-cancle {
+	background-color: #bbb;
+	width: 60px;
+	height: 40px;
+	margin: auto;
+	border-radius: 10px;
+	line-height: 40px;
+	font-size: 12px;
+	color: #fff;
+}
+.grp-member .member-container li .invite-cancle:hover {
+	background-color: #999;
 }
 .grp-member .member-container li .member--id {
 	font-size: 16px;
@@ -64,17 +87,47 @@ body {
 	font-size: 12px;
 	color: #01111e;
 }
-.grp-member .member-container li.menu span{
-	color: #efefef;
-}
-.grp-member .member-container li.add-member span{
+.grp-member .member-container li.invite-member span.add-group {
 	font-size: 35px;
-	color: #efefef;
+	color: #777;
 	cursor: pointer;
 }
-.grp-member .member-container li.add-member span:hover {
+.grp-member .member-container li.invite-member span.add-group:hover {
 	transform: scale(1.05);
 }
+/* 회원 검색 모달 */
+.member-list {
+	list-style: none;	
+}
+.member-list > li  {
+	display: flex;
+	height: 38px;
+	position: relative;
+	padding-bottom: 5px;
+	margin: 20px 0;
+	border-bottom: 1px dotted #eee;
+}
+.member-list > li:last-child {
+	border-bottom: none;
+	margin-bottom: 0;
+}
+.member-list > li .member--id {
+	width: 90px;
+	padding-right: 10px;
+	text-align: center;
+}
+.member-list > li .member--name:before {
+	content: "|";
+	padding-right: 10px;
+	color: #ddd;
+}
+.member-list > li .member--name {
+}
+.member-list > li > button {
+	position: absolute;
+	right: 0;
+}
+
 
 
 
@@ -90,10 +143,28 @@ body {
   font-size: 30px;
   margin-bottom: 30px;
   font-weight: 700;
-
+}
+.tour-plan .description {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 15px;
+	text-align: right;
+}
+.tour-plan .description .desc-title {
+	color: #2b3c7e;
+	font-size: 15px;
+	font-weight: 700;
+}
+.tour-plan .description .desc-title span {
+	color: #2b3c7e;
 }
 .tour-plan ul.plan-container {
   list-style: none;
+}
+.tour-plan ul.plan-container .no-plan {
+	border-top: 1px solid #bbb;
+    padding: 30px 0;
 }
 .tour-plan ul.plan-container li.plan {
   display: flex;
@@ -165,21 +236,34 @@ body {
     z-index: 1;
     color: #507cdf;
 }
-/* 플랜 수정 버튼 */
-.tour-plan .update-btn {
-  background-color: #fff;
-  position: absolute;
-  right: 0;
-  bottom: -50px;
-  padding: 5px;
-  border:none;
-  border-radius: 5px;
-  font-size: 14px;
+/* 버튼 */
+.tour-plan .btn-container {
+	position: absolute;
+	right: 0;
+	bottom: -50px;
 }
-.tour-plan .update-btn:hover {
-  background-color: #ddd;
+.tour-plan .btn-container button {
+    background-color: #799bdb;
+    margin-right: 3px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #fff;
 }
-
+.tour-plan .btn-container button:hover {
+  background-color: #ccc;
+}
+.tour-plan .btn-container button:last-child {
+	margin-right: 0;
+}
+.tour-plan .btn-container .list-btn {
+	margin-right: 0;
+} 
+.tour-plan .btn-container .separator {
+	margin: 7px;
+	color: #777;
+}
 
 
 
