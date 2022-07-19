@@ -12,14 +12,14 @@ import com.bcc.domain.PlanVO;
 
 public interface PlanService {
 
-	// 아이디 가진 회원 목록 가져오기
-	public List<MemberVO> getMemberList(String id);
+	// 아이디 검색 결과 회원 목록 가져오기
+	public List<MemberVO> getSearchMemList(String id);
 	
 	// 그룹 번호 계산
-	public Integer getGrpNum();
+	public Integer getMaxGrpNum();
 
-	// 그룹 생성
-	public void createGrp(PlanVO vo);
+	// 플랜 생성
+	public void createPlan(PlanVO vo);
 
 	// 회원 라이센스 가져오기
 	public String getLicense(String id);
@@ -33,8 +33,8 @@ public interface PlanService {
 	// 그룹 초대 수락 리스트에서 제거
 	public void deleteInvitation(GrpAcceptVO vo);
 
-	// 소속된 그룹 번호 가져오기
-	public List<PlanVO> getGrpList(String id);
+	// 소속된 플랜 리스트 가져오기
+	public List<PlanVO> getPlanList(String id);
 
 	// 그룹 이름 가져오기
 	public String getGrpName(int num);
@@ -55,7 +55,7 @@ public interface PlanService {
 	public void inviteMember(GrpAcceptVO vo);
 
 	// 회원 이름 가져오기
-	public String getName(String id);
+	public String getMemberName(String id);
 
 	// 초대 취소
 	public void inviteCancle(GrpAcceptVO vo);
@@ -82,10 +82,10 @@ public interface PlanService {
 	public List<BoardVO> getSearchList(String category, String keyword);
 
 	// 여행 경로 저장
-	public void modifyPlan(PlanVO vo);
+	public void modifyTourPlan(PlanVO vo);
 
 	// 여행 경로 목록 가져오기
-	public List<List<Object>> getPlanList(int num);
+	public List<List<Object>> getTourPlanList(int num);
 
 	// 회원이 속한 모든 그룹의 멤버 리스트 가져오기
 	public List<List<MemberVO>> getAllGrpMemberList(List<PlanVO> grpList);

@@ -34,18 +34,18 @@ public class PlanServiceImpl implements PlanService {
 	private PlanDAO dao;
 
 	@Override
-	public List<MemberVO> getMemberList(String id) {
-		return dao.getMemberList(id);
+	public List<MemberVO> getSearchMemList(String id) {
+		return dao.getSearchMemList(id);
 	}
 
 	@Override
-	public Integer getGrpNum() {
-		return dao.getGrpNum();
+	public Integer getMaxGrpNum() {
+		return dao.getMaxGrpNum();
 	}
 
 	@Override
-	public void createGrp(PlanVO vo) {
-		dao.createGrp(vo);
+	public void createPlan(PlanVO vo) {
+		dao.createPlan(vo);
 	}
 
 	@Override
@@ -74,8 +74,8 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public List<PlanVO> getGrpList(String id) {
-		return dao.getGrpList(id);
+	public List<PlanVO> getPlanList(String id) {
+		return dao.getPlanList(id);
 	}
 
 	@Override
@@ -109,8 +109,8 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public String getName(String id) {
-		return dao.getName(id);
+	public String getMemberName(String id) {
+		return dao.getMemberName(id);
 	}
 
 	@Override
@@ -218,12 +218,12 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public void modifyPlan(PlanVO vo) {
-		dao.modifyPlan(vo);
+	public void modifyTourPlan(PlanVO vo) {
+		dao.modifyTourPlan(vo);
 	}
 
 	@Override
-	public List<List<Object>> getPlanList(int num) {
+	public List<List<Object>> getTourPlanList(int num) {
 		PlanVO vo = dao.getPlanInfo(num);
 
 		if (vo.getTour_plan() == null || vo.getTour_plan().equals("")) {

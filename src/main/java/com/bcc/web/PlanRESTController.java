@@ -103,7 +103,7 @@ public class PlanRESTController {
 		Map<String, Object> total = new HashMap<String, Object>();
 
 		// 아이디 검색 결과
-		List<MemberVO> memberList = planService.getMemberList(id);
+		List<MemberVO> memberList = planService.getSearchMemList(id);
 
 		// 그룹의 초대중인 회원
 		List<GrpAcceptVO> invitingList = planService.getInvitingList(grpNum);
@@ -141,7 +141,7 @@ public class PlanRESTController {
 		planService.inviteMember(vo);
 
 		// 회원 이름 전달
-		return planService.getName(id);
+		return planService.getMemberName(id);
 	}
 
 	// 초대 취소
@@ -184,7 +184,7 @@ public class PlanRESTController {
 		vo.setWriter(id);
 
 		log.info("플랜 저장 : " + vo);
-		planService.modifyPlan(vo);
+		planService.modifyTourPlan(vo);
 	}
 
 	// 선택한 플랜 정보
@@ -192,7 +192,7 @@ public class PlanRESTController {
 	public List<List<Object>> planListREST(@PathVariable("grp_num") int grp_num, HttpSession session) {
 		log.info("플랜 정보 가져오기 ");
 
-		return planService.getPlanList(grp_num);
+		return planService.getTourPlanList(grp_num);
 	}
 
 	// 숙소 정보 크롤링

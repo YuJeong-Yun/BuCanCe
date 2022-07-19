@@ -26,18 +26,18 @@ public class PlanDAOImpl implements PlanDAO {
 	private static final String NAMESPACE = "com.bcc.mapper.groupMapper";
 
 	@Override
-	public List<MemberVO> getMemberList(String id) {
-		return sqlSession.selectList(NAMESPACE + ".getMemberList", id);
+	public List<MemberVO> getSearchMemList(String id) {
+		return sqlSession.selectList(NAMESPACE + ".getSearchMemList", id);
 	}
 
 	@Override
-	public Integer getGrpNum() {
-		return sqlSession.selectOne(NAMESPACE + ".getGrpNum");
+	public Integer getMaxGrpNum() {
+		return sqlSession.selectOne(NAMESPACE + ".getMaxGrpNum");
 	}
 
 	@Override
-	public void createGrp(PlanVO vo) {
-		sqlSession.insert(NAMESPACE + ".createGrp", vo);
+	public void createPlan(PlanVO vo) {
+		sqlSession.insert(NAMESPACE + ".createPlan", vo);
 	}
 
 	@Override
@@ -61,8 +61,8 @@ public class PlanDAOImpl implements PlanDAO {
 	}
 
 	@Override
-	public List<PlanVO> getGrpList(String id) {
-		return sqlSession.selectList(NAMESPACE + ".getGrpList", id);
+	public List<PlanVO> getPlanList(String id) {
+		return sqlSession.selectList(NAMESPACE + ".getPlanList", id);
 	}
 
 	@Override
@@ -96,8 +96,8 @@ public class PlanDAOImpl implements PlanDAO {
 	}
 
 	@Override
-	public String getName(String id) {
-		return sqlSession.selectOne(NAMESPACE + ".getName", id);
+	public String getMemberName(String id) {
+		return sqlSession.selectOne(NAMESPACE + ".getMemberName", id);
 	}
 
 	@Override
@@ -141,8 +141,8 @@ public class PlanDAOImpl implements PlanDAO {
 	}
 
 	@Override
-	public void modifyPlan(PlanVO vo) {
-		sqlSession.update(NAMESPACE + ".modifyPlan", vo);
+	public void modifyTourPlan(PlanVO vo) {
+		sqlSession.update(NAMESPACE + ".modifyTourPlan", vo);
 	}
 
 	@Override

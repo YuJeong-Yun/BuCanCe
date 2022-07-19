@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.bcc.domain.HotelVO;
 import com.bcc.domain.PlanMemberVO;
 import com.bcc.domain.PlanVO;
 import com.bcc.service.PlanService;
@@ -43,8 +42,8 @@ public class PlanController {
 		// 초대받은 그룹 목록 가져오기
 		model.addAttribute("grpAcceptList", planService.getGrpAcceptList(id));
 
-		// 소속된 그룹 정보 가져오기
-		List<PlanVO> grpList = planService.getGrpList(id);
+		// 소속된 플랜 정보 가져오기
+		List<PlanVO> grpList = planService.getPlanList(id);
 		model.addAttribute("grpList", grpList);
 
 		// 회원이 속한 모든 각 그룹의 멤버 정보 가져오기
@@ -63,8 +62,8 @@ public class PlanController {
 		String id = (String) session.getAttribute("id");
 		// 그룹 번호 생성
 		int num = 1;
-		if (planService.getGrpNum() != null) {
-			num = planService.getGrpNum() + 1;
+		if (planService.getMaxGrpNum() != null) {
+			num = planService.getMaxGrpNum() + 1;
 		}
 		// 그룹 생성
 		grp_name = grp_name.trim();
@@ -72,7 +71,7 @@ public class PlanController {
 		vo.setLeader(id);
 		vo.setNum(num);
 		vo.setGrp_name(grp_name);
-		planService.createGrp(vo);
+		planService.createPlan(vo);
 
 		// 소속된 그룹 정보 저장
 		PlanMemberVO member = new PlanMemberVO();
@@ -102,7 +101,7 @@ public class PlanController {
 //		}
 		
 		// 플랜 정보 전달 
-		model.addAttribute("planList", planService.getPlanList(num));
+		model.addAttribute("planList", planService.getTourPlanList(num));
 
 		return "/plan/planWrite";
 	}
@@ -124,7 +123,7 @@ public class PlanController {
 		// 그룹 멤버 전달
 		model.addAttribute("grpMemberList",planService.getGrpMemberList(num));
 		// 여행 경로 정보 전달
-		model.addAttribute("planList", planService.getPlanList(num));
+		model.addAttribute("planList", planService.getTourPlanList(num));
 		// 초대중인 멤버 리스트 전달
 		model.addAttribute("invitingList",  planService.getInvitingList(num));
 		// 플랜 정보 전달
