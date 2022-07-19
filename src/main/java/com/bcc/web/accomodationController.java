@@ -77,6 +77,7 @@ public class accomodationController {
 		//service에서 저장한 크롤링 정보들을 JSONArray형태로 저장
 		JSONArray roomList = service.roomList();
 
+		
 		model.addAttribute("roomList", roomList);
 	}
 	
@@ -90,9 +91,11 @@ public class accomodationController {
 		log.info(" roomListPOST() 호출 ");
 		log.info(" 입력한 정보를 바탕으로 숙소항목을 보여줌 ");
 		log.info("rs : " + rs);
+		log.info("검색어 : "+rs.getPlace_name());
 		//service에서 입력한 정보를 바탕으로 원하는 크롤링 정보만 보여줌
 		JSONArray roomList = service.roomSearchList(rs);
 		
+		model.addAttribute("rs", rs);
 		model.addAttribute("roomList", roomList);
 		
 		//roomList.jsp에서 선택한 select 정보를 저장
@@ -101,6 +104,8 @@ public class accomodationController {
 		//roomList.jsp에서 input태그에 입력한 정보를 저장
 		model.addAttribute("select_place", rs.getPlace_name());
 			
+		
+		
 	}
 	
 	
@@ -183,8 +188,8 @@ public class accomodationController {
 		model.addAttribute("bno", bno);
 		
 		//체크인,체크아웃날짜
-		model.addAttribute("checkout",rd.getSel_date2().substring(8));
-		model.addAttribute("checkin",rd.getSel_date().substring(8));
+		model.addAttribute("checkout",rd.getSel_date2());
+		model.addAttribute("checkin",rd.getSel_date());
 		
 		//체크인,체크아웃날짜를 시간까지 전부가져오기
 		model.addAttribute("checkoutFull",rd.getSel_date2());

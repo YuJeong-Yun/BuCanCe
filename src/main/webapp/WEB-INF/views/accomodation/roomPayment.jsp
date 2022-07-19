@@ -197,9 +197,8 @@ input[type=text]:focus {
 					<div class="breadcrumb-text">
 						<h2>결제 페이지</h2>
 						<div class="bt-option">
-							<a
-								href="${pageContext.request.contextPath}/accomodation/roomList">Home</a>
-							<span>결제페이지</span>
+							<a href="<%=request.getHeader("REFERER")%>">예약항목 선택</a>
+							<span>결제 페이지</span>
 						</div>
 					</div>
 				</div>
@@ -219,7 +218,7 @@ input[type=text]:focus {
 							style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
 						<div class="rd-text">
 							<div class="rd-title">
-								<h3>${vo.room_title}</h3>
+								<h3>${vo.room_subTitle}</h3>
 								<div class="rdt-right"></div>
 						
 							</div>
@@ -230,7 +229,7 @@ input[type=text]:focus {
 									<tr>
 
 										<td class="r-o"><p></p>예약명 <input type="text" placeholder="서명란"
-											value="${user_name}" style="border-radius: 10px;"></td>
+											value="${user_name}" style="border-radius: 10px;" readonly></td>
 										<td><br> <br></td>
 									</tr>
 									<tr>
@@ -467,6 +466,13 @@ input[type=text]:focus {
 		
 	    function requestPay() {
 			
+			//예약가격가져오기
+			const str = document.getElementById('date-out2').value;
+	    	const regex = /[^0-9]/g;
+	    	const result = str.replace(regex, "");
+	    	const number = parseInt(result);
+			//예약가격가져오기
+			
 			if(!$('#checkOne').is(':checked')){
 				alert('숙소이용규칙 및 취소/환불규정에 동의가 필요합니다.');
 				
@@ -485,9 +491,8 @@ input[type=text]:focus {
 			    	  pg: $("#payment-select option:selected").val(),
 // 			          pay_method: "card",
 			          merchant_uid: "${accId}",  // 숙박 주문번호
-			          name: '${vo.room_title}',  //상품이름
-// 			          amount: "document.getElementsById('date-out')", //가격
-			          amount: 100, //가격
+			          name: '${vo.room_title} ${vo.room_subTitle}',  //상품이름
+			          amount: number, //가격
 			          buyer_email: "${email}",
 			          buyer_name: "${user_name}",
 			          buyer_tel: "${tel}",
@@ -505,8 +510,7 @@ input[type=text]:focus {
 			 					accId: "${accId}",  //고유 id
 			 					accKind: $("#payment-select option:selected").val(),
 			 					accName: '${vo.room_title}',  //상품이름
-// 			 					accAmount: "document.getElementsById('date-out')", //가격
-						        accAmount: 100, //가격
+			 					accAmount: number, //가격
 						        email: "${email}",
 						        user_name: "${user_name}",
 						        tel: "${tel}",
@@ -583,7 +587,7 @@ input[type=text]:focus {
 							</div>
 							<div class="check-date">
 								<label for="date-in"><b>마감시간</b></label> <input type="text"
-									id="date-in" readonly value="당일 ${vo.room_endtime} 시까지"
+									id="date-in" readonly value="${vo.checkin}일 ${vo.room_endtime}시까지"
 									style="font-weight: bold;"> <i class="icon_calendar"></i>
 							</div>
 
@@ -606,7 +610,7 @@ input[type=text]:focus {
 							
 							<c:if test="${license==0}">
 								<label for="date-out"><strong>총 결제 금액 (VAT포함)</strong></label> <input
-									type="text" id="date-out" value="${vo.room_fcost} 원" readonly
+									type="text" id="date-out2" value="${vo.room_fcost} 원" readonly
 									style="font-weight: bold; font-size: 20px"> 
 								</c:if>
 								
@@ -614,7 +618,7 @@ input[type=text]:focus {
 								<c:if test="${license==1}">
 									<label for="date-out"><strong style="color: red">총
 											결제 금액 (멤버쉽 할인, VAT포함)</strong></label>
-									<input type="text" id="date-out"
+									<input type="text" id="date-out2"
 										value="<fmt:formatNumber type="number" maxFractionDigits="0"  value="${vo.room_fcost*0.9}" /> 원"
 										style="color: red; font-weight: bold; font-size: 20px"
 										readonly>

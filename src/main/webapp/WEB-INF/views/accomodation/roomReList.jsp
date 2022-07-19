@@ -21,10 +21,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>예약목록 페이지</h2>
+                        <h2>예약내역</h2>
                         <div class="bt-option">
-                            <a href="${pageContext.request.contextPath}/accomodation/roomList">Home</a>
-                            <span>Rooms</span>
+                            <a href="${pageContext.request.contextPath}/index">Home</a>
+                            <span>예약내역</span>
                             
                             <c:if test="${UserPayList == '[]'}">
                             <br><br> <br><br> <br><br> <br><br>
@@ -59,7 +59,7 @@
                             <h4>${UserPayList.get(a).accName}
                             
                              <c:if test="${UserPayList.get(a).license==1}">
-                            	<br><a style="color :red">(할인)</a>
+                            	<br><a style="color :red">(할인됨)</a>
                             </c:if>
                             </h4>
                             <h5>${UserPayList.get(a).roomSort}</h5><br>
@@ -89,7 +89,14 @@
                                     
                                     <tr>
                                         <td class="r-o">기간 </td>
-                                        <td>${UserPayList.get(a).checkIn} ~ ${UserPayList.get(a).checkOut}</td>
+                                        
+                                        <c:if test="${UserPayList.get(a).sort=='ds'}">
+                                        	<td>${UserPayList.get(a).checkIn}</td>
+                                        </c:if>
+                                        
+                                        <c:if test="${UserPayList.get(a).sort=='acc'}">
+                                        <td>${UserPayList.get(a).checkIn} <br> ${UserPayList.get(a).checkOut}</td>
+										</c:if>
 
 
 <c:set var="oneDayAfter" value="<%=new Date(new Date().getTime() - 60*60*24*1000*1)%>"/>
@@ -110,12 +117,12 @@
                                     
                                     <c:if test="${UserPayList.get(a).sort=='ds'}">
                                         <td class="r-o">이용시간<br>퇴실시간 </td>
-                                        <td>${UserPayList.get(a).useTime}시간/${UserPayList.get(a).endTime}시 </td>
+                                        <td>${UserPayList.get(a).useTime}시간<br>${UserPayList.get(a).endTime}시까지 </td>
                                  	</c:if>
                                  	
                                     <c:if test="${UserPayList.get(a).sort=='acc'}">
                                         <td class="r-o">이용시간<br>퇴실시간</td>
-                                        <td>${UserPayList.get(a).useTime}시간/${UserPayList.get(a).endTime}시</td>
+                                        <td>${UserPayList.get(a).useTime}시간<br>${UserPayList.get(a).endTime}시까지</td>
                                  	</c:if>
                                  	
                                     </tr>

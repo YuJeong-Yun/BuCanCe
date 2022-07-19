@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- 날짜 정보 입력시 유효성 체크 시작 -->
 <script type="text/javascript">
               
@@ -51,6 +52,11 @@
             	});
                 
                 
+             
+             function change(event) {
+            		var tmp = event.target.src;
+            		$("#mainpic").attr("src", tmp);
+            	}
  </script>
 <!-- 날짜 정보 입력시 유효성 체크 끝 -->
     

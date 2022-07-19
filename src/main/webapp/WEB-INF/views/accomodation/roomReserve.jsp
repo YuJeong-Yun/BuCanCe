@@ -18,8 +18,8 @@
                     <div class="breadcrumb-text">
                         <h2>예약항목 선택</h2>
                         <div class="bt-option">
-                            <a href="<%=request.getHeader("REFERER")%>">뒤로가기</a>
-                            <span>${room_title}</span>
+                            <a href="<%=request.getHeader("REFERER")%>">방 상세정보</a>
+                            <span>${room_title} 선택</span>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                                        <td>
                                        
                                          <c:if test='${roomReserve.get(a).room_fcost != ""}'>
-                                        ${roomReserve.get(a).room_endtime}시/
+                                       ${checkin}일 ${roomReserve.get(a).room_endtime}시 <br>
                                           ${roomReserve.get(a).room_usetime}시간
                                         </c:if>
                                         
@@ -111,7 +111,7 @@
                                        <td>
                                         <!-- 숙소가격정보가 있을때 -->
                                          <c:if test='${roomReserve.get(a).room_lcost != "1"}'>
-                                        ${roomReserve.get(a).room_accendtime}시/
+                                        ${checkin}일 ${roomReserve.get(a).room_accendtime}시
                                         ${checkout}일
                                           ${roomReserve.get(a).room_accusetime}시
                                         </c:if>

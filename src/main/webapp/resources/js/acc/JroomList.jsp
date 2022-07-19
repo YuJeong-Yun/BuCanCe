@@ -62,14 +62,14 @@ function selectArea(){
                     	tmpHtml += '<div class="room-item" style="border-radius: 2em;">';
                     	  tmpHtml += '<img src="'+room_pic+'" alt="acc" class="poster" height="200" style=" border-bottom-style: none; border-style: solid;  border-color: #00ABB9 #00ABB9 #FFFFFF #00ABB9 ; box-shadow: 5px 0px 5px gray; border-radius:10px 10px 0px 0px;">';
                     	  tmpHtml += '<div class="ri-text" style=" border-style: solid;  border-color: #FFFFFF #00ABB9 #00ABB9 #00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:0px 0px 10px 10px; height:260px; background: white">';
-                    	  tmpHtml += '<h4>'+room_title+'</h4>';
+                    	  tmpHtml += '<h4><b style="font-family: Jeju Hallasan ">'+room_title+'</b></h4>';
                     	  tmpHtml += '<table><tbody>';
                     	 
                     	 
                     	  tmpHtml += '<tr><td class="r-o" style="color: green">평점:</td><td style="color: green">';
                     	 
  						  if(room_rank != ''){
- 							 tmpHtml += ''+room_rank.substring(0,3)+'';
+ 							 tmpHtml += ''+room_rank.substring(0,3)+'점';
                     	  }
                     	  if(room_rank == ''){
                     		  tmpHtml += '오픈전'

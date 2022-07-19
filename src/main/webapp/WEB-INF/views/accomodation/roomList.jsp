@@ -2,46 +2,46 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|
-Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planContent.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/acc/CroomList.css" type="text/css">
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+
 </style>
 </head>
 <body>
+	<!-- 헤더부분 -->
 	<jsp:include page="../include/header.jsp" />
+	<!-- 헤더부분 -->
 	
-	<!-- 무한스크롤포함 -->
+	<!-- 무한스크롤포함 js동작들 -->
 	<jsp:include page="${pageContext.request.contextPath}/resources/js/acc/JroomList.jsp"/>
-	<!-- 무한스크롤포함 -->
+	<!-- 무한스크롤포함 js동작들 -->
 	
-	<!-- Breadcrumb Section Begin --> <!-- 코드 시작 -->
 	
-	 
-  
-	<section class="tour-plan">
-	<div class="breadcrumb-section" style="background:  #BEEFFF">
+	<!-- Breadcrumb Section Begin --> 
+	<section>
+<%-- 	style="background-image: url('${pageContext.request.contextPath}/resources/img/beach.jpg');  --%>
+<!-- 	background-attachment: fixed;	background-repeat: no-repeat; background-size:cover;" -->
+<!-- 	> -->
+	<div class="breadcrumb-section" >
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text" >
-						<h2   style="font-family: 'Jeju Hallasan' ">부산 숙소</h2>
+						<h2 style="font-family: 'Jeju Hallasan' ">숙소 선택</h2>
 						<div class="bt-option">
 							<a href="${pageContext.request.contextPath}/index">Home</a> 
-							<span>숙소 정보</span> 
-						</div>
-					</div>
-				</div>
-			</div>
-<br><br><br>
+							<span>숙소 선택</span> 
+						</div></div></div></div>
+			<br><br><br>
+
 			<!-- 숙소목록선택,검색기능을 하는 코드 시작 -->
-			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm">
+			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm" >
 				<select name="area" onchange="selectArea()" id="area" style="background: blue; line-height: 1.5;" >
 					<optgroup label="지역">
 						<option value="favorite"
@@ -88,10 +88,10 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 				</select> &nbsp; &nbsp; &nbsp; 
 	
 
-				<input type="text" name="place_name" id="place_name" value="${select_place}" 
-				required spellcheck="false">
-&nbsp; &nbsp; &nbsp; 
-				<input type="submit" value="검색" class="btn btn-primary" style="height: 40px;">
+				<input type="text" name="place_name" id="place_name" value="${rs.getPlace_name()}" required spellcheck="false" style="margin-left:auto; margin-right:auto;">
+				
+&nbsp; &nbsp; 
+				<input type="submit" value="검색" class="btn btn-primary" style="height: 40px; margin-left:auto; margin-right:auto;">
 
 				</form>
 				<!-- 숙소목록선택,검색기능을 하는 코드 끝 -->
@@ -103,18 +103,13 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
   
 
-	<!-- Rooms Section Begin -->
-	<section class="rooms-section spad" >
+	<!-- Rooms Section Begin --> <!-- 방정보 처음 6개 -->
+	<section class="rooms-section spad"  >
 		<div class="container">
-			<div class="row">
+			<div class="row" >
 				<c:set var="a" />
-			
-<%-- 				<c:forEach items="${roomList}" begin="0" end="${roomList.size()}"> --%>
 				<c:forEach items="${roomList}" begin="0" end="5">
-			
-					<div class="col-lg-4 col-md-6" style="height:600px;">
-					
-					
+					<div class="col-lg-4 col-md-6" style="height:600px;" >
 					<c:if test="${roomList.get(a).room_rank!=''}">
 			<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
 			</c:if>
@@ -131,8 +126,8 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 							</c:if>
 							
 							
-							<div class="ri-text"  style=" border-style: solid;  border-color: #FFFFFF #00ABB9 #00ABB9 #00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:0px 0px 10px 10px; height:260px; background: white"  >
-								<h4>${roomList.get(a).room_title}</h4>
+							<div class="ri-text"  style=" border-style: solid;  border-color: #FFFFFF #00ABB9 #00ABB9 #00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:0px 0px 10px 10px; height:260px; background: #FAFAFA"  >
+								<h4><b style="font-family: 'Jeju Hallasan' ">${roomList.get(a).room_title}</b></h4>
 								<table>
 									<tbody>
 										<tr>
@@ -148,10 +143,10 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 										</tr>
 										<tr>
 											<td class="r-o">지역:</td>
-											<td>${roomList.get(a).room_area}</td>
+											<td >${roomList.get(a).room_area}</td>
 										</tr>
 										<tr>
-											<td class="r-o" style="color: blue">대실:</td>
+											<td class="r-o" >대실:</td>
 											<c:if test="${roomList.get(a).room_price!='숙소에 문의'}">
 													
 											<td  style="color: blue">${roomList.get(a).room_price}원</td>
@@ -161,7 +156,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 											</c:if>
 										</tr>
 										<tr>
-											<td class="r-o" style="color: red">숙박:</td>
+											<td class="r-o" >숙박:</td>
 											<c:if test="${roomList.get(a).room_price2!='숙소에 문의'}">
 											<td style="color: red">${roomList.get(a).room_price2} 원</td>
 											</c:if>
@@ -193,20 +188,10 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 		</div>
 	</section>
 	</section>
-<div class="inner">
-  <div class="ocean">
-    <div class="wave"></div>
-    <div class="wave"></div>
-  </div>
-</div>
+	<!-- <!-- 방정보 처음 6개 --> -->
 
 
-
-
-	<jsp:include page="../include/footer.jsp" />
-
-	
+<jsp:include page="../include/footer.jsp" />
 	
 </body>
-
 </html>
