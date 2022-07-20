@@ -144,16 +144,16 @@ public class BoardController {
 		vo.setWriter(id);
 
 		
-		log.info(vo.getnum()+"");
+		log.info(vo.getNum()+"");
 		commentservice.wriComment(vo);
 
-		rttr.addAttribute("num", vo.getnum());
+		rttr.addAttribute("num", vo.getNum());
 		rttr.addAttribute("page", scri.getPage());
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
 
-		return "redirect:/board/read?num="+vo.getnum();
+		return "redirect:/board/read?num="+vo.getNum();
 	}
 	
 	//댓글 수정 GET
@@ -172,13 +172,13 @@ public class BoardController {
 			
 			commentservice.modify(vo);
 			
-			rttr.addAttribute("num", vo.getnum());
+			rttr.addAttribute("num", vo.getNum());
 			rttr.addAttribute("page", scri.getPage());
 			rttr.addAttribute("perPageNum", scri.getPerPageNum());
 			rttr.addAttribute("searchType", scri.getSearchType());
 			rttr.addAttribute("keyword", scri.getKeyword());
 			
-			return  "redirect:/board/read?num="+vo.getnum();
+			return  "redirect:/board/read?num="+vo.getNum();
 		}
 	
 		//댓글 삭제 GET
@@ -198,13 +198,13 @@ public class BoardController {
 			
 			commentservice.delete(vo);
 			
-			rttr.addAttribute("num", vo.getnum());
+			rttr.addAttribute("num", vo.getNum());
 			rttr.addAttribute("page", scri.getPage());
 			rttr.addAttribute("perPageNum", scri.getPerPageNum());
 			rttr.addAttribute("searchType", scri.getSearchType());
 			rttr.addAttribute("keyword", scri.getKeyword());
 			
-			return  "redirect:/board/read?num="+vo.getnum();
+			return  "redirect:/board/read?num="+vo.getNum();
 		}
 
 }
