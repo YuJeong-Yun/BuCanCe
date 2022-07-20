@@ -2,6 +2,8 @@ package com.bcc.service;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
+
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.SearchCriteria;
 
@@ -21,6 +23,12 @@ public interface BoardService {
 	
 	// 게시물 정렬 목록 조회 
 	public List<BoardVO> listAlign(SearchCriteria scri) throws Exception;
+	
+	// 블로그 조회 목록
+	public List getBlog(String title, String addr, String start) throws Exception;
+	
+	// 실시간 날씨 조회
+	public JSONArray getWeather() throws Exception;
 	
 	// 게시물 총 갯수 
 	public int listCount(SearchCriteria scri) throws Exception;

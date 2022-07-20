@@ -5,40 +5,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<style type="text/css">
-#wrap {
-	width: 490px;
-	text-align: center;
-	margin: 0 auto 0 auto;
-}
-
-#btn_group button {
-	background-color: #6aafe6;
-	color: #d4dfe6;
-	border: 1px solid skyblue;
-	padding: 5px;
-	border-radius: 10px;
-	top: 400px;
-}
-
-textarea {
-	position: relative;
-	left: 5%;
-	box-sizing: border-box;
-	border: solid 2px #1E90FF;
-	border-radius: 5px;
-	padding: 10px;
-	font-size: 16px;
-	resize: both;
-}
-</style>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/board.css" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 
-	
 	// 수정 눌렀을 때 부모창으로 값 전달
 	function popupClose(form) {
 		form.target = opener.name;
@@ -70,11 +41,11 @@ textarea {
 					<tbody>
 						<tr>
 							<td><p>
-								<textarea rows="5" cols="50" name="content" id="content">${commentModify.content}</textarea></p></td>
+								<textarea rows="5" cols="50" name="content" id="contentArea">${commentModify.content}</textarea></p></td>
 						</tr>
 					</tbody>
 				</table>
-				<div id ="btn_group">
+				<div id ="modBtn_group">
 					<button type="submit" id="update_btn" onclick="window.close()">저장</button>
 					<button type="button" id="cancel_btn" onclick="window.close()">취소</button>
 				</div>

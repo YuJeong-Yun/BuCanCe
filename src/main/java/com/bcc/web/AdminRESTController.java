@@ -24,12 +24,20 @@ public class AdminRESTController {
 	@Inject
 	private AdminService service;
 	
-	// 날짜에 해당하는 구독 회원 정보
-	@RequestMapping(value = "/getVipInfo", method = RequestMethod.GET)
+	// 날짜에 해당하는 구독 회원 정보(전체)
+	@RequestMapping(value = "/pmMembers", method = RequestMethod.GET)
 	public List<PreOrderVO> getVipInfo(@RequestParam("date") String date){
 		
 		return service.getPmInfo(date);
 	}
+	
+	// 날짜에 해당하는 구독 회원 정보(정기구독회원만)
+	@RequestMapping(value = "/periodMems", method = RequestMethod.GET)
+	public List<PreOrderVO> onlyPeriodGET(@RequestParam("date") String date){
+		
+		return service.getOnlyPeriod(date);
+	}
+	
 	
 	// 일주일간의 최신 수익 차트
 	@RequestMapping(value = "/trendChart", method = RequestMethod.GET)

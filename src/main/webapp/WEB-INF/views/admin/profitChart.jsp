@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <jsp:include page="../include/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" type="text/css">	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/board.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.min.css" type="text/css">	
 	
 
 	    <div id="wrapper">
@@ -196,11 +196,9 @@
                      				<input type="date" name=startDate id="startDate">
                      				~
                      				<input type="date" name=endDate id="endDate">
-                     				<input type="button" value="조회" id="profitBtn">
-                     				<c:if test="${not empty pmMems }">
-								    <input type="button" value="구독회원만 보기" class="w-btn w-btn-indigo" onclick="location.href='/admin/periodMems?date=${param.date}';">
-								    <input type="button" value="모두보기" class="w-btn w-btn-indigo" onclick="location.href='/admin/pmMembers?date=${param.date}';">
-								    </c:if>
+                     				<input type="button" value="조회" id="profitBtn" onclick="pmMems();">
+                     				<span id="filterBtn">
+                     				</span>
                        			</div>
                                 </div>
                                 <div class="card-body">
@@ -215,38 +213,10 @@
                                         	<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">구독 만료일</th>
                                         	</tr>
                                     </thead>
-                                <c:if test="${not empty pmMems }">
                                 <tbody>
-								<c:forEach var="i" begin="0" end="${pmMems.size()-1 }" step="1">
-								<c:set var="pm" value="${pmMems[i] }"/>
-									<tr>
-										<td>${pm.id }</td>
-										<td>
-										<c:if test="${not empty pm.PCD_PAYER_ID }">
-											Y
-										</c:if>
-										<c:if test="${empty pm.PCD_PAYER_ID }">
-											N	
-										</c:if>
-										</td>
-										<td>${pm.create_date }</td>
-										<td>${pm.license_deadline }</td>
-									</tr>
-								</c:forEach>
-								
-								<c:if test="${empty pmMems }">
-									<tr>
-										<td colspan="4">내역이 없습니다.</td>
-									</tr>
-								</c:if>
-                                  </tbody>
-                                   	<tfoot>
-										<tr>
-											<th colspan="3" id="total">총 수익</th>
-											<th>${pmMems.size() * 6000 }</th>
-										</tr>
-									</tfoot>
-                                </c:if>  
+                                </tbody>
+                                <tfoot>
+								</tfoot>
                                 </table>
                                 </div>
                                 </div>
@@ -264,6 +234,10 @@
         <!-- End of Content Wrapper -->
 
     </div>
+<script type="text/javascript">
+
+
+</script>    
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/admin/profitChart.js"></script>   	   									

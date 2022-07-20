@@ -83,10 +83,8 @@
                 </li>
                 <li><a href="/board/tourMap">TOUR</a>
 	                <ul class="dropdown">
-                        <li><a href="#">TourList</a></li>
-                        <li><a href="#">Reviews</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
+	                    <li><a href="/board/tourMap">관광지도</a></li>
+                        <li><a href="/board/tourList?t_category=0&addr=all">모두보기</a></li>
 	                    </ul>
 	                </li>
                 <li><a href="./about-us.html">HOTEL</a>
