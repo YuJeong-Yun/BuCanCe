@@ -66,17 +66,18 @@ body {
 	border-radius: 50%;
 }
 .grp-member .member-container li .invite-cancle {
-	background-color: #bbb;
+	background-color: #fff;
 	width: 60px;
 	height: 40px;
 	margin: auto;
-	border-radius: 10px;
+	border-radius: 20px;
 	line-height: 40px;
 	font-size: 12px;
-	color: #fff;
+	color: #333;
+	box-shadow: 0 0 10px #9bb5c9;
 }
 .grp-member .member-container li .invite-cancle:hover {
-	background-color: #999;
+	background-color: #b1cbdf;
 }
 .grp-member .member-container li .member--id {
 	font-size: 16px;
@@ -89,7 +90,7 @@ body {
 }
 .grp-member .member-container li.invite-member span.add-group {
 	font-size: 35px;
-	color: #777;
+	color: #6e94a9;
 	cursor: pointer;
 }
 .grp-member .member-container li.invite-member span.add-group:hover {
