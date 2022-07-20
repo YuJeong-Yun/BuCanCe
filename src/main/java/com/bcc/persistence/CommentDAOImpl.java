@@ -24,21 +24,22 @@ public class CommentDAOImpl implements CommentDAO {
 
 	// 댓글 조회
 	@Override
-	public List<CommentVO> readComment(int num) throws Exception {
+	public List<CommentVO> readComment(Integer num) throws Exception {
 		return session.selectList(namespace + ".readComment", num);
 	}
 
 	// 댓글 작성
 	@Override
-	public void wriComment(CommentVO vo) throws Exception {
+	public void createComment(CommentVO vo) throws Exception {
 		log.info(vo + "");
-		session.insert(namespace + ".writeComment", vo);
+		session.insert(namespace + ".createComment", vo);
+		session.update(namespace+".updateCommentCnt", vo.getNum());
 	}
 
 	// 댓글 수정
 	@Override
-	public void modify(CommentVO vo) throws Exception {
-		session.update(namespace + ".modify", vo);
+	public void update(CommentVO vo) throws Exception {
+		session.update(namespace + ".update", vo);
 
 	}
 
@@ -47,13 +48,16 @@ public class CommentDAOImpl implements CommentDAO {
 	public void delete(CommentVO vo) throws Exception {
 		session.delete(namespace + ".delete", vo);
 	}
-
+	
 	// 선택된 댓글 조회
 	@Override
-	public CommentVO selectComment(int cno) throws Exception {
+	public CommentVO selectComment(Integer cno) throws Exception {
 		System.out.println(session.selectOne(namespace + ".selectComment", cno) + "");
 		System.out.println(cno);
 		return session.selectOne(namespace + ".selectComment", cno);
 	}
+	
+
+
 
 }
