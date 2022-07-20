@@ -1,4 +1,3 @@
-<%@page import="com.bcc.persistence.MemberDAO"%>
 <%@page import="org.springframework.stereotype.Service"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -40,8 +39,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
-    
-   
 </head>
 
 <body>
@@ -240,13 +237,13 @@
 					                        <li><a href="#">4</a></li>
 					                    </ul>
 					                </li>
-					                <li><a href="./rooms.html">TOUR</a>
-						                <ul class="dropdown">
-					                        <li><a href="#">1</a></li>
-					                        <li><a href="#">2</a></li>
-					                        <li><a href="#">3</a></li>
-					                        <li><a href="#">4</a></li>
-						                    </ul>
+					                <li><a href="/tourMap">TOUR</a>
+<!-- 						                <ul class="dropdown"> -->
+<!-- 					                        <li><a href="#">1</a></li> -->
+<!-- 					                        <li><a href="#">2</a></li> -->
+<!-- 					                        <li><a href="#">3</a></li> -->
+<!-- 					                        <li><a href="#">4</a></li> -->
+<!-- 						                    </ul> -->
 						                </li>
 					                <li><a href="./about-us.html">HOTEL</a>
 						                <ul class="dropdown">
@@ -258,8 +255,8 @@
 						                </li>
 					                <li><a href="./pages.html">PLAN</a>
 					                    <ul class="dropdown">
-					                        <li><a href="#">1</a></li>
-					                        <li><a href="#">2</a></li>
+					                        <li><a href="/order/goods">구독권</a></li>
+					                        <li><a href="/plan/planList">여행 계획</a></li>
 					                        <li><a href="#">3</a></li>
 					                        <li><a href="#">4</a></li>
 					                    </ul>

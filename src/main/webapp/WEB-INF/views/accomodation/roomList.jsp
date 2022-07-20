@@ -2,13 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/acc/CroomList.css" type="text/css">
-<style type="text/css">
-@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
-</style>
-
 	<!-- 헤더부분 -->
 	<jsp:include page="../include/header.jsp" />
 	<!-- 헤더부분 -->

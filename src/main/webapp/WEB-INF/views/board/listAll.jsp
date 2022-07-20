@@ -29,10 +29,13 @@ li {
 	<form class="navbar-form">
 		<div class="input-group">
 			<div class="form-group navbar-left">
-				<select id="category" name="searchType" onchange="search()" >
+				<select id="category" class="category" name="searchType"
+					onchange="search()">
 					<option value="tc"
-						<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>카테고리 선택</option>
-					<option value="강서구"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>강서구</option>
+						<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>카테고리
+						선택</option>
+					<option value="강서구"
+						<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>강서구</option>
 					<option value="금정구">금정구</option>
 					<option value="기장군">기장군</option>
 					<option value="남구">남구</option>
@@ -50,15 +53,16 @@ li {
 					<option value="해운대구">해운대구</option>
 				</select>
 			</div>
-			<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}"  placeholder="검색어를 입력하세요"/>
+			<input type="text" name="keyword" id="keywordInput" class="search"
+				value="${scri.keyword}" placeholder="검색어를 입력하세요" />
 		</div>
 		<div class="input-group-btn">
 			<button class="btn btn-default" type="submit" id="searchBtn">
 				검색 <i class="glyphicon glyphicon-search"></i>
 			</button>
-  </div>
-	</form>
 		</div>
+	</form>
+</div>
 <!-- Rooms Section Begin -->
 <section class="rooms-section spad">
 	<div class="container">
@@ -70,39 +74,42 @@ li {
 							src="${vo.thumbnail }" alt=""></a>
 						<div class="ri-text">
 							<h4>${vo.title }</h4>
+						<%-- 	<a
+								href="/board/read?num=${vo.num}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out
+									value="${vo.title}" /></a> --%>
 							<div>
 								<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>${vo.totalCnt }
-								<i class="fa fa-commenting-o" aria-hidden="true"></i> ${vo.commentCnt }
-									 <i class="fa fa-heart-o" aria-hidden="true"></i>
+								<i class="fa fa-commenting-o" aria-hidden="true"></i>
+								${vo.commentCnt } <i class="fa fa-heart-o" aria-hidden="true"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-</div>
-			<div class="box-footer clearfix">
-				<div>
-					<ul>
-						<c:if test="${pageMaker.prev}">
-							<li><a
-								href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
-						</c:if>
-
-						<c:forEach begin="${pageMaker.startPage}"
-							end="${pageMaker.endPage}" var="idx">
-							<li><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
-						</c:forEach>
-
-						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<li><a
-								href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
-						</c:if>
-					</ul>
-				</div>
-
-				<div></div>
-			</div>
 		</div>
+		<div class="box-footer clearfix">
+			<div>
+				<ul>
+					<c:if test="${pageMaker.prev}">
+						<li><a
+							href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+					</c:if>
+
+					<c:forEach begin="${pageMaker.startPage}"
+						end="${pageMaker.endPage}" var="idx">
+						<li><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
+					</c:forEach>
+
+					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+						<li><a
+							href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+					</c:if>
+				</ul>
+			</div>
+
+			<div></div>
+		</div>
+	</div>
 </section>
 <!-- Rooms Section End -->
 <jsp:include page="../include/footer.jsp" />
@@ -137,31 +144,32 @@ li {
 				}
 			});
 		} else {
-			$.ajax({
-				url : 'http://localhost:8088/board/ajaxListByCategory',
-				type : 'get',
-				data : {
-					category : c
-				},
-				success : function(list) {
-					$('#b-list').empty();
-				 if(list[list.length-1].totalCount < list[list.length-1].cri.perPageNum){
-						$('.clearfix').attr("hidden","true");
-					}else{
-						$('.clearfix').removeAttr("hidden");
-					}
-				 
-					$.each(list, function(index, item) {
-						if((list.length-1) !=index){
-						var listHTML = getListHTML(item);
-						$('#b-list').append(listHTML);
-						}
+			$
+					.ajax({
+						url : 'http://localhost:8088/board/ajaxListByCategory',
+						type : 'get',
+						data : {
+							category : c
+						},
+						success : function(list) {
+							$('#b-list').empty();
+							if (list[list.length - 1].totalCount < list[list.length - 1].cri.perPageNum) {
+								$('.clearfix').attr("hidden", "true");
+							} else {
+								$('.clearfix').removeAttr("hidden");
+							}
 
+							$.each(list, function(index, item) {
+								if ((list.length - 1) != index) {
+									var listHTML = getListHTML(item);
+									$('#b-list').append(listHTML);
+								}
+
+							});
+						},
+						error : function(err) {
+						}
 					});
-				},
-				error : function(err) {
-				}
-			});
 		}
 	}
 	function getListHTML(obj) {
@@ -182,11 +190,15 @@ li {
 	}
 </script>
 
-  <script  type="text/javascript">
-      $(function(){
-        $('#searchBtn').click(function() {
-          self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
-        });
-      });   
-    </script>
+<script type="text/javascript">
+	$(function() {
+		$('#searchBtn').click(
+				function() {
+					self.location = "list" + '${pageMaker.makeQuery(1)}'
+							+ "&searchType="
+							+ $("select option:selected").val() + "&keyword="
+							+ encodeURIComponent($('#keywordInput').val());
+				});
+	});
+</script>
 </html>
