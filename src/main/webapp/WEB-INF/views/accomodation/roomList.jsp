@@ -126,7 +126,7 @@
 							</c:if>
 							
 							
-							<div class="ri-text"  style=" border-style: solid;  border-color: #FFFFFF #00ABB9 #00ABB9 #00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:0px 0px 10px 10px; height:260px; background: #FAFAFA"  >
+							<div class="ri-text"  style=" border-style: solid;  border-color: #FFFFFF #00ABB9 #00ABB9 #00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:0px 0px 10px 10px; height:320px; background: #FAFAFA"  >
 								<h4><b style="font-family: 'Jeju Hallasan' ">${roomList.get(a).room_title}</b></h4>
 								<table>
 									<tbody>
@@ -167,6 +167,7 @@
 										</tr>
 									</tbody>
 								</table>
+								<div class="primary-btn">예약하기</div> 
 								<c:if test="${roomList.get(a).room_rank!=''}">
 <%-- 								<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}" class="primary-btn"> --%>
 								<a></a>
@@ -182,6 +183,7 @@
 							</div>
 						</div>
 					</div>
+					
 					</a>
 				</c:forEach>
 			</div>

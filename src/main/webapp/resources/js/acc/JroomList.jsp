@@ -61,7 +61,7 @@ function selectArea(){
                     	  
                     	tmpHtml += '<div class="room-item" style="border-radius: 2em;">';
                     	  tmpHtml += '<img src="'+room_pic+'" alt="acc" class="poster" height="200" style=" border-bottom-style: none; border-style: solid;  border-color: #00ABB9 #00ABB9 #FFFFFF #00ABB9 ; box-shadow: 5px 0px 5px gray; border-radius:10px 10px 0px 0px;">';
-                    	  tmpHtml += '<div class="ri-text" style=" border-style: solid;  border-color: #FFFFFF #00ABB9 #00ABB9 #00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:0px 0px 10px 10px; height:260px; background: white">';
+                    	  tmpHtml += '<div class="ri-text" style=" border-style: solid;  border-color: #FFFFFF #00ABB9 #00ABB9 #00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:0px 0px 10px 10px; height:320px; background: white">';
                     	  tmpHtml += '<h4><b style="font-family: Jeju Hallasan ">'+room_title+'</b></h4>';
                     	  tmpHtml += '<table><tbody>';
                     	 
@@ -92,7 +92,7 @@ function selectArea(){
                     	  tmpHtml += '</td>';
                     	  tmpHtml += '</tr>';
                     	  
-                    	  tmpHtml += '</tbody></table>';
+                    	  tmpHtml += '</tbody></table><div class="primary-btn">예약하기</div> ';
                     	  tmpHtml += '</div></div></div>';
                     	  
 //                     	  alert(tmpHtml);

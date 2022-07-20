@@ -112,7 +112,7 @@ border-radius:10px;
  <div id="slideShow">
     <ul class="slides">
      <c:forEach items="${roomdetail0}" begin="0" end="${roomdetail0.size()}">
-      <li style="background-color: #00ABB9;">
+      <li style="background-color: white;">
       <img src="${roomdetail0.get(b).room_pic}" style="width: 140px;"  onclick="change(event);">&nbsp;
       </li>
       <c:set var="b" value="${b=b+1 }"/>
