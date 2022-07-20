@@ -32,18 +32,27 @@
 								<td class="r-o">상세주소</td>
 								<td>${vo.addr_full }</td>
 							</tr>
+							
+							<c:if test="${not empty vo.trfc_info }">
 							<tr>
 								<td class="r-o">오시는길</td>
 								<td>${vo.trfc_info}</td>
 							</tr>
+							</c:if>
+							
+							<c:if test="${not empty vo.convenient }">
 							<tr>
 								<td class="r-o">편의</td>
 								<td>${vo.convenient}</td>
 							</tr>
+							</c:if>
+							
+							<c:if test="${not empty vo.url }">
 							<tr>
 								<td class="r-o">홈페이지</td>
 								<td><a href="${vo.url}">${vo.url }</a></td>
 							</tr>
+							</c:if>
                             <tr>
 	                         <td class="r-o">찜하기</td>
 	                         <td>

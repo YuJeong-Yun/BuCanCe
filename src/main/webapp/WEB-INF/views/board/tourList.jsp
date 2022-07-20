@@ -12,7 +12,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="breadcrumb-text">
-					<h2 class="nanumFont" style="display: inline-block; margin-left: 6em; margin-right: 1em;">부산관광명소</h2>
+					<h2 class="nanumFont" style="display: inline-block; margin-left: 6em; margin-right: 1em;">부캉스! 어디가지?</h2>
 	                <!-- 날씨출력 -->
                     <div id="weatherInfo" style="display: inline-block;"></div>
                     <!-- 날씨출력 -->

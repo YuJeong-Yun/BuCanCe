@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
 <jsp:include page="../include/headerAdmin.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/board.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.min.css" type="text/css">	
 	
@@ -23,8 +22,8 @@
 
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                        	<h3><a href="/index" id="toMain">부캉스 메인으로</a></h3>
+                        <div class="input-group" id="toMain">
+                        	<h3><a href="/index">부캉스 메인으로</a></h3>
                         </div>
                     </form>
 
@@ -200,7 +199,6 @@
                      				</span>
                        			</div>
                                 </div>
-                                
                                 <div class="card-body">
                            		<div class="row">
                       				<div class="col-sm-12">
@@ -235,8 +233,8 @@
 
     </div>
 <script type="text/javascript">
-	const create = "${create}";
-	const dead = "${dead}";
+
+
 </script>    
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

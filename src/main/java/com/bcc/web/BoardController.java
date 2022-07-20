@@ -61,7 +61,6 @@ public class BoardController {
 			// 댓글 수정 GET
 			@RequestMapping(value = "/commentModify", method = RequestMethod.GET)
 			public String commentModifyView(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
-				log.info(scri+"");
 				
 				model.addAttribute("commentModify", commentservice.selectComment(vo.getCno()));
 				model.addAttribute("scri", scri);
@@ -73,7 +72,6 @@ public class BoardController {
 			public String commentModify(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 				commentservice.update(vo);
 				
-				log.info(scri+"");
 				rttr.addAttribute("page", scri.getPage());
 				rttr.addAttribute("perPageNum", scri.getPerPageNum());
 				rttr.addAttribute("t_category", scri.getT_category());
@@ -122,6 +120,7 @@ public class BoardController {
 			scri.setAddr(addr);
 			// 조회수
 			session.setAttribute("upFlag", "1");
+			session.setAttribute("id", "admin");
 
 			// 글 정보를 가지고 오기
 			PageMaker pageMaker = new PageMaker();
@@ -152,7 +151,6 @@ public class BoardController {
 				@ModelAttribute("scri") SearchCriteria scri ,Model model, HttpSession session) throws Exception {
 			
 			
-			String url = "";
 			
 			//조회수
 			String upFlag = (String) session.getAttribute("upFlag");
@@ -164,30 +162,14 @@ public class BoardController {
 				}
 			}
 			
-			
-			
-			if(t_category == 0) {
 				model.addAttribute("vo", service.getTour(num));
 				model.addAttribute("scri", scri);
 
 				// 댓글리스트
 				List<CommentVO> commentList = commentservice.readComment(num);
 				model.addAttribute("commentList", commentList);
-
-				url = "board/readTour";
-				
-			} else {
-				model.addAttribute("resVO",service.getFood(num));
-				model.addAttribute("scri", scri);
-				
-				// 댓글리스트
-				List<CommentVO> commentList = commentservice.readComment(num);
-				model.addAttribute("commentList", commentList);
-				
-				url = "board/readFood";
-			}
 			
-			return url;
+			return "board/tourRead";
 		}
 		
 		

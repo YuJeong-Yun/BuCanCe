@@ -22,7 +22,7 @@
 		limit #{pageStart}, #{perPageNum}
 	</select>
 	
-	<!-- 페이징 처리된 게시물 -->
+	<!-- 페이징 처리된 게시물(주소 존재시) -->
 	<select id="listCriAddr" resultType="BoardVO">
 		select * from tourist_spot
 		where t_category=#{t_category} and addr=#{addr}
@@ -43,6 +43,7 @@
 		limit #{pageStart}, #{perPageNum}
 	</select> 
 	
+	<!-- 글 목록 정렬(주소 존재 시) -->
  	<select id="addrListAlign" resultType="BoardVO">
 		select * from tourist_spot
 		where t_category=#{t_category} and addr=#{addr} 
@@ -62,7 +63,7 @@
 		where t_category=#{t_category}
 	</select>
 	
-	<!-- 게시물 검색 -->
+	<!-- 게시물 검색(주소 존재시) -->
 	<select id="listCountAddr" resultType="int">
 		select count(num)
 		from tourist_spot 
@@ -96,23 +97,7 @@
 	<!-- 좋아요 -->
 	
 	
-	
-	<!-- 리스트 출력 -->
-	<select id="tourLists" resultType="BoardVO">
-  		select * from tourist_spot
-  		where addr=#{addr} and t_category=0
-  	</select>
-	<select id="foodLists" resultType="BoardVO">
-  		select * from tourist_spot
-  		where addr=#{addr} and t_category=1
-  	</select>
-  	
   	<!-- 글 내용 -->
-  	<select id="getFood" resultType="BoardVO">
-  		select * from tourist_spot
-  		where num=#{num} and t_category=1
-  	</select>
-  	
 	<select id="getTour" resultType="BoardVO">
 		select * from tourist_spot
 		where num = #{num}

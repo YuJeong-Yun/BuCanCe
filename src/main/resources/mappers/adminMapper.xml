@@ -11,14 +11,14 @@
 	<select id="pmInfo" parameterType="hashMap" resultType="PreOrderVO">
 		select * from premium_order
 		where create_date between #{start} and #{end}
-		order by id
+		order by PCD_PAYER_NAME
 	</select>
 	
 	<select id="onlyPeriodMems" parameterType="hashMap" resultType="PreOrderVO">
 		select * from premium_order
 		where PCD_PAYER_ID is not null
 		and create_date between #{start} and #{end}
-		order by id
+		order by PCD_PAYER_NAME
 	</select>
 	
 	<select id="trendChart" resultType="Integer">
