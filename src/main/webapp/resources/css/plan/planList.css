@@ -149,7 +149,8 @@
 	line-height: 40px;
 	font-size: 12px;
 	color: #333;
-	box-shadow: 0 0 10px #9bb5c9;
+	box-shadow: 0 0 10px #9bb5c97d;
+	cursor: pointer;
 }
 .member-container > li .invite-cancle:hover {
 	background-color: #b1cbdf;

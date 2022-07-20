@@ -12,6 +12,7 @@ var map = new Tmapv2.Map("map_div", {
   height: "650px",
   zoom: 11
 });
+map.setOptions({zoomControl:false}); // 지도 옵션 줌컨트롤 표출 비활성화
 
 // 숙소 리스트 비동기로 가져와서 추가
 const accContainer = document.querySelector('.tour-list li.tour.accomodation .tour__contents > ul');
