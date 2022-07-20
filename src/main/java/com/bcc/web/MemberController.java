@@ -7,9 +7,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -20,20 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.Criteria;
 import com.bcc.domain.KakaoVO;
 import com.bcc.domain.MemberVO;
-import com.bcc.domain.NaverVO;
 import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
 import com.bcc.service.BoardService;
 import com.bcc.service.KakaoService;
 import com.bcc.service.MemberService;
 import com.bcc.service.TourService;
-import com.github.scribejava.core.model.OAuth2AccessToken;
 
 @Controller
 public class MemberController {

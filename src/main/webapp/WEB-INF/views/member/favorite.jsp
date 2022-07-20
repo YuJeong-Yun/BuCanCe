@@ -94,7 +94,7 @@ function deleteThumb(){
 <!-- Rooms Section End -->
 <jsp:include page="../include/footer.jsp" />
 
-<script>
+  <script  type="text/javascript">
 	$(document).ready(function() {
 
 	});
@@ -167,9 +167,7 @@ function deleteThumb(){
 				+ '<i class="fa fa-heart-o" aria-hidden="true"></i>' + '</div>'
 				+ '</div>' + '</div>' + '</div>';
 	}
-</script>
 
-  <script  type="text/javascript">
       $(function(){
         $('#searchBtn').click(function() {
           self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());

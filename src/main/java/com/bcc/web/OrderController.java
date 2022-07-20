@@ -22,12 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bcc.domain.MemberVO;
-import com.bcc.domain.PreMemberVO;
-import com.bcc.domain.PreOrderVO;
 import com.bcc.service.PreOrderService;
-
-import jdk.internal.org.jline.utils.Log;
 
 @Controller
 public class OrderController extends PaypleController {
