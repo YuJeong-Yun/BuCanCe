@@ -178,6 +178,7 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectList(NAMESPACE + ".thumbList", id);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void deleteThumb(int b_num) throws Exception {
 		
@@ -186,4 +187,6 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	
 	
+=======
+>>>>>>> 63a9e5a7cb363781a17497c9c15347ee59fa38a6
 }

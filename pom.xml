@@ -216,6 +216,10 @@
 			<artifactId>selenium-java</artifactId>
 			<version>4.3.0</version>
 		</dependency>
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 63a9e5a7cb363781a17497c9c15347ee59fa38a6
 
 		<!-- 외부 라이브러리 추가 -->
 
