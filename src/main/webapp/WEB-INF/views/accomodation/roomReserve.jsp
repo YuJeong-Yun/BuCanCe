@@ -317,11 +317,11 @@
                            
                          </c:if>
                          
-                         <c:if test="${roomReserve.get(a).room_tf != '숙소에 문의 하세요' }">
+                         <c:if test="${roomReserve.get(a).room_tf == '대실 예약' }">
                             <button type="submit" class="btn btn-primary">대실 예약하기</button>&nbsp;  
                          	</c:if>
                          	
-                         	<c:if test="${roomReserve.get(a).room_tf == '숙소에 문의 하세요' }">
+                         	<c:if test="${roomReserve.get(a).room_tf == '숙소에 문의 하세요' || roomReserve.get(a).room_fcost == ''  }">
                             <button type="button" class="btn btn-primary" style="background: red" disabled='disabled'>숙소에 문의</button> 
                          	</c:if>
                          

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -783,10 +784,26 @@ input[type=text]:focus {
 							<p></p>
 							<hr>
 							<div class="check-date">
+							
+							<c:if test="${license==0}">
 								<label for="date-out"><strong>총 결제 금액 (VAT포함)</strong></label> <input
 									type="text" id="date-out" value="${vo.room_fcost} 원" readonly
-									style="font-weight: bold; font-size: 20px"> <i
-									class=""></i>
+									style="font-weight: bold; font-size: 20px"> 
+								</c:if>
+								
+								
+								<c:if test="${license==1}">
+									<label for="date-out"><strong style="color: red">총
+											결제 금액 (멤버쉽 할인, VAT포함)</strong></label>
+									<input type="text" id="date-out"
+										value="<fmt:formatNumber type="number" maxFractionDigits="0"  value="${vo.room_fcost*0.9}" /> 원"
+										style="color: red; font-weight: bold; font-size: 20px"
+										readonly>
+								</c:if>
+									
+									
+									
+									<i class=""></i>
 								<p></p>
 								<ul>
 									<li>해당 객실가는 세금, 봉사료가 포함된 금액입니다</li>

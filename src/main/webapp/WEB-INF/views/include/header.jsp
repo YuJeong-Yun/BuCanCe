@@ -1,4 +1,3 @@
-<%@page import="com.bcc.persistence.MemberDAO"%>
 <%@page import="org.springframework.stereotype.Service"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -263,6 +262,7 @@
 					                        <li><a href="#">4</a></li>
 					                    </ul>
 					                </li>
+<<<<<<< HEAD
 					                <li><a href="${pageContext.request.contextPath }/board/listAll">TOUR</a>
 						                <ul class="dropdown">
 					                        <li><a href="#">1</a></li>
@@ -270,6 +270,15 @@
 					                        <li><a href="#">3</a></li>
 					                        <li><a href="#">4</a></li>
 						                    </ul>
+=======
+					                <li><a href="/tourMap">TOUR</a>
+<!-- 						                <ul class="dropdown"> -->
+<!-- 					                        <li><a href="#">1</a></li> -->
+<!-- 					                        <li><a href="#">2</a></li> -->
+<!-- 					                        <li><a href="#">3</a></li> -->
+<!-- 					                        <li><a href="#">4</a></li> -->
+<!-- 						                    </ul> -->
+>>>>>>> 8bfabfee6c031d19cb1177d51d9ff50f77e6a7f4
 						                </li>
 					                <li><a href="./about-us.html">HOTEL</a>
 						                <ul class="dropdown">
@@ -281,8 +290,8 @@
 						                </li>
                 					<li><a href="${pageContext.request.contextPath }/tourMap">PLAN</a>
 					                    <ul class="dropdown">
-					                        <li><a href="#">1</a></li>
-					                        <li><a href="#">2</a></li>
+					                        <li><a href="/order/goods">구독권</a></li>
+					                        <li><a href="/plan/planList">여행 계획</a></li>
 					                        <li><a href="#">3</a></li>
 					                        <li><a href="#">4</a></li>
 					                    </ul>

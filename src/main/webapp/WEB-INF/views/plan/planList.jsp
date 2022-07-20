@@ -103,8 +103,8 @@
 									<ul class="plan-container">
 										<!-- 소속 그룹 목록 출력 -->
 										<c:forEach var="grp" items="${grpList }" varStatus="status">
-											<li class="grp${grp.grp_num }">
-												<input type="button" class="plan" value="${grp.grp_name }" onclick="location.href='/plan/planWrite/${grp.grp_num }';">
+											<li class="grp${grp.num }">
+												<input type="button" class="plan" value="${grp.grp_name }" onclick="location.href='/plan/planContent/${grp.num }';">
 												<ul class="member-container">
 													<!-- 해당 그룹 소속된 멤버 출력 -->
 													<c:forEach var="member" items="${grpMemberList.get(status.index) }">
@@ -125,7 +125,7 @@
 														<!-- 초대중인 멤버 출력 -->
 														<c:forEach var="invitingMember" items="${invitingMemberList.get(status.index) }">
 															<li>
-																<div class="invite-cancle" onclick="inviteCancle(event, ${grp.grp_num}, '${invitingMember.receiver }');">초대 취소</div>
+																<div class="invite-cancle" onclick="inviteCancle(event, ${grp.num}, '${invitingMember.receiver }');">초대 취소</div>
 																<div class="member--id">${invitingMember.receiver}</div>
 																<div class="member--name">${invitingMember.name}</div>
 															</li>
@@ -133,12 +133,12 @@
 														<!-- 초대 버튼 출력 -->
 														<li class="invite-member">
 													      	<!-- Button trigger modal -->
-														    <span class="material-icons-outlined add-group" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="setGrpNum(${grp.grp_num})">add_circle</span>
+														    <span class="material-icons-outlined add-group" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="setGrpNum(${grp.num})">add_circle</span>
 														</li>
 													</c:if>
 												</ul> 
 												<!-- 플랜 삭제 버튼 -->
-												<div class="material-icons-outlined delete-plan" onclick="delPlan(event, ${grp.grp_num });">clear</div>
+												<div class="material-icons-outlined delete-plan" onclick="delPlan(event, ${grp.num });">clear</div>
 											</li>
 										</c:forEach>
 										<!-- Modal -->

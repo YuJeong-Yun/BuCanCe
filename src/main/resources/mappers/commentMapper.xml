@@ -11,15 +11,25 @@
 	<select id="readComment" resultType="CommentVO">
 		SELECT
 		CNO, CONTENT, WRITER,
+<<<<<<< HEAD
 		REGDATE
 		FROM comment
+=======
+		REGDATE, VISIT
+		FROM bcc_comment
+>>>>>>> 8bfabfee6c031d19cb1177d51d9ff50f77e6a7f4
 		WHERE num = #{num}
 	</select>
 
 	<!-- 댓글 작성 -->
 	<insert id="writeComment">
+<<<<<<< HEAD
 		insert into comment(num, content, writer)
 		value(#{num}, #{content}, #{writer})
+=======
+		insert into bcc_comment(num, content, writer, visit)
+		value(#{num}, #{content}, #{writer}, #{visit})
+>>>>>>> 8bfabfee6c031d19cb1177d51d9ff50f77e6a7f4
 	</insert>
 
 	<!-- 댓글 수정 -->
@@ -42,9 +52,4 @@
 		where cno = #{cno}
 	</select>
 	
-	<!-- 방문 미방분 분류 -->
-	<select id="visit" resultType="com.bcc.domain.CommentVO">
-	
-	</select>
-
 </mapper>
