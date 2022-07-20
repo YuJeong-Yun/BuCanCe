@@ -4,8 +4,9 @@ public class HotelVO {
 	private int num;
 	private double lng;
 	private double lat;
-	private String img;
+	private String thumbnail;
 	private String title;
+	private int t_category;
 
 	public int getNum() {
 		return num;
@@ -31,12 +32,12 @@ public class HotelVO {
 		this.lat = lat;
 	}
 
-	public String getImg() {
-		return img;
+	public String getThumbnail() {
+		return thumbnail;
 	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 
 	public String getTitle() {
@@ -47,9 +48,18 @@ public class HotelVO {
 		this.title = title;
 	}
 
+	public int getT_category() {
+		return t_category;
+	}
+
+	public void setT_category(int t_category) {
+		this.t_category = t_category;
+	}
+
 	@Override
 	public String toString() {
-		return "HotelVO [num=" + num + ", lng=" + lng + ", lat=" + lat + ", img=" + img + ", title=" + title + "]";
+		return "HotelVO [num=" + num + ", lng=" + lng + ", lat=" + lat + ", thumbnail=" + thumbnail + ", title=" + title
+				+ ", t_category=" + t_category + "]";
 	}
 
 }

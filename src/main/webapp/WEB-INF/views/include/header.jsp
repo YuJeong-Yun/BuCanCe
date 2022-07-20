@@ -1,4 +1,3 @@
-<%@page import="com.bcc.persistence.MemberDAO"%>
 <%@page import="org.springframework.stereotype.Service"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
