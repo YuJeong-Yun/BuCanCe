@@ -58,14 +58,14 @@ function acceptGrp(event, grp_num) {
 			newPlan.innerHTML = newPlanInner;
 			// 최신순으로 정렬했을 때 맞는 순서에 새 그룹 추가
 			for (let i = 0; i < plans.length; i++) {
-				if (grp_num > plans[i].className.substr(3)) {
+				if (grp_num > plans[i].className.substring(3)) {
 					plans[i].before(newPlan);
 					break;
 				}
 			} // for
 			// 제일 첫 번째(생성된지 오래된) 플랜일 경우 제일 밑에 추가
 			// 또는 현재 플랜 하나도 없을 경우 그냥 추가
-			if (grp_num < plans[plans.length - 1].className.substr(3) || plans.length == 0) {
+			if (grp_num < plans[plans.length - 1].className.substring(3) || plans.length == 0) {
 				planContainer.append(newPlan);
 			}
 
