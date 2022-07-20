@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.bcc.domain.PremiumOrderVO;
+import com.bcc.domain.PreOrderVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO{
@@ -25,7 +25,7 @@ public class AdminDAOImpl implements AdminDAO{
 	private static String NAMESPACE = "com.bcc.mapper.adminMapper";
 
 	@Override
-	public List<PremiumOrderVO> getPmInfo(String date) {
+	public List<PreOrderVO> getPmInfo(String date) {
 		Map<String, String> dateMap = new HashMap<String, String>();
 		dateMap.put("start", date.split(" ")[0]);
 		dateMap.put("end", date.split(" ")[1]);
@@ -43,7 +43,7 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 	@Override
-	public List<PremiumOrderVO> getOnlyPeriod(String date) {
+	public List<PreOrderVO> getOnlyPeriod(String date) {
 		Map<String, String> dateMap = new HashMap<String, String>();
 		dateMap.put("start", date.split(" ")[0]);
 		dateMap.put("end", date.split(" ")[1]);

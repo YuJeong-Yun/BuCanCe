@@ -25,7 +25,7 @@ public class MemberDAOImpl implements MemberDAO {
 	// DB연결,자원해제,SQL실행
 
 	// mapper의 위치값(주소) 이름
-	private static final String NAMESPACE="com.bcc.mapper.testMapper";
+	private static final String NAMESPACE="com.bcc.mapper.preMapperr";
 
 	@Override
 	public String getTime() {

@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.bcc.domain.PremiumOrderVO;
+import com.bcc.domain.PreOrderVO;
 import com.bcc.persistence.PreOrderDAO;
 
 @Service
@@ -20,8 +20,9 @@ public class PreOrderServiceImpl implements PreOrderService {
 
 	// 결제
 	@Override
-	public void insertOrder(PremiumOrderVO pvo) {
-		log.info(" service.insertOrder 호출");
+	public void insertOrder(PreOrderVO pvo) {
+		
+		System.out.println(" service.insertOrder 호출");
 
 		dao.insertOrder(pvo);
 
@@ -29,7 +30,7 @@ public class PreOrderServiceImpl implements PreOrderService {
 
 	// 재결제(정기결제)
 	@Override
-	public void ReOrder(PremiumOrderVO rvo) {
+	public void ReOrder(PreOrderVO rvo) {
 		log.info(" service.ReOrder 호출");
 
 		dao.ReOrder(rvo);
@@ -46,7 +47,7 @@ public class PreOrderServiceImpl implements PreOrderService {
 
 	// 결제 정지 (빌링키 삭제)
 	@Override
-	public void deleteKey(PremiumOrderVO dvo) {
+	public void deleteKey(PreOrderVO dvo) {
 		log.info(" service.deleteKey 호출");
 
 		dao.deleteKey(dvo);

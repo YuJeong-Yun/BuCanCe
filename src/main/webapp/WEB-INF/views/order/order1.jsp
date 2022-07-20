@@ -1,8 +1,6 @@
-<%@page import="com.bcc.domain.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<% MemberVO vo = (MemberVO)request.getAttribute("MemberVO"); %>
+<%@ include file = "../include/header.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -176,7 +174,7 @@
                     PCD_PAYER_NAME
                 </th>
                 <td>
-                    <input type="text" name="payer_name" id="payer_name" value="ㅎㅎ<%-- <%=vo.getTel()%> --%>">
+                    <input type="text" name="payer_name" id="payer_name" value="${payer_name}">
                 </td>
             </tr>
             <tr>
@@ -187,7 +185,7 @@
                     PCD_PAYER_HP
                 </th>
                 <td>
-                    <input type="text" name="payer_hp" id="payer_hp" value="ㅎㅎ<%-- <%=vo.getTel()%> --%>">
+                    <input type="text" name="payer_hp" id="payer_hp" value="${payer_hp}">
                 </td>
             </tr>
             <tr>
@@ -198,7 +196,7 @@
                     PCD_PAYER_EMAIL
                 </th>
                 <td>
-                    <input type="text" name="payer_email" id="payer_email" value="ㅎㅎ<%-- <%=vo.getEmail()%> --%>">
+                    <input type="text" name="payer_email" id="payer_email" value="${payer_email}">
                 </td>
             </tr>
             <tr>
@@ -259,7 +257,6 @@
                     </span>
                     <span id="card_ver_view" style="display:none;">
                         <select id="card_ver" name="card_ver">
-                           <!--  <option value="01">간편/정기(빌링키결제)</option> -->
                             <option value="02">앱카드</option>
                         </select>
                     </span>
@@ -342,3 +339,4 @@
 
 </body>
 </html>
+<%@ include file = "../include/footer.jsp" %>

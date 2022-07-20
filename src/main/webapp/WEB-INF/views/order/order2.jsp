@@ -1,8 +1,6 @@
-<%@page import="com.bcc.domain.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<% MemberVO vo = (MemberVO)request.getAttribute("MemberVO"); %>
+<%@ include file = "../include/header.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +18,7 @@
         $("#payAction2").on("click", function (event) {
           var fm = $("#orderForm")[0];
           fm.method = "POST";
-          fm.action = "order_confirm2";
+          fm.action = "order_confirm";
           fm.submit();
           event.preventDefault();
         });
@@ -175,7 +173,7 @@
                     PCD_PAYER_NAME
                 </th>
                 <td>
-                    <input type="text" name="payer_name" id="payer_name" value="ㅎㅎ<%-- <%=vo.getTel()%> --%>">
+                    <input type="text" name="payer_name" id="payer_name" value="${payer_name}">
                 </td>
             </tr>
             <tr>
@@ -186,7 +184,7 @@
                     PCD_PAYER_HP
                 </th>
                 <td>
-                    <input type="text" name="payer_hp" id="payer_hp" value="ㅎㅎ<%-- <%=vo.getTel()%> --%>">
+                    <input type="text" name="payer_hp" id="payer_hp" value="${payer_hp}">
                 </td>
             </tr>
             <tr>
@@ -197,7 +195,7 @@
                     PCD_PAYER_EMAIL
                 </th>
                 <td>
-                    <input type="text" name="payer_email" id="payer_email" value="ㅎㅎ<%-- <%=vo.getEmail()%> --%>">
+                    <input type="text" name="payer_email" id="payer_email" value="${payer_email}">
                 </td>
             </tr>
             <tr>
@@ -256,14 +254,13 @@
                 <td>
                     <span>
                         <select id="pay_type" name="pay_type">
-                            <option value="transfer">계좌이체결제</option>
+                            <!-- <option value="transfer">계좌이체결제</option> -->
                             <option value="card">신용카드</option>
                         </select>
                     </span>
                     <span id="card_ver_view" style="display:none;">
                         <select id="card_ver" name="card_ver">
                             <option value="01">간편/정기(빌링키결제)</option>
-                           <!--  <option value="02">앱카드</option> -->
                         </select>
                     </span>
                 </td>
@@ -288,8 +285,9 @@
                 </th>
                 <td>
                     <select id="pay_work" name="pay_work">
+                     <option value="PAY">즉시결제(PAY)</option>
                        <option value="CERT">결제요청 재컨펌(CERT)</option>
-                        <option value="AUTH">빌링키 등록(AUTH)</option>
+                       <!--  <option value="AUTH">빌링키 등록(AUTH)</option> -->
                     </select>
                 </td>
             </tr>
@@ -344,3 +342,4 @@
 
 </body>
 </html>
+<%@ include file = "../include/footer.jsp" %>

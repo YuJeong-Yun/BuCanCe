@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.lang.model.util.Elements;
-import javax.swing.text.Document;
 
+import org.jsoup.Jsoup;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -142,7 +142,7 @@ public class PlanServiceImpl implements PlanService {
 	public List<HotelVO> getHotelList() {
 		// Jsoup를 이용해서 크롤링
 		String url = "https://www.goodchoice.kr/product/home/12"; // 크롤링할 url지정
-		Document doc = null; // Document에 페이지의 전체 소스가 저장됨
+		org.jsoup.nodes.Document doc = null; // Document에 페이지의 전체 소스가 저장됨
 
 		try {
 			doc = Jsoup.connect(url).get();

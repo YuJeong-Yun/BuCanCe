@@ -1,6 +1,5 @@
-<%@page import="com.bcc.domain.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file = "../include/header.jsp" %>
 
 
 <!DOCTYPE html>
@@ -37,3 +36,4 @@
 		<button type="button" onclick="location.href='/order/orderInfo'">구독하기</button>
 </body>
 </html>
+<%@ include file = "../include/footer.jsp" %>

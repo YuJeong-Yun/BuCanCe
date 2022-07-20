@@ -11,7 +11,7 @@
 
   	<fieldset>
   	  <form action="deleteKey" method="post">
-  	  	 비밀번호 : <input type="password" name="pw">
+  	  	 
   	  	 <input type="submit" value="정기결제 정지">
   	  </form>  	
   	</fieldset>

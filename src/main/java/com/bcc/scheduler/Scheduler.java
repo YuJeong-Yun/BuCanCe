@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.bcc.domain.PremiumMemberVO;
-import com.bcc.domain.PremiumOrderVO;
+import com.bcc.domain.PreMemberVO;
+import com.bcc.domain.PreOrderVO;
 import com.bcc.persistence.PreMemberDAO;
 import com.bcc.service.PreMemberService;
 
@@ -26,8 +26,8 @@ public class Scheduler{
 	
 	  @Autowired
 	    private PreMemberDAO dao;
-	    private PremiumMemberVO dpv;
-	    private PremiumOrderVO ovo;
+	    private PreMemberVO dpv;
+	    private PreOrderVO ovo;
 	    private PreMemberService service;
 	    
 	    public static boolean onScheduled = false;

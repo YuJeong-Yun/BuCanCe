@@ -1,13 +1,16 @@
 package com.bcc.persistence;
 
 import javax.inject.Inject;
+import javax.sound.midi.MidiDevice.Info;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.bcc.domain.PremiumOrderVO;
+import com.bcc.domain.PreOrderVO;
+
+//@Repository : 해당 클래스를 DAO로 스프링에서 인식하도록 하는 표시
 
 @Repository
 public class PreOrderDAOImpl implements PreOrderDAO {
@@ -17,13 +20,15 @@ public class PreOrderDAOImpl implements PreOrderDAO {
 	@Inject
 	private SqlSession sqlSession;
 
-	private static final String NAMESPACE = "com.bcc.mapper.testMapper";
+	private static final String NAMESPACE = "com.bcc.mapper.preMapper";
 
 	/////////////////
 
 	// 정기결제
 			@Override
-			public void insertOrder(PremiumOrderVO pvo) {
+			public void insertOrder(PreOrderVO pvo) {
+				log.info("insertOrder(PreOrderVO pvo) 실행");
+				
 				
 				sqlSession.insert(NAMESPACE+".insertOrder", pvo);
 				
@@ -31,7 +36,7 @@ public class PreOrderDAOImpl implements PreOrderDAO {
 
 			// 정기결제 (재결제) 저장
 			@Override
-			public void ReOrder(PremiumOrderVO rvo) {
+			public void ReOrder(PreOrderVO rvo) {
 				sqlSession.insert(NAMESPACE+".ReOrder", rvo);
 				
 			}
@@ -46,7 +51,7 @@ public class PreOrderDAOImpl implements PreOrderDAO {
 
 			// 결제 정지(빌링키 삭제)
 			@Override
-			public void deleteKey(PremiumOrderVO dvo) {
+			public void deleteKey(PreOrderVO dvo) {
 				
 				sqlSession.selectOne(NAMESPACE + ".deleteKey", dvo);
 				

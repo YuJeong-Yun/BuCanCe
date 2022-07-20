@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.bcc.domain.PremiumMemberVO;
+import com.bcc.domain.PreMemberVO;
 import com.bcc.persistence.PreMemberDAO;
 
 @Service
@@ -20,8 +20,9 @@ public class PreMemberServiceImpl implements PreMemberService {
 
 	// 프리미엄 멤버
 		@Override
-		public void insertPreMember(PremiumMemberVO vo) {
-			log.info(" service.insertPreMember 호출");
+		public void insertPreMember(PreMemberVO vo) {
+			
+			System.out.println(" service.insertPreMember 호출");
 			
 			dao.insertPreMember(vo);
 			
@@ -31,7 +32,7 @@ public class PreMemberServiceImpl implements PreMemberService {
 		// 회원 삭제
 
 		@Override
-		public void deletePreMember(PremiumMemberVO dpv) {
+		public void deletePreMember(PreMemberVO dpv) {
 			log.info(" service.deleteMember 호출");
 
 			dao.deletePreMember(dpv);
