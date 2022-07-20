@@ -1,7 +1,86 @@
 @charset "UTF-8";
-
 @import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
 @import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css");
+
+#wrap {
+	width: 490px;
+	text-align: center;
+	margin: 0 auto 0 auto;
+}
+
+.ri-text {
+	margin-bottom: 3em;
+	border-bottom: 1px solid #E5E5E5;
+	padding-bottom: 2em;
+}
+
+.ri-text h2 {
+	margin-bottom: 14px;
+	color: #01579B;
+}
+
+#paging {
+	text-align: center; 
+	padding-top: 20px;
+	
+}
+
+#paging a {
+	font-size: 16px;
+	color: #707079;
+	border: 1px solid #6aafe6;
+	border-radius: 2px;
+	padding: 7px 13px 5px;
+	margin-right: 7px;
+	display: inline-block;
+}
+
+#btn_group button {
+	position: relative;
+	display: inline-block;
+	font-family: 'Noto Sans KR' !important;
+	text-decoration: none;
+	font-weight: 600;
+	transition: 0.25s;
+	box-sizing: border-box;
+	border: 1px solid skyblue;
+	padding: 8.5px;
+	background-color: #6AAFE6;
+	color: #fff;
+	border-radius: 10px;
+	font-size: 17px;
+}
+
+#modBtn_group button {
+	background-color: #6aafe6;
+	color: #d4dfe6;
+	border: 1px solid skyblue;
+	padding: 5px;
+	border-radius: 10px;
+	top: 400px;
+}
+
+#contentArea {
+	width: 500px;
+	height: 200px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 2px #1E90FF;
+	border-radius: 5px;
+	font-size: 16px;
+	resize: both;
+}
+
+#reviewForm input{
+	width: 13%;
+	height: 20px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 2px #1E90FF;
+	border-radius: 5px;
+	font-size: 16px;
+	resize: both;
+}
 
 	.area {
 	    position: absolute;
@@ -26,17 +105,6 @@
 	
 	}
 	
-	
-	.ri-text {
-		margin-bottom: 3em;
-		border-bottom: 1px solid #e5e5e5;
-		padding-bottom: 2em;
-	}
-	
-	.ri-text h2 {
-		margin-bottom: 14px;
-		color: #01579B;
-	}
 	
 	.infoImage {
 		width: 360px;
@@ -279,6 +347,70 @@
 		transform: translate(0,80px);
 	}
 	
+	#searchAllMenu {
+		transform: translate(0,130px);
+	}
+	
 	#content-wrapper * {
 		font-family: 'Noto Sans KR', sans-serif !important;
 	}
+	
+	.one h2{
+	  position: relative;
+	  padding: 0;
+	  margin: 0;
+	  font-family: "Noto Sans KR", sans-serif;
+	  font-weight: 300;
+	  font-size: 40px;
+	  color: #080808;
+	  -webkit-transition: all 0.4s ease 0s;
+	  -o-transition: all 0.4s ease 0s;
+	  transition: all 0.4s ease 0s;
+	  padding-bottom: 5px;
+	  margin-left: 2.2em;
+	}
+	
+	.one h2:before {
+	  width: 28px;
+	  height: 5px;
+	  display: block;
+	  content: "";
+	  position: absolute;
+	  bottom: 3px;
+	  left: 50%;
+	  margin-left: -14px;
+	  background-color: #b80000;
+	}
+	.one h2:after {
+	  width: 100px;
+	  height: 1px;
+	  display: block;
+	  content: "";
+	  position: relative;
+	  margin-top: 25px;
+	  left: 50%;
+	  margin-left: -50px;
+	  background-color: #b80000;
+	}
+	
+	#mapTitle {
+		display: inline-block;
+		vertical-align: top;
+		width: 49%; 
+		margin-top: 13em;
+		text-align: center;
+	}
+	
+	#mapTitle p {
+		white-space: pre;
+		margin-left: -0.5em;
+	}
+	
+	#readMenu {
+		font-family: 'Noto Sans KR' !important;
+	}
+
+	#alignText a {
+		color: black;
+		font-family: 'Noto Sans KR', sans-serif;
+	}	
