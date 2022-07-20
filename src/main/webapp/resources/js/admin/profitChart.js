@@ -1,21 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-    
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>   
-<script type="text/javascript">
+
 
 $(function(){
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawChart);
 	
 	function drawChart(){
-		var jsonData = $.ajax({
-			url : "/admin/trendChart",
+		let jsonData = $.ajax({
+			url : "/adminRest/trendChart",
 			dataType : "json",
 			async : false
 		}).responseText;
-	console.log(jsonData);
 	
 	var data = new google.visualization.DataTable(jsonData);
  	var chart = new google.visualization.LineChart(document.getElementById("curve_chart"));
@@ -33,11 +27,11 @@ $(function(){
 	
 	function drawChart2(){
 		var jsonData = $.ajax({
-			url : "/admin/monthlyChart",
+			url : "/adminRest/monthlyChart",
 			dataType : "json",
 			async : false
 		}).responseText;
-	console.log(jsonData);
+	/*console.log(jsonData);*/
 	
 	var data = new google.visualization.DataTable(jsonData);
  	var chart = new google.visualization.LineChart(document.getElementById("monthly_chart"));
@@ -51,9 +45,26 @@ $(function(){
 	}
 	
 	
+	google.charts.load('current', {'packages':['corechart', 'bar']});
+	google.charts.setOnLoadCallback(drawChart3);
+	
+	function drawChart3(){
+		var jsonData = $.ajax({
+			url : "/adminRest/dailyMember",
+			dataType : "json",
+			async : false
+		}).responseText;
+	
+	var data = new google.visualization.DataTable(jsonData);
+ 	var chart = new google.visualization.ColumnChart(document.getElementById("daily_member_chart"));
+	
+	
+ 	chart.draw(data,{
+		title:"일간 회원가입자수 추이",
+		legend: { position: 'bottom' }
+	});
+	
+	}
+	
+	
 });
-
-</script>
-
-
-
