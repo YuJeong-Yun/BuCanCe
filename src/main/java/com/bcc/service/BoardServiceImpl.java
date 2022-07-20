@@ -20,12 +20,6 @@ public class BoardServiceImpl implements BoardService{
 	@Inject
 	private BoardDAO dao;
 
-		//글 전체 목록
-		@Override
-		public List<BoardVO> tourLists() throws Exception {
-			List<BoardVO> boardList = dao.tourLists();
-			return boardList;
-		}
 
 		//글 번호에 해당 되는 페이지 상세보기
 		@Override
@@ -38,11 +32,6 @@ public class BoardServiceImpl implements BoardService{
 		public void updateBoardCount(Integer num) throws Exception {
 			dao.updateBoardCnt(num);
 		}
-		//카테고리
-		@Override
-		public List<BoardVO> category(String category) throws Exception {
-			return dao.category(category);
-		}
 		//게시물 목록 조회
 		@Override
 		public List<BoardVO> list(SearchCriteria scri) throws Exception {
@@ -53,14 +42,22 @@ public class BoardServiceImpl implements BoardService{
 		@Override
 		public List<BoardVO> listAlign(SearchCriteria scri) throws Exception {
 			
-			return dao.listAlign(scri);
+			if(scri.getAddr().equals("all"))
+				return dao.listAlign(scri);
+			else
+				return dao.addrListAlign(scri);
+			
 		}
 
 		//게시물 총 갯수
 		@Override
 		public int listCount(SearchCriteria scri) throws Exception {
-			log.info("service 실행");
-			return dao.listCount(scri);
+			
+			if(scri.getAddr().equals("all"))
+				return dao.listCount(scri);
+			else
+				return dao.listCountAddr(scri);
+			
 		}
 		
 	@Override
@@ -85,11 +82,6 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 
-	@Override
-	public List<BoardVO> foodLists(String addr) {
-		
-		return dao.foodLists(addr);
-	}
 
 	@Override
 	public BoardVO getFood(int num) {
@@ -98,16 +90,23 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardVO> tourLists(String addr) throws Exception {
-		
-		return dao.tourLists(addr);
-	}
-
-	@Override
 	public List<BoardVO> searchList(String keyword) {
 		
 		return dao.searchList(keyword);
 	}
+
+	@Override
+	public int listCountAddr(SearchCriteria scri) throws Exception {
+		
+		return dao.listCountAddr(scri);
+	}
+
+	@Override
+	public List<BoardVO> listAddr(SearchCriteria scri) throws Exception {
+		
+		return dao.listAddr(scri);
+	}
+	
 	
 	
 

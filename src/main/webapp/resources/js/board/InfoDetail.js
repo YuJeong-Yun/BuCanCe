@@ -171,18 +171,47 @@
 	
 	checkThumb();
 	
-		//댓글 작성
+		$("#list_btn").on("click", function(){
+		location.href = "/board/tourList?page="+page
+		+"&perPageNum="+perPageNum
+		+"&t_category="+t_category
+		+"&addr="+addr2;
+		});
+		
+	// 댓글 기능
+	
+	 //댓글 작성
 		$(".commentWriteBtn").on("click", function() {
 			var formObj = $("form[name='commentForm']");
-			var test = $(".rev-radi:checked").val();
-			formObj.attr("action", "/board/commentWrite");
+			formObj.attr("action", "/board/commentWrite?num="+b_num
+					+ "&page="+page
+					+ "&perPageNum="+perPageNum
+					+ "&t_category="+t_category
+					+ "&addr="+addr2);
 			formObj.submit();
 		});
-	
-	
-		$("#list_btn").on("click", function(){
-		location.href = "/board/tourAll?page="+page
-		+"&perPageNum="+perPageNum
-		+"&t_category="+t_category;
+							
+		//댓글 수정 팝업
+			$(".commentModifyBtn").on("click", function openUdt(){
+				window.name ="updateComment";
+			window.open("/board/commentModify?num="+b_num
+					+ "&page="+page
+					+ "&perPageNum="+perPageNum
+					+ "&t_category="+t_category
+					+ "&addr="+addr2
+					+ "&cno="
+					+ $(this).attr("data-cno"), "container", "width=500, height=300, resizable= no, scrollbars= no");
 		});
+							
+	//댓글 삭제 팝업
+	$(".commentDeleteBtn").on("click",function openDel() {
+		window.name = "deleteComment";
+				window.open("/board/commentDelete?num="+b_num
+					+ "&page="+page
+					+ "&perPageNum="+perPageNum
+					+ "&t_category="+t_category
+					+ "&addr="+addr2
+					+ "&cno="
+					+ $(this).attr("data-cno"),"container", "width=500, height=300, resizable= no, scrollbars= no");
+	})	
 	

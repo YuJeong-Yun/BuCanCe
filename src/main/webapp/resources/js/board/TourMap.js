@@ -86,7 +86,7 @@ function makePolygon(name,coordinates){
 
     // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
     kakao.maps.event.addListener(polygon, 'click', function(mouseEvent) {
-    	location.href = '/board/tourInfo?t_category=0&addr='+name;
+    	location.href = '/board/tourList?t_category=0&addr='+name;
     });
 }
 
@@ -140,6 +140,6 @@ function makeMultiPolygon(name,coordinates){
 
   	 // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
     kakao.maps.event.addListener(polygon, 'click', function(mouseEvent) {
-    	location.href = '/board/tourInfo?t_category=0&addr='+name;
+    	location.href = '/board/tourList?t_category=0&addr='+name;
     }); 
 }

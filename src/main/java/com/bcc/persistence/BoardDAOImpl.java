@@ -29,14 +29,6 @@ public class BoardDAOImpl implements BoardDAO {
 	private static final String namespace = "com.bcc.mapper.BoardMapper";
 
 
-	// 글 전체 목록
-	@Override
-	public List<BoardVO> tourLists() throws Exception {
-		System.out.println("DAO: 글전체목록 메서드");
-		// sqlSession 객체 사용하여 Mapper 호출
-		return session.selectList(namespace + ".tourLists");
-	}
-
 	// 글 내용
 	@Override
 	public BoardVO getTour(Integer num) {
@@ -47,12 +39,6 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void updateBoardCnt(Integer num) {
 		session.update(namespace + ".updateBoardCnt", num);
-	}
-
-	// 카테고리
-	@Override
-	public List<BoardVO> category(String category) throws Exception {
-		return session.selectList(namespace + ".category", category);
 	}
 
 	// 게시물 목록 조회
@@ -66,14 +52,18 @@ public class BoardDAOImpl implements BoardDAO {
 	// 게시물 정렬결과 조회
 	@Override
 	public List<BoardVO> listAlign(SearchCriteria scri) throws Exception {
-		Map alMap = new HashMap();
-		alMap.put("t_category", scri.getT_category());
-		alMap.put("seq", scri.getSearchType());
-		alMap.put("pageStart", scri.getPageStart());
-		alMap.put("perPageNum", scri.getPerPageNum());
 		
-		return session.selectList(namespace + ".listAlign", alMap);
+		return session.selectList(namespace + ".listAlign", scri);
 	}
+	
+	
+	// 주소 존재시 게시물 정렬결과 조회
+	@Override
+	public List<BoardVO> addrListAlign(SearchCriteria scri) throws Exception {
+		
+		return session.selectList(namespace + ".addrListAlign", scri);
+	}
+	
 
 	// 게시물 총 갯수
 	@Override
@@ -145,12 +135,6 @@ public class BoardDAOImpl implements BoardDAO {
 		session.delete(namespace+".deleteThumb",thuMap);
 	}
 	
-	
-	@Override
-	public List<BoardVO> foodLists(String addr) {
-		
-		return session.selectList(namespace+".foodLists", addr);
-	}
 
 	@Override
 	public BoardVO getFood(int num) {
@@ -159,15 +143,21 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> tourLists(String addr) throws Exception {
-		
-		return session.selectList(namespace+".tourLists", addr);
-	}
-
-	@Override
 	public List<BoardVO> searchList(String keyword) {
 		
 		return session.selectList(namespace+".search",keyword);
+	}
+
+	@Override
+	public int listCountAddr(SearchCriteria scri) throws Exception {
+		
+		return session.selectOne(namespace+".listCountAddr", scri);
+	}
+
+	@Override
+	public List<BoardVO> listAddr(SearchCriteria scri) throws Exception {
+		
+		return session.selectList(namespace+".listCriAddr", scri);
 	}
 	
 	

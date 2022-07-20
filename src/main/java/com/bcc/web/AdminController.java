@@ -27,7 +27,12 @@ public class AdminController {
 	public String pmMemberGET(@RequestParam("date") String date, Model model) {
 		model.addAttribute("pmMems", service.getPmInfo(date));
 		
-		return "/admin/pmMembers";
+		model.addAttribute("totalMem", service.getTotalMem());
+		model.addAttribute("totalPmMem", service.getTotalPmMem());
+		model.addAttribute("totalComment", service.getTotalComment());
+		model.addAttribute("totalAcc", service.getTotalAcc());
+		
+		return "/admin/profitChart";
 	}
 	
 	// '구독회원만 보기' 클릭시 날짜에 해당하는 구독회원 정보만 출력

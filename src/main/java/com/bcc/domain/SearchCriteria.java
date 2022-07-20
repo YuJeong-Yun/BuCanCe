@@ -5,10 +5,19 @@ public class SearchCriteria extends Criteria {
 	private String searchType = "";
 	private String keyword = "";
 	private Integer t_category;
+	private String addr;
 
 	
 	
 	
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
 	public Integer getT_category() {
 		return t_category;
 	}
@@ -35,7 +44,8 @@ public class SearchCriteria extends Criteria {
 
 	@Override
 	public String toString() {
-		return "SearchCriteria [searchType=" + searchType + ", keyword=" + keyword + ", t_category=" + t_category + "]";
+		return "SearchCriteria [searchType=" + searchType + ", keyword=" + keyword + ", t_category=" + t_category
+				+ ", addr=" + addr + "]";
 	}
 
 }

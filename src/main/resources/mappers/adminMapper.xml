@@ -16,7 +16,7 @@
 	
 	<select id="onlyPeriodMems" parameterType="hashMap" resultType="PreOrderVO">
 		select * from premium_order
-		where periodic_pm = 'y' 
+		where PCD_PAYER_ID is not null
 		and create_date between #{start} and #{end}
 		order by id
 	</select>

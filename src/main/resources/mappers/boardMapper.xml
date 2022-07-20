@@ -22,24 +22,51 @@
 		limit #{pageStart}, #{perPageNum}
 	</select>
 	
-	<!-- 글 목록 정렬 -->
- 	<select id="listAlign" parameterType="hashMap" resultType="BoardVO">
+	<!-- 페이징 처리된 게시물 -->
+	<select id="listCriAddr" resultType="BoardVO">
 		select * from tourist_spot
-		where t_category=#{t_category} 
+		where t_category=#{t_category} and addr=#{addr}
+		order by num asc
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<!-- 글 목록 정렬 -->
+ 	<select id="listAlign" resultType="BoardVO">
+		select * from tourist_spot
+		where t_category=#{t_category}
 		order by
 		<choose>
-	        <when test="seq == 'totalCnt'">totalCnt desc</when>
-	        <when test="seq == 'thumbCnt'">thumbCnt desc</when>
-	        <when test="seq == 'commentCnt'">commentCnt desc</when>
+	        <when test="searchType == 'totalCnt'">totalCnt desc</when>
+	        <when test="searchType == 'thumbCnt'">thumbCnt desc</when>
+	        <when test="searchType == 'commentCnt'">commentCnt desc</when>
     	</choose>
 		limit #{pageStart}, #{perPageNum}
 	</select> 
-
+	
+ 	<select id="addrListAlign" resultType="BoardVO">
+		select * from tourist_spot
+		where t_category=#{t_category} and addr=#{addr} 
+		order by
+		<choose>
+	        <when test="searchType == 'totalCnt'">totalCnt desc</when>
+	        <when test="searchType == 'thumbCnt'">thumbCnt desc</when>
+	        <when test="searchType == 'commentCnt'">commentCnt desc</when>
+    	</choose>
+		limit #{pageStart}, #{perPageNum}
+	</select> 
+	
 	<!-- 게시물 검색 -->
 	<select id="listCount" resultType="int">
 		select count(num)
 		from tourist_spot 
 		where t_category=#{t_category}
+	</select>
+	
+	<!-- 게시물 검색 -->
+	<select id="listCountAddr" resultType="int">
+		select count(num)
+		from tourist_spot 
+		where t_category=#{t_category} and addr=#{addr}
 	</select>
 
 
@@ -97,5 +124,5 @@
 		select * from tourist_spot
 		where title like concat('%',#{keyword},'%')
 	</select>
-
+	
 </mapper>

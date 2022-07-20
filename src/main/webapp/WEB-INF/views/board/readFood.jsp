@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
 <jsp:include page="../include/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">	
 	 
 	
 
@@ -46,7 +46,9 @@
                      </table>
                      <p class="f-para">${resVO.contents }</p>
                      </div>  
+                     <div id="btn_group">
                      <button type="button" id="list_btn" class="w-btn w-btn-indigo">목록</button>
+                     </div>
                         <br>
                  <!-- DB 정보 출력 -->  
                         
@@ -65,56 +67,68 @@
                     </div>
                 
                 <!-- 리뷰 창 -->   
-                   <div id="writeReview">
-                   	<div id="comment1">
+		<!-- 댓글 구현 -->
+		<div id="writeReview">
+				<div id="comment1">
 					<div id="comment">
+					<!-- 로그인 안 했을 경우 alert -->
 						<ol class="commentList">
 							<c:forEach items="${commentList}" var="commentList">
-								<p>
-									${commentList.writer} /
-									<fmt:formatDate value="${commentList.regdate}"
-										pattern="yyyy-MM-dd" />/ 
-										<c:if test="${commentList.visit==1}">방문했어요</c:if>
-										<c:if test="${commentList.visit==0}">방문 전입니다</c:if>
-
-								</p>
+							 <div class="sc-author">
+                                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF5muH6piXfKA2yUyMkJwm0mJq6O4lU-1mFA&usqp=CAU"
+                                   width="60" height="60" style="border-radius : 90px">
+								${commentList.writer}님 &nbsp;&nbsp;
+									<fmt:formatDate value="${commentList.regdate}" pattern="yyyy-MM-dd" /> &nbsp;&nbsp;
+									<b><c:if test="${commentList.visit==1}">방문했어요</c:if>
+										<c:if test="${commentList.visit==0}">방문 전입니다</c:if></b>	
+                                </div>
 								<p>${commentList.content}</p>
-								<div>
-									<button type="button" class="commentModifyBtn"
-										data-cno="${commentList.cno }">수정</button>
-									<button type="button" class="commentDeleteBtn"
-										data-cno="${commentList.cno }">삭제</button>
+								<div id ="btn_group">
+								<c:if test = "${sessionScope.id eq commentList.writer}">
+									<button type="button" class="commentModifyBtn" onclick="openUdt()" data-cno="${commentList.cno }">수정</button>
+									<button type="button" class="commentDeleteBtn" onclick="openDel()" data-cno="${commentList.cno }">삭제</button>
+										</c:if>
 								</div>
 								<hr>
 							</c:forEach>
 						</ol>
-						<!-- 리뷰 -->
+						<!-- 댓글 작성 -->
 						<h4>Add Review</h4>
+						<h6>리뷰 작성은 로그인 후 가능합니다 : )</h6>
+						<br>
 					</div>
 					<div>
-						<form name="commentForm" method="post">
+						<form name="commentForm" method="post" id="reviewForm">
 						
 						<p class="rev-radi">
 							<input type="radio" id="rev_visit" name="visit" value="1" checked="checked" onchange="visited"> <label for="visit1"> 방문했어요</label><br>
 							<input type="radio" id="rev_visit" name="visit" value="0" onchange="visited"> <label for="visit2"> 방문 전입니다</label>
-						</p> 
+						</p>
 						
-							<input type="hidden" name="num" id="num" value="${resVO.num}" /> 
-
+							<input type="hidden" name="num" id="num" value="${vo.num}" />
+							<input type="hidden" id="page" name="page" value="${scri.page}">
+							<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}">
+							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
+							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+							
+							<div id ="btn_group">
+							 <c:if test = "${not empty sessionScope.id }">
 							<p>
-								<label for="id">댓글 작성자</label> <input type="text" name="id" id="id" value=" ${id }">
+								<label for="id">댓글 작성자</label>
+								<input type="text" name="id" id="id" value=" ${id }">
 							</p>
 							<p>
-								<textarea rows="5" cols="50" name="content" id="content"></textarea>
+								<textarea rows="5" cols="50" name="content" id="contentArea"></textarea>
 							</p>
 							<p>
 								<button type="button" class="commentWriteBtn">댓글 작성</button>
 							</p>
+							</c:if>
+							</div>
 						</form>
-
 					</div>
 				</div>
-                </div>
+			</div>
   	                <!-- 리뷰 창 -->      
                     
                     <!-- 블로그 리뷰 출력 -->
@@ -137,13 +151,14 @@
             </div>
     </section>
    
-    <!-- Room Details Section End -->
-    <script type="text/javascript">
+   <!-- Room Details Section End -->
+	<script type="text/javascript">
 	const path = '${pageContext.request.contextPath}';
 	const b_num = '${resVO.num}';
 	const t_category = '${resVO.t_category}';
 	const title = '${resVO.title}';
 	const addr = '${resVO.addr}';
+	const addr2 = '${param.addr}';
 	const lat = '${resVO.lat}';
 	const lng = '${resVO.lng}';
 	const id = '${sessionScope.id}';
@@ -152,5 +167,5 @@
 	</script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b3d692ed9e41ded5eedc5a2578cee55&libraries=services"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/board/InfoDetail.js"></script>
-    <jsp:include page="../include/footer.jsp" />
+	<script src="${pageContext.request.contextPath}/resources/js/board/InfoDetail.js"></script>
+	<jsp:include page="../include/footer.jsp" />

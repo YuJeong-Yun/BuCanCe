@@ -4,16 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../include/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
-
-<!-- Breadcrumb Section Begin -->
-<div class="breadcrumb-section">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12"></div>
-		</div>
-	</div>
-</div>
 <!-- 화면 -->
 <!-- Room Details Section Begin -->
 <section class="room-details-section spad">
@@ -66,7 +56,9 @@
 					</table>
 					<p class="f-para">${vo.contents }</p>
 				</div>
+				<div id="btn_group">
 				<button type="button" id="list_btn" class="w-btn w-btn-indigo">목록</button>
+				</div>
 				<div class="menu-item">
 					<div class="nav-menu"
 						style="text-align: left !important; cursor: pointer;">
@@ -79,57 +71,72 @@
 						</nav>
 					</div>
 				</div>
-				<!-- 댓글 구현 -->
+				
+				
+		<!-- 댓글 구현 -->
+		<div id="writeReview">
 				<div id="comment1">
 					<div id="comment">
+					<!-- 로그인 안 했을 경우 alert -->
 						<ol class="commentList">
 							<c:forEach items="${commentList}" var="commentList">
-								<p>
-									${commentList.writer} /
-									<fmt:formatDate value="${commentList.regdate}"
-										pattern="yyyy-MM-dd" />/ 
-										<c:if test="${commentList.visit==1}">방문했어요</c:if>
-										<c:if test="${commentList.visit==0}">방문 전입니다</c:if>
-
-								</p>
+							 <div class="sc-author">
+                                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF5muH6piXfKA2yUyMkJwm0mJq6O4lU-1mFA&usqp=CAU"
+                                   width="60" height="60" style="border-radius : 90px">
+								${commentList.writer}님 &nbsp;&nbsp;
+									<fmt:formatDate value="${commentList.regdate}" pattern="yyyy-MM-dd" /> &nbsp;&nbsp;
+									<b><c:if test="${commentList.visit==1}">방문했어요</c:if>
+										<c:if test="${commentList.visit==0}">방문 전입니다</c:if></b>	
+                                </div>
 								<p>${commentList.content}</p>
-								<div>
-									<button type="button" class="commentModifyBtn"
-										data-cno="${commentList.cno }">수정</button>
-									<button type="button" class="commentDeleteBtn"
-										data-cno="${commentList.cno }">삭제</button>
+								<div id ="btn_group">
+								<c:if test = "${sessionScope.id eq commentList.writer}">
+									<button type="button" class="commentModifyBtn" onclick="openUdt()" data-cno="${commentList.cno }">수정</button>
+									<button type="button" class="commentDeleteBtn" onclick="openDel()" data-cno="${commentList.cno }">삭제</button>
+										</c:if>
 								</div>
 								<hr>
 							</c:forEach>
 						</ol>
-						<!-- 리뷰 -->
+						<!-- 댓글 작성 -->
 						<h4>Add Review</h4>
+						<h6>리뷰 작성은 로그인 후 가능합니다 : )</h6>
+						<br>
 					</div>
 					<div>
-						<form name="commentForm" method="post">
+						<form name="commentForm" method="post" id="reviewForm">
 						
 						<p class="rev-radi">
 							<input type="radio" id="rev_visit" name="visit" value="1" checked="checked" onchange="visited"> <label for="visit1"> 방문했어요</label><br>
 							<input type="radio" id="rev_visit" name="visit" value="0" onchange="visited"> <label for="visit2"> 방문 전입니다</label>
-						</p> 
+						</p>
 						
-							<input type="hidden" name="num" id="num" value="${vo.num}" /> 
-
+							<input type="hidden" name="num" id="num" value="${vo.num}" />
+							<input type="hidden" id="page" name="page" value="${scri.page}">
+							<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}">
+							<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}">
+							<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+							
+							<div id ="btn_group">
+							 <c:if test = "${not empty sessionScope.id }">
 							<p>
-								<label for="id">댓글 작성자</label> <input type="text" name="id" id="id" value=" ${id }">
+								<label for="id">댓글 작성자</label>
+								<input type="text" name="id" id="id" value=" ${id }">
 							</p>
 							<p>
-								<textarea rows="5" cols="50" name="content" id="content"></textarea>
+								<textarea rows="5" cols="50" name="content" id="contentArea"></textarea>
 							</p>
 							<p>
 								<button type="button" class="commentWriteBtn">댓글 작성</button>
 							</p>
+							</c:if>
+							</div>
 						</form>
-
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>	
 		<div class="review-add" id="review-add">
 			<div class="rd-reviews" id="blogList" style="display: none;"></div>
 
@@ -140,68 +147,29 @@
 				</div>
 			</div>
 		</div>
+
+           <!-- 위치 지도 출력 -->
+     		<div id="map" style="width:100%;height:550px; display: none;"></div>
+         <!-- 위치 지도 출력 -->
 	</div>
 	<br>
 
-</section>
-<!-- Room Details Section End -->
-<script type="text/javascript">
-const path = '${pageContext.request.contextPath}';
-const b_num = '${vo.num}';
-const t_category = '${vo.t_category}';
-const title = '${vo.title}';
-const addr = '${vo.addr}';
-const id = '${sessionScope.id}';
-</script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/board/InfoDetail.js"></script>
-<jsp:include page="../include/footer.jsp" />
-
-<script type="text/javascript">
-
-	
-	$(function(){
-		
-	//댓글 작성
-		$(".commentWriteBtn").on("click", function() {
-			var formObj = $("form[name='commentForm']");
-			var test = $(".rev-radi:checked").val();
-			formObj.attr("action", "/board/commentWrite");
-			formObj.submit();
-		});
-
-		//댓글 수정 View
-		$(".commentModifyBtn").on(
-				"click",
-				function() {
-					location.href = "/board/commentModify?num=${vo.num}"
-							+ "&page=${scri.page}"
-							+ "&perPageNum=${scri.perPageNum}"
-							+ "&searchType=${scri.searchType}"
-							+ "&keyword=${scri.keyword}" + "&cno="
-							+ $(this).attr("data-cno");
-				});
-
-		//댓글 삭제 View
-		$(".commentDeleteBtn").on(
-				"click",
-				function() {
-					location.href = "/board/commentDelete?num=${vo.num}"
-							+ "&page=${scri.page}"
-							+ "&perPageNum=${scri.perPageNum}"
-							+ "&searchType=${scri.searchType}"
-							+ "&keyword=${scri.keyword}" + "&cno="
-							+ $(this).attr("data-cno");
-	});// 댓글
-		// 목록 (수정중)
-		$("#list_btn").on("click", function(){
-		location.href = "/board/tourAll?page=${scri.page}"
-		+"&perPageNum=${scri.perPageNum}"
-		+"&t_category=${vo.t_category}";
-		});
-	}); // JQuery
-	
-
-</script>
-
-
+	</section>
+	<!-- Room Details Section End -->
+	<script type="text/javascript">
+	const path = '${pageContext.request.contextPath}';
+	const b_num = '${vo.num}';
+	const t_category = '${vo.t_category}';
+	const title = '${vo.title}';
+	const addr = '${vo.addr}';
+	const addr2 = '${param.addr}';
+	const lat = '${vo.lat}';
+	const lng = '${vo.lng}';
+	const id = '${sessionScope.id}';
+	const page = "${scri.page}";
+	const perPageNum = "${scri.perPageNum}";
+	</script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b3d692ed9e41ded5eedc5a2578cee55&libraries=services"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/board/InfoDetail.js"></script>
+	<jsp:include page="../include/footer.jsp" />

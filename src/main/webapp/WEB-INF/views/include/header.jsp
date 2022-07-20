@@ -130,7 +130,17 @@
 	</div>
 
 <%	
-	}else{ %>
+	} else if(id.equals("admin")){
+		%>
+			<div id="login">
+			관리자님 안녕하세요.
+			<a href="/admin/profitChart">사이트관리</a>
+			<a href="/logout">LOGOUT</a>
+			</div>
+		<%
+	}
+	
+	else{ %>
 	
 
 	<div id="login">
@@ -183,7 +193,17 @@
 	</div>
 
 <%	
-	}else{ %>
+	} else if(id.equals("admin")){
+		%>
+		<div id="login">
+		관리자님 안녕하세요.
+		<a href="/admin/profitChart">사이트관리</a>
+		<a href="/logout">LOGOUT</a>
+		</div>
+		<%
+	}
+	
+	else{ %>
 	
 
 	<div id="login">
@@ -239,7 +259,7 @@
 					                <li><a>TOUR</a>
 						                <ul class="dropdown">
 					                        <li><a href="/board/tourMap">관광지도</a></li>
-					                        <li><a href="/board/tourAll?t_category=0">모두보기</a></li>
+					                        <li><a href="/board/tourList?t_category=0&addr=all">모두보기</a></li>
 					                    </ul> 
 					                </li>
 					                <li><a href="./about-us.html">HOTEL</a>

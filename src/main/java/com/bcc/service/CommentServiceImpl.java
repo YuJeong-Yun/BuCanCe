@@ -17,20 +17,20 @@ public class CommentServiceImpl implements CommentService {
 
 	// 댓글 조회
 	@Override
-	public List<CommentVO> readComment(int num) throws Exception {
+	public List<CommentVO> readComment(Integer num) throws Exception {
 		return dao.readComment(num);
 	}
 
 	// 댓글 작성
 	@Override
-	public void wriComment(CommentVO vo) throws Exception {
-		dao.wriComment(vo);
+	public void createComment(CommentVO vo) throws Exception {
+		dao.createComment(vo);
 	}
 
 	// 댓글 수정
 	@Override
-	public void modify(CommentVO vo) throws Exception {
-		dao.modify(vo);
+	public void update(CommentVO vo) throws Exception {
+		dao.update(vo);
 	}
 
 	// 댓글 삭제
@@ -41,7 +41,7 @@ public class CommentServiceImpl implements CommentService {
 
 	// 선택된 댓글 조회
 	@Override
-	public CommentVO selectComment(int cno) throws Exception {
+	public CommentVO selectComment(Integer cno) throws Exception {
 		return dao.selectComment(cno);
 	}
 
