@@ -116,7 +116,6 @@ A:hover {
 	-moz-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
 }
 
-
 input[type=text] {
 	width: 100%;
 	border: 2px solid #aaa;
@@ -131,3 +130,4 @@ input[type=text]:focus {
 	border-color: dodgerBlue;
 	box-shadow: 0 0 8px 0 dogerBlue;
 }
+

@@ -51,7 +51,7 @@
 				<c:forEach items="${UserPayList}" begin="0" end="${UserPayList.size()}">
                 <div class="col-lg-4 col-md-6" >
                     <div class="room-item">
-                        <img src="${pageContext.request.contextPath}/resources/img/room/room-1.jpg" alt="" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
+                        <img src="${pageContext.request.contextPath}/resources/img/acc/rePic.jpg" alt="" style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
                         <div class="ri-text" style="border: solid #00abb9; box-shadow: 5px 5px 5px 5px gray; border-radius:10px;">
 							<h5>주문번호 : ${UserPayList.get(a).accId}</h5>
 							<hr>

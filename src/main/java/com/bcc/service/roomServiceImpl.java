@@ -298,8 +298,6 @@ public class roomServiceImpl implements roomService{
 		return detailList0;
 	}
 	
-	
-	
 	@Override
 	public JSONArray roomDetail(String bno) {
 
@@ -489,7 +487,7 @@ public class roomServiceImpl implements roomService{
 	
 	
 	
-	
+	//숙소상세가격
 	@Override
 	public JSONArray roomPrice(String bno) {
 
@@ -541,6 +539,7 @@ public class roomServiceImpl implements roomService{
 	}
 	
 	
+	//숙소예약
 	@Override
 	public JSONArray roomReserve(String bno,roomDate rd,String ano) throws ParseException {
 
@@ -635,7 +634,6 @@ public class roomServiceImpl implements roomService{
 		Elements room_tf = doc.select(".info > div:first-child > button");
 		Elements room_df = doc.select(".info > div:last-child > button");
 		
-		// JSON 형태로 영화 정보 저장
 		JSONArray roomList = new JSONArray();
 
 		for (int i = 0; i < room_pic.size(); i++) {
@@ -710,12 +708,14 @@ public class roomServiceImpl implements roomService{
 		
 	}
 
+	//결제 후 내역페이지
 	@Override
 	public roomPayVO roomPayInfo(String accId) {
 		
 		return dao.roomPayInfo(accId);
 	}
 
+	
 	@Override
 	public List<roomPayVO> roomUserPayInfo(String userId) {
 		return dao.roomUserPayInfo(userId);
@@ -730,12 +730,12 @@ public class roomServiceImpl implements roomService{
 		log.info("a = "+a);
 		
 		//a 문자부분
-		String b = "vafqes";
+		String b = "bccReNum";
 		int c=0;
 		
 		//데이터 값이 없을때는 bcc1이 들어가고 있을때는 bcc2,bcc3....로 들어감
 		if(a==null) {
-			b = "vafqes";
+			b = "bccReNum";
 			c= 0;
 		}else {
 			//a의 숫자부분
@@ -768,7 +768,7 @@ public class roomServiceImpl implements roomService{
 		String a = dao.roomSearchRefund();
 		
 		//a 문자부분
-		String b = "ffqv";
+		String b = "bccRfNum";
 				
 		//a 숫자부분
 		int c=0;
@@ -776,7 +776,7 @@ public class roomServiceImpl implements roomService{
 		
 		if(a==null) {
 			
-			b = "ffqv";
+			b = "bccRfNum";
 			c= 0;
 		}else {
 			c = Integer.parseInt(a.replaceAll("[^0-9]",""));
@@ -843,7 +843,7 @@ public class roomServiceImpl implements roomService{
 				conn2.setRequestProperty("Authorization", access_token);
 				conn2.setDoOutput(true);
 				JSONObject obj2 = new JSONObject();
-				obj2.put("reason", "테스트 환불");
+				obj2.put("reason", "숙소 환불");
 				obj2.put("merchant_uid", vo.getAccId());
 				obj2.put("amount", vo.getAccAmount());
 				BufferedWriter bw2 = new BufferedWriter(new OutputStreamWriter(conn2.getOutputStream()));

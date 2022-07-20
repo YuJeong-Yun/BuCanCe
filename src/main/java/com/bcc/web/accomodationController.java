@@ -42,28 +42,7 @@ public class accomodationController {
 	private MemberService service2;
 
 
-	// http://localhost:8088/accomodation/test
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public void testGET() throws IOException {
 
-		log.info(" testGET() 호출 ");
-		
-
-	}
-	
-	// http://localhost:8088/accomodation/test2
-		@RequestMapping(value = "/test2", method = RequestMethod.GET)
-		public void test2GET(Model model) throws IOException {
-
-			log.info(" test2GET() 호출 ");
-			
-			//service에서 저장한 크롤링 정보들을 JSONArray형태로 저장
-			JSONArray roomList = service.roomList();
-
-			model.addAttribute("roomList", roomList);
-			
-		}
-	
 	
 	// 숙소목록을 보여주는 페이지로 이동
 	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
