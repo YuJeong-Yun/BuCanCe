@@ -209,7 +209,7 @@
                     PCD_PAY_GOODS
                 </th>
                 <td>
-                    <input type="text" name="pay_goods" id="pay_goods" value="프리미엄 이용권">
+                    <input type="text" name="pay_goods" id="pay_goods" value="프리미엄 구독권">
                 </td>
             </tr>
             <tr>

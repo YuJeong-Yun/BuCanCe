@@ -20,7 +20,7 @@
         $("#payAction2").on("click", function (event) {
           var fm = $("#orderForm")[0];
           fm.method = "POST";
-          fm.action = "order_confirm";
+          fm.action = "order_confirm2";
           fm.submit();
           event.preventDefault();
         });
@@ -208,7 +208,7 @@
                     PCD_PAY_GOODS
                 </th>
                 <td>
-                    <input type="text" name="pay_goods" id="pay_goods" value="프리미엄 이용권">
+                    <input type="text" name="pay_goods" id="pay_goods" value="프리미엄 구독권">
                 </td>
             </tr>
             <tr>

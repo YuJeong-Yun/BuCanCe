@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping(value="/order/*")
 public class payInfoController extends PaypleController {
 
 	/*
@@ -72,7 +73,7 @@ public class payInfoController extends PaypleController {
 
 			con.setRequestMethod("POST");
 			con.setRequestProperty("content-type", "application/json");
-			con.setRequestProperty("referer", "http://localhost:8080");
+			con.setRequestProperty("referer", "http://localhost:8088");
 			con.setDoOutput(true);
 
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());

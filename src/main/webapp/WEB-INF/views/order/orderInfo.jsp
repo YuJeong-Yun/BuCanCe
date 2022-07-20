@@ -149,7 +149,7 @@
                     PCD_PAY_GOODS
                 </th>
                 <td>
-                    <input type="text" name="pay_goods" id="pay_goods" value="프리미엄 이용권">
+                    <input type="text" name="pay_goods" id="pay_goods" value="프리미엄 구독권">
                 </td>
             </tr>
             <tr>
@@ -167,8 +167,8 @@
         
         <br>
                     <div class ="btns">
-                    <button type="button"onclick="location.href='/order1'">프리미엄 이용권</button>
-                    <button type="button"onclick="location.href='/order2'">프리미엄 정기 이용권</button>
+                    <button type="button"onclick="location.href='/order/order1'">프리미엄 구독권</button>
+                    <button type="button"onclick="location.href='/order/order2'">프리미엄 정기 구독권</button>
 	    </div>
 
 </body>

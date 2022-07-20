@@ -3,22 +3,54 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="com.bcc.mapper.testMapper">
-  
-  	<select id="getNow" resultType="string">
-  		select now() 
-  	</select>
-  	
-  	<insert id="insertPay" parameterType="PreOrderVO">
-		insert into premium_order
-		values (#{id},systimestamp,systdate+30,sysdate+29,#{pm})
-	</insert>
-	
 
+<mapper namespace="com.bcc.mapper.testMapper">
 
-	
-  	
-  	
-  </mapper>
+ <insert id="insertPreMember">
+        insert into premium_member(PCD_PAY_OID,id,credate_date)
+        values(#{PCD_PAY_OID},#{id},now())
+    </insert>
+    
+    <insert id="insertOrder">
+        insert into premium_order(PCD_PAY_OID,id, credate_date,license_deadline,next_order_date,PCD_PAYER_ID)
+        values(#{PCD_PAY_OID},#{id},now(),date_add(now(),interval 1 month),date_sub(date_add(now(),interval 1 month),interval 1 day),#{PCD_PAYER_ID})
+    </insert>
+    
+    <update id="deleteKey">
+       update premium_order
+       set PCD_PAYER_ID = null
+       where id=#{id} and pw=#{pw} 
+    </update>
+    
+    <select id="getKey" parameterType="PremiumOrderVO">
+        select PCD_PAYER_ID from premium_order
+        where id=#{id}
+    </select>
+        
+    <select id="getName" parameterType="MemberVO">
+        select name from bcc_member
+        where id=#{id}
+    </select>
+    
+    <select id="getTel" parameterType="MemberVO">
+        select tel from bcc_member
+        where id=#{id}
+    </select>
+    
+    <select id="getEmail" parameterType="MemberVO">
+        select email from bcc_member
+        where id=#{id}
+    </select>
+
+    <delete id="deletePreMember">
+        delete from premium_member
+        where #{license_deadline} = curdate()
+    </delete>
+    
+    <insert id="ReOrder">
+        insert into premium_order
+        values(#{PCD_PAY_OID},#{id},now(),date_add(now(),interval 1 month),Y,date_sub(date_add(now(),interval 1 month),interval 1 day),#{PCD_PAYER_ID})
+    </insert>
+
+</mapper>
   

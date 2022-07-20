@@ -3,8 +3,7 @@ package com.bcc.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.simple.JSONObject;
-import org.jsoup.select.Elements;
+import javax.lang.model.util.Elements;
 
 public class roomSearch {
 	
