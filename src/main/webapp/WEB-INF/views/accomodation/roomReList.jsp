@@ -3,18 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
-</head>
-<body>
    <jsp:include page="../include/header.jsp" />
-<c:if test="${id == null}">
-	<script>
-	alert('로그인이 필요합니다');
-	location.href="${pageContext.request.contextPath}/login";
-	</script>
-</c:if>
     <!-- Breadcrumb Section Begin -->
     <div class="breadcrumb-section">
         <div class="container">
@@ -196,7 +185,3 @@
 
    <jsp:include page="../include/footer.jsp" />
 
-
-</body>
-
-</html>

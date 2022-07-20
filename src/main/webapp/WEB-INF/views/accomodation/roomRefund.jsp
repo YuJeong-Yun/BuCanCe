@@ -91,7 +91,7 @@
     <!-- Contact Section End -->
 
 <!-- 환불동작 -->
-<jsp:include page="${pageContext.request.contextPath}/resources/js/acc/JroomRefund.jsp"/>
+<jsp:include page="../accomodation/acc/JroomRefund.jsp"/>
 <!-- 환불동작 -->
 
 
@@ -99,6 +99,3 @@
 
 
  
-</body>
-
-</html>

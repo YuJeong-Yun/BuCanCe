@@ -1,80 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 197번줄부터 442번줄 -->
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
-<meta charset="UTF-8">
-<meta name="description" content="Sona Template">
-<meta name="keywords" content="Sona, unica, creative, html">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Sona | Template</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
 <!-- Css Styles -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/acc/yd.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/elegant-icons.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flaticon.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planContent.css" />
-<!-- 따로 제외시키면 에러남 -->
-<style type="text/css">
-#slidebox {
- border:1px solid #00ABB9;
- box-shadow: 5px 5px 5px 5px gray;
-  
-  /*전체 컨테이너*/
-  width: 600px;
-  border-radius:10px;}
-  
-#slideShow {
- border:1px solid #00ABB9;
-  border-radius:10px;
-  /*전체 컨테이너*/
-  width: 600px;
-  height: 100px;
-  position: relative;
-  top:-50px;
- margin: 0 0 -50px 0;
-  overflow: hidden; /*리스트 형식으로 이미지를 일렬로 정렬할 것이기 때문에, 500px 밖으로 튀어 나간 이미지들은 hidden으로 숨겨줘야됨*/
-}
-.slides {border:1px solid gray;
-border-radius:10px;
-  /*이미지들이 담겨있는 슬라이드 컨테이너*/
-  position: absolute;
-  left: 0;
-  top: 0px;
-  width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
-  transition: 0.5s ease-out; /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
-} /* 첫 번째 슬라이드 가운데에 정렬하기위해 첫번째 슬라이드만 margin-left조정 */
-.slides li:first-child {
-border:1px solid skyblue;
-border-radius:10px;
-  margin-left: 50px;
-} /* 슬라이드들 옆으로 정렬 */
-.slides li:not(:last-child) {
-border-radius:10px;
-  float: left;
-  margin-right:0;
-}
-
-</style>
-<!-- 따로 제외시키면 에러남 -->
-</head>
-<body>
 	<jsp:include page="../include/header.jsp" />
 
 	<!-- Breadcrumb Section Begin -->
@@ -239,7 +170,7 @@ border-radius:10px;
                                 <input type="text" class="date-input" id="date-out" value="${param.sel_date2}" name="sel_date2">
                                 <i class="icon_calendar"></i>
                             </div>
-                            <button type="button" id="reserveBtn" class="btn btn-primary" >예약하기</button><p></p>
+                            <button type="button" id="reserveBtn" class="btn btn-primary" style="width:90%">예약하기</button><p></p>
                         </form>
                     </div>
                 </div>
@@ -260,7 +191,4 @@ border-radius:10px;
     <script src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-    <jsp:include page="${pageContext.request.contextPath}/resources/js/acc/JroomDetail.jsp"></jsp:include>
-</body>
-
-</html>
+    <jsp:include page="../accomodation/acc/JroomDetail.jsp"></jsp:include>

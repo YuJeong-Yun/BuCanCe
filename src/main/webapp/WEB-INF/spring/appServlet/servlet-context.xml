@@ -24,9 +24,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- 객체를 자동으로 만들 기본 패키지 지정 : 기본 패키지 아래의 특정하게 정의해 놓은 클래스를 자동 생성 -->
-	<context:component-scan base-package="com.bcc.web" />
-	
 	
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 

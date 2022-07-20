@@ -2,186 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
-<script>
-
-function selectAll(selectAll)  {
-	  const checkboxes 
-	       = document.getElementsByName('checkOne');
-	  
-	  checkboxes.forEach((checkbox) => {
-	    checkbox.checked = selectAll.checked;
-	  })
-	}
-if("${id}"=='')
-{
-alert('로그인이 필요합니다');
-location.href="${pageContext.request.contextPath}/login";
-}
-	
-	
-</script>
-
 <!--유의사항 팝업창  ........................................................................................... -->
 <script src="http://wooshin.mireene.co.kr/g5/js/jquery-1.8.3.min.js"></script>
-<style type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/acc/CroomPayment2.css" type="text/css">
 
-/* a태그 (유의사항)  하이퍼링크 파랑색표시되는거 제거 */
-A:link {
-	text-decoration: none;
-	color: #646464;
-}
-
-A:visited {
-	text-decoration: none;
-	color: #646464;
-}
-
-A:active {
-	text-decoration: none;
-	color: #646464;
-}
-
-A:hover {
-	text-decoration: none;
-	color: #646464;
-}
-
-/* 유의사항 클릭시 효과  */
-#wrapper_popup div[id^='hd_pops_'] {
-	width: 100%;
-	margin: 10px;
-	max-width: 500px;
-	position: absolute;
-	padding: 20px 30px;
-	background: #fff;
-	z-index: 100000;
-	border-radius: 5px;
-	overflow: auto;
-	display: none
-}
-
-#wrapper_popup div[id^='hd_pops_'] h2 {
-	display: block;
-	margin: 10px 0 0;
-	padding-bottom: 15px;
-	border-bottom: 1px #d8d8d8 solid;
-	font-size: 1.1em;
-	font-weight: bold
-}
-
-#wrapper_popup div[id^='hd_pops_'] p {
-	display: block;
-	padding: 20px 0 0;
-	margin: 0;
-	font-size: 1.0em;
-	line-height: 1.5em
-}
-
-#wrapper_popup div[id^='hd_pops_'] .hour-close {
-	display: inline-block;
-	padding: 8px 20px;
-	background: #f2f2f2;
-	color: #666;
-	border: 1px #d8d8d8 solid;
-	border-radius: 5px;
-	margin-top: 15px
-}
-
-#wrapper_popup div[id^='hd_pops_'] .hour-close:hover {
-	background: #54A94C;
-	color: #f8f8f8
-}
-
-#wrapper_popup div[id^='hd_pops_'] img.cancel {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	zoom: 1;
-	filter: alpha(opacity = 50);
-	opacity: 0.7
-}
-
-#wrapper_popup div[id^='hd_pops_'] img.cancel:hover {
-	zoom: 1;
-	filter: alpha(opacity = 100);
-	opacity: 1.0
-}
-
-#wrapper_popup .c1 {
-	border: 1px #54A94C solid;
-	border-bottom: 10px solid #54A94C
-} /*green*/
-#wrapper_popup .c2 {
-	border: 1px #5390BC solid;
-	border-bottom: 10px solid #5390BC
-} /*blue*/
-#wrapper_popup .c3 {
-	border: 1px #FF969D solid;
-	border-bottom: 10px solid #FF969D
-} /*pink*/
-#wrapper_popup .c4 {
-	border: 1px #5B56A6 solid;
-	border-bottom: 10px solid #5B56A6
-} /*purple*/
-#wrapper_popup .c5 {
-	border: 1px #CCB7A2 solid;
-	border-bottom: 10px solid #CCB7A2
-} /*maroon*/
-#wrapper_popup .b-area {
-	width: 100%;
-	text-align: right;
-	margin-top: 20px;
-	border-top: 1px #ccc solid
-}
-
-#wrapper_popup ul {
-	list-style-type: disc;
-	margin: 0 0 20px;
-	line-height: 1.5em
-}
-
-#wrapper_popup .c-green {
-	color: green !important
-}
-
-#wrapper_popup .c-blue {
-	color: blue !important
-}
-
-#wrapper_popup .c-red {
-	color: red !important
-}
-
-.layer-shadow {
-	box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
-	-webkit-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
-	-moz-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
-}
-</style>
-<style>
-/* 서명란 클릭시 테두리(blue) 강조 효과  */
-input[type=text] {
-	width: 100%;
-	border: 2px solid #aaa;
-	border-radius: 2px;
-	margin: 4px 0;
-	outline: none;
-	padding: 4px;
-	box-sizing: border-box;
-	transition: .3s;
-}
-
-input[type=text]:focus {
-	border-color: dodgerBlue;
-	box-shadow: 0 0 8px 0 dogerBlue;
-}
-</style>
-</head>
-
-<body>
 	<jsp:include page="../include/header.jsp" />
 
 	<!-- Breadcrumb Section Begin -->
@@ -443,7 +267,7 @@ input[type=text]:focus {
 
 
 				<!-- 아임포트 결제 숙박용 -->
-				<jsp:include page="${pageContext.request.contextPath}/resources/js/acc/JroomPayment2.jsp"/>
+				<jsp:include page="../accomodation/acc/JroomPayment2.jsp"/>
 				<!-- 아임포트 결제 숙박용 -->
 
 
@@ -498,7 +322,7 @@ input[type=text]:focus {
 									<label for="date-out"><strong style="color: red">총
 											결제 금액 (멤버쉽 할인, VAT포함)</strong></label>
 									<input type="text" id="date-out2"
-										value="<fmt:formatNumber type="number" maxFractionDigits="0"  value="${vo.room_fcost*0.97}" /> 원"
+										value="<fmt:formatNumber type="number" maxFractionDigits="0"  value="${vo.room_fcost*0.95}" /> 원"
 										style="color: red; font-weight: bold; font-size: 20px"
 										readonly>
 								</c:if>
@@ -510,17 +334,16 @@ input[type=text]:focus {
 								</ul>
 							</div>
 
-<button type="button"  onclick="requestPay()"
-class="btn btn-block btn-primary btn-sm"
-style=" border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
-<span style="color: black"><b>결제하기</b></span>
-</button>
+						<button type="button"  onclick="requestPay()"
+						class="btn btn-block btn-primary btn-sm" style=" border: solid white; width: 90%; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px; margin-bottom: 10px;">
+						<span style="color: black"><b>결제하기</b></span>
+						</button>
 
 							<button type="button" onclick="cancelPay()"
-class="btn btn-block btn-danger btn-sm"
-style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
-<span style="color: black"><b>취소하기</b></span>
-</button>
+						class="btn btn-block btn-danger btn-sm"
+						style="border: solid white; width: 90%; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
+						<span style="color: black"><b>취소하기</b></span>
+						</button>
 							<p></p>
 						</form>
 
@@ -534,8 +357,6 @@ style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10p
 		</div>
 
 
-
-
 	</section>
 	</c:if>
 	<!-- Room Details Section End -->
@@ -544,8 +365,3 @@ style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10p
 <jsp:include page="../include/footer.jsp" />
 
 
-	
-
-</body>
-
-</html>

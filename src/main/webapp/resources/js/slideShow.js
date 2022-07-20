@@ -1,10 +1,10 @@
 /**
  * 
  */
-let slides = document.querySelector('.slides');
-let slideImg = document.querySelectorAll('.slides li');
-currentIdx = 0;
-slideCount = slideImg.length;
+let slides = document.querySelector('.slides');  //div영역을 가져옴
+let slideImg = document.querySelectorAll('.slides li'); //사진들을 불러옴
+currentIdx = 0; //현재 인덱스값
+slideCount = slideImg.length; //현재목록갯수
 prev = document.querySelector('.prev'); //이전 버튼
 next = document.querySelector('.next'); //다음 버튼
 slideWidth = 600; //슬라이드이미지 넓이

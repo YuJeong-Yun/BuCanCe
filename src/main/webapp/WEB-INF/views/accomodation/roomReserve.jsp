@@ -2,12 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
-<!-- 168줄부터 ~ 365줄까지 -->
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
-</head>
-<body>
     <jsp:include page="../include/header.jsp" />
 
     <!-- Breadcrumb Section Begin -->
@@ -214,7 +208,3 @@
     <!-- Rooms Section End -->
    <jsp:include page="../include/footer.jsp" />
 
-
-</body>
-
-</html>

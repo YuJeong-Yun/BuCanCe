@@ -2,32 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
+
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planContent.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/acc/CroomList.css" type="text/css">
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
-
 </style>
-</head>
-<body>
+
 	<!-- 헤더부분 -->
 	<jsp:include page="../include/header.jsp" />
 	<!-- 헤더부분 -->
 	
 	<!-- 무한스크롤포함 js동작들 -->
-	<jsp:include page="${pageContext.request.contextPath}/resources/js/acc/JroomList.jsp"/>
+	<jsp:include page="../accomodation/acc/JroomList.jsp"/>
 	<!-- 무한스크롤포함 js동작들 -->
 	
 	
 	<!-- Breadcrumb Section Begin --> 
 	<section>
-<%-- 	style="background-image: url('${pageContext.request.contextPath}/resources/img/beach.jpg');  --%>
-<!-- 	background-attachment: fixed;	background-repeat: no-repeat; background-size:cover;" -->
-<!-- 	> -->
 	<div class="breadcrumb-section" >
 		<div class="container">
 			<div class="row">
@@ -195,5 +187,3 @@
 
 <jsp:include page="../include/footer.jsp" />
 	
-</body>
-</html>
