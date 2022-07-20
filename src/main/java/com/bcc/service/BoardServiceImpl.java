@@ -3,6 +3,8 @@ package com.bcc.service;
 import java.util.List;
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.bcc.domain.BoardVO;
@@ -11,6 +13,10 @@ import com.bcc.persistence.BoardDAO;
 
 @Service
 public class BoardServiceImpl implements BoardService{
+	
+
+	private static final Logger log = LoggerFactory.getLogger(BoardServiceImpl.class);
+	
 	@Inject
 	private BoardDAO dao;
 
@@ -42,17 +48,19 @@ public class BoardServiceImpl implements BoardService{
 		public List<BoardVO> list(SearchCriteria scri) throws Exception {
 			return dao.list(scri);
 		}
+		
+		// 게시물 정렬 목록 조회
+		@Override
+		public List<BoardVO> listAlign(SearchCriteria scri) throws Exception {
+			
+			return dao.listAlign(scri);
+		}
+
 		//게시물 총 갯수
 		@Override
 		public int listCount(SearchCriteria scri) throws Exception {
+			log.info("service 실행");
 			return dao.listCount(scri);
-		}
-		// 게시물 댓글 수
-
-		@Override
-		public void updateCommentCnt(int num) throws Exception {
-			dao.updateCommentCnt(num);
-			
 		}
 		
 	@Override
@@ -75,6 +83,30 @@ public class BoardServiceImpl implements BoardService{
 			dao.insertThumb(b_num, b_category, id);
 		}
 		
+	}
+
+	@Override
+	public List<BoardVO> foodLists(String addr) {
+		
+		return dao.foodLists(addr);
+	}
+
+	@Override
+	public BoardVO getFood(int num) {
+		
+		return dao.getFood(num);
+	}
+
+	@Override
+	public List<BoardVO> tourLists(String addr) throws Exception {
+		
+		return dao.tourLists(addr);
+	}
+
+	@Override
+	public List<BoardVO> searchList(String keyword) {
+		
+		return dao.searchList(keyword);
 	}
 	
 	

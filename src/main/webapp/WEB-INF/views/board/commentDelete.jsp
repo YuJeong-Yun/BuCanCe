@@ -40,8 +40,8 @@
 					<input type="hidden" id="cno" name="cno" value="${commentDelete.cno}" />
 					<input type="hidden" id="page" name="page" value="${scri.page}"> 
 					<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
-					<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
-					<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+					<input type="hidden" id="t_category" name="t_category" value="${scri.t_category}"> 
+					<input type="hidden" id="addr" name="addr" value="${scri.addr}"> 
 					<div id= "btn_group">
 						<p>삭제 후에는 복구가 불가능합니다. 삭제 하시겠습니까?</p>
 						<button type="submit" class="delete_btn" onclick="window.close()">삭제</button>

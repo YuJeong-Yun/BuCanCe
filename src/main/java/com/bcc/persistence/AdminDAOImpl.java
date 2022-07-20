@@ -1,5 +1,6 @@
 package com.bcc.persistence;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.bcc.domain.PremiumOrderVO;
+import com.bcc.domain.KakaoVO;
+import com.bcc.domain.MemberVO;
+import com.bcc.domain.PreOrderVO;
+
 
 @Repository
 public class AdminDAOImpl implements AdminDAO{
@@ -25,7 +29,7 @@ public class AdminDAOImpl implements AdminDAO{
 	private static String NAMESPACE = "com.bcc.mapper.adminMapper";
 
 	@Override
-	public List<PremiumOrderVO> getPmInfo(String date) {
+	public List<PreOrderVO> getPmInfo(String date) {
 		Map<String, String> dateMap = new HashMap<String, String>();
 		dateMap.put("start", date.split(" ")[0]);
 		dateMap.put("end", date.split(" ")[1]);
@@ -34,16 +38,7 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 	@Override
-	public List<String> getPm(String date) {
-		Map<String, String> dateMap = new HashMap<String, String>();
-		dateMap.put("start", date.split(" ")[0]);
-		dateMap.put("end", date.split(" ")[1]);
-		
-		return session.selectList(NAMESPACE+".periodicPm",dateMap);
-	}
-
-	@Override
-	public List<PremiumOrderVO> getOnlyPeriod(String date) {
+	public List<PreOrderVO> getOnlyPeriod(String date) {
 		Map<String, String> dateMap = new HashMap<String, String>();
 		dateMap.put("start", date.split(" ")[0]);
 		dateMap.put("end", date.split(" ")[1]);
@@ -53,23 +48,66 @@ public class AdminDAOImpl implements AdminDAO{
 
 	@Override
 	public Integer getTrendChart(String date) {
-		Map<String, String> dateMap = new HashMap<String, String>();
-		dateMap.put("day", date.split(" ")[0]);
-		dateMap.put("month", date.split(" ")[1]);
 		
-		return session.selectOne(NAMESPACE+".trendChart",dateMap);
+		return session.selectOne(NAMESPACE+".trendChart", date);
 	}
 
 	@Override
 	public Integer getMonthlyChart(String date) {
-		Map<String, String> dateMap = new HashMap<String, String>();
-		dateMap.put("year", date.split(" ")[0]);
-		dateMap.put("month", date.split(" ")[1]);
 		
-		return session.selectOne(NAMESPACE+".monthlyChart",dateMap);
+		return session.selectOne(NAMESPACE+".monthlyChart", date);
+	}
+
+	@Override
+	public Integer getWebMem(String date) {
+		
+		return session.selectOne(NAMESPACE+".webMem", date);
+	}
+
+	@Override
+	public Integer getSNSMem(String date) {
+		
+		return session.selectOne(NAMESPACE+".SNSMem", date);
+	}
+
+	@Override
+	public Integer totalMem() {
+		
+		return session.selectOne(NAMESPACE+".totalMem");
+	}
+
+	@Override
+	public Integer totalPmMem() {
+		
+		return session.selectOne(NAMESPACE+".totalPmMem");
+	}
+
+	@Override
+	public Integer totalComment() {
+		
+		return session.selectOne(NAMESPACE+".totalComment");
+	}
+
+	@Override
+	public Integer totalAcc(String date) {
+		
+		return session.selectOne(NAMESPACE+".totalAcc", date);
+	}
+
+	@Override
+	public List<MemberVO> getallWebMember() {
+	List<MemberVO> mg = new ArrayList<MemberVO>();
+		
+		return session.selectList(NAMESPACE+".allWebMember", mg);
+	}
+
+	@Override
+	public List<KakaoVO> getallSnsMember() {
+		List<KakaoVO> kakao = new ArrayList<KakaoVO>();
+		return session.selectList(NAMESPACE+".allSnsMember", kakao);
 	}
 	
-
+	
 	
 	
 	

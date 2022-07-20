@@ -23,24 +23,37 @@ public interface BoardDAO {
 	public List<BoardVO> list(SearchCriteria scri) throws Exception;
 	public List<BoardVO> list(int page, int size) throws Exception;
 
+	// 게시물 정렬 목록 조회
+	public List<BoardVO> listAlign(SearchCriteria scri) throws Exception;
+	
 	// 게시물 총 갯수
 	public int listCount(SearchCriteria scri) throws Exception;
 
-	//게시글 댓글 수 
-	public void updateCommentCnt(int num) throws Exception;
+	// 좋아요 유무 체크
+	public Integer checkThumb(int b_num, String id);
+
+	// 좋아요 수 +1
+	public void addThumb(int b_num);
+
+	// 좋아요 수 -1
+	public void subThumb(int b_num);
+
+	// 좋아요 테이블에 기록 추가
+	public void insertThumb(int b_num, int b_category, String m_id);
+
+	// 좋아요 테이블에서 기록 삭제
+	public void deleteThumb(int b_num, String id);
 	
-		public Integer checkThumb(int b_num, String id);
+	// 맛집 정보 가져오기
+	public List<BoardVO> foodLists(String addr); 
 	
-		// 좋아요 수 +1
-		public void addThumb(int b_num);
+	// 관광지 정보 가져오기
+	public List<BoardVO> tourLists(String addr) throws Exception; 
 
-		// 좋아요 수 -1
-		public void subThumb(int b_num);
-
-		// 좋아요 테이블에 기록 추가
-		public void insertThumb(int b_num, int b_category, String m_id);
-
-		// 좋아요 테이블에서 기록 삭제
-		public void deleteThumb(int b_num, String id);
+	// 맛집 디테일 가져오기
+	public BoardVO getFood(int num);
+		
+	// 검색 결과 가져오기
+	public List<BoardVO> searchList(String keyword);
 	
 }

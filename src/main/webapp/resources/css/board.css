@@ -32,20 +32,18 @@
 
 #btn_group button {
 	position: relative;
-	border: none;
 	display: inline-block;
-	padding: 15px 30px;
-	border-radius: 15px;
 	font-family: "paybooc-Light", sans-serif;
 	text-decoration: none;
 	font-weight: 600;
 	transition: 0.25s;
 	box-sizing: border-box;
 	border: 1px solid skyblue;
-	padding: 5px;
+	padding: 6px;
 	background-color: #6aafe6;
 	color: #d4dfe6;
 	border-radius: 10px;
+	font-size: 17px;
 }
 
  

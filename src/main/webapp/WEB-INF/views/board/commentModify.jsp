@@ -64,8 +64,6 @@ textarea {
 					<input type="hidden" id="cno" name="cno" value="${commentModify.cno}" /> 
 					<input type="hidden" id="page" name="page" value="${scri.page}"> 
 					<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}">
-				<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
-					<input type="hidden"id="keyword" name="keyword" value="${scri.keyword}">
 				<table>
 					<tbody>
 						<tr>
