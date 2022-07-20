@@ -28,6 +28,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberPage.css" >
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -50,7 +51,7 @@
 			<a href="https://kauth.kakao.com/oauth/authorize?client_id=c30d4acffaf14e6c0a33f269940ff070&redirect_uri=http://localhost:8088/kakao_login
 &response_type=code">
 		<img src="/resources/img/kakao_login_medium_narrow.png" style="height:60px"></a><br>
-		<a href="#">
+			<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=mh2HJRSmhFxLpWvyHva1&redirect_uri=http://localhost:8088/naver_login&response_type=code">
 		<img src="/resources/img/btnG_perfect.png" style="height:60px"></a><br>
 	</form>
 

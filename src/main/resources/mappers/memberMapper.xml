@@ -76,7 +76,8 @@
 		where b_num = #{b_num}
     </delete>
 	
-		<!-- 정보 찾기 -->
+	<!-- 카카오 로그인 -->
+	<!-- 정보 찾기 -->
 	<select id="findKakao" parameterType="java.util.HashMap" resultType="KakaoVO">
 		select * from kakao_table
 		where k_name=#{nickname} and k_email=#{email}
@@ -87,7 +88,21 @@
 		insert into kakao_table(k_name, k_email)
 		values(#{nickname}, #{email})
 	</insert>
+	<!-- 카카오 로그인 -->
 	
+	<!-- 네이버 로그인 -->
+	<!-- 정보 찾기 -->
+	<select id="findNaver" parameterType="java.util.HashMap" resultType="NaverVO">
+		select * from naver_table
+		where n_name=#{nickname} and n_email=#{email}
+	</select>
+
+	<!-- 정보 저장 -->
+	<insert id="naverInsert" parameterType="java.util.HashMap">
+		insert into naver_table(n_name, n_email)
+		values(#{nickname}, #{email})
+	</insert>
+	<!-- 네이버 로그인 -->
 	
   </mapper>
   

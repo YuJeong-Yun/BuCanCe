@@ -1,6 +1,5 @@
 package com.bcc.web;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,12 +21,13 @@ import com.bcc.domain.BoardVO;
 import com.bcc.domain.Criteria;
 import com.bcc.domain.KakaoVO;
 import com.bcc.domain.MemberVO;
+import com.bcc.domain.NaverVO;
 import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
-import com.bcc.domain.ThumbVO;
 import com.bcc.service.BoardService;
 import com.bcc.service.KakaoService;
 import com.bcc.service.MemberService;
+import com.bcc.service.NaverService;
 import com.bcc.service.TourService;
 
 @Controller
@@ -47,6 +46,9 @@ public class MemberController {
 	
     @Inject
     private KakaoService ks;
+
+    @Inject
+    private NaverService ns;
 	
     
 	// http://localhost:8088/index
@@ -327,5 +329,44 @@ public class MemberController {
 			return "redirect:/index";
 			
 	    	}
-		
+	    
+//	    @RequestMapping(value="/naverLogin", method= RequestMethod.GET)
+//	    public String index() {
+//	        log.info("home controller");
+//	        return "/member/naverLogin";
+//	    }
+	    
+		// http://localhost:8088/login
+	    @RequestMapping(value="/naver_login", method=RequestMethod.GET)
+	    public String naverLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
+	    	System.out.println("#########" + code);
+	    	
+	    	String access_Token = ns.getAccessToken(code);
+	    	NaverVO userInfo = ns.getUserInfo(access_Token);
+	    	
+	    	System.out.println("###access_Token#### : " + access_Token);
+	    	System.out.println("###nickname#### : " + userInfo.getN_name());
+	    	System.out.println("###email#### : " + userInfo.getN_email());
+	    
+	    	session.setAttribute("n_name", userInfo.getN_name());
+	    	session.setAttribute("n_email", userInfo.getN_email());
+	    	// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
+	    	// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.
+
+			return "redirect:/index";
+			
+	    }
+	    
+//	     http://localhost:8088/login
+//		 http://localhost:8088/naver_login
+//	     http://localhost:8088/naverLogin
+//	    @RequestMapping(value="/naver_login", method=RequestMethod.GET)
+//	    public String loginPOSTNaver(HttpSession session) {
+//	    	
+//	    	
+//	        log.info("callback controller");
+//	        return "/member/callback";
+//	  
+//	    }
+	    
 }

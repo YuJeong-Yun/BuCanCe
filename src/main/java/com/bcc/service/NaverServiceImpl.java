@@ -13,23 +13,23 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.bcc.domain.KakaoVO;
-import com.bcc.persistence.KakaoDAO;
+import com.bcc.domain.NaverVO;
+import com.bcc.persistence.NaverDAO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Service
-public class KakaoServiceImpl implements KakaoService {
+public class NaverServiceImpl implements NaverService {
 
 	@Inject
-	private KakaoDAO kdao;
+	private NaverDAO ndao;
 	
-	@Override
+
     public String getAccessToken (String authorize_code) {
         String access_Token = "";
         String refresh_Token = "";
-        String reqURL = "https://kauth.kakao.com/oauth/token";
+        String reqURL = "https://nid.naver.com/oauth2.0/token";
 	
         try {
             URL url = new URL(reqURL);
@@ -45,8 +45,8 @@ public class KakaoServiceImpl implements KakaoService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code"); 
-            sb.append("&client_id=c30d4acffaf14e6c0a33f269940ff070");  //본인이 발급받은 key
-            sb.append("&redirect_uri=http://localhost:8088/kakao_login"); // 본인이 설정해 놓은 경로
+            sb.append("&client_id=mh2HJRSmhFxLpWvyHva1");  //본인이 발급받은 key
+            sb.append("&redirect_uri=http://localhost:8088/naver_login"); // 본인이 설정해 놓은 경로
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
@@ -87,11 +87,11 @@ public class KakaoServiceImpl implements KakaoService {
         
     }
     
-	@Override
-    public KakaoVO getUserInfo (String access_Token) {
+
+    public NaverVO getUserInfo (String access_Token) {
 
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
-		String reqURL = "https://kapi.kakao.com/v2/user/me";
+		String reqURL = "https://openapi.naver.com/v1/nid/me";
 		try {
 			URL url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -109,24 +109,24 @@ public class KakaoServiceImpl implements KakaoService {
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-			userInfo.put("nickname", nickname);
+			JsonObject naver_account = element.getAsJsonObject().get("naver_account").getAsJsonObject();
+			String name = properties.getAsJsonObject().get("name").getAsString();
+			String email = naver_account.getAsJsonObject().get("email").getAsString();
+			userInfo.put("name", name);
 			userInfo.put("email", email);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		// catch 아래 코드 추가.
-		KakaoVO result = kdao.findkakao(userInfo);
+		NaverVO result = ndao.findnaver(userInfo);
 		// 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
 		System.out.println("S:" + result);
 		if(result==null) {
 		// result가 null이면 정보가 저장이 안되있는거므로 정보를 저장.
-			kdao.kakaoInsert(userInfo);
+			ndao.naverInsert(userInfo);
 			// 위 코드가 정보를 저장하기 위해 Repository로 보내는 코드임.
-			return kdao.findkakao(userInfo);
+			return ndao.findnaver(userInfo);
 			// 위 코드는 정보 저장 후 컨트롤러에 정보를 보내는 코드임.
 			//  result를 리턴으로 보내면 null이 리턴되므로 위 코드를 사용.
 		} else {
