@@ -9,18 +9,12 @@
   	<select id="getNow" resultType="string">
   		select now() 
   	</select>
-<<<<<<< HEAD
   	
   	<insert id="insertPay" parameterType="PreOrderVO">
 		insert into premium_order
 		values (#{id},systimestamp,systdate+30,sysdate+29,#{pm})
 	</insert>
 	
-
-
-	
-<<<<<<<< HEAD:src/main/resources/mappers/memberMapper.xml
-=======
 
     <select id="countMember" resultType="int">
       select count(*) from bcc_member
@@ -69,13 +63,11 @@
 		where id=#{id} 
 	</update>
 	
->>>>>>> 8bfabfee6c031d19cb1177d51d9ff50f77e6a7f4
 	<update id="licenseDown">
 		update bcc_member
 		set license=0
 		where id=#{id} 
 	</update>
-<<<<<<< HEAD
 
 	<select id="thumbList" resultType="BoardVO">
         select tourist_spot.*
@@ -118,12 +110,5 @@
 	</insert>
 	<!-- 네이버 로그인 -->
 	
-========
-  	
-  	
->>>>>>>> 8bfabfee6c031d19cb1177d51d9ff50f77e6a7f4:src/main/resources/mappers/testMapper.xml
-=======
-  	
->>>>>>> 8bfabfee6c031d19cb1177d51d9ff50f77e6a7f4
   </mapper>
   

@@ -20,16 +20,16 @@ public class NaverDAOImpl implements NaverDAO {
 	private static final String NAMESPACE="com.bcc.mapper.memberMapper";
 	
 	@Override
-	public void naverInsert(HashMap<String, Object> userInfo) {
-		sqlSession.insert(NAMESPACE+".naverInsert",userInfo);
+	public void naverInsert(HashMap<String, Object> apiResult) {
+		sqlSession.insert(NAMESPACE+".naverInsert", apiResult);
 		
 	}
 
 	@Override
-	public NaverVO findnaver(HashMap<String, Object> userInfo) {
-		System.out.println("RN:"+userInfo.get("nickname"));
-		System.out.println("RE:"+userInfo.get("email"));
-		return sqlSession.selectOne(NAMESPACE+".findnaver", userInfo);
+	public NaverVO findnaver(HashMap<String, Object> apiResult) {
+		System.out.println("RN:"+apiResult.get("name"));
+		System.out.println("RE:"+apiResult.get("email"));
+		return sqlSession.selectOne(NAMESPACE+".findnaver", apiResult);
 	}
 	
 }

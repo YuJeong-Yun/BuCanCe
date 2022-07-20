@@ -5,15 +5,7 @@ public class NaverVO {
 	private long n_number;	// pk로 쓸 값
 	private String n_email;
 	private String n_name;
-	private long n_id;
 	
-	
-	public long getN_id() {
-		return n_id;
-	}
-	public void setN_id(long n_id) {
-		this.n_id = n_id;
-	}
 	
 	public long getN_number() {
 		return n_number;
@@ -34,11 +26,10 @@ public class NaverVO {
 		this.n_name = n_name;
 	}
 	
+	
 	@Override
 	public String toString() {
-		return "NaverVO [n_number=" + n_number + ", n_email=" + n_email + ", n_name=" + n_name + ", n_id=" + n_id + "]";
+		return "NaverVO [n_number=" + n_number + ", n_email=" + n_email + ", n_name=" + n_name + "]";
 	}
-	
-	
 	
 }

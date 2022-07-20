@@ -25,7 +25,7 @@ public class KakaoServiceImpl implements KakaoService {
 	@Inject
 	private KakaoDAO kdao;
 	
-	@Override
+	
     public String getAccessToken (String authorize_code) {
         String access_Token = "";
         String refresh_Token = "";
@@ -87,7 +87,7 @@ public class KakaoServiceImpl implements KakaoService {
         
     }
     
-	@Override
+
     public KakaoVO getUserInfo (String access_Token) {
 
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();

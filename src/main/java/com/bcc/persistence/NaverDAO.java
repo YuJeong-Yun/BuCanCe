@@ -6,8 +6,8 @@ import com.bcc.domain.NaverVO;
 
 public interface NaverDAO {
 	
-	public void naverInsert(HashMap<String, Object> userInfo);
+	public void naverInsert(HashMap<String, Object> apiResult);
 	
-	public NaverVO findnaver(HashMap<String, Object> userInfo);
+	public NaverVO findnaver(HashMap<String, Object> apiResult);
 
 }
