@@ -69,8 +69,8 @@
 					success : function(data){
 					console.log(data);
 					let tag = '';
-					if(data != ""){
 					$('#filterBtn').append("<span id='resultCnt'>검색결과 : "+data.length+"건</span>");
+					if(data != ""){
 						$(data).each(function(i,obj){
 							tag += "<tr>";
 							tag += "<td>"+obj.pcd_PAYER_NAME+"</td>";
@@ -123,6 +123,7 @@
 					url : "/adminRest/periodMems?date="+date,
 					success : function(data){
 					let tag = '';
+					$('#filterBtn').append("<span id='resultCnt'>검색결과 : "+data.length+"건</span>");
 					if(data != ""){
 						$(data).each(function(i,obj){
 							tag += "<tr>";

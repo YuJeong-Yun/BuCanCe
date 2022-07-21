@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.bcc.domain.PreOrderVO;
 
-
 public interface AdminDAO {
 	
 	// 프리미엄 회원 order 내역

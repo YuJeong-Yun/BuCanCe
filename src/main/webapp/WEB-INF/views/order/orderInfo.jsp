@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ include file = "../include/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -116,7 +117,7 @@
                     PCD_PAYER_NAME
                 </th>
                 <td>
-                    <input type="text" name="payer_name" id="payer_name" value="ㅎㅎ<%-- <%=vo.getTel()%> --%>">
+                    <input type="text" name="payer_name" id="payer_name" value="${payer_name}">
                 </td>
             </tr>
             <tr>
@@ -127,7 +128,7 @@
                     PCD_PAYER_HP
                 </th>
                 <td>
-                    <input type="text" name="payer_hp" id="payer_hp" value="ㅎㅎ<%-- <%=vo.getTel()%> --%>">
+                    <input type="text" name="payer_hp" id="payer_hp" value="${payer_hp}">
                 </td>
             </tr>
             <tr>
@@ -138,7 +139,7 @@
                     PCD_PAYER_EMAIL
                 </th>
                 <td>
-                    <input type="text" name="payer_email" id="payer_email" value="ㅎㅎ<%-- <%=vo.getEmail()%> --%>">
+                    <input type="text" name="payer_email" id="payer_email" value="${payer_email}">
                 </td>
             </tr>
             <tr>
@@ -149,7 +150,7 @@
                     PCD_PAY_GOODS
                 </th>
                 <td>
-                    <input type="text" name="pay_goods" id="pay_goods" value="프리미엄 이용권">
+                    <input type="text" name="pay_goods" id="pay_goods" value="프리미엄 구독권">
                 </td>
             </tr>
             <tr>
@@ -167,9 +168,10 @@
         
         <br>
                     <div class ="btns">
-                    <button type="button"onclick="location.href='/order1'">프리미엄 이용권</button>
-                    <button type="button"onclick="location.href='/order2'">프리미엄 정기 이용권</button>
+                    <button type="button"onclick="location.href='/order/order1'">프리미엄 구독권</button>
+                    <button type="button"onclick="location.href='/order/order2'">프리미엄 정기 구독권</button>
 	    </div>
 
 </body>
 </html>
+<%@ include file = "../include/footer.jsp" %>
