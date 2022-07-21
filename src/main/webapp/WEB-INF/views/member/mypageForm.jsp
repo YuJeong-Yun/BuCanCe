@@ -19,7 +19,7 @@
 		<a href = "/delete">회원탈퇴</a>
 	</form>
 	
-<div class = "menu-box">	
+<div class = "menu-box">
 	<ul class = "innerwrap" id = "tab">
 		<li><a href="#">내 그룹</a></li>
 		<li><a href="#">일정</a></li>

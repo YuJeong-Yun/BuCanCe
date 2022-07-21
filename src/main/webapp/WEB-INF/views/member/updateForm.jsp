@@ -24,6 +24,7 @@ window.onload = function checkLi(){
 
 function liUp(){
 	var li = $("#license").val()
+	
 	$.ajax({
 	        url:'/liUp', //Controller에서 인식할 주소
  	        type:'POST', //POST 방식으로 전달
@@ -37,7 +38,7 @@ function liUp(){
 			}
 	})
 	};
-	
+
 function liDown(){
 	var li = $("#license").val()
 

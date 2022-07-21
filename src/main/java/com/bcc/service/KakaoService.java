@@ -1,6 +1,6 @@
 package com.bcc.service;
 
-import java.util.HashMap;
+import com.bcc.domain.KakaoVO;
 
 public interface KakaoService {
 	   
@@ -8,6 +8,6 @@ public interface KakaoService {
     // 토큰 받아오기
 	public String getAccessToken (String authorize_code);
 		
-	public HashMap<String, Object> getUserInfo(String access_Token);
+	public KakaoVO getUserInfo(String access_Token);
 	
 }

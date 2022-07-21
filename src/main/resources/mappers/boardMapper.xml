@@ -11,7 +11,6 @@
 		parameterType="int">
 		update tourist_spot set totalCnt = totalCnt + 1
 		where num= #{num}; 
-
 	</select>
 	
 	<!-- 페이징 처리된 게시물 -->
