@@ -366,10 +366,10 @@ public class accomodationController {
 
 		if (tf.equals("OK")) {
 			// 첫번째로 결제테이블의 정보를 환불됨으로 바꾸기(status)
-			service.getPayStatus(vo.getAccId());
+			service.modPayStatus(vo.getAccId());
 
 			// 두번째로 환불테이블 정보입력
-			service.getRoomRefund(vo);
+			service.putRoomRefund(vo);
 		}
 
 		log.info("vo : " + vo);

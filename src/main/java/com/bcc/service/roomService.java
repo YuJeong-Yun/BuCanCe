@@ -49,15 +49,15 @@ public interface roomService {
 	public String SearchPayId();
 
 	//환불시 결제 상태 변경
-	public void getPayStatus(String accId);
+	public void modPayStatus(String accId);
 
 	//환불시 환불테이블에 데이터입력
-	public void getRoomRefund(roomRefundVO vo2);
+	public void putRoomRefund(roomRefundVO vo2);
 
 	////환불테이블 고유아이디값
 	public String refundRoom();
 
-	////환불시 환불테이블에 데이터입력
+	////환불 아임포트동작
 	public String payRefund(roomPayVO vo2) throws MalformedURLException, IOException, org.json.simple.parser.ParseException;
 	
 	

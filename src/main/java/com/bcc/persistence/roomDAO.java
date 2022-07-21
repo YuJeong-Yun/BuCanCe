@@ -15,7 +15,7 @@ public interface roomDAO {
 
 	public String getMaxReRoom();
 
-	public void updateReStatus(String accId);
+	public void modReStatus(String accId);
 
 	public String getMaxRefund();
 	

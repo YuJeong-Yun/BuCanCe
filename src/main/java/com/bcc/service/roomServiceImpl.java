@@ -716,9 +716,9 @@ public class roomServiceImpl implements roomService {
 
 	// 환불시 결제 상태 변경
 	@Override
-	public void getPayStatus(String accId) {
+	public void modPayStatus(String accId) {
 
-		dao.updateReStatus(accId);
+		dao.modReStatus(accId);
 	}
 
 	// 환불테이블 고유아이디값
@@ -748,7 +748,7 @@ public class roomServiceImpl implements roomService {
 
 	// 환불시 환불테이블에 데이터입력
 	@Override
-	public void getRoomRefund(roomRefundVO vo2) {
+	public void putRoomRefund(roomRefundVO vo2) {
 
 		dao.putRfRoom(vo2);
 

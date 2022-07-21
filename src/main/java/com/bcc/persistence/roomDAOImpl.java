@@ -59,8 +59,8 @@ public class roomDAOImpl implements roomDAO {
 
 
 	@Override
-	public void updateReStatus(String accId) {
-		sqlSession.update(NAMESPACE+".updateReStatus",accId);
+	public void modReStatus(String accId) {
+		sqlSession.update(NAMESPACE+".modReStatus",accId);
 	}
 
 	@Override

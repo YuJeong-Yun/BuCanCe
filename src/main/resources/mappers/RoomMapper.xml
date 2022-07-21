@@ -24,7 +24,7 @@
   	select accId from acc_payment order by accDate desc limit 1
   </select>
   
-   <update id="updateReStatus">
+   <update id="modReStatus">
   	update acc_payment set status="refund" where accId=#{accId}
   </update>
   
