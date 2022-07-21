@@ -174,7 +174,6 @@
                 </div>
                 
                 <br>
-                <!-- 프리미엄 회원 내역 조회, 총 액수 출력 -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -234,10 +233,6 @@
         <!-- End of Content Wrapper -->
 
     </div>
-<script type="text/javascript">
-	const create = "${create}";
-	const dead = "${dead}";
-</script>    
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/admin/profitChart.js"></script>   	   									

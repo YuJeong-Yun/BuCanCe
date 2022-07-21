@@ -1,6 +1,7 @@
 package com.bcc.web;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bcc.domain.MemberVO;
 import com.bcc.service.AdminService;
 
 @Controller
@@ -32,6 +34,31 @@ public class AdminController {
 		
 		
 		return "/admin/profitChart";
+	}
+	
+	// 회원 목록
+	@RequestMapping(value = "/memberMg", method = RequestMethod.GET)
+	public String  allWebMemberGET(Model model) {
+		model.addAttribute("mg", service.getallWebMember());
+		model.addAttribute("kakao", service.getallSnsMember());
+			
+		return "admin/memberMg";
+	}
+	
+	//회원 삭제
+	@RequestMapping(value = "/withdrawal", method = RequestMethod.GET)
+	public String deleteMemberGET() {
+		return "/admin/memberMg";
+	}
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String deletMemberPOST(HttpSession session, MemberVO vo) {
+		service.deleteMember(vo);
+		session.invalidate();
+		
+		return  "redirect:/admin/memberMg";
+		
+	
+		
 	}
 	
 	

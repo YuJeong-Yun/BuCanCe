@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.json.simple.JSONObject;
 
+import com.bcc.domain.KakaoVO;
+import com.bcc.domain.MemberVO;
 import com.bcc.domain.PreOrderVO;
-import com.google.gson.JsonObject;
 
 
 public interface AdminService {
@@ -37,5 +38,14 @@ public interface AdminService {
 	
 	// 총 숙박 예약 건수
 	public List<Integer> getTotalAcc();
+	
+	// 웹 회원 목록
+	public List<MemberVO> getallWebMember();
+	
+	//카카오 회원 목록
+	public List<KakaoVO> getallSnsMember();
+
+	// 회원 삭제
+	public void deleteMember(MemberVO vo);
 	
 }

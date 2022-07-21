@@ -1,12 +1,7 @@
 package com.bcc.web;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,28 +11,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.bcc.domain.BoardVO;
 
 import com.bcc.domain.CommentVO;
 import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
 import com.bcc.service.BoardService;
 import com.bcc.service.CommentService;
-import com.bcc.service.MemberService;
 
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
-
 	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
-
 	@Inject
 	private BoardService service;
-
 	@Inject
 	private CommentService commentservice;
 
-	@Inject
-	private MemberService ms;
 
 	// 댓글 작성
 	@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)
@@ -126,14 +116,14 @@ public class BoardController {
 		pageMaker.setCri(scri);
 
 		if (addr.equals("all")) {
-			pageMaker.setTotalCount(service.listCount(scri));
+			pageMaker.setTotalCount(service.countList(scri));
 			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("boardList", service.list(scri));
+			model.addAttribute("boardList", service.getList(scri));
 			model.addAttribute("scri", scri);
 		} else {
-			pageMaker.setTotalCount(service.listCountAddr(scri));
+			pageMaker.setTotalCount(service.countListAddr(scri));
 			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("boardList", service.listAddr(scri));
+			model.addAttribute("boardList", service.getListAddr(scri));
 			model.addAttribute("scri", scri);
 
 		}
@@ -187,10 +177,10 @@ public class BoardController {
 		// 글 정보를 가지고 오기
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(service.listCount(scri));
+		pageMaker.setTotalCount(service.countList(scri));
 
 		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("boardList", service.listAlign(scri));
+		model.addAttribute("boardList", service.alignList(scri));
 		model.addAttribute("scri", scri);
 
 		return "board/tourList";

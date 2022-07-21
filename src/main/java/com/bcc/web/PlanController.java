@@ -68,6 +68,7 @@ public class PlanController {
 		return "plan/planList";
 	}
 
+		
 	// 플랜 생성 - POST
 	// http://localhost:8088/plan/addPlan
 	@RequestMapping(value = "/addPlan", method = RequestMethod.POST)

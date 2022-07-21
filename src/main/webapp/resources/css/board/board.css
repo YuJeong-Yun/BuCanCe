@@ -145,11 +145,11 @@
 		font-family: 'Noto Sans KR', sans-serif;
 	}
 	
-	#resInfo {
+	#infos {
 		margin-top: 2em;
 	}
 	
-	#resInfo tr{
+	#infos tr{
 		margin: 2em 0;
 	}
 	
@@ -368,6 +368,3 @@
 		white-space: pre;
 		margin-left: -0.5em;
 	}
-	
-
-	/* tourMap 안내문구 */	

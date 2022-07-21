@@ -15,33 +15,32 @@ public interface BoardService {
 	// 조회수 증가 
 	public void updateBoardCount(Integer num) throws Exception;
 
-	// 게시물 목록 조회
-	public List<BoardVO> list(SearchCriteria scri) throws Exception;
-
-	// 게시물 정렬 목록 조회
-	public List<BoardVO> listAlign(SearchCriteria scri) throws Exception;
-
+	// 게시물 목록 조회 
+	public List<BoardVO> getList(SearchCriteria scri) throws Exception;
+	
+	// 게시물 정렬 목록 조회 
+	public List<BoardVO> alignList(SearchCriteria scri) throws Exception;
+	
 	// 블로그 조회 목록
 	public List getBlog(String title, String addr, String start) throws Exception;
 
 	// 실시간 날씨 조회
 	public JSONArray getWeather() throws Exception;
-
-	// 게시물 총 갯수
-	public int listCount(SearchCriteria scri) throws Exception;
-
+	
+	// 게시물 총 갯수 
+	public int countList(SearchCriteria scri) throws Exception;
+	
 	// 좋아요 기록 체크
 	public Integer checkThumb(int b_num, String id);
 
 	// 좋아요 기록 체크 후 insert 또는 delete 실행
 	public void updateThumb(int b_num, int b_category, String id);
-
+	
 	// 검색 결과 가져오기
 	public List<BoardVO> searchList(String keyword);
 
 	// 주소 존재 시 페이징 처리 된 목록 가져오기
-	public int listCountAddr(SearchCriteria scri) throws Exception;
-
-	public List<BoardVO> listAddr(SearchCriteria scri) throws Exception;
-
+	public int countListAddr(SearchCriteria scri) throws Exception; 
+	public List<BoardVO> getListAddr(SearchCriteria scri) throws Exception;
+	
 }
