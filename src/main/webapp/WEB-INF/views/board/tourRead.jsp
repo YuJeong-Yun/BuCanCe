@@ -92,10 +92,11 @@
 							 <div class="sc-author">
                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF5muH6piXfKA2yUyMkJwm0mJq6O4lU-1mFA&usqp=CAU"
                                    width="60" height="60" style="border-radius : 90px">
-								${commentList.writer}님 &nbsp;&nbsp;
+								${commentList.writer}님 &nbsp;<a href="" onclick="">🚨신고 </a>&nbsp;&nbsp;
 									<fmt:formatDate value="${commentList.regdate}" pattern="yyyy-MM-dd" /> &nbsp;&nbsp;
-									<b><c:if test="${commentList.visit==1}">방문했어요</c:if>
-										<c:if test="${commentList.visit==0}">방문 전입니다</c:if></b>	
+									<b><c:if test="${commentList.visit==1}">방문했어요 </c:if>
+										<c:if test="${commentList.visit==0}">방문 전입니다 </c:if></b>
+											
                                 </div>
 								<p>${commentList.content}</p>
 								<div id ="btn_group">

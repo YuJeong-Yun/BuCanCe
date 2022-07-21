@@ -16,12 +16,5 @@
                 </a>
             </li>
             
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/profitChart">
-                   <i class="fa fa-window-maximize" aria-hidden="true"></i>
-                    <span>리뷰 관리</span>
-                </a>
-            </li>
-            
         </ul>
         <!-- End of Sidebar -->     

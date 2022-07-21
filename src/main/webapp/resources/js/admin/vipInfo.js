@@ -70,11 +70,12 @@
 					console.log(data);
 					let tag = '';
 					if(data != ""){
+					$('#filterBtn').append("<span id='resultCnt'>검색결과 : "+data.length+"건</span>");
 						$(data).each(function(i,obj){
 							tag += "<tr>";
 							tag += "<td>"+obj.pcd_PAYER_NAME+"</td>";
 								 
-								 if(obj.pcd_PAYER_ID == null){
+								 if(obj.pcd_PAYER_ID == "" || obj.pcd_PAYER_ID == null){
 									tag += "<td>N</td>";
 								 } else {
 									tag += "<td>Y</td>";
