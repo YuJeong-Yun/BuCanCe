@@ -14,10 +14,8 @@ import org.springframework.stereotype.Repository;
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.SearchCriteria;
 
-
 @Repository
 public class BoardDAOImpl implements BoardDAO {
-	
 
 	private static final Logger log = LoggerFactory.getLogger(BoardDAOImpl.class);
 
@@ -27,7 +25,6 @@ public class BoardDAOImpl implements BoardDAO {
 
 	// mapper의 위치 정보 저장
 	private static final String namespace = "com.bcc.mapper.BoardMapper";
-
 
 	// 글 내용
 	@Override
@@ -45,30 +42,27 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public List<BoardVO> list(SearchCriteria scri) throws Exception {
 
-		
 		return session.selectList(namespace + ".listCri", scri);
 	}
-	
+
 	// 게시물 정렬결과 조회
 	@Override
 	public List<BoardVO> listAlign(SearchCriteria scri) throws Exception {
-		
+
 		return session.selectList(namespace + ".listAlign", scri);
 	}
-	
-	
+
 	// 주소 존재시 게시물 정렬결과 조회
 	@Override
 	public List<BoardVO> addrListAlign(SearchCriteria scri) throws Exception {
-		
+
 		return session.selectList(namespace + ".addrListAlign", scri);
 	}
-	
 
 	// 게시물 총 갯수
 	@Override
 	public int listCount(SearchCriteria scri) throws Exception {
-		
+
 		return session.selectOne(namespace + ".listCount", scri);
 	}
 
@@ -89,30 +83,27 @@ public class BoardDAOImpl implements BoardDAO {
 		param.put("perPageNum", size);
 		return session.selectList(namespace + ".listCri", param);
 	}
-	
+
 	@Override
 	public Integer checkThumb(int b_num, String id) {
 		Map thuMap = new HashMap();
 		thuMap.put("m_id", id);
 		thuMap.put("b_num", b_num);
-		
-		return session.selectOne(namespace+".checkThumb",thuMap);
-	}
 
+		return session.selectOne(namespace + ".checkThumb", thuMap);
+	}
 
 	@Override
 	public void addThumb(int num) {
-		session.update(namespace+".addThumb", num);
-		
-	}
+		session.update(namespace + ".addThumb", num);
 
+	}
 
 	@Override
 	public void subThumb(int num) {
-		session.update(namespace+".subThumb",num);
-		
-	}
+		session.update(namespace + ".subThumb", num);
 
+	}
 
 	@Override
 	public void insertThumb(int b_num, int b_category, String m_id) {
@@ -120,47 +111,42 @@ public class BoardDAOImpl implements BoardDAO {
 		thuMap.put("b_num", b_num);
 		thuMap.put("b_category", b_category);
 		thuMap.put("m_id", m_id);
-		
-		session.insert(namespace+".insertThumb", thuMap);
-		
-	}
 
+		session.insert(namespace + ".insertThumb", thuMap);
+
+	}
 
 	@Override
 	public void deleteThumb(int b_num, String id) {
 		Map thuMap = new HashMap();
 		thuMap.put("m_id", id);
 		thuMap.put("b_num", b_num);
-		
-		session.delete(namespace+".deleteThumb",thuMap);
+
+		session.delete(namespace + ".deleteThumb", thuMap);
 	}
-	
 
 	@Override
 	public BoardVO getFood(int num) {
-		
-		return session.selectOne(namespace+".getFood", num);
+
+		return session.selectOne(namespace + ".getFood", num);
 	}
 
 	@Override
 	public List<BoardVO> searchList(String keyword) {
-		
-		return session.selectList(namespace+".search",keyword);
+
+		return session.selectList(namespace + ".search", keyword);
 	}
 
 	@Override
 	public int listCountAddr(SearchCriteria scri) throws Exception {
-		
-		return session.selectOne(namespace+".listCountAddr", scri);
+
+		return session.selectOne(namespace + ".listCountAddr", scri);
 	}
 
 	@Override
 	public List<BoardVO> listAddr(SearchCriteria scri) throws Exception {
-		
-		return session.selectList(namespace+".listCriAddr", scri);
+
+		return session.selectList(namespace + ".listCriAddr", scri);
 	}
-	
-	
-	
 
 }

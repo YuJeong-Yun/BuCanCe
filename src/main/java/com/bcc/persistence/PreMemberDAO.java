@@ -1,25 +1,23 @@
 package com.bcc.persistence;
 
-import java.util.List;
-
-import com.bcc.domain.PreOrderVO;
+import com.bcc.domain.PreMemberVO;
 
 public interface PreMemberDAO {
-	/*
-	 * // 글쓰기 (create) public void create(BoardVO vo);
-	 * 
-	 * // 글 리스트 (select - list) public List<BoardVO> listAll();
-	 * 
-	 * // 글 내용 (select - read) public BoardVO getBoard(Integer bno);
-	 * 
-	 * // 글 수정 (update) public void updateBoard(BoardVO VO);
-	 * 
-	 * // 글 삭제 (delete) public void removeBoard(Integer bno);
-	 * 
-	 * // 글 조회수 1 증가 public void updateBoardCnt(Integer bno);
-	 */
+	
+	// 프리미엄 회원
+	public void insertPreMember(PreMemberVO vo);
 
+	// 구독종료 회원 삭제
+	public void deletePreMember(PreMemberVO dpv);
 
+	// 이름 가져오기
+	public String getName(String id);
+
+	// 휴대전화 가져오기
+	public String getTel(String id);
+
+	// 이메일 가져오기
+	public String getEmail(String id);
 	
 
 }

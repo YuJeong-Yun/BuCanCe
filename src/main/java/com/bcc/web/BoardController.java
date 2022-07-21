@@ -19,10 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.CommentVO;
 import com.bcc.domain.Criteria;
+import com.bcc.domain.MemberVO;
 import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
 import com.bcc.service.BoardService;
 import com.bcc.service.CommentService;
+import com.bcc.service.MemberService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -36,8 +38,10 @@ public class BoardController {
 	@Inject
 	private CommentService commentservice;
 
+	@Inject
+	private MemberService ms;
 
-	// 댓글 작성
+		// 댓글 작성
 			@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)
 			public String commentWirte(CommentVO vo,
 					@ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr, HttpSession session)
@@ -61,7 +65,6 @@ public class BoardController {
 			// 댓글 수정 GET
 			@RequestMapping(value = "/commentModify", method = RequestMethod.GET)
 			public String commentModifyView(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
-				log.info(scri+"");
 				
 				model.addAttribute("commentModify", commentservice.selectComment(vo.getCno()));
 				model.addAttribute("scri", scri);
@@ -73,7 +76,6 @@ public class BoardController {
 			public String commentModify(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
 				commentservice.update(vo);
 				
-				log.info(scri+"");
 				rttr.addAttribute("page", scri.getPage());
 				rttr.addAttribute("perPageNum", scri.getPerPageNum());
 				rttr.addAttribute("t_category", scri.getT_category());
@@ -122,6 +124,7 @@ public class BoardController {
 			scri.setAddr(addr);
 			// 조회수
 			session.setAttribute("upFlag", "1");
+			session.setAttribute("id", "admin");
 
 			// 글 정보를 가지고 오기
 			PageMaker pageMaker = new PageMaker();
@@ -152,7 +155,6 @@ public class BoardController {
 				@ModelAttribute("scri") SearchCriteria scri ,Model model, HttpSession session) throws Exception {
 			
 			
-			String url = "";
 			
 			//조회수
 			String upFlag = (String) session.getAttribute("upFlag");
@@ -164,65 +166,68 @@ public class BoardController {
 				}
 			}
 			
-			
-			
-			if(t_category == 0) {
 				model.addAttribute("vo", service.getTour(num));
 				model.addAttribute("scri", scri);
 
 				// 댓글리스트
 				List<CommentVO> commentList = commentservice.readComment(num);
 				model.addAttribute("commentList", commentList);
+			
+			return "board/tourRead";
+		}
 
-				url = "board/readTour";
-				
-			} else {
-				model.addAttribute("resVO",service.getFood(num));
-				model.addAttribute("scri", scri);
-				
-				// 댓글리스트
-				List<CommentVO> commentList = commentservice.readComment(num);
-				model.addAttribute("commentList", commentList);
-				
-				url = "board/readFood";
-			}
-			
-			return url;
+		if (t_category == 0) {
+			model.addAttribute("vo", service.getTour(num));
+			model.addAttribute("scri", scri);
+
+			// 댓글리스트
+			List<CommentVO> commentList = commentservice.readComment(num);
+			model.addAttribute("commentList", commentList);
+
+			url = "board/readTour";
+
+		} else {
+			model.addAttribute("resVO", service.getFood(num));
+			model.addAttribute("scri", scri);
+
+			// 댓글리스트
+			List<CommentVO> commentList = commentservice.readComment(num);
+			model.addAttribute("commentList", commentList);
+
+			url = "board/readFood";
 		}
-		
-		
-		// 검색 결과 출력(제목 기준)
-		@RequestMapping(value = "/tourSearch", method = RequestMethod.GET)
-		public String tourSearchGET(@ModelAttribute("scri") SearchCriteria scri, Model model)
-				throws Exception {
-			
-			model.addAttribute("boardList", service.searchList(scri.getKeyword()));
-			
-			return "board/tourList";
-		}
-		
-		
-		// 전체글목록 정렬하기
-		@RequestMapping(value = "/tourAlign", method = RequestMethod.GET)
-		public String tourAlignGET(@RequestParam("seq") String seq, Model model,
-				@ModelAttribute("scri") SearchCriteria scri, HttpSession session) throws Exception {
-			
-			scri.setSearchType(seq);
-			
-			// 조회수
-			session.setAttribute("upFlag", "1");
-			// 글 정보를 가지고 오기
-			PageMaker pageMaker = new PageMaker();
-			pageMaker.setCri(scri);
-			pageMaker.setTotalCount(service.listCount(scri));
-			
-			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("boardList", service.listAlign(scri));
-			model.addAttribute("scri",scri);
-			
-			
-			return "board/tourList";
-		}
-		
+
+		return url;
+	}
+
+	// 검색 결과 출력(제목 기준)
+	@RequestMapping(value = "/tourSearch", method = RequestMethod.GET)
+	public String tourSearchGET(@ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
+
+		model.addAttribute("boardList", service.searchList(scri.getKeyword()));
+
+		return "board/tourList";
+	}
+
+	// 전체글목록 정렬하기
+	@RequestMapping(value = "/tourAlign", method = RequestMethod.GET)
+	public String tourAlignGET(@RequestParam("seq") String seq, Model model,
+			@ModelAttribute("scri") SearchCriteria scri, HttpSession session) throws Exception {
+
+		scri.setSearchType(seq);
+
+		// 조회수
+		session.setAttribute("upFlag", "1");
+		// 글 정보를 가지고 오기
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(service.listCount(scri));
+
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("boardList", service.listAlign(scri));
+		model.addAttribute("scri", scri);
+
+		return "board/tourList";
+	}
 
 }

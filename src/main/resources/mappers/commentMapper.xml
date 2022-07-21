@@ -7,6 +7,8 @@
 	<select id="readComment" resultType="CommentVO">
 		SELECT
 		CNO, CONTENT, WRITER,
+		REGDATE
+		FROM comment
 		REGDATE, VISIT
 		FROM comment
 		WHERE num = #{num}
@@ -31,7 +33,7 @@
 	
 	<!-- 선택된 댓글 조회 -->
 	<select id="selectComment" resultType="com.bcc.domain.CommentVO">
-	select num, cno, content, writer, regdate from comment where cno = #{cno}
+		select num, cno, content, writer, regdate from comment where cno = #{cno}
 	</select>
 	<!-- 댓글 수 -->
 	<update id="updateCommentCnt" parameterType="int"> update tourist_spot

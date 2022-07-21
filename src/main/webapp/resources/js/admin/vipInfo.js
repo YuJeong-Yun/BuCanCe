@@ -67,19 +67,23 @@
 				$.ajax({
 					url : "/adminRest/pmMembers?date="+date,
 					success : function(data){
+					console.log(data);
 					let tag = '';
+					$('#filterBtn').append("<span id='resultCnt'>검색결과 : "+data.length+"건</span>");
 					if(data != ""){
 						$(data).each(function(i,obj){
 							tag += "<tr>";
-							tag += "<td>"+obj.id+"</td>";
+							tag += "<td>"+obj.pcd_PAYER_NAME+"</td>";
 								 
-								 if(obj.pcd_PAYER_ID == null){
+								 if(obj.pcd_PAYER_ID == "" || obj.pcd_PAYER_ID == null){
 									tag += "<td>N</td>";
 								 } else {
 									tag += "<td>Y</td>";
 								 }
-							tag += "<td>"+obj.create_date+"</td>";
-							tag += "<td>"+obj.license_deadline+"</td>";
+							let format = new Date(obj.create_date);
+							tag += "<td>"+formatDate(format);+"</td>";
+							format = new Date(obj.license_deadline);
+							tag += "<td>"+formatDate(format);+"</td>";
 							tag += "</tr>";
 						});
 						$('tbody').append(tag);
@@ -119,13 +123,16 @@
 					url : "/adminRest/periodMems?date="+date,
 					success : function(data){
 					let tag = '';
+					$('#filterBtn').append("<span id='resultCnt'>검색결과 : "+data.length+"건</span>");
 					if(data != ""){
 						$(data).each(function(i,obj){
 							tag += "<tr>";
-							tag += "<td>"+obj.id+"</td>";
+							tag += "<td>"+obj.pcd_PAYER_NAME+"</td>";
 							tag += "<td>Y</td>";
-							tag += "<td>"+obj.create_date+"</td>";
-							tag += "<td>"+obj.license_deadline+"</td>";
+							let format = new Date(obj.create_date);
+							tag += "<td>"+formatDate(format);+"</td>";
+							format = new Date(obj.license_deadline);
+							tag += "<td>"+formatDate(format);+"</td>";
 							tag += "</tr>";
 						});
 						$('tbody').append(tag);
