@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" type="text/css">	
-	
+
 	    <div id="wrapper">
 		<jsp:include page="../include/sideMenuAdmin.jsp" />
 
@@ -49,6 +49,8 @@
 							</div>
 							<div class="row">
 								<div class="col-sm-12">
+										 	<form name="deleteform" method="post">
+										 	<input type="hidden" value="" name="id">
 									<table class="table table-bordered dataTable" id="dataTable"
 										width="100%" cellspacing="0" role="grid"
 										aria-describedby="dataTable_info" style="width: 100%;">
@@ -77,17 +79,13 @@
 													style="width: 70px;">권한</th>
 										</thead>
 										<tbody>
-
-
-											<tr class="odd">
-											</tr>
 												<c:forEach items="${mg }" var="mg">
 											<tr class="even">
 												<td class="sorting_1">${mg.name }</td>
 												<td>${mg.id }</td>
 												<td>${mg.tel }</td>
 												<td>${mg.regdate }</td>
-												<td><button type="button" onclick=""></button></td>
+												<td><button type="button" class="w-btn w-btn-indigo" id="Withdrawal" onclick="deleteCheck('${mg.id }');">회원 탈퇴</button></td>
 											</tr>
 											</c:forEach>
 											<c:forEach items="${kakao }" var="kakao">
@@ -95,12 +93,13 @@
 												<td class="sorting_1">${kakao.k_name }</td>
 												<td>${kakao.k_number }</td>
 												<td>${kakao.k_email }</td>
-												<td>${mg.regdate }</td>
-												<td><button type="button" onclick=""></button></td>
+												<td>${kakao.regdate }</td>
+												<td><button type="button" class="w-btn w-btn-indigo" id="Withdrawal" onclick="deleteCheck('${kakao.k_number }');">회원 탈퇴</button></td>
 											</tr>
 											</c:forEach> 
 										</tbody>
 									</table>
+											</form>
 								</div>
 							</div>
 						</div>
@@ -122,9 +121,20 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 
 <script>
+		function deleteCheck(id) {
+			if (confirm("삭제하시겠습니까?")) {
+				document.deleteform.id.value = id;
+				document.deleteform.action = "/admin/delete";
+				document.deleteform.submit();
+			}
 
+		}
 
-
+// 	});
 </script>
 
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin/profitChart.js"></script>   	   									
+<script src="${pageContext.request.contextPath}/resources/js/admin/vipInfo.js"></script>   									
 <jsp:include page="../include/footer.jsp" />

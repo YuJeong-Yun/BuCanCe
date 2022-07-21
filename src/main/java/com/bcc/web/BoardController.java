@@ -132,10 +132,10 @@ public class BoardController {
 
 		session.setAttribute("upFlag", "1");
 		if (cate == 0) {
-			model.addAttribute("tourVO", service.tourLists(addr));
+			model.addAttribute("boardList", service.tourLists(addr));
 			model.addAttribute("addr", addr);
 		} else {
-			model.addAttribute("tourVO", service.foodLists(addr));
+			model.addAttribute("boardList", service.foodLists(addr));
 			model.addAttribute("addr", addr);
 		}
 

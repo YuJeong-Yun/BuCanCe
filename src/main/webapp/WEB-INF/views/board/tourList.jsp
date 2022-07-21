@@ -96,7 +96,6 @@
             </div>
         </div>
 
-
 <!-- Rooms Section Begin -->
 <section class="rooms-section spad">
 	<div class="container">

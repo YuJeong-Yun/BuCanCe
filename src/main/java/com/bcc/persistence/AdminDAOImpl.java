@@ -97,14 +97,19 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public List<MemberVO> getallWebMember() {
 	List<MemberVO> mg = new ArrayList<MemberVO>();
-		
-		return session.selectList(NAMESPACE+".allWebMember", mg);
+		System.out.println(session.selectList(NAMESPACE+".allWebMember"));
+		return session.selectList(NAMESPACE+".allWebMember");
 	}
 
 	@Override
 	public List<KakaoVO> getallSnsMember() {
 		List<KakaoVO> kakao = new ArrayList<KakaoVO>();
 		return session.selectList(NAMESPACE+".allSnsMember", kakao);
+	}
+
+	@Override
+	public void deleteMember(MemberVO vo) {
+		 session.delete(NAMESPACE+".deleteMember",vo);
 	}
 	
 	

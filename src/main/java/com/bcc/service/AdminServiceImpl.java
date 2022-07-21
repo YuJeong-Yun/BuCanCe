@@ -294,6 +294,11 @@ public class AdminServiceImpl implements AdminService{
 	public List<KakaoVO> getallSnsMember() {
 		return dao.getallSnsMember();
 	}
+	//회원 삭제
+	@Override
+	public void deleteMember(MemberVO vo) {
+		dao.deleteMember(vo);
+	}
 	
 	
 	

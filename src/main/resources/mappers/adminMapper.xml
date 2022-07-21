@@ -67,7 +67,12 @@
 	</select>
 
 	<select id="allSnsMember" resultType="KakaoVO">
-		select * from kokoa_table
+		select * from kakao_table
 	</select>
+
+	<delete id="deleteMember">
+	 delete from bcc_member
+	 where id =#{id}
+	</delete>
 
 </mapper>  

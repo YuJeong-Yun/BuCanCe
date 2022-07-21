@@ -45,6 +45,7 @@ public interface AdminService {
 	//카카오 회원 목록
 	public List<KakaoVO> getallSnsMember();
 
-	
+	// 회원 삭제
+	public void deleteMember(MemberVO vo);
 	
 }

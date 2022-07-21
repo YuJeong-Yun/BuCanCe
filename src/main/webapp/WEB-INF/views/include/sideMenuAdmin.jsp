@@ -16,10 +16,12 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/memberMg">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                  <span>회원관리</span></a>
+            </li>
             <li>
-            <a class="nav-link" href="">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-                    </li>
+     
         </ul>
         <!-- End of Sidebar -->     
