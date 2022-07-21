@@ -12,7 +12,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="breadcrumb-text">
-					<h2 class="nanumFont" style="display: inline-block; margin-left: 6em; margin-right: 1em;">부캉스! 어디가지?</h2>
+				<h2 class="nanumFont" style="display: inline-block; margin-left: 6em; margin-right: 1em;">부캉스! 어디가지?</h2>
 	                <!-- 날씨출력 -->
                     <div id="weatherInfo" style="display: inline-block;"></div>
                     <!-- 날씨출력 -->
@@ -135,4 +135,5 @@
 <script src="${pageContext.request.contextPath}/resources/js/board/TourList.js"></script>
 <jsp:include page="../include/footer.jsp" />
 
+>>>>>>> 54d25621b9689c1a7a246cd78ebc6c4278df7257
 </html>

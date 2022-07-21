@@ -1,5 +1,6 @@
 package com.bcc.persistence;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.bcc.domain.KakaoVO;
+import com.bcc.domain.MemberVO;
 import com.bcc.domain.PreOrderVO;
+
 
 @Repository
 public class AdminDAOImpl implements AdminDAO{
@@ -89,6 +93,24 @@ public class AdminDAOImpl implements AdminDAO{
 		
 		return session.selectOne(NAMESPACE+".getTotalAcc", date);
 	}
+
+	@Override
+	public List<MemberVO> getAllWebMem() {
+	List<MemberVO> mg = new ArrayList<MemberVO>();
+		return session.selectList(NAMESPACE+".getAllWebMem");
+	}
+
+	@Override
+	public List<KakaoVO> getAllSnsMem() {
+		List<KakaoVO> kakao = new ArrayList<KakaoVO>();
+		return session.selectList(NAMESPACE+".getAllSnsMem", kakao);
+	}
+
+	@Override
+	public void delMem(MemberVO vo) {
+		 session.delete(NAMESPACE+".delMem",vo);
+	}
+	
 	
 	
 	

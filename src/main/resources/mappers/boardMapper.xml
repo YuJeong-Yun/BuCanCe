@@ -107,5 +107,4 @@
 		select * from tourist_spot
 		where title like concat('%',#{keyword},'%')
 	</select>
-	
 </mapper>
