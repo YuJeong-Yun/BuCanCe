@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<jsp:include page="../include/header.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<jsp:include page="../include/headerAdmin.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/board.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.min.css" type="text/css">	
 	
@@ -22,7 +24,7 @@
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                        	<h3>부캉스</h3>
+                        	<h3><a href="/index" id="toMain">부캉스 메인으로</a></h3>
                         </div>
                     </form>
 
@@ -36,9 +38,6 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">관리자 DashBoard</h1>
                     </div>
-
-                    
-                    
 
 						<div class="row">
 						
@@ -181,7 +180,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">기간별 조회</h1>
+                        <h1 class="h3 mb-0 text-gray-800">매출 기간별 조회</h1>
                     </div>
                     
                     <div class="card mb-4">
@@ -201,6 +200,7 @@
                      				</span>
                        			</div>
                                 </div>
+                                
                                 <div class="card-body">
                            		<div class="row">
                       				<div class="col-sm-12">
@@ -235,8 +235,8 @@
 
     </div>
 <script type="text/javascript">
-
-
+	const create = "${create}";
+	const dead = "${dead}";
 </script>    
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -279,12 +278,6 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 	///////////////// 찜기능//////////////////////
-
-	@Override
-	public BoardVO getFood(int num) {
-
-		return dao.getFood(num);
-	}
 
 	@Override
 	public List<BoardVO> searchList(String keyword) {

@@ -21,10 +21,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-    
-    <!-- Google Chart -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
@@ -134,7 +130,7 @@
 		%>
 			<div id="login">
 			관리자님 안녕하세요.
-			<a href="/admin/profitChart">사이트관리</a>
+			<a href="/admin/profitChart" id="admin">사이트관리</a>
 			<a href="/logout">LOGOUT</a>
 			</div>
 		<%
@@ -207,7 +203,7 @@
 		%>
 		<div id="login">
 		관리자님 안녕하세요.
-		<a href="/admin/profitChart">사이트관리</a>
+		<a href="/admin/profitChart" id="admin">사이트관리</a>
 		<a href="/logout">LOGOUT</a>
 		</div>
 		<%

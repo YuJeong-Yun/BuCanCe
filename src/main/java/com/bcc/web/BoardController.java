@@ -41,124 +41,139 @@ public class BoardController {
 	@Inject
 	private MemberService ms;
 
-	// 댓글 작성
-	@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)
-	public String commentWirte(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr,
-			HttpSession session) throws Exception {
-
-		// 세션에 저장된 회원의 아이디
-		String id = (String) session.getAttribute("id");
-		// 테스트용 아이디 생성
-		vo.setWriter(id);
-		commentservice.createComment(vo);
-		rttr.addAttribute("page", scri.getPage());
-		rttr.addAttribute("perPageNum", scri.getPerPageNum());
-		rttr.addAttribute("t_category", scri.getT_category());
-		rttr.addAttribute("addr", scri.getAddr());
-
-		return "redirect:/board/infoDetail?num=" + vo.getNum();
-	}
-
-	// 댓글 수정 GET
-	@RequestMapping(value = "/commentModify", method = RequestMethod.GET)
-	public String commentModifyView(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model)
-			throws Exception {
-		log.info(scri + "");
-
-		model.addAttribute("commentModify", commentservice.selectComment(vo.getCno()));
-		model.addAttribute("scri", scri);
-		return "board/commentModify";
-	}
-
-	// 댓글 수정 POST
-	@RequestMapping(value = "/commentModify", method = RequestMethod.POST)
-	public String commentModify(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr)
-			throws Exception {
-		commentservice.update(vo);
-
-		log.info(scri + "");
-		rttr.addAttribute("page", scri.getPage());
-		rttr.addAttribute("perPageNum", scri.getPerPageNum());
-		rttr.addAttribute("t_category", scri.getT_category());
-		rttr.addAttribute("addr", scri.getAddr());
-		return "redirect:/board/infoDetail?num=" + vo.getNum();
-	}
-
-	// 댓글 삭제 GET
-	@RequestMapping(value = "/commentDelete", method = RequestMethod.GET)
-	public String commentDeleteView(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model)
-			throws Exception {
-		model.addAttribute("commentDelete", commentservice.selectComment(vo.getCno()));
-		model.addAttribute("scri", scri);
-		return "board/commentDelete";
-	}
-
-	// 댓글 삭제
-	@RequestMapping(value = "/commentDelete", method = RequestMethod.POST)
-	public String commentDelete(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr)
-			throws Exception {
-		commentservice.delete(vo);
-		rttr.addAttribute("page", scri.getPage());
-		rttr.addAttribute("perPageNum", scri.getPerPageNum());
-		rttr.addAttribute("t_category", scri.getT_category());
-		rttr.addAttribute("addr", scri.getAddr());
-
-		return "redirect:/board/infoDetail?num=" + vo.getNum();
-	}
-
-	// http://localhost:8088/board/tourMap
-	// 부산 지도 출력
-	@RequestMapping(value = "/tourMap", method = RequestMethod.GET)
-	public String tourMapGET() {
-
-		return "/board/tourMap";
-	}
-
-	// 맛집, 관광지 목록 출력
-	@RequestMapping(value = "/tourList", method = RequestMethod.GET)
-	public String tourListGET(HttpSession session, @RequestParam("t_category") int cate,
-			@RequestParam("addr") String addr, SearchCriteria scri, Model model) throws Exception {
-
-		scri.setT_category(cate);
-		scri.setAddr(addr);
-		// 조회수
-		session.setAttribute("upFlag", "1");
-
-		// 글 정보를 가지고 오기
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(scri);
-
-		if (addr.equals("all")) {
-			pageMaker.setTotalCount(service.listCount(scri));
-			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("boardList", service.list(scri));
-			model.addAttribute("scri", scri);
-		} else {
-			pageMaker.setTotalCount(service.listCountAddr(scri));
-			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("boardList", service.listAddr(scri));
-			model.addAttribute("scri", scri);
-
-		}
-
-		return "board/tourList";
-	}
-
-	// 맛집, 관광지 상세내역
-	@RequestMapping(value = "/infoDetail", method = RequestMethod.GET)
-	public String infoDetailGET(@RequestParam("num") int num, @RequestParam("t_category") int t_category,
-			@ModelAttribute("scri") SearchCriteria scri, Model model, HttpSession session) throws Exception {
-
-		String url = "";
-
-		// 조회수
-		String upFlag = (String) session.getAttribute("upFlag");
-
-		if (upFlag != null) {
-			if (upFlag.equals("1")) {
-				service.updateBoardCount(num);
-				session.setAttribute("upFlag", "0");
+		// 댓글 작성
+			@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)
+			public String commentWirte(CommentVO vo,
+					@ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr, HttpSession session)
+					throws Exception {
+				
+				// 세션에 저장된 회원의 아이디
+				String id = (String) session.getAttribute("id");
+				// 테스트용 아이디 생성
+				vo.setWriter(id);
+				commentservice.createComment(vo);
+				rttr.addAttribute("page", scri.getPage());
+				rttr.addAttribute("perPageNum", scri.getPerPageNum());
+				rttr.addAttribute("t_category", scri.getT_category());
+				rttr.addAttribute("addr", scri.getAddr());
+				
+				
+				return "redirect:/board/infoDetail?num=" + vo.getNum();
 			}
+			
+			
+			// 댓글 수정 GET
+			@RequestMapping(value = "/commentModify", method = RequestMethod.GET)
+			public String commentModifyView(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
+				
+				model.addAttribute("commentModify", commentservice.selectComment(vo.getCno()));
+				model.addAttribute("scri", scri);
+				return "board/commentModify";
+			}
+			
+			// 댓글 수정 POST
+			@RequestMapping(value = "/commentModify", method = RequestMethod.POST)
+			public String commentModify(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+				commentservice.update(vo);
+				
+				rttr.addAttribute("page", scri.getPage());
+				rttr.addAttribute("perPageNum", scri.getPerPageNum());
+				rttr.addAttribute("t_category", scri.getT_category());
+				rttr.addAttribute("addr", scri.getAddr());
+				return "redirect:/board/infoDetail?num=" + vo.getNum();
+			}
+			
+			// 댓글 삭제 GET
+			@RequestMapping(value = "/commentDelete", method = RequestMethod.GET)
+			public String commentDeleteView(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model) throws Exception {
+				model.addAttribute("commentDelete", commentservice.selectComment(vo.getCno()));
+				model.addAttribute("scri", scri);
+				return "board/commentDelete";
+			}
+			
+			// 댓글 삭제
+			@RequestMapping(value = "/commentDelete", method = RequestMethod.POST)
+			public String commentDelete(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr) throws Exception {
+				commentservice.delete(vo);
+				rttr.addAttribute("page", scri.getPage());
+				rttr.addAttribute("perPageNum", scri.getPerPageNum());
+				rttr.addAttribute("t_category", scri.getT_category());
+				rttr.addAttribute("addr", scri.getAddr());
+				
+				return "redirect:/board/infoDetail?num=" + vo.getNum();
+			}
+		
+		
+		// http://localhost:8088/board/tourMap
+		// 부산 지도 출력
+		@RequestMapping(value = "/tourMap", method = RequestMethod.GET)
+		public String tourMapGET() {
+			
+			return "/board/tourMap";
+		}
+		
+		
+
+		// 맛집, 관광지 목록 출력
+		@RequestMapping(value = "/tourList", method = RequestMethod.GET)
+		public String tourListGET(HttpSession session, @RequestParam("t_category") int cate,
+				@RequestParam("addr") String addr, SearchCriteria scri, Model model) throws Exception {
+			
+			
+			scri.setT_category(cate);
+			scri.setAddr(addr);
+			// 조회수
+			session.setAttribute("upFlag", "1");
+			session.setAttribute("id", "admin");
+
+			// 글 정보를 가지고 오기
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(scri);
+			
+			if(addr.equals("all")) {
+				pageMaker.setTotalCount(service.listCount(scri));
+				model.addAttribute("pageMaker", pageMaker);
+				model.addAttribute("boardList", service.list(scri));
+				model.addAttribute("scri",scri);
+			} else {
+				pageMaker.setTotalCount(service.listCountAddr(scri));
+				model.addAttribute("pageMaker", pageMaker);
+				model.addAttribute("boardList", service.listAddr(scri));
+				model.addAttribute("scri",scri);
+				
+			}
+			
+			return "board/tourList";
+		}
+		
+		
+
+		
+		// 맛집, 관광지 상세내역
+		@RequestMapping(value = "/infoDetail", method = RequestMethod.GET)
+		public String infoDetailGET(@RequestParam("num") int num, @RequestParam("t_category") int t_category,
+				@ModelAttribute("scri") SearchCriteria scri ,Model model, HttpSession session) throws Exception {
+			
+			
+			
+			//조회수
+			String upFlag = (String) session.getAttribute("upFlag");
+
+			if(upFlag != null) {
+				if (upFlag.equals("1")) {
+					service.updateBoardCount(num);
+					session.setAttribute("upFlag", "0");
+				}
+			}
+			
+				model.addAttribute("vo", service.getTour(num));
+				model.addAttribute("scri", scri);
+
+				// 댓글리스트
+				List<CommentVO> commentList = commentservice.readComment(num);
+				model.addAttribute("commentList", commentList);
+			
+			return "board/tourRead";
 		}
 
 		if (t_category == 0) {
