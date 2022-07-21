@@ -39,8 +39,8 @@ public class AdminController {
 	// 회원 목록
 	@RequestMapping(value = "/memberMg", method = RequestMethod.GET)
 	public String  allWebMemberGET(Model model) {
-		model.addAttribute("mg", service.getallWebMember());
-		model.addAttribute("kakao", service.getallSnsMember());
+		model.addAttribute("mg", service.getAllWebMem());
+		model.addAttribute("kakao", service.getAllSnsMem());
 			
 		return "admin/memberMg";
 	}
@@ -52,7 +52,7 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String deletMemberPOST(HttpSession session, MemberVO vo) {
-		service.deleteMember(vo);
+		service.delMem(vo);
 		session.invalidate();
 		
 		return  "redirect:/admin/memberMg";

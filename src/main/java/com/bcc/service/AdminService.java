@@ -40,12 +40,12 @@ public interface AdminService {
 	public List<Integer> getTotalAcc();
 	
 	// 웹 회원 목록
-	public List<MemberVO> getallWebMember();
+	public List<MemberVO> getAllWebMem();
 	
 	//카카오 회원 목록
-	public List<KakaoVO> getallSnsMember();
+	public List<KakaoVO> getAllSnsMem();
 
 	// 회원 삭제
-	public void deleteMember(MemberVO vo);
+	public void delMem(MemberVO vo);
 	
 }

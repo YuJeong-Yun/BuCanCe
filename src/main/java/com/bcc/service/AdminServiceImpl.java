@@ -284,19 +284,19 @@ public class AdminServiceImpl implements AdminService{
 	}
 	//웹 회원 목록
 	@Override
-	public List<MemberVO> getallWebMember() {
-		return dao.getallWebMember();
+	public List<MemberVO> getAllWebMem() {
+		return dao.getAllWebMem();
 	}
 
 	//카카오 회원 목록
 	@Override
-	public List<KakaoVO> getallSnsMember() {
-		return dao.getallSnsMember();
+	public List<KakaoVO> getAllSnsMem() {
+		return dao.getAllSnsMem();
 	}
 	//회원 삭제
 	@Override
-	public void deleteMember(MemberVO vo) {
-		dao.deleteMember(vo);
+	public void delMem(MemberVO vo) {
+		dao.delMem(vo);
 	}
 	
 	
