@@ -37,7 +37,7 @@ public class BoardController {
 	private CommentService commentservice;
 
 
-	// 댓글 작성
+		// 댓글 작성
 			@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)
 			public String commentWirte(CommentVO vo,
 					@ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr, HttpSession session)

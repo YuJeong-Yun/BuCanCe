@@ -286,12 +286,6 @@ public class BoardServiceImpl implements BoardService{
 
 
 	@Override
-	public BoardVO getFood(int num) {
-		
-		return dao.getFood(num);
-	}
-
-	@Override
 	public List<BoardVO> searchList(String keyword) {
 		
 		return dao.searchList(keyword);

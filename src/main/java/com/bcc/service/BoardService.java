@@ -12,9 +12,6 @@ public interface BoardService {
 	// 관광지 상세페이지 
 	public BoardVO getTour(int num) throws Exception;
 	
-	// 맛집 상세페이지
-	public BoardVO getFood(int num);
-	
 	// 조회수 증가 
 	public void updateBoardCount(Integer num) throws Exception;
 
