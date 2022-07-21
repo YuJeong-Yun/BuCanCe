@@ -5,14 +5,14 @@ import java.sql.Date;
 public class CommentVO {
 	
 	private Integer num; //글 번호
-	private int cno; // 댓글 번호
+	private Integer cno; // 댓글 번호
 	private String content; // 댓글 내용
 	private String writer; // 댓글 작성자
 	private Date regdate; //댓글 작성 시간
-	private String visit;
+	private int visit;
 	
 	public CommentVO() {}
-	public CommentVO(Integer num, int cno, String content, String writer, Date regdate, String visit) {
+	public CommentVO(Integer num, int cno, String content, String writer, Date regdate, int visit) {
 		super();
 		this.num = num;
 		this.cno = cno;
@@ -63,11 +63,11 @@ public class CommentVO {
 		this.regdate = regdate;
 	}
 
-	public String getVisit() {
+	public int getVisit() {
 		return visit;
 	}
 
-	public void setVisit(String visit) {
+	public void setVisit(int visit) {
 		this.visit = visit;
 	}
 

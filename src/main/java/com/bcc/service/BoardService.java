@@ -35,7 +35,7 @@ public interface BoardService {
 
 	// 좋아요 기록 체크 후 insert 또는 delete 실행
 	public void updateThumb(int b_num, int b_category, String id);
-
+	
 	// 검색 결과 가져오기
 	public List<BoardVO> searchList(String keyword);
 

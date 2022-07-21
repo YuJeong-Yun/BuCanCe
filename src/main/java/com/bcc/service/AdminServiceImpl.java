@@ -14,9 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.bcc.domain.KakaoVO;
+import com.bcc.domain.MemberVO;
 import com.bcc.domain.PreOrderVO;
 import com.bcc.persistence.AdminDAO;
-import com.google.gson.JsonObject;
 
 
 @Service
@@ -280,6 +281,22 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 		return results;
+	}
+	//웹 회원 목록
+	@Override
+	public List<MemberVO> getallWebMember() {
+		return dao.getallWebMember();
+	}
+
+	//카카오 회원 목록
+	@Override
+	public List<KakaoVO> getallSnsMember() {
+		return dao.getallSnsMember();
+	}
+	//회원 삭제
+	@Override
+	public void deleteMember(MemberVO vo) {
+		dao.deleteMember(vo);
 	}
 	
 	

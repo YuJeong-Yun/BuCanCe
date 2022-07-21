@@ -1,10 +1,13 @@
 package com.bcc.domain;
 
+import java.sql.Date;
+
 public class KakaoVO {
 	
 	private long k_number;
 	private String k_name;
 	private String k_email;
+	private Date regdate;
 	
 	
 	public long getK_number() {
@@ -25,6 +28,13 @@ public class KakaoVO {
 	public void setK_email(String k_email) {
 		this.k_email = k_email;
 	}
+	public Date getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+	
 	
 	@Override
 	public String toString() {

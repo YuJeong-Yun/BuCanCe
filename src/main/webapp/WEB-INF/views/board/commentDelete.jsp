@@ -8,6 +8,17 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/board.css" type="text/css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style type="text/css">
+#btn_group {
+	border: 1px solid skyblue;
+	background-color: rgba(0, 0, 0, 0);
+	color: skyblue;
+	padding: 5px;
+	border-radius: 10px;
+	text-align: center;	
+	}
+
+</style>
 	<script type="text/javascript">
 	
 	function popupClose(form) {

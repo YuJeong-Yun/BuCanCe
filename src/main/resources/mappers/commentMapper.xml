@@ -7,17 +7,17 @@
 	<select id="getComment" resultType="CommentVO">
 		SELECT
 		CNO, CONTENT, WRITER,
-		REGDATE
-		FROM comment
 		REGDATE, VISIT
 		FROM comment
 		WHERE num = #{num}
 	</select>
+	
 	<!-- 댓글 작성 -->
 	<insert id="putComment">
 		insert into comment(num, content, writer, visit)
 		value(#{num}, #{content}, #{writer}, #{visit})
 	</insert>
+	
 	<!-- 댓글 수정 -->
 	<update id="modComment" parameterType="com.bcc.domain.CommentVO">
 		update comment set content
@@ -25,6 +25,7 @@
 		#{content}
 		where cno = #{cno}
 	</update>
+	
 	<!-- 댓글 삭제 -->
 	<delete id="delComment">
 		DELETE FROM comment
@@ -41,5 +42,7 @@
 		#{num})
 		where b.num = #{num}
 	</update>
-	
+
+
+
 </mapper>

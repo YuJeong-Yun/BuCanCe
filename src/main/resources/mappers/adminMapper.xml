@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
 <mapper namespace="com.bcc.mapper.adminMapper">
+ 
+	<select id="getAllWebMem" resultType="MemberVO">
+		select * from bcc_member
+	</select>
 
+	<select id="getAllSnsMem" resultType="KakaoVO">
+		select * from kakao_table
+  </select>
 
 	<select id="getPmInfo" parameterType="hashMap" resultType="PreOrderVO">
 		select * from premium_order
@@ -64,6 +70,11 @@
 		select count(*) from acc_payment
 		where date_format(accDate, '%Y %c')=#{date}
 	</select>
-	
+
+	<delete id="delMem">
+	 delete from bcc_member
+	 where id =#{id}
+	</delete>
+
 	
 </mapper>  

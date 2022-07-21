@@ -7,6 +7,7 @@ import com.bcc.domain.SearchCriteria;
 
 public interface BoardDAO {
 
+
 	// 글 내용
 	public BoardVO getTour(Integer bno) throws Exception;
 

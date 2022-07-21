@@ -37,7 +37,6 @@ public class BoardServiceImpl implements BoardService {
 	@Inject
 	private BoardDAO dao;
 
-
 		//글 번호에 해당 되는 페이지 상세보기
 		@Override
 		public BoardVO getTour(int num) throws Exception {
@@ -299,5 +298,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		return dao.getListAddr(scri);
 	}
+
+
 
 }

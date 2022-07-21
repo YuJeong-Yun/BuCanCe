@@ -14,10 +14,13 @@ import org.springframework.stereotype.Repository;
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.SearchCriteria;
 
+
 @Repository
 public class BoardDAOImpl implements BoardDAO {
+	
 
 	private static final Logger log = LoggerFactory.getLogger(BoardDAOImpl.class);
+
 
 	// DB접근을 위해 필요한 객체
 	@Inject
@@ -44,7 +47,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 		return session.selectList(namespace + ".getList", scri);
 	}
-
+	
 	// 게시물 정렬결과 조회
 	@Override
 	public List<BoardVO> getAlignList(SearchCriteria scri) throws Exception {
@@ -83,7 +86,6 @@ public class BoardDAOImpl implements BoardDAO {
 		param.put("perPageNum", size);
 		return session.selectList(namespace + ".getList", param);
 	}
-
 	@Override
 	public Integer getCheckThumb(int b_num, String id) {
 		Map thuMap = new HashMap();
@@ -128,7 +130,7 @@ public class BoardDAOImpl implements BoardDAO {
 		session.delete(namespace+".delThumb",thuMap);
 	}
 
-	@Override
+@Override
 	public List<BoardVO> getSearchList(String keyword) {
 		
 		return session.selectList(namespace+".getSearchList",keyword);
