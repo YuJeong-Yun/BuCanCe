@@ -37,43 +37,43 @@ public class BoardDAOImpl implements BoardDAO {
 
 	// 조회수
 	@Override
-	public void updateBoardCnt(Integer num) {
-		session.update(namespace + ".updateBoardCnt", num);
+	public void modBoardCnt(Integer num) {
+		session.update(namespace + ".modBoardCnt", num);
 	}
 
 	// 게시물 목록 조회
 	@Override
-	public List<BoardVO> list(SearchCriteria scri) throws Exception {
+	public List<BoardVO> getList(SearchCriteria scri) throws Exception {
 
 		
-		return session.selectList(namespace + ".listCri", scri);
+		return session.selectList(namespace + ".getList", scri);
 	}
 	
 	// 게시물 정렬결과 조회
 	@Override
-	public List<BoardVO> listAlign(SearchCriteria scri) throws Exception {
+	public List<BoardVO> getAlignList(SearchCriteria scri) throws Exception {
 		
-		return session.selectList(namespace + ".listAlign", scri);
+		return session.selectList(namespace + ".getAlignList", scri);
 	}
 	
 	
 	// 주소 존재시 게시물 정렬결과 조회
 	@Override
-	public List<BoardVO> addrListAlign(SearchCriteria scri) throws Exception {
+	public List<BoardVO> getAlignListAddr(SearchCriteria scri) throws Exception {
 		
-		return session.selectList(namespace + ".addrListAlign", scri);
+		return session.selectList(namespace + ".getAlignListAddr", scri);
 	}
 	
 
 	// 게시물 총 갯수
 	@Override
-	public int listCount(SearchCriteria scri) throws Exception {
+	public int getCountList(SearchCriteria scri) throws Exception {
 		
-		return session.selectOne(namespace + ".listCount", scri);
+		return session.selectOne(namespace + ".getCountList", scri);
 	}
 
 	@Override
-	public List<BoardVO> list(int page, int size) throws Exception {
+	public List<BoardVO> getList(int page, int size) throws Exception {
 		Map<String, Integer> param = new HashMap<String, Integer>();
 
 		if (page <= 0) {
@@ -87,77 +87,71 @@ public class BoardDAOImpl implements BoardDAO {
 
 		param.put("pageStart", page);
 		param.put("perPageNum", size);
-		return session.selectList(namespace + ".listCri", param);
+		return session.selectList(namespace + ".getList", param);
 	}
 	
 	@Override
-	public Integer checkThumb(int b_num, String id) {
+	public Integer getCheckThumb(int b_num, String id) {
 		Map thuMap = new HashMap();
 		thuMap.put("m_id", id);
 		thuMap.put("b_num", b_num);
 		
-		return session.selectOne(namespace+".checkThumb",thuMap);
+		return session.selectOne(namespace+".getCheckThumb",thuMap);
 	}
 
 
 	@Override
-	public void addThumb(int num) {
-		session.update(namespace+".addThumb", num);
+	public void modAddThumb(int num) {
+		session.update(namespace+".modAddThumb", num);
 		
 	}
 
 
 	@Override
-	public void subThumb(int num) {
-		session.update(namespace+".subThumb",num);
+	public void modSubThumb(int num) {
+		session.update(namespace+".modSubThumb",num);
 		
 	}
 
 
 	@Override
-	public void insertThumb(int b_num, int b_category, String m_id) {
+	public void putThumb(int b_num, int b_category, String m_id) {
 		Map thuMap = new HashMap();
 		thuMap.put("b_num", b_num);
 		thuMap.put("b_category", b_category);
 		thuMap.put("m_id", m_id);
 		
-		session.insert(namespace+".insertThumb", thuMap);
+		session.insert(namespace+".putThumb", thuMap);
 		
 	}
 
 
 	@Override
-	public void deleteThumb(int b_num, String id) {
+	public void delThumb(int b_num, String id) {
 		Map thuMap = new HashMap();
 		thuMap.put("m_id", id);
 		thuMap.put("b_num", b_num);
 		
-		session.delete(namespace+".deleteThumb",thuMap);
+		session.delete(namespace+".delThumb",thuMap);
 	}
 	
 
 	@Override
-	public BoardVO getFood(int num) {
+	public List<BoardVO> getSearchList(String keyword) {
 		
-		return session.selectOne(namespace+".getFood", num);
+		return session.selectList(namespace+".getSearchList",keyword);
 	}
 
 	@Override
-	public List<BoardVO> searchList(String keyword) {
+	public int getCountListAddr(SearchCriteria scri) throws Exception {
 		
-		return session.selectList(namespace+".search",keyword);
+		return session.selectOne(namespace+".getListCountAddr", scri);
 	}
 
 	@Override
-	public int listCountAddr(SearchCriteria scri) throws Exception {
+	public List<BoardVO> getListAddr(SearchCriteria scri) throws Exception {
 		
-		return session.selectOne(namespace+".listCountAddr", scri);
-	}
-
-	@Override
-	public List<BoardVO> listAddr(SearchCriteria scri) throws Exception {
-		
-		return session.selectList(namespace+".listCriAddr", scri);
+		return session.selectList(namespace+".getListAddr", scri);
 	}
 	
 	

@@ -127,14 +127,14 @@ public class BoardController {
 			pageMaker.setCri(scri);
 			
 			if(addr.equals("all")) {
-				pageMaker.setTotalCount(service.listCount(scri));
+				pageMaker.setTotalCount(service.countList(scri));
 				model.addAttribute("pageMaker", pageMaker);
-				model.addAttribute("boardList", service.list(scri));
+				model.addAttribute("boardList", service.getList(scri));
 				model.addAttribute("scri",scri);
 			} else {
-				pageMaker.setTotalCount(service.listCountAddr(scri));
+				pageMaker.setTotalCount(service.countListAddr(scri));
 				model.addAttribute("pageMaker", pageMaker);
-				model.addAttribute("boardList", service.listAddr(scri));
+				model.addAttribute("boardList", service.getListAddr(scri));
 				model.addAttribute("scri",scri);
 				
 			}
@@ -196,10 +196,10 @@ public class BoardController {
 			// 글 정보를 가지고 오기
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(scri);
-			pageMaker.setTotalCount(service.listCount(scri));
+			pageMaker.setTotalCount(service.countList(scri));
 			
 			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("boardList", service.listAlign(scri));
+			model.addAttribute("boardList", service.alignList(scri));
 			model.addAttribute("scri",scri);
 			
 			

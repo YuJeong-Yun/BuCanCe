@@ -25,10 +25,10 @@ public interface AdminDAO {
 	public Integer getSNSMem(String date);
 	
 	// profitChart 카드
-	public Integer totalMem();
-	public Integer totalPmMem();
-	public Integer totalComment();
-	public Integer totalAcc(String date);
+	public Integer getTotalMem();
+	public Integer getTotalPmMem();
+	public Integer getTotalComment();
+	public Integer getTotalAcc(String date);
 	
 	
 }
