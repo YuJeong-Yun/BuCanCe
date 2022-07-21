@@ -9,6 +9,12 @@
   	<select id="getNow" resultType="string">
   		select now() 
   	</select>
+  	
+  	<insert id="insertPay" parameterType="PreOrderVO">
+		insert into premium_order
+		values (#{id},systimestamp,systdate+30,sysdate+29,#{pm})
+	</insert>
+	
 
     <select id="countMember" resultType="int">
       select count(*) from bcc_member
@@ -62,6 +68,47 @@
 		set license=0
 		where id=#{id} 
 	</update>
-  	
+
+	<select id="thumbList" resultType="BoardVO">
+        select tourist_spot.*
+		from tourist_spot left join thumb
+		on tourist_spot.num = thumb.b_num and tourist_spot.t_category = thumb.b_category
+        where thumb.m_id=#{id }
+		order by tourist_spot.num asc
+	</select>
+	
+    <delete id="deleteThumb" parameterType="int">
+		delete from thumb
+		where b_num = #{b_num}
+    </delete>
+	
+	<!-- 카카오 로그인 -->
+	<!-- 정보 찾기 -->
+	<select id="findKakao" parameterType="java.util.HashMap" resultType="KakaoVO">
+		select * from kakao_table
+		where k_name=#{nickname} and k_email=#{email}
+	</select>
+
+	<!-- 정보 저장 -->
+	<insert id="kakaoInsert" parameterType="java.util.HashMap">
+		insert into kakao_table(k_name, k_email)
+		values(#{nickname}, #{email})
+	</insert>
+	<!-- 카카오 로그인 -->
+	
+	<!-- 네이버 로그인 -->
+	<!-- 정보 찾기 -->
+	<select id="findNaver" parameterType="java.util.HashMap" resultType="NaverVO">
+		select * from naver_table
+		where n_name=#{nickname} and n_email=#{email}
+	</select>
+
+	<!-- 정보 저장 -->
+	<insert id="naverInsert" parameterType="java.util.HashMap">
+		insert into naver_table(n_name, n_email)
+		values(#{nickname}, #{email})
+	</insert>
+	<!-- 네이버 로그인 -->
+	
   </mapper>
   

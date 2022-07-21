@@ -9,8 +9,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 
+import com.bcc.domain.KakaoVO;
+import com.bcc.persistence.KakaoDAO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -18,6 +22,10 @@ import com.google.gson.JsonParser;
 @Service
 public class KakaoServiceImpl implements KakaoService {
 
+	@Inject
+	private KakaoDAO kdao;
+	
+	
     public String getAccessToken (String authorize_code) {
         String access_Token = "";
         String refresh_Token = "";
@@ -79,52 +87,52 @@ public class KakaoServiceImpl implements KakaoService {
         
     }
     
-    public HashMap<String, Object> getUserInfo (String access_Token) {
 
-        //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
-        HashMap<String, Object> userInfo = new HashMap<>();
-        String reqURL = "https://kapi.kakao.com/v2/user/me";
-        try {
-            URL url = new URL(reqURL);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
+    public KakaoVO getUserInfo (String access_Token) {
 
-            //    요청에 필요한 Header에 포함될 내용
-            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+		HashMap<String, Object> userInfo = new HashMap<String, Object>();
+		String reqURL = "https://kapi.kakao.com/v2/user/me";
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line = "";
+			String result = "";
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+			System.out.println("response body : " + result);
+			JsonParser parser = new JsonParser();
+			JsonElement element = parser.parse(result);
+			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+			String email = kakao_account.getAsJsonObject().get("email").getAsString();
+			userInfo.put("nickname", nickname);
+			userInfo.put("email", email);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-            int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-            String line = "";
-            String result = "";
-
-            while ((line = br.readLine()) != null) {
-                result += line;
-            }
-            System.out.println("response body : " + result);
-
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(result);
-
-            JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-            JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-
-            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-            String profile_image = properties.getAsJsonObject().get("profile_image").getAsString();
-            String email = kakao_account.getAsJsonObject().get("email").getAsString();
-
-            userInfo.put("nickname", nickname);
-            userInfo.put("email", email);
-            userInfo.put("profile_image", profile_image);
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return userInfo;
+		// catch 아래 코드 추가.
+		KakaoVO result = kdao.findkakao(userInfo);
+		// 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
+		System.out.println("S:" + result);
+		if(result==null) {
+		// result가 null이면 정보가 저장이 안되있는거므로 정보를 저장.
+			kdao.kakaoInsert(userInfo);
+			// 위 코드가 정보를 저장하기 위해 Repository로 보내는 코드임.
+			return kdao.findkakao(userInfo);
+			// 위 코드는 정보 저장 후 컨트롤러에 정보를 보내는 코드임.
+			//  result를 리턴으로 보내면 null이 리턴되므로 위 코드를 사용.
+		} else {
+			return result;
+			// 정보가 이미 있기 때문에 result를 리턴함.
+		}
 
 }
 	

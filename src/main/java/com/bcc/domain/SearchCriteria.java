@@ -26,6 +26,7 @@ public class SearchCriteria extends Criteria {
 		this.t_category = t_category;
 	}
 
+
 	public String getSearchType() {
 		return searchType;
 	}
@@ -47,5 +48,7 @@ public class SearchCriteria extends Criteria {
 		return "SearchCriteria [searchType=" + searchType + ", keyword=" + keyword + ", t_category=" + t_category
 				+ ", addr=" + addr + "]";
 	}
+
+	
 
 }
