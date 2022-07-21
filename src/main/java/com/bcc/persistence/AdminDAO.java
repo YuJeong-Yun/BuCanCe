@@ -43,4 +43,5 @@ public interface AdminDAO {
 	public void delMem(MemberVO vo);
 	
 	
+	
 }
