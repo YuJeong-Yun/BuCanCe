@@ -1,7 +1,5 @@
 package com.bcc.web;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,7 +20,6 @@ import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
 import com.bcc.service.BoardService;
 import com.bcc.service.CommentService;
-import com.bcc.service.MemberService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -35,9 +32,6 @@ public class BoardController {
 
 	@Inject
 	private CommentService commentservice;
-
-	@Inject
-	private MemberService ms;
 
 	// 댓글 작성
 	@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)
@@ -126,14 +120,14 @@ public class BoardController {
 		pageMaker.setCri(scri);
 
 		if (addr.equals("all")) {
-			pageMaker.setTotalCount(service.listCount(scri));
+			pageMaker.setTotalCount(service.countList(scri));
 			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("boardList", service.list(scri));
+			model.addAttribute("boardList", service.getList(scri));
 			model.addAttribute("scri", scri);
 		} else {
-			pageMaker.setTotalCount(service.listCountAddr(scri));
+			pageMaker.setTotalCount(service.countListAddr(scri));
 			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("boardList", service.listAddr(scri));
+			model.addAttribute("boardList", service.getListAddr(scri));
 			model.addAttribute("scri", scri);
 
 		}
@@ -187,10 +181,10 @@ public class BoardController {
 		// 글 정보를 가지고 오기
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(service.listCount(scri));
+		pageMaker.setTotalCount(service.countList(scri));
 
 		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("boardList", service.listAlign(scri));
+		model.addAttribute("boardList", service.alignList(scri));
 		model.addAttribute("scri", scri);
 
 		return "board/tourList";
