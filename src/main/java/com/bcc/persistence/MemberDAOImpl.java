@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.bcc.domain.BoardVO;
 import com.bcc.domain.MemberVO;
 
 // @Repository : 해당 클래스를 DAO로 스프링에서 인식하도록 하는 표시
@@ -162,31 +161,6 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update(NAMESPACE+".licenseDown", license);
 		
 	}
-	
-	@Override
-	public List<BoardVO> thumbListAll() throws Exception {
-		
-		List<BoardVO> thumbList = sqlSession.selectList(NAMESPACE+".thumbList");
-		
-		return thumbList;
-	}
-	
 
-	// 게시물 목록 조회
-	@Override
-	public List<BoardVO> thumbList(String id) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".thumbList", id);
-	}
 
-<<<<<<< HEAD
-	@Override
-	public void deleteThumb(int b_num) throws Exception {
-		
-		sqlSession.delete(NAMESPACE+".deleteThumb", b_num);
-	}
-	
-	
-	
-=======
->>>>>>> 63a9e5a7cb363781a17497c9c15347ee59fa38a6
 }

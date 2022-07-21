@@ -38,36 +38,6 @@ public class BoardController {
 
 
 	// 댓글 작성
-<<<<<<< HEAD
-	@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)
-	public String commentWirte(CommentVO vo,
-			 @ModelAttribute("scri") SearchCriteria scri,  RedirectAttributes rttr,
-			HttpSession session) throws Exception {
-
-
-		// 세션에 저장된 회원의 아이디
-		String id = (String) session.getAttribute("id");
-		// 테스트용 아이디 생성
-		
-		vo.setWriter(id);
-
-		
-		log.info(vo.getNum()+"");
-		commentservice.wriComment(vo);
-
-		rttr.addAttribute("num", vo.getNum());
-		rttr.addAttribute("page", scri.getPage());
-		rttr.addAttribute("perPageNum", scri.getPerPageNum());
-		rttr.addAttribute("searchType", scri.getSearchType());
-		rttr.addAttribute("keyword", scri.getKeyword());
-
-		return "redirect:/board/read?num="+vo.getNum();
-	}
-	
-	//댓글 수정 GET
-		@RequestMapping(value="/commentModify", method = RequestMethod.GET)
-		public String commentModifyView(CommentVO vo, SearchCriteria scri, Model model) throws Exception {
-=======
 			@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)
 			public String commentWirte(CommentVO vo,
 					@ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr, HttpSession session)
@@ -86,7 +56,6 @@ public class BoardController {
 				
 				return "redirect:/board/infoDetail?num=" + vo.getNum();
 			}
->>>>>>> 63a9e5a7cb363781a17497c9c15347ee59fa38a6
 			
 			
 			// 댓글 수정 GET
@@ -141,28 +110,7 @@ public class BoardController {
 			return "/board/tourMap";
 		}
 		
-<<<<<<< HEAD
-		//댓글 수정 POST
-		@RequestMapping(value="/commentModify", method = RequestMethod.POST)
-		public String commentModify(CommentVO vo, SearchCriteria scri, RedirectAttributes rttr) throws Exception {
-			
-			commentservice.modify(vo);
-			
-			rttr.addAttribute("num", vo.getNum());
-			rttr.addAttribute("page", scri.getPage());
-			rttr.addAttribute("perPageNum", scri.getPerPageNum());
-			rttr.addAttribute("searchType", scri.getSearchType());
-			rttr.addAttribute("keyword", scri.getKeyword());
-			
-			return  "redirect:/board/read?num="+vo.getNum();
-		}
-	
-		//댓글 삭제 GET
-		@RequestMapping(value="/commentDelete", method = RequestMethod.GET)
-		public String commentDeleteView(CommentVO vo, SearchCriteria scri, Model model) throws Exception {
-=======
 		
->>>>>>> 63a9e5a7cb363781a17497c9c15347ee59fa38a6
 
 		// 맛집, 관광지 목록 출력
 		@RequestMapping(value = "/tourList", method = RequestMethod.GET)
@@ -204,15 +152,6 @@ public class BoardController {
 				@ModelAttribute("scri") SearchCriteria scri ,Model model, HttpSession session) throws Exception {
 			
 			
-<<<<<<< HEAD
-			rttr.addAttribute("num", vo.getNum());
-			rttr.addAttribute("page", scri.getPage());
-			rttr.addAttribute("perPageNum", scri.getPerPageNum());
-			rttr.addAttribute("searchType", scri.getSearchType());
-			rttr.addAttribute("keyword", scri.getKeyword());
-			
-			return  "redirect:/board/read?num="+vo.getNum();
-=======
 			String url = "";
 			
 			//조회수
@@ -249,7 +188,6 @@ public class BoardController {
 			}
 			
 			return url;
->>>>>>> 63a9e5a7cb363781a17497c9c15347ee59fa38a6
 		}
 		
 		

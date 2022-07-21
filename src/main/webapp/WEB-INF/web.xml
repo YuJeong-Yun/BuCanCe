@@ -30,12 +30,8 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-<<<<<<< HEAD
-
-=======
 	
 	<!-- 한글처리 -->
->>>>>>> 63a9e5a7cb363781a17497c9c15347ee59fa38a6
 	<filter>
 		<filter-name>encoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

@@ -37,27 +37,27 @@
 
 
 					<!-- 해당숙소의 방사진들을 슬라이드쇼로 보여줌  -->
-					<div id="slidebox">
+					<div id="slidebox" style="border:none; box-shadow: 5px 5px 5px 5px gray; width: 600px;  border:1px solid; border-radius: 10px 10px 0px 0px;">
 						<img src="${roomdetail0.get(0).room_pic}"
-							style="width: 100%; border-radius: 10px;" id="mainpic">
-						<div id="slideShow">
-							<ul class="slides">
+							style="width: 100%; border-radius: 10px; border:none;" id="mainpic">
+						<div id="slideShow" style="border: 1; border-color : black;">
+							<ul class="slides" style="border:none;">
 								<c:forEach items="${roomdetail0}" begin="0"
 									end="${roomdetail0.size()}">
-									<li style="background-color: white;"><img
-										src="${roomdetail0.get(b).room_pic}" style="width: 150px;"
+									<li style="background-color: white; ">
+									<img src="${roomdetail0.get(b).room_pic}" style="width: 150px;  border-color: black"
 										onclick="change(event);">&nbsp;</li>
 									<c:set var="b" value="${b=b+1 }" />
 								</c:forEach>
 							</ul>
 
-							<p class="controller">
+							<p class="controller" style="border:none;">
 								<!-- &lang: 왼쪽 방향 화살표 &rang: 오른쪽 방향 화살표 -->
 
 								<span class="prev"><b
-									style="font-size: xx-large; color: #70ffb0;">◀</b></span> <span
+									style="font-size: xx-large; color: red;">◀</b></span> <span
 									class="next"><b
-									style="font-size: xx-large; color: #70ffb0;">▶</b></span>
+									style="font-size: xx-large; color: red;">▶</b></span>
 
 							</p>
 						</div>
@@ -65,7 +65,7 @@
 					</div>
 					<!-- 해당숙소의 방사진들을 슬라이드쇼로 보여줌  -->
 
-					<br> <br>
+					<br> <br><br> 
 					<!-- 숙소에 대한 상세 정보를 보여주는 영역 시작 -->
 					<div class="rd-text">
 						<div class="rd-title">
@@ -181,7 +181,7 @@
 								name="sel_date2"> <i class="icon_calendar"></i>
 						</div>
 						<button type="button" id="reserveBtn" class="btn btn-primary"
-							style="width: 90%">예약하기</button>
+							style="width: 100%">예약하기</button>
 						<p></p>
 					</form>
 				</div>

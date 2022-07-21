@@ -37,11 +37,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
-=======
->>>>>>> 63a9e5a7cb363781a17497c9c15347ee59fa38a6
 </head>
 
 <body>
@@ -258,23 +253,12 @@
 					                        <li><a href="#">4</a></li>
 					                    </ul>
 					                </li>
-<<<<<<< HEAD
-					                <li><a href="/tourMap">TOUR</a>
-<!-- 						                <ul class="dropdown"> -->
-<!-- 					                        <li><a href="#">1</a></li> -->
-<!-- 					                        <li><a href="#">2</a></li> -->
-<!-- 					                        <li><a href="#">3</a></li> -->
-<!-- 					                        <li><a href="#">4</a></li> -->
-<!-- 						                    </ul> -->
-						                </li>
-=======
 					                <li><a>TOUR</a>
 						                <ul class="dropdown">
 					                        <li><a href="/board/tourMap">관광지도</a></li>
 					                        <li><a href="/board/tourList?t_category=0&addr=all">모두보기</a></li>
 					                    </ul> 
 					                </li>
->>>>>>> 63a9e5a7cb363781a17497c9c15347ee59fa38a6
 					                <li><a href="./about-us.html">HOTEL</a>
 						                <ul class="dropdown">
 					                        <li><a href="${pageContext.request.contextPath }/accomodation/roomList">인기숙소</a></li>

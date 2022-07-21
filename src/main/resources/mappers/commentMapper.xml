@@ -8,21 +8,12 @@
 		SELECT
 		CNO, CONTENT, WRITER,
 		REGDATE, VISIT
-<<<<<<< HEAD
-		FROM bcc_comment
-=======
 		FROM comment
->>>>>>> 63a9e5a7cb363781a17497c9c15347ee59fa38a6
 		WHERE num = #{num}
 	</select>
 	<!-- 댓글 작성 -->
-<<<<<<< HEAD
-	<insert id="writeComment">
-		insert into bcc_comment(num, content, writer, visit)
-=======
 	<insert id="createComment">
 		insert into comment(num, content, writer, visit)
->>>>>>> 63a9e5a7cb363781a17497c9c15347ee59fa38a6
 		value(#{num}, #{content}, #{writer}, #{visit})
 	</insert>
 	<!-- 댓글 수정 -->
