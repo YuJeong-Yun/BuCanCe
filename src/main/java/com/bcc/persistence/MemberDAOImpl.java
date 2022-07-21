@@ -29,21 +29,10 @@ public class MemberDAOImpl implements MemberDAO {
 	private static final String NAMESPACE = "com.bcc.mapper.memberMapper";
 
 	@Override
-	public String getTime() {
-
-		// selectOne(SQL 구문:mapper네임스페이스.sql구문아이디) : SQL실행 결과를 하나 가져오는 동작
-		// selectOne(SQL 구문,전달값)
-		String time = sqlSession.selectOne(NAMESPACE + ".getTime");
-		// sqlSession.selectOne("com.itwillbs.mapper.MemberMapper.getTime");
-
-		return time;
-	}
-
-	@Override
 	public Integer getMemberCount() {
 		// DAO-sql 호출
 
-		Integer cnt = sqlSession.selectOne(NAMESPACE + ".countMember");
+		Integer cnt = sqlSession.selectOne(NAMESPACE + ".getCountMember");
 
 		return cnt;
 	}
@@ -55,7 +44,7 @@ public class MemberDAOImpl implements MemberDAO {
 		logger.info(" 회원가입 실행! ");
 
 		// insert SQL구문 호출
-		sqlSession.insert(NAMESPACE + ".insertMember", vo);
+		sqlSession.insert(NAMESPACE + ".putInsertMember", vo);
 
 		System.out.println(" DAO : 회원가입 완료 ");
 		logger.info(" 회원가입 완료!!! ");
@@ -67,7 +56,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 		logger.info(" loginMember() 동작 호출 ");
 
-		MemberVO resultVO = sqlSession.selectOne(NAMESPACE + ".login", vo);
+		MemberVO resultVO = sqlSession.selectOne(NAMESPACE + ".getLogin", vo);
 
 		logger.info(" 로그인 체크완료, " + resultVO);
 		logger.info(" 테스트파일로 이동 ");
@@ -80,16 +69,23 @@ public class MemberDAOImpl implements MemberDAO {
 
 		logger.info(" 수정 정보를 전달받아서 sql 호출 ");
 
-		int resultCnt = sqlSession.update(NAMESPACE + ".update", vo);
+		int resultCnt = sqlSession.update(NAMESPACE + ".modMember", vo);
 
 		return resultCnt;
 	}
 
 	@Override
-	public void deleteMember(MemberVO dvo) {
+	public void deleteMember(MemberVO vo) {
 
-		sqlSession.delete(NAMESPACE + ".delete", dvo);
+		sqlSession.delete(NAMESPACE + ".delMember", vo);
 
+	}
+	
+	@Override
+	public void storageMember(MemberVO vo) {
+
+		sqlSession.insert(NAMESPACE + ".putStorageMember", vo);
+		
 	}
 
 	@Override
@@ -107,12 +103,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 		logger.info(" getMemberList(String adminID) 호출 ");
 
-		// mapper에 해당 sql구문 호출
-		// => mapper결과를 List형태로 리턴하겠다
-		// List memberList = sqlSession.selectList(adminID, adminID);
-		// return memberList;
-
-		return sqlSession.selectList(NAMESPACE + ".memberList", adminID);
+		return sqlSession.selectList(NAMESPACE + ".getMemberList", adminID);
 	}
 
 	@Override
@@ -128,7 +119,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int idCheck(String id) {
 
-		int cnt = sqlSession.selectOne(NAMESPACE + ".idCheck", id);
+		int cnt = sqlSession.selectOne(NAMESPACE + ".getIdCheck", id);
 
 		return cnt;
 	}
@@ -148,7 +139,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 		logger.info(" licenseUp(String license) 호출 ");
 
-		sqlSession.update(NAMESPACE + ".licenseUp", license);
+		sqlSession.update(NAMESPACE + ".modLicenseUp", license);
 
 	}
 
@@ -157,14 +148,14 @@ public class MemberDAOImpl implements MemberDAO {
 
 		logger.info(" licenseDown(String license) 호출 ");
 
-		sqlSession.update(NAMESPACE + ".licenseDown", license);
+		sqlSession.update(NAMESPACE + ".modLicenseDown", license);
 
 	}
 
 	@Override
 	public List<BoardVO> thumbListAll() throws Exception {
 
-		List<BoardVO> thumbList = sqlSession.selectList(NAMESPACE + ".thumbList");
+		List<BoardVO> thumbList = sqlSession.selectList(NAMESPACE + ".getThumbList");
 
 		return thumbList;
 	}
@@ -172,13 +163,13 @@ public class MemberDAOImpl implements MemberDAO {
 	// 게시물 목록 조회
 	@Override
 	public List<BoardVO> thumbList(String id) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".thumbList", id);
+		return sqlSession.selectList(NAMESPACE + ".getThumbList", id);
 	}
 
 	@Override
 	public void deleteThumb(int b_num) throws Exception {
 
-		sqlSession.delete(NAMESPACE + ".deleteThumb", b_num);
+		sqlSession.delete(NAMESPACE + ".delThumb", b_num);
 	}
 
 }

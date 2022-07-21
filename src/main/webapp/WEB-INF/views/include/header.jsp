@@ -73,7 +73,7 @@
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="${pageContext.request.contextPath }/index">NOTICE</a>
+                <li class="active"><a href="${pageContext.request.contextPath }/member/index">NOTICE</a>
                    <ul class="dropdown">
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
@@ -125,18 +125,10 @@
 	if(id==null && k_email==null){
 %>
 	<div id="login">
-	<a href="/login">LOGIN</a> | 
-	<a href="/insert">JOIN</a>
+	<a href="/member/login">LOGIN</a> | 
+	<a href="/member/insert">JOIN</a>
 	</div>
 
-<%	
-	} else if(id.equals("admin")){
-		%>
-			<div id="login">
-			관리자님 안녕하세요.
-			<a href="/admin/profitChart">사이트관리</a>
-			<a href="/logout">LOGOUT</a>
-			</div>
 		<%
 	}
 	
@@ -145,18 +137,17 @@
 
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
-	<a href="/mypage?id=<%=id %>">MYPAGE</a>
-	<a href="/logout">LOGOUT</a>
+	<a href="/member/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/member/logout">LOGOUT</a>
 	</div>
 
 <%	
 	}else{ %>
 	
-
 	<div id="login">
 	<%=k_email%>님 로그인 중입니다!!
-	<a href="/mypage?id=<%=k_email %>">MYPAGE</a>
-	<a href="/logout">LOGOUT</a>
+	<a href="/member/mypage?id=<%=k_email %>">MYPAGE</a>
+	<a href="/member/logout">LOGOUT</a>
 	</div>
 <%		
 	}
@@ -193,42 +184,35 @@
                             
 <!-- 로그인 / 회원가입 / 로그아웃 -->
 
+
 <%
 
 	if(id==null && k_email == null){
 %>
 	<div id="login">
-	<a href="/login">LOGIN</a> | 
-	<a href="/insert">JOIN</a>
+	<a href="/member/login">LOGIN</a> | 
+	<a href="/member/insert">JOIN</a>
 	</div>
 
 <%	
-	} else if(id.equals("admin")){
-		%>
-		<div id="login">
-		관리자님 안녕하세요.
-		<a href="/admin/profitChart">사이트관리</a>
-		<a href="/logout">LOGOUT</a>
-		</div>
-		<%
+	} 
 	
-	} else if(id!=null){
+	else if(id!=null){
 	%>
 
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
-	<a href="/mypage?id=<%=id %>">MYPAGE</a>
-	<a href="/logout">LOGOUT</a>
+	<a href="/member/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/member/logout">LOGOUT</a>
 	</div>
 
 <%	
 	} else{ %>
 	
-
 	<div id="login">
 	<%=k_email%>님 로그인 중입니다!!
-	<a href="/mypage?id=<%=k_email %>">MYPAGE</a>
-	<a href="/logout">LOGOUT</a>
+	<a href="/member/mypage?id=<%=k_email %>">MYPAGE</a>
+	<a href="/member/logout">LOGOUT</a>
 	</div>
 <%		
 	}
@@ -267,7 +251,7 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-					                <li class="active"><a href="${pageContext.request.contextPath }/index">NOTICE</a>
+					                <li class="active"><a href="${pageContext.request.contextPath }/member/index">NOTICE</a>
 					                   <ul class="dropdown">
 					                        <li><a href="#">1</a></li>
 					                        <li><a href="#">2</a></li>

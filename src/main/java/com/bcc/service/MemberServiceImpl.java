@@ -75,6 +75,15 @@ public class MemberServiceImpl implements MemberService{
 		dao.deleteMember(vo);
 	}
 
+	
+	
+	@Override
+	public void storageMember(MemberVO vo) {
+		
+		dao.storageMember(vo);
+		
+	}
+
 	@Override
 	public List<MemberVO> getMemberList(String id) {
 		log.info("getMemberList(String id) 호출");

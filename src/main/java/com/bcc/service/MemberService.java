@@ -23,6 +23,9 @@ public interface MemberService {
 	
 	// 회원정보 삭제
 	public void deleteMember(MemberVO vo);
+
+	// 회원정보 보관
+	public void storageMember(MemberVO vo);
 	
 	// 회원목록 조회
 	public List<MemberVO> getMemberList(String id);

@@ -19,12 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.CommentVO;
 import com.bcc.domain.Criteria;
-import com.bcc.domain.MemberVO;
 import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
 import com.bcc.service.BoardService;
 import com.bcc.service.CommentService;
-import com.bcc.service.MemberService;
 
 @Controller
 @RequestMapping("/board/*")
@@ -37,9 +35,6 @@ public class BoardController {
 
 	@Inject
 	private CommentService commentservice;
-
-	@Inject
-	private MemberService ms;
 
 	// 댓글 작성
 	@RequestMapping(value = "/commentWrite", method = RequestMethod.POST)

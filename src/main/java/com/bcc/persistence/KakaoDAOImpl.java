@@ -21,7 +21,7 @@ public class KakaoDAOImpl implements KakaoDAO {
 	
 	@Override
 	public void kakaoInsert(HashMap<String, Object> userInfo) {
-		sqlSession.insert(NAMESPACE+".kakaoInsert",userInfo);
+		sqlSession.insert(NAMESPACE+".putKakaoInsert",userInfo);
 		
 	}
 
@@ -29,7 +29,7 @@ public class KakaoDAOImpl implements KakaoDAO {
 	public KakaoVO findkakao(HashMap<String, Object> userInfo) {
 		System.out.println("RN:"+userInfo.get("nickname"));
 		System.out.println("RE:"+userInfo.get("email"));
-		return sqlSession.selectOne(NAMESPACE+".findKakao", userInfo);
+		return sqlSession.selectOne(NAMESPACE+".getFindKakao", userInfo);
 	}
 	
 }

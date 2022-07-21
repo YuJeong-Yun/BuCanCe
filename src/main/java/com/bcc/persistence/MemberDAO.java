@@ -9,9 +9,6 @@ import com.bcc.domain.ThumbVO;
 
 public interface MemberDAO {
 	
-	// 시간정보 가져오기
-	public String getTime();
-	
 	// 회원수 가져오기
 	public Integer getMemberCount();
 
@@ -25,7 +22,10 @@ public interface MemberDAO {
 	public Integer updateMember(MemberVO vo);
 	
 	// 회원정보 삭제
-	public void deleteMember(MemberVO dvo);
+	public void deleteMember(MemberVO vo);
+
+	// 회원정보 보관
+	public void storageMember(MemberVO vo);
 	
 	// 회원정보 조회
 	public MemberVO getMember(String id);
