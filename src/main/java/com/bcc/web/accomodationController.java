@@ -53,7 +53,7 @@ public class accomodationController {
 		log.info(" 전체숙소목록 정보 ");
 
 		// service에서 저장한 크롤링 정보들을 JSONArray형태로 저장
-		JSONArray roomList = service.roomList();
+		JSONArray roomList = service.getRoomList();
 
 		model.addAttribute("roomList", roomList);
 	}
@@ -68,7 +68,7 @@ public class accomodationController {
 		log.info("rs : " + rs);
 		log.info("검색어 : " + rs.getPlace_name());
 		// service에서 입력한 정보를 바탕으로 원하는 크롤링 정보만 보여줌
-		JSONArray roomList = service.roomSearchList(rs);
+		JSONArray roomList = service.getRoomSearchList(rs);
 
 		model.addAttribute("rs", rs);
 		model.addAttribute("roomList", roomList);
@@ -91,12 +91,12 @@ public class accomodationController {
 		log.info(" 숙소정보를 상세하게 보여주는 페이지 ");
 
 		// 상세정보를 크롤링하여 저장함
-		JSONArray roomdetail0 = service.roomDetail0(bno);
-		JSONArray roomdetail = service.roomDetail(bno);
-		JSONArray roomdetail2 = service.roomDetail2(bno);
-		JSONArray roomdetail3 = service.roomDetail3(bno);
-		JSONArray roomdetail4 = service.roomDetail4(bno);
-		JSONArray roomdetail5 = service.roomDetail5(bno);
+		JSONArray roomdetail0 = service.getRoomDetail0(bno);
+		JSONArray roomdetail = service.getRoomDetail(bno);
+		JSONArray roomdetail2 = service.getRoomDetail2(bno);
+		JSONArray roomdetail3 = service.getRoomDetail3(bno);
+		JSONArray roomdetail4 = service.getRoomDetail4(bno);
+		JSONArray roomdetail5 = service.getRoomDetail5(bno);
 
 		model.addAttribute("roomdetail0", roomdetail0);
 		model.addAttribute("roomdetail", roomdetail);
@@ -128,7 +128,7 @@ public class accomodationController {
 		log.info("roomPriceGET() 호출");
 
 		// bno라는 크롤링할 사이트를 사용
-		JSONArray roomPrice = service.roomPrice(bno);
+		JSONArray roomPrice = service.getRoomPrice(bno);
 
 		log.info("roomPrice : "+ roomPrice);
 		
@@ -162,7 +162,7 @@ public class accomodationController {
 		model.addAttribute("checkinFull", rd.getSel_date());
 
 		// 해당날짜와 숙소에 해당하는 크롤링정보들을 가져옴
-		JSONArray roomReserve = service.roomReserve(bno, rd, ano);
+		JSONArray roomReserve = service.reserveRoom(bno, rd, ano);
 		System.out.println("roomReserve : " + roomReserve);
 		model.addAttribute("roomReserve", roomReserve);
 
@@ -270,7 +270,7 @@ public class accomodationController {
 
 		log.info("vo : " + vo);
 
-		service.roomPay(vo);
+		service.insertRoomPay(vo);
 
 		model.addAttribute("vo", vo);
 
@@ -285,7 +285,7 @@ public class accomodationController {
 		// 결제내역
 		log.info("roomReCompleteGET() 호출");
 
-		roomPayVO vo = service.roomPayInfo(accId);
+		roomPayVO vo = service.getRoomPayInfo(accId);
 
 		// 해당 예약정보
 		model.addAttribute("vo", vo);
@@ -303,7 +303,7 @@ public class accomodationController {
 
 		String id = (String) session.getAttribute("id");
 
-		List<roomPayVO> list = service.roomUserPayInfo(id);
+		List<roomPayVO> list = service.getRoomUserPayInfo(id);
 
 		log.info("payList : " + list);
 
@@ -338,7 +338,7 @@ public class accomodationController {
 		log.info("roomRefundPOST() 호출");
 
 		// 환불고유아이디
-		String rfId = service.roomRf();
+		String rfId = service.refundRoom();
 
 		log.info("vo : " + vo);
 
@@ -366,10 +366,10 @@ public class accomodationController {
 
 		if (tf.equals("OK")) {
 			// 첫번째로 결제테이블의 정보를 환불됨으로 바꾸기(status)
-			service.payStatus(vo.getAccId());
+			service.getPayStatus(vo.getAccId());
 
 			// 두번째로 환불테이블 정보입력
-			service.inRoomRefund(vo);
+			service.getRoomRefund(vo);
 		}
 
 		log.info("vo : " + vo);

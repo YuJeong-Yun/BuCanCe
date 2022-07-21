@@ -61,7 +61,7 @@
 <!-- 날짜 정보 입력시 유효성 체크 끝 -->
     
     
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ade9d233a7ea1b5e6f67c2a543fb0b3&libraries=services"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}//dapi.kakao.com/v2/maps/sdk.js?appkey=8ade9d233a7ea1b5e6f67c2a543fb0b3&libraries=services"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {

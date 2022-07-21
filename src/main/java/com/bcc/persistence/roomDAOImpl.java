@@ -33,45 +33,45 @@ public class roomDAOImpl implements roomDAO {
 	
 	
 	@Override
-	public void roomPaySuc(roomPayVO vo) {
+	public void putPaymentRoom(roomPayVO vo) {
 		
-		 sqlSession.insert(NAMESPACE+".insertRoom",vo);
+		 sqlSession.insert(NAMESPACE+".putPaymentRoom",vo);
 		
 	}
 
 
 	@Override
-	public roomPayVO roomPayInfo(String accId) {
-		return sqlSession.selectOne(NAMESPACE+".selectRoom",accId);
+	public roomPayVO getReInfo(String accId) {
+		return sqlSession.selectOne(NAMESPACE+".getReInfo",accId);
 	}
 
 
 	@Override
-	public List<roomPayVO> roomUserPayInfo(String id) {
-		return sqlSession.selectList(NAMESPACE+".userPayList",id);
+	public List<roomPayVO> getRoomReInfo(String id) {
+		return sqlSession.selectList(NAMESPACE+".getRoomReInfo",id);
 	}
 
 
 	@Override
-	public String roomSearchPay() {
-		return sqlSession.selectOne(NAMESPACE+".selectRoomId");
+	public String getMaxReRoom() {
+		return sqlSession.selectOne(NAMESPACE+".getMaxReRoom");
 	}
 
 
 	@Override
-	public void payStatus(String accId) {
-		sqlSession.update(NAMESPACE+".payStatusRoom",accId);
+	public void updateReStatus(String accId) {
+		sqlSession.update(NAMESPACE+".updateReStatus",accId);
 	}
 
 	@Override
-	public String roomSearchRefund() {
+	public String getMaxRefund() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE+".selectRfId");
+		return sqlSession.selectOne(NAMESPACE+".getMaxRefund");
 	}
 
 	@Override
-	public void inRoomRefund(roomRefundVO vo2) {
-		sqlSession.insert(NAMESPACE+".RoomInRefund",vo2);
+	public void putRfRoom(roomRefundVO vo2) {
+		sqlSession.insert(NAMESPACE+".putRfRoom",vo2);
 	}
 
 
