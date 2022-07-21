@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+order_confirm.jsporder_confirm.jsporder_confirm.jsp<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ include file = "../include/header.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -173,6 +174,17 @@ ${result}
     PCD_PAY_TIME = ${pay_time}
     <br>
     PCD_TAXSAVE_RST = ${taxsave_rst}
+    
+    
+    
+    <!-- 하하하하  -->
+    <br>
+    PCD_PAY_TIME = ${pay_time1}
+    <br>    
+    PCD_PAY_TIME = ${pay_time2}
+    <br>
+
+
 </div>
 
 <div style="width:800px; height:20px">&nbsp;</div>
@@ -180,12 +192,13 @@ ${result}
 <div style="border:1px; width:800px;text-align:center;">
 
 	
-	<c:if test = "${pay_work == 'CERT'}">
+<%-- 	<c:if test = "${pay_work == 'CERT'}">
     	<button id="payConfirmAct">결제승인요청</button>
     </c:if>
     <c:if test = "${pay_work != 'AUTH'}">
     	<button id="payRefundAct">결제승인취소</button>
-	</c:if>
+	</c:if> --%>
+    <button type="button" onclick="location='/order/goods'">결제 완료</button>
     
 </div>
 
@@ -214,3 +227,4 @@ ${result}
 <div id='payRefundResult'></div>
 </body>
 </html>
+<%@ include file = "../include/footer.jsp" %>
