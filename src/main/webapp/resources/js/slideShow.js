@@ -1,14 +1,14 @@
 /**
  * 
  */
-let slides = document.querySelector('.slides');
-let slideImg = document.querySelectorAll('.slides li');
-currentIdx = 0;
-slideCount = slideImg.length;
+let slides = document.querySelector('.slides');  //div영역을 가져옴
+let slideImg = document.querySelectorAll('.slides li'); //사진들을 불러옴
+currentIdx = 0; //현재 인덱스값
+slideCount = slideImg.length; //현재목록갯수
 prev = document.querySelector('.prev'); //이전 버튼
 next = document.querySelector('.next'); //다음 버튼
-slideWidth = 500; //슬라이드이미지 넓이
-slideMargin = 0; //슬라이드 끼리의 마진값
+slideWidth = 600; //슬라이드이미지 넓이
+slideMargin = 200; //슬라이드 끼리의 마진값
 makeClone(); // 처음이미지와 마지막 이미지 복사 함수
 initfunction(); //슬라이드 넓이와 위치값 초기화 함수
 function makeClone() {
@@ -34,7 +34,7 @@ next.addEventListener('click', function () {
       //0.5초동안 복사한 첫번째 이미지에서, 진짜 첫번째 위치로 이동
       slides.style.left = -(slideWidth + slideMargin) + 'px';
       slides.style.transition = `${0}s ease-out`;
-    }, 400);
+    }, 300);
     currentIdx = -1;
   }
   currentIdx += 1;
@@ -50,7 +50,7 @@ prev.addEventListener('click', function () {
     setTimeout(function () {
       slides.style.left = -slideCount * (slideWidth + slideMargin) + 'px';
       slides.style.transition = `${0}s ease-out`;
-    }, 400);
+    }, 300);
     currentIdx = slideCount;
   }
   currentIdx -= 1;

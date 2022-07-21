@@ -9,15 +9,19 @@
            	 	<hr class="sidebar-divider my-0">
             </li>
             
-            
-            
             <li class="nav-item">
-                <a class="nav-link" href="/profitChart">
+                <a class="nav-link" href="/admin/profitChart">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-
-
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/profitChart">
+                   <i class="fa fa-window-maximize" aria-hidden="true"></i>
+                    <span>리뷰 관리</span>
+                </a>
+            </li>
+            
         </ul>
         <!-- End of Sidebar -->     

@@ -13,7 +13,7 @@
 	<!-- Application Loggers -->
 	<logger name="com.bcc.web">
 		<level value="info" />
-	</logger> 
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

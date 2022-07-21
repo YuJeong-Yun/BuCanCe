@@ -77,7 +77,7 @@
                         <li><a href="#">4</a></li>
                     </ul>
                 </li>
-                <li><a href="./rooms.html">TOUR</a>
+                <li><a href="/tourMap">TOUR</a>
 	                <ul class="dropdown">
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
@@ -174,7 +174,7 @@
 					                        <li><a href="#">4</a></li>
 					                    </ul>
 					                </li>
-					                <li><a href="./rooms.html">TOUR</a>
+					                <li><a href="/tourMap">TOUR</a>
 						                <ul class="dropdown">
 					                        <li><a href="#">1</a></li>
 					                        <li><a href="#">2</a></li>

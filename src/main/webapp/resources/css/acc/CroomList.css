@@ -1,0 +1,29 @@
+@charset "UTF-8";
+/*datepicker에서 사용한 이미지 버튼 style적용*/
+img.ui-datepicker-trigger {
+	margin-left: 5px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+/*datepicker에서 사용한 이미지 버튼 style적용*/
+
+
+
+/* 숙소명 입력창  버튼클릭시 테두리 효과 style 적용  */
+input[type=text] {
+	width: 38%;
+	border: 2px solid #aaa;
+	border-radius: 4px;
+	margin: 0px 0;
+	outline: none;
+	padding: 6.5px;
+	box-sizing: border-box;
+	transition: .3s;
+}
+
+input[type=text]:focus {
+	border-color: dodgerBlue;
+	box-shadow: 0 0 8px 0 dogerBlue;
+}
+
+/* 숙소명 입력창  버튼클릭시 테두리 효과 style 적용  */

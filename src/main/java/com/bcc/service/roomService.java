@@ -1,5 +1,7 @@
 package com.bcc.service;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import org.json.simple.JSONObject;
 
 import com.bcc.domain.roomDate;
 import com.bcc.domain.roomPayVO;
+import com.bcc.domain.roomReVO;
 import com.bcc.domain.roomRefundVO;
 import com.bcc.domain.roomSearch;
 
@@ -47,6 +50,8 @@ public interface roomService {
 	public void inRoomRefund(roomRefundVO vo2);
 
 	public String roomRf();
+
+	public String payRefund(roomPayVO vo2) throws MalformedURLException, IOException, org.json.simple.parser.ParseException;
 	
 	
 	

@@ -37,10 +37,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
-    
-
 </head>
 
 <body>
@@ -85,12 +81,10 @@
                         <li><a href="#">4</a></li>
                     </ul>
                 </li>
-                <li><a href="${pageContext.request.contextPath }/board/listAll">TOUR</a>
+                <li><a href="/board/tourMap">TOUR</a>
 	                <ul class="dropdown">
-                        <li><a href="#">TourList</a></li>
-                        <li><a href="#">Reviews</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
+	                    <li><a href="/board/tourMap">관광지도</a></li>
+                        <li><a href="/board/tourList?t_category=0&addr=all">모두보기</a></li>
 	                    </ul>
 	                </li>
                 <li><a href="./about-us.html">HOTEL</a>
@@ -136,7 +130,17 @@
 	</div>
 
 <%	
-	}else if(id!=null){ %>
+	} else if(id.equals("admin")){
+		%>
+			<div id="login">
+			관리자님 안녕하세요.
+			<a href="/admin/profitChart">사이트관리</a>
+			<a href="/logout">LOGOUT</a>
+			</div>
+		<%
+	}
+	
+	else if(id!=null){ %>
 	
 
 	<div id="login">
@@ -199,8 +203,17 @@
 	</div>
 
 <%	
-	}else if(id!=null){ %>
+	} else if(id.equals("admin")){
+		%>
+		<div id="login">
+		관리자님 안녕하세요.
+		<a href="/admin/profitChart">사이트관리</a>
+		<a href="/logout">LOGOUT</a>
+		</div>
+		<%
 	
+	} else if(id!=null){
+	%>
 
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
@@ -209,7 +222,7 @@
 	</div>
 
 <%	
-	}else{ %>
+	} else{ %>
 	
 
 	<div id="login">
@@ -262,24 +275,12 @@
 					                        <li><a href="#">4</a></li>
 					                    </ul>
 					                </li>
-
-					                <li><a href="${pageContext.request.contextPath }/board/listAll">TOUR</a>
+					                <li><a>TOUR</a>
 						                <ul class="dropdown">
-					                        <li><a href="#">1</a></li>
-					                        <li><a href="#">2</a></li>
-					                        <li><a href="#">3</a></li>
-					                        <li><a href="#">4</a></li>
-						                    </ul>
-
-					                <li><a href="/tourMap">TOUR</a>
-<!-- 						                <ul class="dropdown"> -->
-<!-- 					                        <li><a href="#">1</a></li> -->
-<!-- 					                        <li><a href="#">2</a></li> -->
-<!-- 					                        <li><a href="#">3</a></li> -->
-<!-- 					                        <li><a href="#">4</a></li> -->
-<!-- 						                    </ul> -->
-
-						                </li>
+					                        <li><a href="/board/tourMap">관광지도</a></li>
+					                        <li><a href="/board/tourList?t_category=0&addr=all">모두보기</a></li>
+					                    </ul> 
+					                </li>
 					                <li><a href="./about-us.html">HOTEL</a>
 						                <ul class="dropdown">
 					                        <li><a href="${pageContext.request.contextPath }/accomodation/roomList">인기숙소</a></li>

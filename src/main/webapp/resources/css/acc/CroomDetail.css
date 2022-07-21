@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+#slidebox {
+ border:1px solid #00ABB9;
+ box-shadow: 5px 5px 5px 5px gray;
+  
+  /*전체 컨테이너*/
+  width: 600px;
+  border-radius:10px;}
+  
+#slideShow {
+ border:1px solid #00ABB9;
+  border-radius:10px;
+  /*전체 컨테이너*/
+  width: 600px;
+  height: 100px;
+  position: relative;
+  top:-50px;
+ margin: 0 0 -50px 0;
+  overflow: hidden; /*리스트 형식으로 이미지를 일렬로 정렬할 것이기 때문에, 500px 밖으로 튀어 나간 이미지들은 hidden으로 숨겨줘야됨*/
+}
+.slides {border:1px solid gray;
+border-radius:10px;
+  /*이미지들이 담겨있는 슬라이드 컨테이너*/
+  position: absolute;
+  left: 0;
+  top: 0px;
+  width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
+  transition: 0.5s ease-out; /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
+} /* 첫 번째 슬라이드 가운데에 정렬하기위해 첫번째 슬라이드만 margin-left조정 */
+.slides li:first-child {
+border:1px solid skyblue;
+border-radius:10px;
+  margin-left: 50px;
+} /* 슬라이드들 옆으로 정렬 */
+.slides li:not(:last-child) {
+border-radius:10px;
+  float: left;
+  margin-right:0;
+}
