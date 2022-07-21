@@ -7,6 +7,8 @@
 	<select id="getComment" resultType="CommentVO">
 		SELECT
 		CNO, CONTENT, WRITER,
+		REGDATE
+		FROM comment
 		REGDATE, VISIT
 		FROM comment
 		WHERE num = #{num}

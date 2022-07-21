@@ -14,10 +14,8 @@ import org.springframework.stereotype.Repository;
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.SearchCriteria;
 
-
 @Repository
 public class BoardDAOImpl implements BoardDAO {
-	
 
 	private static final Logger log = LoggerFactory.getLogger(BoardDAOImpl.class);
 
@@ -27,7 +25,6 @@ public class BoardDAOImpl implements BoardDAO {
 
 	// mapper의 위치 정보 저장
 	private static final String namespace = "com.bcc.mapper.BoardMapper";
-
 
 	// 글 내용
 	@Override
@@ -45,25 +42,22 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public List<BoardVO> getList(SearchCriteria scri) throws Exception {
 
-		
 		return session.selectList(namespace + ".getList", scri);
 	}
-	
+
 	// 게시물 정렬결과 조회
 	@Override
 	public List<BoardVO> getAlignList(SearchCriteria scri) throws Exception {
 		
 		return session.selectList(namespace + ".getAlignList", scri);
 	}
-	
-	
+
 	// 주소 존재시 게시물 정렬결과 조회
 	@Override
 	public List<BoardVO> getAlignListAddr(SearchCriteria scri) throws Exception {
 		
 		return session.selectList(namespace + ".getAlignListAddr", scri);
 	}
-	
 
 	// 게시물 총 갯수
 	@Override
@@ -89,7 +83,7 @@ public class BoardDAOImpl implements BoardDAO {
 		param.put("perPageNum", size);
 		return session.selectList(namespace + ".getList", param);
 	}
-	
+
 	@Override
 	public Integer getCheckThumb(int b_num, String id) {
 		Map thuMap = new HashMap();
@@ -125,7 +119,6 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 
-
 	@Override
 	public void delThumb(int b_num, String id) {
 		Map thuMap = new HashMap();
@@ -134,7 +127,6 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		session.delete(namespace+".delThumb",thuMap);
 	}
-	
 
 	@Override
 	public List<BoardVO> getSearchList(String keyword) {
@@ -153,7 +145,6 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return session.selectList(namespace+".getListAddr", scri);
 	}
-	
 	
 	
 

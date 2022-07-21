@@ -9,7 +9,7 @@ import com.bcc.domain.SearchCriteria;
 
 public interface BoardService {
 
-	// 관광지 상세페이지 
+	// 관광지 상세페이지
 	public BoardVO getTour(int num) throws Exception;
 	
 	// 조회수 증가 
@@ -23,7 +23,7 @@ public interface BoardService {
 	
 	// 블로그 조회 목록
 	public List getBlog(String title, String addr, String start) throws Exception;
-	
+
 	// 실시간 날씨 조회
 	public JSONArray getWeather() throws Exception;
 	
@@ -33,15 +33,14 @@ public interface BoardService {
 	// 좋아요 기록 체크
 	public Integer checkThumb(int b_num, String id);
 
-	// 좋아요 기록 체크 후 insert 또는 delete 실행 
+	// 좋아요 기록 체크 후 insert 또는 delete 실행
 	public void updateThumb(int b_num, int b_category, String id);
-	
+
 	// 검색 결과 가져오기
 	public List<BoardVO> searchList(String keyword);
-	
+
 	// 주소 존재 시 페이징 처리 된 목록 가져오기
 	public int countListAddr(SearchCriteria scri) throws Exception; 
 	public List<BoardVO> getListAddr(SearchCriteria scri) throws Exception;
 	
-
 }
