@@ -38,16 +38,13 @@ public class PlanController {
 	public String planListGET( Model model, HttpSession session, HttpServletResponse response) throws Exception {
 		log.info(" planListGET() 호출 ");
 		
-		///////////////////////////////////// 지울코드 //////////////////////////////////////////
-		session.setAttribute("id", "yun1");
-		
 		String id = (String) session.getAttribute("id");
 		
 		// 로그인 안하면 로그인 페이지로 이동
 		if(id == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('회원만 이용 가능합니다.'); location.href='/login';</script>");
+			out.println("<script>alert('회원만 이용 가능합니다.'); location.href='/member/login';</script>");
 			out.flush();
 			
 			return "";
