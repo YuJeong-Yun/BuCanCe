@@ -1,7 +1,13 @@
 package com.bcc.service;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
-
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,6 +19,7 @@ import javax.inject.Inject;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,9 +30,11 @@ import org.springframework.stereotype.Service;
 
 import com.bcc.domain.roomDate;
 import com.bcc.domain.roomPayVO;
+import com.bcc.domain.roomReVO;
 import com.bcc.domain.roomRefundVO;
 import com.bcc.domain.roomSearch;
 import com.bcc.persistence.roomDAO;
+
 
 @Service
 public class roomServiceImpl implements roomService{
@@ -38,6 +47,8 @@ public class roomServiceImpl implements roomService{
 			LoggerFactory.getLogger(roomServiceImpl.class);
 	
 	
+
+
 	//숙소목록 페이지
 	@Override
 	public JSONArray roomList() {
@@ -88,8 +99,6 @@ public class roomServiceImpl implements roomService{
 		
 		 return roomList;
 	}
-
-	
 	
 	
 	//숙소목록페이지에서 검색한 정보만 불러오게함
@@ -131,7 +140,9 @@ public class roomServiceImpl implements roomService{
 			String[] titleArr = rs.transTitle(room_title, rs.getPlace_name());
 			String title = rs.getPlace_name();
 			//제목검색
-		
+			log.info(titleArr+"");
+			log.info(title+"");
+			
 		//지역을 선택하지않은 경우
 		if(rs.getArea().equals("favorite")) {	
 			
@@ -286,8 +297,6 @@ public class roomServiceImpl implements roomService{
 
 		return detailList0;
 	}
-	
-	
 	
 	@Override
 	public JSONArray roomDetail(String bno) {
@@ -478,7 +487,7 @@ public class roomServiceImpl implements roomService{
 	
 	
 	
-	
+	//숙소상세가격
 	@Override
 	public JSONArray roomPrice(String bno) {
 
@@ -530,6 +539,7 @@ public class roomServiceImpl implements roomService{
 	}
 	
 	
+	//숙소예약
 	@Override
 	public JSONArray roomReserve(String bno,roomDate rd,String ano) throws ParseException {
 
@@ -624,7 +634,6 @@ public class roomServiceImpl implements roomService{
 		Elements room_tf = doc.select(".info > div:first-child > button");
 		Elements room_df = doc.select(".info > div:last-child > button");
 		
-		// JSON 형태로 영화 정보 저장
 		JSONArray roomList = new JSONArray();
 
 		for (int i = 0; i < room_pic.size(); i++) {
@@ -699,12 +708,14 @@ public class roomServiceImpl implements roomService{
 		
 	}
 
+	//결제 후 내역페이지
 	@Override
 	public roomPayVO roomPayInfo(String accId) {
 		
 		return dao.roomPayInfo(accId);
 	}
 
+	
 	@Override
 	public List<roomPayVO> roomUserPayInfo(String userId) {
 		return dao.roomUserPayInfo(userId);
@@ -719,12 +730,12 @@ public class roomServiceImpl implements roomService{
 		log.info("a = "+a);
 		
 		//a 문자부분
-		String b = "bccs";
+		String b = "bccReNum";
 		int c=0;
 		
 		//데이터 값이 없을때는 bcc1이 들어가고 있을때는 bcc2,bcc3....로 들어감
 		if(a==null) {
-			b = "bccs";
+			b = "bccReNum";
 			c= 0;
 		}else {
 			//a의 숫자부분
@@ -757,7 +768,7 @@ public class roomServiceImpl implements roomService{
 		String a = dao.roomSearchRefund();
 		
 		//a 문자부분
-		String b = "rfs";
+		String b = "bccRfNum";
 				
 		//a 숫자부분
 		int c=0;
@@ -765,7 +776,7 @@ public class roomServiceImpl implements roomService{
 		
 		if(a==null) {
 			
-			b = "rfs";
+			b = "bccRfNum";
 			c= 0;
 		}else {
 			c = Integer.parseInt(a.replaceAll("[^0-9]",""));
@@ -788,6 +799,66 @@ public class roomServiceImpl implements roomService{
 		
 		
 		dao.inRoomRefund(vo2);
+		
+	}
+
+
+	@Override
+	public String payRefund(roomPayVO vo) throws IOException, org.json.simple.parser.ParseException {
+		//access_token 발급
+				HttpURLConnection conn = null;
+				URL url = new URL("https://api.iamport.kr/users/getToken");
+				conn = (HttpURLConnection)url.openConnection();
+				conn.setRequestMethod("POST");
+				conn.setRequestProperty("Content-Type", "application/json");
+				conn.setRequestProperty("Accept", "application/json");
+				conn.setDoOutput(true);
+				JSONObject obj = new JSONObject();
+				obj.put("imp_key", "3817682477122484");
+				obj.put("imp_secret", "a060f160cc159fd09923a2ebfb7678adbac710c0105bedad238924b8d34a67409508e32f09830702");
+				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+				bw.write(obj.toString());
+				bw.flush();
+				bw.close();
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				StringBuilder sb = new StringBuilder();
+				String line = null;
+				while((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+				}
+				br.close();
+				JSONParser jsonParser = new JSONParser();
+				JSONObject jsonObj = (JSONObject)jsonParser.parse(sb.toString());
+				JSONObject responseData = (JSONObject)jsonObj.get("response");
+				String access_token = (String)responseData.get("access_token");
+				
+				log.info("액세스토큰 :"+access_token);
+				
+				//REST API(결제환불) 호출
+				HttpURLConnection conn2 = null;
+				URL url2 = new URL("https://api.iamport.kr/payments/cancel");
+				conn2 = (HttpURLConnection)url2.openConnection();
+				conn2.setRequestMethod("POST");
+				conn2.setRequestProperty("Content-Type", "application/json");
+				conn2.setRequestProperty("Authorization", access_token);
+				conn2.setDoOutput(true);
+				JSONObject obj2 = new JSONObject();
+				obj2.put("reason", "숙소 환불");
+				obj2.put("merchant_uid", vo.getAccId());
+				obj2.put("amount", vo.getAccAmount());
+				BufferedWriter bw2 = new BufferedWriter(new OutputStreamWriter(conn2.getOutputStream()));
+				bw2.write(obj2.toString());
+				bw2.flush();
+				bw2.close();
+				BufferedReader br2 = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
+				StringBuilder sb2 = new StringBuilder();
+				String line2 = null;
+				while((line2 = br2.readLine()) != null) {
+				sb2.append(line2 + "\n");
+				}
+				br2.close();
+				
+				return "OK";
 		
 	}
 	

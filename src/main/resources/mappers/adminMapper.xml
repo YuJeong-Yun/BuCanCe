@@ -10,31 +10,60 @@
 
 	<select id="pmInfo" parameterType="hashMap" resultType="PreOrderVO">
 		select * from premium_order
-		where success_date between #{start} and #{end}
-		order by id
-	</select>
-	
-	<select id="periodicPm" parameterType="hashMap" resultType="String">
-		select periodic_pm from premium_member 
-		where id in (select id from premium_order where success_date between #{start} and #{end})
+		where create_date between #{start} and #{end}
 		order by id
 	</select>
 	
 	<select id="onlyPeriodMems" parameterType="hashMap" resultType="PreOrderVO">
 		select * from premium_order
-		where id in (select id from premium_member where periodic_pm = 'y') 
-		and success_date between #{start} and #{end}
+		where PCD_PAYER_ID is not null
+		and create_date between #{start} and #{end}
 		order by id
 	</select>
 	
-	<select id="trendChart" parameterType="hashMap" resultType="Integer">
+	<select id="trendChart" resultType="Integer">
 		select count(*) from premium_order
-		where day(success_date)=#{day} and month(success_date)=#{month}
+		where date_format(create_date, '%Y %c %e')=#{date}
 	</select>
 	
-	<select id="monthlyChart" parameterType="hashMap" resultType="Integer">
+	<select id="monthlyChart" resultType="Integer">
 		select count(*) from premium_order
-		where year(success_date)=#{year} and month(success_date)=#{month}
+		where date_format(create_date, '%Y %c')=#{date}
 	</select>
+	
+	<select id="webMem" resultType="Integer">
+		select count(*) from bcc_member
+		where date_format(regdate, '%Y %c %e')=#{date}
+	</select>
+	
+	<select id="SNSMem" resultType="Integer">
+		select count(*) from kakao_table
+		where date_format(regdate, '%Y %c %e')=#{date}
+	</select>
+	
+	<select id="totalMem" resultType="Integer">
+		select count(*)+(select count(*) from kakao_table)
+		from bcc_member
+		<![CDATA[
+		where date_format(regdate, '%Y %c %e') <= date_format(now(), '%Y %c %e')
+		]]>
+	</select>
+	
+	<select id="totalPmMem" resultType="Integer">
+		select count(*) from premium_member
+	</select>
+	
+	<select id="totalComment" resultType="Integer">
+		select count(*) from comment
+		<![CDATA[
+		where date_format(regdate, '%Y %c %e') <= date_format(now(), '%Y %c %e')
+		]]>
+	</select>
+	
+	<select id="totalAcc" resultType="Integer">
+		select count(*) from acc_payment
+		where date_format(accDate, '%Y %c')=#{date}
+	</select>
+	
 	
 </mapper>  

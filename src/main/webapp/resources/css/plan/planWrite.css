@@ -36,7 +36,7 @@
 }
 /* 타이틀 */
 .plan-title {
-	background-color: #0288d1;
+	background-color: rgb(192 228 237 / 50%);
 }
 .plan-title > .inner {
 	height: 100px;
@@ -47,16 +47,14 @@
 	line-height: 100px;
 	font-size: 25px;
 	font-weight: 700;
-	color: #efefef;	
-	
-
+	color: #333;	
 	}
 
 
 
 /* 플랜 작성 */
 .make-plan {
-	margin-bottom: 50px;
+	margin: 50px 0;
 }
 .make-plan .container {
 }
@@ -300,6 +298,7 @@
     top: 70px;
     z-index: 1;
     color: #666;
+    pointer-events: none;
 }
 .make-plan .date-plan-container .plan .plan__contents > ul > li .hotel {
     position: absolute;
@@ -307,6 +306,7 @@
     top: 70px;
     z-index: 1;
     color: #507cdf;
+    pointer-events: none;
 }
 .make-plan .date-plan-container .plan .plan__contents > ul > li .content__img {
 	width: 80px;
@@ -352,22 +352,29 @@
 	bottom: 175px;
 	right: 10px;
 }
+.make-plan .inner > .btn-container > * {
+	margin-right: 14px;
+}
 .make-plan .inner > .btn-container input {
 	color: #fff;
 	border: none;
+	border-radius: 5px;
 	height: 30px;
 	box-shadow: 2px 2px 3px #bbb;
 	font-size: 15px;
 }
 .make-plan .inner > .btn-container .btn--reset {
 	background-color: #efefef;
-	margin-right: 7px;
 	color: #333;
 }
+.make-plan .inner > .btn-container .btn--line-path {
+	background-color: #2679df;
+}
 .make-plan .inner > .btn-container .btn--del-path {
+	background-color: #96bbe7;
 	margin-right: 7px;
-	background-color: #4fc3f7;
 }
 .make-plan .inner > .btn-container .btn--check-path {
 	background-color: #2679df;
+	margin-right: 0;
 }
