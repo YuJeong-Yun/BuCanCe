@@ -66,7 +66,10 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
                 	<c:forEach var="tour" items="${tourlist }">
 	                  <li class="tour-item t${tour.num }" onclick="selectTour(event)">
 	                    <img src="${tour.thumbnail }" alt="" class="content__img" />
-	                    <div class="content__title">${tour.title }</div>
+	                    <div class="description">
+		                    <div class="content__title">${tour.title }</div>
+		                    <span class="content__detail">상세정보</span>
+	                    </div>
 	                    <input type="hidden" value="${tour.num }" class="num">
 	                    <input type="hidden" value="${tour.lng }" class="lng">
 	                    <input type="hidden" value="${tour.lat }" class="lat">
@@ -109,7 +112,10 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
                    <c:forEach var="rest" items="${restlist }">
 	                  <li class="tour-item r${rest.num }" onclick="selectTour(event)">
 	                    <img src="${rest.thumbnail }" alt="" class="content__img" />
-	                    <div class="content__title">${rest.title }</div>
+	                    <div class="description">
+		                    <div class="content__title">${rest.title }</div>
+		                    <span class="content__detail">상세정보</span>
+	                    </div>
 	                    <input type="hidden" value="${rest.num }" class="num">
 	                    <input type="hidden" value="${rest.lng }" class="lng">
 	                    <input type="hidden" value="${rest.lat }" class="lat">
@@ -126,7 +132,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
       <!--일정별 관광지 선택-->
       <ul class="date-plan-container hidden">
-      <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22 -->
+      <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 			<!-- 저장된 플랜 있을 경우 출력 -->
 			<c:forEach var="plan" items="${planList }">
 				<li class="plan">
@@ -138,7 +144,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 					    <c:forEach var="planItem" items="${plan[1] }">
 						<li class="plan-item draggable" draggable="true">
 						  <div class="tour-wrapper">
-							<img src="${planItem.thumbnail }" alt="" class="content__img">
+								<img src="${planItem.thumbnail }" alt="" class="content__img">
 								<div class="content__title">${planItem.title }</div>
 								<!-- 호텔 -->
 								<c:if test="${planItem.t_category == -1}"> 
@@ -164,7 +170,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 					</div>
 				</li>
 			</c:forEach>
-		<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22 -->
+		<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 		</ul>
 
       <div class="btn-container hidden">

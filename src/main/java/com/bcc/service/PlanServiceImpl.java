@@ -1,7 +1,9 @@
 package com.bcc.service;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -116,12 +118,12 @@ public class PlanServiceImpl implements PlanService {
 		if (vo.getTour_plan() == null || vo.getTour_plan().equals("")) {
 			return null;
 		}
-
+		
 		// 날짜끼리는 +, 날짜-관광지는 :, 관광지 끼리는 @ 로 구분
 		// 날짜별로 나눠서 allPlanArr에 담음
 		String[] allPlanArr = (String[]) vo.getTour_plan().split("\\+");
-		// 호텔 - 날짜별로 이미지*타이틀*lat*lng 정보 담을 배열
-		String[] allPlanAccArr = (String[]) vo.getTour_plan_acc().split("\\+");
+		// 날짜별로 이미지*타이틀*lat*lng 정보 담을 배열
+		String[] allPlanExtraArr = (String[]) vo.getTour_plan_extra().split("\\+");
 
 		// [날짜, [플랜,플랜, ..]], [날짜, [플랜, 플랜, ..]] 형태로 datePlanContainer에 저장
 		List<List<Object>> datePlanContainer = new ArrayList<>();
@@ -143,50 +145,59 @@ public class PlanServiceImpl implements PlanService {
 
 				continue;
 			}
+			
+			
 
 			// 플랜@플랜@ ... 연결된 문자열 구분
 			String[] planArr = datePlanArr[1].split("@");
-			String[] planAccArr = allPlanAccArr[i].split("@");
+			String[] planExtraArr = allPlanExtraArr[i].split("@");
 			// 플랜 나눠서 planList에 저장
 //			for (String plan : planArr) {
 			for (int j = 0; j < planArr.length; j++) {
 				int tourNum = Integer.parseInt(planArr[j].substring(1));
 				BoardVO tour = new BoardVO();
+				String[] planExtraInfo = planExtraArr[j].split("\\*");
+
 				
 				switch (planArr[j].charAt(0)) {
-				// 관광지일 경우
+				// 관광지, 맛집일 경우
 				case 't':
-					// 관광지 정보 삭제됐으면 정보 전달 x
-					if (dao.getTourInfo(tourNum) != null) {
-						planList.add(dao.getTourInfo(tourNum));
-					}
+					BoardVO tourVO = new BoardVO();
+					tourVO.setThumbnail(planExtraInfo[0]);
+					tourVO.setTitle(planExtraInfo[1]);
+					tourVO.setLat(Double.parseDouble(planExtraInfo[2]));
+					tourVO.setLng(Double.parseDouble(planExtraInfo[3]));
+					tourVO.sett_category(0);
+					tourVO.setNum(tourNum);
+
+					planList.add(tourVO);
 					break;
-				// 맛집일 경우
-				case 'r':
-					if (dao.getTourInfo(tourNum) != null) {
-						planList.add(dao.getTourInfo(tourNum));
-					}
+				case 'r': 
+					BoardVO resVO = new BoardVO();
+					resVO.setThumbnail(planExtraInfo[0]);
+					resVO.setTitle(planExtraInfo[1]);
+					resVO.setLat(Double.parseDouble(planExtraInfo[2]));
+					resVO.setLng(Double.parseDouble(planExtraInfo[3]));
+					resVO.sett_category(1);
+					resVO.setNum(tourNum);
+
+					planList.add(resVO);
 					break;
 				// 숙소일 경우
 				default:
-//					for (HotelVO hotel : hotellist) {
-//						if (hotel.getNum() == tourNum) {
-//							planList.add(hotel);
-//						}
-//					}
-					String[] planAccInfo = planAccArr[j].split("\\*");
-
 					HotelVO hotel = new HotelVO();
-					hotel.setThumbnail(planAccInfo[0]);
-					hotel.setTitle(planAccInfo[1]);
-					hotel.setLat(Double.parseDouble(planAccInfo[2]));
-					hotel.setLng(Double.parseDouble(planAccInfo[3]));
+					hotel.setThumbnail(planExtraInfo[0]);
+					hotel.setTitle(planExtraInfo[1]);
+					hotel.setLat(Double.parseDouble(planExtraInfo[2]));
+					hotel.setLng(Double.parseDouble(planExtraInfo[3]));
 					hotel.setT_category(-1);
 					hotel.setNum(tourNum);
 
 					planList.add(hotel);
 					break;
 				} // switch
+				
+				
 			} // for
 
 			// 날짜, [관광지, 관광지, ...] 형태로 datePlanList에 저장

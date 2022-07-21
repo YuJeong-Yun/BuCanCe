@@ -12,7 +12,9 @@ var map = new Tmapv2.Map("map_div", {
   height: "650px",
   zoom: 11
 });
-map.setOptions({zoomControl:false}); // 지도 옵션 줌컨트롤 표출 비활성화
+map.setOptions({
+  zoomControl: false
+}); // 지도 옵션 줌컨트롤 표출 비활성화
 
 // 숙소 리스트 비동기로 가져와서 추가
 const accContainer = document.querySelector('.tour-list li.tour.accomodation .tour__contents > ul');
@@ -512,7 +514,6 @@ function selectTour(event) {
     alert('숙소 목록을 가져오기까지 잠시만 기다려주세요.');
     return;
   }
-
   // 관광지 : t, 숙소 : a, 맛집 : r
   const category = event.target.classList[1].substring(0, 1);
 
@@ -743,42 +744,38 @@ function savePlan() {
   // 플랜 정보 문자열로 연결해서 DB저장
   // 날짜랑 플랜은 :, 플랜끼리는 @, 날짜 끼리는 +로 구분
   let plan = '';
-  // 숙소는 타이틀, 이미지, 위도, 경도도 같이 저장 - planAcc 변수
+  // 타이틀, 이미지, 위도, 경도도 같이 저장 - planExtra 변수
   // 타이틀과 이미지 위도, 경도 *로 구분
-  let planAcc = '';
+  let planExtra = '';
   for (let i = 0; i < dates.length; i++) {
     // plan에 날짜 담기
     plan += dates[i] + ':';
     // plan에 날짜의 플랜정보 담음
     let plans = planContainer[i].querySelectorAll('.num');
-    // 이미지와 타이틀은 숙소일 경우에만 planAcc 변수에 담아서 DB에 저장
+    // 이미지와 타이틀 담을 배열
     let imgs = planContainer[i].querySelectorAll('.content__img');
     let titles = planContainer[i].querySelectorAll('.content__title');
     for (let j = 0; j < plans.length; j++) {
       plan += plans[j].value + '@';
-      // 이미지와 타이틀은 숙소일 경우에만 planAcc 변수에 담아서 DB에 저장
-      if (plans[j].value.charAt(0) == 'a') {
-        let lat = document.querySelector('li.tour-item.' + plans[j].value + ' .lat').value;
-        let lng = document.querySelector('li.tour-item.' + plans[j].value + ' .lng').value;
-        planAcc += imgs[j].src + '*' + titles[j].innerText + '*' + lat + '*' + lng + '@';
-      } else {
-        planAcc += '0' + '@';
-      }
+      //  planExtra 변수에 담아서 DB에 저장
+      let lat = document.querySelector('li.tour-item.' + plans[j].value + ' .lat').value;
+      let lng = document.querySelector('li.tour-item.' + plans[j].value + ' .lng').value;
+      planExtra += imgs[j].src + '*' + titles[j].innerText + '*' + lat + '*' + lng + '@';
     }
     plan = plan.substring(0, plan.length - 1); // 마지막에 @는 제거
-    planAcc = planAcc.substring(0, planAcc.length - 1); // 마지막에 @는 제거
+    planExtra = planExtra.substring(0, planExtra.length - 1); // 마지막에 @는 제거
     plan += '+';
-    planAcc += '+';
+    planExtra += '+';
   }
   plan = plan.substring(0, plan.length - 1); // 마지막에 +는 제거
-  planAcc = planAcc.substring(0, planAcc.length - 1); // 마지막에 +는 제거
+  planExtra = planExtra.substring(0, planExtra.length - 1); // 마지막에 +는 제거
   // DB에 저장
   const vo = {
     num: grp_num,
     tour_plan: plan,
     tour_date_start: dates[0],
     tour_date_end: dates[dates.length - 1],
-    tour_plan_acc: planAcc
+    tour_plan_extra: planExtra
   };
   $.ajax({
     url: path + '/planREST/planModify',
@@ -877,12 +874,17 @@ function calcLinePath() {
   let tempLng = '';
   // 경로 2개 이상 있을때만 폴리라인 생성
   if (cNums.length >= 2) {
-    preLat = document.querySelector('.tour-item.' + cNums[0] + ' .lat').value;
-    preLng = document.querySelector('.tour-item.' + cNums[0] + ' .lng').value;
+//    preLat = document.querySelector('.tour-item.' + cNums[0] + ' .lat').value;
+//    preLng = document.querySelector('.tour-item.' + cNums[0] + ' .lng').value;
+    preLng = positions[seq][cNums[0]].getPosition()._lng;
+    preLat = positions[seq][cNums[0]].getPosition()._lat;
   }
   for (let i = 1; i < cNums.length; i++) {
-    tempLat = document.querySelector('.tour-item.' + cNums[i] + ' .lat').value;
-    tempLng = document.querySelector('.tour-item.' + cNums[i] + ' .lng').value;
+//    tempLat = document.querySelector('.tour-item.' + cNums[i] + ' .lat').value;
+//    tempLng = document.querySelector('.tour-item.' + cNums[i] + ' .lng').value;
+	  tempLng = positions[seq][cNums[i]].getPosition()._lng;
+	  tempLat = positions[seq][cNums[i]].getPosition()._lat;
+
 
     const polyline = new Tmapv2.Polyline({
       path: [
@@ -921,10 +923,10 @@ function delLinePath() {
 // 현재 checkShowLinePath 값에 따라 직선 폴리라인 출력 / 제거 실행
 function checkLinePath() {
   // 호텔 목록 가져오기 전이면 기다려 달라고 알림창 띄우기
-  if (getHotelList == 0) {
-    alert('숙소 목록을 가져오기까지 잠시만 기다려주세요.');
-    return;
-  }
+//  if (getHotelList == 0) {
+//    alert('숙소 목록을 가져오기까지 잠시만 기다려주세요.');
+//    return;
+//  }
 
   // checkShowLinePath 0 이면 출력, 1이면 제거
   if (checkShowLinePath == 0) {

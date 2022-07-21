@@ -2,6 +2,8 @@ package com.bcc.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -157,19 +159,15 @@ public class PlanController {
 			return "";
 		}
 		
-//		// 숙소 정보 없으면 저장
-//		if (session.getAttribute("hotellist") == null) {
-//			// 숙소 정보 세션에 저장
-//			session.setAttribute("hotellist", planService.getHotelList());
-//			log.info("숙소 정보 세션 저장 완료");
-//		}
-		
 		// 그룹 멤버 전달
 		model.addAttribute("grpMemberList",grpService.getGrpMemberList(num));
+
 		// 여행 경로 정보 전달
 		model.addAttribute("planList", planService.getTourPlanList(num));
+
 		// 초대중인 멤버 리스트 전달
 		model.addAttribute("invitingList",  grpService.getInvitingList(num));
+
 		// 플랜 정보 전달
 		model.addAttribute("plan", planService.getPlanInfo(num));
 		
