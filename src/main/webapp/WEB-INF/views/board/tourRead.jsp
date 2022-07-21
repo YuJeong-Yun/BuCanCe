@@ -18,7 +18,7 @@
 						<h3 style="font-family: 'NanumSquareBold' !important;">${vo.title }
 						</h3>
 					</div>
-					<table id="resInfo">
+					<table id="infos">
 						<tbody>
 							<tr>
 								<td class="r-o">전화번호</td>

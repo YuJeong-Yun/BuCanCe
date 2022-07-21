@@ -28,10 +28,10 @@ public interface AdminDAO {
 	public Integer getSNSMem(String date);
 	
 	// profitChart 카드
-	public Integer totalMem();
-	public Integer totalPmMem();
-	public Integer totalComment();
-	public Integer totalAcc(String date);
+	public Integer getTotalMem();
+	public Integer getTotalPmMem();
+	public Integer getTotalComment();
+	public Integer getTotalAcc(String date);
 	
 	// 웹 회원 목록
 	public List<MemberVO> getAllWebMem();
@@ -41,7 +41,4 @@ public interface AdminDAO {
 	
 	// 회원 삭제
 	public void delMem(MemberVO vo);
-	
-	
-	
 }
