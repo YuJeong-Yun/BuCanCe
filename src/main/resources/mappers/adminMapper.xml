@@ -62,15 +62,15 @@
         where date_format(accDate, '%Y %c')=#{date}
     </select>
 
-	<select id="allWebMember" resultType="MemberVO">
+	<select id="getAllWebMem" resultType="MemberVO">
 		select * from bcc_member
 	</select>
 
-	<select id="allSnsMember" resultType="KakaoVO">
+	<select id="getAllSnsMem" resultType="KakaoVO">
 		select * from kakao_table
 	</select>
 
-	<delete id="deleteMember">
+	<delete id="delMem">
 	 delete from bcc_member
 	 where id =#{id}
 	</delete>
