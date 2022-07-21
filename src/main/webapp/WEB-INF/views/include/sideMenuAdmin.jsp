@@ -8,8 +8,6 @@
                 <hr class="sidebar-divider my-0">
             </li>
             
-            
-            
             <li class="nav-item">
                 <a class="nav-link" href="/admin/profitChart">
                     <i class="fa fa-clock-o" aria-hidden="true"></i>

@@ -2,11 +2,12 @@ package com.bcc.domain;
 
 public class SearchCriteria extends Criteria {
 
-	private String searchType;
-	private String keyword;
+	private String searchType = "";
+	private String keyword = "";
 	private Integer t_category;
 	private String addr;
-	
+
+
 	public String getSearchType() {
 		return searchType;
 	}
@@ -37,5 +38,4 @@ public class SearchCriteria extends Criteria {
 		return "SearchCriteria [searchType=" + searchType + ", keyword=" + keyword + ", t_category=" + t_category
 				+ ", addr=" + addr + "]";
 	}
-	
 }

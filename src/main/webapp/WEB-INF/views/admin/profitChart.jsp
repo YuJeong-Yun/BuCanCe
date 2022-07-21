@@ -1,10 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <jsp:include page="../include/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" type="text/css">	
+=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<jsp:include page="../include/headerAdmin.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/board.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.min.css" type="text/css">	
+>>>>>>> 54d25621b9689c1a7a246cd78ebc6c4278df7257
 	
 
 	    <div id="wrapper">
@@ -22,7 +32,7 @@
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                        	<h3>부캉스</h3>
+                        	<h3><a href="/index" id="toMain">부캉스 메인으로</a></h3>
                         </div>
                     </form>
 
@@ -36,9 +46,6 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">관리자 DashBoard</h1>
                     </div>
-
-                    
-                    
 
 						<div class="row">
 						
@@ -152,13 +159,17 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 숙박 결제건(전월대비)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${totalAcc[0] } 
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="display: inline-block;">${totalAcc[0] }건
                                             </div>
-                                            <c:if test="${(totalAcc[0]-totalAcc[1]) < 0 } ">
-                                             <span>${totalAcc[0]-totalAcc[1] } <i class="fa fa-arrow-up" aria-hidden="true" style="color:red;"></i></span>
+                                            
+                                            <!-- 전월과 비교하여 증가 감소 추세 표시 -->
+                                            <c:if test="${totalAcc[0]-totalAcc[1] > 0 }">
+                                             <span style="color:red; margin-left: 7px;">${totalAcc[0]-totalAcc[1] } ▲</span> 
                                             </c:if>
                                             
-                                            
+                                            <c:if test="${totalAcc[0]-totalAcc[1] < 0 }">
+                                             <span style="color:blue; margin-left: 7px;">${(totalAcc[0]-totalAcc[1])*-1 } ▼</span> 
+                                            </c:if>
                                             
                                         </div>
                                     </div>
@@ -171,33 +182,55 @@
                 </div>
                 
                 <br>
-                <!-- 프리미엄 회원 내역 조회 -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">기간별 조회</h1>
+                        <h1 class="h3 mb-0 text-gray-800">매출 기간별 조회</h1>
                     </div>
                     
                     <div class="card mb-4">
                                 <div class="card-header">
+                                    조회할 기간을 선택해주세요.
                      			<div id="dataTable_filter" class="dataTables_filter">
-                     				조회 기간 : &nbsp;&nbsp;
                 				    <input type="button" value="오늘" class="periodBtn" id="today">
                        				<input type="button" value="7일" class="periodBtn" id="week">
                        				<input type="button" value="1개월" class="periodBtn" id="1month">
                        				<input type="button" value="3개월" class="periodBtn" id="3months">
-                       				<input type="button" value="6개월" class="periodBtn" id="6months">&nbsp;&nbsp;
+                       				<input type="button" value="6개월" class="periodBtn" id="6months">
                      				<input type="date" name=startDate id="startDate">
                      				~
                      				<input type="date" name=endDate id="endDate">
-                     				<input type="button" value="조회" id="profitBtn">
+                     				<input type="button" value="조회" id="profitBtn" onclick="pmMems();">
+                     				<span id="filterBtn">
+                     				</span>
                        			</div>
                                 </div>
+                                
                                 <div class="card-body">
+                           		<div class="row">
+                      				<div class="col-sm-12">
+                      					<table class="table table-bordered dataTable" id="dataTable" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                    <thead>
+                                        <tr role="row">
+                                        	<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending">회원 ID</th>
+                                        	<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" >정기 구독 여부</th>
+                                        	<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending">구독 결제일</th>
+                                        	<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">구독 만료일</th>
+                                        	</tr>
+                                    </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+								</tfoot>
+                                </table>
                                 </div>
+                                </div>
+                                </div>
+                                
                             </div>
+
                 </div>
                 <!-- 프리미엄 회원 내역 조회, 총 액수 출력 -->
 

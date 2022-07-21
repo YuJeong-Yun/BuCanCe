@@ -34,7 +34,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formatedDate );
 		
-		return "home";
+		return "/tour/main";
 	}
 	
 	

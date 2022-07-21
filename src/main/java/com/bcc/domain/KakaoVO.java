@@ -9,6 +9,7 @@ public class KakaoVO {
 	private String k_email;
 	private Date regdate;
 	
+	
 	public long getK_number() {
 		return k_number;
 	}
@@ -34,6 +35,11 @@ public class KakaoVO {
 		this.regdate = regdate;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "KakaoVO [k_number=" + k_number + ", k_name=" + k_name + ", k_email=" + k_email + "]";
+	}
 	
 
 }

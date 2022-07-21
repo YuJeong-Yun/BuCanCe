@@ -2,369 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
-
-<!-- <script type="text/javascript"> -->
-
-<!-- history.replaceState({}, null, location.pathname); -->
-
-<!-- </script> -->
-
-<meta charset="UTF-8">
-<meta name="description" content="Sona Template">
-<meta name="keywords" content="Sona, unica, creative, html">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Sona | Template</title>
-<script>
-
-function selectAll(selectAll)  {
-	  const checkboxes 
-	       = document.getElementsByName('checkOne');
-	  
-	  checkboxes.forEach((checkbox) => {
-	    checkbox.checked = selectAll.checked;
-	  })
-	}
-	
-</script>
-
 <!--유의사항 팝업창  ........................................................................................... -->
 <script src="http://wooshin.mireene.co.kr/g5/js/jquery-1.8.3.min.js"></script>
-<style type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/acc/CroomPayment2.css" type="text/css">
 
-/* a태그 (유의사항)  하이퍼링크 파랑색표시되는거 제거 */
-A:link {
-	text-decoration: none;
-	color: #646464;
-}
-
-A:visited {
-	text-decoration: none;
-	color: #646464;
-}
-
-A:active {
-	text-decoration: none;
-	color: #646464;
-}
-
-A:hover {
-	text-decoration: none;
-	color: #646464;
-}
-
-/* 유의사항 클릭시 효과  */
-#wrapper_popup div[id^='hd_pops_'] {
-	width: 100%;
-	margin: 10px;
-	max-width: 500px;
-	position: absolute;
-	padding: 20px 30px;
-	background: #fff;
-	z-index: 100000;
-	border-radius: 5px;
-	overflow: auto;
-	display: none
-}
-
-#wrapper_popup div[id^='hd_pops_'] h2 {
-	display: block;
-	margin: 10px 0 0;
-	padding-bottom: 15px;
-	border-bottom: 1px #d8d8d8 solid;
-	font-size: 1.1em;
-	font-weight: bold
-}
-
-#wrapper_popup div[id^='hd_pops_'] p {
-	display: block;
-	padding: 20px 0 0;
-	margin: 0;
-	font-size: 1.0em;
-	line-height: 1.5em
-}
-
-#wrapper_popup div[id^='hd_pops_'] .hour-close {
-	display: inline-block;
-	padding: 8px 20px;
-	background: #f2f2f2;
-	color: #666;
-	border: 1px #d8d8d8 solid;
-	border-radius: 5px;
-	margin-top: 15px
-}
-
-#wrapper_popup div[id^='hd_pops_'] .hour-close:hover {
-	background: #54A94C;
-	color: #f8f8f8
-}
-
-#wrapper_popup div[id^='hd_pops_'] img.cancel {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	zoom: 1;
-	filter: alpha(opacity = 50);
-	opacity: 0.7
-}
-
-#wrapper_popup div[id^='hd_pops_'] img.cancel:hover {
-	zoom: 1;
-	filter: alpha(opacity = 100);
-	opacity: 1.0
-}
-
-#wrapper_popup .c1 {
-	border: 1px #54A94C solid;
-	border-bottom: 10px solid #54A94C
-} /*green*/
-#wrapper_popup .c2 {
-	border: 1px #5390BC solid;
-	border-bottom: 10px solid #5390BC
-} /*blue*/
-#wrapper_popup .c3 {
-	border: 1px #FF969D solid;
-	border-bottom: 10px solid #FF969D
-} /*pink*/
-#wrapper_popup .c4 {
-	border: 1px #5B56A6 solid;
-	border-bottom: 10px solid #5B56A6
-} /*purple*/
-#wrapper_popup .c5 {
-	border: 1px #CCB7A2 solid;
-	border-bottom: 10px solid #CCB7A2
-} /*maroon*/
-#wrapper_popup .b-area {
-	width: 100%;
-	text-align: right;
-	margin-top: 20px;
-	border-top: 1px #ccc solid
-}
-
-#wrapper_popup ul {
-	list-style-type: disc;
-	margin: 0 0 20px;
-	line-height: 1.5em
-}
-
-#wrapper_popup .c-green {
-	color: green !important
-}
-
-#wrapper_popup .c-blue {
-	color: blue !important
-}
-
-#wrapper_popup .c-red {
-	color: red !important
-}
-
-.layer-shadow {
-	box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
-	-webkit-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
-	-moz-box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.74);
-}
-</style>
-
-
-<style>
-/* 서명란 클릭시 테두리(blue) 강조 효과  */
-input[type=text] {
-	width: 100%;
-	border: 2px solid #aaa;
-	border-radius: 2px;
-	margin: 4px 0;
-	outline: none;
-	padding: 4px;
-	box-sizing: border-box;
-	transition: .3s;
-}
-
-input[type=text]:focus {
-	border-color: dodgerBlue;
-	box-shadow: 0 0 8px 0 dogerBlue;
-}
-</style>
-<!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap"
-	rel="stylesheet">
-
-<!-- Css Styles -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/elegant-icons.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/flaticon.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/nice-select.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/magnific-popup.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/slicknav.min.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css"
-	type="text/css">
-</head>
-
-<body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
-
-	<!-- Offcanvas Menu Section Begin -->
-	<div class="offcanvas-menu-overlay"></div>
-	<div class="canvas-open">
-		<i class="icon_menu"></i>
-	</div>
-	<div class="offcanvas-menu-wrapper">
-		<div class="canvas-close">
-			<i class="icon_close"></i>
-		</div>
-		<div class="search-icon search-switch">
-			<i class="icon_search"></i>
-		</div>
-		<div class="header-configure-area">
-			<div class="language-option">
-				<img src="${pageContext.request.contextPath}/resources/img/flag.jpg"
-					alt=""> <span>EN <i class="fa fa-angle-down"></i></span>
-				<div class="flag-dropdown">
-					<ul>
-						<li><a href="#">Zi</a></li>
-						<li><a href="#">Fr</a></li>
-					</ul>
-				</div>
-			</div>
-			<a href="#" class="bk-btn">Booking Now</a>
-		</div>
-		<nav class="mainmenu mobile-menu">
-			<ul>
-				<li class="active"><a href="./index.html">Home</a></li>
-				<li><a href="./rooms.html">Rooms</a></li>
-				<li><a href="./about-us.html">About Us</a></li>
-				<li><a href="./pages.html">Pages</a>
-					<ul class="dropdown">
-						<li><a href="./room-details.html">Room Details</a></li>
-						<li><a href="./blog-details.html">Blog Details</a></li>
-						<li><a href="#">Family Room</a></li>
-						<li><a href="#">Premium Room</a></li>
-					</ul></li>
-				<li><a href="./blog.html">News</a></li>
-				<li><a href="./contact.html">Contact</a></li>
-			</ul>
-		</nav>
-		<div id="mobile-menu-wrap"></div>
-		<div class="top-social">
-			<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-				class="fa fa-twitter"></i></a> <a href="#"><i
-				class="fa fa-tripadvisor"></i></a> <a href="#"><i
-				class="fa fa-instagram"></i></a>
-		</div>
-		<ul class="top-widget">
-			<li><i class="fa fa-phone"></i> (12) 345 67890</li>
-			<li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-		</ul>
-	</div>
-	<!-- Offcanvas Menu Section End -->
-
-	<!-- Header Section Begin -->
-	<header class="header-section header-normal">
-		<div class="top-nav">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6">
-						<ul class="tn-left">
-							<li><i class="fa fa-phone"></i> (12) 345 67890</li>
-							<li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-						</ul>
-					</div>
-					<div class="col-lg-6">
-						<div class="tn-right">
-							<div class="top-social">
-								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-									class="fa fa-twitter"></i></a> <a href="#"><i
-									class="fa fa-tripadvisor"></i></a> <a href="#"><i
-									class="fa fa-instagram"></i></a>
-							</div>
-							<a href="#" class="bk-btn">Booking Now</a>
-							<div class="language-option">
-								<img
-									src="${pageContext.request.contextPath}/resources/img/flag.jpg"
-									alt=""> <span>EN <i class="fa fa-angle-down"></i></span>
-								<div class="flag-dropdown">
-									<ul>
-										<li><a href="#">Zi</a></li>
-										<li><a href="#">Fr</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="menu-item">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-2">
-						<div class="logo">
-							<a href="./index.html"> <img
-								src="${pageContext.request.contextPath}/resources/img/logo.png"
-								alt="">
-							</a>
-						</div>
-					</div>
-					<div class="col-lg-10">
-						<div class="nav-menu">
-							<nav class="mainmenu">
-								<ul>
-									<li><a href="./index.html">Home</a></li>
-									<li class="active"><a href="./rooms.html">Rooms</a></li>
-									<li><a href="./about-us.html">About Us</a></li>
-									<li><a href="./pages.html">Pages</a>
-										<ul class="dropdown">
-											<li><a href="./room-details.html">Room Details</a></li>
-											<li><a href="./blog-details.html">Blog Details</a></li>
-											<li><a href="#">Family Room</a></li>
-											<li><a href="#">Premium Room</a></li>
-										</ul></li>
-									<li><a href="./blog.html">News</a></li>
-									<li><a href="./contact.html">Contact</a></li>
-								</ul>
-							</nav>
-							<div class="nav-right search-switch">
-								<i class="icon_search"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- Header End -->
+	<jsp:include page="../include/header.jsp" />
 
 	<!-- Breadcrumb Section Begin -->
 	<div class="breadcrumb-section">
@@ -374,9 +16,8 @@ input[type=text]:focus {
 					<div class="breadcrumb-text">
 						<h2>결제 페이지</h2>
 						<div class="bt-option">
-							<a
-								href="${pageContext.request.contextPath}/accomodation/roomList">Home</a>
-							<span>결제페이지</span>
+							<a href="<%=request.getHeader("REFERER")%>">예약항목 선택</a>
+							<span>결제 페이지</span>
 						</div>
 					</div>
 				</div>
@@ -385,6 +26,7 @@ input[type=text]:focus {
 	</div>
 	<!-- Breadcrumb Section End -->
 
+<c:if test="${id != null}">
 	<!-- Room Details Section Begin -->
 	<section class="room-details-section spad">
 		<div class="container">
@@ -395,7 +37,7 @@ input[type=text]:focus {
 							style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
 						<div class="rd-text">
 							<div class="rd-title">
-								<h3>${vo.room_title}</h3>
+								<h3>${vo.room_subTitle}</h3>
 								<div class="rdt-right"></div>
 							</div>
 							
@@ -403,7 +45,7 @@ input[type=text]:focus {
 								<tbody>
 									<tr>
 										<td class="r-o">예약명 <input type="text" placeholder="서명란"
-											value="${user_name}" style="border-radius: 10px;"></td>
+											value="${user_name}" style="border-radius: 10px;" readonly></td>
 										<td><br> <br></td>
 									</tr>
 									<tr>
@@ -421,7 +63,7 @@ input[type=text]:focus {
 												<option value="html5_inicis" selected="selected">신용/체크카드</option>
 												<option value="payco">PAYCO</option>
 												<option value="danal_tpay">휴대폰결제</option>
-										</select>></td>
+										</select></td>
 									</tr>
 								</tbody>
 							</table>
@@ -621,119 +263,16 @@ input[type=text]:focus {
 
 
 				</div>
-
 				<!-- 팝업내용 -->
 
 
+				<!-- 아임포트 결제 숙박용 -->
+				<jsp:include page="../accomodation/acc/JroomPayment2.jsp"/>
+				<!-- 아임포트 결제 숙박용 -->
 
 
 
-
-				<!-- 아임포트 -->
-				<script type="text/javascript"
-					src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-				<script type="text/javascript"
-					src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-				<script type="text/javascript">
-
-		var IMP = window.IMP; // 생략 가능
-		IMP.init("imp49919207"); // 예: imp00000000
-
-		
-function requestPay() {
-			
-			if(!$('#checkOne').is(':checked')){
-				alert('숙소이용규칙 및 취소/환불규정에 동의가 필요합니다.');
 				
-			}else if(!$('#checkTwo').is(':checked')){
-				alert('개인정보 수집 및 이용 동의가 필요합니다.');
-			}
-			else if(!$('#checkThree').is(':checked')){
-				alert('개인정보 제 3자 제공 동의가 필요합니다.');
-			}
-			else if(!$('#checkFour').is(':checked')){
-				alert('만 14세 이상의 확인이 필요합니다.');
-			}else{
-				alert('결제를 시작합니다.');
-				   // IMP.request_pay(param, callback) 결제창 호출
-			      IMP.request_pay({ // param
-			    	  pg: $("#payment-select option:selected").val(),
-// 			          pay_method: "card",
-			          merchant_uid: "${accId}",  //고유 id
-			          name: '${vo.room_title}',  //상품이름
-// 			          amount: '${vo.room_fcost}', //가격
-			          amount: 100, //가격
-			          buyer_email: "${email}",
-			          buyer_name: "${user_name}",
-			          buyer_tel: "${tel}",
-			          buyer_addr: "${address1}",
-			          buyer_postcode: "${zip}",
-			      }, function (rsp) { // callback
-			          if (rsp.success) {
-			        	// http://localhost:8088/accomodation/roomList
-			              // 결제 성공 시 로직,
-			             alert('결제성공');
-			             $.ajax({
-			 				type:"GET",
-			 				url :"${pageContext.request.contextPath}/accomodation/roomPayDB",
-			 				data : {
-			 					accId: "${accId}",  //고유 id
-			 					accKind: $("#payment-select option:selected").val(),
-			 					accName: '${vo.room_title}',  //상품이름
-// 						        amount: '${vo.room_fcost}', //가격
-						        accAmount: 100, //가격
-						        email: "${email}",
-						        user_name: "${user_name}",
-						        tel: "${tel}",
-						        address1: "${address1}",
-						        zip: "${zip}",
-						        id : "${id}",
-						        sort : "acc",
-						        roomSort : "${vo.room_subTitle}",
-						        endTime : "${vo.accendtime}",
-						        useTime : "${vo.accusetime}",
-						        checkIn : "${vo.checkin}",
-						        checkOut : "${vo.checkout}",
-						        license : "${license}"
-			 				},
-			 				contentType: "application/json",
-			 				success : function(data){
-			 					alert('성공');
-			 					
-			 					
-			 				}
-			 			
-			 			}); //ajax끝
-			 			
-			              //결제내역페이지로이동
-			             location.href= "${pageContext.request.contextPath}/accomodation/roomReComplete?accId="+"${accId}";	
-			          } else {
-			         	
-			              // 결제 실패 시 로직, 뒤로가기
-			              alert('결제실패');
-			              //결제 실패시 뒤로가기
-			              location.href=document.getElementById("reload").value;
-			          }
-			      });
-			}
-			
-			
-	   
-	    }
-
-		
-		
-		
-	    function cancelPay() {
-	    	
-	    	alert('예약목록창으로 이동');
-	    	location.href=document.getElementById("reload").value;
-	    	
-	    }
-		
-		
-</script>
-				<!-- 아임포트 -->
 
 
 
@@ -755,7 +294,7 @@ function requestPay() {
 							<div class="check-date">
 								<label for="date-in"><b>입실시간</b></label> <input type="text"
 									id="date-in" readonly
-									value="${vo.checkin } &nbsp;  ${vo.room_endtime} 시까지"
+									value="${vo.checkin }   ${vo.room_endtime}시까지"
 									style="font-weight: bold;"> <i class="icon_calendar"></i>
 							</div>
 
@@ -775,15 +314,15 @@ function requestPay() {
 
 								<c:if test="${license==0}">
 									<label for="date-out"><strong>총 결제 금액 (VAT포함)</strong></label>
-									<input type="text" id="date-out" value="${vo.room_fcost} 원"
+									<input type="text" id="date-out2" value="${vo.room_fcost} 원"
 										readonly style="font-weight: bold; font-size: 20px">
 								</c:if>
 
 								<c:if test="${license==1}">
 									<label for="date-out"><strong style="color: red">총
 											결제 금액 (멤버쉽 할인, VAT포함)</strong></label>
-									<input type="text" id="date-out"
-										value="<fmt:formatNumber type="number" maxFractionDigits="0"  value="${vo.room_fcost*0.9}" /> 원"
+									<input type="text" id="date-out2"
+										value="<fmt:formatNumber type="number" maxFractionDigits="0"  value="${vo.room_fcost*0.95}" /> 원"
 										style="color: red; font-weight: bold; font-size: 20px"
 										readonly>
 								</c:if>
@@ -795,18 +334,16 @@ function requestPay() {
 								</ul>
 							</div>
 
-
-							<button type="button" onclick="requestPay()"
-								class="btn btn-primary"
-								style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
-								<span style="color: black"><b>결제하기</b></span>
-							</button>
+						<button type="button"  onclick="requestPay()"
+						class="btn btn-block btn-primary btn-sm" style=" border: solid white; width: 90%; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px; margin-bottom: 10px;">
+						<span style="color: black"><b>결제하기</b></span>
+						</button>
 
 							<button type="button" onclick="cancelPay()"
-								class="btn btn-block btn-danger btn-lg"
-								style="border: solid white; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
-								<span style="color: black"><b>취소하기</b></span>
-							</button>
+						class="btn btn-block btn-danger btn-sm"
+						style="border: solid white; width: 90%; box-shadow: 5px 5px 5px 5px gray; border-radius: 10px;">
+						<span style="color: black"><b>취소하기</b></span>
+						</button>
 							<p></p>
 						</form>
 
@@ -820,125 +357,11 @@ function requestPay() {
 		</div>
 
 
-
-
 	</section>
+	</c:if>
 	<!-- Room Details Section End -->
 
 
+<jsp:include page="../include/footer.jsp" />
 
-	<!-- Footer Section Begin -->
-	<footer class="footer-section">
-		<div class="container">
-			<div class="footer-text">
-				<div class="row">
-					<div class="col-lg-4">
-						<div class="ft-about">
-							<div class="logo">
-								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/img/footer-logo.png"
-									alt="">
-								</a>
-							</div>
-							<p>
-								We inspire and reach millions of travelers<br /> across 90
-								local websites
-							</p>
-							<div class="fa-social">
-								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
-									class="fa fa-twitter"></i></a> <a href="#"><i
-									class="fa fa-tripadvisor"></i></a> <a href="#"><i
-									class="fa fa-instagram"></i></a> <a href="#"><i
-									class="fa fa-youtube-play"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 offset-lg-1">
-						<div class="ft-contact">
-							<h6>Contact Us</h6>
-							<ul>
-								<li>(12) 345 67890</li>
-								<li>info.colorlib@gmail.com</li>
-								<li>856 Cordia Extension Apt. 356, Lake, United State</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-3 offset-lg-1">
-						<div class="ft-newslatter">
-							<h6>New latest</h6>
-							<p>Get the latest updates and offers.</p>
-							<form action="#" class="fn-form">
-								<input type="text" placeholder="Email">
-								<button type="submit">
-									<i class="fa fa-send"></i>
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="copyright-option">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-7">
-						<ul>
-							<li><a href="#">Contact</a></li>
-							<li><a href="#">Terms of use</a></li>
-							<li><a href="#">Privacy</a></li>
-							<li><a href="#">Environmental Policy</a></li>
-						</ul>
-					</div>
-					<div class="col-lg-5">
-						<div class="co-text">
-							<p>
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;
-								<script>
-									document.write(new Date().getFullYear());
-								</script>
-								All rights reserved | This template is made with <i
-									class="fa fa-heart" aria-hidden="true"></i> by <a
-									href="https://colorlib.com" target="_blank">Colorlib</a>
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- Footer Section End -->
 
-	<!-- Search model Begin -->
-	<div class="search-model">
-		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div class="search-close-switch">
-				<i class="icon_close"></i>
-			</div>
-			<form class="search-model-form">
-				<input type="text" id="search-input" placeholder="Search here.....">
-			</form>
-		</div>
-	</div>
-	<!-- Search model end -->
-
-	<!-- Js Plugins -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.nice-select.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-</body>
-
-</html>

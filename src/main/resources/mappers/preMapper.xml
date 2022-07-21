@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bcc.mapper.preMapper">
+
+ <insert id="insertPreMember">
+        insert into premium_member
+        values(#{PCD_PAY_OID},#{PCD_PAYER_NAME},date_add(now(),interval 1 month))
+    </insert>
+    
+    <insert id="insertOrder">
+        insert into premium_order
+         values(#{PCD_PAY_OID},#{PCD_PAYER_NAME},now(),date_add(now(),interval 1 month),date_sub(date_add(now(),interval 1 month),interval 1 day),#{PCD_PAYER_ID})
+    </insert>
+    
+    <update id="deleteKey">
+       update premium_order
+       set PCD_PAYER_ID = ''
+       where PCD_PAYER_NAME=#{id} 
+    </update>
+    
+    <select id="getKey">
+        select PCD_PAYER_ID from premium_order
+        where PCD_PAYER_NAME=#{id}
+    </select>
+        
+    <select id="getName" parameterType="MemberVO">
+        select name from bcc_member
+        where id=#{id}
+    </select>
+    
+    <select id="getTel" parameterType="MemberVO">
+        select tel from bcc_member
+        where id=#{id}
+    </select>
+    
+    <select id="getEmail" parameterType="MemberVO">
+        select email from bcc_member
+        where id=#{id}
+    </select>
+
+    <delete id="deletePreMember">
+        delete from premium_member
+        where #{license_deadline} = curdate()
+    </delete>
+    
+    <insert id="ReOrder">
+        insert into premium_order
+        values(#{PCD_PAY_OID},#{PCD_PAYER_NAME},now(),date_add(now(),interval 1 month),Y,date_sub(date_add(now(),interval 1 month),interval 1 day),#{PCD_PAYER_ID})
+    </insert>
+
+</mapper>
+  

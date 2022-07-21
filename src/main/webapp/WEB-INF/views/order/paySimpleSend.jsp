@@ -1,9 +1,6 @@
-<%@page import="com.bcc.domain.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<% PreMemberVO vo = (PreMemberVO)request.getAttribute("PreMemberVO"); %>
-    
+    <%@ include file = "../include/header.jsp" %>
     
 <!DOCTYPE html>
 <html>
@@ -116,19 +113,19 @@
                 <tr>
                     <td>*페이플 고유 ID(빌링키)</td>
                     <td> :
-                        <input type="text" name="PCD_PAYER_ID" id="PCD_PAYER_ID" value="ㅎㅎ<%-- <%=vo.getPCD_PAYER_ID()%> --%>" required />
+                        <input type="text" name="PCD_PAYER_ID" id="PCD_PAYER_ID" value="${payer_id}" required />
                     </td>
                 </tr>
                 <tr>
                     <td>*상품명</td>
                     <td> :
-                        <input type="text" name="PCD_PAY_GOODS" id="PCD_PAY_GOODS" value="프리미엄 이용권" required />
+                        <input type="text" name="PCD_PAY_GOODS" id="PCD_PAY_GOODS" value="프리미엄 정기 구독권" required />
                     </td>
                 </tr>
                 <tr>
                     <td>*결제금액</td>
                     <td> :
-                        <input type="text" name="PCD_PAY_TOTAL" id="PCD_PAY_TOTAL" value="100" required />
+                        <input type="text" name="PCD_PAY_TOTAL" id="PCD_PAY_TOTAL" value="1000" required />
                     </td>
                 </tr>
                 <tr>
@@ -141,7 +138,7 @@
                 <tr>
                     <td>결제자 이메일</td>
                     <td> :
-                        <input type="text" name="PCD_PAYER_EMAIL" id="PCD_PAYER_EMAIL" value="ㅎㅎ<%-- <%=vo.getEmail() %> --%>" />
+                        <input type="text" name="PCD_PAYER_EMAIL" id="PCD_PAYER_EMAIL" value="${payer_email}" />
                     </td>
                 </tr>
             </table>
@@ -154,3 +151,4 @@
 </body>
 
 </html>
+    <%@ include file = "../include/footer.jsp" %>
