@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <jsp:include page="../include/header.jsp" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" type="text/css">	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.min.css" type="text/css">	
 
 	    <div id="wrapper">
 		<jsp:include page="../include/sideMenuAdmin.jsp" />
