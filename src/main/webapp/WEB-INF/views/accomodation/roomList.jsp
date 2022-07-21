@@ -98,7 +98,7 @@
 				<c:forEach items="${roomList}" begin="0" end="5">
 					<div class="col-lg-4 col-md-6" style="height:600px;" >
 					<c:if test="${roomList.get(a).room_rank!=''}">
-			<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
+			<a href="${pageContext.request.contextPath}/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
 			</c:if>
 						<div class="room-item" style="border-radius: 2em; ">
 							
