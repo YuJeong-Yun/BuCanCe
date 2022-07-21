@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file = "../include/header.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../include/header.jsp"%>
 
 
 <!DOCTYPE html>
@@ -34,6 +35,9 @@
 		</table>
 
 		<button type="button" onclick="location.href='/order/orderInfo'">구독하기</button>
+
+		<br>
+
 </body>
 </html>
-<%@ include file = "../include/footer.jsp" %>
+<%@ include file="../include/footer.jsp"%>

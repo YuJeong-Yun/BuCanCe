@@ -55,7 +55,9 @@ public class OrderController extends PaypleController {
 	@RequestMapping(value = "/deleteKey", method = RequestMethod.GET)
 	public String deleteGET(HttpSession session) {
 		
+		//임시
 		session.setAttribute("id", "itwill2");
+		
 		String id = (String) session.getAttribute("id");
 		
 		log.info(" deleteGET() 호출 ");
@@ -68,20 +70,19 @@ public class OrderController extends PaypleController {
 	public String deletePOST(HttpSession session, PreOrderVO dvo/* , MemberVO vo */) {
 		log.info(" deletePOST() 호출 ");
 		
+		//임시
 		session.setAttribute("id", "itwill2");
+		
 		String id = (String) session.getAttribute("id");
 		
 		//vo.setId((String)session.getAttribute("id"));
 		//log.info(vo+"");
 		
 		// 서비스 - 회원삭제동작
-		orderservice.deleteKey(dvo);
-		
-		// 세션 초기화
-		// session.invalidate();
-		
+	    orderservice.deleteKey(dvo);
+	    
 		// 페이지 이동
-		return "redirect:/index";
+		return "redirect:/";
 	}	
 	
 ////////////////////////////////////////////////////////////////////////	
