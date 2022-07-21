@@ -23,6 +23,37 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	</section>
 
 
+
+	<!-- 관광지/맛집 상세정보 모달 -->
+	<div class="modal fade" id="tourModal" tabindex="-1" aria-labelledby="tourModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <div class="modal-title detail__title" id="tourModalLabel"></div>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <div class="detail__content">
+	        	<img class="content__img" alt="" />
+	        	<div>
+	        		<span class="info">운영시간</span><div class="info-value content__runtime"></div>
+	        	</div>
+	        	<div>
+	        		<span class="info">상세주소</span><div class="info-value content__addr"></div>
+	        	</div>
+	        	<div>
+	        		<span class="info">홈페이지</span><div class="info-value content__homepage"></div>
+	        	</div>
+	        	<div class="content__content"></div>
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary more">더 보러가기</button>
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
   <!--플랜 작성-->
   <section class="make-plan">
     <div class="inner">
@@ -64,11 +95,13 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
               <div class="tour__contents">
                 <ul>
                 	<c:forEach var="tour" items="${tourlist }">
-	                  <li class="tour-item t${tour.num }" onclick="selectTour(event)">
+	                  <li class="tour-item t${tour.num }" onclick="selectTour(event)"  >
 	                    <img src="${tour.thumbnail }" alt="" class="content__img" />
 	                    <div class="description">
 		                    <div class="content__title">${tour.title }</div>
-		                    <span class="content__detail">상세정보</span>
+		                    <span class="content__detail" data-bs-toggle="modal" data-bs-target="#tourModal" onclick="showDetailInfo(${tour.num})">
+ 								상세정보
+							</span>
 	                    </div>
 	                    <input type="hidden" value="${tour.num }" class="num">
 	                    <input type="hidden" value="${tour.lng }" class="lng">
@@ -114,7 +147,9 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	                    <img src="${rest.thumbnail }" alt="" class="content__img" />
 	                    <div class="description">
 		                    <div class="content__title">${rest.title }</div>
-		                    <span class="content__detail">상세정보</span>
+		                    <span class="content__detail" data-bs-toggle="modal" data-bs-target="#tourModal" onclick="showDetailInfo(${rest.num})">
+ 								상세정보
+							</span>
 	                    </div>
 	                    <input type="hidden" value="${rest.num }" class="num">
 	                    <input type="hidden" value="${rest.lng }" class="lng">
@@ -129,6 +164,8 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
           </ul>
         </div>
       </div>
+      
+      
 
       <!--일정별 관광지 선택-->
       <ul class="date-plan-container hidden">
@@ -189,11 +226,11 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	const path = '${pageContext.request.contextPath}';
 	const grp_num = '${num}';
 </script>
-<jsp:include page="../include/footer.jsp"></jsp:include>
 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx4c685864b69a4b71966f8bda89ed2dd3"></script>
-<script defer src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js?v=<%=System.currentTimeMillis() %>"></script>
+<script defer src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js"></script>
+<jsp:include page="../include/footer.jsp"></jsp:include>
