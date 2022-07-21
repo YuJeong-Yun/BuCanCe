@@ -21,7 +21,7 @@ function deleteThumb(){
 	        data:{b_num:b_num},
  	        success:function(){
  	        	alert("찜 취소 성공");
- 	        	location.href="/favorite";
+ 	        	location.href="/member/favorite";
  	        },
 			error:function(error){
 				alert("찜 취소 실패");

@@ -5,6 +5,7 @@ public class KakaoVO {
 	private long k_number;
 	private String k_name;
 	private String k_email;
+	private String k_id;
 	
 	
 	public long getK_number() {
@@ -25,11 +26,19 @@ public class KakaoVO {
 	public void setK_email(String k_email) {
 		this.k_email = k_email;
 	}
+	public String getK_id() {
+		return k_id;
+	}
+	public void setK_id(String k_id) {
+		this.k_id = k_id;
+	}
 	
 	@Override
 	public String toString() {
-		return "KakaoVO [k_number=" + k_number + ", k_name=" + k_name + ", k_email=" + k_email + "]";
+		return "KakaoVO [k_number=" + k_number + ", k_name=" + k_name + ", k_email=" + k_email + ", k_id=" + k_id + "]";
 	}
 	
-
+	
+	
+	
 }

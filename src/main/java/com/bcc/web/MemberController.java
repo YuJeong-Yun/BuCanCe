@@ -67,7 +67,7 @@ public class MemberController {
 		@RequestMapping(value = "/favorite", method = RequestMethod.GET)
 		public String thumbList(@ModelAttribute("result") String result, SearchCriteria scri, Model model, HttpSession session)
 				throws Exception {
-			
+			    	
 			String id = (String)session.getAttribute("id");
 			
 			// 조회수
@@ -300,6 +300,10 @@ public class MemberController {
 	    	// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
 	    	session.setAttribute("k_name", userInfo.getK_name());
 	    	session.setAttribute("k_email", userInfo.getK_email());
+	    	session.setAttribute("kakao", "kakao");
+	    	
+	    	// id는 실행한 앱에서만 고유값... 실행 위치마다 달라진다. 그러므로 사용 X
+	    	
 	    	// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
 	    	// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.
 

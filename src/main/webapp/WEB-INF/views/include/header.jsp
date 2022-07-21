@@ -129,10 +129,8 @@
 	<a href="/member/insert">JOIN</a>
 	</div>
 
-		<%
-	}
-	
-	else if(id!=null){ %>
+<%	
+	}else if(id!=null){ %>
 	
 
 	<div id="login">
@@ -144,6 +142,7 @@
 <%	
 	}else{ %>
 	
+
 	<div id="login">
 	<%=k_email%>님 로그인 중입니다!!
 	<a href="/member/mypage?id=<%=k_email %>">MYPAGE</a>
@@ -184,10 +183,11 @@
                             
 <!-- 로그인 / 회원가입 / 로그아웃 -->
 
+<!-- 로그인 / 회원가입 / 로그아웃 -->
 
 <%
 
-	if(id==null && k_email == null){
+	if(id==null && k_email==null){
 %>
 	<div id="login">
 	<a href="/member/login">LOGIN</a> | 
@@ -195,10 +195,8 @@
 	</div>
 
 <%	
-	} 
+	}else if(id!=null){ %>
 	
-	else if(id!=null){
-	%>
 
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
@@ -207,8 +205,9 @@
 	</div>
 
 <%	
-	} else{ %>
+	}else{ %>
 	
+
 	<div id="login">
 	<%=k_email%>님 로그인 중입니다!!
 	<a href="/member/mypage?id=<%=k_email %>">MYPAGE</a>
@@ -218,7 +217,7 @@
 	}
 %>
 	
-<!-- 로그인 / 회원가입 / 로그아웃 -->	
+<!-- 로그인 / 회원가입 / 로그아웃 -->
 
 
                             <a href="#" class="bk-btn">Booking Now</a>
