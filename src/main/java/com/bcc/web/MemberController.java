@@ -66,7 +66,7 @@ public class MemberController {
 		// 글 정보를 가지고 오기
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(bs.listCount(scri));
+		pageMaker.setTotalCount(bs.countList(scri));
 
 		log.info(pageMaker + "");
 		model.addAttribute("pageMaker", pageMaker);

@@ -242,17 +242,17 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public Integer getTotalMem() {
 
-		return dao.totalMem();
+		return dao.getTotalMem();
 	}
 
 	@Override
 	public Integer getTotalPmMem() {
-		return dao.totalPmMem();
+		return dao.getTotalPmMem();
 	}
 
 	@Override
 	public Integer getTotalComment() {
-		return dao.totalComment();
+		return dao.getTotalComment();
 	}
 
 	@Override
@@ -265,7 +265,7 @@ public class AdminServiceImpl implements AdminService{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy M");
 		
 		// 이번달건수
-		results.add(dao.totalAcc(sdf.format(date)));
+		results.add(dao.getTotalAcc(sdf.format(date)));
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
@@ -277,7 +277,7 @@ public class AdminServiceImpl implements AdminService{
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		
 		// 지난달건수
-		results.add(dao.totalAcc(year+" "+month));
+		results.add(dao.getTotalAcc(year+" "+month));
 		
 		
 		return results;

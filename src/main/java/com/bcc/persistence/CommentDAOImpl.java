@@ -24,37 +24,36 @@ public class CommentDAOImpl implements CommentDAO {
 
 	// 댓글 조회
 	@Override
-	public List<CommentVO> readComment(Integer num) throws Exception {
-		return session.selectList(namespace + ".readComment", num);
+	public List<CommentVO> getComment(Integer num) throws Exception {
+		return session.selectList(namespace + ".getComment", num);
 	}
 
 	// 댓글 작성
 	@Override
-	public void createComment(CommentVO vo) throws Exception {
+	public void putComment(CommentVO vo) throws Exception {
 		log.info(vo + "");
-		session.insert(namespace + ".createComment", vo);
-		session.update(namespace+".updateCommentCnt", vo.getNum());
+		session.insert(namespace + ".putComment", vo);
+		session.update(namespace+".modCommentCnt", vo.getNum());
 	}
 
 	// 댓글 수정
 	@Override
-	public void update(CommentVO vo) throws Exception {
-		session.update(namespace + ".update", vo);
+	public void modComment(CommentVO vo) throws Exception {
+		session.update(namespace + ".modComment", vo);
 
 	}
 
 	// 댓글 삭제
 	@Override
-	public void delete(CommentVO vo) throws Exception {
-		session.delete(namespace + ".delete", vo);
+	public void delComment(CommentVO vo) throws Exception {
+		session.delete(namespace + ".delComment", vo);
 	}
 	
 	// 선택된 댓글 조회
 	@Override
-	public CommentVO selectComment(Integer cno) throws Exception {
-		System.out.println(session.selectOne(namespace + ".selectComment", cno) + "");
+	public CommentVO getSelectComment(Integer cno) throws Exception {
 		System.out.println(cno);
-		return session.selectOne(namespace + ".selectComment", cno);
+		return session.selectOne(namespace + ".getSelectComment", cno);
 	}
 	
 
