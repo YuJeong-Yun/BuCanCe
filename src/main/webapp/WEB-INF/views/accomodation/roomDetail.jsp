@@ -15,7 +15,8 @@
 				<div class="breadcrumb-text">
 					<h2>방 상세정보</h2>
 					<div class="bt-option">
-						<a href="${pageContext.request.contextPath }/accomodation/roomList">숙소선택</a>
+						<a
+							href="${pageContext.request.contextPath }/accomodation/roomList">숙소선택</a>
 						<span>방 상세정보</span>
 					</div>
 				</div>
@@ -37,35 +38,37 @@
 
 
 					<!-- 해당숙소의 방사진들을 슬라이드쇼로 보여줌  -->
-					<div id="slidebox" style="border:none; box-shadow: 5px 5px 5px 5px gray; width: 600px;  border:1px solid; border-radius: 10px 10px 0px 0px;">
+					<div id="slidebox"
+						style="border: none; box-shadow: 5px 5px 5px 5px gray; border: 1px solid; border-radius: 10px 10px 0px 0px;">
 						<img src="${roomdetail0.get(0).room_pic}"
-							style="width: 100%; border-radius: 10px; border:none;" id="mainpic">
-						<div id="slideShow" style="border: 1; border-color : black;">
-							<ul class="slides" style="border:none;">
+							style="width: 100%; border-radius: 10px; border: none;"
+							id="mainpic">
+						<div id="slideShow" style="border: 1; border-color: black;">
+							<ul class="slides" style="border: none;">
 								<c:forEach items="${roomdetail0}" begin="0"
 									end="${roomdetail0.size()}">
-									<li style="background-color: white; ">
-									<img src="${roomdetail0.get(b).room_pic}" style="width: 150px;  border-color: black"
+									<li style="background-color: white;"><img
+										src="${roomdetail0.get(b).room_pic}"
+										style="width: 150px; border-color: black"
 										onclick="change(event);">&nbsp;</li>
 									<c:set var="b" value="${b=b+1 }" />
 								</c:forEach>
 							</ul>
 
-							<p class="controller" style="border:none;">
+							<p class="controller" style="border: none;">
 								<!-- &lang: 왼쪽 방향 화살표 &rang: 오른쪽 방향 화살표 -->
 
 								<span class="prev"><b
 									style="font-size: xx-large; color: red;">◀</b></span> <span
-									class="next"><b
-									style="font-size: xx-large; color: red;">▶</b></span>
-
+									class="next"><b style="font-size: xx-large; color: red;">▶</b></span>
 							</p>
 						</div>
 
 					</div>
 					<!-- 해당숙소의 방사진들을 슬라이드쇼로 보여줌  -->
 
-					<br> <br><br> 
+					<br> <br>
+					<br>
 					<!-- 숙소에 대한 상세 정보를 보여주는 영역 시작 -->
 					<div class="rd-text">
 						<div class="rd-title">
@@ -87,7 +90,7 @@
 								</tr>
 								<c:if test="${roomdetail2.size() != 0}">
 									<tr>
-										<td class="r-o">서비스:</td>
+										<td class="r-o">서비스</td>
 										<td>${roomdetail2.get(0).room_service}</td>
 									</tr>
 								</c:if>
@@ -96,7 +99,7 @@
 								</tr>
 								<c:if test="${roomdetail.get(0).room_address!=null}">
 									<tr>
-										<td class="r-o">주소:</td>
+										<td class="r-o">주소</td>
 										<td>${roomdetail.get(0).room_address}</td>
 									</tr>
 								</c:if>
@@ -117,6 +120,26 @@
 										<td class="r-o">주변 안내</td>
 										<td>${roomdetail4.get(0).room_info}</td>
 									</tr>
+
+
+									<tr>
+										<td><hr> <br></td>
+									</tr>
+
+									<tr>
+										<td>지도</td>
+
+
+										<td><p style="margin-top: -12px">
+												<em class="link"> <a href="javascript:void(0);"
+													onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+												</a>
+												</em>
+											</p>
+											<div id="map" style="width: 100%; height: 350px;"></div></td>
+
+									</tr>
+
 								</c:if>
 							</tbody>
 
@@ -156,7 +179,7 @@
 			<!-- 달력을 통해 날짜 정보를 입력하여 예약페이지로 이동시킬수있음 -->
 			<div class="col-lg-4">
 				<div class="room-booking"
-					style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; background-color: #FAFAFA; border-radius: 10px;">
+					style="border: solid gray; box-shadow: 5px 5px 5px 5px gray; background-color: #FAFAFA; border-radius: 10px; ">
 					<p></p>
 					<h3>
 						<a

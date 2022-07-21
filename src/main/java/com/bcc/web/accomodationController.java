@@ -130,6 +130,9 @@ public class accomodationController {
 		// bno라는 크롤링할 사이트를 사용
 		JSONArray roomPrice = service.roomPrice(bno);
 
+		log.info("roomPrice : "+ roomPrice);
+		
+		
 		model.addAttribute("roomPrice", roomPrice);
 	}
 
