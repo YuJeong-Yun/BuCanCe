@@ -2,10 +2,69 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  
+
+
 <mapper namespace="com.bcc.mapper.adminMapper">
- 
+
+	<select id="pmInfo" parameterType="hashMap"
+		resultType="PreOrderVO">
+		select * from premium_order
+		where create_date between #{start} and #{end}
+		order by PCD_PAYER_ID
+	</select>
+
+	<select id="onlyPeriodMems" parameterType="hashMap"
+		resultType="PreOrderVO">
+		select * from premium_order
+		where PCD_PAYER_ID is not null
+		and create_date between #{start} and #{end}
+		order by PCD_PAYER_ID
+	</select>
+
+	<select id="trendChart" resultType="Integer">
+		select count(*) from premium_order
+		where date_format(create_date, '%Y %c %e')=#{date}
+	</select>
+
+	<select id="monthlyChart" resultType="Integer">
+		select count(*) from premium_order
+		where date_format(create_date, '%Y %c')=#{date}
+	</select>
+
+	<select id="webMem" resultType="Integer">
+		select count(*) from bcc_member
+		where date_format(regdate, '%Y %c %e')=#{date}
+	</select>
+
+	<select id="SNSMem" resultType="Integer">
+		select count(*) from kakao_table
+		where date_format(regdate, '%Y %c %e')=#{date}
+	</select>
+
+	<select id="totalMem" resultType="Integer">
+		select count(*)+(select count(*) from kakao_table)
+		from bcc_member
+        <![CDATA[
+        where date_format(regdate, '%Y %c %e') <= date_format(now(), '%Y %c %e')
+        ]]>
+	</select>
+
+	<select id="totalPmMem" resultType="Integer">
+		select count(*) from premium_member
+	</select>
+
+	<select id="totalComment" resultType="Integer">
+		select count(*) from comment
+        <![CDATA[
+        where date_format(regdate, '%Y %c %e') <= date_format(now(), '%Y %c %e')
+        ]]>
+	</select>
+
+	<select id="totalAcc" resultType="Integer">
+		select count(*) from acc_payment
+		where date_format(accDate, '%Y %c')=#{date}
+	</select>
+
 	<select id="getAllWebMem" resultType="MemberVO">
 		select * from bcc_member
 	</select>
@@ -72,9 +131,9 @@
 	</select>
 
 	<delete id="delMem">
-	 delete from bcc_member
-	 where id =#{id}
+		delete from bcc_member
+		where id =#{id}
 	</delete>
 
-	
+
 </mapper>  
