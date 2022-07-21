@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.bcc.domain.BoardVO;
+import com.bcc.domain.Criteria;
 import com.bcc.domain.MemberVO;
+import com.bcc.domain.SearchCriteria;
 import com.bcc.domain.ThumbVO;
 import com.bcc.persistence.BoardDAO;
 import com.bcc.persistence.MemberDAO;
@@ -117,15 +119,38 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<BoardVO> getThumbList(String id) throws Exception {
+	public List<BoardVO> getThumbList(SearchCriteria scri) throws Exception {
 		
-		return dao.thumbList(id);
+		return dao.getThumbList(scri);
+	}
+	
+	
+
+	@Override
+	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception {
+		
+		return dao.getSNSThumbList(scri);
 	}
 
 	@Override
-	public void deleteThumb(int b_num) throws Exception {
+	public void deleteThumb(int b_num, String id) throws Exception {
 		
-		dao.deleteThumb(b_num);
+		dao.delThumb(b_num, id);
 	}
+
+	@Override
+	public Integer getThumbCount(String id) {
+	
+		return dao.getThumbCount(id);
+	}
+
+	@Override
+	public Integer getSNSThumbCount(String id) {
+		
+		return dao.getSNSThumbCount(id);
+	}
+	
+	
+	
 	
 }

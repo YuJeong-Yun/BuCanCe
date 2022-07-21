@@ -69,18 +69,34 @@
 		where id=#{id} 
 	</update>
 
-	<select id="thumbList" resultType="BoardVO">
-        select tourist_spot.*
-		from tourist_spot left join thumb
-		on tourist_spot.num = thumb.b_num and tourist_spot.t_category = thumb.b_category
-        where thumb.m_id=#{id }
-		order by tourist_spot.num asc
+	<select id="getThumbList" resultType="BoardVO">
+        select title,thumbnail,num from tourist_spot 
+        where num in (select b_num from thumb where m_id=(select id from bcc_member where id=#{keyword}))
+        limit #{pageStart}, #{perPageNum}
 	</select>
 	
-    <delete id="deleteThumb" parameterType="int">
+	<select id="getSNSThumbList" resultType="BoardVO">
+        select title,thumbnail,num from tourist_spot 
+        where num in (select b_num from thumb where m_id=(select k_number from kakao_table where k_number=#{keyword}))
+        limit #{pageStart}, #{perPageNum}
+	</select>
+	
+    <delete id="delThumb" parameterType="hashMap">
 		delete from thumb
-		where b_num = #{b_num}
+		where b_num = #{b_num} and m_id=#{m_id}
     </delete>
+    
+    <select id="getThumbCount" resultType="Integer">
+    	select count(*)
+    	from thumb
+    	where m_id = (select id from bcc_member where id=#{id})
+    </select>
+    
+    <select id="getSNSThumbCount" resultType="Integer">
+    	select count(*)
+    	from thumb
+    	where m_id = (select k_number from kakao_table where k_number=#{id})
+    </select>
 	
 	<!-- 카카오 로그인 -->
 	<!-- 정보 찾기 -->

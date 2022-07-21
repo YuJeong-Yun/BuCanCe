@@ -4,11 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bcc.mapper.CommentMapper">
 	<!-- 댓글 조회 -->
-	<select id="getComment" resultType="CommentVO">
+	<select id="getComment" parameterType="Integer" resultType="com.bcc.domain.CommentVO">
 		SELECT
 		CNO, CONTENT, WRITER,
-		REGDATE
-		FROM comment
 		REGDATE, VISIT
 		FROM comment
 		WHERE num = #{num}
