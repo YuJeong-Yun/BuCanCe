@@ -47,7 +47,7 @@ public class PlanRESTController {
 		GrpAcceptVO vo = new GrpAcceptVO();
 		vo.setReceiver(id);
 		vo.setGrp_num(grpNum);
-		grpService.deleteInvitation(vo);
+		grpService.delInvitation(vo);
 
 		// 그룹에 멤버 추가
 		PlanMemberVO member = new PlanMemberVO();
@@ -76,7 +76,7 @@ public class PlanRESTController {
 		vo.setReceiver(id);
 		vo.setGrp_num(grpNum);
 		// 초대 수락 리스트에서 제거
-		grpService.deleteInvitation(vo);
+		grpService.delInvitation(vo);
 	}
 
 	// 플랜 삭제
@@ -157,7 +157,7 @@ public class PlanRESTController {
 		String id = (String) session.getAttribute("id");
 		vo.setWriter(id);
 
-		planService.modifyTourPlan(vo);
+		planService.modTourPlan(vo);
 	}
 
 	// 선택한 플랜 정보

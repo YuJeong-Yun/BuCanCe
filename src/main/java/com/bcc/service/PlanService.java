@@ -27,7 +27,7 @@ public interface PlanService {
 	public List<BoardVO> getSearchList(String category, String keyword);
 
 	// 여행 경로 저장
-	public void modifyTourPlan(PlanVO vo);
+	public void modTourPlan(PlanVO vo);
 
 	// 여행 경로 목록 가져오기
 	public List<List<Object>> getTourPlanList(int num);

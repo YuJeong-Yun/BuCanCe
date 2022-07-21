@@ -6,7 +6,7 @@
 
 <mapper namespace="com.bcc.mapper.planMapper">
 
-	<insert id="createPlan">
+	<insert id="putPlan">
 		insert into plan(num, grp_name, leader)
 		values(#{num}, #{grp_name}, #{leader})
 	</insert>
@@ -39,7 +39,7 @@
 		where num = #{num}
 	</select>
 	
-	<update id="modifyTourPlan">
+	<update id="modTourPlan">
 		update plan
 		set writer = #{writer}, tour_plan = #{tour_plan}, tour_plan_acc = #{tour_plan_acc}, tour_date_start = #{tour_date_start}, tour_date_end = #{tour_date_end}, lastUpdate = now()
 		where num = #{num}

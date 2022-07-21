@@ -26,7 +26,7 @@ public class PlanServiceImpl implements PlanService {
 
 	@Override
 	public void createPlan(PlanVO vo) {
-		dao.createPlan(vo);
+		dao.putPlan(vo);
 	}
 
 	@Override
@@ -105,8 +105,8 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public void modifyTourPlan(PlanVO vo) {
-		dao.modifyTourPlan(vo);
+	public void modTourPlan(PlanVO vo) {
+		dao.modTourPlan(vo);
 	}
 
 	@Override
