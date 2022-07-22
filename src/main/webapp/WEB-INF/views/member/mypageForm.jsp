@@ -24,7 +24,7 @@
 			<a href="/order/deleteKey">정기결제 정지</a>
 			</form>
 
-<<<<<<< HEAD
+
 			<div class="menu-box">
 				<ul class="innerwrap" id="tab">
 					<li><a href="#">내 그룹</a></li>
@@ -36,7 +36,6 @@
 
 		</div>
 	</div>
-=======
 <body class = "memberBody">
 <div class = "memberInputArea">
 <div class = memberForm>
@@ -56,7 +55,7 @@
 	
 </div>
 </div>
->>>>>>> 4b4bd9e339d47f08f4cd87001f09245f2c8a15bf
+
 </body>
 </html>
 
