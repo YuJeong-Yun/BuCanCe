@@ -141,7 +141,7 @@ public class PlanController {
 	// 플랜 확인 페이지
 	// http://localhost:8088/plan/planContent/1
 	@RequestMapping(value="/planContent/{num}", method=RequestMethod.GET)
-	public String planContentGET(@PathVariable("num") int num, Model model,HttpSession session, HttpServletResponse response) throws IOException {
+	public String planContentGET(@PathVariable("num") int num, Model model,HttpSession session, HttpServletResponse response) throws Exception {
 		log.info("플랜 정보 확인 : "+num);
 		
 		String id = (String) session.getAttribute("id");
