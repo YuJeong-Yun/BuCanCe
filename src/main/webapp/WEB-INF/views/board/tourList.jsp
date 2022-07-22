@@ -12,11 +12,11 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="breadcrumb-text">
-				<h2 class="nanumFont" style="display: inline-block; margin-left: 6em; margin-right: 1em;">부캉스! 어디가지?</h2>
+				<h2 class="nanumFont" id="listTitle">부캉스! 어디가지?</h2>
 	                <!-- 날씨출력 -->
                     <div id="weatherInfo" style="display: inline-block;"></div>
                     <!-- 날씨출력 -->
-                   	<div id="cateMenu" style="position: absolute; left: 43.2%; top: 95%;">
+                   	<div id="cateMenu">
 		                    <select id="category" onchange="search()">
 								<option>카테고리 선택</option>
 								<option value="all">전체보기</option>
@@ -45,29 +45,23 @@
 </div>
 <!-- Breadcrumb Section End -->
 
-    <div class="top-nav" style="border-bottom: none; margin-bottom: 1em;">
+    <div class="top-nav" id="top-nav1">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
-                     <div class="weatherInfo" style="width: 227.750px; height: 150px;"></div>
                      <button type="button" class="actBtn" id="spot">관광지</button>
                         <button type="button" class="notActBtn" id="eating">맛집</button>
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
-                        	<div id="searchAllMenu">
 		                        <i class="fa fa-search" aria-hidden="true"></i>
-		                        <input type="text" name="keyword" id="keywordInput" placeholder="검색어를 입력하세요"/>
-		                        <button class="w-btn w-btn-indigo" type="submit" id="searchBtn">
-									검색
-								</button>
-							</div>
+		                        <input type="search" id="keywordInput" placeholder="검색어를 입력하세요" onkeypress="keywordSearch(event)"/>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-	    <div class="top-nav" style="border-bottom: none; margin-bottom: 1em;">
+	    <div class="top-nav" id="top-nav2">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
@@ -107,7 +101,7 @@
 				</div>
 			</c:forEach>
 		</div>
-			<div id="paging" style="text-align: center; padding-top: 20px;">
+			<div id="paging">
 			<c:if test="${not empty pageMaker }">
 					<c:if test="${pageMaker.prev}">
 						<a href="tourList${pageMaker.makeSearch(pageMaker.startPage - 1)}&t_category=${param.t_category}&addr=${param.addr}">이전</a>
@@ -115,7 +109,7 @@
 
 					<c:forEach begin="${pageMaker.startPage}"
 						end="${pageMaker.endPage}" var="idx">
-						<a href="tourList${pageMaker.makeSearch(idx)}&t_category=${param.t_category}&addr=${param.addr}">${idx}</a>
+						<a href="tourList${pageMaker.makeSearch(idx)}&t_category=${param.t_category}&addr=${param.addr}" id="idx${idx }">${idx}</a>
 					</c:forEach>
 
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
@@ -129,6 +123,7 @@
 <script type="text/javascript">
 	const addr = '${param.addr}';
 	const t_category = '${param.t_category}';
+	const page = '${param.page}';
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script> 
 <script src="${pageContext.request.contextPath}/resources/js/board/Weather.js"></script>
