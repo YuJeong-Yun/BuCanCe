@@ -21,6 +21,8 @@ public interface roomDAO {
 	
 	public void putRfRoom(roomRefundVO vo2);
 
+	public List<roomPayVO> getReRoomInfoAdmin();
+
 
 
 }

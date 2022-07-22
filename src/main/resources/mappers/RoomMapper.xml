@@ -37,7 +37,9 @@
   		values(#{rfId},#{accId},#{accAmount},#{accName},#{roomSort},#{sort},#{accKind},#{checkIn},#{checkOut},#{id},#{license})
   	</insert>
   	
-
+	<select id="getReRoomInfoAdmin" resultType="roomPayVO">
+  	select * from acc_payment
+  	</select>
   
   </mapper>
   

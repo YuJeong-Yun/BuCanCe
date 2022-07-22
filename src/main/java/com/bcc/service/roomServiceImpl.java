@@ -234,7 +234,7 @@ public class roomServiceImpl implements roomService {
 
 		}
 
-		System.out.println(" roomList : " + roomList);
+		System.out.println(" roomSearchList : " + roomList);
 
 		return roomList;
 	}
@@ -811,6 +811,11 @@ public class roomServiceImpl implements roomService {
 
 		return "OK";
 
+	}
+
+	@Override
+	public List<roomPayVO> getReseAdmin() {
+		return dao.getReRoomInfoAdmin();
 	}
 
 }

@@ -28,7 +28,7 @@
 			<br><br><br>
 
 			<!-- 숙소목록선택,검색기능을 하는 코드 시작 -->
-			<form action="/accomodation/roomList" method="post" id="idForm" name="idForm" >
+<!-- 			<form  id="idForm" name="idForm" > -->
 				<select name="area" onchange="selectArea()" id="area" style="background: blue; line-height: 1.5;" >
 					<optgroup label="지역">
 						<option value="favorite"
@@ -75,109 +75,37 @@
 				</select> &nbsp; &nbsp; &nbsp; 
 	
 
-				<input type="text" name="place_name" id="place_name" value="${rs.getPlace_name()}" required spellcheck="false" style="margin-left:auto; margin-right:auto;">
+				<input type="text" name="place_name" id="place_name" style="margin-left:auto; margin-right:auto;">
 				
 &nbsp; &nbsp; 
-				<input type="submit" value="검색" class="btn btn-primary" style="height: 40px; margin-left:auto; margin-right:auto;">
+				<button type="button" class="btn btn-primary" onclick="selectArea()" style="height: 40px; margin-left:auto; margin-right:auto;">검색</button>
 
-				</form>
+<!-- 				</form> -->
 				<!-- 숙소목록선택,검색기능을 하는 코드 끝 -->
 
 		</div>
 	</div>
 	<!-- Breadcrumb Section End -->
-<br><br>
+<br><br><br>
 
-  
+  	<div class="loading" >
+				
+					<img src="${pageContext.request.contextPath}/resources/img/acc/loading.gif"  style=" display: block; margin: 0px auto;">				
+				
+				</div>
 
 	<!-- Rooms Section Begin --> <!-- 방정보 처음 6개 -->
 	<section class="rooms-section spad"  >
 		<div class="container">
-			<div class="row" >
-				<c:set var="a" />
-				<c:forEach items="${roomList}" begin="0" end="5">
-					<div class="col-lg-4 col-md-6" style="height:600px;" >
-					<c:if test="${roomList.get(a).room_rank!=''}">
-			<a href="${pageContext.request.contextPath}/accomodation/roomDetail?bno=${roomList.get(a).room_link}">
-			</c:if>
-						<div class="room-item" style="border-radius: 2em; ">
-							
-							<c:if test="${roomList.get(a).room_rank!=''}">
-							
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200" style=" border-bottom-style: none; border-style: solid;  border-color: #00ABB9 #00ABB9 #FFFFFF #00ABB9 ; box-shadow: 5px 0px 5px gray; border-radius:10px 10px 0px 0px;">
-							
-							</c:if>
-							
-							<c:if test="${roomList.get(a).room_rank==''}">
-								<img src="${roomList.get(a).room_pic}" alt="acc" class="poster" height="200">
-							</c:if>
-							
-							
-							<div class="ri-text"  style=" border-style: solid;  border-color: #FFFFFF #00ABB9 #00ABB9 #00ABB9;  box-shadow: 5px 5px 5px 5px gray; border-radius:0px 0px 10px 10px; height:320px; background: #FAFAFA"  >
-								<h4><b style="font-family: 'Jeju Hallasan' ">${roomList.get(a).room_title}</b></h4>
-								<table>
-									<tbody>
-										<tr>
-											<td class="r-o" style="color: green">평점:</td>
-											<td style="color: green">
-											<c:if test="${roomList.get(a).room_rank!=''}">
-											${fn:substring(roomList.get(a).room_rank,0,3)}점
-											</c:if>
-											<c:if test="${roomList.get(a).room_rank==''}">
-											미정
-											</c:if>
-											</td>
-										</tr>
-										<tr>
-											<td class="r-o">지역:</td>
-											<td >${roomList.get(a).room_area}</td>
-										</tr>
-										<tr>
-											<td class="r-o" style="color: blue">대실:</td>
-											<c:if test="${roomList.get(a).room_price!='숙소에 문의'}">
-													
-											<td  style="color: blue">${roomList.get(a).room_price}원</td>
-											</c:if>
-											<c:if test="${roomList.get(a).room_price=='숙소에 문의'}">
-											<td style="color: blue"> 미정 </td>
-											</c:if>
-										</tr>
-										<tr>
-											<td class="r-o" style="color: red">숙박:</td>
-											<c:if test="${roomList.get(a).room_price2!='숙소에 문의'}">
-											<td style="color: red">${roomList.get(a).room_price2} 원</td>
-											</c:if>
-											<c:if test="${roomList.get(a).room_price2=='숙소에 문의'}">
-											<td style="color: red"> 미정 </td>
-											</c:if>
-											
-										</tr>
-									</tbody>
-								</table>
-								<div class="primary-btn">예약하기</div> 
-								<c:if test="${roomList.get(a).room_rank!=''}">
-<%-- 								<a href="/accomodation/roomDetail?bno=${roomList.get(a).room_link}" class="primary-btn"> --%>
-								<a></a>
-<!-- 								</a>  -->
-								</c:if>
-								
-								<c:if test="${roomList.get(a).room_rank==''}">
-								<a class="primary-btn"> 준비중 </a> 
-								</c:if>
-								
-								<c:set var="a" value="${a=a+1}"/>
-
-							</div>
-						</div>
-					</div>
-					
-					</a>
-				</c:forEach>
+			<div class="row" id="cell">
+		
+			
+			
 			</div>
 		</div>
 	</section>
 	</section>
-	<!-- <!-- 방정보 처음 6개 --> -->
+	<!-- < 방정보 처음 6개 --> 
 
 
 <jsp:include page="../include/footer.jsp" />

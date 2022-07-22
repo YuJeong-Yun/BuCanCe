@@ -47,37 +47,37 @@ public class accomodationController {
 	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
 	// http://localhost:8088/accomodation/roomList
 	@RequestMapping(value = "/roomList", method = RequestMethod.GET)
-	public void roomListGET(Model model) throws IOException {
+	public void roomListGET(Model model) throws Exception {
 
 		log.info(" roomListGET() 호출 ");
 		log.info(" 전체숙소목록 정보 ");
 
 		// service에서 저장한 크롤링 정보들을 JSONArray형태로 저장
-		JSONArray roomList = service.getRoomList();
+//		JSONArray roomList = service.getRoomList();
 
-		model.addAttribute("roomList", roomList);
+//		model.addAttribute("roomList", roomList);
 	}
 
 	// 숙소목록을 지역선택이나 검색을 통해 원하는 목록만 보여줌
 	// http://localhost:8088/accomodation/roomList
 	@RequestMapping(value = "/roomList", method = RequestMethod.POST)
-	public void roomListPOST(Model model, roomSearch rs) throws IOException {
+	public void roomListPOST(Model model, roomSearch rs) throws Exception {
 
 		log.info(" roomListPOST() 호출 ");
 		log.info(" 입력한 정보를 바탕으로 숙소항목을 보여줌 ");
 		log.info("rs : " + rs);
 		log.info("검색어 : " + rs.getPlace_name());
 		// service에서 입력한 정보를 바탕으로 원하는 크롤링 정보만 보여줌
-		JSONArray roomList = service.getRoomSearchList(rs);
+//		JSONArray roomList = service.getRoomSearchList(rs);
 
-		model.addAttribute("rs", rs);
-		model.addAttribute("roomList", roomList);
+//		model.addAttribute("rs", rs);
+//		model.addAttribute("roomList", roomList);
 
 		// roomList.jsp에서 선택한 select 정보를 저장
-		model.addAttribute("select_area", rs.getArea());
+//		model.addAttribute("select_area", rs.getArea());
 
 		// roomList.jsp에서 input태그에 입력한 정보를 저장
-		model.addAttribute("select_place", rs.getPlace_name());
+//		model.addAttribute("select_place", rs.getPlace_name());
 
 	}
 
@@ -85,7 +85,7 @@ public class accomodationController {
 	// 방 정보를 볼수있고 날짜 정보를 입력후에 예약페이지로 이동가능함
 	// http://localhost:8088/accomodation/roomDetail
 	@RequestMapping(value = "/roomDetail", method = RequestMethod.GET)
-	public void roomDetailGET(Model model, @RequestParam("bno") String bno) throws IOException {
+	public void roomDetailGET(Model model, @RequestParam("bno") String bno) throws Exception {
 
 		log.info("roomDetailGET() 호출");
 		log.info(" 숙소정보를 상세하게 보여주는 페이지 ");
@@ -123,7 +123,7 @@ public class accomodationController {
 	// roomDetail에서 가격상세정보를 클릭하면 보여줌
 	// http://localhost:8088/accomodation/roomPrice
 	@RequestMapping(value = "/roomPrice", method = RequestMethod.GET)
-	public void roomPriceGET(Model model, @RequestParam("bno") String bno) throws IOException {
+	public void roomPriceGET(Model model, @RequestParam("bno") String bno) throws Exception {
 
 		log.info("roomPriceGET() 호출");
 
@@ -174,7 +174,7 @@ public class accomodationController {
 	// 대실예약페이지
 	// http://localhost:8088/accomodation/roomPayment
 	@RequestMapping(value = "/roomPayment", method = RequestMethod.GET)
-	public String roomPaymentGET(roomReVO vo, Model model,HttpSession session,HttpServletResponse response) throws IOException {
+	public String roomPaymentGET(roomReVO vo, Model model,HttpSession session,HttpServletResponse response) throws Exception {
 
 		log.info("roomPaymentGET() 호출");
 		log.info("대실예약페이지 호출");
@@ -218,7 +218,7 @@ public class accomodationController {
 	// 숙박예약페이지
 	// http://localhost:8088/accomodation/roomPayment2
 	@RequestMapping(value = "/roomPayment2", method = RequestMethod.GET)
-	public String roomPayment2GET(roomReVO vo, Model model, HttpSession session,HttpServletResponse response) throws IOException {
+	public String roomPayment2GET(roomReVO vo, Model model, HttpSession session,HttpServletResponse response) throws Exception {
 
 		log.info("roomPayment2GET() 호출");
 		log.info("숙박예약페이지 호출");
@@ -264,7 +264,7 @@ public class accomodationController {
 	// 그정보를 바탕으로 예약페이지로 이동
 	// http://localhost:8088/accomodation/roomPayDB
 	@RequestMapping(value = "/roomPayDB", method = RequestMethod.GET)
-	public void roomPayDBGET(roomPayVO vo, Model model) throws IOException {
+	public void roomPayDBGET(roomPayVO vo, Model model) throws Exception {
 
 		log.info("roomPayDBGET() 호출");
 
@@ -279,7 +279,7 @@ public class accomodationController {
 	// 결제완료후 내역 페이지
 	// http://localhost:8088/accomodation/roomReComplete
 	@RequestMapping(value = "/roomReComplete", method = RequestMethod.GET)
-	public void roomReCompleteGET(Model model, @RequestParam("accId") String accId) throws IOException {
+	public void roomReCompleteGET(Model model, @RequestParam("accId") String accId) throws Exception {
 
 		log.info("accId : " + accId);
 		// 결제내역
@@ -296,7 +296,7 @@ public class accomodationController {
 	// 유저 예약 목록
 	// http://localhost:8088/accomodation/roomReList
 	@RequestMapping(value = "/roomReList", method = RequestMethod.GET)
-	public String roomReListGET(Model model, HttpSession session, HttpServletResponse response) throws IOException {
+	public String roomReListGET(Model model, HttpSession session, HttpServletResponse response) throws Exception {
 
 		// 결제내역
 		log.info("roomReListGET() 호출");
@@ -332,7 +332,7 @@ public class accomodationController {
 	// 결제환불
 	// http://localhost:8088/accomodation/roomRefund
 	@RequestMapping(value = "/roomRefund", method = RequestMethod.POST)
-	public void roomRefundPOST(roomPayVO vo, Model model) throws IOException {
+	public void roomRefundPOST(roomPayVO vo, Model model) throws Exception {
 
 		// 결제내역
 		log.info("roomRefundPOST() 호출");
@@ -351,7 +351,7 @@ public class accomodationController {
 	// http://localhost:8088/accomodation/roomRfDB
 	@RequestMapping(value = "/roomRfDB", method = RequestMethod.GET)
 	public void roomRefundGET(roomRefundVO vo, roomPayVO vo2, Model model)
-			throws IOException, org.json.simple.parser.ParseException {
+			throws Exception, org.json.simple.parser.ParseException {
 
 		// 결제내역
 		log.info("roomRfDBGET() 호출");
@@ -377,5 +377,42 @@ public class accomodationController {
 		model.addAttribute("vo", vo);
 
 	}
+	
+	// 관리자페이지
+	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
+	// http://localhost:8088/accomodation/accMg
+	@RequestMapping(value = "/accMg", method = RequestMethod.GET)
+	public void accMgGET(Model model) throws Exception {
+
+		log.info(" accMgGET() 호출 ");
+		log.info(" 관리자 예약목록 호출 ");
+
+		//예약정보들 호출
+		List<roomPayVO> roomMg = service.getReseAdmin();
+			
+		log.info(roomMg+"");
+			
+		model.addAttribute("roomMg",roomMg);
+
+	}
+	
+	// 관리자페이지
+	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
+	// http://localhost:8088/accomodation/accMg
+	@RequestMapping(value = "/reCancle", method = RequestMethod.POST)
+	public String reCanclePost(Model model,@RequestParam("id") String id) throws Exception {
+
+		log.info(" reCanclePost() 호출 ");
+		log.info(" 관리자 예약취소 동작 ");
+
+		//예약취소로 변경
+//		service.modReCancel(id);
+				
+				
+		return "accomodation/accMg";
+	}
+	
+	
+	
 
 }

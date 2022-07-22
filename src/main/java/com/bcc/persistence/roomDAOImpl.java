@@ -75,6 +75,12 @@ public class roomDAOImpl implements roomDAO {
 	}
 
 
+	@Override
+	public List<roomPayVO> getReRoomInfoAdmin() {
+		return sqlSession.selectList(NAMESPACE+".getReRoomInfoAdmin");
+	}
+
+
 
 	
 	
