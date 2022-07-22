@@ -50,7 +50,7 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                       	<div id="daily_member_chart" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></div>
+                                       	<div id="daily_member_chart" class="chartjs-render-monitor"></div>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                       	<div id="curve_chart" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></div>
+                                       	<div id="curve_chart" class="chartjs-render-monitor"></div>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                       	<div id="monthly_chart" style="display: block; width: 100%; height: 100%;" class="chartjs-render-monitor"></div>
+                                       	<div id="monthly_chart" class="chartjs-render-monitor"></div>
                                     </div>
                                 </div>
                             </div>
@@ -155,11 +155,11 @@
                                             
                                             <!-- 전월과 비교하여 증가 감소 추세 표시 -->
                                             <c:if test="${totalAcc[0]-totalAcc[1] > 0 }">
-                                             <span style="color:red; margin-left: 7px;">${totalAcc[0]-totalAcc[1] } ▲</span> 
+                                             <span id="inc">${totalAcc[0]-totalAcc[1] } ▲</span> 
                                             </c:if>
                                             
                                             <c:if test="${totalAcc[0]-totalAcc[1] < 0 }">
-                                             <span style="color:blue; margin-left: 7px;">${(totalAcc[0]-totalAcc[1])*-1 } ▼</span> 
+                                             <span id="dec">${(totalAcc[0]-totalAcc[1])*-1 } ▼</span> 
                                             </c:if>
                                             
                                         </div>
@@ -171,7 +171,6 @@
 
 
                 </div>
-                
                 <br>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -234,6 +233,6 @@
     </div>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/admin/profitChart.js"></script>   	   									
+<script src="${pageContext.request.contextPath}/resources/js/admin/profitChart.js"></script> 									
 <script src="${pageContext.request.contextPath}/resources/js/admin/vipInfo.js"></script>   									
 <jsp:include page="../include/footer.jsp" />

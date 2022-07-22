@@ -108,3 +108,39 @@
 	#profitBtn:disabled {
 	  opacity: 0.5;
 	}
+	
+	.periodSpan {
+		color: #025ce2;
+		font-size: 1em;
+		font-weight: bold;
+		padding: 0 10px;
+	}
+	
+	.periodSpan:hover {
+		color: black;
+		cursor: pointer;
+	}
+	
+	
+	
+	/* 차트 */
+	.chartjs-render-monitor {
+		display: block; 
+		width: 100%; 
+		height: 100%;
+	}
+	
+	/* 카드 */
+	#inc {
+		color:red; 
+		margin-left: 7px;
+	}
+	
+	#dec {
+		color:blue; 
+		margin-left: 7px;
+	}
+	
+	
+	
+	
