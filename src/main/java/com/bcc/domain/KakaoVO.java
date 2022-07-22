@@ -1,15 +1,15 @@
 package com.bcc.domain;
 
-import java.sql.Date;
+
+import java.sql.Timestamp;
 
 public class KakaoVO {
 	
 	private long k_number;
 	private String k_name;
 	private String k_email;
-	private Date regdate;
-	
-	
+	private String k_id;
+	private Timestamp regdate;
 	public long getK_number() {
 		return k_number;
 	}
@@ -28,18 +28,26 @@ public class KakaoVO {
 	public void setK_email(String k_email) {
 		this.k_email = k_email;
 	}
-	public Date getRegdate() {
+	public String getK_id() {
+		return k_id;
+	}
+	public void setK_id(String k_id) {
+		this.k_id = k_id;
+	}
+	public Timestamp getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(Date regdate) {
+	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
 	
 	
 	@Override
 	public String toString() {
-		return "KakaoVO [k_number=" + k_number + ", k_name=" + k_name + ", k_email=" + k_email + "]";
+		return "KakaoVO [k_number=" + k_number + ", k_name=" + k_name + ", k_email=" + k_email + ", k_id=" + k_id
+				+ ", regdate=" + regdate + "]";
 	}
 	
 
+	
 }

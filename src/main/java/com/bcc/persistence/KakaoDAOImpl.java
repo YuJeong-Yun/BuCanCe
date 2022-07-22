@@ -20,16 +20,16 @@ public class KakaoDAOImpl implements KakaoDAO {
 	private static final String NAMESPACE="com.bcc.mapper.memberMapper";
 	
 	@Override
-	public void kakaoInsert(HashMap<String, Object> userInfo) {
-		sqlSession.insert(NAMESPACE+".kakaoInsert",userInfo);
+	public void putKakao(HashMap<String, Object> userInfo) {
+		sqlSession.insert(NAMESPACE+".putKakao",userInfo);
 		
 	}
 
 	@Override
-	public KakaoVO findkakao(HashMap<String, Object> userInfo) {
+	public KakaoVO getKakao(HashMap<String, Object> userInfo) {
 		System.out.println("RN:"+userInfo.get("nickname"));
 		System.out.println("RE:"+userInfo.get("email"));
-		return sqlSession.selectOne(NAMESPACE+".findKakao", userInfo);
+		return sqlSession.selectOne(NAMESPACE+".getKakao", userInfo);
 	}
 	
 }

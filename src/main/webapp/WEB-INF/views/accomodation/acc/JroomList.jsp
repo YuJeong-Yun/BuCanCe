@@ -221,7 +221,6 @@ $(window).on("scroll", function() {
 	$("#scrollPosition").text(scrollPosition);
 	if (scrollPosition > scrollHeight - 500) {	
     	
-	
     rl = roomList;
     if(tt<rl.length){
     
@@ -230,7 +229,7 @@ $(window).on("scroll", function() {
     	
     		if(idx<6){
     			
-    			if(rl[tt].room_pic!=''){	
+    			if(tt<rl.length){	
     			
     			var room_pic = rl[tt].room_pic;
            	   var room_title = rl[tt].room_title;

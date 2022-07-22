@@ -9,8 +9,9 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
- 
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
+
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.model.OAuthRequest;
@@ -18,6 +19,7 @@ import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 
+@Service
 public class NaverService {
 	   private final static String CLIENT_ID = "mh2HJRSmhFxLpWvyHva1";
 	   private final static String CLIENT_SECRET = "V3fN3Vgf7p";
