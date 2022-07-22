@@ -120,8 +120,12 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
               </div>
               <div class="tour__contents hidden">
                 <ul>
-                 	<li>로딩중 ...</li>
-<%--                 	<c:forEach var="hotel" items="${hotellist }"> --%>
+					<li class="loading-icon">로딩중 ... &nbsp;
+						<div class="spinner-border spinner-border-sm" role="status">
+						  <span class="sr-only">Loading...</span>
+						</div>
+					</li>
+								<%--                 	<c:forEach var="hotel" items="${hotellist }"> --%>
 <%-- 	                  <li class="tour-item a${hotel.num }" onclick="selectTour(event)"> --%>
 <%-- 	                    <img src="${hotel.thumbnail }" alt="" class="content__img" /> --%>
 <%-- 	                    <div class="content__title">${hotel.title }</div> --%>

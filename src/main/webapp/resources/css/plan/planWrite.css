@@ -259,6 +259,13 @@
 	overflow: auto;
 	z-index: 1;
 }
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul .loading-icon {
+	background-color: #fafafa;
+    display: block;
+    box-shadow: none;
+	text-align: center;
+    line-height: 80px;
+}
 .make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul.search-result {
 	background-color: #8fb1db;
 	z-index: 2;
