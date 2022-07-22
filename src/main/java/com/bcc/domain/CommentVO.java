@@ -9,7 +9,7 @@ public class CommentVO {
 	private String content; // 댓글 내용
 	private String writer; // 댓글 작성자
 	private Date regdate; //댓글 작성 시간
-	
+
 	public CommentVO() {} 
 	public CommentVO(int num, int cno, String content, String writer, Date regdate) {
 		super();

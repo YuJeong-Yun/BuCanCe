@@ -40,7 +40,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/acc/yd.css" type="text/css">
+    
+   
 </head>
 
 <body>

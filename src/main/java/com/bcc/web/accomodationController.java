@@ -42,6 +42,29 @@ public class accomodationController {
 	private MemberService service2;
 
 
+	// http://localhost:8088/accomodation/test
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public void testGET() throws IOException {
+
+		log.info(" testGET() 호출 ");
+		
+
+	}
+	
+	// http://localhost:8088/accomodation/test2
+		@RequestMapping(value = "/test2", method = RequestMethod.GET)
+		public void test2GET(Model model) throws IOException {
+
+			log.info(" test2GET() 호출 ");
+			
+			//service에서 저장한 크롤링 정보들을 JSONArray형태로 저장
+			JSONArray roomList = service.roomList();
+
+			model.addAttribute("roomList", roomList);
+			
+		}
+	
+	
 	// 숙소목록을 보여주는 페이지로 이동
 	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
 	// http://localhost:8088/accomodation/roomList
@@ -81,46 +104,6 @@ public class accomodationController {
 	}
 	
 	
-	
-	// 숙소목록을 보여주는 페이지로 이동2222222222222222222222222222222222222222
-	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
-	// http://localhost:8088/accomodation/roomList
-	@RequestMapping(value = "/roomList2", method = RequestMethod.GET)
-	public void roomListGET2(Model model) throws IOException {
-		
-		log.info(" roomListGET2() 호출 ");
-		log.info(" 전체숙소목록 정보 ");
-		
-		//service에서 저장한 크롤링 정보들을 JSONArray형태로 저장
-		JSONArray roomList = service.roomList();
-		
-		model.addAttribute("roomList", roomList);
-	}
-	
-	
-	
-	// 숙소목록을 지역선택이나 검색을 통해 원하는 목록만 보여줌222222222222222222222222222222222222
-	// http://localhost:8088/accomodation/roomList
-	@RequestMapping(value = "/roomList2", method = RequestMethod.POST)
-	public void roomListPOST2(Model model,roomSearch rs) throws IOException {
-		
-		log.info(" roomListPOST2() 호출 ");
-		log.info(" 입력한 정보를 바탕으로 숙소항목을 보여줌 ");
-		log.info("rs : " + rs);
-		//service에서 입력한 정보를 바탕으로 원하는 크롤링 정보만 보여줌
-		JSONArray roomList = service.roomSearchList(rs);
-		
-		model.addAttribute("roomList", roomList);
-		
-		//roomList.jsp에서 선택한 select 정보를 저장
-		model.addAttribute("select_area", rs.getArea());
-		
-		//roomList.jsp에서 input태그에 입력한 정보를 저장
-		model.addAttribute("select_place", rs.getPlace_name());
-		
-	}
-	
-	
 
 	
 	// roomList.jsp에서 선택한 숙소를 자세하게 보여주는 페이지
@@ -140,6 +123,7 @@ public class accomodationController {
 		JSONArray roomdetail3 = service.roomDetail3(bno);
 		JSONArray roomdetail4 = service.roomDetail4(bno);
 		JSONArray roomdetail5 = service.roomDetail5(bno);
+		JSONArray roomdetail6 = service.roomDetail6(bno);
 			
 		model.addAttribute("roomdetail0", roomdetail0);
 		model.addAttribute("roomdetail", roomdetail);
@@ -147,6 +131,7 @@ public class accomodationController {
 		model.addAttribute("roomdetail3", roomdetail3);
 		model.addAttribute("roomdetail4", roomdetail4);
 		model.addAttribute("roomdetail5", roomdetail5);
+		model.addAttribute("roomdetail6", roomdetail);
 			
 		
 		//이후에 크롤링할 사이트를 bno에 저장 
@@ -236,20 +221,27 @@ public class accomodationController {
 		//숙박주문번호 설정
 		String accId = service.SearchPayId();
 		
+		
 		String id = (String) session.getAttribute("id");
-		//아이디 정보에 해당하는 유저정보를 가져오는 서비스
-		MemberVO mvo = service2.getMember(id);
 		
+		if(id==null) {
+			MemberVO mvo = null;
+		}else {
+			//아이디 정보에 해당하는 유저정보를 가져오는 서비스
+			MemberVO mvo = service2.getMember(id);
+			
+			
+			//로그인정보들(임의의값)
+			session.setAttribute("id", mvo.getId());
+			session.setAttribute("user_name", mvo.getName());
+			session.setAttribute("email", mvo.getEmail());
+			session.setAttribute("accId", accId);
+			session.setAttribute("tel", mvo.getTel());
+			session.setAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
+			session.setAttribute("zip", mvo.getZip());
+			session.setAttribute("license", mvo.getLicense());
+		}
 		
-		//로그인정보들(임의의값)
-		session.setAttribute("id", mvo.getId());
-		session.setAttribute("user_name", mvo.getName());
-		session.setAttribute("email", mvo.getEmail());
-		session.setAttribute("accId", accId);
-		session.setAttribute("tel", mvo.getTel());
-		session.setAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
-		session.setAttribute("zip", mvo.getZip());
-		session.setAttribute("license", mvo.getLicense());
 		
 		}
 		
@@ -275,18 +267,23 @@ public class accomodationController {
 		
 		String id = (String) session.getAttribute("id");
 		//아이디 정보에 해당하는 유저정보를 가져오는 서비스
-		MemberVO mvo = service2.getMember(id);
-		
-		
-		//로그인정보들(임의의값)
-		session.setAttribute("id", mvo.getId());
-		session.setAttribute("user_name", mvo.getName());
-		session.setAttribute("email", mvo.getEmail());
-		session.setAttribute("accId", accId);
-		session.setAttribute("tel", mvo.getTel());
-		session.setAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
-		session.setAttribute("zip", mvo.getZip());
-		session.setAttribute("license", mvo.getLicense());
+		if(id==null) {
+			MemberVO mvo = null;
+		}else {
+			//아이디 정보에 해당하는 유저정보를 가져오는 서비스
+			MemberVO mvo = service2.getMember(id);
+			
+			
+			//로그인정보들(임의의값)
+			session.setAttribute("id", mvo.getId());
+			session.setAttribute("user_name", mvo.getName());
+			session.setAttribute("email", mvo.getEmail());
+			session.setAttribute("accId", accId);
+			session.setAttribute("tel", mvo.getTel());
+			session.setAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
+			session.setAttribute("zip", mvo.getZip());
+			session.setAttribute("license", mvo.getLicense());
+		}
 				
 				
 		}
@@ -347,6 +344,8 @@ public class accomodationController {
 				
 		log.info("payList : "+list);
 		
+		
+		
 		//해당 유저의 예약정보
 		model.addAttribute("UserPayList", list);
 				
@@ -377,18 +376,28 @@ public class accomodationController {
 		//결제환불 db에 저장
 		//http://localhost:8088/accomodation/roomRfDB
 		@RequestMapping(value = "/roomRfDB" ,method =RequestMethod.GET)
-		public void roomRefundGET(roomRefundVO vo,Model model) throws IOException {
+		public void roomRefundGET(roomRefundVO vo,roomPayVO vo2,Model model) throws IOException, org.json.simple.parser.ParseException {
 			
 							
 		//결제내역
 		log.info("roomRfDBGET() 호출");
 		
-						
-		//첫번째로 결제테이블의 정보를 환불됨으로 바꾸기(status)
-		service.payStatus(vo.getAccId());
+		log.info(vo2.getAccId());
+		log.info(vo2.getAccAmount()+"");				
 		
-		//두번째로 환불테이블 정보입력
-		service.inRoomRefund(vo);
+		//아임포트 환불
+		String tf = service.payRefund(vo2);
+		
+		log.info(tf);
+		
+		if(tf.equals("OK")) {
+			//첫번째로 결제테이블의 정보를 환불됨으로 바꾸기(status)
+			service.payStatus(vo.getAccId());
+			
+			//두번째로 환불테이블 정보입력
+			service.inRoomRefund(vo);
+		}
+		
 		
 		
 		log.info("vo : "+vo);

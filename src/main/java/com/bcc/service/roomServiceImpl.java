@@ -1,7 +1,13 @@
 package com.bcc.service;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
-
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,6 +19,7 @@ import javax.inject.Inject;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -23,9 +30,11 @@ import org.springframework.stereotype.Service;
 
 import com.bcc.domain.roomDate;
 import com.bcc.domain.roomPayVO;
+import com.bcc.domain.roomReVO;
 import com.bcc.domain.roomRefundVO;
 import com.bcc.domain.roomSearch;
 import com.bcc.persistence.roomDAO;
+
 
 @Service
 public class roomServiceImpl implements roomService{
@@ -38,6 +47,8 @@ public class roomServiceImpl implements roomService{
 			LoggerFactory.getLogger(roomServiceImpl.class);
 	
 	
+
+
 	//숙소목록 페이지
 	@Override
 	public JSONArray roomList() {
@@ -88,8 +99,6 @@ public class roomServiceImpl implements roomService{
 		
 		 return roomList;
 	}
-
-	
 	
 	
 	//숙소목록페이지에서 검색한 정보만 불러오게함
@@ -118,6 +127,7 @@ public class roomServiceImpl implements roomService{
 		Elements room_price = doc.select(".map_html > p:nth-child(1) > b"); //대실가격
 		Elements room_price2 = doc.select(".map_html > p:nth-child(2) > b"); //숙박가격
 		Elements room_link = doc.select(".list_2.adcno1 > a");  //이후에 크롤링할페이지를 저장
+
 		// JSON 형태로 영화 정보 저장
 		JSONArray roomList = new JSONArray();
 //			[log.info](http://log.info/)(room_title+"");
@@ -153,6 +163,7 @@ public class roomServiceImpl implements roomService{
 				obj.put("room_price", room_price.get(i).text().replace("원",""));
 				obj.put("room_price2", room_price2.get(i).text().replace("원",""));
 				obj.put("room_link", room_link.get(i).attr("href"));
+			
 
 				roomList.add(obj);
 
@@ -315,6 +326,7 @@ public class roomServiceImpl implements roomService{
 //		Elements room_pic = doc.select(".pic_view .lazy"); // 2. 대표사진
 		Elements room_star_num = doc.select(".score_cnt span");// 4.별점(숫자)
 		Elements room_address = doc.select(".info .address"); // 5. 주소
+	
 
 
 		// JSON 형태로 영화 정보 저장
@@ -472,6 +484,36 @@ public class roomServiceImpl implements roomService{
 		System.out.println(" detailList5 : " + detailList5);
 
 		return detailList5;
+	}
+	//roomDetail0~5까지 방상세정보를 불러오는 동작
+	
+	@Override
+	public JSONArray roomDetail6(String bno) {
+		log.info("크롤링 상세정보 처리불러오기");
+		
+		String url = bno;
+		
+		Document doc = null;
+		
+		try {
+			doc = Jsoup.connect(url).get();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Elements room_infopic = doc.select(".div.gallery_pc > div.swiper-container.gallery-thumbs.swiper-container-horizontal > ul > li.swiper-slide.swiper-slide-next > img");// 9.호텔(상세 내용)
+		
+		JSONArray detailList6 = new JSONArray();
+		
+		for (int i = 0; i < room_infopic.size(); i++) {
+			JSONObject obj = new JSONObject();
+			obj.put("room_infopic", room_infopic.get(i).attr("src"));
+			detailList6.add(obj);
+		}
+		System.out.println(" detailList6 : " + detailList6);
+		
+		return detailList6;
 	}
 	//roomDetail0~5까지 방상세정보를 불러오는 동작
 	
@@ -721,12 +763,12 @@ public class roomServiceImpl implements roomService{
 		log.info("a = "+a);
 		
 		//a 문자부분
-		String b = "bvsdvsvs";
+		String b = "bcvvvsF";
 		int c=0;
 		
 		//데이터 값이 없을때는 bcc1이 들어가고 있을때는 bcc2,bcc3....로 들어감
 		if(a==null) {
-			b = "bvsdvsvs";
+			b = "bcvvvsF";
 			c= 0;
 		}else {
 			//a의 숫자부분
@@ -759,7 +801,7 @@ public class roomServiceImpl implements roomService{
 		String a = dao.roomSearchRefund();
 		
 		//a 문자부분
-		String b = "rfsrvdvfv";
+		String b = "ffqwdwqF";
 				
 		//a 숫자부분
 		int c=0;
@@ -767,7 +809,7 @@ public class roomServiceImpl implements roomService{
 		
 		if(a==null) {
 			
-			b = "rfsrvdvfv";
+			b = "ffqwdwqF";
 			c= 0;
 		}else {
 			c = Integer.parseInt(a.replaceAll("[^0-9]",""));
@@ -790,6 +832,66 @@ public class roomServiceImpl implements roomService{
 		
 		
 		dao.inRoomRefund(vo2);
+		
+	}
+
+
+	@Override
+	public String payRefund(roomPayVO vo) throws IOException, org.json.simple.parser.ParseException {
+		//access_token 발급
+				HttpURLConnection conn = null;
+				URL url = new URL("https://api.iamport.kr/users/getToken");
+				conn = (HttpURLConnection)url.openConnection();
+				conn.setRequestMethod("POST");
+				conn.setRequestProperty("Content-Type", "application/json");
+				conn.setRequestProperty("Accept", "application/json");
+				conn.setDoOutput(true);
+				JSONObject obj = new JSONObject();
+				obj.put("imp_key", "3817682477122484");
+				obj.put("imp_secret", "a060f160cc159fd09923a2ebfb7678adbac710c0105bedad238924b8d34a67409508e32f09830702");
+				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+				bw.write(obj.toString());
+				bw.flush();
+				bw.close();
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				StringBuilder sb = new StringBuilder();
+				String line = null;
+				while((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+				}
+				br.close();
+				JSONParser jsonParser = new JSONParser();
+				JSONObject jsonObj = (JSONObject)jsonParser.parse(sb.toString());
+				JSONObject responseData = (JSONObject)jsonObj.get("response");
+				String access_token = (String)responseData.get("access_token");
+				
+				log.info("액세스토큰 :"+access_token);
+				
+				//REST API(결제환불) 호출
+				HttpURLConnection conn2 = null;
+				URL url2 = new URL("https://api.iamport.kr/payments/cancel");
+				conn2 = (HttpURLConnection)url2.openConnection();
+				conn2.setRequestMethod("POST");
+				conn2.setRequestProperty("Content-Type", "application/json");
+				conn2.setRequestProperty("Authorization", access_token);
+				conn2.setDoOutput(true);
+				JSONObject obj2 = new JSONObject();
+				obj2.put("reason", "테스트 환불");
+				obj2.put("merchant_uid", vo.getAccId());
+				obj2.put("amount", vo.getAccAmount());
+				BufferedWriter bw2 = new BufferedWriter(new OutputStreamWriter(conn2.getOutputStream()));
+				bw2.write(obj2.toString());
+				bw2.flush();
+				bw2.close();
+				BufferedReader br2 = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
+				StringBuilder sb2 = new StringBuilder();
+				String line2 = null;
+				while((line2 = br2.readLine()) != null) {
+				sb2.append(line2 + "\n");
+				}
+				br2.close();
+				
+				return "OK";
 		
 	}
 	
