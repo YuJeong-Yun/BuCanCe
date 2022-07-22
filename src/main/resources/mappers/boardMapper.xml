@@ -7,23 +7,21 @@
 <mapper namespace="com.bcc.mapper.BoardMapper">
 
 	<!-- 조회수 -->
-	<select id="updateBoardCnt" resultType="BoardVO"
-		parameterType="int">
+	<update id="modBoardCnt" parameterType="int"> 
 		update tourist_spot set totalCnt = totalCnt + 1
 		where num= #{num}; 
-
-	</select>
+	</update>
 	
 	<!-- 페이징 처리된 게시물 -->
-	<select id="listCri" resultType="BoardVO">
+	<select id="getList" resultType="BoardVO">
 		select * from tourist_spot
 		where t_category=#{t_category} 
 		order by num asc
 		limit #{pageStart}, #{perPageNum}
 	</select>
 	
-	<!-- 페이징 처리된 게시물 -->
-	<select id="listCriAddr" resultType="BoardVO">
+	<!-- 페이징 처리된 게시물(주소 존재시) -->
+	<select id="getListAddr" resultType="BoardVO">
 		select * from tourist_spot
 		where t_category=#{t_category} and addr=#{addr}
 		order by num asc
@@ -31,7 +29,7 @@
 	</select>
 	
 	<!-- 글 목록 정렬 -->
- 	<select id="listAlign" resultType="BoardVO">
+ 	<select id="getAlignList" resultType="BoardVO">
 		select * from tourist_spot
 		where t_category=#{t_category}
 		order by
@@ -43,7 +41,8 @@
 		limit #{pageStart}, #{perPageNum}
 	</select> 
 	
- 	<select id="addrListAlign" resultType="BoardVO">
+	<!-- 글 목록 정렬(주소 존재 시) -->
+ 	<select id="getAlignListAddr" resultType="BoardVO">
 		select * from tourist_spot
 		where t_category=#{t_category} and addr=#{addr} 
 		order by
@@ -56,14 +55,14 @@
 	</select> 
 	
 	<!-- 게시물 검색 -->
-	<select id="listCount" resultType="int">
+	<select id="getCountList" resultType="int">
 		select count(num)
 		from tourist_spot 
 		where t_category=#{t_category}
 	</select>
 	
-	<!-- 게시물 검색 -->
-	<select id="listCountAddr" resultType="int">
+	<!-- 게시물 검색(주소 존재시) -->
+	<select id="getListCountAddr" resultType="int">
 		select count(num)
 		from tourist_spot 
 		where t_category=#{t_category} and addr=#{addr}
@@ -71,48 +70,32 @@
 
 
 	<!-- 좋아요 -->
-	<select id="checkThumb" parameterType="hashMap" resultType="Integer">
+	<select id="getCheckThumb" parameterType="hashMap" resultType="Integer">
 		select count(*) from thumb
 		where b_num=#{b_num} and m_id=#{m_id}
 	</select>
 	
-	<update id="addThumb">
+	<update id="modAddThumb">
 		update tourist_spot set thumbCnt = thumbCnt+1 where num=#{num}
 	</update>
 	
-	<update id="subThumb">
+	<update id="modSubThumb">
 		update tourist_spot set thumbCnt = thumbCnt-1 where num=#{num}
 	</update>
 	
-	<insert id="insertThumb" parameterType="hashMap">
+	<insert id="putThumb" parameterType="hashMap">
 		insert into thumb(b_num,b_category,m_id)
 		values (#{b_num},#{b_category},#{m_id})
 	</insert>
 	
-	<delete id="deleteThumb" parameterType="hashMap">
+	<delete id="delThumb" parameterType="hashMap">
 		delete from thumb
 		where b_num=#{b_num} and m_id=#{m_id}
 	</delete>
 	<!-- 좋아요 -->
 	
 	
-	
-	<!-- 리스트 출력 -->
-	<select id="tourLists" resultType="BoardVO">
-  		select * from tourist_spot
-  		where addr=#{addr} and t_category=0
-  	</select>
-	<select id="foodLists" resultType="BoardVO">
-  		select * from tourist_spot
-  		where addr=#{addr} and t_category=1
-  	</select>
-  	
   	<!-- 글 내용 -->
-  	<select id="getFood" resultType="BoardVO">
-  		select * from tourist_spot
-  		where num=#{num} and t_category=1
-  	</select>
-  	
 	<select id="getTour" resultType="BoardVO">
 		select * from tourist_spot
 		where num = #{num}
@@ -120,9 +103,8 @@
 	
 	
 	<!-- 검색 결과 -->
-	<select id="search" resultType="BoardVO">
+	<select id="getSearchList" resultType="BoardVO">
 		select * from tourist_spot
 		where title like concat('%',#{keyword},'%')
 	</select>
-	
 </mapper>

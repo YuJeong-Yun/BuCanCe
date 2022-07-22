@@ -18,7 +18,7 @@
 						<h3 style="font-family: 'NanumSquareBold' !important;">${vo.title }
 						</h3>
 					</div>
-					<table id="resInfo">
+					<table id="infos">
 						<tbody>
 							<tr>
 								<td class="r-o">전화번호</td>
@@ -32,18 +32,27 @@
 								<td class="r-o">상세주소</td>
 								<td>${vo.addr_full }</td>
 							</tr>
+							
+							<c:if test="${not empty vo.trfc_info }">
 							<tr>
 								<td class="r-o">오시는길</td>
 								<td>${vo.trfc_info}</td>
 							</tr>
+							</c:if>
+							
+							<c:if test="${not empty vo.convenient }">
 							<tr>
 								<td class="r-o">편의</td>
 								<td>${vo.convenient}</td>
 							</tr>
+							</c:if>
+							
+							<c:if test="${not empty vo.url }">
 							<tr>
 								<td class="r-o">홈페이지</td>
 								<td><a href="${vo.url}">${vo.url }</a></td>
 							</tr>
+							</c:if>
                             <tr>
 	                         <td class="r-o">찜하기</td>
 	                         <td>
@@ -83,10 +92,11 @@
 							 <div class="sc-author">
                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF5muH6piXfKA2yUyMkJwm0mJq6O4lU-1mFA&usqp=CAU"
                                    width="60" height="60" style="border-radius : 90px">
-								${commentList.writer}님 &nbsp;&nbsp;
+								${commentList.writer}님 &nbsp;<a href="" onclick="">🚨신고 </a>&nbsp;&nbsp;
 									<fmt:formatDate value="${commentList.regdate}" pattern="yyyy-MM-dd" /> &nbsp;&nbsp;
-									<b><c:if test="${commentList.visit==1}">방문했어요</c:if>
-										<c:if test="${commentList.visit==0}">방문 전입니다</c:if></b>	
+									<b><c:if test="${commentList.visit==1}">방문했어요 </c:if>
+										<c:if test="${commentList.visit==0}">방문 전입니다 </c:if></b>
+											
                                 </div>
 								<p>${commentList.content}</p>
 								<div id ="btn_group">

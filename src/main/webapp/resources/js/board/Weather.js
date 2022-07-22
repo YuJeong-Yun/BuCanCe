@@ -1,4 +1,3 @@
-	$(function(){
 		
 		$.ajax({
 			url : "/boardREST/getWeather",
@@ -52,4 +51,3 @@
 			}
 		});
 		
-	}); //jquery

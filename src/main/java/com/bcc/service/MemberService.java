@@ -2,7 +2,9 @@ package com.bcc.service;
 
 import java.util.List;
 
+import com.bcc.domain.BoardVO;
 import com.bcc.domain.MemberVO;
+import com.bcc.domain.ThumbVO;
 
 public interface MemberService {
 
@@ -36,5 +38,11 @@ public interface MemberService {
     
     // license Down
 	public void liDown(String license);
-    
+	
+	// 찜 목록 조회 //
+	public List<BoardVO> getThumbList(String id) throws Exception;
+	
+	// 찜 삭제
+	public void deleteThumb(int b_num) throws Exception;
+	
 }

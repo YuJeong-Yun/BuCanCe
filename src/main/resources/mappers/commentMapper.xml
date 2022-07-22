@@ -4,40 +4,45 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bcc.mapper.CommentMapper">
 	<!-- 댓글 조회 -->
-	<select id="readComment" resultType="CommentVO">
+	<select id="getComment" resultType="CommentVO">
 		SELECT
 		CNO, CONTENT, WRITER,
 		REGDATE, VISIT
 		FROM comment
 		WHERE num = #{num}
 	</select>
+	
 	<!-- 댓글 작성 -->
-	<insert id="createComment">
+	<insert id="putComment">
 		insert into comment(num, content, writer, visit)
 		value(#{num}, #{content}, #{writer}, #{visit})
 	</insert>
+	
 	<!-- 댓글 수정 -->
-	<update id="update" parameterType="com.bcc.domain.CommentVO">
+	<update id="modComment" parameterType="com.bcc.domain.CommentVO">
 		update comment set content
 		=
 		#{content}
 		where cno = #{cno}
 	</update>
+	
 	<!-- 댓글 삭제 -->
-	<delete id="delete">
+	<delete id="delComment">
 		DELETE FROM comment
 		WHERE cno = #{cno}
 	</delete>
 	
 	<!-- 선택된 댓글 조회 -->
-	<select id="selectComment" resultType="com.bcc.domain.CommentVO">
+	<select id="getSelectComment" resultType="com.bcc.domain.CommentVO">
 	select num, cno, content, writer, regdate from comment where cno = #{cno}
 	</select>
 	<!-- 댓글 수 -->
-	<update id="updateCommentCnt" parameterType="int"> update tourist_spot
+	<update id="modCommentCnt" parameterType="int"> update tourist_spot
 		b set b.commentCnt = (select count(cno) from comment where num =
 		#{num})
 		where b.num = #{num}
 	</update>
-	
+
+
+
 </mapper>

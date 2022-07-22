@@ -20,6 +20,7 @@ public class roomPayVO {
 	private String status;
 	private String accDate;
 	private int license;
+	
 	public String getAccId() {
 		return accId;
 	}

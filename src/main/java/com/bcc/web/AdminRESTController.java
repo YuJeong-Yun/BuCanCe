@@ -27,7 +27,7 @@ public class AdminRESTController {
 	// 날짜에 해당하는 구독 회원 정보(전체)
 	@RequestMapping(value = "/pmMembers", method = RequestMethod.GET)
 	public List<PreOrderVO> getVipInfo(@RequestParam("date") String date){
-		
+		//log.info(service.getPmInfo(date)+"");
 		return service.getPmInfo(date);
 	}
 	

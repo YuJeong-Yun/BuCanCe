@@ -4,7 +4,6 @@
 	var rePageCheck = false; // '블로그 리뷰' 탭 중복 클릭 시 같은 글 가져오기 방지
 	var size = 3;
 	
-	$(function(){
 		// 찜하기 클릭
 		$('#updateThumb').click(function(){
 			if(id){
@@ -149,12 +148,6 @@
 			
 		});
 		 
-		
-		 
-		 
-	}); // jQuery
-	
-	
 	// 페이지 클릭 시 사용자의 좋아요 기록 확인 후 표시할 이미지 결정
 	function checkThumb(){
 		$.ajax({
@@ -172,10 +165,10 @@
 	checkThumb();
 	
 		$("#list_btn").on("click", function(){
-		location.href = "/board/tourList?page="+page
-		+"&perPageNum="+perPageNum
-		+"&t_category="+t_category
-		+"&addr="+addr2;
+			location.href = "/board/tourList?page="+page
+			+"&perPageNum="+perPageNum
+			+"&t_category="+t_category
+			+"&addr="+addr2;
 		});
 		
 	// 댓글 기능

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file = "../include/header.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -22,7 +22,7 @@
 				// callBack 함수 사용
 				var getResult = function(res) {
 
-					var url = "/order_result.php";
+					var url = "/order/order_result.php";
 
 					var $form = $('<form></form>');
 					$form.attr('action', url);
@@ -64,7 +64,7 @@
 
 							// 결제창 방식 설정 - 팝업(상대경로), 다이렉트(절대경로)
 							pcd_rst_url = is_direct === 'Y' ? server_name
-									+ "/order_result" : "/order_result";
+									+ "/order/order_result" : "/order/order_result";
 
 							var obj = new Object();
 
@@ -207,3 +207,4 @@ td {
 	<button id="payAction" style="margin-left: 260px">결제하기</button>
 </body>
 </html>
+<%@ include file = "../include/footer.jsp" %>
