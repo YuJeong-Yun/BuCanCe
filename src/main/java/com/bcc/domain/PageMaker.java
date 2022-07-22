@@ -81,9 +81,7 @@ public class PageMaker {
 	// 리스트 + 검색 + 페이징
 	public String makeSearch(int page) {
 		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
-				.queryParam("perPageNum", cri.getPerPageNum())
-				.queryParam("searchType", ((SearchCriteria) cri).getSearchType())
-				.queryParam("keyword", encoding(((SearchCriteria) cri).getKeyword())).build();
+				.queryParam("perPageNum", cri.getPerPageNum()).build();
 		return uriComponents.toUriString();
 	}
 

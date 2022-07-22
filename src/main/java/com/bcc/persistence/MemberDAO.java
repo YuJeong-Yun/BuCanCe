@@ -2,7 +2,11 @@ package com.bcc.persistence;
 
 import java.util.List;
 
+import com.bcc.domain.BoardVO;
+import com.bcc.domain.Criteria;
 import com.bcc.domain.MemberVO;
+import com.bcc.domain.SearchCriteria;
+import com.bcc.domain.ThumbVO;
 
 public interface MemberDAO {
 	
@@ -17,9 +21,6 @@ public interface MemberDAO {
 	
 	// 로그인
 	public MemberVO loginMember(MemberVO vo);
-	
-//	// 로그인2
-//	public MemberVO loginMember(String id,String pw);
 	
 	// 회원정보 수정(이름,이메일,수정일)
 	public Integer updateMember(MemberVO vo);
@@ -47,5 +48,16 @@ public interface MemberDAO {
     
     // license down
     public void licenseDown(String license);
+    
+	// 좋아요 목록 조회
+	public List<BoardVO> getThumbList(SearchCriteria scri) throws Exception;
+	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception;
+	
+	// 좋아요 삭제
+	public void delThumb(int b_num, String id) throws Exception;
+	
+	// 좋아요 갯수 조회
+	public Integer getThumbCount(String id);
+	public Integer getSNSThumbCount(String id);
 
 }

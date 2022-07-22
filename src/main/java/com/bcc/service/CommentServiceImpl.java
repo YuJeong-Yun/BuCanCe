@@ -17,32 +17,32 @@ public class CommentServiceImpl implements CommentService {
 
 	// 댓글 조회
 	@Override
-	public List<CommentVO> readComment(int num) throws Exception {
-		return dao.readComment(num);
+	public List<CommentVO> readComment(Integer num) throws Exception {
+		return dao.getComment(num);
 	}
 
 	// 댓글 작성
 	@Override
-	public void wriComment(CommentVO vo) throws Exception {
-		dao.wriComment(vo);
+	public void createComment(CommentVO vo) throws Exception {
+		dao.putComment(vo);
 	}
 
 	// 댓글 수정
 	@Override
-	public void modify(CommentVO vo) throws Exception {
-		dao.modify(vo);
+	public void update(CommentVO vo) throws Exception {
+		dao.modComment(vo);
 	}
 
 	// 댓글 삭제
 	@Override
 	public void delete(CommentVO vo) throws Exception {
-		dao.delete(vo);
+		dao.delComment(vo);
 	}
 
 	// 선택된 댓글 조회
 	@Override
-	public CommentVO selectComment(int cno) throws Exception {
-		return dao.selectComment(cno);
+	public CommentVO selectComment(Integer cno) throws Exception {
+		return dao.getSelectComment(cno);
 	}
 
 }

@@ -9,6 +9,12 @@
   	<select id="getNow" resultType="string">
   		select now() 
   	</select>
+  	
+  	<insert id="insertPay" parameterType="PreOrderVO">
+		insert into premium_order
+		values (#{id},systimestamp,systdate+30,sysdate+29,#{pm})
+	</insert>
+	
 
     <select id="countMember" resultType="int">
       select count(*) from bcc_member
@@ -62,6 +68,63 @@
 		set license=0
 		where id=#{id} 
 	</update>
-  	
+
+	<select id="getThumbList" resultType="BoardVO">
+        select title,thumbnail,num from tourist_spot 
+        where num in (select b_num from thumb where m_id=(select id from bcc_member where id=#{keyword}))
+        limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="getSNSThumbList" resultType="BoardVO">
+        select title,thumbnail,num from tourist_spot 
+        where num in (select b_num from thumb where m_id=(select k_number from kakao_table where k_number=#{keyword}))
+        limit #{pageStart}, #{perPageNum}
+	</select>
+	
+    <delete id="delThumb" parameterType="hashMap">
+		delete from thumb
+		where b_num = #{b_num} and m_id=#{m_id}
+    </delete>
+    
+    <select id="getThumbCount" resultType="Integer">
+    	select count(*)
+    	from thumb
+    	where m_id = (select id from bcc_member where id=#{id})
+    </select>
+    
+    <select id="getSNSThumbCount" resultType="Integer">
+    	select count(*)
+    	from thumb
+    	where m_id = (select k_number from kakao_table where k_number=#{id})
+    </select>
+	
+	<!-- 카카오 로그인 -->
+	<!-- 정보 찾기 -->
+	<select id="findKakao" parameterType="java.util.HashMap" resultType="KakaoVO">
+		select * from kakao_table
+		where k_name=#{nickname} and k_email=#{email}
+	</select>
+
+	<!-- 정보 저장 -->
+	<insert id="kakaoInsert" parameterType="java.util.HashMap">
+		insert into kakao_table(k_name, k_email)
+		values(#{nickname}, #{email})
+	</insert>
+	<!-- 카카오 로그인 -->
+	
+	<!-- 네이버 로그인 -->
+	<!-- 정보 찾기 -->
+	<select id="findNaver" parameterType="java.util.HashMap" resultType="NaverVO">
+		select * from naver_table
+		where n_name=#{nickname} and n_email=#{email}
+	</select>
+
+	<!-- 정보 저장 -->
+	<insert id="naverInsert" parameterType="java.util.HashMap">
+		insert into naver_table(n_name, n_email)
+		values(#{nickname}, #{email})
+	</insert>
+	<!-- 네이버 로그인 -->
+	
   </mapper>
   

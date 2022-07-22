@@ -1,40 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   
 <mapper namespace="com.bcc.mapper.adminMapper">
+ 
+	<select id="getAllWebMem" resultType="MemberVO">
+		select * from bcc_member
+	</select>
 
+	<select id="getAllSnsMem" resultType="KakaoVO">
+		select * from kakao_table
+  	</select>
 
-	<select id="pmInfo" parameterType="hashMap" resultType="PreOrderVO">
+	<select id="getPmInfo" parameterType="hashMap" resultType="PreOrderVO">
 		select * from premium_order
-		where success_date between #{start} and #{end}
-		order by id
+		where create_date between #{start} and #{end}
+		order by PCD_PAYER_NAME
 	</select>
 	
-	<select id="periodicPm" parameterType="hashMap" resultType="String">
-		select periodic_pm from premium_member 
-		where id in (select id from premium_order where success_date between #{start} and #{end})
-		order by id
-	</select>
-	
-	<select id="onlyPeriodMems" parameterType="hashMap" resultType="PreOrderVO">
+	<select id="getOnlyPeriodMems" parameterType="hashMap" resultType="PreOrderVO">
 		select * from premium_order
-		where id in (select id from premium_member where periodic_pm = 'y') 
-		and success_date between #{start} and #{end}
-		order by id
+		where PCD_PAYER_ID != ""
+		and create_date between #{start} and #{end}
+		order by PCD_PAYER_NAME
 	</select>
 	
-	<select id="trendChart" parameterType="hashMap" resultType="Integer">
+	<select id="getTrendChart" resultType="Integer">
 		select count(*) from premium_order
-		where day(success_date)=#{day} and month(success_date)=#{month}
+		where date_format(create_date, '%Y %c %e')=#{date}
 	</select>
 	
-	<select id="monthlyChart" parameterType="hashMap" resultType="Integer">
+	<select id="getMonthlyChart" resultType="Integer">
 		select count(*) from premium_order
-		where year(success_date)=#{year} and month(success_date)=#{month}
+		where date_format(create_date, '%Y %c')=#{date}
 	</select>
+	
+	<select id="getWebMem" resultType="Integer">
+		select count(*) from bcc_member
+		where date_format(regdate, '%Y %c %e')=#{date}
+	</select>
+	
+	<select id="getSNSMem" resultType="Integer">
+		select count(*) from kakao_table
+		where date_format(regdate, '%Y %c %e')=#{date}
+	</select>
+	
+	<select id="getTotalMem" resultType="Integer">
+		select count(*)+(select count(*) from kakao_table)
+		from bcc_member
+		<![CDATA[
+		where date_format(regdate, '%Y %c %e') <= date_format(now(), '%Y %c %e')
+		]]>
+	</select>
+	
+	<select id="getTotalPmMem" resultType="Integer">
+		select count(*) from premium_member
+	</select>
+	
+	<select id="getTotalComment" resultType="Integer">
+		select count(*) from comment
+		<![CDATA[
+		where date_format(regdate, '%Y %c %e') <= date_format(now(), '%Y %c %e')
+		]]>
+	</select>
+	
+	<select id="getTotalAcc" resultType="Integer">
+		select count(*) from acc_payment
+		where date_format(accDate, '%Y %c')=#{date}
+	</select>
+
+	<delete id="delMem">
+	 delete from bcc_member
+	 where id =#{id}
+	</delete>
+
 	
 </mapper>  

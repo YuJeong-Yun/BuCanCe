@@ -1,4 +1,3 @@
-<%@page import="com.bcc.persistence.MemberDAO"%>
 <%@page import="org.springframework.stereotype.Service"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -22,10 +21,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-    
-    <!-- Google Chart -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
@@ -38,11 +33,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hyejin.css" type="text/css">
 </head>
 
 <body>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -75,7 +69,7 @@
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">NOTICE</a>
+                <li class="active"><a href="${pageContext.request.contextPath }/index">NOTICE</a>
                    <ul class="dropdown">
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
@@ -83,12 +77,10 @@
                         <li><a href="#">4</a></li>
                     </ul>
                 </li>
-                <li><a href="./rooms.html">TOUR</a>
+                <li><a href="/board/tourMap">TOUR</a>
 	                <ul class="dropdown">
-                        <li><a href="#">TourList</a></li>
-                        <li><a href="#">Reviews</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
+	                    <li><a href="/board/tourMap">관광지도</a></li>
+                        <li><a href="/board/tourList?t_category=0&addr=all">모두보기</a></li>
 	                    </ul>
 	                </li>
                 <li><a href="./about-us.html">HOTEL</a>
@@ -99,7 +91,7 @@
                         <li><a href="#">4</a></li>
 	                    </ul>
 	                </li>
-                <li><a href="./pages.html">PLAN</a>
+                <li><a href="${pageContext.request.contextPath }/tourMap">PLAN</a>
                     <ul class="dropdown">
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
@@ -121,10 +113,12 @@
 
 <%
 	String id = null;
-	if(session.getAttribute("id")!=null){
+	String k_email = null;
+	if(session.getAttribute("id")!=null || session.getAttribute("k_email")!=null){
 	id = (String)session.getAttribute("id");
+	k_email = (String)session.getAttribute("k_email");
 }
-	if(id==null){
+	if(id==null && k_email==null){
 %>
 	<div id="login">
 	<a href="/login">LOGIN</a> | 
@@ -132,12 +126,32 @@
 	</div>
 
 <%	
-	}else{ %>
+	} else if(id.equals("admin")){
+		%>
+			<div id="login">
+			관리자님 안녕하세요.
+			<a href="/admin/profitChart" id="admin">사이트관리</a>
+			<a href="/logout">LOGOUT</a>
+			</div>
+		<%
+	}
+	
+	else if(id!=null){ %>
 	
 
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
 	<a href="/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/logout">LOGOUT</a>
+	</div>
+
+<%	
+	}else{ %>
+	
+
+	<div id="login">
+	<%=k_email%>님 로그인 중입니다!!
+	<a href="/mypage?id=<%=k_email %>">MYPAGE</a>
 	<a href="/logout">LOGOUT</a>
 	</div>
 <%		
@@ -177,7 +191,7 @@
 
 <%
 
-	if(id==null){
+	if(id==null && k_email == null){
 %>
 	<div id="login">
 	<a href="/login">LOGIN</a> | 
@@ -185,12 +199,31 @@
 	</div>
 
 <%	
-	}else{ %>
+	} else if(id.equals("admin")){
+		%>
+		<div id="login">
+		관리자님 안녕하세요.
+		<a href="/admin/profitChart" id="admin">사이트관리</a>
+		<a href="/logout">LOGOUT</a>
+		</div>
+		<%
 	
+	} else if(id!=null){
+	%>
 
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
 	<a href="/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/logout">LOGOUT</a>
+	</div>
+
+<%	
+	} else{ %>
+	
+
+	<div id="login">
+	<%=k_email%>님 로그인 중입니다!!
+	<a href="/mypage?id=<%=k_email %>">MYPAGE</a>
 	<a href="/logout">LOGOUT</a>
 	</div>
 <%		
@@ -230,7 +263,7 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-					                <li class="active"><a href="./index.html">NOTICE</a>
+					                <li class="active"><a href="${pageContext.request.contextPath }/index">NOTICE</a>
 					                   <ul class="dropdown">
 					                        <li><a href="#">1</a></li>
 					                        <li><a href="#">2</a></li>
@@ -238,14 +271,12 @@
 					                        <li><a href="#">4</a></li>
 					                    </ul>
 					                </li>
-					                <li><a href="/tourMap">TOUR</a>
-<!-- 						                <ul class="dropdown"> -->
-<!-- 					                        <li><a href="#">1</a></li> -->
-<!-- 					                        <li><a href="#">2</a></li> -->
-<!-- 					                        <li><a href="#">3</a></li> -->
-<!-- 					                        <li><a href="#">4</a></li> -->
-<!-- 						                    </ul> -->
-						                </li>
+					                <li><a>TOUR</a>
+						                <ul class="dropdown">
+					                        <li><a href="/board/tourMap">관광지도</a></li>
+					                        <li><a href="/board/tourList?t_category=0&addr=all">모두보기</a></li>
+					                    </ul> 
+					                </li>
 					                <li><a href="./about-us.html">HOTEL</a>
 						                <ul class="dropdown">
 					                        <li><a href="${pageContext.request.contextPath }/accomodation/roomList">인기숙소</a></li>
@@ -254,7 +285,7 @@
 					                        <li><a href="#">4</a></li>
 						                    </ul>
 						                </li>
-					                <li><a href="./pages.html">PLAN</a>
+                					<li><a href="${pageContext.request.contextPath }/tourMap">PLAN</a>
 					                    <ul class="dropdown">
 					                        <li><a href="/order/goods">구독권</a></li>
 					                        <li><a href="/plan/planList">여행 계획</a></li>

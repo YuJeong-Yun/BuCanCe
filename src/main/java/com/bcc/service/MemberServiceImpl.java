@@ -8,7 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.bcc.domain.BoardVO;
+import com.bcc.domain.Criteria;
 import com.bcc.domain.MemberVO;
+import com.bcc.domain.SearchCriteria;
+import com.bcc.domain.ThumbVO;
+import com.bcc.persistence.BoardDAO;
 import com.bcc.persistence.MemberDAO;
 
 // @Service : 해당 객체가 서비스동작을 수행하는 객체다. 라는 의미 
@@ -20,6 +25,9 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Inject
 	private MemberDAO dao;
+	
+	@Inject
+	private BoardDAO bdao;
 
 	@Override
 	public void memberInsert(MemberVO vo) {
@@ -109,5 +117,40 @@ public class MemberServiceImpl implements MemberService{
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public List<BoardVO> getThumbList(SearchCriteria scri) throws Exception {
 		
+		return dao.getThumbList(scri);
+	}
+	
+	
+
+	@Override
+	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception {
+		
+		return dao.getSNSThumbList(scri);
+	}
+
+	@Override
+	public void deleteThumb(int b_num, String id) throws Exception {
+		
+		dao.delThumb(b_num, id);
+	}
+
+	@Override
+	public Integer getThumbCount(String id) {
+	
+		return dao.getThumbCount(id);
+	}
+
+	@Override
+	public Integer getSNSThumbCount(String id) {
+		
+		return dao.getSNSThumbCount(id);
+	}
+	
+	
+	
+	
 }

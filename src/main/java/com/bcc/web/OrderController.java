@@ -6,6 +6,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+<<<<<<< HEAD
+=======
+import java.util.Calendar;
+import java.util.Date;
+>>>>>>> 4b4bd9e339d47f08f4cd87001f09245f2c8a15bf
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +34,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bcc.domain.MemberVO;
 import com.bcc.domain.PreMemberVO;
 import com.bcc.domain.PreOrderVO;
 import com.bcc.scheduler.Scheduler;
@@ -52,6 +56,7 @@ public class OrderController extends PaypleController {
 	private MemberService service;
 
 ///////////////////////////////////////////////////////////////
+<<<<<<< HEAD
 	// 정기결제 정지(빌링키 삭제)
 		// http://localhost:8088/order/deleteKey
 		// http://localhost:8088/mypage
@@ -101,9 +106,46 @@ public class OrderController extends PaypleController {
 			return "/order/goods";
 
 		}
+=======
+
+	// 정기결제 정지(빌링키 삭제)
+	// http://localhost:8088/order/deleteKey
+	@RequestMapping(value = "/deleteKey", method = RequestMethod.GET)
+	public String deleteGET(HttpSession session) {
+
+		// 임시
+		session.setAttribute("id", "itwill2");
+
+		String id = (String) session.getAttribute("id");
+
+		log.info(" deleteGET() 호출 ");
+
+		return "/order/deleteKey";
+	}
+
+	// 정기결제 정지(빌링키 삭제)
+	@RequestMapping(value = "/deleteKey", method = RequestMethod.POST)
+	public String deletePOST(HttpSession session, PreOrderVO dvo/* , MemberVO vo */) {
+		log.info(" deletePOST() 호출 ");
+
+		// 임시
+		session.setAttribute("id", "itwill2");
+
+		String id = (String) session.getAttribute("id");
+
+		// vo.setId((String)session.getAttribute("id"));
+		// log.info(vo+"");
+
+		// 서비스 - 회원삭제동작
+		orderservice.deleteKey(dvo);
+
+		// 페이지 이동
+		return "redirect:/";
+	}
+>>>>>>> 4b4bd9e339d47f08f4cd87001f09245f2c8a15bf
 
 ////////////////////////////////////////////////////////////////////////	
-	
+
 	/*
 	 * goods.jsp : 물건 페이지
 	 */
@@ -121,7 +163,7 @@ public class OrderController extends PaypleController {
 	@RequestMapping(value = "/orderInfo")
 // http://localhost:8088/order/orderInfo
 	public String orderInfo(Model model, HttpSession session) {
-		
+
 		model.addAttribute("payer_no", "1234"); // 파트너 회원 고유번호 > 선택사항 그거없셔
 		model.addAttribute("payer_name", "itwill2"); // 결제자 이름
 		model.addAttribute("payer_hp", "010-1111-1111"); // 결제자 휴대전화번호
@@ -272,16 +314,47 @@ public class OrderController extends PaypleController {
 		model.addAttribute("pay_cardtradenum", request.getParameter("PCD_PAY_CARDTRADENUM")); // 카드 거래번호
 		model.addAttribute("pay_cardauthno", request.getParameter("PCD_PAY_CARDAUTHNO")); // 카드 승인번호
 		model.addAttribute("pay_cardreceipt", request.getParameter("PCD_PAY_CARDRECEIPT")); // 카드 매출전표 URL
+<<<<<<< HEAD
 		
          // DB에 저장
 		try {
             orderservice.putOrder(pvo);
+=======
+
+		// 날짜 계산ㅇ랴ㅓ
+		// create_date
+		Date create_date = new Date();
+		Calendar c1 = Calendar.getInstance();
+		c1.setTime(create_date);
+		create_date = c1.getTime();
+
+		// license_deadline
+		Date license_deadline = new Date();
+		Calendar c2 = Calendar.getInstance();
+		c2.setTime(license_deadline);
+		c2.add(Calendar.MONTH, 1);
+		license_deadline = c2.getTime();
+
+		// next_order_date
+		Date next_order_date = c2.getTime();
+		Calendar c3 = Calendar.getInstance();
+		c3.setTime(next_order_date);
+		c3.add(Calendar.DATE, -1);
+		next_order_date = c3.getTime();
+
+		System.out.println(pvo);
+		System.out.println(vo);
+
+		// DB에 저장
+		try {
+			orderservice.insertOrder(pvo);
+>>>>>>> 4b4bd9e339d47f08f4cd87001f09245f2c8a15bf
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
 			memberservice.putPreMember(vo);
 		} catch (NullPointerException e) {

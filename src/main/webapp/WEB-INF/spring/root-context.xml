@@ -19,8 +19,12 @@
 		<property name="username" value="itwillbs5" />
 		<property name="password" value="itwillbs8030909" />
 	</bean>
+<<<<<<< HEAD
 	<!-- DataSource객체 -->
 
+=======
+	
+>>>>>>> 4b4bd9e339d47f08f4cd87001f09245f2c8a15bf
 	<!-- sqlSessionFactyroy 객체 (디비연결, mybatis 설정, mapper 연결) -->
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
