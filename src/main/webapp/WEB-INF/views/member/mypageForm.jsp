@@ -14,16 +14,16 @@
 <body class = "memberBody">
 <div class = "memberInputArea">
 <div class = memberForm>
-	<form action="/mypage" method="post">
-		<a href = "/update">회원정보수정</a>
-		<a href = "/delete">회원탈퇴</a>
+	<form action="/member/mypage" method="post">
+		<a href = "/member/update">회원정보수정</a>
+		<a href = "/member/delete">회원탈퇴</a>
 	</form>
 	
 <div class = "menu-box">
-	<ul class = "innerwrap" id = "tab">
+	<ul class = "innerwrap" id ="tab" >
 		<li><a href="#">내 그룹</a></li>
 		<li><a href="#">일정</a></li>
-		<li><a href="/favorite">찜한 여행지</a></li>
+		<li><a href="/member/favorite">찜한 여행지</a></li>
 	</ul>
 </div>
 	

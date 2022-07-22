@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/member.css" type="text/css">
 
 
-
 <!-- Breadcrumb Section Begin -->
 <div class="breadcrumb-section">
 	<div class="container">
@@ -22,7 +21,6 @@
 </div>
 <!-- Breadcrumb Section End -->
 
-
 <section class="rooms-section spad">
 	<div class="container">
 		<div id="b-list" class="row">
@@ -32,7 +30,7 @@
 						<img src="${vo.thumbnail }" id="thumbnail">
 						<span id="thumbX" onclick="javascript:delCheck(${vo.num});">🗙</span>
 						<div class="info">
-							<h4><a href="/board/infoDetail?num=${vo.num}&t_category=3" id="thumbA">${vo.title }</a></h4>
+							<h4><a href="/board/infoDetail?num=${vo.num}&page=${scri.page}&perPageNum=${scri.perPageNum}&t_category=${vo.t_category}&addr=favorite" id="thumbA">${vo.title }</a></h4>
 						</div>
 					</div>
 				</div>
