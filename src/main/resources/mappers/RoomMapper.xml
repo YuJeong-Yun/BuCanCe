@@ -5,41 +5,41 @@
   
   <mapper namespace="com.bcc.mapper.RoomMapper">
   
-
   
-  	<insert id="insertRoom">
+  	<insert id="putPaymentRoom">
   		insert into acc_payment (accId,accKind,accName,accAmount,email,user_name,tel,zip,id,sort,roomSort,endTime,useTime,checkIn,checkOut,license)
   		values(#{accId},#{accKind},#{accName},#{accAmount},#{email},#{user_name},#{tel},#{zip},#{id},#{sort},#{roomSort},#{endTime},#{useTime},#{checkIn},#{checkOut},#{license})
   	</insert>
   
   
-  
-  <select id="selectRoom" resultType="roomPayVO">
+  <select id="getReInfo" resultType="roomPayVO">
   	select * from acc_payment where accId=#{accId}
   </select>
   
-  <select id="userPayList" resultType="roomPayVO">
+  <select id="getRoomReInfo" resultType="roomPayVO">
   	select * from acc_payment where id=#{id} order by accDate desc
   </select>
    
-   <select id="selectRoomId" resultType="String">
+   <select id="getMaxReRoom" resultType="String">
   	select accId from acc_payment order by accDate desc limit 1
   </select>
   
-   <update id="payStatusRoom">
+   <update id="modReStatus">
   	update acc_payment set status="refund" where accId=#{accId}
   </update>
   
-   <select id="selectRfId" resultType="String">
+   <select id="getMaxRefund" resultType="String">
   	select rfId from acc_refund order by rf_date desc limit 1
   </select>
 
-	<insert id="RoomInRefund">
+	<insert id="putRfRoom">
   		insert into acc_refund (rfId,accId,accAmount,accName,roomSort,sort,accKind,checkIn,checkOut,id,license)
   		values(#{rfId},#{accId},#{accAmount},#{accName},#{roomSort},#{sort},#{accKind},#{checkIn},#{checkOut},#{id},#{license})
   	</insert>
   	
-
+	<select id="getReRoomInfoAdmin" resultType="roomPayVO">
+  	select * from acc_payment
+  	</select>
   
   </mapper>
   

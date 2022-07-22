@@ -16,42 +16,52 @@ import com.bcc.domain.roomSearch;
 
 public interface roomService {
 
-	public JSONArray roomList();
+	//숙소목록 페이지
+	public JSONArray getRoomList();
 	
-	public JSONArray roomSearchList(roomSearch rs);
+	//숙소목록페이지에서 검색한 정보만 불러오게함
+	public JSONArray getRoomSearchList(roomSearch rs);
 	
-	public JSONArray roomDetail0(String bno);
+	//roomDetail0~5까지 방상세정보를 불러오는 동작
+	public JSONArray getRoomDetail0(String bno);
+	public JSONArray getRoomDetail(String bno);
+	public JSONArray getRoomDetail2(String bno);
+	public JSONArray getRoomDetail3(String bno);
+	public JSONArray getRoomDetail4(String bno);
+	public JSONArray getRoomDetail5(String bno);
 	
-	public JSONArray roomDetail(String bno);
+	//숙소상세가격
+	public JSONArray getRoomPrice(String bno);
 
-	public JSONArray roomDetail2(String bno);
-	
-	public JSONArray roomDetail3(String bno);
-	
-	public JSONArray roomDetail4(String bno);
+	//숙소예약
+	public JSONArray reserveRoom(String bno, roomDate rd,String ano) throws ParseException;
 
-	public JSONArray roomDetail5(String bno);
-	
-	public JSONArray roomPrice(String bno);
+	//결제 성공시 db에 입력
+	public void insertRoomPay(roomPayVO vo);
 
-	public JSONArray roomReserve(String bno, roomDate rd,String ano) throws ParseException;
+	//결제 후 내역페이지
+	public roomPayVO getRoomPayInfo(String accId);
 
-	public void roomPay(roomPayVO vo);
+	//유저예약정보
+	public List<roomPayVO> getRoomUserPayInfo(String userId);
 
-	public roomPayVO roomPayInfo(String accId);
-
-	public List<roomPayVO> roomUserPayInfo(String userId);
-
+	// (주문번호설정)
 	public String SearchPayId();
 
-	public void payStatus(String accId);
+	//환불시 결제 상태 변경
+	public void modPayStatus(String accId);
 
+	//환불시 환불테이블에 데이터입력
+	public void putRoomRefund(roomRefundVO vo2);
 
-	public void inRoomRefund(roomRefundVO vo2);
+	////환불테이블 고유아이디값
+	public String refundRoom();
 
-	public String roomRf();
-
+	////환불 아임포트동작
 	public String payRefund(roomPayVO vo2) throws MalformedURLException, IOException, org.json.simple.parser.ParseException;
+
+	//숙소예약정보들 (관리자)
+	public List<roomPayVO> getReseAdmin();
 	
 	
 	

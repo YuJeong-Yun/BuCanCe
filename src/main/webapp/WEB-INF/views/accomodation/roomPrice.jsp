@@ -11,8 +11,8 @@
                     <div class="breadcrumb-text">
                         <h2>숙소 가격 페이지</h2>
                         <div class="bt-option">
-                            <a href="./home.html">Home</a>
-                            <span>숙소 가격</span>
+                          <a href="<%=request.getHeader("REFERER")%>">뒤로가기</a>
+                         
                         </div>
                     </div>
                 </div>
@@ -27,10 +27,6 @@
    
    $(function(){
 	  
-	   $('#abs').attr({
-		 
-	   });
-	   
 	   $('.table_type_02').css({
 // 		   'color' : 'green',
 		   'text-align' : 'center',
@@ -48,33 +44,53 @@
 		   'color' : 'green',
 		   
 	   });
-
+	   $('tbody > tr > th').css({
+		  'color' : 'white',
+		  'background' : 'gray'
+			   
+	   });
 	   $('th').attr('width','25%');
 	   $('td').attr('height',90);
 	   $('span').append('<br>');
+	   $('table').attr({
+		   'width' : '80%'
+	   }).css({
+		   'margin-left' : '15%',
+	   		'margin-right' :'15%'
+	   });
 	   
+	   $('span').css({
+		   'margin-left' : '15%',
+	   		'margin-right' :'15%'
+	   });
+	   
+	   $('td').css({
+		   'background' : "#FDF5E6"
+	   });
    });
    
    
    </script>
        <!-- 내가 만드는공간  -->
-                       대실 요금 정보
+       <br><br>
+       
+                       <span><b>대실 요금 정보</b></span>
                         <div id="abs">
                         
                         ${roomPrice.get(0).roomToday}
                         
                         <br><br>
-                        대실 이용 시간
+                         <span><b>대실 이용 시간</b></span>
                         
                          ${roomPrice.get(2).roomTimeTo}
                         
                         <br><br>
-                       숙박 요금 정보
+                        <span><b>숙박 요금 정보</b></span>
                         ${roomPrice.get(1).roomOneTo}
                         
                         
                         <br><br>
-                       숙박 이용시간
+                        <span><b>숙박 이용시간</b></span>
                          ${roomPrice.get(3).roomTimeOne}
                         
                         
@@ -83,7 +99,7 @@
                         
                                     <hr>
                             
-                        <button style="margin:auto;">예약하기</button>
+                     
                        <!-- 내가 만드는공간  -->   
    
    
