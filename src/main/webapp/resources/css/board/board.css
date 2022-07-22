@@ -185,6 +185,8 @@
 	    
 	}
 	
+	}
+	
 	.w-btn-indigo {
 	    background-color: aliceblue;
 	    color: #1e6b7b;
@@ -283,7 +285,8 @@
 		border-bottom: 1px solid black;
 	}
 	
-	.b-btn {
+	#eating {
+    color: #fff;
     position: relative;
     border: none;
     display: inline-block;
@@ -296,12 +299,31 @@
     width: 130;
     height: 30;
     margin-right: 0.5em;
-	    
+	
 	}
 	
-	.b-btn-indigo {
-	    background-color: black;
-	    color: #fff;
+	.actBtn {
+		background-color: #0D6EFD;
+	}
+	
+	.notActBtn {
+		background-color: black;
+	}
+	
+	#spot {
+    color: #fff;
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 10px 10px;
+    border-radius: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    width: 130;
+    height: 30;
+    margin-right: 0.5em;
 	}
 	
 	#searchMenu {

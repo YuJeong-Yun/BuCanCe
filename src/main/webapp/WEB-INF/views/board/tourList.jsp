@@ -50,8 +50,8 @@
                 <div class="row">
                     <div class="col-lg-6">
                      <div class="weatherInfo" style="width: 227.750px; height: 150px;"></div>
-                     <button type="button" class="b-btn b-btn-indigo" id="spot" onclick="location.href='/board/tourList?t_category=0&addr=${param.addr}'">관광지</button>
-                        <button type="button" class="b-btn b-btn-indigo" id="eating" onclick="location.href='/board/tourList?t_category=1&addr=${param.addr}'">맛집</button>
+                     <button type="button" class="actBtn" id="spot">관광지</button>
+                        <button type="button" class="notActBtn" id="eating">맛집</button>
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
