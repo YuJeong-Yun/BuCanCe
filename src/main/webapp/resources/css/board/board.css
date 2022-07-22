@@ -122,6 +122,14 @@
 		border-bottom: 1px solid #e5e5e5;
 		padding-bottom: 2em;
 		font-family: 'NanumSquare' !important;
+
+	}
+	
+	.info h4 {
+		text-overflow: ellipsis;
+		width: 306px;
+		overflow: hidden;
+		white-space: nowrap;
 	}
 	
 	.room-item .info {

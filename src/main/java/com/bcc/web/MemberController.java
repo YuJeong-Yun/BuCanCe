@@ -69,7 +69,6 @@ public class MemberController {
 			
 		}
 
-		log.info(pageMaker + "");
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("scri", scri);
 

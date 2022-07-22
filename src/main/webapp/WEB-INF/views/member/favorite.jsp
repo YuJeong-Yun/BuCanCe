@@ -31,8 +31,8 @@
 					<div class="room-item" id="thumbItem">
 						<img src="${vo.thumbnail }" id="thumbnail">
 						<span id="thumbX" onclick="javascript:delCheck(${vo.num});">🗙</span>
-						<div class="info">
-							<h4><a href="/board/infoDetail?num=${vo.num}&t_category=3" id="thumbA">${vo.title }</a></h4>
+						<div class="info" id="info">
+							<h4><a href="/board/infoDetail?num=${vo.num}&page=${scri.page}&perPageNum=${scri.perPageNum}&t_category=${vo.t_category}&addr=favorite" id="thumbA">${vo.title }</a></h4>
 						</div>
 					</div>
 				</div>
