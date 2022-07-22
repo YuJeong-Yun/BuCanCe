@@ -46,7 +46,7 @@ public class KakaoServiceImpl implements KakaoService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code"); 
             sb.append("&client_id=c30d4acffaf14e6c0a33f269940ff070");  //본인이 발급받은 key
-            sb.append("&redirect_uri=http://localhost:8088/kakao_login"); // 본인이 설정해 놓은 경로
+            sb.append("&redirect_uri=http://localhost:8088/member/kakao_login"); // 본인이 설정해 놓은 경로
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
@@ -112,21 +112,23 @@ public class KakaoServiceImpl implements KakaoService {
 			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-			userInfo.put("nickname", nickname);
+			
+	        userInfo.put("nickname", nickname);
 			userInfo.put("email", email);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		// catch 아래 코드 추가.
-		KakaoVO result = kdao.findkakao(userInfo);
+		KakaoVO result = kdao.getKakao(userInfo);
 		// 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
 		System.out.println("S:" + result);
 		if(result==null) {
 		// result가 null이면 정보가 저장이 안되있는거므로 정보를 저장.
-			kdao.kakaoInsert(userInfo);
+			kdao.putKakao(userInfo);
 			// 위 코드가 정보를 저장하기 위해 Repository로 보내는 코드임.
-			return kdao.findkakao(userInfo);
+			return kdao.getKakao(userInfo);
 			// 위 코드는 정보 저장 후 컨트롤러에 정보를 보내는 코드임.
 			//  result를 리턴으로 보내면 null이 리턴되므로 위 코드를 사용.
 		} else {

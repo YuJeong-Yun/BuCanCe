@@ -8,6 +8,14 @@
 li {
   list-style-type: none;
 }
+
+#slidebox {
+
+ box-shadow: 5px 5px 5px 5px gray;
+  /*전체 컨테이너*/
+  
+  border-radius:10px;}
+
 /* 보여줄 구간의 높이와 넓이 설정 */
 #slideShow {
   /*전체 컨테이너*/

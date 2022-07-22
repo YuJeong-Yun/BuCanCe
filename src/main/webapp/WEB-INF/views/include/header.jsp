@@ -69,7 +69,7 @@
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="${pageContext.request.contextPath }/index">NOTICE</a>
+                <li class="active"><a href="${pageContext.request.contextPath }/member/index">NOTICE</a>
                    <ul class="dropdown">
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
@@ -113,52 +113,40 @@
 
 <%
 	String id = null;
-	String k_email = null;
-	if(session.getAttribute("id")!=null || session.getAttribute("k_email")!=null){
+	if(session.getAttribute("id")!=null){
 	id = (String)session.getAttribute("id");
-	k_email = (String)session.getAttribute("k_email");
 }
-	if(id==null && k_email==null){
+	if(id==null){
 %>
 	<div id="login">
-	<a href="/login">LOGIN</a> | 
-	<a href="/insert">JOIN</a>
+	<a href="/member/login">LOGIN</a> | 
+	<a href="/member/insert">JOIN</a>
 	</div>
-
-<%	
+	
+	<%	
 	} else if(id.equals("admin")){
 		%>
 			<div id="login">
 			관리자님 안녕하세요.
-			<a href="/admin/profitChart" id="admin">사이트관리</a>
-			<a href="/logout">LOGOUT</a>
+			<a href="/admin/profitChart">사이트관리</a>
+			<a href="/member/logout">LOGOUT</a>
 			</div>
-		<%
-	}
-	
-	else if(id!=null){ %>
-	
 
+<%	
+	}else { %>
+	
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
-	<a href="/mypage?id=<%=id %>">MYPAGE</a>
-	<a href="/logout">LOGOUT</a>
+	<a href="/member/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/member/logout">LOGOUT</a>
 	</div>
 
 <%	
-	}else{ %>
-	
-
-	<div id="login">
-	<%=k_email%>님 로그인 중입니다!!
-	<a href="/mypage?id=<%=k_email %>">MYPAGE</a>
-	<a href="/logout">LOGOUT</a>
-	</div>
-<%		
 	}
 %>
+
 	
-<!-- 로그인 / 회원가입 / 로그아웃 -->	
+<!-- 로그인 / 회원가입 / 로그아웃 -->
 
         <ul class="top-widget">
             <li><i class="fa fa-phone"></i> (12) 345 67890</li>
@@ -191,47 +179,36 @@
 
 <%
 
-	if(id==null && k_email == null){
+	if(id==null){
 %>
 	<div id="login">
-	<a href="/login">LOGIN</a> | 
-	<a href="/insert">JOIN</a>
+	<a href="/member/login">LOGIN</a> | 
+	<a href="/member/insert">JOIN</a>
 	</div>
-
-<%	
+	
+	<%	
 	} else if(id.equals("admin")){
 		%>
-		<div id="login">
-		관리자님 안녕하세요.
-		<a href="/admin/profitChart" id="admin">사이트관리</a>
-		<a href="/logout">LOGOUT</a>
-		</div>
-		<%
-	
-	} else if(id!=null){
-	%>
+			<div id="login">
+			관리자님 안녕하세요.
+			<a href="/admin/profitChart">사이트관리</a>
+			<a href="/member/logout">LOGOUT</a>
+			</div>
 
+<%	
+	}else { %>
+	
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
-	<a href="/mypage?id=<%=id %>">MYPAGE</a>
-	<a href="/logout">LOGOUT</a>
+	<a href="/member/mypage?id=<%=id %>">MYPAGE</a>
+	<a href="/member/logout">LOGOUT</a>
 	</div>
 
 <%	
-	} else{ %>
-	
-
-	<div id="login">
-	<%=k_email%>님 로그인 중입니다!!
-	<a href="/mypage?id=<%=k_email %>">MYPAGE</a>
-	<a href="/logout">LOGOUT</a>
-	</div>
-<%		
 	}
 %>
 	
-<!-- 로그인 / 회원가입 / 로그아웃 -->	
-
+<!-- 로그인 / 회원가입 / 로그아웃 -->
 
                             <a href="#" class="bk-btn">Booking Now</a>
                             <div class="language-option">
@@ -263,7 +240,7 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-					                <li class="active"><a href="${pageContext.request.contextPath }/index">NOTICE</a>
+					                <li class="active"><a href="${pageContext.request.contextPath }/member/index">NOTICE</a>
 					                   <ul class="dropdown">
 					                        <li><a href="#">1</a></li>
 					                        <li><a href="#">2</a></li>

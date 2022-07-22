@@ -7,19 +7,21 @@ import com.bcc.domain.roomRefundVO;
 
 public interface roomDAO {
 
-	public void roomPaySuc(roomPayVO vo);
+	public void putPaymentRoom(roomPayVO vo);
 
-	public roomPayVO roomPayInfo(String accId);
+	public roomPayVO getReInfo(String accId);
 
-	public List<roomPayVO> roomUserPayInfo(String userId);
+	public List<roomPayVO> getRoomReInfo(String userId);
 
-	public String roomSearchPay();
+	public String getMaxReRoom();
 
-	public void payStatus(String accId);
+	public void modReStatus(String accId);
 
-	public String roomSearchRefund();
+	public String getMaxRefund();
 	
-	public void inRoomRefund(roomRefundVO vo2);
+	public void putRfRoom(roomRefundVO vo2);
+
+	public List<roomPayVO> getReRoomInfoAdmin();
 
 
 

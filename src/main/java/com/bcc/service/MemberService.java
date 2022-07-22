@@ -3,10 +3,8 @@ package com.bcc.service;
 import java.util.List;
 
 import com.bcc.domain.BoardVO;
-import com.bcc.domain.Criteria;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.SearchCriteria;
-import com.bcc.domain.ThumbVO;
 
 public interface MemberService {
 
@@ -15,7 +13,6 @@ public interface MemberService {
 	
 	// 로그인
 	public MemberVO loginCheck(MemberVO vo);
-	//public MemberVO loginCheck(String id,String pw);
 	
 	// 회원정보 조회
 	public MemberVO getMember(String id);
@@ -25,6 +22,9 @@ public interface MemberService {
 	
 	// 회원정보 삭제
 	public void deleteMember(MemberVO vo);
+
+	// 회원정보 보관
+	public void storageMember(MemberVO vo);
 	
 	// 회원목록 조회
 	public List<MemberVO> getMemberList(String id);
@@ -40,7 +40,7 @@ public interface MemberService {
     
     // license Down
 	public void liDown(String license);
-	
+
 	// 찜 목록 조회 //
 	public List<BoardVO> getThumbList(SearchCriteria scri) throws Exception;
 	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception;
@@ -51,5 +51,4 @@ public interface MemberService {
 	// 찜 목록 갯수 조회
 	public Integer getThumbCount(String id);
 	public Integer getSNSThumbCount(String id);
-	
 }

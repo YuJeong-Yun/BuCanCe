@@ -28,7 +28,7 @@
 	color: #66b3ff;
 }
 
-#info h4 {
+	#info h4 {
 	text-overflow: ellipsis;
 	width: 220px;
 	overflow: hidden;

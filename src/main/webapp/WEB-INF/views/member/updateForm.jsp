@@ -26,12 +26,12 @@ function liUp(){
 	var li = $("#license").val()
 	
 	$.ajax({
-	        url:'/liUp', //Controller에서 인식할 주소
+	        url:'/member/liUp', //Controller에서 인식할 주소
  	        type:'POST', //POST 방식으로 전달
  	        data:{li:li},
  	        success:function(){
  	        	alert("구독을 시작했습니다.");
- 	        	location.href="/update";
+ 	        	location.href="/member/update";
  	        },
 			error:function(){
 				alert("liUp에러");
@@ -43,12 +43,12 @@ function liDown(){
 	var li = $("#license").val()
 
 	$.ajax({
-	        url:'/liDown', //Controller에서 인식할 주소
+	        url:'/member/liDown', //Controller에서 인식할 주소
  	        type:'POST', //POST 방식으로 전달
  	        data:{li:li},
  	        success:function(){
  	        	alert("구독을 취소하였습니다.");
- 	        	location.href="/update";
+ 	        	location.href="/member/update";
  	        },
 			error:function(error){
 				alert("Lidown에러");
