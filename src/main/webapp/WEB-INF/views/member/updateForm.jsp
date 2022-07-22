@@ -31,7 +31,7 @@ function liUp(){
  	        data:{li:li},
  	        success:function(){
  	        	alert("구독을 시작했습니다.");
- 	        	location.href="/update";
+ 	        	location.href="/member/update";
  	        },
 			error:function(){
 				alert("liUp에러");
@@ -48,7 +48,7 @@ function liDown(){
  	        data:{li:li},
  	        success:function(){
  	        	alert("구독을 취소하였습니다.");
- 	        	location.href="/update";
+ 	        	location.href="/member/update";
  	        },
 			error:function(error){
 				alert("Lidown에러");

@@ -117,12 +117,10 @@
 
 <%
 	String id = null;
-	String k_email = null;
-	if(session.getAttribute("id")!=null || session.getAttribute("k_email")!=null){
+	if(session.getAttribute("id")!=null){
 	id = (String)session.getAttribute("id");
-	k_email = (String)session.getAttribute("k_email");
 }
-	if(id==null && k_email==null){
+	if(id==null){
 %>
 	<div id="login">
 	<a href="/member/login">LOGIN</a> | 
@@ -132,7 +130,6 @@
 <%	
 	}else if(id!=null){ %>
 	
-
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
 	<a href="/member/mypage?id=<%=id %>">MYPAGE</a>
@@ -140,17 +137,9 @@
 	</div>
 
 <%	
-	}else{ %>
-	
-
-	<div id="login">
-	<%=k_email%>님 로그인 중입니다!!
-	<a href="/member/mypage?id=<%=k_email %>">MYPAGE</a>
-	<a href="/member/logout">LOGOUT</a>
-	</div>
-<%		
 	}
 %>
+
 	
 <!-- 로그인 / 회원가입 / 로그아웃 -->	
 
@@ -183,11 +172,9 @@
                             
 <!-- 로그인 / 회원가입 / 로그아웃 -->
 
-<!-- 로그인 / 회원가입 / 로그아웃 -->
-
 <%
 
-	if(id==null && k_email==null){
+	if(id==null){
 %>
 	<div id="login">
 	<a href="/member/login">LOGIN</a> | 
@@ -197,7 +184,6 @@
 <%	
 	}else if(id!=null){ %>
 	
-
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
 	<a href="/member/mypage?id=<%=id %>">MYPAGE</a>
@@ -205,17 +191,9 @@
 	</div>
 
 <%	
-	}else{ %>
-	
-
-	<div id="login">
-	<%=k_email%>님 로그인 중입니다!!
-	<a href="/member/mypage?id=<%=k_email %>">MYPAGE</a>
-	<a href="/member/logout">LOGOUT</a>
-	</div>
-<%		
 	}
 %>
+
 	
 <!-- 로그인 / 회원가입 / 로그아웃 -->
 

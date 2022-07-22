@@ -77,7 +77,7 @@
 	<select id="getThumbList" resultType="BoardVO">
         select tourist_spot.*
 		from tourist_spot left join thumb
-		on tourist_spot.num = thumb.b_num and tourist_spot.t_category = thumb.b_category
+		on tourist_spot.num = thumb.b_num
         where thumb.m_id=#{id }
 		order by tourist_spot.num asc
 	</select>

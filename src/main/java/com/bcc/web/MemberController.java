@@ -65,8 +65,11 @@ public class MemberController {
 		// http://localhost:8088/member/index
 		// http://localhost:8088/member/favorite
 		@RequestMapping(value = "/favorite", method = RequestMethod.GET)
-		public String thumbList(@ModelAttribute("result") String result, SearchCriteria scri, Model model, HttpSession session)
+		public String thumbList(@ModelAttribute("result") String result, @RequestParam("addr") String addr, @RequestParam("t_category") int cate, SearchCriteria scri, Model model, HttpSession session)
 				throws Exception {
+			
+			scri.setT_category(cate);
+			scri.setAddr(addr);
 			    	
 			String id = (String)session.getAttribute("id");
 			
@@ -76,8 +79,21 @@ public class MemberController {
 			// 글 정보를 가지고 오기
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(scri);
-			pageMaker.setTotalCount(bs.listCount(scri));
+			
+			// 글 정보를 가지고 오기
+			if (addr.equals("all")) {
+				pageMaker.setTotalCount(bs.listCount(scri));
+				model.addAttribute("pageMaker", pageMaker);
+				model.addAttribute("boardList", bs.list(scri));
+				model.addAttribute("scri", scri);
+			} else {
+				pageMaker.setTotalCount(bs.listCountAddr(scri));
+				model.addAttribute("pageMaker", pageMaker);
+				model.addAttribute("boardList", bs.listAddr(scri));
+				model.addAttribute("scri", scri);
 
+			}
+			
 			log.info(pageMaker+"");
 			model.addAttribute("pageMaker", pageMaker);
 			log.info(" 로그인중인 id : "+ id );
@@ -90,7 +106,7 @@ public class MemberController {
 		// http://localhost:8088/member/insert
 		// 회원가입
 		@RequestMapping(value = "/insert", method = RequestMethod.GET)
-		public String insertGET() {
+		public String insertGET() throws Exception {
 			log.info(" insertGET() 호출 ");
 			log.info(" view 페이지 출력 -> 정보 입력 ");
 			
@@ -125,7 +141,7 @@ public class MemberController {
 		}
 		
 		@RequestMapping(value = "/login",method = RequestMethod.POST)
-		public String loginPOST(MemberVO vo,HttpSession session) {
+		public String loginPOST(MemberVO vo,HttpSession session) throws Exception {
 			log.info("loginPOST() 호출");
 
 			log.info(vo+"");
@@ -152,7 +168,7 @@ public class MemberController {
 		// http://localhost:8088/member/logout
 		// 로그아웃
 		@RequestMapping(value = "/logout",method = RequestMethod.GET)
-		public String logoutGET(HttpSession session) {
+		public String logoutGET(HttpSession session) throws Exception {
 			log.info(" logoutGET() 호출 ");
 			
 			// 로그아웃 => 세션정보 초기화
@@ -165,7 +181,7 @@ public class MemberController {
 		// http://localhost:8088/member/mypage
 		// 마이페이지
 		@RequestMapping(value = "/mypage",method = RequestMethod.GET)
-		public String mypageGET(MemberVO vo,HttpSession session) {
+		public String mypageGET(MemberVO vo,HttpSession session) throws Exception {
 			log.info(" mypageGET() 호출 ");
 			log.info(" view 페이지 출력 -> 정보 입력 ");
 			
@@ -176,7 +192,7 @@ public class MemberController {
 		// http://localhost:8088/member/update
 		// 회원정보 수정
 		@RequestMapping(value = "/update",method = RequestMethod.GET)
-		public String updateGET(HttpSession session,Model model) {
+		public String updateGET(HttpSession session,Model model) throws Exception {
 			log.info(" updateGET() 호출 ");
 			
 			String id = (String)session.getAttribute("id");
@@ -188,7 +204,7 @@ public class MemberController {
 		
 		// 회원정보 수정
 		@RequestMapping(value = "/update", method = RequestMethod.POST)
-		public String updatePOST(HttpSession session, MemberVO vo) {
+		public String updatePOST(HttpSession session, MemberVO vo) throws Exception {
 			
 			String id = (String)session.getAttribute("id");
 			int result = service.updateMember(vo);
@@ -204,7 +220,7 @@ public class MemberController {
 		}
 
 		@RequestMapping(value = "/liUp", method = RequestMethod.POST)
-		public String liUpPOST(HttpSession session) {
+		public String liUpPOST(HttpSession session) throws Exception {
 			
 			log.info(" liUpPOST() 호출 ");
 			
@@ -217,7 +233,7 @@ public class MemberController {
 		
 		// http://localhost:8088/member/login
 		@RequestMapping(value = "/liDown", method = RequestMethod.POST)
-		public String liDownPOST(HttpSession session) {
+		public String liDownPOST(HttpSession session) throws Exception {
 			
 			log.info(" liDownPOST() 호출 ");
 			
@@ -240,7 +256,7 @@ public class MemberController {
 		
 		// 회원정보 삭제(탈퇴)
 		@RequestMapping(value = "/delete", method = RequestMethod.GET)
-		public String deleteGET() {
+		public String deleteGET() throws Exception {
 			
 			log.info(" deleteGET() 호출 ");
 			
@@ -249,7 +265,7 @@ public class MemberController {
 		
 		// 회원정보 삭제(탈퇴)
 		@RequestMapping(value = "/delete", method = RequestMethod.POST)
-		public String deletePOST(HttpSession session,MemberVO vo) {
+		public String deletePOST(HttpSession session,MemberVO vo) throws Exception {
 			log.info(" deletePOST() 호출 ");
 			//log.info(pw);
 			vo.setId((String)session.getAttribute("id"));
@@ -272,7 +288,7 @@ public class MemberController {
 
 	    @PostMapping("/idCheck")
 	    @ResponseBody
-	    public int idCheck(@RequestParam("id") String id){
+	    public int idCheck(@RequestParam("id") String id) throws Exception {
 	        log.info("userIdCheck 진입");
 	        log.info("전달받은 id:"+id);
 	        int cnt = service.idCheck(id);
@@ -298,12 +314,15 @@ public class MemberController {
 	    	// 아래 코드가 추가되는 내용
 //	    	session.invalidate();
 	    	// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
-	    	session.setAttribute("k_name", userInfo.getK_name());
-	    	session.setAttribute("k_email", userInfo.getK_email());
-	    	session.setAttribute("kakao", "kakao");
 	    	
 	    	// id는 실행한 앱에서만 고유값... 실행 위치마다 달라진다. 그러므로 사용 X
 	    	
+	    	session.setAttribute("k_name", userInfo.getK_name());
+//	    	session.setAttribute("k_email", userInfo.getK_email());
+	    	session.setAttribute("id", userInfo.getK_email());
+	    	session.setAttribute("kakao", "kakao");
+
+
 	    	// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
 	    	// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.
 
@@ -314,7 +333,7 @@ public class MemberController {
 		//로그인 첫 화면 요청 메소드
 		// http://localhost:8088/member/testlogin
 		@RequestMapping(value = "/testlogin", method = { RequestMethod.GET, RequestMethod.POST })
-		public String login(Model model, HttpSession session) {
+		public String login(Model model, HttpSession session) throws Exception {
 			
 			/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 			String naverAuthUrl = ns.getAuthorizationUrl(session);

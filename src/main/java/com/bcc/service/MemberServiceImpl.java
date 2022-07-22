@@ -126,13 +126,13 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List<BoardVO> getThumbList(String id) throws Exception {
+	public List<BoardVO> getThumbList(String id) {
 		
 		return dao.thumbList(id);
 	}
 
 	@Override
-	public void deleteThumb(int b_num) throws Exception {
+	public void deleteThumb(int b_num) {
 		
 		dao.deleteThumb(b_num);
 	}

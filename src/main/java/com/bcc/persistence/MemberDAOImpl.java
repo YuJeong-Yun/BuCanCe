@@ -153,7 +153,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<BoardVO> thumbListAll() throws Exception {
+	public List<BoardVO> thumbListAll() {
 
 		List<BoardVO> thumbList = sqlSession.selectList(NAMESPACE + ".getThumbList");
 
@@ -162,12 +162,12 @@ public class MemberDAOImpl implements MemberDAO {
 
 	// 게시물 목록 조회
 	@Override
-	public List<BoardVO> thumbList(String id) throws Exception {
+	public List<BoardVO> thumbList(String id) {
 		return sqlSession.selectList(NAMESPACE + ".getThumbList", id);
 	}
 
 	@Override
-	public void deleteThumb(int b_num) throws Exception {
+	public void deleteThumb(int b_num) {
 
 		sqlSession.delete(NAMESPACE + ".delThumb", b_num);
 	}

@@ -49,12 +49,12 @@ public interface MemberDAO {
     public void licenseDown(String license);
     
 	// 좋아요 리스트
-	public List<BoardVO> thumbListAll() throws Exception;
+	public List<BoardVO> thumbListAll();
 	
 	// 게시물 목록 조회
-	public List<BoardVO> thumbList(String id) throws Exception;
+	public List<BoardVO> thumbList(String id);
 	
 	// 좋아요 삭제
-	public void deleteThumb(int b_num) throws Exception;
+	public void deleteThumb(int b_num);
 
 }

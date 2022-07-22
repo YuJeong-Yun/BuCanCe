@@ -21,7 +21,7 @@ function deleteThumb(){
 	        data:{b_num:b_num},
  	        success:function(){
  	        	alert("찜 취소 성공");
- 	        	location.href="/member/favorite";
+ 	        	location.href="/favorite";
  	        },
 			error:function(error){
 				alert("찜 취소 실패");
@@ -34,144 +34,55 @@ function deleteThumb(){
 	<!-- 2조건 : thumb 테이블의 B_num과 tourist_spot 테이블의 num 컬럼값이 같고(and) -->
 	<!-- 3조건 : thumb 테이블의 b_category와 tourist_spot 테이블의 t_category 값이 같아야됨. -->
 	
-<!-- Breadcrumb Section Begin -->
-<div class="breadcrumb-section">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="breadcrumb-text">
-					<h2>favorite.jsp</h2>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 <!-- Breadcrumb Section End -->
 
 <!-- Rooms Section Begin -->
 <section class="rooms-section spad">
 	<div class="container">
 		<div id="b-list" class="row">
-
 			<c:forEach var="vo" items="${boardList }">
 				<div class="col-lg-4 col-md-6">
 					<div class="room-item">
-						<a href="/board/read?num=${vo.num }"><img
-							src="${vo.thumbnail }" alt=""></a>
-						<div class="ri-text">
+						<a href="/board/infoDetail?num=${vo.num}&page=${scri.page}&perPageNum=${scri.perPageNum}&t_category=${vo.t_category}&addr=${scri.addr }">
+						<img src="${vo.thumbnail }" alt=""></a>
+						<div class="info">
 							<h4>${vo.title }</h4>
-							<input type = "button" id = "deleteThumb" onclick = "deleteThumb()" value = "찜 취소">
+							<div>
+								<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>${vo.totalCnt }
+								<i class="fa fa-commenting-o" aria-hidden="true"></i>${vo.commentCnt }
+								<i class="fa fa-heart-o" aria-hidden="true"></i>${vo.thumbCnt }
+							</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-
-</div>
-			<div class="box-footer clearfix">
-				<div>
-					<ul>
-						<c:if test="${pageMaker.prev}">
-							<li><a
-								href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
-						</c:if>
-
-						<c:forEach begin="${pageMaker.startPage}"
-							end="${pageMaker.endPage}" var="idx">
-							<li><a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
-						</c:forEach>
-
-						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<li><a
-								href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
-						</c:if>
-					</ul>
-				</div>
-
-				<div></div>
-			</div>
 		</div>
+			<div id="paging" style="text-align: center; padding-top: 20px;">
+			<c:if test="${not empty pageMaker }">
+					<c:if test="${pageMaker.prev}">
+						<a href="tourList${pageMaker.makeSearch(pageMaker.startPage - 1)}&t_category=${param.t_category}&addr=${param.addr}">이전</a>
+					</c:if>
+
+					<c:forEach begin="${pageMaker.startPage}"
+						end="${pageMaker.endPage}" var="idx">
+						<a href="tourList${pageMaker.makeSearch(idx)}&t_category=${param.t_category}&addr=${param.addr}">${idx}</a>
+					</c:forEach>
+
+					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+						<a href="tourList${pageMaker.makeSearch(pageMaker.endPage + 1)}&t_category=${param.t_category}&addr=${param.addr}">다음</a>
+					</c:if>
+			</c:if>		
+			</div>
+	</div>
 </section>
 <!-- Rooms Section End -->
+<script type="text/javascript">
+	const addr = '${param.addr}';
+	const t_category = '${param.t_category}';
+</script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script> 
+<script src="${pageContext.request.contextPath}/resources/js/board/Weather.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/board/TourList.js"></script>
 <jsp:include page="../include/footer.jsp" />
 
-  <script  type="text/javascript">
-	$(document).ready(function() {
-
-	});
-
-	function search() {
-		let c = $('#category option:selected').val();
-
-		if (c == '전체') {
-			$.ajax({
-				url : 'http://localhost:8088/board/ajaxListAll',
-				type : 'get',
-				data : {},
-				success : function(list) {
-					$('#b-list').empty();
-					$.each(list, function(index, item) {
-						var listHTML = getListHTML(item);
-						console.log(item);
-						if ((list.length - 1) == index) {
-						} else {
-							$('#b-list').append(listHTML);
-
-						}
-					});
-				},
-				error : function(err) {
-					console.log(err);
-				}
-			});
-		} else {
-			$.ajax({
-				url : 'http://localhost:8088/board/ajaxListByCategory',
-				type : 'get',
-				data : {
-					category : c
-				},
-				success : function(list) {
-					$('#b-list').empty();
-				 if(list[list.length-1].totalCount < list[list.length-1].cri.perPageNum){
-						$('.clearfix').attr("hidden","true");
-					}else{
-						$('.clearfix').removeAttr("hidden");
-					}
-				 
-					$.each(list, function(index, item) {
-						if((list.length-1) !=index){
-						var listHTML = getListHTML(item);
-						$('#b-list').append(listHTML);
-						}
-
-					});
-				},
-				error : function(err) {
-				}
-			});
-		}
-	}
-	function getListHTML(obj) {
-
-		return '<div class="col-lg-4 col-md-6">'
-				+ '<div class="room-item">'
-				+ '<a href="/board/read?num='
-				+ obj.num
-				+ '"><img src="'+obj.thumbnail+'" alt=""></a>'
-				+ '<div class="ri-text">'
-				+ '<h4>'
-				+ obj.title
-				+ '</h4>'
-				+ '<div>'
-				+ '<i class="fa fa-hand-pointer-o" aria-hidden="true"></i> 조회수 <i class="fa fa-commenting-o" aria-hidden="true"></i> 댓글'
-				+ '<i class="fa fa-heart-o" aria-hidden="true"></i>' + '</div>'
-				+ '</div>' + '</div>' + '</div>';
-	}
-
-      $(function(){
-        $('#searchBtn').click(function() {
-          self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
-        });
-      });   
-    </script>
 </html>

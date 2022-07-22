@@ -64,8 +64,9 @@
 			<input type="submit" value="로그인" >
 			<input type="button" value="회원가입" onclick=" location.href='/member/insert';" >
 		</span>
+		<!-- 사용자가 email 등 data 수신을 동의하지 않았을 경우 scope로 추가적으로 동의를 받아야 한다. -->
 			<a href="https://kauth.kakao.com/oauth/authorize?client_id=c30d4acffaf14e6c0a33f269940ff070&redirect_uri=http://localhost:8088/member/kakao_login
-&response_type=code">
+&response_type=code&scope=account_email"> 
 		<img src="/resources/img/kakao_login_medium_narrow.png" style="height:60px"></a><br>
 			<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=mh2HJRSmhFxLpWvyHva1&redirect_uri=http%3A%2F%2Flocalhost%3A8088%2Fcallback&state=063e8713-b6a0-4235-b05f-b64982f7a6f8">
 		<img src="/resources/img/btnG_perfect.png" style="height:60px"></a></div><br>

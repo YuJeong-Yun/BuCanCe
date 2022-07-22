@@ -43,9 +43,9 @@ public interface MemberService {
 	public void liDown(String license);
 	
 	// 찜 목록 조회 //
-	public List<BoardVO> getThumbList(String id) throws Exception;
+	public List<BoardVO> getThumbList(String id);
 	
 	// 찜 삭제
-	public void deleteThumb(int b_num) throws Exception;
+	public void deleteThumb(int b_num);
 	
 }
