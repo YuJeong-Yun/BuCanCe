@@ -1,6 +1,8 @@
 package com.bcc.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -10,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.bcc.domain.BoardVO;
+import com.bcc.domain.Criteria;
 import com.bcc.domain.MemberVO;
+import com.bcc.domain.SearchCriteria;
 import com.bcc.domain.ThumbVO;
 
 // @Repository : 해당 클래스를 DAO로 스프링에서 인식하도록 하는 표시
@@ -161,24 +165,43 @@ public class MemberDAOImpl implements MemberDAO {
 
 	}
 
-	@Override
-	public List<BoardVO> thumbListAll() throws Exception {
-
-		List<BoardVO> thumbList = sqlSession.selectList(NAMESPACE + ".thumbList");
-
-		return thumbList;
-	}
-
 	// 게시물 목록 조회
 	@Override
-	public List<BoardVO> thumbList(String id) throws Exception {
-		return sqlSession.selectList(NAMESPACE + ".thumbList", id);
+	public List<BoardVO> getThumbList(SearchCriteria scri) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + ".getThumbList", scri);
+	}
+	
+	
+
+	@Override
+	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE + ".getSNSThumbList", scri);
 	}
 
 	@Override
-	public void deleteThumb(int b_num) throws Exception {
+	public void delThumb(int b_num, String id) throws Exception {
+		Map thuMap = new HashMap();
+		thuMap.put("b_num", b_num);
+		thuMap.put("m_id", id);
 
-		sqlSession.delete(NAMESPACE + ".deleteThumb", b_num);
+		sqlSession.delete(NAMESPACE + ".delThumb", thuMap);
 	}
+
+	@Override
+	public Integer getThumbCount(String id) {
+		
+		return sqlSession.selectOne(NAMESPACE+".getThumbCount",id);
+	}
+
+	@Override
+	public Integer getSNSThumbCount(String id) {
+		
+		return sqlSession.selectOne(NAMESPACE+".getSNSThumbCount",id);
+	}
+	
+	
+	
 
 }

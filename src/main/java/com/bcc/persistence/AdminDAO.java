@@ -41,6 +41,4 @@ public interface AdminDAO {
 	
 	// 회원 삭제
 	public void delMem(MemberVO vo);
-	
-	
 }

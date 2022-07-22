@@ -12,7 +12,7 @@
 
 	<select id="getAllSnsMem" resultType="KakaoVO">
 		select * from kakao_table
-  </select>
+  	</select>
 
 	<select id="getPmInfo" parameterType="hashMap" resultType="PreOrderVO">
 		select * from premium_order
