@@ -3,21 +3,21 @@ package com.bcc.web;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.Response;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
@@ -33,6 +33,7 @@ import com.bcc.domain.MemberVO;
 import com.bcc.domain.PreMemberVO;
 import com.bcc.domain.PreOrderVO;
 import com.bcc.scheduler.Scheduler;
+import com.bcc.service.MemberService;
 import com.bcc.service.PreMemberService;
 import com.bcc.service.PreOrderService;
 
@@ -47,44 +48,60 @@ public class OrderController extends PaypleController {
 	private PreOrderService orderservice;
 	@Inject
 	private PreMemberService memberservice;
+	@Inject	
+	private MemberService service;
 
 ///////////////////////////////////////////////////////////////
-	
 	// 정기결제 정지(빌링키 삭제)
-	// http://localhost:8088/order/deleteKey
-	@RequestMapping(value = "/deleteKey", method = RequestMethod.GET)
-	public String deleteGET(HttpSession session) {
+		// http://localhost:8088/order/deleteKey
+		// http://localhost:8088/mypage
+		@RequestMapping(value = "/deleteKey", method = RequestMethod.GET)
+		public String deleteKeyGET(HttpSession session, PreOrderVO vo) throws Exception {
+			
+			// 임시
+			session.setAttribute("id", "hg");
+			String PCD_PAYER_NAME = (String) session.getAttribute("id");		
+			
+			log.info(" deleteKeyGET() 호출 ");
+			
+			// 서비스 - 빌링키 불러오기
+			vo.setPCD_PAYER_NAME(PCD_PAYER_NAME);
+			String PCD_PAYER_ID = orderservice.getKey(vo);
+			log.info(" getKey(vo) : 빌링키 왔다 ");
+			
+			if(PCD_PAYER_ID == null) {
+				log.info("빌링키 없노");
+				
+				return "order/noDeleteKey";
+			}
+
+			return "/order/deleteKeyForm";
+
+		}
 		
-		//임시
-		session.setAttribute("id", "itwill2");
-		
-		String id = (String) session.getAttribute("id");
-		
-		log.info(" deleteGET() 호출 ");
-		
-		return "/order/deleteKey";
-	}
-	
-	// 정기결제 정지(빌링키 삭제)
-	@RequestMapping(value = "/deleteKey", method = RequestMethod.POST)
-	public String deletePOST(HttpSession session, PreOrderVO dvo/* , MemberVO vo */) {
-		log.info(" deletePOST() 호출 ");
-		
-		//임시
-		session.setAttribute("id", "itwill2");
-		
-		String id = (String) session.getAttribute("id");
-		
-		//vo.setId((String)session.getAttribute("id"));
-		//log.info(vo+"");
-		
-		// 서비스 - 회원삭제동작
-	    orderservice.deleteKey(dvo);
-	    
-		// 페이지 이동
-		return "redirect:/";
-	}	
-	
+		@RequestMapping(value = "/deleteKey", method = RequestMethod.POST)
+		public String deleteKeyPOST(HttpSession session, Model model, HttpServletResponse response,
+				PreOrderVO vo) throws Exception {
+
+			log.info(" deleteKeyPOST() 호출 ");
+
+				// 임시
+				session.setAttribute("id", "hg");
+				String PCD_PAYER_NAME = (String) session.getAttribute("id");				
+				
+				// 서비스 - 빌링키 불러오기
+				vo.setPCD_PAYER_NAME(PCD_PAYER_NAME);
+				String PCD_PAYER_ID = orderservice.getKey(vo);
+				log.info(" getKey(vo) : 빌링키 왔다 ");
+
+				// 서비스 - 회원삭제동작
+				orderservice.delKey(vo);
+				log.info(" delKey(vo): 정기결제 해지 ");
+				
+			return "/order/goods";
+
+		}
+
 ////////////////////////////////////////////////////////////////////////	
 	
 	/*
@@ -256,35 +273,9 @@ public class OrderController extends PaypleController {
 		model.addAttribute("pay_cardauthno", request.getParameter("PCD_PAY_CARDAUTHNO")); // 카드 승인번호
 		model.addAttribute("pay_cardreceipt", request.getParameter("PCD_PAY_CARDRECEIPT")); // 카드 매출전표 URL
 		
-		// 날짜 계산ㅇ랴ㅓ
-		// create_date
-		Date create_date = new Date();
-		Calendar c1 = Calendar.getInstance();
-		c1.setTime(create_date);
-		create_date = c1.getTime();
-		
-		//license_deadline
-		Date license_deadline = new Date();
-		Calendar c2 = Calendar.getInstance();
-		c2.setTime(license_deadline);
-		c2.add(Calendar.MONTH, 1);
-		license_deadline = c2.getTime();
-		
-		//next_order_date
-		Date next_order_date = c2.getTime();
-		Calendar c3 = Calendar.getInstance();
-		c3.setTime(next_order_date);
-		c3.add(Calendar.DATE, -1);
-		next_order_date = c3.getTime();
-
-		
-		System.out.println(pvo);
-		System.out.println(vo);
-
-		
          // DB에 저장
 		try {
-            orderservice.insertOrder(pvo);
+            orderservice.putOrder(pvo);
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -292,7 +283,7 @@ public class OrderController extends PaypleController {
 		}
 		
 		try {
-			memberservice.insertPreMember(vo);
+			memberservice.putPreMember(vo);
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -355,14 +346,14 @@ public class OrderController extends PaypleController {
 ////////////////////////////////////
 // 정기결제 재결제(빌링키결제) (paySimpleSend.jsp)
 	@RequestMapping(value = "/paySimpleSend")
-	public String paySimpleSendRoute(Model model, HttpSession session) {
+	public String paySimpleSendRoute(Model model, HttpSession session, PreOrderVO vo) {
 // 임시 아이디
 		session.setAttribute("id", "et");
 		String id = (String) session.getAttribute("id");
 // 이름 휴대전화 이메일 불러오기 에효
 		String email = memberservice.getEmail(id);
 // 빌링키 가져오기
-		String PCD_PAYER_ID = orderservice.getKey(id);
+		String PCD_PAYER_ID = orderservice.getKey(vo);
 
 		model.addAttribute("payer_id", PCD_PAYER_ID); // 결제자 고유 ID (빌링키)
 		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
@@ -377,7 +368,7 @@ public class OrderController extends PaypleController {
 	 */
 	@ResponseBody
 	@PostMapping(value = "/paySimpleSend")
-	public JSONObject paySimpleSend(HttpServletRequest request, HttpSession session, PreOrderVO vo) {
+	public JSONObject paySimpleSend(HttpServletRequest request, HttpSession session, PreOrderVO vo, PreMemberVO mvo) {
 		JSONObject jsonObject = new JSONObject();
 		JSONParser jsonParser = new JSONParser();
 // 정기결제 재결제 전 파트너 인증
@@ -392,7 +383,7 @@ public class OrderController extends PaypleController {
 		session.setAttribute("id", "et");
 		String id = (String) session.getAttribute("id");
 // 빌링키 가져오기
-		String PCD_PAYER_ID = orderservice.getKey(id);
+		String PCD_PAYER_ID = orderservice.getKey(vo);
 // 파트너 인증 응답값
 		String cstId = (String) authObj.get("cst_id"); // 파트너사 ID :"cst_id"
 		String custKey = (String) authObj.get("custKey"); // 파트너사 키:"custKey"
@@ -440,7 +431,23 @@ public class OrderController extends PaypleController {
 		}
 
 // DB에 결과저장
-// service.ReOrder(vo);
+
+		try {
+			orderservice.putReOrder(vo);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			memberservice.putPreMember(mvo);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 
 		return jsonObject;
 	}

@@ -6,48 +6,49 @@
 
 <mapper namespace="com.bcc.mapper.preMapper">
 
- <insert id="insertPreMember">
+ <insert id="putPreMember">
         insert into premium_member
         values(#{PCD_PAY_OID},#{PCD_PAYER_NAME},date_add(now(),interval 1 month))
     </insert>
     
-    <insert id="insertOrder">
+    <insert id="putOrder">
         insert into premium_order
          values(#{PCD_PAY_OID},#{PCD_PAYER_NAME},now(),date_add(now(),interval 1 month),date_sub(date_add(now(),interval 1 month),interval 1 day),#{PCD_PAYER_ID})
     </insert>
     
-    <update id="deleteKey">
+    <update id="delKey">
        update premium_order
        set PCD_PAYER_ID = ''
-       where PCD_PAYER_NAME=#{id} 
+       where PCD_PAYER_NAME=#{PCD_PAYER_NAME} 
     </update>
     
-    <select id="getKey">
-        select PCD_PAYER_ID from premium_order
-        where PCD_PAYER_NAME=#{id}
+    <select id="getKey" parameterType="PreOrderVO" resultType="string">
+       SELECT PCD_PAYER_ID 
+       FROM premium_order
+       where PCD_PAYER_NAME =#{PCD_PAYER_NAME}
     </select>
         
-    <select id="getName" parameterType="MemberVO">
+    <select id="getName" parameterType="MemberVO" resultType="string">
         select name from bcc_member
         where id=#{id}
     </select>
     
-    <select id="getTel" parameterType="MemberVO">
+    <select id="getTel" parameterType="MemberVO" resultType="string">
         select tel from bcc_member
         where id=#{id}
     </select>
     
-    <select id="getEmail" parameterType="MemberVO">
+    <select id="getEmail" parameterType="MemberVO" resultType="string">
         select email from bcc_member
         where id=#{id}
     </select>
 
-    <delete id="deletePreMember">
+    <delete id="delPreMember">
         delete from premium_member
         where #{license_deadline} = curdate()
     </delete>
     
-    <insert id="ReOrder">
+    <insert id="putReOrder">
         insert into premium_order
         values(#{PCD_PAY_OID},#{PCD_PAYER_NAME},now(),date_add(now(),interval 1 month),Y,date_sub(date_add(now(),interval 1 month),interval 1 day),#{PCD_PAYER_ID})
     </insert>
