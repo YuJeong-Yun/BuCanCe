@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,46 +60,44 @@ public class MemberController {
 			return "/member/index";
 		}
 
-		// 글 전체 목록
-		// http://localhost:8088/member/index
-		// http://localhost:8088/member/favorite
+		// 찜 목록
+		// http://localhost:8088/index
+		// http://localhost:8088/favorite
 		@RequestMapping(value = "/favorite", method = RequestMethod.GET)
-		public String thumbList(@ModelAttribute("result") String result, @RequestParam("addr") String addr, @RequestParam("t_category") int cate, SearchCriteria scri, Model model, HttpSession session)
-				throws Exception {
+		public String thumbList(SearchCriteria scri, Model model,
+				HttpSession session) throws Exception {
+			//session.setAttribute("kakao", "kakao");
 			
-			scri.setT_category(cate);
-			scri.setAddr(addr);
-			    	
-			String id = (String)session.getAttribute("id");
-			
-			// 조회수
-			session.setAttribute("upFlag", "1");
-			
+			scri.setKeyword((String) session.getAttribute("id"));
 			// 글 정보를 가지고 오기
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(scri);
 			
-			// 글 정보를 가지고 오기
-			if (addr.equals("all")) {
-				pageMaker.setTotalCount(bs.listCount(scri));
-				model.addAttribute("pageMaker", pageMaker);
-				model.addAttribute("boardList", bs.list(scri));
-				model.addAttribute("scri", scri);
+			// 일반회원, SNS 회원 구별
+			if(session.getAttribute("kakao") != null) {
+				pageMaker.setTotalCount(service.getSNSThumbCount((String) session.getAttribute("id")));
+				model.addAttribute("thumbList", service.getSNSThumbList(scri));
+				
 			} else {
-				pageMaker.setTotalCount(bs.listCountAddr(scri));
-				model.addAttribute("pageMaker", pageMaker);
-				model.addAttribute("boardList", bs.listAddr(scri));
-				model.addAttribute("scri", scri);
-
+				pageMaker.setTotalCount(service.getThumbCount((String) session.getAttribute("id")));
+				model.addAttribute("thumbList", service.getThumbList(scri));
+				
 			}
-			
-			log.info(pageMaker+"");
+
+			log.info(pageMaker + "");
 			model.addAttribute("pageMaker", pageMaker);
-			log.info(" 로그인중인 id : "+ id );
-			model.addAttribute("boardList", service.getThumbList(id));
-			
+			model.addAttribute("scri", scri);
+
 			return "/member/favorite";
 
+		}
+		
+		// 찜삭제
+		@RequestMapping(value = "/delThumb", method = RequestMethod.GET)
+		public String delThumb(HttpSession session, @RequestParam("num") int num) throws Exception {
+			service.deleteThumb(num,(String) session.getAttribute("id"));
+			
+			return "redirect:/favorite";
 		}
 		
 		// http://localhost:8088/member/insert
@@ -133,7 +130,7 @@ public class MemberController {
 		// http://localhost:8088/member/login
 		// 로그인
 		@RequestMapping(value = "/login",method = RequestMethod.GET)
-		public String loginGet() throws IOException {
+		public String loginGet(HttpSession session) throws IOException {
 			log.info("loginGet() 호출");
 			log.info(" /member/loginForm.jsp 페이지로 이동");
 
@@ -143,12 +140,11 @@ public class MemberController {
 		@RequestMapping(value = "/login",method = RequestMethod.POST)
 		public String loginPOST(MemberVO vo,HttpSession session) throws Exception {
 			log.info("loginPOST() 호출");
-
-			log.info(vo+"");
-			
+	
 			// db동작 호출을 위해서 서비스 동작을 호출 - loginCheck()
 			MemberVO resultVO = service.loginCheck(vo);
 			System.out.println(resultVO);
+			
 			// 로그인 실패 - 페이지 이동(로그인페이지)
 			if(resultVO == null) {
 				log.info("로그인 정보 없음! 페이지 이동 ");
@@ -244,16 +240,6 @@ public class MemberController {
 			return "redirect:/member/update";
 		}
 		
-
-		@RequestMapping(value = "/deleteThumb", method = RequestMethod.GET)
-		public void deleteThumbPOST(@RequestParam(value = "b_num") int b_num) throws Exception {
-			
-			log.info(" deleteThumbPOST() 호출 ");
-
-			service.deleteThumb(b_num);
-			
-		}
-		
 		// 회원정보 삭제(탈퇴)
 		@RequestMapping(value = "/delete", method = RequestMethod.GET)
 		public String deleteGET() throws Exception {
@@ -297,7 +283,6 @@ public class MemberController {
 	        return cnt;
 	    }
 
-
 		// http://localhost:8088/member/login
 		// http://localhost:8088/member/kakao_login
 	    @RequestMapping(value="/kakao_login", method=RequestMethod.GET)
@@ -312,16 +297,14 @@ public class MemberController {
 	    	System.out.println("###email#### : " + userInfo.getK_email());
 	    	
 	    	// 아래 코드가 추가되는 내용
-//	    	session.invalidate();
+	    	// session.invalidate();
 	    	// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
 	    	
 	    	// id는 실행한 앱에서만 고유값... 실행 위치마다 달라진다. 그러므로 사용 X
 	    	
 	    	session.setAttribute("k_name", userInfo.getK_name());
-//	    	session.setAttribute("k_email", userInfo.getK_email());
 	    	session.setAttribute("id", userInfo.getK_email());
 	    	session.setAttribute("kakao", "kakao");
-
 
 	    	// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
 	    	// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.

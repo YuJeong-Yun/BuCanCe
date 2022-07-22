@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+	#toMain:hover {
+		text-decoration: none !important;
+	}
+	
+	
+	#resultCnt {
+		font-size: 18px;
+		font-weight: bold;
+		margin-left: 1em;
+	}
+	
+		.w-btn {
+	    position: relative;
+	    border: none;
+	    display: inline-block;
+	    padding: 10px 10px;
+	    border-radius: 15px;
+	    font-family: 'Noto Sans KR', sans-serif;
+	    text-decoration: none;
+	    font-weight: 500;
+	    transition: 0.25s;
+	    width: 130;
+	    height: 30;
+	    margin-right: 0.5em;
+	    
+	}
+	
+	.w-btn-indigo {
+	    background-color: royalblue;
+	    color: white;
+	}

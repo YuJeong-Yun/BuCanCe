@@ -121,14 +121,14 @@ public class KakaoServiceImpl implements KakaoService {
 		}
 
 		// catch 아래 코드 추가.
-		KakaoVO result = kdao.findkakao(userInfo);
+		KakaoVO result = kdao.getKakao(userInfo);
 		// 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
 		System.out.println("S:" + result);
 		if(result==null) {
 		// result가 null이면 정보가 저장이 안되있는거므로 정보를 저장.
-			kdao.kakaoInsert(userInfo);
+			kdao.putKakao(userInfo);
 			// 위 코드가 정보를 저장하기 위해 Repository로 보내는 코드임.
-			return kdao.findkakao(userInfo);
+			return kdao.getKakao(userInfo);
 			// 위 코드는 정보 저장 후 컨트롤러에 정보를 보내는 코드임.
 			//  result를 리턴으로 보내면 null이 리턴되므로 위 코드를 사용.
 		} else {

@@ -18,7 +18,7 @@
 						<h3 style="font-family: 'NanumSquareBold' !important;">${vo.title }
 						</h3>
 					</div>
-					<table id="resInfo">
+					<table id="infos">
 						<tbody>
 							<tr>
 								<td class="r-o">전화번호</td>
@@ -32,18 +32,27 @@
 								<td class="r-o">상세주소</td>
 								<td>${vo.addr_full }</td>
 							</tr>
+							
+							<c:if test="${not empty vo.trfc_info }">
 							<tr>
 								<td class="r-o">오시는길</td>
 								<td>${vo.trfc_info}</td>
 							</tr>
+							</c:if>
+							
+							<c:if test="${not empty vo.convenient }">
 							<tr>
 								<td class="r-o">편의</td>
 								<td>${vo.convenient}</td>
 							</tr>
+							</c:if>
+							
+							<c:if test="${not empty vo.url }">
 							<tr>
 								<td class="r-o">홈페이지</td>
 								<td><a href="${vo.url}">${vo.url }</a></td>
 							</tr>
+							</c:if>
                             <tr>
 	                         <td class="r-o">찜하기</td>
 	                         <td>
@@ -57,7 +66,10 @@
 					<p class="f-para">${vo.contents }</p>
 				</div>
 				<div id="btn_group">
+				<!-- 마이페이지 찜목록에서 넘어올 경우 목록버튼 안보이게함 -->
+				<c:if test="${param.t_category != 3 }">
 				<button type="button" id="list_btn" class="w-btn w-btn-indigo">목록</button>
+				</c:if>
 				</div>
 				<div class="menu-item">
 					<div class="nav-menu"
@@ -85,8 +97,9 @@
                                    width="60" height="60" style="border-radius : 90px">
 								${commentList.writer}님 &nbsp;&nbsp;
 									<fmt:formatDate value="${commentList.regdate}" pattern="yyyy-MM-dd" /> &nbsp;&nbsp;
-									<b><c:if test="${commentList.visit==1}">방문했어요</c:if>
-										<c:if test="${commentList.visit==0}">방문 전입니다</c:if></b>	
+									<b><c:if test="${commentList.visit==1}">방문했어요 </c:if>
+										<c:if test="${commentList.visit==0}">방문 전입니다 </c:if></b>
+											
                                 </div>
 								<p>${commentList.content}</p>
 								<div id ="btn_group">

@@ -1,5 +1,6 @@
 package com.bcc.persistence;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.bcc.domain.KakaoVO;
+import com.bcc.domain.MemberVO;
 import com.bcc.domain.PreOrderVO;
+
 
 @Repository
 public class AdminDAOImpl implements AdminDAO{
@@ -30,7 +34,7 @@ public class AdminDAOImpl implements AdminDAO{
 		dateMap.put("start", date.split(" ")[0]);
 		dateMap.put("end", date.split(" ")[1]);
 		
-		return session.selectList(NAMESPACE+".pmInfo",dateMap);
+		return session.selectList(NAMESPACE+".getPmInfo",dateMap);
 	}
 
 	@Override
@@ -39,56 +43,74 @@ public class AdminDAOImpl implements AdminDAO{
 		dateMap.put("start", date.split(" ")[0]);
 		dateMap.put("end", date.split(" ")[1]);
 		
-		return session.selectList(NAMESPACE+".onlyPeriodMems",dateMap);
+		return session.selectList(NAMESPACE+".getOnlyPeriodMems",dateMap);
 	}
 
 	@Override
 	public Integer getTrendChart(String date) {
 		
-		return session.selectOne(NAMESPACE+".trendChart", date);
+		return session.selectOne(NAMESPACE+".getTrendChart", date);
 	}
 
 	@Override
 	public Integer getMonthlyChart(String date) {
 		
-		return session.selectOne(NAMESPACE+".monthlyChart", date);
+		return session.selectOne(NAMESPACE+".getMonthlyChart", date);
 	}
 
 	@Override
 	public Integer getWebMem(String date) {
 		
-		return session.selectOne(NAMESPACE+".webMem", date);
+		return session.selectOne(NAMESPACE+".getWebMem", date);
 	}
 
 	@Override
 	public Integer getSNSMem(String date) {
 		
-		return session.selectOne(NAMESPACE+".SNSMem", date);
+		return session.selectOne(NAMESPACE+".getSNSMem", date);
 	}
 
 	@Override
-	public Integer totalMem() {
+	public Integer getTotalMem() {
 		
-		return session.selectOne(NAMESPACE+".totalMem");
+		return session.selectOne(NAMESPACE+".getTotalMem");
 	}
 
 	@Override
-	public Integer totalPmMem() {
+	public Integer getTotalPmMem() {
 		
-		return session.selectOne(NAMESPACE+".totalPmMem");
+		return session.selectOne(NAMESPACE+".getTotalPmMem");
 	}
 
 	@Override
-	public Integer totalComment() {
+	public Integer getTotalComment() {
 		
-		return session.selectOne(NAMESPACE+".totalComment");
+		return session.selectOne(NAMESPACE+".getTotalComment");
 	}
 
 	@Override
-	public Integer totalAcc(String date) {
+	public Integer getTotalAcc(String date) {
 		
-		return session.selectOne(NAMESPACE+".totalAcc", date);
+		return session.selectOne(NAMESPACE+".getTotalAcc", date);
 	}
+
+	@Override
+	public List<MemberVO> getAllWebMem() {
+	List<MemberVO> mg = new ArrayList<MemberVO>();
+		return session.selectList(NAMESPACE+".getAllWebMem");
+	}
+
+	@Override
+	public List<KakaoVO> getAllSnsMem() {
+		List<KakaoVO> kakao = new ArrayList<KakaoVO>();
+		return session.selectList(NAMESPACE+".getAllSnsMem", kakao);
+	}
+
+	@Override
+	public void delMem(MemberVO vo) {
+		 session.delete(NAMESPACE+".delMem",vo);
+	}
+	
 	
 	
 	

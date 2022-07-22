@@ -1,5 +1,4 @@
 package com.bcc.web;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,12 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.bcc.domain.BoardVO;
 import com.bcc.domain.CommentVO;
-import com.bcc.domain.Criteria;
 import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
 import com.bcc.service.BoardService;
@@ -27,12 +23,9 @@ import com.bcc.service.CommentService;
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
-
 	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
-
 	@Inject
 	private BoardService service;
-
 	@Inject
 	private CommentService commentservice;
 
@@ -58,7 +51,6 @@ public class BoardController {
 	@RequestMapping(value = "/commentModify", method = RequestMethod.GET)
 	public String commentModifyView(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, Model model)
 			throws Exception {
-		log.info(scri + "");
 
 		model.addAttribute("commentModify", commentservice.selectComment(vo.getCno()));
 		model.addAttribute("scri", scri);
@@ -71,7 +63,6 @@ public class BoardController {
 			throws Exception {
 		commentservice.update(vo);
 
-		log.info(scri + "");
 		rttr.addAttribute("page", scri.getPage());
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("t_category", scri.getT_category());
@@ -118,20 +109,21 @@ public class BoardController {
 		scri.setAddr(addr);
 		// 조회수
 		session.setAttribute("upFlag", "1");
+//		session.setAttribute("id", "admin");
 
 		// 글 정보를 가지고 오기
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
 
 		if (addr.equals("all")) {
-			pageMaker.setTotalCount(service.listCount(scri));
+			pageMaker.setTotalCount(service.countList(scri));
 			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("boardList", service.list(scri));
+			model.addAttribute("boardList", service.getList(scri));
 			model.addAttribute("scri", scri);
 		} else {
-			pageMaker.setTotalCount(service.listCountAddr(scri));
+			pageMaker.setTotalCount(service.countListAddr(scri));
 			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("boardList", service.listAddr(scri));
+			model.addAttribute("boardList", service.getListAddr(scri));
 			model.addAttribute("scri", scri);
 
 		}
@@ -144,8 +136,6 @@ public class BoardController {
 	public String infoDetailGET(@RequestParam("num") int num, @RequestParam("t_category") int t_category,
 			@ModelAttribute("scri") SearchCriteria scri, Model model, HttpSession session) throws Exception {
 
-		String url = "";
-
 		// 조회수
 		String upFlag = (String) session.getAttribute("upFlag");
 
@@ -156,28 +146,14 @@ public class BoardController {
 			}
 		}
 
-		if (t_category == 0) {
-			model.addAttribute("vo", service.getTour(num));
-			model.addAttribute("scri", scri);
+		model.addAttribute("vo", service.getTour(num));
+		model.addAttribute("scri", scri);
 
-			// 댓글리스트
-			List<CommentVO> commentList = commentservice.readComment(num);
-			model.addAttribute("commentList", commentList);
+		// 댓글리스트
+		List<CommentVO> commentList = commentservice.readComment(num);
+		model.addAttribute("commentList", commentList);
 
-			url = "board/readTour";
-
-		} else {
-			model.addAttribute("resVO", service.getFood(num));
-			model.addAttribute("scri", scri);
-
-			// 댓글리스트
-			List<CommentVO> commentList = commentservice.readComment(num);
-			model.addAttribute("commentList", commentList);
-
-			url = "board/readFood";
-		}
-
-		return url;
+		return "board/tourRead";
 	}
 
 	// 검색 결과 출력(제목 기준)
@@ -201,10 +177,10 @@ public class BoardController {
 		// 글 정보를 가지고 오기
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(service.listCount(scri));
+		pageMaker.setTotalCount(service.countList(scri));
 
 		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("boardList", service.listAlign(scri));
+		model.addAttribute("boardList", service.alignList(scri));
 		model.addAttribute("scri", scri);
 
 		return "board/tourList";

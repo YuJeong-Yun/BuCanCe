@@ -1,5 +1,6 @@
 package com.bcc.domain;
 
+
 import java.sql.Timestamp;
 
 public class KakaoVO {
@@ -9,8 +10,6 @@ public class KakaoVO {
 	private String k_email;
 	private String k_id;
 	private Timestamp regdate;
-	
-	
 	public long getK_number() {
 		return k_number;
 	}
@@ -35,7 +34,6 @@ public class KakaoVO {
 	public void setK_id(String k_id) {
 		this.k_id = k_id;
 	}
-	
 	public Timestamp getRegdate() {
 		return regdate;
 	}
@@ -50,5 +48,6 @@ public class KakaoVO {
 				+ ", regdate=" + regdate + "]";
 	}
 	
+
 	
 }

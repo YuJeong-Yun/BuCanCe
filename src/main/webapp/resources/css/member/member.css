@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+#thumbnail {
+	 position: relative;
+}
+
+#thumbItem:hover #thumbX {display: inline-block;}
+
+#thumbX {
+  position: absolute;
+  top: 5px;
+  right: 19px;
+  color: #fff;
+  display: none;
+  font-size: 23px;
+  cursor: pointer;
+}
+
+#thumbA {
+	color: black;
+}
+
+#thumbA:hover {
+	color: #66b3ff;
+}
+
+	#info h4 {
+	text-overflow: ellipsis;
+	width: 220px;
+	overflow: hidden;
+	white-space: nowrap;	
+	
+}
