@@ -94,12 +94,13 @@ $.ajax({
 });
 
 
-
+var tt =6;
 
 //지역 select 고를때 동작
 //해당지역을 골랐을때 지역에 해당하는 숙소목록을 보여줌
 function selectArea(){
 // 	idForm.submit();
+	tt=6;
 	
 	$('.loading').show();	
 	
@@ -210,7 +211,7 @@ $.ajax({
 }
 
 
-var tt =6;
+
 
 $(window).on("scroll", function() {
 	
@@ -222,11 +223,15 @@ $(window).on("scroll", function() {
     	
 	
     rl = roomList;
-//     alert(rl);
+    if(tt<rl.length){
     
     $(rl).each(function(idx){
     	
+    	
     		if(idx<6){
+    			
+    			if(rl[tt].room_pic!=''){	
+    			
     			var room_pic = rl[tt].room_pic;
            	   var room_title = rl[tt].room_title;
            	   var room_link = rl[tt].room_link;
@@ -288,11 +293,15 @@ $(window).on("scroll", function() {
                 	  
                 	 
                 	tt++;
+                	
+    		}
     		}
     			
     	
     });
     
+	}
+//     console.log("tt : "+tt);
     }
 }); 
 

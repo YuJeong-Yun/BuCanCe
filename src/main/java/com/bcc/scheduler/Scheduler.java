@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +61,7 @@ public class Scheduler{
 	    //구독권 정기결재(재결제) 스케줄 : 매일 3시 진행
 	            // Premium_Order테이블에 next_order_date = curdate()시 삭제
 	             @Scheduled(cron="0 0 3 * * *") 
-	               public void reOrder(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException{
+	               public void reOrder(HttpServletRequest request, HttpServletResponse response) throws IOException{
 	                 
 	                 // 스케쥴러 시작
 	                 log.info(new Date() + "스케쥴러 실행");
