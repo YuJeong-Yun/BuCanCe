@@ -11,20 +11,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bcc.domain.BoardVO;
-import com.bcc.domain.Criteria;
 import com.bcc.domain.KakaoVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
-import com.bcc.service.BoardService;
 import com.bcc.service.KakaoService;
 import com.bcc.service.MemberService;
 
@@ -35,9 +31,6 @@ public class MemberController {
 
 	@Inject
 	private MemberService service;
-
-	@Inject
-	private BoardService bs;
 
 	@Inject
 	private KakaoService ks;
@@ -51,31 +44,47 @@ public class MemberController {
 		return "/member/index";
 	}
 
-	// 글 전체 목록
+	// 찜 목록
 	// http://localhost:8088/index
 	// http://localhost:8088/favorite
 	@RequestMapping(value = "/favorite", method = RequestMethod.GET)
-	public String thumbList(@ModelAttribute("result") String result, SearchCriteria scri, Model model,
+	public String thumbList(SearchCriteria scri, Model model,
 			HttpSession session) throws Exception {
 
-		String id = (String) session.getAttribute("id");
-
-		// 조회수
-		session.setAttribute("upFlag", "1");
-
+		//session.setAttribute("kakao", "kakao");
+		
+		scri.setKeyword((String) session.getAttribute("id"));
 		// 글 정보를 가지고 오기
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(bs.countList(scri));
+		
+		// 일반회원, SNS 회원 구별
+		if(session.getAttribute("kakao") != null) {
+			pageMaker.setTotalCount(service.getSNSThumbCount((String) session.getAttribute("id")));
+			model.addAttribute("thumbList", service.getSNSThumbList(scri));
+			
+		} else {
+			pageMaker.setTotalCount(service.getThumbCount((String) session.getAttribute("id")));
+			model.addAttribute("thumbList", service.getThumbList(scri));
+			
+		}
 
 		log.info(pageMaker + "");
 		model.addAttribute("pageMaker", pageMaker);
-		log.info(" 로그인중인 id : " + id);
-		model.addAttribute("boardList", service.getThumbList(id));
+		model.addAttribute("scri", scri);
 
 		return "/member/favorite";
 
 	}
+	
+	// 찜삭제
+	@RequestMapping(value = "/delThumb", method = RequestMethod.GET)
+	public String delThumb(HttpSession session, @RequestParam("num") int num) throws Exception {
+		service.deleteThumb(num,(String) session.getAttribute("id"));
+		
+		return "redirect:/favorite";
+	}
+	
 
 	// http://localhost:8088/insert
 	// 회원가입
@@ -216,15 +225,6 @@ public class MemberController {
 		service.liDown(id);
 
 		return "redirect:/update";
-	}
-
-	@RequestMapping(value = "/deleteThumb", method = RequestMethod.GET)
-	public void deleteThumbPOST(@RequestParam(value = "b_num") int b_num) throws Exception {
-
-		log.info(" deleteThumbPOST() 호출 ");
-
-		service.deleteThumb(b_num);
-
 	}
 
 	// 회원정보 삭제(탈퇴)
