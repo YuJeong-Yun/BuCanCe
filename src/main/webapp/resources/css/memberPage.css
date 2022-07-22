@@ -56,9 +56,9 @@
 }
 
 .menu-box {
-	width : 500px;
+	width : 750px;
 	height : 50px;
-	outline : 1px dotted red;
+	outline : blue;
 	text-aling:center;
 	}
 
