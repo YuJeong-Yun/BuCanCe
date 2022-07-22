@@ -126,9 +126,18 @@
 	<a href="/member/login">LOGIN</a> | 
 	<a href="/member/insert">JOIN</a>
 	</div>
+	
+	<%	
+	} else if(id.equals("admin")){
+		%>
+			<div id="login">
+			관리자님 안녕하세요.
+			<a href="/admin/profitChart">사이트관리</a>
+			<a href="/member/logout">LOGOUT</a>
+			</div>
 
 <%	
-	}else if(id!=null){ %>
+	}else { %>
 	
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
@@ -141,7 +150,7 @@
 %>
 
 	
-<!-- 로그인 / 회원가입 / 로그아웃 -->	
+<!-- 로그인 / 회원가입 / 로그아웃 -->
 
         <ul class="top-widget">
             <li><i class="fa fa-phone"></i> (12) 345 67890</li>
@@ -180,9 +189,18 @@
 	<a href="/member/login">LOGIN</a> | 
 	<a href="/member/insert">JOIN</a>
 	</div>
+	
+	<%	
+	} else if(id.equals("admin")){
+		%>
+			<div id="login">
+			관리자님 안녕하세요.
+			<a href="/admin/profitChart">사이트관리</a>
+			<a href="/member/logout">LOGOUT</a>
+			</div>
 
 <%	
-	}else if(id!=null){ %>
+	}else { %>
 	
 	<div id="login">
 	<%=id%>님 로그인 중입니다!!
@@ -193,10 +211,8 @@
 <%	
 	}
 %>
-
 	
 <!-- 로그인 / 회원가입 / 로그아웃 -->
-
 
                             <a href="#" class="bk-btn">Booking Now</a>
                             <div class="language-option">
