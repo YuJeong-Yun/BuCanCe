@@ -45,34 +45,30 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberPage.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/memberPage.css" >
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
 </head>
-<body class = "memberBody">
-<div class="memberForm">
-<div class = "memberInputArea">
+<body>
+<div class = "member-wrapper">
 	<form action="/member/login.do" method="post">
-		<span class = "memberInputGroup">
-			<input type ="text" name="id" id = "inputBox" placeholder="아이디">
+		<span>
+			<input type ="text" class = "loginInputbox" name="id" id = "inputBox" placeholder="아이디">
 		</span>
-		<span class = "memberInputGroup">
-			<input type ="password" name="pw" id = "inputBox" placeholder = "비밀번호">
-		</span>
-		<span class = "memberInputGroup">
-			<input type="submit" value="로그인" >
-			<input type="button" value="회원가입" onclick=" location.href='/member/insert';" >
-		</span>
+		<span>
+			<input type ="password" class = "loginInputbox" name="pw" id = "inputBox" placeholder = "비밀번호">
+		</span><br>
+		<span>
+			<input type="submit" id = "loginBtn" value="로그인" >
+		</span><br>
 		<!-- 사용자가 email 등 data 수신을 동의하지 않았을 경우 scope로 추가적으로 동의를 받아야 한다. -->
 			<a href="https://kauth.kakao.com/oauth/authorize?client_id=c30d4acffaf14e6c0a33f269940ff070&redirect_uri=http://localhost:8088/member/kakao_login
 &response_type=code&scope=account_email"> 
-		<img src="/resources/img/kakao_login_medium_narrow.png" style="height:60px"></a><br>
-			<a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=mh2HJRSmhFxLpWvyHva1&redirect_uri=http%3A%2F%2Flocalhost%3A8088%2Fcallback&state=063e8713-b6a0-4235-b05f-b64982f7a6f8">
-		<img src="/resources/img/btnG_perfect.png" style="height:60px"></a></div><br>
+		<img src="/resources/img/kakao_login_medium_narrow.png" id = "snsBtn" ></a><br>
+<!-- 		<img src="/resources/img/kakao_login_medium_narrow.png" id = "snsBtnstyle = "width: 460px" style="height:40px"></a><br> -->
+			<input type="button" id = "inputBtn" value="회원가입" onclick=" location.href='/member/insert';" >
 	</form>
-
-</div>
 </div>
 </body>
 </html>
