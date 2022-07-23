@@ -192,7 +192,7 @@ public class accomodationController {
 			MemberVO mvo = null;
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인이 필요합니다.'); location.href='/login';</script>");
+			out.println("<script>alert('로그인이 필요합니다.'); location.href='/member/login';</script>");
 			out.flush();
 			
 			return "";
@@ -236,7 +236,7 @@ public class accomodationController {
 		if (id == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인이 필요합니다.'); location.href='/login';</script>");
+			out.println("<script>alert('로그인이 필요합니다.'); location.href='/member/login';</script>");
 			out.flush();
 			MemberVO mvo = null;
 			
@@ -312,7 +312,7 @@ public class accomodationController {
 		if(id==null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인이 필요합니다.'); location.href='/login';</script>");
+			out.println("<script>alert('로그인이 필요합니다.'); location.href='/member/login';</script>");
 			out.flush();
 			
 			return "";
