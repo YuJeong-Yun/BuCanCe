@@ -110,18 +110,28 @@
 	}
 	
 	.periodSpan {
-		color: #025ce2;
-		font-size: 1em;
-		font-weight: bold;
-		padding: 0 10px;
-	}
-	
-	.periodSpan:hover {
 		color: black;
+		font-size: 1em;
+		padding: 0 10px;
+		display: inline-block;
 		cursor: pointer;
 	}
 	
+	.periodSpan a:hover {
+		text-decoration: none;
+	}
 	
+	.periodSpan a:after {
+	    display:block;
+   	    content: '';
+   		border-bottom: solid 2px #025ce2;
+   		transform: scaleX(0);/*크기를 0으로 줌으로써 평상시엔 밑줄 없음*/
+   		transition: transform 250ms ease-in-out; /*변형 방식*/
+	}
+	
+	.periodSpan a:hover:after {
+	   transform: scaleX(1);
+	}
 	
 	/* 차트 */
 	.chartjs-render-monitor {

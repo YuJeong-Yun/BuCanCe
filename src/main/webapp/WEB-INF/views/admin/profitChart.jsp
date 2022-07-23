@@ -233,6 +233,6 @@
     </div>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/admin/profitChart.js"></script> 									
+<script src="${pageContext.request.contextPath}/resources/js/admin/profitChart.js"></script>							
 <script src="${pageContext.request.contextPath}/resources/js/admin/vipInfo.js"></script>   									
 <jsp:include page="../include/footer.jsp" />
