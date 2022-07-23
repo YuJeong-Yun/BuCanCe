@@ -79,7 +79,7 @@ public class BoardController {
 		return "board/commentDelete";
 	}
 
-	// 댓글 삭제
+	// 댓글 삭제 POST
 	@RequestMapping(value = "/commentDelete", method = RequestMethod.POST)
 	public String commentDelete(CommentVO vo, @ModelAttribute("scri") SearchCriteria scri, RedirectAttributes rttr)
 			throws Exception {
@@ -95,7 +95,7 @@ public class BoardController {
 	// http://localhost:8088/board/tourMap
 	// 부산 지도 출력
 	@RequestMapping(value = "/tourMap", method = RequestMethod.GET)
-	public String tourMapGET() {
+	public String tourMapGET() throws Exception{
 
 		return "/board/tourMap";
 	}
@@ -145,10 +145,8 @@ public class BoardController {
 				session.setAttribute("upFlag", "0");
 			}
 		}
-
 		model.addAttribute("vo", service.getTour(num));
 		model.addAttribute("scri", scri);
-
 		// 댓글리스트
 		List<CommentVO> commentList = commentservice.readComment(num);
 		model.addAttribute("commentList", commentList);
