@@ -52,6 +52,67 @@
 
 
 
+
+/* 관광지/맛집 상세정보 모달 */
+#tourModal * {
+	color: #333;
+}
+#tourModal .detail__title {
+	font-size: 25px;
+	font-weight: 700;
+}
+#tourModal .detail__content {
+	padding: 0 20px;
+}
+#tourModal .detail__content .content__img {
+	display: block;
+	width: 700px;
+	height: 400px;
+	margin: 0 auto 10px;;
+}
+#tourModal .detail__content > div {
+	display: flex;
+}
+#tourModal .detail__content .info {
+	width: 100px;
+	margin: 5px 0;
+	font-weight: 700;
+	color : #666;
+}
+#tourModal .detail__content .info-value {
+	width: 600px;
+	margin: 5px 0;
+}
+#tourModal .detail__content .content__runtime {
+	
+}
+#tourModal .detail__content .content__addr {
+	
+}
+#tourModal .detail__content .content__homepage  {
+}
+#tourModal .detail__content .content__homepage a {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: #007bff;
+}
+#tourModal .detail__content .content__content {
+	width: 100%; 
+	margin-top: 10px;
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	display: -webkit-box;
+	-webkit-line-clamp: 10;
+	-webkit-box-orient: vertical;
+}
+#tourModal .modal-footer button {
+	color: #fff;
+}
+
+
 /* 플랜 작성 */
 .make-plan {
 	margin: 50px 0;
@@ -198,6 +259,13 @@
 	overflow: auto;
 	z-index: 1;
 }
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul .loading-icon {
+	background-color: #fafafa;
+    display: block;
+    box-shadow: none;
+	text-align: center;
+    line-height: 80px;
+}
 .make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul.search-result {
 	background-color: #8fb1db;
 	z-index: 2;
@@ -217,6 +285,9 @@
 	margin: 0 10px;
 	pointer-events: none; 
 }
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul > li .description {
+	pointer-events: none; 
+}
 .make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul > li .content__title {
 	width: 180px;
 	overflow: hidden;
@@ -225,10 +296,19 @@
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	pointer-events: none; 
-  font-size: 13px;
+  	font-size: 13px;
 }
-
-
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul > li .content__detail {
+	padding-top: 5px;
+	font-size: 11px;
+	color: #777;
+	pointer-events: auto;
+	cursor: alias;
+	z-index: 1;
+}
+.make-plan .tour-container .tour-list-container .tour-list .tour .tour__contents > ul > li .content__detail:hover {
+	color: #333;
+}
 
 /* 일정별 관광지 */
 .make-plan ul.date-plan-container {

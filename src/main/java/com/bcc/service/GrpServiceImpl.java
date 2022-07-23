@@ -57,12 +57,7 @@ public class GrpServiceImpl implements GrpService {
 
 	@Override
 	public void insertGrpMember(PlanMemberVO member) {
-		dao.insertGrpMember(member);
-	}
-
-	@Override
-	public void deleteInvitation(GrpAcceptVO vo) {
-		dao.deleteInvitation(vo);
+		dao.putGrpMember(member);
 	}
 
 	@Override
@@ -98,11 +93,11 @@ public class GrpServiceImpl implements GrpService {
 			return 0;
 		}
 		// 이미 초대중인 회원일 경우
-		if(dao.checkInviteMember(vo) == 1) {
+		if (dao.getCheckInviteMember(vo) == 1) {
 			return -1;
 		}
 		// 초대 리스트에 추가
-		dao.inviteMember(vo);
+		dao.putInviteMember(vo);
 
 		// 초대 성공하면 1 반환
 		return 1;
@@ -121,18 +116,24 @@ public class GrpServiceImpl implements GrpService {
 		PlanMemberVO member = new PlanMemberVO();
 		member.setGrp_num(vo.getGrp_num());
 		member.setId(vo.getReceiver());
-		if (dao.checkGrpMember(member) == 1) {
+		if (dao.getCheckGrpMember(member) == 1) {
 			return 1;
 		}
 
 		// 초대 취소
-		dao.inviteCancle(vo);
+		dao.delInvitation(vo);
 		return 0;
 	}
 
 	@Override
+	public void delInvitation(GrpAcceptVO vo) {
+		dao.delInvitation(vo);
+
+	}
+
+	@Override
 	public Integer checkGrpMember(PlanMemberVO vo) {
-		return dao.checkGrpMember(vo);
+		return dao.getCheckGrpMember(vo);
 	}
 
 	@Override
@@ -146,7 +147,7 @@ public class GrpServiceImpl implements GrpService {
 			// 본인이 그룹의 마지막 멤버이면 플랜정보 완전 삭제
 			if (newLeader == null) {
 				// 초대중인 리스트 삭제
-				dao.deleteInvitingList(grpNum);
+				dao.delInvitingList(grpNum);
 				// 플랜 삭제
 				planDao.delPlan(grpNum);
 
@@ -157,7 +158,7 @@ public class GrpServiceImpl implements GrpService {
 			PlanVO plan = new PlanVO();
 			plan.setLeader(newLeader);
 			plan.setNum(grpNum);
-			dao.updateLeader(plan);
+			dao.modLeader(plan);
 		}
 	}
 

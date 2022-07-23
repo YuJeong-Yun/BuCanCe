@@ -2,6 +2,8 @@ package com.bcc.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -38,16 +40,13 @@ public class PlanController {
 	public String planListGET( Model model, HttpSession session, HttpServletResponse response) throws Exception {
 		log.info(" planListGET() 호출 ");
 		
-		///////////////////////////////////// 지울코드 //////////////////////////////////////////
-		session.setAttribute("id", "yun1");
-		
 		String id = (String) session.getAttribute("id");
 		
 		// 로그인 안하면 로그인 페이지로 이동
 		if(id == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('회원만 이용 가능합니다.'); location.href='/login';</script>");
+			out.println("<script>alert('회원만 이용 가능합니다.'); location.href='/member/login';</script>");
 			out.flush();
 			
 			return "";
@@ -142,7 +141,7 @@ public class PlanController {
 	// 플랜 확인 페이지
 	// http://localhost:8088/plan/planContent/1
 	@RequestMapping(value="/planContent/{num}", method=RequestMethod.GET)
-	public String planContentGET(@PathVariable("num") int num, Model model,HttpSession session, HttpServletResponse response) throws IOException {
+	public String planContentGET(@PathVariable("num") int num, Model model,HttpSession session, HttpServletResponse response) throws Exception {
 		log.info("플랜 정보 확인 : "+num);
 		
 		String id = (String) session.getAttribute("id");
@@ -160,19 +159,15 @@ public class PlanController {
 			return "";
 		}
 		
-//		// 숙소 정보 없으면 저장
-//		if (session.getAttribute("hotellist") == null) {
-//			// 숙소 정보 세션에 저장
-//			session.setAttribute("hotellist", planService.getHotelList());
-//			log.info("숙소 정보 세션 저장 완료");
-//		}
-		
 		// 그룹 멤버 전달
 		model.addAttribute("grpMemberList",grpService.getGrpMemberList(num));
+
 		// 여행 경로 정보 전달
 		model.addAttribute("planList", planService.getTourPlanList(num));
+
 		// 초대중인 멤버 리스트 전달
 		model.addAttribute("invitingList",  grpService.getInvitingList(num));
+
 		// 플랜 정보 전달
 		model.addAttribute("plan", planService.getPlanInfo(num));
 		

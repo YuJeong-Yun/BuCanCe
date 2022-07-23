@@ -8,7 +8,7 @@ public class PlanVO {
 	private String tour_date_start;
 	private String tour_date_end;
 	private String tour_plan;
-	private String tour_plan_acc;
+	private String tour_plan_extra;
 	private Timestamp date;
 	private String leader;
 	private String writer;
@@ -54,12 +54,12 @@ public class PlanVO {
 		this.tour_plan = tour_plan;
 	}
 
-	public String getTour_plan_acc() {
-		return tour_plan_acc;
+	public String getTour_plan_extra() {
+		return tour_plan_extra;
 	}
 
-	public void setTour_plan_acc(String tour_plan_acc) {
-		this.tour_plan_acc = tour_plan_acc;
+	public void setTour_plan_extra(String tour_plan_extra) {
+		this.tour_plan_extra = tour_plan_extra;
 	}
 
 	public Timestamp getDate() {
@@ -97,8 +97,9 @@ public class PlanVO {
 	@Override
 	public String toString() {
 		return "PlanVO [num=" + num + ", grp_name=" + grp_name + ", tour_date_start=" + tour_date_start
-				+ ", tour_date_end=" + tour_date_end + ", tour_plan=" + tour_plan + ", tour_plan_acc=" + tour_plan_acc
-				+ ", date=" + date + ", leader=" + leader + ", writer=" + writer + ", lastUpdate=" + lastUpdate + "]";
+				+ ", tour_date_end=" + tour_date_end + ", tour_plan=" + tour_plan + ", tour_plan_extra="
+				+ tour_plan_extra + ", date=" + date + ", leader=" + leader + ", writer=" + writer + ", lastUpdate="
+				+ lastUpdate + "]";
 	}
 
 }

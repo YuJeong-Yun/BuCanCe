@@ -7,7 +7,7 @@ import com.bcc.domain.PlanVO;
 
 public interface PlanDAO {
 	// 플랜 생성
-	public void createPlan(PlanVO vo);
+	public void putPlan(PlanVO vo);
 
 	// 소속된 플랜 리스트 가져오기
 	public List<PlanVO> getPlanList(String id);	
@@ -22,7 +22,7 @@ public interface PlanDAO {
 	public BoardVO getTourInfo(int num);
 	
 	// 여행 경로 수정
-	public void modifyTourPlan(PlanVO vo);
+	public void modTourPlan(PlanVO vo);
 
 	// 그룹의 여행 정보 가져오기
 	public PlanVO getPlanInfo(int num);
