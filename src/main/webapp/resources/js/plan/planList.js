@@ -58,14 +58,14 @@ function acceptGrp(event, grp_num) {
 			newPlan.innerHTML = newPlanInner;
 			// 최신순으로 정렬했을 때 맞는 순서에 새 그룹 추가
 			for (let i = 0; i < plans.length; i++) {
-				if (grp_num > plans[i].className.substr(3)) {
+				if (grp_num > plans[i].className.substring(3)) {
 					plans[i].before(newPlan);
 					break;
 				}
 			} // for
 			// 제일 첫 번째(생성된지 오래된) 플랜일 경우 제일 밑에 추가
 			// 또는 현재 플랜 하나도 없을 경우 그냥 추가
-			if (grp_num < plans[plans.length - 1].className.substr(3) || plans.length == 0) {
+			if (grp_num < plans[plans.length - 1].className.substring(3) || plans.length == 0) {
 				planContainer.append(newPlan);
 			}
 
@@ -131,6 +131,12 @@ function setGrpNum(num) {
 function showMember() {
 	let searchID = searchInput.value.trim();
 
+	// 공백만 검색했을 경우
+	if (searchID === '') {
+		alert('검색값을 입력해 주세요.');
+		return;
+	}
+
 	$.ajax({
 		url: path + '/planREST/memberID',
 		type: 'post',
@@ -144,8 +150,8 @@ function showMember() {
 				memberList.removeChild(memberList.firstChild);
 			}
 
-			// 검색 결과 없거나 공백만 검색했을 경우
-			if (item.memberArr.length == 0 || searchID === '') {
+			// 검색 결과 없을 경우
+			if (item.memberArr.length == 0) {
 				const noResult = document.createElement('li');
 				noResult.innerHTML = '<div>검색 결과가 없습니다.</div>';
 
@@ -208,10 +214,11 @@ function inviteMember(event, id) {
 			grpNum: grpNum
 		},
 		success: function(item) {
+		console.log(item);
 			if (item == 0) {
 				alert('더 이상 초대할 수 없습니다.');
 				return;
-			} else if (item = -1) {
+			} else if (item == -1) {
 				alert('이미 초대중인 회원입니다.');
 				return;
 			}

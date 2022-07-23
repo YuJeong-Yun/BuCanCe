@@ -37,7 +37,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 			<!--초대중인 멤버 출력 -->
 			<c:forEach var="invitingMember" items="${invitingList }">
 				<li>
-					<div class="invite-cancle" onclick="inviteCancle(event, ${num}, '${invitingMember.receiver }');">초대 취소</div>
+					<div class="invite-cancle" onclick="inviteCancle(event, '${invitingMember.receiver }');">초대 취소</div>
 					<div class="member--id">${invitingMember.receiver}</div>
 					<div class="member--name">${invitingMember.name}</div>
 				</li>
@@ -45,7 +45,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 			<!-- 초대 버튼 출력 -->
 			<li class="invite-member">
 				<!-- Button trigger modal -->
-				<span class="material-icons-outlined add-group" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setGrpNum(${num})">add_circle</span>
+				<span class="material-icons-outlined add-group" data-bs-toggle="modal" data-bs-target="#exampleModal">add_circle</span>
 			</li>
 		</c:if>
       </ul>
@@ -87,11 +87,13 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
       	<!-- 마지막 수정시간 -->
       	<div class="last-update">
       	  <f:formatDate value="${plan.lastUpdate }" pattern="yyyy-MM-dd HH:mm"/> 
+      	  <!-- 정보 없으면 - 출력 -->
       	  <c:if test="${plan.lastUpdate eq null }">-</c:if>
       	</div>
       	<!-- 마지막 작성자 -->
       	<div class="last-writer">
       	  <strong>${plan.writer }</strong>
+      	  <!-- 정보 없으면 - 출력 -->
       	  <c:if test="${plan.writer eq null }">-</c:if>
       	</div>
       </div>
@@ -112,9 +114,11 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 		                <img src="${planItem.thumbnail }" alt="" class="item__img" />
 		                <div class="item__title">${planItem.title }</div>
 		                <span class="material-icons-outlined arrow">arrow_circle_right</span>
+		                <!-- 맛집이면 맛집 아이콘 표시 -->
 		                <c:if test="${planItem.t_category == 1 }">
    							<div class="material-icons-outlined restaurant">restaurant</div>
 		                </c:if>
+		                <!-- 숙소이면 숙소 아이콘 표시 -->
 		                <c:if test="${planItem.t_category == -1 }">
    							<div class="material-icons-outlined hotel">bed</div>
 		                </c:if>
@@ -131,7 +135,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
         <button class="list-btn" onclick="location.href='/plan/planList';">목록</button>
         <span class="separator">|</span>
         <button class="update-btn" onclick="location.href='/plan/planWrite/${num}';">플랜 수정</button>
-        <button class="del-btn" onclick="delPlan(event, ${num})">플랜 삭제</button>
+        <button class="del-btn" onclick="delPlan(event)">플랜 삭제</button>
       </div>
     </div>
   </section>
@@ -153,7 +157,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
 <script type="text/javascript">
 	const path = '${pageContext.request.contextPath}';
-	const grp_num = '${num}';
+	const grpNum = '${num}';
 </script>
 <script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"	crossorigin="anonymous"></script>
 <script defer src="${pageContext.request.contextPath }/resources/js/plan/planContent.js"></script>

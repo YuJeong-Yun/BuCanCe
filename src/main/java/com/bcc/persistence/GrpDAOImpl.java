@@ -44,18 +44,18 @@ public class GrpDAOImpl implements GrpDAO {
 	}
 
 	@Override
-	public void insertGrpMember(PlanMemberVO member) {
-		sqlSession.insert(NAMESPACE + ".insertGrpMember", member);
+	public void putGrpMember(PlanMemberVO member) {
+		sqlSession.insert(NAMESPACE + ".putGrpMember", member);
 	}
 
 	@Override
-	public void deleteInvitation(GrpAcceptVO vo) {
-		sqlSession.delete(NAMESPACE + ".deleteInvitation", vo);
+	public void delInvitation(GrpAcceptVO vo) {
+		sqlSession.delete(NAMESPACE + ".delInvitation", vo);
 	}
 
 	@Override
-	public void deleteInvitingList(int grp_num) {
-		sqlSession.delete(NAMESPACE + ".deleteInvitingList", grp_num);
+	public void delInvitingList(int grp_num) {
+		sqlSession.delete(NAMESPACE + ".delInvitingList", grp_num);
 	}
 
 	@Override
@@ -84,13 +84,13 @@ public class GrpDAOImpl implements GrpDAO {
 	}
 
 	@Override
-	public void inviteMember(GrpAcceptVO vo) {
-		sqlSession.insert(NAMESPACE + ".inviteMember", vo);
+	public void putInviteMember(GrpAcceptVO vo) {
+		sqlSession.insert(NAMESPACE + ".putInviteMember", vo);
 	}
 	
 	@Override
-	public Integer checkInviteMember(GrpAcceptVO vo) {
-		return sqlSession.selectOne(NAMESPACE+".checkInviteMember", vo);
+	public Integer getCheckInviteMember(GrpAcceptVO vo) {
+		return sqlSession.selectOne(NAMESPACE+".getCheckInviteMember", vo);
 	}
 
 	@Override
@@ -99,13 +99,8 @@ public class GrpDAOImpl implements GrpDAO {
 	}
 
 	@Override
-	public void inviteCancle(GrpAcceptVO vo) {
-		sqlSession.delete(NAMESPACE + ".inviteCancle", vo);
-	}
-
-	@Override
-	public int checkGrpMember(PlanMemberVO vo) {
-		return sqlSession.selectOne(NAMESPACE + ".checkGrpMember", vo);
+	public int getCheckGrpMember(PlanMemberVO vo) {
+		return sqlSession.selectOne(NAMESPACE + ".getCheckGrpMember", vo);
 	}
 
 	@Override
@@ -114,8 +109,8 @@ public class GrpDAOImpl implements GrpDAO {
 	}
 
 	@Override
-	public void updateLeader(PlanVO plan) {
-		sqlSession.update(NAMESPACE + ".updateLeader", plan);
+	public void modLeader(PlanVO plan) {
+		sqlSession.update(NAMESPACE + ".modLeader", plan);
 	}
 
 
