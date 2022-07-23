@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.MemberVO;
-import com.bcc.domain.ThumbVO;
+import com.bcc.domain.SearchCriteria;
 import com.bcc.persistence.BoardDAO;
 import com.bcc.persistence.MemberDAO;
 
@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService{
 		log.info(" 컨트롤러 호출 ");
 		log.info(" memberInsert(vo) 호출 ");
 		
-		dao.insertMember(vo);
+		dao.putInsertMember(vo);
 		
 		log.info(" DAO 처리 완료 -> 컨트롤러 이동");
 		
@@ -42,7 +42,7 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO loginCheck(MemberVO vo) {
 		log.info("loginCheck(vo) 호출 ");
 		// DAO객체 메서드 호출
-		MemberVO loginResultVO = dao.loginMember(vo);		
+		MemberVO loginResultVO = dao.getLogin(vo);		
 		
 		log.info(loginResultVO+"");
 		
@@ -63,7 +63,7 @@ public class MemberServiceImpl implements MemberService{
 	public Integer updateMember(MemberVO vo) {
 		log.info("updateMember(vo)");
 		
-		 int resultCnt = dao.updateMember(vo);		
+		 int resultCnt = dao.modMember(vo);		
 		
 		return resultCnt;
 	}
@@ -72,7 +72,16 @@ public class MemberServiceImpl implements MemberService{
 	public void deleteMember(MemberVO vo) {
 		log.info(" deleteMember(vo) 호출 ");
 		
-		dao.deleteMember(vo);
+		dao.delMember(vo);
+	}
+
+	
+	
+	@Override
+	public void storageMember(MemberVO vo) {
+		
+		dao.putStorageMember(vo);
+		
 	}
 
 	@Override
@@ -85,7 +94,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int idCheck(String id) {
 	       
-		int cnt = dao.idCheck(id);	 
+		int cnt = dao.getIdCheck(id);	 
 		
 		return cnt;
 	}
@@ -101,7 +110,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void liUp(String license) {
 		try {
-			dao.licenseUp(license);
+			dao.modLicenseUp(license);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -110,22 +119,42 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void liDown(String license) {
 		try {
-			dao.licenseDown(license);
+			dao.modLicenseDown(license);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public List<BoardVO> getThumbList(String id) throws Exception {
+	public List<BoardVO> getThumbList(SearchCriteria scri) throws Exception {
 		
-		return dao.thumbList(id);
+		return dao.getThumbList(scri);
+	}
+	
+	
+
+	@Override
+	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception {
+		
+		return dao.getSNSThumbList(scri);
 	}
 
 	@Override
-	public void deleteThumb(int b_num) throws Exception {
+	public void deleteThumb(int b_num, String id) throws Exception {
 		
-		dao.deleteThumb(b_num);
+		dao.delThumb(b_num, id);
+	}
+
+	@Override
+	public Integer getThumbCount(String id) {
+	
+		return dao.getThumbCount(id);
+	}
+
+	@Override
+	public Integer getSNSThumbCount(String id) {
+		
+		return dao.getSNSThumbCount(id);
 	}
 	
 }
