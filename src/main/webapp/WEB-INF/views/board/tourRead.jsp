@@ -20,18 +20,24 @@
 					</div>
 					<table id="infos">
 						<tbody>
+							<c:if test="${not empty vo.tel }">
 							<tr>
 								<td class="r-o">전화번호</td>
 								<td>${vo.tel }</td>
 							</tr>
+							</c:if>
+							<c:if test="${not empty vo.usage_day }">
 							<tr>
 								<td class="r-o">운영시간</td>
 								<td>${vo.usage_day }</td>
 							</tr>
+							</c:if>
+							<c:if test="${not empty vo.addr_full }">
 							<tr>
 								<td class="r-o">상세주소</td>
 								<td>${vo.addr_full }</td>
 							</tr>
+							</c:if>
 							
 							<c:if test="${not empty vo.trfc_info }">
 							<tr>

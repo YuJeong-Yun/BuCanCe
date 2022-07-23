@@ -57,5 +57,13 @@ public class AdminController {
 		return "redirect:/admin/memberMg";
 
 	}
+	
+	// 관광지 추가 글쓰기
+	@RequestMapping(value = "/addTour", method = RequestMethod.GET)
+	public String addTourGET() {
+		
+		
+		return "admin/addTour";
+	}
 
 }

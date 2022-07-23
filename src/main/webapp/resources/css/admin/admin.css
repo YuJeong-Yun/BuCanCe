@@ -4,7 +4,7 @@
 		text-decoration: none !important;
 	}
 	
-	#content-wrapper * {
+	#wrapper * {
 		font-family: 'Noto Sans KR', sans-serif !important;
 	}
 	
@@ -151,6 +151,17 @@
 		margin-left: 7px;
 	}
 	
+	#sideTitle {
+		cursor: pointer;
+	}
 	
+	#formRadio {
+		margin-bottom: 1em;
+	}
 	
+	#ta {
+		margin-bottom: 1em;
+		border-radius: 1rem !important;
+		resize: none;
+	}
 	
