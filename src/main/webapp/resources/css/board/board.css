@@ -27,7 +27,6 @@
 	#paging {
 		text-align: center; 
 		padding-top: 20px;
-		
 	}
 	
 	#paging a {
@@ -38,75 +37,217 @@
 		padding: 7px 13px 5px;
 		margin-right: 7px;
 		display: inline-block;
+		width: 40px;
+		text-align: center;
+	}
+	
+	#paging a:hover {
+		color: #6aafe6;
 	}
 
-#btn_group button {
-	position: relative;
-	display: inline-block;
-	font-family: 'Noto Sans KR' !important;
-	text-decoration: none;
-	font-weight: 600;
-	transition: 0.25s;
-	box-sizing: border-box;
-	border: 1px solid skyblue;
-	padding: 8.5px;
-	background-color: #6AAFE6;
-	color: #fff;
-	border-radius: 10px;
-	font-size: 17px;
-}
+	.area {
+	    position: absolute;
+	    background: #fff;
+	    border: 1px solid #888;
+	    border-radius: 3px;
+	    font-size: 18px;
+	    top: -5px;
+	    left: 15px;
+	    padding:2px;
+	}
+	
+	.info-menu {
+		font-size: 20px;
+		text-decoration: none !important;
+		color: #fff !important;
+	}
+	
+	
+	#load-more {
+		cursor: pointer;
+	
+	}
+	
+	
+	.infoImage {
+		width: 360px;
+		height: 350px;
+		margin-right: 1em;
+	}
+	
+	.weatherPic {
+		width: 150px;
+		margin-right: 1em;
+	}
+	
+	.info {
+		margin-bottom: 3em;
+		border-bottom: 1px solid #e5e5e5;
+		padding-bottom: 2em;
+		font-family: 'NanumSquare' !important;
 
-#modBtn_group button {
-	background-color: #6aafe6;
-	color: #d4dfe6;
-	border: 1px solid skyblue;
-	padding: 5px;
-	border-radius: 10px;
-	top: 400px;
-}
+	}
+	
+	.info h4 {
+		text-overflow: ellipsis;
+		width: 306px;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	
+	.room-item .info {
+		border: 1px solid #ebebeb;
+		border-top: none;
+		padding: 24px 24px 30px 28px;
+		font-family: 'NanumSquare' !important;
+	}
+	
+	.room-item .info h4 {
+		color: #19191a;
+		margin-bottom: 17px;
+		font-family: 'NanumSquare' !important;
+	}
+	
+	.nanumFont {
+		font-family: 'NanumSquare' !important;
+	}
+	
+	#blogList * {
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	
+	#infos {
+		margin-top: 2em;
+	}
+	
+	#infos tr{
+		margin: 2em 0;
+	}
+	
+	#total {
+		font-style: italic;
+	}
+	
+	#pmSort {
+		margin-top: 1em;
+	} 
+	
+	.w-btn {
+	    position: relative;
+	    border: none;
+	    display: inline-block;
+	    padding: 10px 10px;
+	    font-family: 'Noto Sans KR', sans-serif;
+	    text-decoration: none;
+	    font-weight: 600;
+	    transition: 0.25s;
+	    width: 130;
+	    height: 30;
+	    margin-right: 0.5em;
+	    
+	}
+	
+	.w-btn-indigo {
+	    background-color: aliceblue;
+	    color: #1e6b7b;
+	}
+	
+	
+	#like_img {
+		width: 30px;
+		height: 30px;
+		margin: 0;
+	}
 
-#contentArea {
-	width: 100%;
-	height: 200px;
-	padding: 10px;
-	box-sizing: border-box;
-	border: solid 2px #1E90FF;
-	border-radius: 5px;
-	font-size: 16px;
-	resize: both;
-}
-
-#reviewForm input {
-	width: 13%;
-	height: 20px;
-	padding: 10px;
-	box-sizing: border-box;
-	border: solid 2px #1E90FF;
-	border-radius: 5px;
-	font-size: 16px;
-	resize: both;
-}
-
-.area {
-	position: absolute;
-	background: #fff;
-	border: 1px solid #888;
-	border-radius: 3px;
-	font-size: 18px;
-	top: -5px;
-	left: 15px;
-	padding: 2px;
-}
-
-.info-menu {
-	font-size: 20px;
-	text-decoration: none !important;
-	color: #fff !important;
-}
-
-#load-more {
-	cursor: pointer;
-}
+	button {
+		all: unset;
+	}
+	
+	#cateMenu {
+		position: absolute;
+		left: 43.2%; 
+		top: 95%;
+	}
+	
+	#listTitle {
+		display: inline-block; 
+		margin-left: 6em; 
+		margin-right: 1em;
+	}
+	
+	#keywordInput {
+		width: 470px;
+		border: none;
+		border-bottom: 1px solid black;
+	}
+	
+	#eating {
+    color: #fff;
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 10px 10px;
+    border-radius: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    width: 130;
+    height: 30;
+    margin-right: 0.5em;
+	
+	}
+	
+	.actBtn {
+		background-color: #0D6EFD;
+	}
+	
+	.notActBtn {
+		background-color: black;
+	}
+	
+	#spot {
+    color: #fff;
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 10px 10px;
+    border-radius: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    width: 130;
+    height: 30;
+    margin-right: 0.5em;
+	}
+	
+	#searchMenu {
+		transform: translate(0,80px);
+	}
+	
+	#searchAllMenu {
+		transform: translate(0,130px);
+	}
+	
+	#top-nav1 {
+		border-bottom: none; 
+		margin-bottom: 1em; 
+		margin-top: 7em;
+	}
+	
+	#top-nav2 {
+		border-bottom: none; 
+		margin-bottom: 1em;
+	}
+	
+	#content-wrapper * {
+		font-family: 'Noto Sans KR', sans-serif !important;
+	}
+	
+	#readMenu {
+		font-family: 'Noto Sans KR' !important;
+	}
 
 .infoImage {
 	width: 360px;

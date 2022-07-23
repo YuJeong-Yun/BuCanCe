@@ -251,6 +251,8 @@ public class AdminServiceImpl implements AdminService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy M");
 
 		// 이번달건수
+		results.add(dao.getTotalAcc(sdf.format(date)));
+		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 
