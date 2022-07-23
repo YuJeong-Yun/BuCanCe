@@ -1,0 +1,96 @@
+/* 여행 플랜 */
+#tour-plan {
+	background-color: #fafafa;
+	margin: 30px 0 0;
+	padding: 60px 0;
+    box-shadow: 2px 2px 5px #eee;
+}
+#tour-plan .container {
+	position: relative;
+	margin: auto;
+	height: 800px;
+}
+#tour-plan .container img {
+	width: 600px;
+	height: 420px;
+	position: absolute;
+	box-shadow: 2px 2px 10px #ccc;
+}
+#tour-plan .container .plan1 {
+	top: 0;
+	left: 50px;
+	z-index: 1;
+}
+#tour-plan .container .plan2 {
+	top: 300px;
+	right: 50px;
+}
+#tour-plan .container img:hover {
+	transform: scale(1.01);
+	transition: .5s;
+	z-index: 2;
+}
+
+#tour-plan .container .description-1 {
+	position: absolute;
+	top: 10%;
+	right: 10%;
+}
+#tour-plan .container .description-1 div {
+	font-size: 18px;
+	line-height: 35px;
+	color: #333;
+	text-align: center;
+}
+#tour-plan .container .description-2 {
+	position: absolute;
+	left: 5%;
+	bottom: 15%;
+	text-align: center;
+}
+#tour-plan .container .description-2 .title {
+	font-size: 25px;
+	color: #333;
+}
+#tour-plan .container .description-2 button {
+	background-color: #dae3ec;
+    width: 200px;
+    height: 45px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#tour-plan .container .description-2 a.no-member {
+	display: block;
+}
+#tour-plan .container .description-2 a.no-member:hover {
+	color: #333;
+}
+
+
+/* 행정구역별 지도 */
+#tour-map {
+	margin: 0 auto 30px;
+}
+#tour-map .map-container {
+	position: relative;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+#tour-map .map-container img {
+	width: 100%;
+	height: 100%;
+}
+#tour-map .map-container button {
+	background-color: #fafafa;
+    width: 120px;
+	position: absolute;
+    height: 35px;
+    right: 30%;
+    bottom: 15%;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
