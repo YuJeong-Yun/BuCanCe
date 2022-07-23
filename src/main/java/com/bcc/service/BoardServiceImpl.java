@@ -206,11 +206,12 @@ public class BoardServiceImpl implements BoardService {
 		// log.info("baseTime : "+baseTime);
 
 		URL url = new URL(urlBuilder.toString());
-		// log.info("url: "+url);
+		//System.out.println(("url: "+url));
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Content-type", "application/json");
-		// System.out.println(conn.getResponseCode());
+		conn.setRequestProperty("Accept", "application/json");
+		//System.out.println(conn.getResponseCode());
 
 		BufferedReader rd;
 		if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
@@ -227,7 +228,7 @@ public class BoardServiceImpl implements BoardService {
 		rd.close();
 		conn.disconnect();
 		String result = sb.toString();
-		// log.info(result);
+		//System.out.println(result);
 
 		// =======이 밑에 부터는 json에서 데이터 파싱해 오는 부분이다=====//
 		// Json parser를 만들어 만들어진 문자열 데이터를 객체화

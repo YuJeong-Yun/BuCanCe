@@ -68,13 +68,15 @@ public class MemberController {
 				HttpSession session) throws Exception {
 			//session.setAttribute("kakao", "kakao");
 			
-			scri.setKeyword((String) session.getAttribute("id"));
+			String id = (String) session.getAttribute("id");
+			
+			scri.setKeyword(id);
 			// 글 정보를 가지고 오기
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(scri);
 			
-			// 일반회원, SNS 회원 구별
-			if(session.getAttribute("kakao") != null) {
+			// 일반회원, SNS 회원 구별(sns회원 -> id 영역에 이메일 저장)
+			if(id.indexOf("@") != -1) {
 				pageMaker.setTotalCount(service.getSNSThumbCount((String) session.getAttribute("id")));
 				model.addAttribute("thumbList", service.getSNSThumbList(scri));
 				
@@ -97,7 +99,7 @@ public class MemberController {
 		public String delThumb(HttpSession session, @RequestParam("num") int num) throws Exception {
 			service.deleteThumb(num,(String) session.getAttribute("id"));
 			
-			return "redirect:/favorite";
+			return "redirect:/member/favorite";
 		}
 		
 		// http://localhost:8088/member/insert
