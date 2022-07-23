@@ -51,9 +51,6 @@
         <div class="canvas-close">
             <i class="icon_close"></i>
         </div>
-        <div class="search-icon  search-switch">
-            <i class="icon_search"></i>
-        </div>
         <div class="header-configure-area">
             <div class="language-option">
                 <img src="${pageContext.request.contextPath}/resources/img/flag.jpg" alt="">
@@ -69,7 +66,7 @@
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="${pageContext.request.contextPath }/member/index">NOTICE</a>
+                <li class="active"><a href="${pageContext.request.contextPath }/main">NOTICE</a>
                    <ul class="dropdown">
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
@@ -160,67 +157,8 @@
         <div class="top-nav">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <ul class="tn-left">
-                            <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-                            <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="tn-right">
-                            <div class="top-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </div>
                             
-<!-- 로그인 / 회원가입 / 로그아웃 -->
 
-<%
-
-	if(id==null){
-%>
-	<div id="login">
-	<a href="/member/login">LOGIN</a> | 
-	<a href="/member/insert">JOIN</a>
-	</div>
-	
-	<%	
-	} else if(id.equals("admin")){
-		%>
-			<div id="login">
-			관리자님 안녕하세요.
-			<a href="/admin/profitChart">사이트관리</a>
-			<a href="/member/logout">LOGOUT</a>
-			</div>
-
-<%	
-	}else { %>
-	
-	<div id="login">
-	<%=id%>님 로그인 중입니다!!
-	<a href="/member/mypage?id=<%=id %>">MYPAGE</a>
-	<a href="/member/logout">LOGOUT</a>
-	</div>
-
-<%	
-	}
-%>
-	
-<!-- 로그인 / 회원가입 / 로그아웃 -->
-
-                            <a href="#" class="bk-btn">Booking Now</a>
-                            <div class="language-option">
-                                <img src="${pageContext.request.contextPath}/resources/img/flag.jpg" alt="">
-                                <span>EN <i class="fa fa-angle-down"></i></span>
-                                <div class="flag-dropdown">
-                                    <ul>
-                                        <li><a href="#">Zi</a></li>
-                                        <li><a href="#">Fr</a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -231,8 +169,8 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="./index.html">
-                                <img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="">
+                            <a href="/main">
+                                <img src="${pageContext.request.contextPath}/resources/img/Bucance-logo.png" alt="">
                             </a>
                         </div>
                     </div>
@@ -240,21 +178,13 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-					                <li class="active"><a href="${pageContext.request.contextPath }/member/index">NOTICE</a>
-					                   <ul class="dropdown">
-					                        <li><a href="#">1</a></li>
-					                        <li><a href="#">2</a></li>
-					                        <li><a href="#">3</a></li>
-					                        <li><a href="#">4</a></li>
-					                    </ul>
-					                </li>
 					                <li><a>TOUR</a>
 						                <ul class="dropdown">
 					                        <li><a href="/board/tourMap">관광지도</a></li>
 					                        <li><a href="/board/tourList?t_category=0&addr=all">모두보기</a></li>
 					                    </ul> 
 					                </li>
-					                <li><a href="./about-us.html">HOTEL</a>
+					                <li><a href="#">HOTEL</a>
 						                <ul class="dropdown">
 					                        <li><a href="${pageContext.request.contextPath }/accomodation/roomList">인기숙소</a></li>
 					                        <li><a href="${pageContext.request.contextPath }/accomodation/roomReList">예약내역</a></li>
@@ -270,10 +200,47 @@
 					                        <li><a href="#">4</a></li>
 					                    </ul>
 					                </li>
+					                <li class="active"><a href="${pageContext.request.contextPath }/member/mypage">MYPAGE</a></li>
 					             </ul>
                             </nav>
                             <div class="nav-right search-switch">
-                                <i class="icon_search"></i>
+<!-- 로그인 / 회원가입 / 로그아웃 -->
+
+<%
+
+	if(id==null){
+%>
+
+
+
+	 <div id="btn-group">
+	 <button type="button" class="w-btn w-btn-indigo" onclick="location.href='/member/login'">LOGIN</button>
+	</div>
+	
+	
+	
+	<%	
+	} else if(id.equals("admin")){
+		%>
+			<div id="login">
+			관리자님 안녕하세요.
+			<a href="/admin/profitChart">사이트관리</a>
+	 <button type="button" class="w-btn w-btn-indigo" onclick="location.href='/member/logout'">LOGOUT</button>
+		<!-- 	<a href="/member/logout">LOGOUT</a> -->
+			</div>
+<%	
+	}else { %>
+	
+	<div id="login">
+	<%=id%>님 반갑습니다
+	 <button type="button" class="w-btn w-btn-indigo" onclick="location.href='/member/logout'">LOGOUT</button>
+	</div>
+
+<%	
+	}
+%>
+	
+<!-- 로그인 / 회원가입 / 로그아웃 -->
                             </div>
                         </div>
                     </div>

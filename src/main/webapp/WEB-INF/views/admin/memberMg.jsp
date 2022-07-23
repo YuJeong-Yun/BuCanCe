@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<jsp:include page="../include/header.jsp" />
+<jsp:include page="../include/headerAdmin.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.min.css" type="text/css">	
@@ -33,7 +33,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">관리자 DashBoard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">회원관리</h1>
                     </div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -134,7 +134,4 @@
 </script>
 
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/admin/profitChart.js"></script>   	   									
-<script src="${pageContext.request.contextPath}/resources/js/admin/vipInfo.js"></script>   									
 <jsp:include page="../include/footer.jsp" />

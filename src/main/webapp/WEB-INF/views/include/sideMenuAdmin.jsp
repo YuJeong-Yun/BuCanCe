@@ -19,7 +19,6 @@
                   <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                   <span>회원관리</span></a>
             </li>
-            <li>
      
         </ul>
         <!-- End of Sidebar -->     
