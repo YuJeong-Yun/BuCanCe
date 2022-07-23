@@ -110,11 +110,4 @@ public class AdminDAOImpl implements AdminDAO{
 	public void delMem(MemberVO vo) {
 		 session.delete(NAMESPACE+".delMem",vo);
 	}
-	
-	
-	
-	
-	
-	
-	
 }

@@ -59,10 +59,12 @@
 				$('#filterBtn').empty();
 					
 					let btnTag = '';
-					btnTag += "<input type='button' value='구독회원만 보기' class='w-btn w-btn-indigo' onclick='periodMems();'>";
-					btnTag += "<input type='button' value='모두보기' class='w-btn w-btn-indigo' onclick='pmMems();'>";
+					btnTag += "<span id='onlyPm' class='periodSpan' onclick='periodMems();'><a>구독회원만 보기</a></span>";
+					btnTag += "<span id='allMem' class='periodSpan' onclick='pmMems();'><a>모두보기</a></span>";
 				
 					$('#filterBtn').append(btnTag);
+					document.getElementById('allMem').style.color = "#025ce2";
+					document.getElementById('allMem').style.fontWeight = "bold";
 					
 				$.ajax({
 					url : "/adminRest/pmMembers?date="+date,
@@ -112,12 +114,15 @@
 				$('tbody').empty();
 				$('tfoot').empty();
 				$('#filterBtn').empty();
+				
 					
 					let btnTag = '';
-					btnTag += "<input type='button' value='구독회원만 보기' class='w-btn w-btn-indigo' onclick='periodMems();'>";
-					btnTag += "<input type='button' value='모두보기' class='w-btn w-btn-indigo' onclick='pmMems();'>";
+					btnTag += "<span id='onlyPm' class='periodSpan' onclick='periodMems();'><a>구독회원만 보기</a></span>";
+					btnTag += "<span id='allMem' class='periodSpan' onclick='pmMems();'><a>모두보기</a></span>";
 				
 					$('#filterBtn').append(btnTag);
+					document.getElementById('onlyPm').style.color = "#025ce2";
+					document.getElementById('onlyPm').style.fontWeight = "bold";
 					
 				$.ajax({
 					url : "/adminRest/periodMems?date="+date,
