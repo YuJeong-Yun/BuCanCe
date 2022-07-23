@@ -13,3 +13,4 @@ $(function() {
 		location.href = "/board/tourSearch?keyword="+keyword+"&addr="+addr+"&t_category="+t_category;		
 	});
 });
+

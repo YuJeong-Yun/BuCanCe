@@ -96,7 +96,7 @@
 						<a href="/board/infoDetail?num=${vo.num}&page=${scri.page}&perPageNum=${scri.perPageNum}&t_category=${vo.t_category}&addr=${scri.addr }">
 						<img src="${vo.thumbnail }" alt=""></a>
 						<div class="info">
-							<h4>${vo.title }</h4>
+							<h4 id="title">${vo.title }</h4>
 							<div>
 								<i class="fa fa-hand-pointer-o" aria-hidden="true"></i>${vo.totalCnt }
 								<i class="fa fa-commenting-o" aria-hidden="true"></i>${vo.commentCnt }
@@ -107,17 +107,14 @@
 				</div>
 			</c:forEach>
 		</div>
-			<div id="paging" style="text-align: center; padding-top: 20px;">
+			<div id="paging">
 			<c:if test="${not empty pageMaker }">
 					<c:if test="${pageMaker.prev}">
 						<a href="tourList${pageMaker.makeSearch(pageMaker.startPage - 1)}&t_category=${param.t_category}&addr=${param.addr}">이전</a>
 					</c:if>
-
-					<c:forEach begin="${pageMaker.startPage}"
-						end="${pageMaker.endPage}" var="idx">
-						<a href="tourList${pageMaker.makeSearch(idx)}&t_category=${param.t_category}&addr=${param.addr}">${idx}</a>
+					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx" step="1">
+				<a class ="${param.page eq idx }" href="tourList${pageMaker.makeSearch(idx)}&t_category=${param.t_category}&addr=${param.addr}">${idx}</a>
 					</c:forEach>
-
 					<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 						<a href="tourList${pageMaker.makeSearch(pageMaker.endPage + 1)}&t_category=${param.t_category}&addr=${param.addr}">다음</a>
 					</c:if>

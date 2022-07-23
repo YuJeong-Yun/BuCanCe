@@ -39,26 +39,26 @@ public class BoardServiceImpl implements BoardService {
 
 		//글 번호에 해당 되는 페이지 상세보기
 		@Override
-		public BoardVO getTour(int num) throws Exception {
+		public BoardVO getTour(int num){
 			BoardVO vo = dao.getTour(num);
 			return vo;
 		}	
 		
 		// 조회수
 		@Override
-		public void updateBoardCount(Integer num) throws Exception {
+		public void updateBoardCount(Integer num){
 			dao.modBoardCnt(num);
 		}
 		
 		//게시물 목록 조회
 		@Override
-		public List<BoardVO> getList(SearchCriteria scri) throws Exception {
+		public List<BoardVO> getList(SearchCriteria scri) {
 			return dao.getList(scri);
 		}
 		
 		// 게시물 정렬 목록 조회
 		@Override
-		public List<BoardVO> alignList(SearchCriteria scri) throws Exception {
+		public List<BoardVO> alignList(SearchCriteria scri){
 			
 			if(scri.getAddr().equals("all"))
 				return dao.getAlignList(scri);
@@ -248,7 +248,7 @@ public class BoardServiceImpl implements BoardService {
 
 	// 게시물 총 갯수
 	@Override
-	public int countList(SearchCriteria scri) throws Exception {
+	public int countList(SearchCriteria scri){
 		
 		if(scri.getAddr().equals("all"))
 			return dao.getCountList(scri);
@@ -288,13 +288,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int countListAddr(SearchCriteria scri) throws Exception {
+	public int countListAddr(SearchCriteria scri){
 		
 		return dao.getCountListAddr(scri);
 	}
 
 	@Override
-	public List<BoardVO> getListAddr(SearchCriteria scri) throws Exception {
+	public List<BoardVO> getListAddr(SearchCriteria scri){
 		
 		return dao.getListAddr(scri);
 	}

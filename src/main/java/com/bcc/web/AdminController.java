@@ -25,7 +25,7 @@ public class AdminController {
 
 	// 차트 & 프리미엄 회원 조회 창으로 이동
 	@RequestMapping(value = "/profitChart", method = RequestMethod.GET)
-	public String profitChartGET(Model model) {
+	public String profitChartGET(Model model) throws Exception{
 		model.addAttribute("totalMem", service.getTotalMem());
 		model.addAttribute("totalPmMem", service.getTotalPmMem());
 		model.addAttribute("totalComment", service.getTotalComment());
@@ -36,7 +36,7 @@ public class AdminController {
 
 	// 회원 목록
 	@RequestMapping(value = "/memberMg", method = RequestMethod.GET)
-	public String allWebMemberGET(Model model) {
+	public String allWebMemberGET(Model model) throws Exception{
 		model.addAttribute("mg", service.getAllWebMem());
 		model.addAttribute("kakao", service.getAllSnsMem());
 
@@ -45,12 +45,12 @@ public class AdminController {
 
 	// 회원 삭제
 	@RequestMapping(value = "/withdrawal", method = RequestMethod.GET)
-	public String deleteMemberGET() {
+	public String deleteMemberGET() throws Exception{
 		return "/admin/memberMg";
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String deletMemberPOST(HttpSession session, MemberVO vo) {
+	public String deletMemberPOST(HttpSession session, MemberVO vo) throws Exception{
 		service.delMem(vo);
 		session.invalidate();
 
