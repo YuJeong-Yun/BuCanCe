@@ -145,10 +145,8 @@ public class BoardController {
 				session.setAttribute("upFlag", "0");
 			}
 		}
-
 		model.addAttribute("vo", service.getTour(num));
 		model.addAttribute("scri", scri);
-
 		// 댓글리스트
 		List<CommentVO> commentList = commentservice.readComment(num);
 		model.addAttribute("commentList", commentList);

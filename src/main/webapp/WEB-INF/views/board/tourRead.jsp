@@ -66,10 +66,8 @@
 					<p class="f-para">${vo.contents }</p>
 				</div>
 				<div id="btn_group">
-				<!-- 마이페이지 찜목록에서 넘어올 경우 목록버튼 안보이게함 -->
-				<c:if test="${param.t_category != 3 }">
-				<button type="button" id="list_btn" class="w-btn w-btn-indigo">목록</button>
-				</c:if>
+				<!-- 좋아요페이지 또는 글 리스트 페이지로 돌아가기 구분 -->
+				<button type="button" class="w-btn w-btn-indigo" onclick="backToList('${param.addr}');">목록</button>
 				</div>
 				<div class="menu-item">
 					<div class="nav-menu"

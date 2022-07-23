@@ -78,7 +78,7 @@
     
     <select id="getSNSThumbList" resultType="BoardVO">
         select title,thumbnail,num from tourist_spot 
-        where num in (select b_num from thumb where m_id=(select k_number from kakao_table where k_number=#{keyword}))
+        where num in (select b_num from thumb where m_id=(select k_email from kakao_table where k_email=#{keyword}))
         limit #{pageStart}, #{perPageNum}
     </select>
     
@@ -96,7 +96,7 @@
     <select id="getSNSThumbCount" resultType="Integer">
         select count(*)
         from thumb
-        where m_id = (select k_number from kakao_table where k_number=#{id})
+        where m_id = (select k_email from kakao_table where k_email=#{id})
     </select>
     
     <!-- 카카오 로그인 -->
