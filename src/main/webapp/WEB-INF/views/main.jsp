@@ -1,15 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <jsp:include page="include/header.jsp" />
 
-
-<!-- <style>
-.owl-carousel{
-background-position: center center;
-}
-</style> 
- -->
     <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="container">

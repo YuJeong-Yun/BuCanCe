@@ -106,6 +106,10 @@
 					<c:if test="${pageMaker.prev}">
 						<a href="tourList${pageMaker.makeSearch(pageMaker.startPage - 1)}&t_category=${param.t_category}&addr=${param.addr}">이전</a>
 					</c:if>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 02cdc9101f5f8f172f3bf9d5471e3d8e6a292360
 					<c:forEach begin="${pageMaker.startPage}"
 						end="${pageMaker.endPage}" var="idx">
 						<a href="tourList${pageMaker.makeSearch(idx)}&t_category=${param.t_category}&addr=${param.addr}" id="idx${idx }">${idx}</a>
@@ -128,5 +132,4 @@
 <script src="${pageContext.request.contextPath}/resources/js/board/TourList.js"></script>
 <jsp:include page="../include/footer.jsp" />
 
->>>>>>> 54d25621b9689c1a7a246cd78ebc6c4278df7257
 </html>

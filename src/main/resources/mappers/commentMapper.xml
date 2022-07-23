@@ -20,9 +20,7 @@
 	
 	<!-- 댓글 수정 -->
 	<update id="modComment" parameterType="com.bcc.domain.CommentVO">
-		update comment set content
-		=
-		#{content}
+		update comment set content = #{content}
 		where cno = #{cno}
 	</update>
 	
