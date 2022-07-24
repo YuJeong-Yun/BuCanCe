@@ -185,7 +185,8 @@ public class MemberController {
 			// 페이지이동
 			return "/member/mypageForm";
 		}
-		
+
+		// http://localhost:8088/member/login	
 		// http://localhost:8088/member/update
 		// 회원정보 수정
 		@RequestMapping(value = "/update",method = RequestMethod.GET)
@@ -203,15 +204,18 @@ public class MemberController {
 		@RequestMapping(value = "/update", method = RequestMethod.POST)
 		public String updatePOST(HttpSession session, MemberVO vo) throws Exception {
 			
-			String id = (String)session.getAttribute("id");
 			int result = service.updateMember(vo);
+			
+			log.info("vo : " + vo);
+			log.info("result : "+result);
 			
 			if(result != 1) {
 				// 서비스 - 정보 수정동작 호출
-				
+				log.info(" 수정 실패 ");
 				return "redirect:/member/update";
 			}
 			
+			log.info(" 수정 완료 ");
 			// 페이지 이동
 			return "redirect:/member/mypage";
 		}
@@ -258,12 +262,12 @@ public class MemberController {
 			vo.setId((String)session.getAttribute("id"));
 			log.info(vo+"");
 			
-			// 서비스 - 회원삭제동작
-			service.deleteMember(vo);
-			
 			// 서비스 - 삭제회원보관
 			service.storageMember(vo);
 			
+			// 서비스 - 회원삭제동작
+			service.deleteMember(vo);
+						
 			// 회원정보(세션) 초기화
 			session.invalidate();
 			

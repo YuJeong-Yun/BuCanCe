@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberPage.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/memberPage.css" type="text/css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- Daum postcode API -->
@@ -234,15 +234,15 @@ function checkEmail(){
 </script>
 </head>
 
-<body class = "memberBody">
-<div class = "memberInputArea">
+<body>
+<div class = "insert-wrapper">
     	<form action="${pageContext.request.contextPath }/insert" method="post" onsubmit="return checkForm()">
-			<span class = "memberInputGroup"><input type="text" id = "id" name="id" placeholder="아이디" onblur = "checkId()" ></span><span id="checkId1">&nbsp;</span>
-			<span class = "memberInputGroup"><input type ="password" name="pw" id = "pw" placeholder = "비밀번호" onblur="checkPwd()"></span><span id="checkPwd1"> &nbsp;</span>
-			<span class = "memberInputGroup"><input type="password" name="pw2" id ="pw2" placeholder="비밀번호 확인" onblur="checkPwd2()"></span><span id="checkPwd2"> &nbsp;</span>
-			<span class = "memberInputGroup"><input type="text" class = "inputBox" name="user_name"  id = "user_name" onblur="checkName()" placeholder="이름"></span><span id="checkName">&nbsp;</span>
-			<span class = "memberInputGroup"><input type="text" class = "inputBox" name="email"  id = "email" onblur="checkEmail()" placeholder = "이메일"></span><span id="checkEmail">&nbsp;</span>
-			<span class = "memberInputGroup"><input type="text" class = "inputBox" name="tel" id = "tel" onblur="checkMtel()" placeholder =  "전화번호"></span><span id="checkTel">&nbsp;</span>
+			<span><input type="text" id = "id" name="id" placeholder="아이디" onblur = "checkId()" ></span><span id="checkId1">&nbsp;</span>
+			<span><input type ="password" name="pw" id = "pw" placeholder = "비밀번호" onblur="checkPwd()"></span><span id="checkPwd1"> &nbsp;</span>
+			<span><input type="password" name="pw2" id ="pw2" placeholder="비밀번호 확인" onblur="checkPwd2()"></span><span id="checkPwd2"> &nbsp;</span>
+			<span><input type="text" class = "inputBox" name="user_name"  id = "user_name" onblur="checkName()" placeholder="이름"></span><span id="checkName">&nbsp;</span>
+			<span><input type="text" class = "inputBox" name="email"  id = "email" onblur="checkEmail()" placeholder = "이메일"></span><span id="checkEmail">&nbsp;</span>
+			<span><input type="text" class = "inputBox" name="tel" id = "tel" onblur="checkMtel()" placeholder =  "전화번호"></span><span id="checkTel">&nbsp;</span>
 			<input type="text" class="inputBox" name="zip" id = "zip" placeholder = "우편번호"><input type="button" id="search" class="dup" onclick="daumPostcode()" value="우편번호찾기">
 			<label>&nbsp;</label><input type="text" id="address1" name="address1" value="" class="address1" readonly>
 			<label>&nbsp;</label><input type="text" id="address2" name="address2" class="address2" placeholder="상세주소를 입력하세요." required="">
