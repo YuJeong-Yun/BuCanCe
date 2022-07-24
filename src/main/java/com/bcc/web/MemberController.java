@@ -209,6 +209,8 @@ public class MemberController {
 			
 			log.info("result : "+result);
 			
+			log.info("vo : "+vo);
+
 			if(result != 1) {
 				// 서비스 - 정보 수정동작 호출
 				log.info(" 수정 실패 ");
