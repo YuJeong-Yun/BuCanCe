@@ -27,7 +27,18 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 			  <c:if test="${plan.leader eq member.id }">
 				<span class="material-icons-outlined leader">star</span>
 			  </c:if>
-	          <div class="member--profile"><img src="${pageContext.request.contextPath }/resources/img/who.jpg" /></div>
+	          <div class="member--profile">
+			 	<!-- 프로필 있을 경우 -->
+			 	<c:if test="${member.profile ne null }">
+                    <img src="${pageContext.request.contextPath }${member.profile}"
+                    width="60" height="60" style="border-radius : 90px">
+                </c:if>
+                <!-- 프로필 없을 경우 -->
+                <c:if test="${member.profile eq null }">
+                   <img src="${pageContext.request.contextPath }/resources/img/profile/profile1.png"
+                   width="60" height="60" style="border-radius : 90px">
+                </c:if>
+	          </div>
 	          <div class="member--id">${member.id }</div>
 	          <div class="member--name">${member.name }</div>
 	        </li>
