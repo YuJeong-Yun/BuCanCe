@@ -737,7 +737,7 @@ ul, ol {
 	text-align: center;
 	border-radius: 50%;
 	position: absolute;
-	left: -190px;
+	left: 0;
 	top: 50%;
 	-webkit-transform: translateY(-6px);
 	-ms-transform: translateY(-6px);
@@ -752,7 +752,7 @@ ul, ol {
 }
 .testimonial-slider.owl-carousel .owl-nav button.owl-next {
 	left: auto;
-	right: -190px;
+	right: 0;
 }
 .testimonial-slider .ts-item {
 	text-align: center;
