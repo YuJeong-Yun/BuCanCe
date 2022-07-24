@@ -91,8 +91,16 @@
 						<ol class="commentList">
 							<c:forEach items="${commentList}" var="commentList">
 							 <div class="sc-author">
-                                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF5muH6piXfKA2yUyMkJwm0mJq6O4lU-1mFA&usqp=CAU"
+							 	<!-- 프로필 있을 경우 -->
+							 	<c:if test="${commentList.profile ne null }">
+                                   <img src="${pageContext.request.contextPath }${commentList.profile}"
                                    width="60" height="60" style="border-radius : 90px">
+                                </c:if>
+                                <!-- 프로필 없을 경우 -->
+                                <c:if test="${commentList.profile eq null }">
+                                   <img src="${pageContext.request.contextPath }/resources/img/profile/profile1.png"
+                                   width="60" height="60" style="border-radius : 90px">
+                                </c:if>
 								${commentList.writer}님 &nbsp;&nbsp;
 									<fmt:formatDate value="${commentList.regdate}" pattern="yyyy-MM-dd" /> &nbsp;&nbsp;
 									<b><c:if test="${commentList.visit==1}">방문했어요 </c:if>

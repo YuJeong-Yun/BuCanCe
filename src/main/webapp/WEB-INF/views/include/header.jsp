@@ -10,7 +10,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
+    <title>부산 여행은 부캉스</title>
     
     <style type="text/css">
     @import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
@@ -52,48 +52,26 @@
             <i class="icon_close"></i>
         </div>
         <div class="header-configure-area">
-            <div class="language-option">
-                <img src="${pageContext.request.contextPath}/resources/img/flag.jpg" alt="">
-                <span>EN <i class="fa fa-angle-down"></i></span>
-                <div class="flag-dropdown">
-                    <ul>
-                        <li><a href="#">Zi</a></li>
-                        <li><a href="#">Fr</a></li>
-                    </ul>
-                </div>
-            </div>
-            <a href="#" class="bk-btn">Booking Now</a>
+            <a href="#" class="bk-btn">Bucance</a>
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="${pageContext.request.contextPath }/main">NOTICE</a>
-                   <ul class="dropdown">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                    </ul>
-                </li>
-                <li><a href="/board/tourMap">TOUR</a>
+                <li><a href="#">TOUR</a>
 	                <ul class="dropdown">
 	                    <li><a href="/board/tourMap">관광지도</a></li>
                         <li><a href="/board/tourList?t_category=0&addr=all">모두보기</a></li>
 	                    </ul>
 	                </li>
-                <li><a href="./about-us.html">HOTEL</a>
+                <li><a href="#">HOTEL</a>
 	                <ul class="dropdown">
                         <li><a href="${pageContext.request.contextPath }/accomodation/roomList">인기숙소</a></li>
                         <li><a href="${pageContext.request.contextPath }/accomodation/roomReList">예약내역</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
 	                    </ul>
 	                </li>
-                <li><a href="${pageContext.request.contextPath }/tourMap">PLAN</a>
+                <li><a href="#">PLAN</a>
                     <ul class="dropdown">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
+                        <li><a href="${pageContext.request.contextPath }/order/goods">구독권</a></li>
+                        <li><a href="${pageContext.request.contextPath }/plan/planList">여행 계획</a></li>
                     </ul>
                 </li>
             </ul>
@@ -132,7 +110,7 @@
 	}else { %>
 	
 	<div id="login">
-	<%=id%>님 로그인 중입니다!!
+	<%=id%>님 로그인 중입니다!!<br>
 	<a href="/member/mypage?id=<%=id %>">MYPAGE</a>
 	<a href="/member/logout">LOGOUT</a>
 	</div>
@@ -140,16 +118,12 @@
 <%	
 	}
 %>
-
-	
 <!-- 로그인 / 회원가입 / 로그아웃 -->
-
-        <ul class="top-widget">
-            <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-            <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
-        </ul>
     </div>
     <!-- Offcanvas Menu Section End -->
+
+
+
 
     <!-- Header Section Begin -->
     <header class="header-section">
@@ -157,7 +131,6 @@
             <div class="container">
                 <div class="row">
                             
-
                         </div>
                     </div>
                 </div>
@@ -177,26 +150,22 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-					                <li><a>TOUR</a>
+					                <li><a href="#">TOUR</a>
 						                <ul class="dropdown">
-					                        <li><a href="/board/tourMap">관광지도</a></li>
-					                        <li><a href="/board/tourList?t_category=0&addr=all">모두보기</a></li>
+					                        <li><a href="${pageContext.request.contextPath }/board/tourMap">관광지도</a></li>
+					                        <li><a href="${pageContext.request.contextPath }/board/tourList?t_category=0&addr=all">모두보기</a></li>
 					                    </ul> 
 					                </li>
 					                <li><a href="#">HOTEL</a>
 						                <ul class="dropdown">
 					                        <li><a href="${pageContext.request.contextPath }/accomodation/roomList">인기숙소</a></li>
 					                        <li><a href="${pageContext.request.contextPath }/accomodation/roomReList">예약내역</a></li>
-					                        <li><a href="#">3</a></li>
-					                        <li><a href="#">4</a></li>
 						                    </ul>
 						                </li>
-                					<li><a href="${pageContext.request.contextPath }/tourMap">PLAN</a>
+                					<li><a href="#">PLAN</a>
 					                    <ul class="dropdown">
-					                        <li><a href="/order/goods">구독권</a></li>
-					                        <li><a href="/plan/planList">여행 계획</a></li>
-					                        <li><a href="#">3</a></li>
-					                        <li><a href="#">4</a></li>
+					                        <li><a href="${pageContext.request.contextPath }/order/goods">구독권</a></li>
+					                        <li><a href="${pageContext.request.contextPath }/plan/planList">여행 계획</a></li>
 					                    </ul>
 					                </li>
 					                <li class="active"><a href="${pageContext.request.contextPath }/member/mypage">MYPAGE</a></li>
