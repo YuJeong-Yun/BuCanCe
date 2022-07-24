@@ -205,10 +205,12 @@ public class MemberController {
 		public String updatePOST(HttpSession session, MemberVO vo) throws Exception {
 			
 			int result = service.updateMember(vo);
-			
-			log.info("vo : " + vo);
+
 			log.info("result : "+result);
 			
+			log.info("vo : "+vo);
+
+
 			if(result != 1) {
 				// 서비스 - 정보 수정동작 호출
 				log.info(" 수정 실패 ");

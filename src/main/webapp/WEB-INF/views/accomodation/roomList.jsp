@@ -89,7 +89,6 @@
 <br><br><br>
 
   	<div class="loading" >
-				
 					<img src="${pageContext.request.contextPath}/resources/img/acc/loading.gif"  style=" display: block; margin: 0px auto;">				
 				
 				</div>
