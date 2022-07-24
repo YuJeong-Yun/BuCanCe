@@ -453,7 +453,7 @@ ul, ol {
 	top: 52px;
 	width: 100%;
 	height: 2px;
-	background: #dfa974;
+	background: #557cb3;
 	content: "";
 	opacity: 0;
 	-webkit-transition: all 0.3s;
@@ -2061,7 +2061,7 @@ ul, ol {
 		font-size: 13px;
 		font-weight: 700;
 		padding: 16px 28px 15px;
-		background: #dfa974;
+		background: #557cb3;
 		color: #ffffff;
 		text-transform: uppercase;
 		letter-spacing: 2px;
