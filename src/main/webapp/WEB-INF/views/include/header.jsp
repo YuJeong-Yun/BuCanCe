@@ -119,7 +119,6 @@
 	<a href="/member/login">LOGIN</a> | 
 	<a href="/member/insert">JOIN</a>
 	</div>
-	
 	<%	
 	} else if(id.equals("admin")){
 		%>
