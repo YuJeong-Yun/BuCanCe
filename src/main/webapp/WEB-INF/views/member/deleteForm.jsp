@@ -12,7 +12,7 @@
 
   	<fieldset>
   	  <form action="/member/delete" method="post">
-  	  	 비밀번호 : <input type="password" name="pw">
+  	  	 비밀번호 : <input type="password" name="pw"><br>
   	  	 <input type="submit" value="회원탈퇴">
   	  </form>  	
   	</fieldset>
