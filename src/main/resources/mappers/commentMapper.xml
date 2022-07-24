@@ -5,12 +5,11 @@
 <mapper namespace="com.bcc.mapper.CommentMapper">
 	<!-- 댓글 조회 -->
 	<select id="getComment" parameterType="Integer" resultType="CommentVO">
-		SELECT
-		CNO, CONTENT, WRITER,
-		REGDATE, VISIT
-		FROM comment
-		WHERE num = #{num}
-		ORDER BY cno
+		select  a.cno, a.content, a.writer, a.regdate, a.visit,  b.profile
+		from comment a left outer join bcc_member b
+		on a.writer = b.id
+		where a.num = #{num}
+    order by a.cno
 	</select>
 	
 	<!-- 댓글 작성 -->
@@ -33,14 +32,13 @@
 	
 	<!-- 선택된 댓글 조회 -->
 	<select id="getSelectComment" resultType="CommentVO">
-	select num, cno, content, writer, regdate from comment where cno = #{cno}
+		select num, cno, content, writer, regdate from comment where cno = #{cno}
 	</select>
 	
 	<!-- 댓글 수 -->
 	<update id="modCommentCnt" parameterType="int"> 
-	update tourist_spot
-		b set b.commentCnt = (select count(cno) from comment where num =
-		#{num})
+		update tourist_spot b 
+		set b.commentCnt = (select count(cno) from comment where num =	#{num})
 		where b.num = #{num}
 	</update>
 

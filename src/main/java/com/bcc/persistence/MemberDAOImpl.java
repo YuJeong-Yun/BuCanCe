@@ -137,20 +137,20 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void modLicenseUp(String license) {
+	public void modLicenseUp(String id) {
 
 		logger.info(" licenseUp(String license) 호출 ");
 
-		sqlSession.update(NAMESPACE + ".modLicenseUp", license);
+		sqlSession.update(NAMESPACE + ".modLicenseUp", id);
 
 	}
 
 	@Override
-	public void modLicenseDown(String license) {
+	public void modLicenseDown(String id) {
 
 		logger.info(" licenseDown(String license) 호출 ");
 
-		sqlSession.update(NAMESPACE + ".modLicenseDown", license);
+		sqlSession.update(NAMESPACE + ".modLicenseDown", id);
 
 	}
 	// 게시물 목록 조회

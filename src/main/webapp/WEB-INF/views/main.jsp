@@ -369,7 +369,7 @@ background-position: center center;
     		<div class="description-2">
     			<div class="title">부캉스의 회원은 누구나 이용 가능!</div>
     			<button onclick="location.href='${pageContext.request.contextPath}/plan/planList';">플랜 작성하러 가기</button>
-    			<a href="${pageContext.request.contextPath }/member/join" class="no-member">지금 회원 가입하러 가기</a>
+    			<a href="${pageContext.request.contextPath }/member/insert" class="no-member">지금 회원 가입하러 가기</a>
     		</div>
     	</div>
     </section>

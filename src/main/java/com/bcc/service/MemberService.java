@@ -36,10 +36,10 @@ public interface MemberService {
     public int getLicense(String license);
     
     // license UP
-    public void liUp(String license);
+    public void liUp(String id);
     
     // license Down
-	public void liDown(String license);
+	public void liDown(String id);
 
 	// 찜 목록 조회 //
 	public List<BoardVO> getThumbList(SearchCriteria scri) throws Exception;

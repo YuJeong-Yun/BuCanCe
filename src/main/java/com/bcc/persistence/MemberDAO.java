@@ -42,10 +42,10 @@ public interface MemberDAO {
 	public int getLicense(String license);
     
     // license up
-    public void modLicenseUp(String license);
+    public void modLicenseUp(String id);
     
     // license down
-    public void modLicenseDown(String license);
+    public void modLicenseDown(String id);
     
 	// 좋아요 목록 조회
 	public List<BoardVO> getThumbList(SearchCriteria scri) throws Exception;

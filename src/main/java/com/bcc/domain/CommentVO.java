@@ -3,15 +3,18 @@ package com.bcc.domain;
 import java.sql.Date;
 
 public class CommentVO {
-	
-	private Integer num; //글 번호
+
+	private Integer num; // 글 번호
 	private Integer cno; // 댓글 번호
 	private String content; // 댓글 내용
 	private String writer; // 댓글 작성자
-	private Date regdate; //댓글 작성 시간
+	private Date regdate; // 댓글 작성 시간
 	private int visit;
-	
-	public CommentVO() {}
+	private String profile;
+
+	public CommentVO() {
+	}
+
 	public CommentVO(Integer num, int cno, String content, String writer, Date regdate, int visit) {
 		super();
 		this.num = num;
@@ -21,7 +24,6 @@ public class CommentVO {
 		this.regdate = regdate;
 		this.visit = visit;
 	}
-
 
 	public Integer getNum() {
 		return num;
@@ -71,11 +73,18 @@ public class CommentVO {
 		this.visit = visit;
 	}
 
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
 	@Override
 	public String toString() {
 		return "CommentVO [num=" + num + ", cno=" + cno + ", content=" + content + ", writer=" + writer + ", regdate="
-				+ regdate + ", visit=" + visit + "]";
-	} 
-	
-	
+				+ regdate + ", visit=" + visit + ", profile=" + profile + "]";
+	}
+
 }

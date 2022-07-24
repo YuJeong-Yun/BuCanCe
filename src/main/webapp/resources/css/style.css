@@ -453,7 +453,7 @@ ul, ol {
 	top: 52px;
 	width: 100%;
 	height: 2px;
-	background: #dfa974;
+	background: #557cb3;
 	content: "";
 	opacity: 0;
 	-webkit-transition: all 0.3s;
@@ -737,7 +737,7 @@ ul, ol {
 	text-align: center;
 	border-radius: 50%;
 	position: absolute;
-	left: -190px;
+	left: 0;
 	top: 50%;
 	-webkit-transform: translateY(-6px);
 	-ms-transform: translateY(-6px);
@@ -752,7 +752,7 @@ ul, ol {
 }
 .testimonial-slider.owl-carousel .owl-nav button.owl-next {
 	left: auto;
-	right: -190px;
+	right: 0;
 }
 .testimonial-slider .ts-item {
 	text-align: center;
@@ -2061,7 +2061,7 @@ ul, ol {
 		font-size: 13px;
 		font-weight: 700;
 		padding: 16px 28px 15px;
-		background: #dfa974;
+		background: #557cb3;
 		color: #ffffff;
 		text-transform: uppercase;
 		letter-spacing: 2px;
