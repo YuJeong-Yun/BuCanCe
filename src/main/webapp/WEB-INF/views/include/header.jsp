@@ -10,7 +10,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
+    <title>부산 여행은 부캉스</title>
     
     <style type="text/css">
     @import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
