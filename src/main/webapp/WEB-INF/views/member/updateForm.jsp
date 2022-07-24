@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memberPage.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/memberPage.css" type="text/css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
@@ -60,23 +60,26 @@ function liDown(){
 </head>
 <body>
 		<h2>회원정보 수정</h2>
-		
-		<fieldset>
+	<div>
 		<!-- action 속성값이 없는경우 자신의 주소를 호출 -->
-    	<form action="/update?id=<%=id %>" method="post" >
-    	    아이디 : <input type ="text" name="id" value="${memberVO.id }" readonly><br>
-    	    비밀번호 : <input type ="password" name="pw" placeholder="비밀번호를 입력하시오."><br>
-    	    이름 : <input type="text" name="name" value ="${memberVO.name }" readonly><br>
-    	    전화번호 : <input type="text" name="tel" value="${memberVO.tel}" ><br>
-    	    이메일 : <input type="text" name="email" value="${memberVO.email}" ><br>
-    	    구독 상태 : <input type = "hidden" id = "license" name ="license"><span id="checkLicense">&nbsp;</span>
+    	<form action="/member/update?id=<%=id %>" method="post" >
+    	    <label>아이디 : </label>
+    	    <input type ="text" name="id" value="${memberVO.id }" readonly><br>
+    	    <label>비밀번호 : </label>
+    	    <input type ="password" name="pw" placeholder="비밀번호를 입력하시오."><br>
+    	    <label>이름 : </label>
+    	    <input type="text" name="name" value ="${memberVO.name }" readonly><br>
+    	    <label>전화번호 : </label>
+    	    <input type="text" name="tel" value="${memberVO.tel}" ><br>
+    	    <label>이메일 : </label>
+    	    <input type="text" name="email" value="${memberVO.email}" ><br>
+    	    <label>구독 상태 : </label>
+    	    <input type = "hidden" id = "license" name ="license"><span id="checkLicense">&nbsp;</span>
     	    <input type = "button" id = "liOnBtn" onclick = "liUp()" value = "구독하기">
     	    <input type = "button" id = "liOffBtn" onclick = "liDown()" value = "구독취소"><br>
-    	    <input type="submit" value="수정완료" >
-    	</form>    
-    </fieldset>
-		
-		
+    	    <input type ="submit" value="수정완료" >
+    	</form>
+	</div>	
 </body>
 </html>
 
