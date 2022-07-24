@@ -11,7 +11,7 @@
 <body>
 
   	<fieldset>
-  	  <form action="/delete" method="post">
+  	  <form action="/member/delete" method="post">
   	  	 비밀번호 : <input type="password" name="pw">
   	  	 <input type="submit" value="회원탈퇴">
   	  </form>  	

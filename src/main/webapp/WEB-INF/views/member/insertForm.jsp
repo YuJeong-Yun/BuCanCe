@@ -236,11 +236,11 @@ function checkEmail(){
 
 <body class = "memberBody">
 <div class = "memberInputArea">
-    	<form action="${pageContext.request.contextPath }/insert" method="post" onsubmit="return checkForm()">
+    	<form action="${pageContext.request.contextPath }/member/insert" method="post" onsubmit="return checkForm()">
 			<span class = "memberInputGroup"><input type="text" id = "id" name="id" placeholder="아이디" onblur = "checkId()" ></span><span id="checkId1">&nbsp;</span>
 			<span class = "memberInputGroup"><input type ="password" name="pw" id = "pw" placeholder = "비밀번호" onblur="checkPwd()"></span><span id="checkPwd1"> &nbsp;</span>
 			<span class = "memberInputGroup"><input type="password" name="pw2" id ="pw2" placeholder="비밀번호 확인" onblur="checkPwd2()"></span><span id="checkPwd2"> &nbsp;</span>
-			<span class = "memberInputGroup"><input type="text" class = "inputBox" name="user_name"  id = "user_name" onblur="checkName()" placeholder="이름"></span><span id="checkName">&nbsp;</span>
+			<span class = "memberInputGroup"><input type="text" class = "inputBox" name="name"  id = "user_name" onblur="checkName()" placeholder="이름"></span><span id="checkName">&nbsp;</span>
 			<span class = "memberInputGroup"><input type="text" class = "inputBox" name="email"  id = "email" onblur="checkEmail()" placeholder = "이메일"></span><span id="checkEmail">&nbsp;</span>
 			<span class = "memberInputGroup"><input type="text" class = "inputBox" name="tel" id = "tel" onblur="checkMtel()" placeholder =  "전화번호"></span><span id="checkTel">&nbsp;</span>
 			<input type="text" class="inputBox" name="zip" id = "zip" placeholder = "우편번호"><input type="button" id="search" class="dup" onclick="daumPostcode()" value="우편번호찾기">
