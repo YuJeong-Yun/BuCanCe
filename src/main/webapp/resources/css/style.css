@@ -617,7 +617,7 @@ ul, ol {
 	transition: all 0.3s;
 }
 .service-item:hover {
-	background: #dfa974;
+	background: rgb(0, 128, 192);
 }
 .service-item:hover i {
 	color: #ffffff;
@@ -630,7 +630,7 @@ ul, ol {
 }
 .service-item i {
 	display: inline-block;
-	color: #dfa974;
+	color: #425a7d;
 	-webkit-transition: all 0.3s;
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
