@@ -57,7 +57,7 @@ public class MemberController {
 			log.info(" insertGET() 호출 ");
 			log.info(" view 페이지 출력 -> 정보 입력 ");
 			
-			return "/member/index";
+			return "/main";
 		}
 
 		// 찜 목록
@@ -158,7 +158,7 @@ public class MemberController {
 			log.info(" 로그인 성공 ");
 			
 			// 메인페이지로 이동
-			return "redirect:/member/index";
+			return "redirect:/main";
 		}
 		
 		// http://localhost:8088/member/logout
@@ -171,7 +171,7 @@ public class MemberController {
 			session.invalidate();
 			
 			// 페이지이동
-			return "redirect:/member/index";
+			return "redirect:/main";
 		}
 		
 		// http://localhost:8088/member/mypage
@@ -271,7 +271,7 @@ public class MemberController {
 			session.invalidate();
 			
 			// 페이지 이동
-			return "redirect:/member/index";
+			return "redirect:/main";
 		}
 
 	    // 아이디 체크
@@ -313,7 +313,7 @@ public class MemberController {
 	    	// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
 	    	// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.
 
-	    	return "redirect:/member/index";
+	    	return "redirect:/main";
 			
 	    	}
 	    
