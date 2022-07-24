@@ -205,6 +205,7 @@ public class MemberController {
 			
 			int result = service.updateMember(vo);
 			
+			log.info("vo : " + vo);
 			log.info("result : "+result);
 			
 			if(result != 1) {
