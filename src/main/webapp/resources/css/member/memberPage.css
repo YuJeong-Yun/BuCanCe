@@ -132,4 +132,15 @@
 	height: 50px;
 }
 	
+
 /* --------------- 로그인 페이지 -------------- */
+
+/* --------------- 회원가입 페이지 -------------- */
+
+.insert-wrapper {
+	margin :auto;
+	height : 100%;
+	width: 600px;
+	padding: 20px;
+  	text-align: center;
+}

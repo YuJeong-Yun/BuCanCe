@@ -62,7 +62,8 @@ function liDown(){
 		<h2>회원정보 수정</h2>
 	<div>
 		<!-- action 속성값이 없는경우 자신의 주소를 호출 -->
-    	<form action="/member/update?id=<%=id %>" method="post" >
+
+    	<form action="/member/update" method="post" >
     	    <label>아이디 : </label>
     	    <input type ="text" name="id" value="${memberVO.id }" readonly><br>
     	    <label>비밀번호 : </label>
