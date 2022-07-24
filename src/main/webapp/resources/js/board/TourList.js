@@ -59,6 +59,7 @@ function keywordSearch(e) {
 }
 
 
+
 $('#searchBtn').click(function() {
 	let keyword = $('#keywordInput').val();
 	location.href = "/board/tourSearch?keyword=" + keyword + "&addr=" + addr + "&t_category=" + t_category;

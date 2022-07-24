@@ -4,6 +4,7 @@
 <jsp:include page="./include/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css" />
 
+
 <!-- <style>
 .owl-carousel{
 background-position: center center;
@@ -382,4 +383,4 @@ background-position: center center;
 	   	</div>
     </section>
 
-<jsp:include page="./include/footer.jsp" />
+<jsp:include page="include/footer.jsp" />
