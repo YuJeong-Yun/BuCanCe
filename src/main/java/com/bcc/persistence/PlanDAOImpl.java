@@ -23,8 +23,8 @@ public class PlanDAOImpl implements PlanDAO {
 	private static final String NAMESPACE = "com.bcc.mapper.planMapper";
 
 	@Override
-	public void createPlan(PlanVO vo) {
-		sqlSession.insert(NAMESPACE + ".createPlan", vo);
+	public void putPlan(PlanVO vo) {
+		sqlSession.insert(NAMESPACE + ".putPlan", vo);
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class PlanDAOImpl implements PlanDAO {
 	}
 
 	@Override
-	public void modifyTourPlan(PlanVO vo) {
-		sqlSession.update(NAMESPACE + ".modifyTourPlan", vo);
+	public void modTourPlan(PlanVO vo) {
+		sqlSession.update(NAMESPACE + ".modTourPlan", vo);
 	}
 
 	@Override

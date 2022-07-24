@@ -26,14 +26,16 @@ inviteModal.addEventListener('hidden.bs.modal', function(event) {
 	searchInput.value = '';
 });
 
-// 초대하려는 그룹 번호 가져오기
-let grpNum = 0;
-function setGrpNum(num) {
-	grpNum = num;
-}
+
 // 초대 멤버 검색
 function showMember() {
 	let searchID = searchInput.value.trim();
+
+  // 공백만 검색했을 경우
+  if(searchID === '') {
+    alert('검색값을 입력해 주세요.');
+    return;
+  }
 
 	$.ajax({
 		url: path + '/planREST/memberID',
@@ -48,21 +50,20 @@ function showMember() {
 				memberList.removeChild(memberList.firstChild);
 			}
 
-			// 검색 결과 없거나 공백만 검색했을 경우
-			if (item.memberArr.length == 0 || searchID === '') {
+			// 검색 결과 없으면
+			if (item.memberArr.length == 0) {
 				const noResult = document.createElement('li');
 				noResult.innerHTML = '<div>검색 결과가 없습니다.</div>';
 
 				memberList.append(noResult);
 
-				// 검색 결과 있을 경우
+			// 검색 결과 있을 경우
 			} else {
 				// 초대 중인 회원 아이디 배열
 				let invitingIDList = [];
 				item.invitingArr.forEach(member => {
 					invitingIDList.push(member.receiver);
 				});
-				console.log(invitingIDList);
 				// 그룹 회원 아이디 배열
 				let grpMemberIDList = [];
 				item.grpMemberArr.forEach(member => {
@@ -74,7 +75,6 @@ function showMember() {
 					let memberInner =
 						"<div class=member--id>" + item.memberArr[i].id + "</div>" +
 						"<div class=member--name>" + item.memberArr[i].name + "</div>";
-
 
 					// 초대 중인 회원일 경우
 					if (invitingIDList.includes(item.memberArr[i].id)) {
@@ -108,13 +108,13 @@ function inviteMember(event, id) {
 		type: 'post',
 		data: {
 			id: id,
-			grpNum: grp_num
+			grpNum: grpNum
 		},
 		success: function(item) {
 			if (item == 0) {
 				alert('더 이상 초대할 수 없습니다.');
 				return;
-			} else if (item = -1) {
+			} else if (item == -1) {
 				alert('이미 초대중인 회원입니다.');
 				return;
 			}
@@ -132,7 +132,7 @@ function inviteMember(event, id) {
 
 			const addInviteMember = document.createElement('li');
 			let addInviteMemberInner =
-				'<div class="invite-cancle" onclick="inviteCancle(event, ' + grp_num + ',\'' + id + '\');">초대 취소</div>' +
+				'<div class="invite-cancle" onclick="inviteCancle(event, \'' + id + '\');">초대 취소</div>' +
 				'<div class="member--id">' + id + '</div>' +
 				'<div class="member--name">' + item + '</div>';
 
@@ -148,13 +148,13 @@ function inviteMember(event, id) {
 }
 
 // 초대 취소
-function inviteCancle(event, grp_num, id) {
+function inviteCancle(event, id) {
 	if (confirm('초대를 취소하시겠습니까?')) {
 		$.ajax({
 			url: path + '/planREST/inviteCancle',
 			type: 'post',
 			data: {
-				grpNum: grp_num,
+				grpNum: grpNum,
 				id: id
 			},
 			success: function(item) {
@@ -163,7 +163,7 @@ function inviteCancle(event, grp_num, id) {
 				// 이미 초대 수락했을 경우
 				if (item == 1) {
 					alert('이미 상대가 초대를 수락했습니다.');
-					location.href = '/plan/planContent/' + grp_num;
+					location.href = '/plan/planContent/' + grpNum;
 				}
 
 			},
@@ -177,13 +177,12 @@ function inviteCancle(event, grp_num, id) {
 
 //////////////////////////////////////////////// 플랜 삭제 //////////////////////////////////////////////////
 // 플랜 삭제
-function delPlan(event, grp_num) {
+function delPlan(event) {
 	if (confirm("플랜을 삭제하시겠습니까?")) {
 		$.ajax({
-			url: '/planREST/delete/' + grp_num,
+			url: '/planREST/delete/' + grpNum,
 			type: 'post',
 			success: function(data) {
-				event.target.parentElement.remove();
 				alert("삭제를 완료했습니다.");
 
 				location.href = '/plan/planList';

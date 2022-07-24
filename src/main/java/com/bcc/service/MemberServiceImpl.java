@@ -32,6 +32,10 @@ public class MemberServiceImpl implements MemberService{
 		log.info(" 컨트롤러 호출 ");
 		log.info(" memberInsert(vo) 호출 ");
 		
+		// 1-10 랜덤 프로필
+		int profile = (int) (Math.random()*(10)) + 1;
+		vo.setProfile("/resources/img/profile/profile"+profile+".png");
+		System.out.println(vo);
 		dao.putInsertMember(vo);
 		
 		log.info(" DAO 처리 완료 -> 컨트롤러 이동");
@@ -108,18 +112,18 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void liUp(String license) {
+	public void liUp(String id) {
 		try {
-			dao.modLicenseUp(license);
+			dao.modLicenseUp(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void liDown(String license) {
+	public void liDown(String id) {
 		try {
-			dao.modLicenseDown(license);
+			dao.modLicenseDown(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

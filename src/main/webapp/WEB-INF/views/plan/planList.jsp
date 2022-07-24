@@ -175,7 +175,7 @@
 						<!-- 구독권 구매 이동 -->
 						<c:if test="${license eq 'free' }">
 							<p class="f-para">더 많은 플랜을 작성하고 싶다면?</p>
-							<a href="javascript:void(0)" class="buy-subscription">프리미엄	회원으로 업그레이드하기</a>
+							<a href="${pageContext.request.contextPath }/order/goods" class="buy-subscription">프리미엄	회원으로 업그레이드하기</a>
 						</c:if>
 					</div>
 				</div>

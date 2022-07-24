@@ -5,9 +5,34 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|
 Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planWrite.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planWriteModal.css" />
 
 
-
+	<!-- 모달 설명창 띄우기 -->
+	<div id="plan-write-modal">
+	  <div class="modal_body">
+		<div class="testimonial-slider owl-carousel">
+          <div class="ts-item">
+              <img src="${pageContext.request.contextPath }/resources/img/plan/modal1.jpg" alt="설명1" />
+          </div>
+          <div class="ts-item">
+              <img src="${pageContext.request.contextPath }/resources/img/plan/modal2.jpg" alt="설명2" />
+          </div>
+          <div class="ts-item">
+              <img src="${pageContext.request.contextPath }/resources/img/plan/modal3.jpg" alt="설명3" />
+          </div>
+          <div class="ts-item">
+              <img src="${pageContext.request.contextPath }/resources/img/plan/modal4.jpg" alt="설명4" />
+          </div>
+          <div class="ts-item">
+              <img src="${pageContext.request.contextPath }/resources/img/plan/modal5.jpg" alt="설명5" />
+              <button class="btn-close-modal">닫기</button>
+          </div>
+      	</div>
+	
+	  </div>
+	</div>
+	
 
 	<!--그룹 멤버 보여주기 메뉴-->
 	<section class="show-title-btn">
@@ -23,6 +48,37 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	</section>
 
 
+
+	<!-- 관광지/맛집 상세정보 모달 -->
+	<div class="modal fade" id="tourModal" tabindex="-1" aria-labelledby="tourModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <div class="modal-title detail__title" id="tourModalLabel"></div>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <div class="detail__content">
+	        	<img class="content__img" alt="" />
+	        	<div>
+	        		<span class="info">운영시간</span><div class="info-value content__runtime"></div>
+	        	</div>
+	        	<div>
+	        		<span class="info">상세주소</span><div class="info-value content__addr"></div>
+	        	</div>
+	        	<div>
+	        		<span class="info">홈페이지</span><div class="info-value content__homepage"></div>
+	        	</div>
+	        	<div class="content__content"></div>
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary more">더 보러가기</button>
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
   <!--플랜 작성-->
   <section class="make-plan">
     <div class="inner">
@@ -64,9 +120,14 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
               <div class="tour__contents">
                 <ul>
                 	<c:forEach var="tour" items="${tourlist }">
-	                  <li class="tour-item t${tour.num }" onclick="selectTour(event)">
+	                  <li class="tour-item t${tour.num }" onclick="selectTour(event)"  >
 	                    <img src="${tour.thumbnail }" alt="" class="content__img" />
-	                    <div class="content__title">${tour.title }</div>
+	                    <div class="description">
+		                    <div class="content__title">${tour.title }</div>
+		                    <span class="content__detail" data-bs-toggle="modal" data-bs-target="#tourModal" onclick="showDetailInfo(${tour.num})">
+ 								상세정보
+							</span>
+	                    </div>
 	                    <input type="hidden" value="${tour.num }" class="num">
 	                    <input type="hidden" value="${tour.lng }" class="lng">
 	                    <input type="hidden" value="${tour.lat }" class="lat">
@@ -84,16 +145,11 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
               </div>
               <div class="tour__contents hidden">
                 <ul>
-                 	<li>로딩중 ...</li>
-<%--                 	<c:forEach var="hotel" items="${hotellist }"> --%>
-<%-- 	                  <li class="tour-item a${hotel.num }" onclick="selectTour(event)"> --%>
-<%-- 	                    <img src="${hotel.thumbnail }" alt="" class="content__img" /> --%>
-<%-- 	                    <div class="content__title">${hotel.title }</div> --%>
-<%-- 	                    <input type="hidden" value="${hotel.num }" class="num"> --%>
-<%-- 	                    <input type="hidden" value="${hotel.lng }" class="lng"> --%>
-<%-- 	                    <input type="hidden" value="${hotel.lat }" class="lat"> --%>
-<!-- 	                  </li> -->
-<%-- 	                </c:forEach> --%>
+					<li class="loading-icon">로딩중 ... &nbsp;
+						<div class="spinner-border spinner-border-sm" role="status">
+						  <span class="sr-only">Loading...</span>
+						</div>
+					</li>
                 </ul>
                 <ul class="search-result hidden">
                 </ul>
@@ -109,7 +165,12 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
                    <c:forEach var="rest" items="${restlist }">
 	                  <li class="tour-item r${rest.num }" onclick="selectTour(event)">
 	                    <img src="${rest.thumbnail }" alt="" class="content__img" />
-	                    <div class="content__title">${rest.title }</div>
+	                    <div class="description">
+		                    <div class="content__title">${rest.title }</div>
+		                    <span class="content__detail" data-bs-toggle="modal" data-bs-target="#tourModal" onclick="showDetailInfo(${rest.num})">
+ 								상세정보
+							</span>
+	                    </div>
 	                    <input type="hidden" value="${rest.num }" class="num">
 	                    <input type="hidden" value="${rest.lng }" class="lng">
 	                    <input type="hidden" value="${rest.lat }" class="lat">
@@ -123,10 +184,12 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
           </ul>
         </div>
       </div>
+      
+      
 
       <!--일정별 관광지 선택-->
       <ul class="date-plan-container hidden">
-      <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22 -->
+      <!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 			<!-- 저장된 플랜 있을 경우 출력 -->
 			<c:forEach var="plan" items="${planList }">
 				<li class="plan">
@@ -138,7 +201,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 					    <c:forEach var="planItem" items="${plan[1] }">
 						<li class="plan-item draggable" draggable="true">
 						  <div class="tour-wrapper">
-							<img src="${planItem.thumbnail }" alt="" class="content__img">
+								<img src="${planItem.thumbnail }" alt="" class="content__img">
 								<div class="content__title">${planItem.title }</div>
 								<!-- 호텔 -->
 								<c:if test="${planItem.t_category == -1}"> 
@@ -164,7 +227,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 					</div>
 				</li>
 			</c:forEach>
-		<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22 -->
+		<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 		</ul>
 
       <div class="btn-container hidden">
@@ -183,11 +246,12 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	const path = '${pageContext.request.contextPath}';
 	const grp_num = '${num}';
 </script>
-<jsp:include page="../include/footer.jsp"></jsp:include>
 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx4c685864b69a4b71966f8bda89ed2dd3"></script>
-<script defer src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js?v=<%=System.currentTimeMillis() %>"></script>
+<script defer src="${pageContext.request.contextPath }/resources/js/plan/planWriteModal.js"></script>
+<script defer src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js"></script>
+<jsp:include page="../include/footer.jsp"></jsp:include>

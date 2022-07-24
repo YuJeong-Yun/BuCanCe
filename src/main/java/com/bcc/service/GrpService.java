@@ -23,9 +23,6 @@ public interface GrpService {
 	// 회원이 소속된 그룹 정보 저장
 	public void insertGrpMember(PlanMemberVO member);
 
-	// 그룹 초대 수락 리스트에서 제거
-	public void deleteInvitation(GrpAcceptVO vo);
-
 	// 그룹 이름 가져오기
 	public String getGrpName(int num);
 
@@ -49,6 +46,9 @@ public interface GrpService {
 
 	// 초대 취소
 	public Integer inviteCancle(GrpAcceptVO vo);
+	
+	// 초대 리스트에서 제거 (초대 수락했을 때)
+	public void delInvitation(GrpAcceptVO vo);
 
 	// 그룹 회원인지 확인
 	public Integer checkGrpMember(PlanMemberVO vo);

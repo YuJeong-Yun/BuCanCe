@@ -50,18 +50,17 @@ public class MemberController {
 		this.ns = ns;
 	}
 
-	// http://localhost:8088/index
-	// http://localhost:8088/member/index
-		@RequestMapping(value = "/index", method = RequestMethod.GET)
+	// http://localhost:8088/main
+		@RequestMapping(value = "/main", method = RequestMethod.GET)
 		public String indexGET() {
 			log.info(" insertGET() 호출 ");
 			log.info(" view 페이지 출력 -> 정보 입력 ");
 			
-			return "/member/index";
+			return "/main";
 		}
 
 		// 찜 목록
-		// http://localhost:8088/index
+		// http://localhost:8088/main
 		// http://localhost:8088/favorite
 		@RequestMapping(value = "/favorite", method = RequestMethod.GET)
 		public String thumbList(SearchCriteria scri, Model model,
@@ -160,7 +159,7 @@ public class MemberController {
 			log.info(" 로그인 성공 ");
 			
 			// 메인페이지로 이동
-			return "redirect:/member/index";
+			return "redirect:/main";
 		}
 		
 		// http://localhost:8088/member/logout
@@ -173,7 +172,7 @@ public class MemberController {
 			session.invalidate();
 			
 			// 페이지이동
-			return "redirect:/member/index";
+			return "redirect:/main";
 		}
 		
 		// http://localhost:8088/member/mypage
@@ -186,7 +185,8 @@ public class MemberController {
 			// 페이지이동
 			return "/member/mypageForm";
 		}
-		
+
+		// http://localhost:8088/member/login	
 		// http://localhost:8088/member/update
 		// 회원정보 수정
 		@RequestMapping(value = "/update",method = RequestMethod.GET)
@@ -204,15 +204,20 @@ public class MemberController {
 		@RequestMapping(value = "/update", method = RequestMethod.POST)
 		public String updatePOST(HttpSession session, MemberVO vo) throws Exception {
 			
-			String id = (String)session.getAttribute("id");
 			int result = service.updateMember(vo);
+
+			log.info("result : "+result);
 			
+			log.info("vo : "+vo);
+
+
 			if(result != 1) {
 				// 서비스 - 정보 수정동작 호출
-				
+				log.info(" 수정 실패 ");
 				return "redirect:/member/update";
 			}
 			
+			log.info(" 수정 완료 ");
 			// 페이지 이동
 			return "redirect:/member/mypage";
 		}
@@ -259,17 +264,17 @@ public class MemberController {
 			vo.setId((String)session.getAttribute("id"));
 			log.info(vo+"");
 			
-			// 서비스 - 회원삭제동작
-			service.deleteMember(vo);
-			
 			// 서비스 - 삭제회원보관
 			service.storageMember(vo);
 			
+			// 서비스 - 회원삭제동작
+			service.deleteMember(vo);
+						
 			// 회원정보(세션) 초기화
 			session.invalidate();
 			
 			// 페이지 이동
-			return "redirect:/member/index";
+			return "redirect:/main";
 		}
 
 	    // 아이디 체크
@@ -311,7 +316,7 @@ public class MemberController {
 	    	// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
 	    	// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.
 
-	    	return "redirect:/member/index";
+	    	return "redirect:/main";
 			
 	    	}
 	    

@@ -198,7 +198,7 @@
 					+ "&t_category="+t_category
 					+ "&addr="+addr2
 					+ "&cno="
-					+ $(this).attr("data-cno"), "container", "width=500, height=300, resizable= no, scrollbars= no");
+					+ $(this).attr("data-cno"), "container", "width=600, height=400, resizable= no, scrollbars= no");
 		});
 							
 	//댓글 삭제 팝업
