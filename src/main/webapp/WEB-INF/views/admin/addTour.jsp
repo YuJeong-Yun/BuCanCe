@@ -5,8 +5,7 @@
 <jsp:include page="../include/headerAdmin.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.min.css" type="text/css">	
-	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/sb-admin-2.min.css" type="text/css">
 
 	    <div id="wrapper">
 		<jsp:include page="../include/sideMenuAdmin.jsp" />
@@ -31,8 +30,13 @@
                                         <input type="text" class="form-control form-control-user" name="title" placeholder="글제목">
                                 </div>
                                         <textarea cols="5" rows="7" class="form-control form-control-user" id="ta" placeholder="글내용"></textarea>
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" name="exampleInputEmail" placeholder="주소" onclick="findAddr();" readonly>
+                                <div class="form-group row">
+                                	<div class="col-sm-3 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" name="exampleInputEmail" id="addr1" placeholder="구군" onclick="findAddr()" readonly>
+                                    </div>
+                                    <div class="col-sm-9">
+                                    <input type="text" class="form-control form-control-user" name="exampleInputEmail" id="addr2" placeholder="상세주소" onclick="findAddr()" readonly>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                         <input type="text" class="form-control form-control-user" name="exampleInputPassword" placeholder="Password">

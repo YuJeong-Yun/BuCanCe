@@ -5,7 +5,7 @@
             <!-- Sidebar - Brand -->
             <li>
                 <div class="sidebar-brand d-flex align-items-center justify-content-center" id="sideTitle" 
-                onclick="location.href='/member/index';">부캉스</div>
+                onclick="location.href='/main';">부캉스</div>
                 <hr class="sidebar-divider my-0">
             </li>
             

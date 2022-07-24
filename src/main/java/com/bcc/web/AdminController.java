@@ -65,5 +65,12 @@ public class AdminController {
 		
 		return "admin/addTour";
 	}
+	
+	// 관광지 주소 찾기
+	@RequestMapping(value = "/findAddr", method = RequestMethod.GET)
+	public String findAddrGET() {
+		
+		return "admin/findAddr";
+	}
 
 }

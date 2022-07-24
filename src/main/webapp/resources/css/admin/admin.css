@@ -165,3 +165,34 @@
 		resize: none;
 	}
 	
+	
+	#findWrapper {
+		height: 40px;
+		width: 400px;
+		border: 1px solid #1b5ac2;
+		background: #fff;
+		margin: auto;
+		margin-top: 80px;
+	}
+	
+	#findWrapper input {
+		font-size: 16px;
+		width: 325px;
+		padding: 10px;
+		border: 0px;
+		outline: none;
+		float: left;
+	}
+	
+	#findWrapper button {
+		width: 50px;
+		height: 100%;
+		border: 0px;
+		background: #1b5ac2;
+		outline: none;
+		float: right;
+		color: #fff;
+		cursor: pointer;
+	}
+	
+	

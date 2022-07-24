@@ -131,9 +131,9 @@
 	}
 	
 	.info h4 {
-		text-overflow: ellipsis;
 		width: 306px;
 		overflow: hidden;
+		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
 	

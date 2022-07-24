@@ -60,4 +60,11 @@ public class AdminRESTController {
 		return service.getDailyMember();
 	}
 	
+	// 관광지 주소 추가
+	@RequestMapping(value = "/searchAddr", method = RequestMethod.GET)
+	public List searchAddrGET(@RequestParam("title") String title) throws Exception{
+		
+		return service.searchAddr(title);
+	}
+	
 }
