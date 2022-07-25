@@ -2,36 +2,63 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd">
+
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- DataSource객체 -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="url" value="jdbc:mysql://itwillbs5.cafe24.com/itwillbs5" />
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="url"
+			value="jdbc:mysql://itwillbs5.cafe24.com/itwillbs5" />
 		<property name="username" value="itwillbs5" />
 		<property name="password" value="itwillbs8030909" />
 	</bean>
+<<<<<<< HEAD
+	<!-- DataSource객체 -->
+
+=======
 	
+>>>>>>> 4b4bd9e339d47f08f4cd87001f09245f2c8a15bf
 	<!-- sqlSessionFactyroy 객체 (디비연결, mybatis 설정, mapper 연결) -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
-		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+		<property name="configLocation"
+			value="classpath:/mybatis-config.xml"></property>
+		<property name="mapperLocations"
+			value="classpath:mappers/**/*Mapper.xml"></property>
 	</bean>
 	<!-- sqlSessionFactyroy 객체 -->
-	
+
 	<!-- SqlSessionTemplate 객체 (디비연결, 자원해제, 트랜잭션, 쓰레드안전성) -->
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
-		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate"
+		destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 	<!-- SqlSessionTemplate 객체 -->
-	
+
 	<!-- com.itwillbs.persistence 패키지 추가(빈 등록) -->
-	<context:component-scan base-package="com.bcc.persistence" />
-	
+	<context:component-scan
+		base-package="com.bcc.persistence" />
+
 	<!-- com.itwillbs.service 패키지 추가(빈 등록) -->
+<<<<<<< HEAD
 	<context:component-scan base-package="com.bcc.service" />
 	
 </beans>
+=======
+	<context:component-scan
+		base-package="com.bcc.service" />
+		
+	<task:annotation-driven />
+
+</beans>
+>>>>>>> 4c95f915bbd7289c67d8abbdc9037d6c5a31d4a3
