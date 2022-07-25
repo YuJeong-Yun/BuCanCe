@@ -44,10 +44,19 @@ function acceptGrp(event, grp_num) {
 			for (let i = 0; i < data.grpMember.length; i++) {
 				newPlanInner += '<li>';
 
+				// 리더면 별 표시
 				if (data.leader == data.grpMember[i].id) {
 					newPlanInner += '<span class="material-icons-outlined leader">star</span>';
 				}
-				newPlanInner +=
+				newPlanInner += '<div class="member--profile">';
+				// 프로필 있으면 프로필, 없으면 기본 출력
+				if (data.grpMember[i].profile != null) {
+					newPlanInner += '<img src="' + path + data.grpMember[i].profile + '" width="60" height="60" style="border-radius : 90px">';
+				} else {
+					newPlanInner += '<img src="' + path + '/resources/img/profile/profile1.png" width="60" height="60" style="border-radius : 90px">';
+				}
+
+				newPlanInner += '</div>' +
 					'<div class="member--profile"><img src="' + path + '/resources/img/who.jpg" /></div>' +
 					'<div class="member--name">' + data.grpMember[i].id + '</div>' +
 					'<div class="member--name">' + data.grpMember[i].name + '</div>' +
@@ -65,7 +74,7 @@ function acceptGrp(event, grp_num) {
 			} // for
 			// 제일 첫 번째(생성된지 오래된) 플랜일 경우 제일 밑에 추가
 			// 또는 현재 플랜 하나도 없을 경우 그냥 추가
-			if (grp_num < plans[plans.length - 1].className.substring(3) || plans.length == 0) {
+			if (plans.length == 0 || grp_num < plans[plans.length - 1].className.substring(3)) {
 				planContainer.append(newPlan);
 			}
 
@@ -214,7 +223,7 @@ function inviteMember(event, id) {
 			grpNum: grpNum
 		},
 		success: function(item) {
-		console.log(item);
+			console.log(item);
 			if (item == 0) {
 				alert('더 이상 초대할 수 없습니다.');
 				return;
