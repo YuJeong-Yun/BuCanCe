@@ -13,10 +13,10 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="breadcrumb-text">
-					<h2>방 상세정보</h2>
+					<h2 style="font-family: 'Jeju Hallasan' ">방 상세정보</h2>
 					<div class="bt-option">
 						<a
-							href="${pageContext.request.contextPath }/accomodation/roomList">숙소선택</a>
+							href="${pageContext.request.contextPath}/accomodation/roomList">숙소선택</a>
 						<span>방 상세정보</span>
 					</div>
 				</div>
@@ -72,7 +72,7 @@
 					<!-- 숙소에 대한 상세 정보를 보여주는 영역 시작 -->
 					<div class="rd-text">
 						<div class="rd-title">
-							<h3>${roomdetail.get(0).room_title}</h3>
+							<h3 style="font-family: 'Jeju Hallasan' ">${roomdetail.get(0).room_title}</h3>
 							<div class="rdt-right">
 								<div class="rating">${roomdetail.get(0).room_star}
 									<i class="icon_star"></i> <i class="icon_star"></i> <i
@@ -184,7 +184,7 @@
 					<h3>
 						<a
 							href="${pageContext.request.contextPath}/accomodation/roomPrice?bno=${bno}"
-							id="reserveId"><b>요금정보</b></a>
+							id="reserveId" style="color: black; font-family: 'Jeju Hallasan' "><b>요금정보</b></a>
 					</h3>
 					<form
 						action="${pageContext.request.contextPath}/accomodation/roomReserve"

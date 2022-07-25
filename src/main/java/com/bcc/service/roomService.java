@@ -60,8 +60,7 @@ public interface roomService {
 	////환불 아임포트동작
 	public String payRefund(roomPayVO vo2) throws MalformedURLException, IOException, org.json.simple.parser.ParseException;
 
-	//숙소예약정보들 (관리자)
-	public List<roomPayVO> getReseAdmin();
+	
 	
 	
 	

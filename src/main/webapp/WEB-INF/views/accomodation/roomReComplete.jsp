@@ -15,7 +15,7 @@
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="contact-text">
-						<h2>결제완료</h2>
+						<h2 style="font-family: 'Jeju Hallasan' ">결제완료</h2>
 						<p>이용해주셔서 감사합니다!</p>
 						<div class="room-item">
 							<div class="ri-text"

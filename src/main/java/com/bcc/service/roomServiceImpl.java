@@ -90,7 +90,7 @@ public class roomServiceImpl implements roomService {
 //				log.info(obj+"");
 			roomList.add(obj);
 		}
-		System.out.println(" roomList : " + roomList);
+//		System.out.println(" roomList : " + roomList);
 
 		return roomList;
 	}
@@ -133,8 +133,8 @@ public class roomServiceImpl implements roomService {
 		String[] titleArr = rs.transTitle(room_title, rs.getPlace_name());
 		String title = rs.getPlace_name();
 		// 제목검색
-		log.info(titleArr + "");
-		log.info(title + "");
+//		log.info(titleArr + "");
+//		log.info(title + "");
 
 		// 지역을 선택하지않은 경우
 		if (rs.getArea().equals("favorite")) {
@@ -234,7 +234,7 @@ public class roomServiceImpl implements roomService {
 
 		}
 
-		System.out.println(" roomSearchList : " + roomList);
+//		System.out.println(" roomSearchList : " + roomList);
 
 		return roomList;
 	}
@@ -269,13 +269,11 @@ public class roomServiceImpl implements roomService {
 			// JSONObject에 키:값 형태로 데이터 저장
 			JSONObject obj = new JSONObject();
 
-//			obj.put("room_pic", room_pic.get(i).attr("data-original"));
 			obj.put("room_pic", room_pic.get(i).attr("data-src"));
 
 			detailList0.add(obj);
 
 		}
-		System.out.println(" detailList : " + detailList0);
 
 		return detailList0;
 	}
@@ -321,7 +319,6 @@ public class roomServiceImpl implements roomService {
 			detailList.add(obj);
 
 		}
-		System.out.println(" detailList : " + detailList);
 
 		return detailList;
 	}
@@ -364,7 +361,6 @@ public class roomServiceImpl implements roomService {
 			detailList2.add(obj2);
 
 		}
-		System.out.println(" detailList2 : " + detailList2);
 
 		return detailList2;
 	}
@@ -395,7 +391,6 @@ public class roomServiceImpl implements roomService {
 			detailList3.add(obj);
 
 		}
-		System.out.println(" detailList3 : " + detailList3);
 
 		return detailList3;
 	}
@@ -428,7 +423,6 @@ public class roomServiceImpl implements roomService {
 			detailList4.add(obj);
 
 		}
-		System.out.println(" detailList4 : " + detailList4);
 
 		return detailList4;
 	}
@@ -457,7 +451,6 @@ public class roomServiceImpl implements roomService {
 			obj.put("room_infoa", room_infoa.get(i).text());
 			detailList5.add(obj);
 		}
-		System.out.println(" detailList5 : " + detailList5);
 
 		return detailList5;
 	}
@@ -508,7 +501,7 @@ public class roomServiceImpl implements roomService {
 		arr.add(obj3);
 		arr.add(obj4);
 
-		log.info(arr + "");
+//		log.info(arr + "");
 
 		return arr;
 	}
@@ -517,7 +510,7 @@ public class roomServiceImpl implements roomService {
 	@Override
 	public JSONArray reserveRoom(String bno, roomDate rd, String ano) throws ParseException {
 
-		log.info("크롤링 처리불러오기");
+//		log.info("크롤링 처리불러오기");
 		// Jsoup를 이용해서 크롤링 - 여기어때
 		String url = "https://www.goodchoice.kr/product/detail?ano=66035&adcno=1&sel_date=2022-07-01&sel_date2=2022-07-02";
 
@@ -544,7 +537,7 @@ public class roomServiceImpl implements roomService {
 		url = url.replace(cc, ch_ano);
 		// 주소의 날짜값을 바꿔주는 구문
 
-		log.info(url);
+//		log.info(url);
 
 		// 컴퓨터시각 오늘
 		Calendar cal = Calendar.getInstance();
@@ -569,13 +562,13 @@ public class roomServiceImpl implements roomService {
 		long diff = secondDate.getTime() - firstDate.getTime();
 		TimeUnit time = TimeUnit.DAYS;
 		long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
-		System.out.println("받은날짜값 차이 : " + diffrence);
+//		System.out.println("받은날짜값 차이 : " + diffrence);
 		// 선택한 날짜값 차이를 구하는 구문
 
-		log.info("오늘날짜 : " + today);
-		log.info("내일날짜 : " + tomorrow);
-		log.info("체크인날짜 : " + rd.getSel_date());
-		log.info("체크아웃날짜 : " + rd.getSel_date2());
+//		log.info("오늘날짜 : " + today);
+//		log.info("내일날짜 : " + tomorrow);
+//		log.info("체크인날짜 : " + rd.getSel_date());
+//		log.info("체크아웃날짜 : " + rd.getSel_date2());
 
 		Document doc = null; // Document에 페이지의 전체 소스가 저장됨
 
@@ -660,7 +653,7 @@ public class roomServiceImpl implements roomService {
 //				log.info(obj+"");
 			roomList.add(obj);
 		}
-		System.out.println(" roomList : " + roomList);
+//		System.out.println(" roomList : " + roomList);
 
 		return roomList;
 	}
@@ -691,7 +684,7 @@ public class roomServiceImpl implements roomService {
 	public String SearchPayId() {
 		String a = dao.getMaxReRoom();
 
-		log.info("a = " + a);
+//		log.info("a = " + a);
 
 		// a 문자부분
 		String b = "bccReNum";
@@ -709,7 +702,7 @@ public class roomServiceImpl implements roomService {
 
 		String d = b + (c + 1);
 
-		log.info(d);
+//		log.info(d);
 
 		return d;
 	}
@@ -813,9 +806,6 @@ public class roomServiceImpl implements roomService {
 
 	}
 
-	@Override
-	public List<roomPayVO> getReseAdmin() {
-		return dao.getReRoomInfoAdmin();
-	}
+	
 
 }

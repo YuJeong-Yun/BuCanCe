@@ -52,10 +52,6 @@ public class accomodationController {
 		log.info(" roomListGET() 호출 ");
 		log.info(" 전체숙소목록 정보 ");
 
-		// service에서 저장한 크롤링 정보들을 JSONArray형태로 저장
-//		JSONArray roomList = service.getRoomList();
-
-//		model.addAttribute("roomList", roomList);
 	}
 
 	// 숙소목록을 지역선택이나 검색을 통해 원하는 목록만 보여줌
@@ -67,17 +63,7 @@ public class accomodationController {
 		log.info(" 입력한 정보를 바탕으로 숙소항목을 보여줌 ");
 		log.info("rs : " + rs);
 		log.info("검색어 : " + rs.getPlace_name());
-		// service에서 입력한 정보를 바탕으로 원하는 크롤링 정보만 보여줌
-//		JSONArray roomList = service.getRoomSearchList(rs);
-
-//		model.addAttribute("rs", rs);
-//		model.addAttribute("roomList", roomList);
-
-		// roomList.jsp에서 선택한 select 정보를 저장
-//		model.addAttribute("select_area", rs.getArea());
-
-		// roomList.jsp에서 input태그에 입력한 정보를 저장
-//		model.addAttribute("select_place", rs.getPlace_name());
+	
 
 	}
 
@@ -114,8 +100,8 @@ public class accomodationController {
 		String cc = bno.substring(ano_idx + 4, bno.length());
 		model.addAttribute("ano", cc);
 
-		log.info("bno =" + bno);
-		log.info("ano =" + cc);
+//		log.info("bno =" + bno); 크롤링된 사이트주소
+//		log.info("ano =" + cc);  크롤링에사용된값
 
 	}
 
@@ -126,11 +112,12 @@ public class accomodationController {
 	public void roomPriceGET(Model model, @RequestParam("bno") String bno) throws Exception {
 
 		log.info("roomPriceGET() 호출");
-
+		log.info("가격 상세페이지 호출");
+		
 		// bno라는 크롤링할 사이트를 사용
 		JSONArray roomPrice = service.getRoomPrice(bno);
 
-		log.info("roomPrice : "+ roomPrice);
+//		log.info("roomPrice : "+ roomPrice);
 		
 		
 		model.addAttribute("roomPrice", roomPrice);
@@ -147,8 +134,8 @@ public class accomodationController {
 		log.info("roomReserveGET() 호출");
 
 		// 날짜정보가져오기
-		log.info(rd.getSel_date());
-		log.info(rd.getSel_date2());
+//		log.info(rd.getSel_date());
+//		log.info(rd.getSel_date2());
 
 		// 크롤링할 사이트 주소가져오기
 		model.addAttribute("bno", bno);
@@ -163,7 +150,7 @@ public class accomodationController {
 
 		// 해당날짜와 숙소에 해당하는 크롤링정보들을 가져옴
 		JSONArray roomReserve = service.reserveRoom(bno, rd, ano);
-		System.out.println("roomReserve : " + roomReserve);
+//		log.info("roomReserve : " + roomReserve);
 		model.addAttribute("roomReserve", roomReserve);
 
 		// 이전페이지의 숙소이름저장
@@ -179,8 +166,6 @@ public class accomodationController {
 		log.info("roomPaymentGET() 호출");
 		log.info("대실예약페이지 호출");
 
-		log.info("vo : " + vo);
-//		log.info(vo.getRoom_title());			
 		model.addAttribute("vo", vo);
 
 		// 숙박주문번호 설정
@@ -222,9 +207,6 @@ public class accomodationController {
 
 		log.info("roomPayment2GET() 호출");
 		log.info("숙박예약페이지 호출");
-
-		log.info("vo : " + vo);
-//		log.info(vo.getRoom_title());			
 
 		// 숙박 주문번호 설정
 		String accId = service.SearchPayId();
@@ -268,8 +250,6 @@ public class accomodationController {
 
 		log.info("roomPayDBGET() 호출");
 
-		log.info("vo : " + vo);
-
 		service.insertRoomPay(vo);
 
 		model.addAttribute("vo", vo);
@@ -288,7 +268,6 @@ public class accomodationController {
 		roomPayVO vo = service.getRoomPayInfo(accId);
 
 		// 해당 예약정보
-		model.addAttribute("vo", vo);
 
 	}
 
@@ -340,7 +319,6 @@ public class accomodationController {
 		// 환불고유아이디
 		String rfId = service.refundRoom();
 
-		log.info("vo : " + vo);
 
 		model.addAttribute("vo", vo);
 		model.addAttribute("rfId", rfId);
@@ -372,45 +350,12 @@ public class accomodationController {
 			service.putRoomRefund(vo);
 		}
 
-		log.info("vo : " + vo);
 
 		model.addAttribute("vo", vo);
 
 	}
 	
-	// 관리자페이지
-	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
-	// http://localhost:8088/accomodation/accMg
-	@RequestMapping(value = "/accMg", method = RequestMethod.GET)
-	public void accMgGET(Model model) throws Exception {
-
-		log.info(" accMgGET() 호출 ");
-		log.info(" 관리자 예약목록 호출 ");
-
-		//예약정보들 호출
-		List<roomPayVO> roomMg = service.getReseAdmin();
-			
-		log.info(roomMg+"");
-			
-		model.addAttribute("roomMg",roomMg);
-
-	}
 	
-	// 관리자페이지
-	// 크롤링한 숙소정보들를 테이블 형태로 보여줌
-	// http://localhost:8088/accomodation/accMg
-	@RequestMapping(value = "/reCancle", method = RequestMethod.POST)
-	public String reCanclePost(Model model,@RequestParam("id") String id) throws Exception {
-
-		log.info(" reCanclePost() 호출 ");
-		log.info(" 관리자 예약취소 동작 ");
-
-		//예약취소로 변경
-//		service.modReCancel(id);
-				
-				
-		return "accomodation/accMg";
-	}
 	
 	
 	

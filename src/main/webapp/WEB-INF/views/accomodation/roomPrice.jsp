@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>숙소 가격 페이지</h2>
+                        <h2 style="font-family: 'Jeju Hallasan' ">숙소 가격 페이지</h2>
                         <div class="bt-option">
                           <a href="<%=request.getHeader("REFERER")%>">뒤로가기</a>
                          
