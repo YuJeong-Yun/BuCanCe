@@ -39,7 +39,7 @@ public interface GrpService {
 	public List<GrpAcceptVO> getInvitingList(int grp_num);
 
 	// 그룹에 멤버 초대
-	public Integer inviteMember(GrpAcceptVO vo);
+	public String inviteMember(GrpAcceptVO vo);
 
 	// 회원 이름 가져오기
 	public String getMemberName(String id);
