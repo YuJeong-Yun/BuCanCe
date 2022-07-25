@@ -300,6 +300,15 @@ public class BoardServiceImpl implements BoardService {
 		return dao.getListAddr(scri);
 	}
 
+	@Override
+	public List getHotList() {
+		List hotList = new ArrayList();
+		hotList.add(dao.getHotList(0));
+		hotList.add(dao.getHotList(1));
+		
+		return hotList;
+	}
 
+	
 
 }

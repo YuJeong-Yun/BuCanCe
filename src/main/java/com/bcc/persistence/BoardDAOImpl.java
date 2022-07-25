@@ -143,4 +143,12 @@ public class BoardDAOImpl implements BoardDAO {
 		return session.selectList(namespace + ".getListAddr", scri);
 	}
 
+	@Override
+	public List<BoardVO> getHotList(int t_category) {
+		
+		
+		return session.selectList(namespace+".getHotList",t_category);
+	}
+	
+	
 }

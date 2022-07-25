@@ -48,5 +48,8 @@ public interface BoardDAO {
 	public int getCountListAddr(SearchCriteria scri);
 
 	public List<BoardVO> getListAddr(SearchCriteria scri);
+	
+	// Hot 게시물 가져오기
+	public List<BoardVO> getHotList(int t_category);
 
 }

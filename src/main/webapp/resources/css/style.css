@@ -115,7 +115,7 @@ ul, ol {
 }
 .section-title span {
 	font-size: 14px;
-	color: #dfa974;
+	color: rgb(0, 128, 192);
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -738,7 +738,7 @@ ul, ol {
 	border-radius: 50%;
 	position: absolute;
 	left: 0;
-	top: 50%;
+	top: 32%;
 	-webkit-transform: translateY(-6px);
 	-ms-transform: translateY(-6px);
 	transform: translateY(-6px);
@@ -757,6 +757,9 @@ ul, ol {
 .testimonial-slider .ts-item {
 	text-align: center;
 }
+.testimonial-slider .ts-item img{
+	cursor: pointer;
+}
 .testimonial-slider .ts-item p {
 	font-size: 20px;
 	color: #707079;
@@ -772,11 +775,6 @@ ul, ol {
 .testimonial-slider .ts-item .ti-author .rating i {
 	color: #f5b917;
 	font-size: 16px;
-}
-.testimonial-slider .ts-item .ti-author h5 {
-	font-size: 20px;
-	color: #19191a;
-	display: inline-block;
 }
 /*---------------------
   Blog and Event

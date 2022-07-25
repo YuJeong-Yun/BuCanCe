@@ -43,4 +43,7 @@ public interface BoardService {
 	public int countListAddr(SearchCriteria scri); 
 	public List<BoardVO> getListAddr(SearchCriteria scri);
 	
+	// 메인페이지 인기글
+	public List getHotList();
+	
 }
