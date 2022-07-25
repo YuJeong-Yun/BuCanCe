@@ -261,14 +261,14 @@ public class accomodationController {
 	@RequestMapping(value = "/roomReComplete", method = RequestMethod.GET)
 	public void roomReCompleteGET(Model model, @RequestParam("accId") String accId) throws Exception {
 
-		log.info("accId : " + accId);
-		// 결제내역
 		log.info("roomReCompleteGET() 호출");
+		// 결제내역
+		log.info("accId : " + accId);
 
 		roomPayVO vo = service.getRoomPayInfo(accId);
 
 		// 해당 예약정보
-
+		model.addAttribute("vo", vo);
 	}
 
 	
