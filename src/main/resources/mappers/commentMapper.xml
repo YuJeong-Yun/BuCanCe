@@ -9,6 +9,7 @@
 		from comment a left outer join bcc_member b
 		on a.writer = b.id
 		where a.num = #{num}
+    order by a.cno
 	</select>
 	
 	<!-- 댓글 작성 -->
@@ -33,11 +34,11 @@
 	<select id="getSelectComment" resultType="CommentVO">
 		select num, cno, content, writer, regdate from comment where cno = #{cno}
 	</select>
+	
 	<!-- 댓글 수 -->
 	<update id="modCommentCnt" parameterType="int"> 
 		update tourist_spot b 
-		set b.commentCnt = (select count(cno) from comment where num =
-		#{num})
+		set b.commentCnt = (select count(cno) from comment where num =	#{num})
 		where b.num = #{num}
 	</update>
 
