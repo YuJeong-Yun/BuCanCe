@@ -548,7 +548,7 @@ function selectTour(event) {
 	// 일정 칸에 선택한 관광지 추가
 	const firstChild = event.target.firstElementChild;
 	const img = firstChild.src;
-	const title = firstChild.nextElementSibling.innerText;
+	const title = firstChild.nextElementSibling.firstElementChild.innerText;
 	const num = firstChild.nextElementSibling.nextElementSibling.value;
 	const lng = firstChild.nextElementSibling.nextElementSibling.nextElementSibling.value;
 	const lat = firstChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value;
