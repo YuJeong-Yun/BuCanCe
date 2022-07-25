@@ -20,37 +20,37 @@ public class PreOrderServiceImpl implements PreOrderService {
 
 	// 결제
 	@Override
-	public void insertOrder(PreOrderVO pvo) {
+	public void putOrder(PreOrderVO pvo) {
 		
 		System.out.println(" service.insertOrder 호출");
 
-		dao.insertOrder(pvo);
+		dao.putOrder(pvo);
 
 	}
 
 	// 재결제(정기결제)
 	@Override
-	public void ReOrder(PreOrderVO rvo) {
+	public void putReOrder(PreOrderVO rvo) {
 		log.info(" service.ReOrder 호출");
 
-		dao.ReOrder(rvo);
+		dao.putReOrder(rvo);
 
 	}
 
 	// 빌링키 가져오기
 	@Override
-	public String getKey(String id) {
-		log.info(" service.getKey 호출");
+	public String getKey(PreOrderVO vo) {
+		log.info(" service.getKey 호출!");
 
-		return dao.getKey(id);
+		return dao.getKey(vo);
 	}
 
 	// 결제 정지 (빌링키 삭제)
 	@Override
-	public void deleteKey(PreOrderVO dvo) {
-		log.info(" service.deleteKey 호출");
+	public void delKey(PreOrderVO dvo) {
+		log.info(" service.delKey 호출");
 
-		dao.deleteKey(dvo);
+		dao.delKey(dvo);
 
 	}
 }

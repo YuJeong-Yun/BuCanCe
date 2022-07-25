@@ -11,17 +11,6 @@ public class PreOrderVO {
 	private Date next_order_date; //다음결제일
 	private String PCD_PAYER_ID; //빌링키
 	
-	public PreOrderVO(String pCD_PAY_OID, String pCD_PAYER_NAME, Date create_date, Date license_deadline,
-			Date next_order_date, String pCD_PAYER_ID) {
-		super();
-		PCD_PAY_OID = pCD_PAY_OID;
-		PCD_PAYER_NAME = pCD_PAYER_NAME;
-		this.create_date = create_date;
-		this.license_deadline = license_deadline;
-		this.next_order_date = next_order_date;
-		PCD_PAYER_ID = pCD_PAYER_ID;
-	}
-	
 	@Override
 	public String toString() {
 		return "PreOrderVO [PCD_PAY_OID=" + PCD_PAY_OID + ", PCD_PAYER_NAME=" + PCD_PAYER_NAME + ", create_date="
