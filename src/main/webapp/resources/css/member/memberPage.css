@@ -102,8 +102,8 @@
 	margin: 5px auto;
 	padding: 10px;
 	border: 1px solid #000000;
-	max-width: 460px;
-	width: 460px;
+	max-width: 360px;
+	width: 360px;
 	height: 50px;
 }
 
@@ -111,15 +111,15 @@
 	background-color: #AFDDFA;
 	margin: 10px auto;
 	border: 1px solid #000000;
-	max-width: 460px;
-	width: 460px;
+	max-width: 360px;
+	width: 360px;
 	height: 50px;
 }
 
 #snsBtn {
 	margin: 10px auto;
-	max-width: 460px;
-	width: 460px;
+	max-width: 360px;
+	width: 360px;
 	height: 50px;
 }
 
@@ -127,15 +127,15 @@
 	background-color: #FFFFFF;
 	margin: 20px auto;
 	border: 1px solid #000000;
-	max-width: 460px;
-	width: 460px;
+	max-width: 360px;
+	width: 360px;
 	height: 50px;
 }
 	
 
 /* --------------- 로그인 페이지 -------------- */
 
-/* --------------- 회원가입 페이지 -------------- */
+/* -------------- 회원가입 페이지 -------------- */
 
 .insert-wrapper {
 	margin :auto;
@@ -144,3 +144,30 @@
 	padding: 20px;
   	text-align: center;
 }
+
+.insertbox {
+	margin: 5px auto;
+	padding: 10px;
+	border: 1px solid #000000;
+	max-width: 400px;
+	width: 400px;
+	height: 50px;
+}
+
+.addrbox {
+	margin: 5px auto;
+	padding: 10px;
+	border: 1px solid #000000;
+	max-width: 340px;
+	width: 340px;
+	height: 50px;
+}
+
+.adrBtn {
+	margin: 10px 0px 10px 10px;
+	max-width: 50px;
+	width: 50px;
+	
+}
+
+/* -------------- 회원가입 페이지 -------------- */

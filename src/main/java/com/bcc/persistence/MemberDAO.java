@@ -22,6 +22,9 @@ public interface MemberDAO {
 	
 	// 회원정보 삭제
 	public void delMember(MemberVO vo);
+	
+	// 삭제 전 확인
+    public int delCheck(MemberVO vo);
 
 	// 회원정보 보관
 	public void putStorageMember(MemberVO vo);
@@ -37,6 +40,12 @@ public interface MemberDAO {
 	
 	// id 중복 검사
     public int getIdCheck(String id);
+    
+	// tel 중복 검사
+    public int getTelCheck(String tel);
+    
+	// email 중복 검사
+    public int getEmailCheck(String email);
     
 	// 라이센스 조회
 	public int getLicense(String license);
