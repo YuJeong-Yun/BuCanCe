@@ -22,7 +22,7 @@
 					<div class="breadcrumb-text" >
 						<h2 style="font-family: 'Jeju Hallasan' ">숙소 선택</h2>
 						<div class="bt-option">
-							<a href="${pageContext.request.contextPath}/index">Home</a> 
+							<a href="${pageContext.request.contextPath}/main">Home</a> 
 							<span>숙소 선택</span> 
 						</div></div></div></div>
 			<br><br><br>
