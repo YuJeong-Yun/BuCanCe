@@ -149,6 +149,13 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return session.selectList(namespace+".getHotList",t_category);
 	}
+
+	@Override
+	public int putBoard(BoardVO vo) {
+		
+		return session.insert(namespace+".putBoard",vo);
+	}
+	
 	
 	
 }

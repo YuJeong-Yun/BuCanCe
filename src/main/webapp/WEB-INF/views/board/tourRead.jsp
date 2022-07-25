@@ -15,7 +15,7 @@
 				</div>
 				<div class="rd-text">
 					<div class="rd-title">
-						<h3 style="font-family: 'NanumSquareBold' !important;">${vo.title }
+						<h3>${vo.title }
 						</h3>
 					</div>
 					<table id="infos">
@@ -187,6 +187,7 @@
 	const t_category = '${vo.t_category}';
 	const title = '${vo.title}';
 	const addr = '${vo.addr}';
+	const addr_full = '${vo.addr_full}';
 	const addr2 = '${param.addr}';
 	const lat = '${vo.lat}';
 	const lng = '${vo.lng}';

@@ -1,6 +1,7 @@
 package com.bcc.web;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -9,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bcc.domain.BoardVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.service.AdminService;
+import com.bcc.service.BoardService;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -22,6 +25,9 @@ public class AdminController {
 
 	@Inject
 	private AdminService service;
+	
+	@Inject
+	private BoardService boardService;
 
 	// 차트 & 프리미엄 회원 조회 창으로 이동
 	@RequestMapping(value = "/profitChart", method = RequestMethod.GET)
@@ -72,5 +78,15 @@ public class AdminController {
 		
 		return "admin/findAddr";
 	}
+	
+	@RequestMapping(value = "/writeBoard", method = RequestMethod.POST)
+	public String writeBoard(RedirectAttributes rttr, BoardVO vo, HttpServletRequest request) {
+		
+		//log.info(vo+"");
+		int result = boardService.putBoard(vo);
+		
+		return "redirect:/admin/addTour?result="+result;
+	}
+	
 
 }

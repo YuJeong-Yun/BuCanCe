@@ -12,6 +12,10 @@
 		<input type="text" placeholder="검색어를 입력해주세요." id="title">
 		<button onclick="searchAddr();">검색</button>
 	</div>
+	<div id="tableWrapper">
+		<table id="resultTable">
+		</table>
+	</div>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/admin/addTour.js"></script>

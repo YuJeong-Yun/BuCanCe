@@ -195,4 +195,79 @@
 		cursor: pointer;
 	}
 	
+	#noData {
+		margin-top: 2em;
+	}
 	
+	#resultTable {
+	  border-collapse: separate;
+	  border-spacing: 1px;
+	  text-align: center;
+	  line-height: 1.5;
+	  margin: 2em auto;
+	}
+	
+	#resultTable th {
+	  width: 155px;
+	  padding: 10px;
+	  font-weight: bold;
+	  vertical-align: top;
+	  color: #fff;
+	  background: #1b5ac2;
+	}
+	
+	#resultTable td {
+	  width: 155px;
+	  padding: 10px;
+	  vertical-align: top;
+	  border-bottom: 1px solid #ccc;
+	  background: #eee;
+	}
+	
+	#resultTable td:nth-child(2), #resultTable td:nth-child(3) {
+		cursor: pointer;
+	}
+	
+	#resultTable td:nth-child(2):hover, #resultTable td:nth-child(3):hover {
+		font-weight: bold;
+	}
+	
+	#menu {
+	  cursor: pointer;
+	  z-index: 999;
+	  position: absolute;
+	  background-color: #4e73df;
+	  width: 996px;
+	  color: #fff;
+	  border-radius: 1rem !important;
+	  padding: 0.8em;
+	  font-size: 15px;
+	}
+	
+	#sideUl {
+		width: 100%;
+		height: 100%;
+		display: none;
+		margin-top: 5em;
+	}
+	
+	#sideUl li {
+		list-style: none;
+		padding: 7px;
+		color: black;
+		font-size: 1.1em;
+		cursor: pointer;
+	}
+	
+	#sideUl li:hover {
+		font-weight: bold;
+	}
+	
+	#upload {
+		margin-left: 3em;
+		margin-bottom: 3em;
+	}
+	
+	#remove {
+		margin-left: 0.7em;
+	}

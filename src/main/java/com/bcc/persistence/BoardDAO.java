@@ -51,5 +51,8 @@ public interface BoardDAO {
 	
 	// Hot 게시물 가져오기
 	public List<BoardVO> getHotList(int t_category);
+	
+	// 관광지 게시글 추가
+	public int putBoard(BoardVO vo);
 
 }

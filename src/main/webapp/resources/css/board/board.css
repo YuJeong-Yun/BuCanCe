@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-@import
-	url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
-
-@import
-	url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css")
-	;
-
 	#wrap {
 		width: 490px;
 		text-align: center;
@@ -79,7 +72,7 @@
 	border: solid 2px #1E90FF;
 	border-radius: 5px;
 	font-size: 16px;
-	resize: both;
+	resize: none;
 }
 
 #reviewForm input {
@@ -136,7 +129,6 @@
 	
 	}
 	
-	
 	.infoImage {
 		width: 360px;
 		height: 350px;
@@ -152,7 +144,7 @@
 		margin-bottom: 3em;
 		border-bottom: 1px solid #e5e5e5;
 		padding-bottom: 2em;
-		font-family: 'NanumSquare' !important;
+		font-family: 'Noto Sans KR', sans-serif;
 
 	}
 	
@@ -167,17 +159,13 @@
 		border: 1px solid #ebebeb;
 		border-top: none;
 		padding: 24px 24px 30px 28px;
-		font-family: 'NanumSquare' !important;
+		font-family: 'Noto Sans KR', sans-serif;
 	}
 	
 	.room-item .info h4 {
 		color: #19191a;
 		margin-bottom: 17px;
-		font-family: 'NanumSquare' !important;
-	}
-	
-	.nanumFont {
-		font-family: 'NanumSquare' !important;
+		font-family: 'Noto Sans KR', sans-serif;
 	}
 	
 	#blogList * {
@@ -199,7 +187,6 @@
 	#pmSort {
 		margin-top: 1em;
 	} 
-	
 	.w-btn {
 	    position: relative;
 	    border: none;
@@ -318,80 +305,6 @@
 	}
 
 
-.infoImage {
-	width: 360px;
-	height: 350px;
-	margin-right: 1em;
-}
-
-.weatherPic {
-	width: 150px;
-	margin-right: 1em;
-}
-
-.info {
-	margin-bottom: 3em;
-	border-bottom: 1px solid #e5e5e5;
-	padding-bottom: 2em;
-	font-family: 'NanumSquare' !important;
-}
-
-.room-item .info {
-	border: 1px solid #ebebeb;
-	border-top: none;
-	padding: 24px 24px 30px 28px;
-	font-family: 'NanumSquare' !important;
-}
-
-.room-item .info h4 {
-	color: #19191a;
-	margin-bottom: 17px;
-	font-family: 'NanumSquare' !important;
-}
-
-.nanumFont {
-	font-family: 'NanumSquare' !important;
-}
-
-#blogList * {
-	font-family: 'Noto Sans KR', sans-serif;
-}
-
-#infos {
-	margin-top: 2em;
-}
-
-#infos tr {
-	margin: 2em 0;
-}
-
-#total {
-	font-style: italic;
-}
-
-#pmSort {
-	margin-top: 1em;
-}
-
-.w-btn {
-	position: relative;
-	border: none;
-	display: inline-block;
-	padding: 10px 10px;
-	border-radius: 15px;
-	font-family: 'Noto Sans KR', sans-serif;
-	text-decoration: none;
-	font-weight: 600;
-	transition: 0.25s;
-	width: 130;
-	height: 30;
-	margin-right: 0.5em;
-}
-
-.w-btn-indigo {
-	background-color: royalblue;
-	color: #fff;
-}
 
 #profitBtn {
 	-webkit-appearance: none;
