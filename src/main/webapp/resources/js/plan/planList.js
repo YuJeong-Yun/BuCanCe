@@ -57,7 +57,6 @@ function acceptGrp(event, grp_num) {
 				}
 
 				newPlanInner += '</div>' +
-					'<div class="member--profile"><img src="' + path + '/resources/img/who.jpg" /></div>' +
 					'<div class="member--name">' + data.grpMember[i].id + '</div>' +
 					'<div class="member--name">' + data.grpMember[i].name + '</div>' +
 					'</li>';
@@ -335,6 +334,10 @@ function delPlan(event, grp_num) {
 					plans[0].firstElementChild.style.backgroundColor = '#6e94a9';
 					plans[0].firstElementChild.style.color = '#fff';
 					plans[0].firstElementChild.style.cursor = 'pointer';
+					// 방장이면 초대 아이콘 출력
+					if (plans[0].firstElementChild.nextElementSibling.querySelector('li.invite-member') != null) {
+						plans[0].firstElementChild.nextElementSibling.querySelector('li.invite-member').style.display = 'block';
+					}
 				}
 
 			},

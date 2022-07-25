@@ -207,7 +207,10 @@
 			planButtons[i].style.backgroundColor = '#777';
 			planButtons[i].style.color = '#ddd';
 			planButtons[i].style.cursor = 'not-allowed';
-			
+			// 초대 버튼 있으면 숨기기
+			if(planButtons[i].nextElementSibling.querySelector('li.invite-member') != null) {
+				planButtons[i].nextElementSibling.querySelector('li.invite-member').style.display = 'none'; 
+			}
 		} // for
 	};
 	
