@@ -10,9 +10,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>예약내역</h2>
+                        <h2 style="font-family: 'Jeju Hallasan' ">예약내역</h2>
                         <div class="bt-option">
-                            <a href="${pageContext.request.contextPath}/index">Home</a>
+                            <a href="${pageContext.request.contextPath}/main">Home</a>
                             <span>예약내역</span>
                             
                             <c:if test="${UserPayList == '[]'}">

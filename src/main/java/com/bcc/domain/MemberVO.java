@@ -14,7 +14,6 @@ public class MemberVO {
 	private Timestamp regdate;
 	private int license;
 	private String profile;
-
 	public String getId() {
 		return id;
 	}

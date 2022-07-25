@@ -5,11 +5,11 @@ let slides = document.querySelector('.slides');  //div영역을 가져옴
 let slideImg = document.querySelectorAll('.slides li img'); //사진들을 불러옴
 currentIdx = 0; //현재 인덱스값
 //slideCount = 25; //현재목록갯수
-slideCount = slideImg.length/4; //현재목록갯수
+slideCount = Math.floor(slideImg.length/4); //현재목록갯수
 prev = document.querySelector('.prev'); //이전 버튼
 next = document.querySelector('.next'); //다음 버튼
 slideWidth = 600; //슬라이드이미지 넓이
-slideMargin = 200; //슬라이드 끼리의 마진값
+slideMargin = 0; //슬라이드 끼리의 마진값
 
 
 makeClone(); // 처음이미지와 마지막 이미지 복사 함수
@@ -37,7 +37,7 @@ next.addEventListener('click', function () {
   //다음 버튼 눌렀을때
   if (currentIdx <= slideCount - 1) {
     //슬라이드이동
-    slides.style.left = -(currentIdx + 1) * (slideWidth) + 'px';
+    slides.style.left = -(currentIdx + 2) * (slideWidth) + 'px';
 //    slides.style.transition = `${0.5}s ease-out`; //이동 속도
   }
   if (currentIdx === slideCount - 1) {

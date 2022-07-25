@@ -14,7 +14,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-text">
-						<h2>결제 페이지</h2>
+						<h2 style="font-family: 'Jeju Hallasan' ">결제 페이지</h2>
 						<div class="bt-option">
 							<a href="<%=request.getHeader("REFERER")%>">예약항목 선택</a>
 							<span>결제 페이지</span>

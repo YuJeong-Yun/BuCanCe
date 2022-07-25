@@ -32,7 +32,6 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public Integer getMemberCount() {
-		// DAO-sql 호출
 
 		Integer cnt = sqlSession.selectOne(NAMESPACE + ".getCountMember");
 
@@ -83,6 +82,15 @@ public class MemberDAOImpl implements MemberDAO {
 
 	}
 	
+	
+	@Override
+	public int delCheck(MemberVO vo) {
+		
+		int cnt = sqlSession.selectOne(NAMESPACE + ".delCheck", vo);
+
+		return cnt;
+	}
+
 	@Override
 	public void putStorageMember(MemberVO vo) {
 
@@ -122,6 +130,22 @@ public class MemberDAOImpl implements MemberDAO {
 	public int getIdCheck(String id) {
 
 		int cnt = sqlSession.selectOne(NAMESPACE + ".getIdCheck", id);
+
+		return cnt;
+	}
+	
+	@Override
+	public int getTelCheck(String tel) {
+		
+		int cnt = sqlSession.selectOne(NAMESPACE + ".getTelCheck", tel);
+
+		return cnt;
+	}
+
+	@Override
+	public int getEmailCheck(String email) {
+		
+		int cnt = sqlSession.selectOne(NAMESPACE + ".getEmailCheck", email);
 
 		return cnt;
 	}
