@@ -759,6 +759,16 @@ ul, ol {
 }
 .testimonial-slider .ts-item img{
 	cursor: pointer;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.testimonial-slider .ts-item img:hover{
+	cursor: pointer;
+	-webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 .testimonial-slider .ts-item p {
 	font-size: 20px;
