@@ -673,7 +673,7 @@ let detailTourNum;
 let detailT_category;
 // 더 보러가기 클릭
 function moreInfo() {
-	location.href = path + '/board/infoDetail?num=' + detailTourNum + '&age=1&perPageNum=12&t_category=' + detailT_category + '&addr=all';
+	window.open(path + '/board/infoDetail?num=' + detailTourNum + '&age=1&perPageNum=12&t_category=' + detailT_category + '&addr=all');
 }
 
 
