@@ -1,8 +1,10 @@
 package com.bcc.web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.inject.Inject;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -139,18 +141,18 @@ public class MemberController {
 		}
 		
 		@RequestMapping(value = "/login",method = RequestMethod.POST)
-		public String loginPOST(MemberVO vo,HttpSession session) throws Exception {
+		public String loginPOST(MemberVO vo,HttpSession session, HttpServletRequest request) throws Exception {
 			log.info("loginPOST() 호출");
 	
 			// db동작 호출을 위해서 서비스 동작을 호출 - loginCheck()
 			MemberVO resultVO = service.loginCheck(vo);
 			System.out.println(resultVO);
-			
+
 			// 로그인 실패 - 페이지 이동(로그인페이지)
 			if(resultVO == null) {
-				log.info("로그인 정보 없음! 페이지 이동 ");
-				
-				return "redirect:/member/login";
+				request.setAttribute("msg", "로그인 실패!!!");
+				request.setAttribute("url", "/member/login");
+				return "/member/alert";
 			}
 			
 			// 로그인 성공 - 아이디를 세션객체에 저장
@@ -178,9 +180,19 @@ public class MemberController {
 		// http://localhost:8088/member/mypage
 		// 마이페이지
 		@RequestMapping(value = "/mypage",method = RequestMethod.GET)
-		public String mypageGET(MemberVO vo,HttpSession session) throws Exception {
+		public String mypageGET(MemberVO vo, HttpSession session, HttpServletRequest request) throws Exception {
 			log.info(" mypageGET() 호출 ");
 			log.info(" view 페이지 출력 -> 정보 입력 ");
+			
+			// db동작 호출을 위해서 서비스 동작을 호출 - loginCheck()
+			String id = (String)session.getAttribute("id");
+			
+			if(id == null) {
+				log.info("로그인 정보 없음! 페이지 이동");
+				request.setAttribute("msg", "로그인이 필요합니다.");
+				request.setAttribute("url", "/member/login");
+				return "/member/alert";
+			}
 			
 			// 페이지이동
 			return "/member/mypageForm";
@@ -209,7 +221,6 @@ public class MemberController {
 			log.info("result : "+result);
 			
 			log.info("vo : "+vo);
-
 
 			if(result != 1) {
 				// 서비스 - 정보 수정동작 호출
@@ -258,23 +269,33 @@ public class MemberController {
 		
 		// 회원정보 삭제(탈퇴)
 		@RequestMapping(value = "/delete", method = RequestMethod.POST)
-		public String deletePOST(HttpSession session,MemberVO vo) throws Exception {
+		public String deletePOST(HttpSession session,MemberVO vo, HttpServletRequest request) throws Exception {
 			log.info(" deletePOST() 호출 ");
 			//log.info(pw);
 			vo.setId((String)session.getAttribute("id"));
 			log.info(vo+"");
 			
-			// 서비스 - 삭제회원보관
-			service.storageMember(vo);
+			int cnt = service.delCheck(vo);
+			log.info("cnt : "+ cnt);
 			
-			// 서비스 - 회원삭제동작
+			if(cnt != 1) {
+				
+				log.info("로그인 정보 없음! 페이지 이동");
+				request.setAttribute("msg", "비밀번호가 다릅니다.");
+				request.setAttribute("url", "/member/delete");
+				return "/member/alert";
+				
+			}
+			
+			service.storageMember(vo);
 			service.deleteMember(vo);
-						
-			// 회원정보(세션) 초기화
+			
 			session.invalidate();
 			
-			// 페이지 이동
-			return "redirect:/main";
+			request.setAttribute("msg", "탈퇴가 완료되었습니다.");
+			request.setAttribute("url", "/main");
+			
+			return "/member/alert";
 		}
 
 	    // 아이디 체크
@@ -290,6 +311,29 @@ public class MemberController {
 	        return cnt;
 	    }
 
+	    
+	    @PostMapping("/telCheck")
+	    @ResponseBody
+	    public int telCheck(@RequestParam("tel") String tel) throws Exception {
+	        log.info("userTelCheck 진입");
+	        log.info("전달받은 tel:"+tel);
+	        int tCnt = service.telCheck(tel);
+	        log.info("확인 결과:"+tCnt);
+	        
+	        return tCnt;
+	    }
+	    
+	    @PostMapping("/emailCheck")
+	    @ResponseBody
+	    public int emailCheck(@RequestParam("email") String email) throws Exception {
+	        log.info("userEmailCheck 진입");
+	        log.info("전달받은 email:"+email);
+	        int eCnt = service.emailCheck(email);
+	        log.info("확인 결과:"+eCnt);
+	        
+	        return eCnt;
+	    }
+	    
 		// http://localhost:8088/member/login
 		// http://localhost:8088/member/kakao_login
 	    @RequestMapping(value="/kakao_login", method=RequestMethod.GET)

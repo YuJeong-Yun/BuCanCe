@@ -3,6 +3,7 @@ package com.bcc.service;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -119,11 +120,12 @@ public class PlanServiceImpl implements PlanService {
 			return null;
 		}
 		
-		// 날짜끼리는 +, 날짜-관광지는 :, 관광지 끼리는 @ 로 구분
-		// 날짜별로 나눠서 allPlanArr에 담음
-		String[] allPlanArr = (String[]) vo.getTour_plan().split("\\+");
+		// 날짜끼리는 +, 날짜-관광지는 >, 관광지 끼리는 @ 로 구분
+		// 날짜별로 나눠서 allPlanArr, allPlanExtraArr에 담음
+		String[] allPlanArr = (String[]) vo.getTour_plan().split("[+]");
+		
 		// 날짜별로 이미지*타이틀*lat*lng 정보 담을 배열
-		String[] allPlanExtraArr = (String[]) vo.getTour_plan_extra().split("\\+");
+		String[] allPlanExtraArr = (String[]) vo.getTour_plan_extra().split("[+]");
 
 		// [날짜, [플랜,플랜, ..]], [날짜, [플랜, 플랜, ..]] 형태로 datePlanContainer에 저장
 		List<List<Object>> datePlanContainer = new ArrayList<>();
@@ -134,7 +136,8 @@ public class PlanServiceImpl implements PlanService {
 			List<Object> datePlanList = new ArrayList<>(); // 날짜 , [플랜, 플랜, ...] 담을 리스트
 
 			// 날짜랑 플랜 구분해서 datePlanArr에 담음
-			String[] datePlanArr = allPlanArr[i].split(":");
+			String[] datePlanArr = allPlanArr[i].split(">");
+			String[] datePlanExtraArr = allPlanExtraArr[i].split(">");
 			datePlanList.add(datePlanArr[0]); // 날짜 담기
 
 			List<Object> planList = new ArrayList<Object>(); // 플랜만 담을 리스트
@@ -147,17 +150,14 @@ public class PlanServiceImpl implements PlanService {
 			}
 			
 			
-
 			// 플랜@플랜@ ... 연결된 문자열 구분
 			String[] planArr = datePlanArr[1].split("@");
-			String[] planExtraArr = allPlanExtraArr[i].split("@");
+			String[] planExtraArr = datePlanExtraArr[1].split("@");
 			// 플랜 나눠서 planList에 저장
 //			for (String plan : planArr) {
 			for (int j = 0; j < planArr.length; j++) {
 				int tourNum = Integer.parseInt(planArr[j].substring(1));
-				BoardVO tour = new BoardVO();
-				String[] planExtraInfo = planExtraArr[j].split("\\*");
-
+				String[] planExtraInfo = planExtraArr[j].split("[*]");
 				
 				switch (planArr[j].charAt(0)) {
 				// 관광지, 맛집일 경우

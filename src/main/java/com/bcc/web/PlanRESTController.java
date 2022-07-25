@@ -118,8 +118,8 @@ public class PlanRESTController {
 	}
 
 	// 그룹에 초대
-	@RequestMapping(value = "/invite")
-	public int inviteREST(String id, int grpNum, HttpSession session) throws Exception {
+	@RequestMapping(value = "/invite",  produces = "application/text; charset=utf8")
+	public String inviteREST(String id, int grpNum, HttpSession session) throws Exception {
 		log.info("그룹에 초대 : " + grpNum + "그룹, " + id);
 
 		String sender = (String) session.getAttribute("id");
@@ -130,7 +130,7 @@ public class PlanRESTController {
 		vo.setSender(sender);
 		vo.setReceiver(id);
 
-		// 초대 성공하면 1, 실패하면 0, 이미 초대중이면 -1 반환
+		// 초대 성공하면 이름, 이미 초대중이면 ing, 초대 가능 인원수 초과면 no 반환
 		return grpService.inviteMember(vo);
 	}
 

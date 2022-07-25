@@ -40,7 +40,7 @@ public class accRESTController {
 		@RequestMapping(value = "/roomSearch", method = RequestMethod.POST)
 		public List roomSearchPOST(roomSearch rs) throws Exception{
 			
-			log.info("rs : "+rs);
+//			log.info("rs : "+rs);
 			
 			return service.getRoomSearchList(rs);
 		}

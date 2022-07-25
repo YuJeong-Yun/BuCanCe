@@ -49,7 +49,9 @@ $.ajax({
 
 			const accItemInner =
 				'<img src="' + acc.thumbnail + '" alt="' + acc.title + '" class="content__img" />' +
+				'<div class="description">' +
 				'<div class="content__title">' + acc.title + '</div>' +
+				'</div>' +
 				'<input type="hidden" value="' + acc.num + '" class="num">' +
 				'<input type="hidden" value="' + acc.lng + '" class="lng">' +
 				'<input type="hidden" value="' + acc.lat + '" class="lat">';
@@ -548,7 +550,7 @@ function selectTour(event) {
 	// 일정 칸에 선택한 관광지 추가
 	const firstChild = event.target.firstElementChild;
 	const img = firstChild.src;
-	const title = firstChild.nextElementSibling.innerText;
+	const title = firstChild.nextElementSibling.firstElementChild.innerText;
 	const num = firstChild.nextElementSibling.nextElementSibling.value;
 	const lng = firstChild.nextElementSibling.nextElementSibling.nextElementSibling.value;
 	const lat = firstChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value;
@@ -671,7 +673,7 @@ let detailTourNum;
 let detailT_category;
 // 더 보러가기 클릭
 function moreInfo() {
-	location.href = path + '/board/infoDetail?num=' + detailTourNum + '&age=1&perPageNum=12&t_category=' + detailT_category + '&addr-all';
+	window.open(path + '/board/infoDetail?num=' + detailTourNum + '&age=1&perPageNum=12&t_category=' + detailT_category + '&addr=all');
 }
 
 
@@ -814,14 +816,15 @@ function savePlan() {
 	});
 
 	// 플랜 정보 문자열로 연결해서 DB저장
-	// 날짜랑 플랜은 :, 플랜끼리는 @, 날짜 끼리는 +로 구분
+	// 날짜랑 플랜은 >, 플랜끼리는 @, 날짜 끼리는 +로 구분
 	let plan = '';
 	// 타이틀, 이미지, 위도, 경도도 같이 저장 - planExtra 변수
 	// 타이틀과 이미지 위도, 경도 *로 구분
 	let planExtra = '';
 	for (let i = 0; i < dates.length; i++) {
 		// plan에 날짜 담기
-		plan += dates[i] + ':';
+		plan += dates[i] + '>';
+		planExtra += dates[i] + '>';
 		// plan에 날짜의 플랜정보 담음
 		let plans = planContainer[i].querySelectorAll('.num');
 		// 이미지와 타이틀 담을 배열

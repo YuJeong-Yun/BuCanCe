@@ -52,7 +52,7 @@
 </head>
 <body>
 <div class = "member-wrapper">
-	<form action="/member/login.do" method="post">
+	<form method="post">
 		<span>
 			<input type ="text" class = "loginInputbox" name="id" id = "inputBox" placeholder="아이디">
 		</span>
