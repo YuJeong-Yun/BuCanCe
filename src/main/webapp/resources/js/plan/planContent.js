@@ -111,10 +111,10 @@ function inviteMember(event, id) {
 			grpNum: grpNum
 		},
 		success: function(item) {
-			if (item == 0) {
+			if (item == 'no') {
 				alert('더 이상 초대할 수 없습니다.');
 				return;
-			} else if (item == -1) {
+			} else if (item == 'ing') {
 				alert('이미 초대중인 회원입니다.');
 				return;
 			}
