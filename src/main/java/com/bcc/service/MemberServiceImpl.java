@@ -78,9 +78,15 @@ public class MemberServiceImpl implements MemberService{
 		
 		dao.delMember(vo);
 	}
+	
+	@Override
+	public int delCheck(MemberVO vo) {
+		
+		int cnt = dao.delCheck(vo); 
+		
+		return cnt;
+	}
 
-	
-	
 	@Override
 	public void storageMember(MemberVO vo) {
 		
@@ -99,6 +105,22 @@ public class MemberServiceImpl implements MemberService{
 	public int idCheck(String id) {
 	       
 		int cnt = dao.getIdCheck(id);	 
+		
+		return cnt;
+	}
+
+	@Override
+	public int telCheck(String tel) {
+		
+		int cnt = dao.getTelCheck(tel); 
+		
+		return cnt;
+	}
+	
+	@Override
+	public int emailCheck(String email) {
+
+		int cnt = dao.getEmailCheck(email); 
 		
 		return cnt;
 	}

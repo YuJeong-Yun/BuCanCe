@@ -35,6 +35,12 @@
       delete from bcc_member 
       where id=#{id} and pw=#{pw}
     </delete>
+	
+	<select id="delCheck" parameterType="String" resultType="int">
+		select count(id and pw) 
+		from bcc_member 
+		where id = #{id} and pw = #{pw}
+    </select>
     
 	<insert id="putStorageMember" parameterType="MemberVO">
 		insert into bcc_storage
@@ -56,6 +62,18 @@
 		select count(id) 
 		from bcc_member 
 		where id = #{id}
+    </select>
+    
+    <select id="getEmailCheck" parameterType="String" resultType="int">
+		select count(email) 
+		from bcc_member 
+		where email = #{email}
+    </select>
+    
+	<select id="getTelCheck" parameterType="String" resultType="int">
+		select count(tel) 
+		from bcc_member 
+		where tel = #{tel}
     </select>
 
 	<update id="modLicenseUp">
