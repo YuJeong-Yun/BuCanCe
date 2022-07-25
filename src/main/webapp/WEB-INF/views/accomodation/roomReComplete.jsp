@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript">
-	if ("${vo.accName}" == "") {
-		location.reload();
-
-	}
-</script>
 	<jsp:include page="../include/header.jsp" />
 
 	<!-- Contact Section Begin -->
@@ -15,7 +9,7 @@
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="contact-text">
-						<h2>결제완료</h2>
+						<h2 style="font-family: 'Jeju Hallasan' ">결제완료</h2>
 						<p>이용해주셔서 감사합니다!</p>
 						<div class="room-item">
 							<div class="ri-text"

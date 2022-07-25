@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>예약항목 선택</h2>
+                        <h2 style="font-family: 'Jeju Hallasan' ">예약항목 선택</h2>
                         <div class="bt-option">
                             <a href="<%=request.getHeader("REFERER")%>">방 상세정보</a>
                             <span>${room_title} 선택</span>
