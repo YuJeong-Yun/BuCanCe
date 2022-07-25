@@ -37,7 +37,7 @@ next.addEventListener('click', function () {
   //다음 버튼 눌렀을때
   if (currentIdx <= slideCount - 1) {
     //슬라이드이동
-    slides.style.left = -(currentIdx + 1) * (slideWidth) + 'px';
+    slides.style.left = -(currentIdx + 2) * (slideWidth) + 'px';
 //    slides.style.transition = `${0.5}s ease-out`; //이동 속도
   }
   if (currentIdx === slideCount - 1) {
