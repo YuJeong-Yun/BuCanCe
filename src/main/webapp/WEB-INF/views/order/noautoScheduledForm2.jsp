@@ -8,15 +8,16 @@
 			<div class="col-lg-12">
 				<div class="breadcrumb-text">
 				
-					<h2>시스템 점검 중입니다</h2>
+					<h2>수동 스케줄러</h2>
 					
 					<div class="bt-option">
-						<span style="padding: 3em;">잠시 후 다시 시도해주세요</span>
+						<span style="padding: 3em;">정기결제 : 수동으로 관리하는 공간입니다</span>
 
 						<section>
 
-								<button class="btn btn-info" type="button" onclick="location.href='/main'">메인페이지로</button>
-
+							<form action="/order/noautoScheduled2" method="post">
+								<input class="btn btn-info" type="submit" value="정기결제(재결제)">
+							</form>
 
 						</section>
 					</div>
