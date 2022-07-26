@@ -11,27 +11,22 @@
             
             <li class="nav-item">
                 <a class="nav-link" href="/admin/profitChart">
-                    <span>📝 Dashboard</span>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    <span>Dashboard</span>
                 </a>
             </li>
             
             <li class="nav-item">
                 <a class="nav-link" href="/admin/memberMg">
-                  <span>👨‍👨‍👧‍👧 회원관리</span></a>
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                  <span>회원관리</span></a>
             </li>
             
             <li class="nav-item">
                 <a class="nav-link" href="/admin/addTour">
-                  <span>🌄 관광지 추가</span></a>
-            </li>
-            
-            
-            <li class="nav-item">
-                <a class="nav-link" href="/order/noautoScheduled">
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <span>수동 스케줄러</span></a>
+                  <span>관광지 추가</span></a>
             </li>
-            
      
         </ul>
         <!-- End of Sidebar -->     

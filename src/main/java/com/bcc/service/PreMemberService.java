@@ -21,9 +21,5 @@ public interface PreMemberService {
 	
 	// 재결제 프리미엄 회원 
 	public void putRePreMember(PreMemberVO vo);
-	
-	// 프리미엄 회원 id 가져오기
-	public String getid(PreMemberVO vo);
-	
 
 }

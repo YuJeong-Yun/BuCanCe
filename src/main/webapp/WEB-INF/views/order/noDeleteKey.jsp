@@ -17,7 +17,7 @@
 						<section>
 						
 							<form>
-							<a class="btn btn-info" href="/main" style="color: white;">마이페이지</a>
+							<a class="btn btn-info" href="/mypage" style="color: white;">마이페이지</a>
 								
 							</form>
 

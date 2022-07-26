@@ -13,8 +13,8 @@
 
 		$('#today').click(function(){
 			var date = new Date();
-			document.getElementById("startDate").value = formatDate(date); // 시작날짜
-			document.getElementById("endDate").value = formatDate(date); // 마지막날짜
+			document.getElementById("startDate").value = formatDate(date);
+			document.getElementById("endDate").value = formatDate(date);
 		});
 		
 		$('#week').click(function(){
@@ -58,7 +58,6 @@
 				$('tfoot').empty();
 				$('#filterBtn').empty();
 					
-					// 정렬 출력
 					let btnTag = '';
 					btnTag += "<span id='onlyPm' class='periodSpan' onclick='periodMems();'><a>구독회원만 보기</a></span>";
 					btnTag += "<span id='allMem' class='periodSpan' onclick='pmMems();'><a>모두보기</a></span>";
@@ -77,7 +76,6 @@
 							tag += "<tr>";
 							tag += "<td>"+obj.pcd_PAYER_NAME+"</td>";
 								 
-								 // pcd_PAYER_ID 값으로 구독회원 구별
 								 if(obj.pcd_PAYER_ID == "" || obj.pcd_PAYER_ID == null){
 									tag += "<td>N</td>";
 								 } else {

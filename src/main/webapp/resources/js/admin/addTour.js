@@ -17,8 +17,6 @@ function findAddr() {
 function searchAddr(){
 	$('#noData').empty();
 	$('#resultTable').empty();
-	
-	// 팝업창에서 검색 keyword 받아옴
 	let title = document.getElementById('title').value;
 		$.ajax({
 			url : "/adminRest/searchAddr?title="+title,
@@ -27,7 +25,7 @@ function searchAddr(){
 				
 				var tag = "";
 				if(data[1] == 0){
-					$('#findWrapper').append("<div id='noData'>내역이 없습니다.</div>"); // 데이터 갯수가 0일때
+					$('#findWrapper').append("<div id='noData'>내역이 없습니다.</div>");
 				} else {
 						tag += "<tr>";
 						tag += "<th>가게명</th>";
@@ -51,9 +49,8 @@ function searchAddr(){
 }
 
 function chooseAddr(addr){
-	/* 부모창의 요소에 데이터 들어감 */
 	opener.document.getElementById("addr1").value = addr.split(" ")[1];
-	opener.document.getElementById('addr2').value = addr; 
+	opener.document.getElementById('addr2').value = addr; /* 부모창의 요소에 데이터 들어감 */
 	
 	window.close();
 }
@@ -72,17 +69,13 @@ function addMenu(){
 	
 }
 
-// 선택사항 지우기
 function removeMenu(menuEng,menuKor){
 	var element = document.getElementById(menuEng); 
 	element.parentNode.removeChild(element);
-	
-	// 항목제거 span 삭제
 	$('#remove'+menuEng).remove();
 	document.getElementById(menuEng+"li").style.display="block"; 
 }
 
-// 선택사항추가의 리스트 요소 클릭시
 $('#sideUl li').click(function(){
 	let tag = "<div class='form-group'>";
 		tag += "<input type='text' class='form-control form-control-user' id='"+$(this).attr('value')+"' placeholder='"+$(this).text()+"' name='"+$(this).attr('value')+"'>";

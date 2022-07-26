@@ -51,15 +51,15 @@
 	</filter-mapping>
 	<!-- 한글처리 -->
 
-<!-- 	<servlet> -->
-
-<!-- 		<display-name>NaverLoginServlet</display-name> -->
-<!-- 		<servlet-name>NaverLoginServlet</servlet-name> -->
-<!-- 		<servlet-class>com.bcc.web.NaverLoginServlet</servlet-class> -->
-<!-- 	</servlet> -->
-<!-- 	<servlet-mapping> -->
-<!-- 		<servlet-name>NaverLoginServlet</servlet-name> -->
-<!-- 		<url-pattern>/NaverLoginServlet</url-pattern> -->
-<!-- 	</servlet-mapping> -->
+	<servlet>
+		<description></description>
+		<display-name>NaverLoginServlet</display-name>
+		<servlet-name>NaverLoginServlet</servlet-name>
+		<servlet-class>com.bcc.web.NaverLoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NaverLoginServlet</servlet-name>
+		<url-pattern>/NaverLoginServlet</url-pattern>
+	</servlet-mapping>
 
 </web-app>

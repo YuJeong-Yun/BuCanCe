@@ -172,6 +172,7 @@ function showMember() {
 				item.invitingArr.forEach(member => {
 					invitingIDList.push(member.receiver);
 				});
+				console.log(invitingIDList);
 				// 그룹 회원 아이디 배열
 				let grpMemberIDList = [];
 				item.grpMemberArr.forEach(member => {

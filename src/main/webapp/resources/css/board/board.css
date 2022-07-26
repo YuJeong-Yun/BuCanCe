@@ -228,7 +228,6 @@
 		display: inline-block; 
 		margin-left: 6em; 
 		margin-right: 1em;
-		font-family: 'Noto Sans KR', sans-serif;
 	}
 	
 	#keywordInput {
@@ -485,8 +484,4 @@ button {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-}
-
-.tr-title h3 {
-	font-family: "Noto Sans KR", sans-serif;
 }

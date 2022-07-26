@@ -10,7 +10,7 @@ if (t_category == 1) {
 	document.getElementById('eating').className = "notActBtn";
 }
 
-// 맛집별/관광지별 정보 페이지 이동
+
 $('#spot').click(function() {
 
 	location.href = '/board/tourList?t_category=0&addr=' + addr;
@@ -57,3 +57,10 @@ function keywordSearch(e) {
 		location.href = "/board/tourSearch?keyword=" + keyword + "&addr=" + addr + "&t_category=" + t_category;
 	}
 }
+
+
+
+$('#searchBtn').click(function() {
+	let keyword = $('#keywordInput').val();
+	location.href = "/board/tourSearch?keyword=" + keyword + "&addr=" + addr + "&t_category=" + t_category;
+});

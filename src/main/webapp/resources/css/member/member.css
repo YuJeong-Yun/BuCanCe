@@ -33,7 +33,7 @@
 		margin-bottom: 3em;
 		border-bottom: 1px solid #e5e5e5;
 		padding-bottom: 2em;
-		font-family: 'Noto Sans KR' !important;
+		font-family: 'NanumSquare' !important;
 
 	}
 	
@@ -42,8 +42,4 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-	}
-	
-	#favTitle {
-		font-family: 'Noto Sans KR' !important;
 	}

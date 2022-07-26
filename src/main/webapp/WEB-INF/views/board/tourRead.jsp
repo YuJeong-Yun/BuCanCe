@@ -14,7 +14,7 @@
 					<img src="${vo.img }">
 				</div>
 				<div class="rd-text">
-					<div class="rd-title tr-title">
+					<div class="rd-title">
 						<h3>${vo.title }
 						</h3>
 					</div>
@@ -93,6 +93,7 @@
 		<div id="writeReview">
 				<div id="comment1">
 					<div id="comment">
+					<!-- 로그인 안 했을 경우 alert -->
 						<ol class="commentList">
 							<c:forEach items="${commentList}" var="commentList">
 							 <div class="sc-author">
@@ -145,7 +146,7 @@
 							 <c:if test = "${not empty sessionScope.id }">
 							<p>
 								<label for="id">댓글 작성자</label>
-								<input type="text" name="id" id="id" value=" ${id }" readonly="${id }">
+								<input type="text" name="id" id="id" value=" ${id }">
 							</p>
 							<p>
 								<textarea rows="5" cols="250" name="content" id="contentArea"></textarea>

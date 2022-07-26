@@ -192,10 +192,10 @@
 	
 <%-- 	<c:if test = "${pay_work == 'CERT'}">
     	<button id="payConfirmAct">결제승인요청</button>
-    </c:if> --%>
-<%--     <c:if test = "${pay_work != 'AUTH'}">
-    	 <button class="btn btn-info" type="button" onclick="location='/main'" style="margin: 1em; background-color: #0091EA;" >결제승인취소</button>
-	</c:if>  --%>
+    </c:if>
+    <c:if test = "${pay_work != 'AUTH'}">
+    	<button id="payRefundAct">결제승인취소</button>
+	</c:if> --%>
     <button class="btn btn-info" type="button" onclick="location='/main'" style="margin: 1em; background-color: #0091EA;" >결제 완료</button>
     
 </div>
@@ -206,7 +206,7 @@
 		</div>
 		</div>
 		</div>
-
+	</div>
 
 <%-- <form id="payConfirmForm">
     <input type="hidden" name="PCD_PAY_TYPE" id="PCD_PAY_TYPE" value="${pay_type}"> <!-- (필수) 결제수단 (transfer|card) -->
@@ -214,23 +214,23 @@
     <input type="hidden" name="PCD_PAYER_ID" id="PCD_PAYER_ID" value="${payer_id}"> <!-- (필수) 결제자 고유 ID (빌링키) (결제완료시 RETURN) -->
     <input type="hidden" name="PCD_PAY_REQKEY" id="PCD_PAY_REQKEY" value="${pay_reqkey}"> <!-- (필수) 최종 결제요청 승인키 -->
     <input type="hidden" name="PCD_PAY_COFURL" id="PCD_PAY_COFURL" value="${pay_cofurl}"> <!-- (필수) 최종 결제요청 URL -->
-</form>--%>
+</form>
 
-<%-- <form id="payRefundForm">
+<form id="payRefundForm">
     <input type="hidden" name="PCD_PAY_OID" id="PCD_PAY_OID" value="${pay_oid}"> <!-- (필수) 주문번호 -->
     <input type="hidden" name="PCD_PAY_DATE" id="PCD_PAY_DATE" value="${pay_date}"> <!-- (필수) 원거래 결제일자 -->
     <input type="hidden" name="PCD_REFUND_TOTAL" id="PCD_REFUND_TOTAL" value="${pay_total}"> <!-- (필수) 결제취소 요청금액 -->
     <!--<input type="hidden" name="PCD_REFUND_TAXTOTAL" id="PCD_REFUND_TAXTOTAL" value="${refund_taxtotal}">  (선택) 결제취소 부가세 -->
 </form>
- --%>
-<!-- <br/><br/><br/><br/>
+
+<br/><br/><br/><br/>
 <b>Response (CERT:결과)</b><br/><br/>
 <div id='payConfirmResult'></div>
 
 
 <br/><br/><br/><br/>
 <b>Response (취소 결과)</b><br/><br/>
-<div id='payRefundResult'></div>  -->
+<div id='payRefundResult'></div> --%>
 </body>
 </html>
 <%@ include file = "../include/footer.jsp" %>
