@@ -14,6 +14,8 @@ public class MemberVO {
 	private Timestamp regdate;
 	private int license;
 	private String profile;
+	private String sns;
+	
 	public String getId() {
 		return id;
 	}
@@ -102,11 +104,21 @@ public class MemberVO {
 		this.profile = profile;
 	}
 
+	public String getSns() {
+		return sns;
+	}
+
+	public void setSns(String sns) {
+		this.sns = sns;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", tel=" + tel + ", zip="
 				+ zip + ", address1=" + address1 + ", address2=" + address2 + ", regdate=" + regdate + ", license="
-				+ license + ", profile=" + profile + "]";
+				+ license + ", profile=" + profile + ", sns=" + sns + "]";
 	}
 
+	
+	
 }
