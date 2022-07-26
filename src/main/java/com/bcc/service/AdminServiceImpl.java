@@ -91,10 +91,6 @@ public class AdminServiceImpl implements AdminService {
 			int month = cal.get(Calendar.MONTH) + 1;
 			int year = cal.get(Calendar.YEAR);
 
-			log.info(year + "");
-			log.info(month + "");
-			log.info(day + "");
-
 			JSONObject months = new JSONObject();
 			months.put("v", month + "/" + day);
 

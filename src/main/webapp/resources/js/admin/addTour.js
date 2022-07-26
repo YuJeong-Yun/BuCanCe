@@ -23,7 +23,6 @@ function searchAddr(){
 			dataType : "json",
 			success : function(data){
 				
-				console.log(data);
 				var tag = "";
 				if(data[1] == 0){
 					$('#findWrapper').append("<div id='noData'>내역이 없습니다.</div>");
