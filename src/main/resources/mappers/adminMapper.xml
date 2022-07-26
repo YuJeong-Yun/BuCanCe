@@ -10,10 +10,6 @@
 		select * from bcc_member
 	</select>
 
-	<select id="getAllSnsMem" resultType="KakaoVO">
-		select * from kakao_table
-  	</select>
-
 	<select id="getPmInfo" parameterType="hashMap" resultType="PreOrderVO">
 		select * from premium_order
 		where create_date between #{start} and #{end}

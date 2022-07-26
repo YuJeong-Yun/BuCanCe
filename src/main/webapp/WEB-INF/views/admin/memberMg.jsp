@@ -88,15 +88,6 @@
 												<td><button type="button" class="w-btn w-btn-indigo" id="Withdrawal" onclick="deleteCheck('${mg.id }');">회원 탈퇴</button></td>
 											</tr>
 											</c:forEach>
-											<c:forEach items="${kakao }" var="kakao">
-											<tr class="even">
-												<td class="sorting_1">${kakao.k_name }</td>
-												<td>${kakao.k_number }</td>
-												<td>${kakao.k_email }</td>
-												<td>${kakao.regdate }</td>
-												<td><button type="button" class="w-btn w-btn-indigo" id="Withdrawal" onclick="deleteCheck('${kakao.k_number }');">회원 탈퇴</button></td>
-											</tr>
-											</c:forEach> 
 										</tbody>
 									</table>
 											</form>
