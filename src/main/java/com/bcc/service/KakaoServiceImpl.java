@@ -13,7 +13,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.bcc.domain.KakaoVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.persistence.MemberDAO;
 import com.google.gson.JsonElement;
@@ -25,76 +24,77 @@ public class KakaoServiceImpl implements KakaoService {
 
 	@Inject
 	private MemberDAO dao;
+	
+    public String getAccessToken (String authorize_code) {
+        String access_Token = "";
+        String refresh_Token = "";
+        String reqURL = "https://kauth.kakao.com/oauth/token";
+	
+        URL url = null;
+        HttpURLConnection conn = null;
+        
+        try {
+            url = new URL(reqURL);
 
-	public String getAccessToken(String authorize_code) {
-		String access_Token = "";
-		String refresh_Token = "";
-		String reqURL = "https://kauth.kakao.com/oauth/token";
+            conn = (HttpURLConnection) url.openConnection();
 
-		URL url = null;
-		HttpURLConnection conn = null;
+            //    POST 요청을 위해 기본값이 false인 setDoOutput을 true로
 
-		try {
-			url = new URL(reqURL);
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            
+            //    POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+            StringBuilder sb = new StringBuilder();
+            sb.append("grant_type=authorization_code"); 
+            sb.append("&client_id=c30d4acffaf14e6c0a33f269940ff070");  //본인이 발급받은 key
+            sb.append("&redirect_uri=http://itwillbs5.cafe24.com/member/kakao_login"); // 본인이 설정해 놓은 경로
+            sb.append("&code=" + authorize_code);
+            bw.write(sb.toString());
+            bw.flush();
 
-			conn = (HttpURLConnection) url.openConnection();
+            //    결과 코드가 200이라면 성공
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
 
-			// POST 요청을 위해 기본값이 false인 setDoOutput을 true로
+            //    요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
 
-			conn.setRequestMethod("POST");
-			conn.setDoOutput(true);
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println("response body : " + result);
 
-			// POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-			StringBuilder sb = new StringBuilder();
-			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=c30d4acffaf14e6c0a33f269940ff070"); // 본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost:8088/member/kakao_login"); // 본인이 설정해 놓은 경로
-			sb.append("&code=" + authorize_code);
-			bw.write(sb.toString());
-			bw.flush();
+            //    Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
 
-			// 결과 코드가 200이라면 성공
-			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode : " + responseCode);
+            access_Token = element.getAsJsonObject().get("access_token").getAsString();
+            refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
 
-			// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String line = "";
-			String result = "";
+            System.out.println("access_token : " + access_Token);
+            System.out.println("refresh_token : " + refresh_Token);
 
-			while ((line = br.readLine()) != null) {
-				result += line;
-			}
-			System.out.println("response body : " + result);
-
-			// Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
-			JsonParser parser = new JsonParser();
-			JsonElement element = parser.parse(result);
-
-			access_Token = element.getAsJsonObject().get("access_token").getAsString();
-			refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
-
-			System.out.println("access_token : " + access_Token);
-			System.out.println("refresh_token : " + refresh_Token);
-
-			br.close();
-			bw.close();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (conn != null) {
+            br.close();
+            bw.close();
+            
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+			if(conn != null) {
 				conn.disconnect();
 			}
 		}
 
-		return access_Token;
+        return access_Token;
+        
+    }
+    
 
-	}
-
-	public MemberVO getUserInfo(String access_Token) {
+    public MemberVO getUserInfo (String access_Token) {
 
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";

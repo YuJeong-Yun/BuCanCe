@@ -63,7 +63,7 @@
 			<input type="submit" id = "loginBtn" value="로그인" >
 		</span><br>
 		<!-- 사용자가 email 등 data 수신을 동의하지 않았을 경우 scope로 추가적으로 동의를 받아야 한다. -->
-			<a href="https://kauth.kakao.com/oauth/authorize?client_id=c30d4acffaf14e6c0a33f269940ff070&redirect_uri=http://localhost:8088/member/kakao_login
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=c30d4acffaf14e6c0a33f269940ff070&redirect_uri=http://itwillbs5.cafe24.com/member/kakao_login
 &response_type=code&scope=account_email"> 
 		<img src="/resources/img/kakao_login_medium_narrow.png" id = "snsBtn" ></a><br>
 <!-- 		<img src="/resources/img/kakao_login_medium_narrow.png" id = "snsBtnstyle = "width: 460px" style="height:40px"></a><br> -->
