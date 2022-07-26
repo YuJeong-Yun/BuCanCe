@@ -81,8 +81,8 @@
         autoplayHoverPause: true,
         dots: false,
         autoplay: true,
-        loop: true,
-        smartSpeed: 3000,
+        loop: false,
+        smartSpeed: 2000,
         nav: true,
         navText: ["<i class='arrow_left'></i>", "<i class='arrow_right'></i>"]
     });
