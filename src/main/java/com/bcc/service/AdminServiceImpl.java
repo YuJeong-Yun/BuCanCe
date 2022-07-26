@@ -285,12 +285,6 @@ public class AdminServiceImpl implements AdminService {
 		return dao.getAllWebMem();
 	}
 
-	// 카카오 회원 목록
-	@Override
-	public List<KakaoVO> getAllSnsMem() {
-		return dao.getAllSnsMem();
-	}
-
 	// 회원 삭제
 	@Override
 	public void delMem(MemberVO vo) {

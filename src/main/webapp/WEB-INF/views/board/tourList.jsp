@@ -4,6 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <jsp:include page="../include/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/board.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" type="text/css">
+
 
 
 <!-- Breadcrumb Section Begin -->

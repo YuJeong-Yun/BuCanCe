@@ -125,9 +125,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public int getSnsCheck(String k_email) {
+	public int getSnsCheck(String sns) {
 		
-		int cnt = sqlSession.selectOne(NAMESPACE + ".getSnsCheck", k_email);
+		int cnt = sqlSession.selectOne(NAMESPACE + ".getSnsCheck", sns);
 
 		return cnt;
 	}

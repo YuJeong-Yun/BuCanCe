@@ -210,12 +210,16 @@ public class MemberController {
 			
 			String id = (String)session.getAttribute("id");
 			
-			int cnt = service.idCheck(id);
+			int cnt = service.snsCheck(id);
+			
+			log.info("id : "+ id);
+			
+			log.info("cnt : "+ cnt);
 			
 			if(id == null) {
 					return "redirect:/main";
 					
-				} else if(cnt != 1) {
+				} else if(cnt == 1) {
 					
 					request.setAttribute("msg", "sns 회원은 수정 불가");
 					request.setAttribute("url", "/member/mypage");
@@ -282,13 +286,13 @@ public class MemberController {
 			
 			String id = (String)session.getAttribute("id");
 			
-			int cnt = service.idCheck(id);
+			int cnt = service.snsCheck(id);
 			
 			if(id == null) {
 				
 					return "redirect:/main";
 					
-				} else if(cnt != 1) {
+				} else if(cnt == 1) {
 					
 					request.setAttribute("msg", "sns 회원은 접근 불가");
 					request.setAttribute("url", "/member/mypage");

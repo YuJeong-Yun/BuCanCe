@@ -108,6 +108,14 @@ public class MemberServiceImpl implements MemberService{
 		
 		return cnt;
 	}
+	
+	@Override
+	public int snsCheck(String sns) {
+		
+		int cnt = dao.getSnsCheck(sns);	 
+		
+		return cnt;
+	}
 
 	@Override
 	public int telCheck(String tel) {

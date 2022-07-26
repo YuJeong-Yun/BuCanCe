@@ -39,8 +39,8 @@ public interface MemberDAO {
 	// id 중복 검사
     public int getIdCheck(String id);
     
-	// sns 중복 검사
-    public int getSnsCheck(String k_email);
+	// sns 체크
+    public int getSnsCheck(String sns);
     
 	// tel 중복 검사
     public int getTelCheck(String tel);

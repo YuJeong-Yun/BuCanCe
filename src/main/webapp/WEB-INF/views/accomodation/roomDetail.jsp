@@ -233,7 +233,7 @@
 <jsp:include page="../include/footer.jsp" />
 <!-- Js Plugins -->
 <script
-	src="${pageContext.request.contextPath}/resources/js/slideShow.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/acc/slideShow.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script
