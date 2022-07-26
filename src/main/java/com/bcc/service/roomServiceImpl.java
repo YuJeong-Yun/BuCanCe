@@ -778,6 +778,11 @@ public class roomServiceImpl implements roomService {
 
 		log.info("액세스토큰 :" + access_token);
 
+		// 자원해제
+		if (conn != null) {
+			conn.disconnect();
+		}
+
 		// REST API(결제환불) 호출
 		HttpURLConnection conn2 = null;
 		URL url2 = new URL("https://api.iamport.kr/payments/cancel");
@@ -801,11 +806,13 @@ public class roomServiceImpl implements roomService {
 			sb2.append(line2 + "\n");
 		}
 		br2.close();
-
+		
+		// 자원해제
+		if (conn2 != null) {
+			conn2.disconnect();
+		}
 		return "OK";
 
 	}
-
-	
 
 }
