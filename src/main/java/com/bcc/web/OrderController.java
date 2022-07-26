@@ -297,6 +297,7 @@ public class OrderController extends PaypleController {
 
 					try {
 						orderservice.putOrder(pvo);
+						service.liUp(id);
 					} catch (NullPointerException e) {
 						e.printStackTrace();
 					} catch (Exception e) {

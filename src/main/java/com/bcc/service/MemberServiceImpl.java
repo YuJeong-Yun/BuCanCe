@@ -142,11 +142,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void liUp(String id) {
-		try {
 			dao.modLicenseUp(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
