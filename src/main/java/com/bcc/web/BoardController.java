@@ -109,7 +109,6 @@ public class BoardController {
 		scri.setAddr(addr);
 		// 조회수
 		session.setAttribute("upFlag", "1");
-		//session.setAttribute("id", "admin");
 
 		// 글 정보를 가지고 오기
 		PageMaker pageMaker = new PageMaker();
