@@ -65,9 +65,9 @@
     </select>
     
 	<select id="getSnsCheck" parameterType="String" resultType="int">
-		select count(k_email)
+		select count(sns)
 		from bcc_member 
-		where id = #{k_email}
+		where id = #{id} and sns = "Y"
     </select>
     
     <select id="getEmailCheck" parameterType="String" resultType="int">
