@@ -54,9 +54,10 @@ public class OrderController extends PaypleController {
 ///////////////////////////////////////////////////////////////
 // 정기결제 정지(빌링키 삭제)
 // http://localhost:8088/order/deleteKey
-// http://localhost:8088/mypage
+// http://localhost:8088/main
+
 	@RequestMapping(value = "/deleteKey", method = RequestMethod.GET)
-	public String deleteKeyGET(HttpSession session, PreOrderVO vo) throws Exception {
+	public String deleteKeyGET(HttpSession session, PreOrderVO vo, PreMemberVO mo) throws Exception {
 
 		String id = (String) session.getAttribute("id");
 		String PCD_PAYER_NAME = (String) session.getAttribute("id");
@@ -66,9 +67,17 @@ public class OrderController extends PaypleController {
 // 서비스 - 빌링키 불러오기
 		vo.setPCD_PAYER_NAME(PCD_PAYER_NAME);
 		String PCD_PAYER_ID = orderservice.getKey(vo);
+		String prememberid = memberservice.getid(mo);
+
 		log.info(" getKey(vo) : 빌링키 호출 ");
 
-		if (PCD_PAYER_ID.length() == 0) {
+		if (prememberid == null) {
+			log.info("프리미엄 회원 아님");
+
+			return "order/noDeleteKey";
+
+		} else if (PCD_PAYER_ID.length() == 0) {
+
 			log.info("빌링키 == NULL ");
 
 			return "order/noDeleteKey";
@@ -100,33 +109,55 @@ public class OrderController extends PaypleController {
 		orderservice.delKey(vo);
 		log.info(" delKey(vo): 정기결제 해지 ");
 
-		return "/order/goods";
+		return "/main";
 
 	}
 
 ////////////////////////////////////////////////////////////////////////
+	// http://localhost:8088/main
 
 	/*
 	 * goods.jsp : 물건 페이지
 	 */
 	@RequestMapping(value = "/goods")
 // http://localhost:8088/order/goods
-	public String goods(Model model, HttpSession session, HttpServletRequest request) throws Exception {
+	public String goods(Model model, HttpSession session, HttpServletRequest request, PreMemberVO mo)
+			throws Exception {
 
 		// db동작 호출을 위해서 서비스 동작을 호출 - loginCheck()
 		String id = (String) session.getAttribute("id");
+		String PCD_PAYER_NAME = (String) session.getAttribute("id");
+
+		mo.setPCD_PAYER_NAME(PCD_PAYER_NAME);
+		String prememberid = memberservice.getid(mo);
 
 		if (id == null) {
 			log.info("로그인 정보 없음! 페이지 이동");
 			request.setAttribute("msg", "로그인이 필요합니다.");
 			request.setAttribute("url", "/member/login");
 			return "/member/alert";
+
 		}
 
-		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-		model.addAttribute("pay_total", "6000"); // 결제요청금액
+		if (prememberid == null) {
 
-		return "/order/goods";
+			log.info("구독권 구매 페이지로 이동");
+
+			model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
+			model.addAttribute("pay_total", "6000"); // 결제요청금액
+
+			return "/order/goods";
+
+		} else {
+
+			log.info("이미 구독권 사용중! 페이지 이동");
+
+			request.setAttribute("msg", "이미 구독권을 이용 중입니다 :)");
+			request.setAttribute("url", "/main");
+			return "/member/alert";
+
+		}
+
 	}
 
 	@RequestMapping(value = "/order1")
@@ -263,20 +294,24 @@ public class OrderController extends PaypleController {
 		model.addAttribute("pay_cardreceipt", request.getParameter("PCD_PAY_CARDRECEIPT")); // 카드 매출전표 URL
 
 		// DB에 저장
-		try {
-			orderservice.putOrder(pvo);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-		try {
-			memberservice.putPreMember(vo);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+		if ("PCD_PAY_OID".length() == 0) {
+			try {
+				orderservice.putOrder(pvo);
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			try {
+				memberservice.putPreMember(vo);
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		return "/order/order_result";
@@ -493,7 +528,17 @@ public class OrderController extends PaypleController {
 	 * noautoScheduled.jsp : 수동 스케줄러
 	 */
 	// http://localhost:8088/order/noautoScheduled
-
+	
+	// 수동스케줄러 페이지
+	@RequestMapping(value = "/noautoScheduled",method = RequestMethod.GET)
+	public String noautoScheduledGET(MemberVO vo, HttpSession session, HttpServletRequest request) throws Exception {
+		log.info(" noautoScheduledGET() 호출 ");
+		
+		// 페이지이동
+		return "/order/noautoScheduledForm";
+	}
+	
+ ////////////////////////
 	@RequestMapping(value = "/noautoScheduled1", method = RequestMethod.GET)
 	public String delPreMemberGET() {
 
@@ -517,7 +562,7 @@ public class OrderController extends PaypleController {
 		System.out.println("기한만료 회원삭제");
 
 		// 페이지 이동
-		return "/order/goods";
+		return "/order/noautoScheduledForm";
 	}
 
 	/////
@@ -548,7 +593,7 @@ public class OrderController extends PaypleController {
 
 		}
 		// 페이지 이동
-		return "/order/goods";
+		return "/order/noautoScheduledForm";
 	}
 
 }

@@ -1,9 +1,11 @@
 	var searchTotal = '';
 	var startPage = 1;
-	var total = document.getElementsByClassName('ri-text').length+10;
+	var pageSize = 10;
+	var total = document.getElementsByClassName('ri-text').length+pageSize;
 	var rePageCheck = false; // '블로그 리뷰' 탭 중복 클릭 시 같은 글 가져오기 방지
-	var size = 3;
 	
+	
+		// 목록 클릭시 찜목록에서 온 경우 구별
 		function backToList(addr){
 			if(addr == "favorite"){
 				location.href = "/member/favorite?page="+page
@@ -72,7 +74,7 @@
 			document.getElementsByClassName('load-more')[0].style.display = 'none';
 			document.getElementById('writeReview').style.display = 'none';
 			
-			/* 좌표값 없을 경우 상세주소로 좌표검색*/
+			// 좌표값 없을 경우 상세주소로 좌표검색
 			if(lat == 0.0 || lng == 0.0) {
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
@@ -174,9 +176,9 @@
 		
 		// load-more 클릭 시 글 시작 번호 계산
 		function countStartPage(){
-			//console.log(searchTotal);
 			if(total<(searchTotal)){
-			startPage = startPage + 10;
+			// 가지고 온 페이지 수만큼 더해줌
+			startPage = startPage + pageSize;
 			return startPage;
 			}
 			else{
@@ -185,8 +187,9 @@
 			
 		}
 		
-		
+		 
 		 $('#load-more').click(function(){
+		 	 // 가져올 글 시작 번호
 			 var start = countStartPage();
 			 //console.log(start);
 			
@@ -198,7 +201,8 @@
 						});
 					}
 			});
-			total = total + 10;
+			// 전체 페이지 수 업데이트
+			total = total + pageSize;
 			//console.log(total);
 			
 		});

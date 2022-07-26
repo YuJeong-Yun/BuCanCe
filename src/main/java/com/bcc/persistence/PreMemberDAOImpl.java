@@ -70,4 +70,12 @@ public class PreMemberDAOImpl implements PreMemberDAO {
 			sqlSession.update(NAMESPACE+".putRePreMember", vo);
 		}
 
+		// 프리미엄 회원 id 가져오기
+		@Override
+		public String getid(PreMemberVO vo) {
+			
+			return sqlSession.selectOne(NAMESPACE + ".getid", vo);
+		}
+		
+
 }

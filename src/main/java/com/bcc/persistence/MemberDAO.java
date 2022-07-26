@@ -1,5 +1,6 @@
 package com.bcc.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.bcc.domain.BoardVO;
@@ -34,12 +35,12 @@ public interface MemberDAO {
 	
 	// 전체 회원정보 조회
 	public List<MemberVO> getMemberList(String adminID);
-	
-	// sns email 조회
-	public MemberVO getEmail(String email);
-	
+
 	// id 중복 검사
     public int getIdCheck(String id);
+    
+	// sns 중복 검사
+    public int getSnsCheck(String k_email);
     
 	// tel 중복 검사
     public int getTelCheck(String tel);
@@ -66,5 +67,10 @@ public interface MemberDAO {
 	// 좋아요 갯수 조회
 	public Integer getThumbCount(String id);
 	public Integer getSNSThumbCount(String id);
+	
+	// 카카오
+	public void putKakao(HashMap<String, Object> userInfo);
+	
+	public MemberVO getKakao(HashMap<String, Object> userInfo);
 
 }

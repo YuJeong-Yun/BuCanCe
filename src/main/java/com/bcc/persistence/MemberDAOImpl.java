@@ -117,16 +117,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberVO getEmail(String email) {
-
-		logger.info(" getEmail(email) ");
-
-		MemberVO vo = sqlSession.selectOne(NAMESPACE + ".getEmail", email);
-
-		return vo;
-	}
-
-	@Override
 	public int getIdCheck(String id) {
 
 		int cnt = sqlSession.selectOne(NAMESPACE + ".getIdCheck", id);
@@ -134,6 +124,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return cnt;
 	}
 	
+	@Override
+	public int getSnsCheck(String k_email) {
+		
+		int cnt = sqlSession.selectOne(NAMESPACE + ".getSnsCheck", k_email);
+
+		return cnt;
+	}
+
 	@Override
 	public int getTelCheck(String tel) {
 		
@@ -210,4 +208,20 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.selectOne(NAMESPACE+".getSNSThumbCount",id);
 	}
+	
+	// 카카오
+	@Override
+	public void putKakao(HashMap<String, Object> userInfo) {
+		sqlSession.insert(NAMESPACE+".putKakao",userInfo);
+		
+	}
+
+	@Override
+	public MemberVO getKakao(HashMap<String, Object> userInfo) {
+		System.out.println("RN:"+userInfo.get("name"));
+		System.out.println("RE:"+userInfo.get("email"));
+		return sqlSession.selectOne(NAMESPACE+".getKakao", userInfo);
+	}
+	
+	
 }
