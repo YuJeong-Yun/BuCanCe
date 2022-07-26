@@ -34,7 +34,7 @@ public interface MemberService {
 	
 	// 아이디 중복 확인
     public int idCheck(String id);
-    
+
 	// 전화 중복 확인
     public int telCheck(String tel);
     

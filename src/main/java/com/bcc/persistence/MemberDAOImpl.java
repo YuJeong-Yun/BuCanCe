@@ -117,16 +117,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberVO getEmail(String email) {
-
-		logger.info(" getEmail(email) ");
-
-		MemberVO vo = sqlSession.selectOne(NAMESPACE + ".getEmail", email);
-
-		return vo;
-	}
-
-	@Override
 	public int getIdCheck(String id) {
 
 		int cnt = sqlSession.selectOne(NAMESPACE + ".getIdCheck", id);
@@ -134,6 +124,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return cnt;
 	}
 	
+	@Override
+	public int getSnsCheck(String k_email) {
+		
+		int cnt = sqlSession.selectOne(NAMESPACE + ".getSnsCheck", k_email);
+
+		return cnt;
+	}
+
 	@Override
 	public int getTelCheck(String tel) {
 		
