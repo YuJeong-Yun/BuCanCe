@@ -15,8 +15,6 @@ import com.bcc.domain.PlanVO;
 @Repository
 public class PlanDAOImpl implements PlanDAO {
 
-	private static final Logger log = LoggerFactory.getLogger(PlanDAOImpl.class);
-
 	@Inject
 	private SqlSession sqlSession;
 

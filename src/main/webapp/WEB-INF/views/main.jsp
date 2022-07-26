@@ -332,7 +332,7 @@ background-position: center center;
                 <div class="col-lg-8 offset-lg-2">
                 <c:set value="${hotList[0] }" var="tour"/>
                 <c:set value="${hotList[1] }" var="eating"/>
-                    <div class="testimonial-slider owl-carousel">
+                    <div class="testimonial-slider owl-carousel main">
                			<c:forEach var="i" begin="0" end="${tour.size()-1 }" step="1">
                         <div class="ts-item">
                             <p><img src="${tour[i].img }" class="hotTour" onclick="location.href='/board/infoDetail?num=${tour[i].num}&page=1&perPageNum=12&t_category=${tour[i].t_category}&addr=all'"></p>

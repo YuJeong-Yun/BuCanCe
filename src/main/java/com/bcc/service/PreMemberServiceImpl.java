@@ -20,11 +20,11 @@ public class PreMemberServiceImpl implements PreMemberService {
 
 	// 프리미엄 멤버
 		@Override
-		public void insertPreMember(PreMemberVO vo) {
+		public void putPreMember(PreMemberVO vo) {
 			
-			System.out.println(" service.insertPreMember 호출");
+			System.out.println(" service.putPreMember 호출");
 			
-			dao.insertPreMember(vo);
+			dao.putPreMember(vo);
 			
 		}
 
@@ -32,10 +32,10 @@ public class PreMemberServiceImpl implements PreMemberService {
 		// 회원 삭제
 
 		@Override
-		public void deletePreMember(PreMemberVO dpv) {
-			log.info(" service.deleteMember 호출");
+		public void delPreMember(PreMemberVO dpv) {
+			log.info(" service.delPreMember 호출");
 
-			dao.deletePreMember(dpv);
+			dao.delPreMember(dpv);
 
 		}
 
@@ -61,5 +61,15 @@ public class PreMemberServiceImpl implements PreMemberService {
 			log.info(" service.getEmail 호출");
 			
 			return dao.getEmail(id);
+		}
+
+
+		// 재결제 프리미엄 회원 
+		@Override
+		public void putRePreMember(PreMemberVO vo) {
+			log.info(" service.putRePreMember 호출");
+
+			dao.putRePreMember(vo);
+			
 		}
 }
