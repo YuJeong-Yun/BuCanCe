@@ -11,21 +11,18 @@
             
             <li class="nav-item">
                 <a class="nav-link" href="/admin/profitChart">
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    <span>Dashboard</span>
+                    <span>📝 Dashboard</span>
                 </a>
             </li>
             
             <li class="nav-item">
                 <a class="nav-link" href="/admin/memberMg">
-                  <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                  <span>회원관리</span></a>
+                  <span>👨‍👨‍👧‍👧 회원관리</span></a>
             </li>
             
             <li class="nav-item">
                 <a class="nav-link" href="/admin/addTour">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <span>관광지 추가</span></a>
+                  <span>🌄 관광지 추가</span></a>
             </li>
      
         </ul>

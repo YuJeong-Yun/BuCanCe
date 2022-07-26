@@ -75,7 +75,7 @@ function liDown(){
     	    <label>이메일 : </label>
     	    <input type="text" name="email" value="${memberVO.email}" ><br>
     	    <label>구독 상태 : </label>
-    	    <input type = "hidden" id = "license" name ="license"><span id="checkLicense">&nbsp;</span>
+    	    <input type = "hidden" id = "license" name ="license" value="${memberVO.license }"><span id="checkLicense">&nbsp;</span>
     	    <input type = "button" id = "liOnBtn" onclick = "liUp()" value = "구독하기">
     	    <input type = "button" id = "liOffBtn" onclick = "liDown()" value = "구독취소"><br>
     	    <input type ="submit" value="수정완료" >
