@@ -132,8 +132,8 @@
     
     <!-- 정보 저장 -->
     <insert id="putKakao" parameterType="java.util.HashMap">
-        insert into bcc_member(name, id, sns)
-        values(#{name}, #{email}, "Y")
+        insert into bcc_member(name, id, sns, profile)
+        values(#{name}, #{email}, "Y", #{profile})
     </insert>
     
     <!-- 카카오 로그인 -->
