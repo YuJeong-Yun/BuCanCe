@@ -72,4 +72,13 @@ public class PreMemberServiceImpl implements PreMemberService {
 			dao.putRePreMember(vo);
 			
 		}
+
+
+		// 프리미엄 회원 id 가져오기
+		@Override
+		public String getid(String id) {
+			log.info(" service.getid 호출");
+
+			return dao.getid(id);
+		}
 }

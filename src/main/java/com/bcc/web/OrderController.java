@@ -115,11 +115,20 @@ public class OrderController extends PaypleController {
 
 		// db동작 호출을 위해서 서비스 동작을 호출 - loginCheck()
 		String id = (String) session.getAttribute("id");
+		String PCD_PAYER_NAME = memberservice.getid(id);
 
 		if (id == null) {
 			log.info("로그인 정보 없음! 페이지 이동");
 			request.setAttribute("msg", "로그인이 필요합니다.");
 			request.setAttribute("url", "/member/login");
+			return "/member/alert";
+		}
+		
+		
+		if (PCD_PAYER_NAME == id) {
+			log.info("이미 구독권 사용중! 페이지 이동");
+			request.setAttribute("msg", "이미 구독권을 이용 중입니다 :)");
+			request.setAttribute("url", "/main");
 			return "/member/alert";
 		}
 
