@@ -47,7 +47,4 @@ public interface BoardService {
 	// 메인페이지 인기글
 	public List getHotList();
 	
-	// 관광지 게시글 추가
-	public int putBoard(BoardVO vo);
-	
 }

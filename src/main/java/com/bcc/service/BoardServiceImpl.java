@@ -313,12 +313,4 @@ public class BoardServiceImpl implements BoardService {
 		return hotList;
 	}
 
-	@Override
-	public int putBoard(BoardVO vo) {
-		
-		 return dao.putBoard(vo);
-	}
-
-	
-
 }

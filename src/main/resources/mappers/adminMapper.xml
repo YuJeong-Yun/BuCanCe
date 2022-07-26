@@ -43,16 +43,13 @@
 	</select>
 	
 	<select id="getSNSMem" resultType="Integer">
-		select count(*) from kakao_table
-		where date_format(regdate, '%Y %c %e')=#{date}
+		select count(if((instr(id,'@')>0 and date_format(regdate, '%Y %c %e')=#{date}),1,null)) 
+		from bcc_member;
 	</select>
 	
 	<select id="getTotalMem" resultType="Integer">
-		select count(*)+(select count(*) from kakao_table)
+		select count(*)
 		from bcc_member
-		<![CDATA[
-		where date_format(regdate, '%Y %c %e') <= date_format(now(), '%Y %c %e')
-		]]>
 	</select>
 	
 	<select id="getTotalPmMem" resultType="Integer">
@@ -61,9 +58,6 @@
 	
 	<select id="getTotalComment" resultType="Integer">
 		select count(*) from comment
-		<![CDATA[
-		where date_format(regdate, '%Y %c %e') <= date_format(now(), '%Y %c %e')
-		]]>
 	</select>
 	
 	<select id="getTotalAcc" resultType="Integer">
@@ -75,6 +69,12 @@
 	 delete from bcc_member
 	 where id =#{id}
 	</delete>
-
+	
+	<!-- 관광지 게시글 추가 -->
+	<insert id="putBoard">
+		insert into tourist_spot (title,lng,convenient,price,tel,img,trfc_info,hldy_info,contents,subtitle,usage_day,addr,addr_full,url,thumbnail,lat,t_category)
+		values (#{title},#{lng},#{convenient},#{price},#{tel},#{img},#{trfc_info},
+		#{hldy_info},#{contents},#{subtitle},#{usage_day},#{addr},#{addr_full},#{url},#{thumbnail},#{lat},#{t_category})
+	</insert>
 	
 </mapper>  
