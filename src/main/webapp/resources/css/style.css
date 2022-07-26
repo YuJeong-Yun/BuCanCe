@@ -738,13 +738,16 @@ ul, ol {
 	border-radius: 50%;
 	position: absolute;
 	left: 0;
-	top: 32%;
+	top: 50%;
 	-webkit-transform: translateY(-6px);
 	-ms-transform: translateY(-6px);
 	transform: translateY(-6px);
 	-webkit-transition: all 0.3s;
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
+}
+.testimonial-slider.owl-carousel.main .owl-nav button {
+	top: 32%;
 }
 .testimonial-slider.owl-carousel .owl-nav button:hover {
 	border-color: #19191a;
