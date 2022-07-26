@@ -16,7 +16,6 @@ import com.bcc.domain.PlanVO;
 
 @Repository
 public class GrpDAOImpl implements GrpDAO {
-	private static final Logger log = LoggerFactory.getLogger(GrpDAOImpl.class);
 
 	@Inject
 	private SqlSession sqlSession;

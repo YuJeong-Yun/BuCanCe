@@ -1,9 +1,6 @@
 package com.bcc.web;
 
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +35,7 @@ public class PlanController {
 	// http://localhost:8088/plan/planList
 	@RequestMapping(value = "/planList", method = RequestMethod.GET)
 	public String planListGET( Model model, HttpSession session, HttpServletResponse response) throws Exception {
-		log.info(" planListGET() 호출 ");
+//		log.info(" planListGET() 호출 ");
 		
 		String id = (String) session.getAttribute("id");
 		
@@ -54,16 +51,12 @@ public class PlanController {
 
 		// 회원 license 가져오기
 		model.addAttribute("license", grpService.getLicense(id));
-
 		// 초대받은 그룹 목록 가져오기
 		model.addAttribute("grpAcceptList", grpService.getGrpAcceptList(id));
-
 		// 소속된 플랜 정보 가져오기
 		model.addAttribute("grpList", planService.getPlanList(id));
-
 		// 회원이 속한 모든 각 그룹의 멤버 정보 가져오기
 		model.addAttribute("grpMemberList", grpService.getAllGrpMemberList(id));
-		
 		// 회원이 속한 모든 각 그룹의 초대중인 멤버 목록 가져오기
 		model.addAttribute("invitingMemberList", grpService.getAllGrpInvitingList(id));
 		
@@ -75,7 +68,7 @@ public class PlanController {
 	// http://localhost:8088/plan/addPlan
 	@RequestMapping(value = "/addPlan", method = RequestMethod.POST)
 	public String addPlanPOST(HttpSession session, String grp_name) throws Exception {
-		log.info(" addPlanPOST() 호출 ");
+//		log.info(" addPlanPOST() 호출 ");
 
 		String id = (String) session.getAttribute("id");
 		// 그룹 번호 생성
@@ -124,13 +117,7 @@ public class PlanController {
 		model.addAttribute("tourlist", planService.getTourList());
 		// 맛집 정보
 		model.addAttribute("restlist", planService.getRestaurantList());
-//		// 숙소 정보
-//		if (session.getAttribute("hotellist") == null) {
-//			// 숙소 정보 세션에 저장
-//			session.setAttribute("hotellist", planService.getHotelList());
-//			log.info("숙소 정보 세션 저장 완료");
-//		}
-		
+
 		// 선택한 관강지 플랜 정보 전달 
 		model.addAttribute("planList", planService.getTourPlanList(num));
 
@@ -142,7 +129,7 @@ public class PlanController {
 	// http://localhost:8088/plan/planContent/1
 	@RequestMapping(value="/planContent/{num}", method=RequestMethod.GET)
 	public String planContentGET(@PathVariable("num") int num, Model model,HttpSession session, HttpServletResponse response) throws Exception {
-		log.info("플랜 정보 확인 : "+num);
+//		log.info("플랜 정보 확인 : "+num);
 		
 		String id = (String) session.getAttribute("id");
 		
@@ -161,10 +148,8 @@ public class PlanController {
 		
 		// 그룹 멤버 전달
 		model.addAttribute("grpMemberList",grpService.getGrpMemberList(num));
-
 		// 여행 경로 정보 전달
 		model.addAttribute("planList", planService.getTourPlanList(num));
-
 		// 초대중인 멤버 리스트 전달
 		model.addAttribute("invitingList",  grpService.getInvitingList(num));
 

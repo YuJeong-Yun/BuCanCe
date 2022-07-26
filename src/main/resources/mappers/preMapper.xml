@@ -8,7 +8,7 @@
 
  <insert id="putPreMember">
         insert into premium_member
-        values(#{PCD_PAY_OID},#{PCD_PAYER_NAME},date_add(now(),interval 1 month))
+        values(#{PCD_PAY_OID},#{PCD_PAYER_NAME},date_add(now(),interval 1 month),date_sub(date_add(now(),interval 1 month),interval 1 day))
     </insert>
     
     <insert id="putOrder">
@@ -29,7 +29,7 @@
     </select>
         
     <select id="getName" parameterType="MemberVO" resultType="string">
-        select name from bcc_member
+        select id from bcc_member
         where id=#{id}
     </select>
     
@@ -51,13 +51,13 @@
    <update id="putReOrder">
         update premium_order
         set create_date = now(), license_deadline = date_add(now(),interval 1 month), next_order_date = date_sub(date_add(now(),interval 1 month),interval 1 day)
-        where PCD_PAYER_NAME =#{PCD_PAYER_NAME}
+        where next_order_date = curdate()
     </update>
     
    <update id="putRePreMember">
         update premium_member
-        set license_deadline = date_add(now(),interval 1 month)
-        where PCD_PAYER_NAME =#{PCD_PAYER_NAME}
+        set license_deadline = date_add(now(),interval 1 month), next_order_date = date_sub(date_add(now(),interval 1 month),interval 1 day)
+        where next_order_date = curdate()
     </update>
 
 </mapper>
