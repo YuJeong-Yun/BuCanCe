@@ -13,7 +13,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.bcc.domain.KakaoVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.persistence.MemberDAO;
 import com.google.gson.JsonElement;
@@ -47,7 +46,7 @@ public class KakaoServiceImpl implements KakaoService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code"); 
             sb.append("&client_id=c30d4acffaf14e6c0a33f269940ff070");  //본인이 발급받은 key
-            sb.append("&redirect_uri=http://localhost:8088/member/kakao_login"); // 본인이 설정해 놓은 경로
+            sb.append("&redirect_uri=http://itwillbs5.cafe24.com/member/kakao_login"); // 본인이 설정해 놓은 경로
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
