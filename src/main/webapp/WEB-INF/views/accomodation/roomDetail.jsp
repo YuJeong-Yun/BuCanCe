@@ -140,6 +140,23 @@
 
 									</tr>
 
+</tr>
+									<td><hr> <br></td>
+									</tr>
+
+									<tr>
+										<td class="r-o">로드뷰</td>
+
+										<td>
+											<!-- 로드뷰를 담을 영역 -->
+											<div id="map2" style="width: 100%; height: 350px;"></div>
+										</td>
+
+									</tr>
+
+
+
+
 								</c:if>
 							</tbody>
 
