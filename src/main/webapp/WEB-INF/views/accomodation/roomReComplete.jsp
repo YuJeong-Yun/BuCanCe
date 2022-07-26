@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<jsp:include page="../include/header.jsp" />
-
+<meta http-equiv="refresh" content="5;">
 	<!-- Contact Section Begin -->
 	<section class="contact-section spad">
 		<div class="container">

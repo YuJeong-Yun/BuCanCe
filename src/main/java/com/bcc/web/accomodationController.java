@@ -3,10 +3,7 @@ package com.bcc.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -48,7 +45,6 @@ public class accomodationController {
 	// http://localhost:8088/accomodation/roomList
 	@RequestMapping(value = "/roomList", method = RequestMethod.GET)
 	public void roomListGET(Model model) throws Exception {
-
 //		log.info(" roomListGET() 호출 ");
 //		log.info(" 전체숙소목록 정보 ");
 
@@ -267,6 +263,8 @@ public class accomodationController {
 		// 결제내역
 //		log.info("accId : " + accId);
 
+		//3초후
+		Thread.sleep(3000);
 		roomPayVO vo = service.getRoomPayInfo(accId);
 
 		// 해당 예약정보
