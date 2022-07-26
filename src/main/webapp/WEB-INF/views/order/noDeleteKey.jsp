@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="breadcrumb-section">
 	<div class="container">
@@ -8,15 +9,17 @@
 			<div class="col-lg-12">
 				<div class="breadcrumb-text">
 				
-					<h2>시스템 점검 중입니다</h2>
+					<h2>구독권 정기결제 정지</h2>
 					
 					<div class="bt-option">
-						<span style="padding: 3em;">잠시 후 다시 시도해주세요</span>
+						<span style="padding: 3em;">정기결제 회원이 아닙니다</span>
 
 						<section>
-
-								<button class="btn btn-info" type="button" onclick="location.href='/main'">메인페이지로</button>
-
+						
+							<form>
+							<a class="btn btn-info" href="/mypage" style="color: white;">마이페이지</a>
+								
+							</form>
 
 						</section>
 					</div>
