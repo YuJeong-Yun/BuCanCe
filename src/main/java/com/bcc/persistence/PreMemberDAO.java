@@ -5,10 +5,10 @@ import com.bcc.domain.PreMemberVO;
 public interface PreMemberDAO {
 	
 	// 프리미엄 회원
-	public void insertPreMember(PreMemberVO vo);
+	public void putPreMember(PreMemberVO vo);
 
 	// 구독종료 회원 삭제
-	public void deletePreMember(PreMemberVO dpv);
+	public void delPreMember(PreMemberVO dpv);
 
 	// 이름 가져오기
 	public String getName(String id);
@@ -18,6 +18,9 @@ public interface PreMemberDAO {
 
 	// 이메일 가져오기
 	public String getEmail(String id);
+	
+	// 재결제 프리미엄 회원 
+	public void putRePreMember(PreMemberVO vo);
 	
 
 }

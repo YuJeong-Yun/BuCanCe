@@ -32,6 +32,10 @@ public class MemberServiceImpl implements MemberService{
 		log.info(" 컨트롤러 호출 ");
 		log.info(" memberInsert(vo) 호출 ");
 		
+		// 1-10 랜덤 프로필
+		int profile = (int) (Math.random()*(10)) + 1;
+		vo.setProfile("/resources/img/profile/profile"+profile+".png");
+		System.out.println(vo);
 		dao.putInsertMember(vo);
 		
 		log.info(" DAO 처리 완료 -> 컨트롤러 이동");
@@ -74,9 +78,15 @@ public class MemberServiceImpl implements MemberService{
 		
 		dao.delMember(vo);
 	}
+	
+	@Override
+	public int delCheck(MemberVO vo) {
+		
+		int cnt = dao.delCheck(vo); 
+		
+		return cnt;
+	}
 
-	
-	
 	@Override
 	public void storageMember(MemberVO vo) {
 		
@@ -95,6 +105,22 @@ public class MemberServiceImpl implements MemberService{
 	public int idCheck(String id) {
 	       
 		int cnt = dao.getIdCheck(id);	 
+		
+		return cnt;
+	}
+
+	@Override
+	public int telCheck(String tel) {
+		
+		int cnt = dao.getTelCheck(tel); 
+		
+		return cnt;
+	}
+	
+	@Override
+	public int emailCheck(String email) {
+
+		int cnt = dao.getEmailCheck(email); 
 		
 		return cnt;
 	}

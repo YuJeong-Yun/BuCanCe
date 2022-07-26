@@ -25,20 +25,20 @@ public class PreMemberDAOImpl implements PreMemberDAO {
 
 	// 프리미엄 멤버
 		@Override
-		public void insertPreMember(PreMemberVO vo) {
+		public void putPreMember(PreMemberVO vo) {
 			
-			log.info("insertPreMember(PreMemberVO vo) 실행");
+			log.info("putPreMember(PreMemberVO vo) 실행");
 			
-			sqlSession.insert(NAMESPACE + ".insertPreMember", vo);
+			sqlSession.insert(NAMESPACE + ".putPreMember", vo);
 			
 		}
 		
 		// 구독종료 회원 삭제
 		@Override
-		public void deletePreMember(PreMemberVO dpv) {
+		public void delPreMember(PreMemberVO dpv) {
 
 		
-			sqlSession.delete(NAMESPACE + ".deletePreMember", dpv);
+			sqlSession.delete(NAMESPACE + ".delPreMember", dpv);
 
 		}
 
@@ -61,6 +61,13 @@ public class PreMemberDAOImpl implements PreMemberDAO {
 		public String getEmail(String id) {
 			
 			return sqlSession.selectOne(NAMESPACE + ".getEmail", id);
+		}
+
+		// 재결제 프리미엄 회원 
+		@Override
+		public void putRePreMember(PreMemberVO vo) {
+
+			sqlSession.update(NAMESPACE+".putRePreMember", vo);
 		}
 
 }

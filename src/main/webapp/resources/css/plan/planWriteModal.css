@@ -1,0 +1,40 @@
+#plan-write-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+#plan-write-modal .modal_body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 1100px;
+  height: 600px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+}
+#plan-write-modal .modal_body img {
+  width: 1100px;
+  height: 600px;
+}
+#plan-write-modal .modal_body .btn-close-modal {
+  background-color: #777;
+  width: 60px; 
+  height: 40px;
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: 40px;
+  margin: auto;
+  border: 1px solid #aaa;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 10;
+}

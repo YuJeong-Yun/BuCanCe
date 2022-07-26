@@ -28,10 +28,18 @@
 	color: #66b3ff;
 }
 
-	#info h4 {
-	text-overflow: ellipsis;
-	width: 220px;
-	overflow: hidden;
-	white-space: nowrap;	
+
+	.info {
+		margin-bottom: 3em;
+		border-bottom: 1px solid #e5e5e5;
+		padding-bottom: 2em;
+		font-family: 'NanumSquare' !important;
+
+	}
 	
-}
+	.info h4 {
+		width: 200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}

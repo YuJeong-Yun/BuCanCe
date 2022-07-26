@@ -3,6 +3,7 @@ package com.bcc.service;
 import java.util.List;
 
 import org.json.simple.JSONArray;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.SearchCriteria;
@@ -42,5 +43,11 @@ public interface BoardService {
 	// 주소 존재 시 페이징 처리 된 목록 가져오기
 	public int countListAddr(SearchCriteria scri); 
 	public List<BoardVO> getListAddr(SearchCriteria scri);
+	
+	// 메인페이지 인기글
+	public List getHotList();
+	
+	// 관광지 게시글 추가
+	public int putBoard(BoardVO vo);
 	
 }

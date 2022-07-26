@@ -1,4 +1,4 @@
-	
+	let price = 6000;
 	
 	// 날짜 형식 변환
 	function formatDate(date){
@@ -89,11 +89,11 @@
 							tag += "</tr>";
 						});
 						$('tbody').append(tag);
-						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*6000+"</th></tr>");
+						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*price+"</th></tr>");
 						
 					} else {
 						$('tbody').append("<tr><td colspan='4'>내역이 없습니다.</td></tr>");
-						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*6000+"</th></tr>");
+						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*price+"</th></tr>");
 						}
 					}
 				}); // ajax
@@ -141,7 +141,7 @@
 							tag += "</tr>";
 						});
 						$('tbody').append(tag);
-						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*6000+"</th></tr>");
+						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*price+"</th></tr>");
 						
 					} else {
 						$('tbody').append("<tr><td colspan='4'>내역이 없습니다.</td></tr>");
