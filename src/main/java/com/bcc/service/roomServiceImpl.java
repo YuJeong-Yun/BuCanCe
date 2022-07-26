@@ -48,7 +48,7 @@ public class roomServiceImpl implements roomService {
 	@Override
 	public JSONArray getRoomList() {
 
-		log.info("service : 숙소목록불러오기");
+//		log.info("service : 숙소목록불러오기");
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
 		String url = "https://www.goodchoice.kr/product/home/12";
@@ -99,7 +99,7 @@ public class roomServiceImpl implements roomService {
 	@Override
 	public JSONArray getRoomSearchList(roomSearch rs) {
 
-		log.info("숙소를 검색한 페이지만 불러오기");
+//		log.info("숙소를 검색한 페이지만 불러오기");
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
 		String url = "https://www.goodchoice.kr/product/home/12";
@@ -243,7 +243,7 @@ public class roomServiceImpl implements roomService {
 	@Override
 	public JSONArray getRoomDetail0(String bno) {
 
-		log.info("크롤링 처리불러오기");
+//		log.info("크롤링 처리불러오기");
 
 		String url = bno;
 
@@ -281,7 +281,7 @@ public class roomServiceImpl implements roomService {
 	@Override
 	public JSONArray getRoomDetail(String bno) {
 
-		log.info("크롤링 처리불러오기");
+//		log.info("크롤링 처리불러오기");
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
 		// // 크롤링할 url지정
@@ -325,7 +325,7 @@ public class roomServiceImpl implements roomService {
 
 	@Override
 	public JSONArray getRoomDetail2(String bno) {
-		log.info("크롤링 서비스값 불러오기");
+//		log.info("크롤링 서비스값 불러오기");
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
 		// String url =
@@ -367,7 +367,7 @@ public class roomServiceImpl implements roomService {
 
 	@Override
 	public JSONArray getRoomDetail3(String bno) {
-		log.info("크롤링  코멘트 처리불러오기");
+//		log.info("크롤링  코멘트 처리불러오기");
 
 		String url = bno;
 
@@ -397,7 +397,7 @@ public class roomServiceImpl implements roomService {
 
 	@Override
 	public JSONArray getRoomDetail4(String bno) {
-		log.info("크롤링 처리불러오기");
+//		log.info("크롤링 처리불러오기");
 
 		String url = bno;
 
@@ -429,7 +429,7 @@ public class roomServiceImpl implements roomService {
 
 	@Override
 	public JSONArray getRoomDetail5(String bno) {
-		log.info("크롤링 상세정보 처리불러오기");
+//		log.info("크롤링 상세정보 처리불러오기");
 
 		String url = bno;
 

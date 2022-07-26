@@ -17,7 +17,7 @@ $.ajax({
 	   $('.loading').hide();
 	   
 	   roomList=data;
-	   console.log(roomList);
+// 	   console.log(roomList);
 	   
 	   $(data).each(function(idx){
 		    
@@ -130,7 +130,7 @@ $.ajax({
 	   $('.loading').hide();
 	   
 	   roomList=data;
-	   console.log(roomList);
+// 	   console.log(roomList);
 	   
 	   $(data).each(function(idx){
 		    

@@ -69,7 +69,6 @@
 				$.ajax({
 					url : "/adminRest/pmMembers?date="+date,
 					success : function(data){
-					console.log(data);
 					let tag = '';
 					$('#filterBtn').append("<span id='resultCnt'>검색결과 : "+data.length+"건</span>");
 					if(data != ""){
