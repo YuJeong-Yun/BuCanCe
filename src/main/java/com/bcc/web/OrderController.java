@@ -121,7 +121,6 @@ public class OrderController extends PaypleController {
 	 */
 	@RequestMapping(value = "/goods")
 // http://localhost:8088/order/goods
-<<<<<<< HEAD
 	public String goods(Model model, HttpSession session, HttpServletRequest request, PreMemberVO mo)
 			throws Exception {
 
