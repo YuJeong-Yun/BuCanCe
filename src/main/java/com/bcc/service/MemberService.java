@@ -55,12 +55,10 @@ public interface MemberService {
 
 	// 찜 목록 조회 //
 	public List<BoardVO> getThumbList(SearchCriteria scri) throws Exception;
-	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception;
 	
 	// 찜 삭제
 	public void deleteThumb(int b_num, String id) throws Exception;
 	
 	// 찜 목록 갯수 조회
 	public Integer getThumbCount(String id);
-	public Integer getSNSThumbCount(String id);
 }

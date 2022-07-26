@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.bcc.domain.BoardVO;
 import com.bcc.domain.KakaoVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PreOrderVO;
@@ -364,6 +365,12 @@ public class AdminServiceImpl implements AdminService {
 		} catch (IOException e) {
 			throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
 		}
+	}
+	
+	@Override
+	public int putBoard(BoardVO vo) {
+		
+		 return dao.putBoard(vo);
 	}
 	
 

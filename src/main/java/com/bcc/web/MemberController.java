@@ -78,18 +78,10 @@ public class MemberController {
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(scri);
 			
-			// 일반회원, SNS 회원 구별(sns회원 -> id 영역에 이메일 저장)
-			if(id.indexOf("@") != -1) {
-				pageMaker.setTotalCount(service.getSNSThumbCount((String) session.getAttribute("id")));
-				model.addAttribute("thumbList", service.getSNSThumbList(scri));
-				
-			} else {
 				pageMaker.setTotalCount(service.getThumbCount((String) session.getAttribute("id")));
 				model.addAttribute("thumbList", service.getThumbList(scri));
 				
-			}
 
-			log.info(pageMaker + "");
 			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("scri", scri);
 
