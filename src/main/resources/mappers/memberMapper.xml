@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="memberMapper">
+  <mapper namespace="com.bcc.mapper.memberMapper">
 
   	<insert id="putPay" parameterType="PreOrderVO">
 		insert into premium_order
