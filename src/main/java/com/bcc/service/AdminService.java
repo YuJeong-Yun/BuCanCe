@@ -1,6 +1,7 @@
 package com.bcc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 
@@ -45,5 +46,8 @@ public interface AdminService {
 
 	// 회원 삭제
 	public void delMem(MemberVO vo);
+	
+	// 관광지 주소 찾기
+	public List searchAddr(String title) throws Exception;
 
 }

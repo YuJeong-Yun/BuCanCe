@@ -115,7 +115,7 @@ ul, ol {
 }
 .section-title span {
 	font-size: 14px;
-	color: #dfa974;
+	color: rgb(0, 128, 192);
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -746,6 +746,9 @@ ul, ol {
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
 }
+.testimonial-slider.owl-carousel.main .owl-nav button {
+	top: 32%;
+}
 .testimonial-slider.owl-carousel .owl-nav button:hover {
 	border-color: #19191a;
 	color: #19191a;
@@ -756,6 +759,19 @@ ul, ol {
 }
 .testimonial-slider .ts-item {
 	text-align: center;
+}
+.testimonial-slider .ts-item .hotTour{
+	cursor: pointer;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.testimonial-slider .ts-item .hotTour:hover{
+	cursor: pointer;
+	-webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 .testimonial-slider .ts-item p {
 	font-size: 20px;
@@ -772,11 +788,6 @@ ul, ol {
 .testimonial-slider .ts-item .ti-author .rating i {
 	color: #f5b917;
 	font-size: 16px;
-}
-.testimonial-slider .ts-item .ti-author h5 {
-	font-size: 20px;
-	color: #19191a;
-	display: inline-block;
 }
 /*---------------------
   Blog and Event

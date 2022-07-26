@@ -12,11 +12,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>부산 여행은 부캉스</title>
     
-    <style type="text/css">
-    @import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
-	@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css");
-    </style>
-    
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
