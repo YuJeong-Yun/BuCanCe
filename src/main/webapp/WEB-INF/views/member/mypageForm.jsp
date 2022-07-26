@@ -11,6 +11,7 @@
 
 <body>
 <div id = "memberMypage">
+	<a href = "/order/deleteKey" style="float: right;">정기결제 정지</a>
 	<section class = "info wid2">
 		<form action="/member/mypage" method="post">
 			<a href = "/member/update">회원정보수정</a>
