@@ -1,9 +1,11 @@
 package com.bcc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 
+import com.bcc.domain.BoardVO;
 import com.bcc.domain.KakaoVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PreOrderVO;
@@ -40,10 +42,13 @@ public interface AdminService {
 	// 웹 회원 목록
 	public List<MemberVO> getAllWebMem();
 
-	// 카카오 회원 목록
-	public List<KakaoVO> getAllSnsMem();
-
 	// 회원 삭제
 	public void delMem(MemberVO vo);
+	
+	// 관광지 주소 찾기
+	public List searchAddr(String title) throws Exception;
+	
+	// 관광지 게시글 추가
+	public int putBoard(BoardVO vo);
 
 }

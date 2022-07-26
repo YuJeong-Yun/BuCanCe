@@ -35,6 +35,12 @@
       delete from bcc_member 
       where id=#{id} and pw=#{pw}
     </delete>
+	
+	<select id="delCheck" parameterType="String" resultType="int">
+		select count(id and pw) 
+		from bcc_member 
+		where id = #{id} and pw = #{pw}
+    </select>
     
 	<insert id="putStorageMember" parameterType="MemberVO">
 		insert into bcc_storage
@@ -57,6 +63,24 @@
 		from bcc_member 
 		where id = #{id}
     </select>
+    
+	<select id="getSnsCheck" parameterType="String" resultType="int">
+		select count(sns)
+		from bcc_member 
+		where id = #{id} and sns = "Y"
+    </select>
+    
+    <select id="getEmailCheck" parameterType="String" resultType="int">
+		select count(email) 
+		from bcc_member 
+		where email = #{email}
+    </select>
+    
+	<select id="getTelCheck" parameterType="String" resultType="int">
+		select count(tel) 
+		from bcc_member 
+		where tel = #{tel}
+    </select>
 
 	<update id="modLicenseUp">
 		update bcc_member
@@ -72,13 +96,7 @@
 
     <select id="getThumbList" resultType="BoardVO">
         select title,thumbnail,num from tourist_spot 
-        where num in (select b_num from thumb where m_id=(select id from bcc_member where id=#{keyword}))
-        limit #{pageStart}, #{perPageNum}
-    </select>
-    
-    <select id="getSNSThumbList" resultType="BoardVO">
-        select title,thumbnail,num from tourist_spot 
-        where num in (select b_num from thumb where m_id=(select k_email from kakao_table where k_email=#{keyword}))
+        where num in (select b_num from thumb where m_id=#{keyword})
         limit #{pageStart}, #{perPageNum}
     </select>
     
@@ -90,41 +108,51 @@
     <select id="getThumbCount" resultType="Integer">
         select count(*)
         from thumb
-        where m_id = (select id from bcc_member where id=#{id})
-    </select>
-    
-    <select id="getSNSThumbCount" resultType="Integer">
-        select count(*)
-        from thumb
-        where m_id = (select k_email from kakao_table where k_email=#{id})
+        where m_id = #{id}
     </select>
     
     <!-- 카카오 로그인 -->
     <!-- 정보 찾기 -->
-    <select id="getKakao" parameterType="java.util.HashMap" resultType="KakaoVO">
-        select * from kakao_table
-        where k_name=#{nickname} and k_email=#{email}
+    <select id="getKakao" parameterType="java.util.HashMap" resultType="MemberVO">
+        select * from bcc_member
+        where name=#{name} and id=#{email}
     </select>
     
     <!-- 정보 저장 -->
     <insert id="putKakao" parameterType="java.util.HashMap">
-        insert into kakao_table(k_name, k_email)
-        values(#{nickname}, #{email})
+        insert into bcc_member(name, id, sns, profile)
+        values(#{name}, #{email}, "Y", #{profile})
     </insert>
+    
     <!-- 카카오 로그인 -->
     
-    <!-- 네이버 로그인 -->
-    <!-- 정보 찾기 -->
-    <select id="findNaver" parameterType="java.util.HashMap" resultType="NaverVO">
-        select * from naver_table
-        where n_name=#{nickname} and n_email=#{email}
-    </select>
-    <!-- 정보 저장 -->
-    <insert id="naverInsert" parameterType="java.util.HashMap">
-        insert into naver_table(n_name, n_email)
-        values(#{nickname}, #{email})
-    </insert>
-    <!-- 네이버 로그인 -->
+<!--     카카오 로그인 백업 -->
+<!-- 	 	정보 찾기 -->
+<!--     <select id="getKakao" parameterType="java.util.HashMap" resultType="KakaoVO"> -->
+<!--         select * from kakao_table -->
+<!--         where k_name=#{nickname} and k_email=#{email} -->
+<!--     </select> -->
+    
+<!--     정보 저장 -->
+<!--     <insert id="putKakao" parameterType="java.util.HashMap"> -->
+<!--         insert into kakao_table(k_name, k_email) -->
+<!--         values(#{nickname}, #{email}) -->
+<!--     </insert> -->
+<!--     카카오 로그인 백업 -->
+    
+    
+<!--     네이버 로그인 -->
+<!--     정보 찾기 -->
+<!--     <select id="findNaver" parameterType="java.util.HashMap" resultType="NaverVO"> -->
+<!--         select * from naver_table -->
+<!--         where n_name=#{nickname} and n_email=#{email} -->
+<!--     </select> -->
+<!--     정보 저장 -->
+<!--     <insert id="naverInsert" parameterType="java.util.HashMap"> -->
+<!--         insert into naver_table(n_name, n_email) -->
+<!--         values(#{nickname}, #{email}) -->
+<!--     </insert> -->
+<!--     네이버 로그인 -->
     
   </mapper>
   

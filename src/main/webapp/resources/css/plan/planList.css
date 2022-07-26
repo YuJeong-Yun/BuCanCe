@@ -36,8 +36,8 @@
 	right: 0;
 }
 .invitation-list .grp-accept-list li form .btn {
-	width: 30px;
-	height: 20px;
+	width: 50px;
+	height: 30px;
 	margin: 0;
 	font-size: 11px;
 }
@@ -156,6 +156,10 @@
 	background-color: #b1cbdf;
 }
 .member-container > li .member--id {
+    width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 	font-size: 13px;
 }
 .member-container > li .member--name {

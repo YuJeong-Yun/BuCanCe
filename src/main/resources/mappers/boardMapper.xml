@@ -107,4 +107,13 @@
 		select * from tourist_spot
 		where title like concat('%',#{keyword},'%')
 	</select>
+	
+	<!-- Hot게시물 가져오기 -->
+	<select id="getHotList" resultType="BoardVO">
+		select * from tourist_spot
+		where t_category=#{t_category}
+		order by totalCnt desc
+		limit 0,3
+	</select>
+	
 </mapper>

@@ -48,7 +48,7 @@ public class roomServiceImpl implements roomService {
 	@Override
 	public JSONArray getRoomList() {
 
-		log.info("service : 숙소목록불러오기");
+//		log.info("service : 숙소목록불러오기");
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
 		String url = "https://www.goodchoice.kr/product/home/12";
@@ -99,7 +99,7 @@ public class roomServiceImpl implements roomService {
 	@Override
 	public JSONArray getRoomSearchList(roomSearch rs) {
 
-		log.info("숙소를 검색한 페이지만 불러오기");
+//		log.info("숙소를 검색한 페이지만 불러오기");
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
 		String url = "https://www.goodchoice.kr/product/home/12";
@@ -243,7 +243,7 @@ public class roomServiceImpl implements roomService {
 	@Override
 	public JSONArray getRoomDetail0(String bno) {
 
-		log.info("크롤링 처리불러오기");
+//		log.info("크롤링 처리불러오기");
 
 		String url = bno;
 
@@ -281,7 +281,7 @@ public class roomServiceImpl implements roomService {
 	@Override
 	public JSONArray getRoomDetail(String bno) {
 
-		log.info("크롤링 처리불러오기");
+//		log.info("크롤링 처리불러오기");
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
 		// // 크롤링할 url지정
@@ -325,7 +325,7 @@ public class roomServiceImpl implements roomService {
 
 	@Override
 	public JSONArray getRoomDetail2(String bno) {
-		log.info("크롤링 서비스값 불러오기");
+//		log.info("크롤링 서비스값 불러오기");
 
 		// Jsoup를 이용해서 크롤링 - 여기어때
 		// String url =
@@ -367,7 +367,7 @@ public class roomServiceImpl implements roomService {
 
 	@Override
 	public JSONArray getRoomDetail3(String bno) {
-		log.info("크롤링  코멘트 처리불러오기");
+//		log.info("크롤링  코멘트 처리불러오기");
 
 		String url = bno;
 
@@ -397,7 +397,7 @@ public class roomServiceImpl implements roomService {
 
 	@Override
 	public JSONArray getRoomDetail4(String bno) {
-		log.info("크롤링 처리불러오기");
+//		log.info("크롤링 처리불러오기");
 
 		String url = bno;
 
@@ -429,7 +429,7 @@ public class roomServiceImpl implements roomService {
 
 	@Override
 	public JSONArray getRoomDetail5(String bno) {
-		log.info("크롤링 상세정보 처리불러오기");
+//		log.info("크롤링 상세정보 처리불러오기");
 
 		String url = bno;
 
@@ -687,12 +687,12 @@ public class roomServiceImpl implements roomService {
 //		log.info("a = " + a);
 
 		// a 문자부분
-		String b = "bccRevNum";
+		String b = "bccReNumber";
 		int c = 0;
 
 		// 데이터 값이 없을때는 bcc1이 들어가고 있을때는 bcc2,bcc3....로 들어감
 		if (a == null) {
-			b = "bccRevNum";
+			b = "bccReNumber";
 			c = 0;
 		} else {
 			// a의 숫자부분
@@ -720,14 +720,14 @@ public class roomServiceImpl implements roomService {
 		String a = dao.getMaxRefund();
 
 		// a 문자부분
-		String b = "bccRefNum";
+		String b = "bccRefNumber";
 
 		// a 숫자부분
 		int c = 0;
 
 		if (a == null) {
 
-			b = "bccRefNum";
+			b = "bccRefNumber";
 			c = 0;
 		} else {
 			c = Integer.parseInt(a.replaceAll("[^0-9]", ""));
@@ -748,59 +748,67 @@ public class roomServiceImpl implements roomService {
 	}
 
 	@Override
-	public String payRefund(roomPayVO vo) throws IOException, org.json.simple.parser.ParseException {
+	public String payRefund(roomPayVO vo) throws Exception {
 		// access_token 발급
-		HttpURLConnection conn = null;
-		URL url = new URL("https://api.iamport.kr/users/getToken");
-		conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("POST");
-		conn.setRequestProperty("Content-Type", "application/json");
-		conn.setRequestProperty("Accept", "application/json");
-		conn.setDoOutput(true);
-		JSONObject obj = new JSONObject();
-		obj.put("imp_key", "3817682477122484");
-		obj.put("imp_secret", "a060f160cc159fd09923a2ebfb7678adbac710c0105bedad238924b8d34a67409508e32f09830702");
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-		bw.write(obj.toString());
-		bw.flush();
-		bw.close();
-		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		StringBuilder sb = new StringBuilder();
-		String line = null;
-		while ((line = br.readLine()) != null) {
-			sb.append(line + "\n");
-		}
-		br.close();
-		JSONParser jsonParser = new JSONParser();
-		JSONObject jsonObj = (JSONObject) jsonParser.parse(sb.toString());
-		JSONObject responseData = (JSONObject) jsonObj.get("response");
-		String access_token = (String) responseData.get("access_token");
+		
+		try {
+			HttpURLConnection conn = null;
+			URL url;
+			url = new URL("https://api.iamport.kr/users/getToken");
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty("Accept", "application/json");
+			conn.setDoOutput(true);
+			JSONObject obj = new JSONObject();
+			obj.put("imp_key", "3817682477122484");
+			obj.put("imp_secret", "a060f160cc159fd09923a2ebfb7678adbac710c0105bedad238924b8d34a67409508e32f09830702");
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			bw.write(obj.toString());
+			bw.flush();
+			bw.close();
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			br.close();
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObj = (JSONObject) jsonParser.parse(sb.toString());
+			JSONObject responseData = (JSONObject) jsonObj.get("response");
+			String access_token = (String) responseData.get("access_token");
 
-		log.info("액세스토큰 :" + access_token);
+			log.info("액세스토큰 :" + access_token);
 
-		// REST API(결제환불) 호출
-		HttpURLConnection conn2 = null;
-		URL url2 = new URL("https://api.iamport.kr/payments/cancel");
-		conn2 = (HttpURLConnection) url2.openConnection();
-		conn2.setRequestMethod("POST");
-		conn2.setRequestProperty("Content-Type", "application/json");
-		conn2.setRequestProperty("Authorization", access_token);
-		conn2.setDoOutput(true);
-		JSONObject obj2 = new JSONObject();
-		obj2.put("reason", "숙소 환불");
-		obj2.put("merchant_uid", vo.getAccId());
-		obj2.put("amount", vo.getAccAmount());
-		BufferedWriter bw2 = new BufferedWriter(new OutputStreamWriter(conn2.getOutputStream()));
-		bw2.write(obj2.toString());
-		bw2.flush();
-		bw2.close();
-		BufferedReader br2 = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
-		StringBuilder sb2 = new StringBuilder();
-		String line2 = null;
-		while ((line2 = br2.readLine()) != null) {
-			sb2.append(line2 + "\n");
+			// REST API(결제환불) 호출
+			HttpURLConnection conn2 = null;
+			URL url2 = new URL("https://api.iamport.kr/payments/cancel");
+			conn2 = (HttpURLConnection) url2.openConnection();
+			conn2.setRequestMethod("POST");
+			conn2.setRequestProperty("Content-Type", "application/json");
+			conn2.setRequestProperty("Authorization", access_token);
+			conn2.setDoOutput(true);
+			JSONObject obj2 = new JSONObject();
+			obj2.put("reason", "숙소 환불");
+			obj2.put("merchant_uid", vo.getAccId());
+			obj2.put("amount", vo.getAccAmount());
+			BufferedWriter bw2 = new BufferedWriter(new OutputStreamWriter(conn2.getOutputStream()));
+			bw2.write(obj2.toString());
+			bw2.flush();
+			bw2.close();
+			BufferedReader br2 = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
+			StringBuilder sb2 = new StringBuilder();
+			String line2 = null;
+			while ((line2 = br2.readLine()) != null) {
+				sb2.append(line2 + "\n");
+			}
+			br2.close();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		br2.close();
+		
 
 		return "OK";
 

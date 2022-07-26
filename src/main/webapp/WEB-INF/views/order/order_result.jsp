@@ -1,4 +1,4 @@
-order_confirm.jsporder_confirm.jsporder_confirm.jsp<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ include file = "../include/header.jsp" %>
 
@@ -120,10 +120,18 @@ order_confirm.jsporder_confirm.jsporder_confirm.jsp<%@ page language="java" cont
   </head>
 
 <body>
+<div class="breadcrumb-section" style="margin: 0 auto;">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb-text">
 
-<p><b>Response (PAY:결과 CERT:인증 AUTH:등록)</b></p>
+            <div style="margin-bottom: 5em; margin-top: 3em;">
+							<div>
+								<h3>| 결제 결과</h3>
 <!-- 1. 결제결과 모두 출력  -->
-${result}
+ <div class="bt-option" >
+<span style="padding: 2em;">최종 결제를 위해 [결제완료]를 클릭해주세요 → </span>
 
 <!-- 2. 결제결과 파라미터로 받기 - 응답 파라미터를 받아서 활용해보세요.  -->
 <div style="display:none">
@@ -174,57 +182,55 @@ ${result}
     PCD_PAY_TIME = ${pay_time}
     <br>
     PCD_TAXSAVE_RST = ${taxsave_rst}
-    
-    
-    
-    <!-- 하하하하  -->
-    <br>
-    PCD_PAY_TIME = ${pay_time1}
-    <br>    
-    PCD_PAY_TIME = ${pay_time2}
-    <br>
-
 
 </div>
 
-<div style="width:800px; height:20px">&nbsp;</div>
+<!-- <div style="width:800px; height:20px">&nbsp;</div>
 
 <div style="border:1px; width:800px;text-align:center;">
-
+ -->
 	
 <%-- 	<c:if test = "${pay_work == 'CERT'}">
     	<button id="payConfirmAct">결제승인요청</button>
-    </c:if>
-    <c:if test = "${pay_work != 'AUTH'}">
-    	<button id="payRefundAct">결제승인취소</button>
-	</c:if> --%>
-    <button type="button" onclick="location='/order/goods'">결제 완료</button>
+    </c:if> --%>
+<%--     <c:if test = "${pay_work != 'AUTH'}">
+    	 <button class="btn btn-info" type="button" onclick="location='/main'" style="margin: 1em; background-color: #0091EA;" >결제승인취소</button>
+	</c:if>  --%>
+    <button class="btn btn-info" type="button" onclick="location='/main'" style="margin: 1em; background-color: #0091EA;" >결제 완료</button>
     
 </div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
 
-<form id="payConfirmForm">
+
+<%-- <form id="payConfirmForm">
     <input type="hidden" name="PCD_PAY_TYPE" id="PCD_PAY_TYPE" value="${pay_type}"> <!-- (필수) 결제수단 (transfer|card) -->
     <input type="hidden" name="PCD_AUTH_KEY" id="PCD_AUTH_KEY" value="${auth_key}"> <!-- (필수) 파트너 인증 토큰 값 -->
     <input type="hidden" name="PCD_PAYER_ID" id="PCD_PAYER_ID" value="${payer_id}"> <!-- (필수) 결제자 고유 ID (빌링키) (결제완료시 RETURN) -->
     <input type="hidden" name="PCD_PAY_REQKEY" id="PCD_PAY_REQKEY" value="${pay_reqkey}"> <!-- (필수) 최종 결제요청 승인키 -->
     <input type="hidden" name="PCD_PAY_COFURL" id="PCD_PAY_COFURL" value="${pay_cofurl}"> <!-- (필수) 최종 결제요청 URL -->
-</form>
+</form>--%>
 
-<form id="payRefundForm">
+<%-- <form id="payRefundForm">
     <input type="hidden" name="PCD_PAY_OID" id="PCD_PAY_OID" value="${pay_oid}"> <!-- (필수) 주문번호 -->
     <input type="hidden" name="PCD_PAY_DATE" id="PCD_PAY_DATE" value="${pay_date}"> <!-- (필수) 원거래 결제일자 -->
     <input type="hidden" name="PCD_REFUND_TOTAL" id="PCD_REFUND_TOTAL" value="${pay_total}"> <!-- (필수) 결제취소 요청금액 -->
     <!--<input type="hidden" name="PCD_REFUND_TAXTOTAL" id="PCD_REFUND_TAXTOTAL" value="${refund_taxtotal}">  (선택) 결제취소 부가세 -->
 </form>
-
-<br/><br/><br/><br/>
+ --%>
+<!-- <br/><br/><br/><br/>
 <b>Response (CERT:결과)</b><br/><br/>
 <div id='payConfirmResult'></div>
 
 
 <br/><br/><br/><br/>
 <b>Response (취소 결과)</b><br/><br/>
-<div id='payRefundResult'></div>
+<div id='payRefundResult'></div>  -->
 </body>
 </html>
 <%@ include file = "../include/footer.jsp" %>

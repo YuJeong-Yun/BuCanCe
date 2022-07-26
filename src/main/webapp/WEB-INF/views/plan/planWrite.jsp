@@ -5,9 +5,34 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|
 Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planWrite.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/plan/planWriteModal.css" />
 
 
-
+	<!-- 모달 설명창 띄우기 -->
+	<div id="plan-write-modal">
+	  <div class="modal_body">
+		<div class="testimonial-slider owl-carousel">
+          <div class="ts-item">
+              <img src="${pageContext.request.contextPath }/resources/img/plan/modal1.jpg" alt="설명1" />
+          </div>
+          <div class="ts-item">
+              <img src="${pageContext.request.contextPath }/resources/img/plan/modal2.jpg" alt="설명2" />
+          </div>
+          <div class="ts-item">
+              <img src="${pageContext.request.contextPath }/resources/img/plan/modal3.jpg" alt="설명3" />
+          </div>
+          <div class="ts-item">
+              <img src="${pageContext.request.contextPath }/resources/img/plan/modal4.jpg" alt="설명4" />
+          </div>
+          <div class="ts-item">
+              <img src="${pageContext.request.contextPath }/resources/img/plan/modal5.jpg" alt="설명5" />
+              <button class="btn-close-modal">닫기</button>
+          </div>
+      	</div>
+	
+	  </div>
+	</div>
+	
 
 	<!--그룹 멤버 보여주기 메뉴-->
 	<section class="show-title-btn">
@@ -125,15 +150,6 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 						  <span class="sr-only">Loading...</span>
 						</div>
 					</li>
-								<%--                 	<c:forEach var="hotel" items="${hotellist }"> --%>
-<%-- 	                  <li class="tour-item a${hotel.num }" onclick="selectTour(event)"> --%>
-<%-- 	                    <img src="${hotel.thumbnail }" alt="" class="content__img" /> --%>
-<%-- 	                    <div class="content__title">${hotel.title }</div> --%>
-<%-- 	                    <input type="hidden" value="${hotel.num }" class="num"> --%>
-<%-- 	                    <input type="hidden" value="${hotel.lng }" class="lng"> --%>
-<%-- 	                    <input type="hidden" value="${hotel.lat }" class="lat"> --%>
-<!-- 	                  </li> -->
-<%-- 	                </c:forEach> --%>
                 </ul>
                 <ul class="search-result hidden">
                 </ul>
@@ -236,5 +252,6 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 	const grp_num = '${num}';
 </script>
 <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx4c685864b69a4b71966f8bda89ed2dd3"></script>
+<script defer src="${pageContext.request.contextPath }/resources/js/plan/planWriteModal.js"></script>
 <script defer src="${pageContext.request.contextPath }/resources/js/plan/planWrite.js"></script>
 <jsp:include page="../include/footer.jsp"></jsp:include>

@@ -13,6 +13,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,8 @@ import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bcc.domain.BoardVO;
 import com.bcc.domain.SearchCriteria;
@@ -36,6 +39,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Inject
 	private BoardDAO dao;
+	
 
 		//글 번호에 해당 되는 페이지 상세보기
 		@Override
@@ -300,6 +304,13 @@ public class BoardServiceImpl implements BoardService {
 		return dao.getListAddr(scri);
 	}
 
-
+	@Override
+	public List getHotList() {
+		List hotList = new ArrayList();
+		hotList.add(dao.getHotList(0));
+		hotList.add(dao.getHotList(1));
+		
+		return hotList;
+	}
 
 }

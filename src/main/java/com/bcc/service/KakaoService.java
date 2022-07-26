@@ -1,6 +1,6 @@
 package com.bcc.service;
 
-import com.bcc.domain.KakaoVO;
+import com.bcc.domain.MemberVO;
 
 public interface KakaoService {
 	   
@@ -8,6 +8,6 @@ public interface KakaoService {
     // 토큰 받아오기
 	public String getAccessToken (String authorize_code);
 		
-	public KakaoVO getUserInfo(String access_Token);
+	public MemberVO getUserInfo(String access_Token);
 	
 }

@@ -58,7 +58,7 @@ public interface roomService {
 	public String refundRoom();
 
 	////환불 아임포트동작
-	public String payRefund(roomPayVO vo2) throws MalformedURLException, IOException, org.json.simple.parser.ParseException;
+	public String payRefund(roomPayVO vo2) throws Exception;
 
 	
 	

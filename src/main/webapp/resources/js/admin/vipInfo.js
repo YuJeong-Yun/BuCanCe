@@ -1,4 +1,4 @@
-	
+	let price = 6000;
 	
 	// 날짜 형식 변환
 	function formatDate(date){
@@ -13,8 +13,8 @@
 
 		$('#today').click(function(){
 			var date = new Date();
-			document.getElementById("startDate").value = formatDate(date);
-			document.getElementById("endDate").value = formatDate(date);
+			document.getElementById("startDate").value = formatDate(date); // 시작날짜
+			document.getElementById("endDate").value = formatDate(date); // 마지막날짜
 		});
 		
 		$('#week').click(function(){
@@ -58,6 +58,7 @@
 				$('tfoot').empty();
 				$('#filterBtn').empty();
 					
+					// 정렬 출력
 					let btnTag = '';
 					btnTag += "<span id='onlyPm' class='periodSpan' onclick='periodMems();'><a>구독회원만 보기</a></span>";
 					btnTag += "<span id='allMem' class='periodSpan' onclick='pmMems();'><a>모두보기</a></span>";
@@ -69,7 +70,6 @@
 				$.ajax({
 					url : "/adminRest/pmMembers?date="+date,
 					success : function(data){
-					console.log(data);
 					let tag = '';
 					$('#filterBtn').append("<span id='resultCnt'>검색결과 : "+data.length+"건</span>");
 					if(data != ""){
@@ -77,6 +77,7 @@
 							tag += "<tr>";
 							tag += "<td>"+obj.pcd_PAYER_NAME+"</td>";
 								 
+								 // pcd_PAYER_ID 값으로 구독회원 구별
 								 if(obj.pcd_PAYER_ID == "" || obj.pcd_PAYER_ID == null){
 									tag += "<td>N</td>";
 								 } else {
@@ -89,11 +90,11 @@
 							tag += "</tr>";
 						});
 						$('tbody').append(tag);
-						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*6000+"</th></tr>");
+						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*price+"</th></tr>");
 						
 					} else {
 						$('tbody').append("<tr><td colspan='4'>내역이 없습니다.</td></tr>");
-						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*6000+"</th></tr>");
+						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*price+"</th></tr>");
 						}
 					}
 				}); // ajax
@@ -141,7 +142,7 @@
 							tag += "</tr>";
 						});
 						$('tbody').append(tag);
-						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*6000+"</th></tr>");
+						$('tfoot').append("<tr><th colspan='3' id='total'>총 수익</th><th>"+($(data).length)*price+"</th></tr>");
 						
 					} else {
 						$('tbody').append("<tr><td colspan='4'>내역이 없습니다.</td></tr>");

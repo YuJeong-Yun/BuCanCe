@@ -22,6 +22,9 @@ public interface MemberService {
 	
 	// 회원정보 삭제
 	public void deleteMember(MemberVO vo);
+	
+	// 삭제 전 확인
+    public int delCheck(MemberVO vo);
 
 	// 회원정보 보관
 	public void storageMember(MemberVO vo);
@@ -31,6 +34,15 @@ public interface MemberService {
 	
 	// 아이디 중복 확인
     public int idCheck(String id);
+    
+	// sns 사용자 확인
+    public int snsCheck(String sns);
+
+	// 전화 중복 확인
+    public int telCheck(String tel);
+    
+	// 이메일 중복 확인
+    public int emailCheck(String email);
     
 	// 라이센스 확인
     public int getLicense(String license);
@@ -43,12 +55,10 @@ public interface MemberService {
 
 	// 찜 목록 조회 //
 	public List<BoardVO> getThumbList(SearchCriteria scri) throws Exception;
-	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception;
 	
 	// 찜 삭제
 	public void deleteThumb(int b_num, String id) throws Exception;
 	
 	// 찜 목록 갯수 조회
 	public Integer getThumbCount(String id);
-	public Integer getSNSThumbCount(String id);
 }

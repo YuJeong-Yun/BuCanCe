@@ -149,8 +149,10 @@
 }
 .make-plan .tour-container .tour-map .menu .choice-date input {
 	border: 1px solid #eee;
+	border-radius: 5px;
 }
 .make-plan .tour-container .tour-map .menu .choice-date .set-date {
+	border: none;
 	margin-left: 10px;
 }
 .make-plan .tour-container .tour-map .menu .choice-date .set-date:hover {
@@ -165,9 +167,9 @@
 	margin: auto;
 }
 .make-plan .tour-container .tour-map .menu .btn-container button {
-	border: none;
-	box-shadow: 2px 2px 3px #bbb;
 	padding: 5px 10px;
+	border: none;
+	border-radius: 5px;
 }
 .make-plan .tour-container .tour-map .menu .btn-container .btn--move {
 	background-color: #efefef;

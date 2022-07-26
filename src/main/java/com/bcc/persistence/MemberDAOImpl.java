@@ -32,7 +32,6 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public Integer getMemberCount() {
-		// DAO-sql 호출
 
 		Integer cnt = sqlSession.selectOne(NAMESPACE + ".getCountMember");
 
@@ -83,6 +82,15 @@ public class MemberDAOImpl implements MemberDAO {
 
 	}
 	
+	
+	@Override
+	public int delCheck(MemberVO vo) {
+		
+		int cnt = sqlSession.selectOne(NAMESPACE + ".delCheck", vo);
+
+		return cnt;
+	}
+
 	@Override
 	public void putStorageMember(MemberVO vo) {
 
@@ -109,19 +117,33 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberVO getEmail(String email) {
-
-		logger.info(" getEmail(email) ");
-
-		MemberVO vo = sqlSession.selectOne(NAMESPACE + ".getEmail", email);
-
-		return vo;
-	}
-
-	@Override
 	public int getIdCheck(String id) {
 
 		int cnt = sqlSession.selectOne(NAMESPACE + ".getIdCheck", id);
+
+		return cnt;
+	}
+	
+	@Override
+	public int getSnsCheck(String sns) {
+		
+		int cnt = sqlSession.selectOne(NAMESPACE + ".getSnsCheck", sns);
+
+		return cnt;
+	}
+
+	@Override
+	public int getTelCheck(String tel) {
+		
+		int cnt = sqlSession.selectOne(NAMESPACE + ".getTelCheck", tel);
+
+		return cnt;
+	}
+
+	@Override
+	public int getEmailCheck(String email) {
+		
+		int cnt = sqlSession.selectOne(NAMESPACE + ".getEmailCheck", email);
 
 		return cnt;
 	}
@@ -161,12 +183,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception {
-		
-		return sqlSession.selectList(NAMESPACE + ".getSNSThumbList", scri);
-	}
-
-	@Override
 	public void delThumb(int b_num, String id) throws Exception {
 		Map thuMap = new HashMap();
 		thuMap.put("b_num", b_num);
@@ -180,10 +196,20 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.selectOne(NAMESPACE+".getThumbCount",id);
 	}
+	
+	// 카카오
+	@Override
+	public void putKakao(HashMap<String, Object> userInfo) {
+		sqlSession.insert(NAMESPACE+".putKakao",userInfo);
+		
+	}
 
 	@Override
-	public Integer getSNSThumbCount(String id) {
-		
-		return sqlSession.selectOne(NAMESPACE+".getSNSThumbCount",id);
+	public MemberVO getKakao(HashMap<String, Object> userInfo) {
+		System.out.println("RN:"+userInfo.get("name"));
+		System.out.println("RE:"+userInfo.get("email"));
+		return sqlSession.selectOne(NAMESPACE+".getKakao", userInfo);
 	}
+	
+	
 }

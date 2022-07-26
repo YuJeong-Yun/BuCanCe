@@ -13,6 +13,9 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 var result_pwd = false;
+var result_id = false;
+var result_email = false;
+var result_tel = false;
 
 //Daum postcode API
 function daumPostcode() {
@@ -49,7 +52,6 @@ function daumPostcode() {
               }
            // 참고항목의 유무에 따라 최종 주소를 만든다.
               addr += (extraAddr !== '' ? extraAddr : '');
-          
           } 
 
           // 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -73,19 +75,23 @@ function checkForm(){
 	
     var id = document.getElementById("id");
     var pw = document.getElementById("pw");
-    var name = document.getElementById("user_name");
+    var name = document.getElementById("name");
     var email = document.getElementById("email");
     var tel = document.getElementById("tel");
     
     var pwd1 = document.getElementById("pw").value;
     var pwd2 = document.getElementById("pw2").value;
-    
-	if($("#id").val()==""){ // 아이디 공백 검사
+
+	if($("#id").val()=="") { // 아이디 공백 검사
 	    alert("아이디를 입력하지 않으셨습니다.");
 		$("#id").focus();
 		return false;
 	} else if(!regId.test(id.value)){ // 아이디 유효성검사
 		alert("아이디는 4~12자의 영문 소문자와 숫자로만 입력하여 주세요.");
+		$("#id").focus();
+		return false;
+	} else if(result_id == false){ // 아이디 중복 검사
+		alert("이미 가입된 아이디 입니다.");
 		$("#id").focus();
 		return false;
 	} else if($("#pw").val()==""){ // 비밀번호 공백 검사
@@ -100,13 +106,13 @@ function checkForm(){
         alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
         $("#pw").focus();
         return false;
-	} else if($("#user_name").val()==""){ // 이름 공백 검사
+	} else if($("#name").val()==""){ // 이름 공백 검사
 	    alert("이름을 입력하지 않으셨습니다.");
-		$("#user_name").focus();
+		$("#name").focus();
 		return false;
     } else if(!regName.test(name.value)){ // 이름 유효성검사
 		alert("한글만 입력해주세요.");
-    	$("#user_name").focus();
+    	$("#name").focus();
 		return false;
 	} else if($("#email").val()==""){ // 이메일 공백 검사
 		alert("메일주소를 입력하지 않으셨습니다.");
@@ -114,6 +120,9 @@ function checkForm(){
 		return false;
 	} else if(!regEmail.test(email.value)){ // 이메일 유효성 검사
 		alert("올바른 이메일 형식이 아닙니다.");
+		return false;
+	} else if(result_email == false){ // 이메일 중복 검사
+		alert("이미 사용중인 이메일 입니다.");
 		return false;
 	} else if($("#tel").val()==""){ // 전화번호 공백 검사
 		alert("전화번호를 입력하지 않으셨습니다.");
@@ -123,17 +132,19 @@ function checkForm(){
 		alert("숫자로만 입력하세요.");
 		$("#tel").focus();
 		return false;
+	} else if(result_tel == false){ // 전화번호 중복 검사
+		alert("이미 사용중인 전화번호 입니다.");
+		$("#tel").focus();
+		return false;
 	} else if($("#address2").val()==""){
 		alert("나머지 주소를 입력하지 않으셨습니다.");
 		$("#address2").focus();
 		return false;
     } else {
-    	
     	alert("회원가입이 완료되었습니다.")
-    
-    }
-    
+    } 
 }
+
 
 function checkId(){
     var id = $("#id").val(); //id값이 "id"인 입력란의 값을 저장
@@ -144,14 +155,16 @@ function checkId(){
      		checkUserId.html("<font color='red'><b>아이디는 영문, 숫자로 4-12 글자 입니다.</b></font>");
      	}else{
      	   $.ajax({
-     	        url:'/idCheck', //Controller에서 인식할 주소
+     	        url:'/member/idCheck', //Controller에서 인식할 주소
      	        type:'POST', //POST 방식으로 전달
      	        data:{id:id},
      	        success:function(cnt){
-     	        if(cnt != 1){
+     	        if(cnt == 0){
      	         		checkUserId.html("<font color='green'><b>사용 가능한 아이디 입니다.</b></font>");
+     	         		result_id = true;
      	            } else {
      	         		checkUserId.html("<font color='red'><b>이미 사용중인 아이디 입니다.</b></font>");
+     	         		result_id = false;
      	            }
      	        },
      	        
@@ -159,11 +172,70 @@ function checkId(){
      	            alert("에러입니다");
      	            
      	        }
-//     	         return;
      	    })
      	}
-     	}
-    	
+    }
+     	
+function checkMtel(){
+	var tel = $("#tel").val();
+	var checkSpan4 = $("#checkTel");
+    var regTel = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/;
+	
+ 	if(!regTel.test(tel)){
+ 		checkSpan4.html("<font color='red'><b>형식이 맞지 않습니다.</b></font>");
+ 	}else{
+ 		
+  	   $.ajax({
+	        url:'/member/telCheck', //Controller에서 인식할 주소
+	        type:'POST', //POST 방식으로 전달
+	        data:{tel:tel},
+	        success:function(tCnt){
+	        if(tCnt == 0){
+	     			checkSpan4.html("<font color='green'><b>사용가능한 전화번호 입니다.</b></font>");
+		     		result_tel = true;
+	            } else {
+	            	checkSpan4.html("<font color='red'><b>이미 사용중인 전화번호 입니다.</b></font>");
+	            	result_tel = false;
+	            }
+	        },
+	        
+	        error:function(){
+	            alert("에러입니다");
+ 	        }
+	    })
+	}
+}
+
+function checkEmail(){
+	var email = $("#email").val();
+	var checkSpan5 = $("#checkEmail");
+	var regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	
+ 	if(!regEmail.test(email)){
+ 		checkSpan5.html("<font color='red'><b>형식이 맞지 않습니다.</b></font>");
+ 	}else{
+ 		
+   	   $.ajax({
+	        url:'/member/emailCheck', //Controller에서 인식할 주소
+	        type:'POST', //POST 방식으로 전달
+	        data:{email:email},
+	        success:function(eCnt){
+	        if(eCnt == 0){
+	     			checkSpan5.html("<font color='green'><b>사용가능한 이메일 입니다.</b></font>");
+		     		result_email = true;
+	            } else {
+	            	checkSpan5.html("<font color='red'><b>이미 사용중인 이메일 입니다.</b></font>");
+	            	result_email = false;
+	            }
+	        },
+	        
+	        error:function(){
+	            alert("에러입니다");
+	        }
+	    })
+	}
+}
+
 function checkPwd(){
 	var pwd1 = $("#pw").val();
 	var checkSpan = $("#checkPwd1");
@@ -185,15 +257,16 @@ function checkPwd2(){
   if(pwd2 != ""){
 	   	if(pwd2 == pwd1){
 	    	checkSpan.innerHTML = "<font color='green'><b>비밀번호가 일치합니다.</b></font>";
+	    	result_pwd = true;
 	    }else{
 	   		checkSpan.innerHTML = "<font color='red'><b>비밀번호가 일치하지 않습니다.</b></font>";
-	   		result_pwd = true;
+	   		
 	   	}
   }
 }
 
 function checkName(){
-	    	var name = $("#user_name").val();
+	    	var name = $("#name").val();
 	    	var checkSpan3 = $("#checkName");
 	    	var regName = /^[가-힣]{2,4}$/;
 	    	
@@ -201,33 +274,6 @@ function checkName(){
 	     		checkSpan3.html("<font color='red'><b>형식이 맞지 않습니다.</b></font>");
 	     	}else{
 	     		checkSpan3.html("<font color='green'><b>사용가능한 성명</b></font>");
-	     		result_pwd = true;
-	     	}
-	    }
-
-function checkMtel(){
-	    	var mTel = $("#tel").val();
-	    	var checkSpan4 = $("#checkTel");
-	        var regTel = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-	    	
-	     	if(!regTel.test(mTel)){
-	     		checkSpan4.html("<font color='red'><b>형식이 맞지 않습니다.</b></font>");
-	     	}else{
-	     		checkSpan4.html("<font color='green'><b>사용가능한 전화번호</b></font>");
-	     		result_pwd = true;
-	     	}
-	    }
-
-function checkEmail(){
-	    	var email = $("#email").val();
-	    	var checkSpan5 = $("#checkEmail");
-	    	var regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	    	
-	     	if(!regEmail.test(email)){
-	     		checkSpan5.html("<font color='red'><b>형식이 맞지 않습니다.</b></font>");
-	     	}else{
-	     		checkSpan5.html("<font color='green'><b>사용가능한 메일주소</b></font>");
-	     		result_pwd = true;
 	     	}
 	    }
 
@@ -236,16 +282,16 @@ function checkEmail(){
 
 <body>
 <div class = "insert-wrapper">
-    	<form action="${pageContext.request.contextPath }/insert" method="post" onsubmit="return checkForm()">
-			<span><input type="text" id = "id" name="id" placeholder="아이디" onblur = "checkId()" ></span><span id="checkId1">&nbsp;</span>
-			<span><input type ="password" name="pw" id = "pw" placeholder = "비밀번호" onblur="checkPwd()"></span><span id="checkPwd1"> &nbsp;</span>
-			<span><input type="password" name="pw2" id ="pw2" placeholder="비밀번호 확인" onblur="checkPwd2()"></span><span id="checkPwd2"> &nbsp;</span>
-			<span><input type="text" class = "inputBox" name="user_name"  id = "user_name" onblur="checkName()" placeholder="이름"></span><span id="checkName">&nbsp;</span>
-			<span><input type="text" class = "inputBox" name="email"  id = "email" onblur="checkEmail()" placeholder = "이메일"></span><span id="checkEmail">&nbsp;</span>
-			<span><input type="text" class = "inputBox" name="tel" id = "tel" onblur="checkMtel()" placeholder =  "전화번호"></span><span id="checkTel">&nbsp;</span>
-			<input type="text" class="inputBox" name="zip" id = "zip" placeholder = "우편번호"><input type="button" id="search" class="dup" onclick="daumPostcode()" value="우편번호찾기">
-			<label>&nbsp;</label><input type="text" id="address1" name="address1" value="" class="address1" readonly>
-			<label>&nbsp;</label><input type="text" id="address2" name="address2" class="address2" placeholder="상세주소를 입력하세요." required="">
+    	<form action="${pageContext.request.contextPath }/member/insert" method="post" onsubmit="return checkForm()">
+			<span><input type="text" class = "insertbox" id = "id" name="id" placeholder="아이디" onblur = "checkId()" ><br><span id="checkId1">&nbsp;</span></span><br>
+			<span><input type ="password" class = "insertbox" name="pw" id = "pw" placeholder = "비밀번호" onblur="checkPwd()"><br><span id="checkPwd1"> &nbsp;</span></span><br>
+			<span><input type="password" class = "insertbox" name="pw2" id ="pw2" placeholder="비밀번호 확인" onblur="checkPwd2()"><br><span id="checkPwd2"> &nbsp;</span></span><br>
+			<span><input type="text" class = "insertbox" name="name" id ="name" onblur="checkName()" placeholder="이름"><br><span id="checkName">&nbsp;</span></span><br>
+			<span><input type="text" class = "insertbox" name="email" id = "email" onblur="checkEmail()" placeholder = "이메일"><br><span id="checkEmail">&nbsp;</span></span><br>
+			<span><input type="text" class = "insertbox" name="tel" id = "tel" onblur="checkMtel()" placeholder =  "전화번호"><br><span id="checkTel">&nbsp;</span></span><br>
+			<input type="text" class = "addrbox" name="zip" id = "zip" placeholder = "우편번호"><input type="button" id="search" class="adrBtn" onclick="daumPostcode()" value="검색"><br>
+			<label>&nbsp;</label><span><input type="text" class = "insertbox" id="address1" name="address1" value="" class="address1" readonly></span><br>
+			<label>&nbsp;</label><span><input type="text" class = "insertbox" id="address2" name="address2" class="address2" placeholder="상세주소를 입력하세요." required=""></span><br>
     	    <input type="submit" value="회원가입" >
     	</form>
 </div>

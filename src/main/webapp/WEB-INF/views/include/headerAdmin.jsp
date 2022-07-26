@@ -10,14 +10,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
-    
-    <style type="text/css">
-    @import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css");
-	@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css");
-    </style>
-    
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <title>사이트관리</title>
     
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -26,7 +19,6 @@
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/flaticon.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css" type="text/css">

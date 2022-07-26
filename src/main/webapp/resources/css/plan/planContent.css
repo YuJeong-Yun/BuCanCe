@@ -81,9 +81,13 @@ body {
 	background-color: #b1cbdf;
 }
 .grp-member .member-container li .member--id {
+    width: 80px;
 	font-size: 16px;
 	font-weight: 700;
 	color: #01111e;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .grp-member .member-container li .member--name {
 	font-size: 12px;
@@ -135,7 +139,7 @@ body {
 
 /* 여행 일정 확인 */
 .tour-plan {
-  padding: 60px 0 350px;
+  padding: 60px 0 600px;
   background-color: rgb(192 228 237 / 50%);
 }
 .tour-plan .inner {

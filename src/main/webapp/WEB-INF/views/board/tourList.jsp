@@ -4,6 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <jsp:include page="../include/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/board.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" type="text/css">
+
 
 
 <!-- Breadcrumb Section Begin -->
@@ -55,7 +57,7 @@
                     <div class="col-lg-6">
                         <div class="tn-right">
 		                        <i class="fa fa-search" aria-hidden="true"></i>
-		                        <input type="search" id="keywordInput" placeholder="검색어를 입력하세요" onkeypress="keywordSearch(event)"/>
+		                        <input type="search" id="keywordInput" placeholder="검색어를 입력하세요" onkeypress="keywordSearch(event)" value="${scri.keyword}"/>
                         </div>
                     </div>
                 </div>

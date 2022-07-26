@@ -14,24 +14,30 @@
 					<img src="${vo.img }">
 				</div>
 				<div class="rd-text">
-					<div class="rd-title">
-						<h3 style="font-family: 'NanumSquareBold' !important;">${vo.title }
+					<div class="rd-title tr-title">
+						<h3>${vo.title }
 						</h3>
 					</div>
 					<table id="infos">
 						<tbody>
+							<c:if test="${not empty vo.tel }">
 							<tr>
 								<td class="r-o">전화번호</td>
 								<td>${vo.tel }</td>
 							</tr>
+							</c:if>
+							<c:if test="${not empty vo.usage_day }">
 							<tr>
 								<td class="r-o">운영시간</td>
 								<td>${vo.usage_day }</td>
 							</tr>
+							</c:if>
+							<c:if test="${not empty vo.addr_full }">
 							<tr>
 								<td class="r-o">상세주소</td>
 								<td>${vo.addr_full }</td>
 							</tr>
+							</c:if>
 							
 							<c:if test="${not empty vo.trfc_info }">
 							<tr>
@@ -87,12 +93,19 @@
 		<div id="writeReview">
 				<div id="comment1">
 					<div id="comment">
-					<!-- 로그인 안 했을 경우 alert -->
 						<ol class="commentList">
 							<c:forEach items="${commentList}" var="commentList">
 							 <div class="sc-author">
-                                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF5muH6piXfKA2yUyMkJwm0mJq6O4lU-1mFA&usqp=CAU"
+							 	<!-- 프로필 있을 경우 -->
+							 	<c:if test="${commentList.profile ne null }">
+                                   <img src="${pageContext.request.contextPath }${commentList.profile}"
                                    width="60" height="60" style="border-radius : 90px">
+                                </c:if>
+                                <!-- 프로필 없을 경우 -->
+                                <c:if test="${commentList.profile eq null }">
+                                   <img src="${pageContext.request.contextPath }/resources/img/profile/profile1.png"
+                                   width="60" height="60" style="border-radius : 90px">
+                                </c:if>
 								${commentList.writer}님 &nbsp;&nbsp;
 									<fmt:formatDate value="${commentList.regdate}" pattern="yyyy-MM-dd" /> &nbsp;&nbsp;
 									<b><c:if test="${commentList.visit==1}">방문했어요 </c:if>
@@ -132,10 +145,10 @@
 							 <c:if test = "${not empty sessionScope.id }">
 							<p>
 								<label for="id">댓글 작성자</label>
-								<input type="text" name="id" id="id" value=" ${id }">
+								<input type="text" name="id" id="id" value=" ${id }" readonly="${id }">
 							</p>
 							<p>
-								<textarea rows="5" cols="50" name="content" id="contentArea"></textarea>
+								<textarea rows="5" cols="250" name="content" id="contentArea"></textarea>
 							</p>
 							<p>
 								<button type="button" class="commentWriteBtn">댓글 작성</button>
@@ -173,6 +186,7 @@
 	const t_category = '${vo.t_category}';
 	const title = '${vo.title}';
 	const addr = '${vo.addr}';
+	const addr_full = '${vo.addr_full}';
 	const addr2 = '${param.addr}';
 	const lat = '${vo.lat}';
 	const lng = '${vo.lng}';

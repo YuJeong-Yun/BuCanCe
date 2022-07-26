@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <jsp:include page="./include/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/main.css" />
-
 
 <!-- <style>
 .owl-carousel{
@@ -240,61 +239,6 @@ background-position: center center;
 <!--     </section> -->
     <!-- Home Room Section End -->
 
-    <!-- Testimonial Section Begin -->
-<!--     <section class="testimonial-section spad"> -->
-<!--         <div class="container"> -->
-<!--             <div class="row"> -->
-<!--                 <div class="col-lg-12"> -->
-<!--                     <div class="section-title"> -->
-<!--                         <span>Testimonials</span> -->
-<!--                         <h2>What Customers Say?</h2> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--             <div class="row"> -->
-<!--                 <div class="col-lg-8 offset-lg-2"> -->
-<!--                     <div class="testimonial-slider owl-carousel"> -->
-<!--                         <div class="ts-item"> -->
-<!--                             <p>After a construction project took longer than expected, my husband, my daughter and I -->
-<!--                                 needed a place to stay for a few nights. As a Chicago resident, we know a lot about our -->
-<!--                                 city, neighborhood and the types of housing options available and absolutely love our -->
-<!--                                 vacation at Sona Hotel.</p> -->
-<!--                             <div class="ti-author"> -->
-<!--                                 <div class="rating"> -->
-<!--                                     <i class="icon_star"></i> -->
-<!--                                     <i class="icon_star"></i> -->
-<!--                                     <i class="icon_star"></i> -->
-<!--                                     <i class="icon_star"></i> -->
-<!--                                     <i class="icon_star-half_alt"></i> -->
-<!--                                 </div> -->
-<!--                                 <h5> - Alexander Vasquez</h5> -->
-<!--                             </div> -->
-<%--                             <img src="${pageContext.request.contextPath}/resources/img/testimonial-logo.png" alt=""> --%>
-<!--                         </div> -->
-<!--                         <div class="ts-item"> -->
-<!--                             <p>After a construction project took longer than expected, my husband, my daughter and I -->
-<!--                                 needed a place to stay for a few nights. As a Chicago resident, we know a lot about our -->
-<!--                                 city, neighborhood and the types of housing options available and absolutely love our -->
-<!--                                 vacation at Sona Hotel.</p> -->
-<!--                             <div class="ti-author"> -->
-<!--                                 <div class="rating"> -->
-<!--                                     <i class="icon_star"></i> -->
-<!--                                     <i class="icon_star"></i> -->
-<!--                                     <i class="icon_star"></i> -->
-<!--                                     <i class="icon_star"></i> -->
-<!--                                     <i class="icon_star-half_alt"></i> -->
-<!--                                 </div> -->
-<!--                                 <h5> - Alexander Vasquez</h5> -->
-<!--                             </div> -->
-<%--                             <img src="${pageContext.request.contextPath}/resources/img/testimonial-logo.png" alt=""> --%>
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </section> -->
-    <!-- Testimonial Section End -->
-
     <!-- Blog Section Begin -->
 <!--     <section class="blog-section spad"> -->
 <!--         <div class="container"> -->
@@ -369,9 +313,60 @@ background-position: center center;
     		<div class="description-2">
     			<div class="title">부캉스의 회원은 누구나 이용 가능!</div>
     			<button onclick="location.href='${pageContext.request.contextPath}/plan/planList';">플랜 작성하러 가기</button>
-    			<a href="${pageContext.request.contextPath }/member/join" class="no-member">지금 회원 가입하러 가기</a>
+    			<a href="${pageContext.request.contextPath }/member/insert" class="no-member">지금 회원 가입하러 가기</a>
     		</div>
     	</div>
+    </section>
+    
+    <!-- 인기관광지/맛집 -->
+    <section class="testimonial-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Best</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                <c:set value="${hotList[0] }" var="tour"/>
+                <c:set value="${hotList[1] }" var="eating"/>
+                    <div class="testimonial-slider owl-carousel main">
+               			<c:forEach var="i" begin="0" end="${tour.size()-1 }" step="1">
+                        <div class="ts-item">
+                            <p><img src="${tour[i].img }" class="hotTour" onclick="location.href='/board/infoDetail?num=${tour[i].num}&page=1&perPageNum=12&t_category=${tour[i].t_category}&addr=all'"></p>
+                                <div class="row">
+					                <div class="col-lg-12">
+					                    <div class="section-title">
+					                        <span>관광지 TOP3</span>
+					                    </div>
+					                </div>
+					            </div>
+                            <div class="ti-author">
+                                <h4>${i+1}위. ${tour[i].title }</h4>
+                            </div>
+                        </div>
+                		</c:forEach>    
+                		<c:forEach var="i" begin="0" end="${eating.size()-1 }" step="1">
+                        <div class="ts-item">
+                            <p><img src="${eating[i].img }" class="hotTour" onclick="location.href='/board/infoDetail?num=${eating[i].num}&page=1&perPageNum=12&t_category=${eating[i].t_category}&addr=all'"></p>
+                                <div class="row">
+					                <div class="col-lg-12">
+					                    <div class="section-title">
+					                        <span>맛집 TOP3</span>
+					                    </div>
+					                </div>
+					            </div>
+                            <div class="ti-author">
+                                <h4>${i+1}위. ${eating[i].title }</h4>
+                            </div>
+                        </div>
+                		</c:forEach>    
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     
     
@@ -382,5 +377,4 @@ background-position: center center;
 	   		<button onclick="location.href='${pageContext.request.contextPath}/board/tourMap';">지금 보러 가기</button>
 	   	</div>
     </section>
-
 <jsp:include page="include/footer.jsp" />

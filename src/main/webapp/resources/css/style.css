@@ -115,7 +115,7 @@ ul, ol {
 }
 .section-title span {
 	font-size: 14px;
-	color: #dfa974;
+	color: rgb(0, 128, 192);
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -453,7 +453,7 @@ ul, ol {
 	top: 52px;
 	width: 100%;
 	height: 2px;
-	background: #dfa974;
+	background: #557cb3;
 	content: "";
 	opacity: 0;
 	-webkit-transition: all 0.3s;
@@ -737,7 +737,7 @@ ul, ol {
 	text-align: center;
 	border-radius: 50%;
 	position: absolute;
-	left: -190px;
+	left: 0;
 	top: 50%;
 	-webkit-transform: translateY(-6px);
 	-ms-transform: translateY(-6px);
@@ -746,16 +746,32 @@ ul, ol {
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
 }
+.testimonial-slider.owl-carousel.main .owl-nav button {
+	top: 32%;
+}
 .testimonial-slider.owl-carousel .owl-nav button:hover {
 	border-color: #19191a;
 	color: #19191a;
 }
 .testimonial-slider.owl-carousel .owl-nav button.owl-next {
 	left: auto;
-	right: -190px;
+	right: 0;
 }
 .testimonial-slider .ts-item {
 	text-align: center;
+}
+.testimonial-slider .ts-item .hotTour{
+	cursor: pointer;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.testimonial-slider .ts-item .hotTour:hover{
+	cursor: pointer;
+	-webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 .testimonial-slider .ts-item p {
 	font-size: 20px;
@@ -772,11 +788,6 @@ ul, ol {
 .testimonial-slider .ts-item .ti-author .rating i {
 	color: #f5b917;
 	font-size: 16px;
-}
-.testimonial-slider .ts-item .ti-author h5 {
-	font-size: 20px;
-	color: #19191a;
-	display: inline-block;
 }
 /*---------------------
   Blog and Event
@@ -937,7 +948,7 @@ ul, ol {
 	position: absolute;
 	right: -13px;
 	top: 1px;
-	content: "";
+	content: "";
 	font-size: 18px;
 	font-family: "FontAwesome";
 	color: #aaaab3;
@@ -2061,7 +2072,7 @@ ul, ol {
 		font-size: 13px;
 		font-weight: 700;
 		padding: 16px 28px 15px;
-		background: #dfa974;
+		background: #557cb3;
 		color: #ffffff;
 		text-transform: uppercase;
 		letter-spacing: 2px;

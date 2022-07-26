@@ -78,10 +78,11 @@
     ----------------------- */
     $(".testimonial-slider").owlCarousel({
         items: 1,
+        autoplayHoverPause: true,
         dots: false,
         autoplay: true,
         loop: true,
-        smartSpeed: 1200,
+        smartSpeed: 3000,
         nav: true,
         navText: ["<i class='arrow_left'></i>", "<i class='arrow_right'></i>"]
     });
