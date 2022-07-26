@@ -56,7 +56,7 @@ public class PaypleController {
 			con.setRequestMethod("POST");
 			con.setRequestProperty("content-type", "application/json");
 			con.setRequestProperty("charset", "UTF-8");
-			con.setRequestProperty("referer", "http://localhost:8088");
+			con.setRequestProperty("referer", "http://itwillbs5.cafe24.com");
 			con.setDoOutput(true);
 
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());

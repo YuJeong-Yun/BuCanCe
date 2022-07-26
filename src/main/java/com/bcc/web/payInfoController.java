@@ -73,7 +73,7 @@ public class payInfoController extends PaypleController {
 
 			con.setRequestMethod("POST");
 			con.setRequestProperty("content-type", "application/json");
-			con.setRequestProperty("referer", "http://localhost:8088");
+			con.setRequestProperty("referer", "http://itwillbs5.cafe24.com");
 			con.setDoOutput(true);
 
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
