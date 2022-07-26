@@ -14,7 +14,7 @@
 					<img src="${vo.img }">
 				</div>
 				<div class="rd-text">
-					<div class="rd-title">
+					<div class="rd-title tr-title">
 						<h3>${vo.title }
 						</h3>
 					</div>
