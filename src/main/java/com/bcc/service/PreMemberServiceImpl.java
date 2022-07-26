@@ -22,7 +22,7 @@ public class PreMemberServiceImpl implements PreMemberService {
 		@Override
 		public void putPreMember(PreMemberVO vo) {
 			
-			System.out.println(" service.putPreMember 호출");
+//			System.out.println(" service.putPreMember 호출");
 			
 			dao.putPreMember(vo);
 			
@@ -33,7 +33,7 @@ public class PreMemberServiceImpl implements PreMemberService {
 
 		@Override
 		public void delPreMember(PreMemberVO dpv) {
-			log.info(" service.delPreMember 호출");
+//			log.info(" service.delPreMember 호출");
 
 			dao.delPreMember(dpv);
 
@@ -42,7 +42,7 @@ public class PreMemberServiceImpl implements PreMemberService {
 		// 이름 가져오기
 		@Override
 		public String getName(String id) {
-			log.info(" service.getName 호출");
+//			log.info(" service.getName 호출");
 
 			return dao.getName(id);
 		}
@@ -50,7 +50,7 @@ public class PreMemberServiceImpl implements PreMemberService {
 		// 전화 가져오기
 		@Override
 		public String getTel(String id) {
-			log.info(" service.getTel 호출");
+//			log.info(" service.getTel 호출");
 			
 			return dao.getTel(id);
 		}
@@ -58,7 +58,7 @@ public class PreMemberServiceImpl implements PreMemberService {
 		// 메일 가져오기
 		@Override
 		public String getEmail(String id) {
-			log.info(" service.getEmail 호출");
+//			log.info(" service.getEmail 호출");
 			
 			return dao.getEmail(id);
 		}
@@ -67,7 +67,7 @@ public class PreMemberServiceImpl implements PreMemberService {
 		// 재결제 프리미엄 회원 
 		@Override
 		public void putRePreMember(PreMemberVO vo) {
-			log.info(" service.putRePreMember 호출");
+//			log.info(" service.putRePreMember 호출");
 
 			dao.putRePreMember(vo);
 			
@@ -77,7 +77,7 @@ public class PreMemberServiceImpl implements PreMemberService {
 		// 프리미엄 회원 id 가져오기
 		@Override
 		public String getid(PreMemberVO vo) {
-			log.info(" service.getid 호출");
+//			log.info(" service.getid 호출");
 
 			return dao.getid(vo);
 		}
