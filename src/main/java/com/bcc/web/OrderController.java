@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bcc.domain.MemberVO;
 import com.bcc.domain.PreMemberVO;
 import com.bcc.domain.PreOrderVO;
 import com.bcc.scheduler.Scheduler;
@@ -58,7 +59,7 @@ public class OrderController extends PaypleController {
 	public String deleteKeyGET(HttpSession session, PreOrderVO vo) throws Exception {
 
 // 임시
-		session.setAttribute("id", "itwill2");
+//session.setAttribute("id", "hg");
 		String PCD_PAYER_NAME = (String) session.getAttribute("id");
 
 		log.info(" deleteKeyGET() 호출 ");
@@ -89,7 +90,7 @@ public class OrderController extends PaypleController {
 		log.info(" deleteKeyPOST() 호출 ");
 
 // 임시
-		session.setAttribute("id", "itwill2");
+//session.setAttribute("id", "hg");
 		String PCD_PAYER_NAME = (String) session.getAttribute("id");
 
 // 서비스 - 빌링키 불러오기
@@ -114,7 +115,7 @@ public class OrderController extends PaypleController {
 // http://localhost:8088/order/goods
 	public String goods(Model model) {
 		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-		model.addAttribute("pay_total", "1000"); // 결제요청금액
+		model.addAttribute("pay_total", "6000"); // 결제요청금액
 		return "/order/goods";
 	}
 
@@ -123,61 +124,45 @@ public class OrderController extends PaypleController {
 	 */
 	@RequestMapping(value = "/orderInfo")
 // http://localhost:8088/order/orderInfo
-	public String orderInfo(Model model, HttpSession session) {
+	public String orderInfo(Model model, HttpSession session, MemberVO vo) {
 
 		model.addAttribute("payer_no", "1234"); // 파트너 회원 고유번호 > 선택사항 그거없셔
-		model.addAttribute("payer_name", "itwill2"); // 결제자 이름
-		model.addAttribute("payer_hp", "010-1111-1111"); // 결제자 휴대전화번호
-		model.addAttribute("payer_email", "itwill2@naver.com"); // 결제자 이메일
+		model.addAttribute("payer_name", vo.getId()); // 결제자 이름
+		model.addAttribute("payer_hp", vo.getTel()); // 결제자 휴대전화번호
+		model.addAttribute("payer_email", vo.getEmail()); // 결제자 이메일
 		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-		model.addAttribute("pay_total", "1000"); // 결제요청금액
+		model.addAttribute("pay_total", "6000"); // 결제요청금액
 		return "/order/orderInfo";
 	}
 
 	@RequestMapping(value = "/order1")
 // http://localhost:8088/order/order1
-	public String order1(Model model, HttpSession session) throws Exception {
+	public String order1(Model model, HttpSession session, MemberVO vo) throws Exception {
 		log.info("order1() 호출");
 		log.info("일반 결제 페이지 호출");
 
-// String id = (String) session.getAttribute("id");
-// 이름 휴대전화 이메일 불러오기 에효
-// String name = service2.getName(id);
-// String tel = service2.getTel(id);
-// String email = service2.getEmail(id);
 		model.addAttribute("payer_no", "1234"); // 파트너 회원 고유번호 > 선택사항 그거없셔
-		model.addAttribute("payer_name", "itwill2"); // 결제자 이름
-		model.addAttribute("payer_hp", "010-1111-1111"); // 결제자 휴대전화번호
-		model.addAttribute("payer_email", "itwill2@naver.com"); // 결제자 이메일
+		model.addAttribute("payer_name", vo.getId()); // 결제자 이름
+		model.addAttribute("payer_hp", vo.getTel()); // 결제자 휴대전화번호
+		model.addAttribute("payer_email", vo.getEmail()); // 결제자 이메일
 		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-		model.addAttribute("pay_total", "1000"); // 결제요청금액
+		model.addAttribute("pay_total", "6000"); // 결제요청금액
 // 페이지 이동
 		return "/order/order1";
 	}
 
 	@RequestMapping(value = "/order2")
 // http://localhost:8088/order/order2
-	public String order2(Model model, HttpSession session) throws Exception {
+	public String order2(Model model, HttpSession session, MemberVO vo) throws Exception {
 		log.info("order2() 호출");
 		log.info("정기 결제 페이지 호출");
 
-// 이름 휴대전화 이메일 불러오기 에효
-// String name = service2.getName(id);
-// String tel = service2.getTel(id);
-// String email = service2.getEmail(id);
-
 		model.addAttribute("payer_no", "1234"); // 파트너 회원 고유번호 > 선택사항 그거없셔
-		model.addAttribute("payer_name", "itwill2"/* name */); // 결제자 이름
-		model.addAttribute("payer_hp", "010-1111-1111"/* tel */); // 결제자 휴대전화번호
-		model.addAttribute("payer_email", "itwill2@naver.com"/* email */); // 결제자 이메일
+		model.addAttribute("payer_name", vo.getId()); // 결제자 이름
+		model.addAttribute("payer_hp", vo.getTel()); // 결제자 휴대전화번호
+		model.addAttribute("payer_email", vo.getEmail()); // 결제자 이메일
 		model.addAttribute("pay_goods", "프리미엄 정기 구독권"); // 상품명
-		model.addAttribute("pay_total", "1000"); // 결제요청금액
-
-//
-		model.addAttribute("id", "sb");
-//model.addAttribute("credate_date", ""); 	
-//model.addAttribute("license_deadline",""); 	
-//model.addAttribute("next_order_date", ""); 
+		model.addAttribute("pay_total", "6000"); // 결제요청금액
 
 // 페이지 이동
 		return "/order/order2";
@@ -347,27 +332,26 @@ public class OrderController extends PaypleController {
 //////////// 정기결제///////////////
 // http://localhost:8088/order/noautoScheduled2
 // 정기결제 재결제(빌링키결제) (paySimpleSend.jsp)
-	@RequestMapping(value = "/paySimpleSend", method = RequestMethod.GET)
+	@RequestMapping(value = "/paySimpleSend")
 	public String paySimpleSendRoute(Model model, HttpSession session, PreOrderVO vo) {
 
 		log.info("빌링키결제 GET 호출");
 
 		// 임시
-		session.setAttribute("id", "test2");
+		// sesession.setAttribute("id", "hg");
 		String PCD_PAYER_NAME = (String) session.getAttribute("id");
 
 		// 빌링키 가져오기
-		// String PCD_PAYER_ID = orderservice.getKey(vo);
-		session.setAttribute("payer_id", "dkNXTFdUWnhOR1pTRTgvMEcyZ1JUZz09");
-		session.setAttribute("PCD_PAYER_ID", "dkNXTFdUWnhOR1pTRTgvMEcyZ1JUZz09");
-		String PCD_PAYER_ID = (String) session.getAttribute("payer_id");
+		String PCD_PAYER_ID = orderservice.getKey(vo);
+		// session.setAttribute("payer_id", "dkNXTFdUWnhOR1pTRTgvMEcyZ1JUZz09");
+		// session.setAttribute("PCD_PAYER_ID", "dkNXTFdUWnhOR1pTRTgvMEcyZ1JUZz09");
 
 		log.info("정기결제 빌링키 호출 성공");
 
 		model.addAttribute("payer_name", PCD_PAYER_NAME); // 결제자 이름
 		model.addAttribute("payer_id", PCD_PAYER_ID); // 결제자 고유 ID (빌링키)
 		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-		model.addAttribute("pay_total", "1000"); // 결제요청금액
+		model.addAttribute("pay_total", "6000"); // 결제요청금액
 		model.addAttribute("payer_no", "1234"); // 결제자 고유번호 (파트너사 회원 회원번호)
 		model.addAttribute("payer_email", "gjhs79@naver.com"); // 결제자 이메일
 
@@ -378,21 +362,20 @@ public class OrderController extends PaypleController {
 	 * paySimpleSend : 정기결제 재결제(빌링키 결제)
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/paySimpleSend", method = RequestMethod.POST)
+	@PostMapping(value = "/paySimpleSend")
 	public JSONObject paySimpleSend(HttpServletRequest request, HttpSession session, PreOrderVO vo, PreMemberVO mvo,
-			Model model) {
+			Model model, MemberVO mo) {
 
 		log.info("빌링키결제 POST 호출");
 
 		// 임시
+		// sesession.setAttribute("id", "hg");
 		String PCD_PAYER_NAME = (String) session.getAttribute("id");
-		session.setAttribute("id", "test2");
 
 		// 빌링키 가져오기
-		// String PCD_PAYER_ID = orderservice.getKey(vo);
-		session.setAttribute("payer_id", "dkNXTFdUWnhOR1pTRTgvMEcyZ1JUZz09");
-		session.setAttribute("PCD_PAYER_ID", "dkNXTFdUWnhOR1pTRTgvMEcyZ1JUZz09");
-		String PCD_PAYER_ID = (String) session.getAttribute("payer_id");
+		String PCD_PAYER_ID = orderservice.getKey(vo);
+		// session.setAttribute("payer_id", "dkNXTFdUWnhOR1pTRTgvMEcyZ1JUZz09");
+		// session.setAttribute("PCD_PAYER_ID", "dkNXTFdUWnhOR1pTRTgvMEcyZ1JUZz09");
 
 		JSONObject jsonObject = new JSONObject();
 		JSONParser jsonParser = new JSONParser();
@@ -417,7 +400,7 @@ public class OrderController extends PaypleController {
 		String pay_type = request.getParameter("card"); // (필수) 결제수단 (card | transfer)
 		String payer_id = request.getParameter(PCD_PAYER_ID); // (필수) 결제자 고유 ID (빌링키)
 		String pay_goods = request.getParameter("프리미엄 이용권"); // (필수) 상품명
-		String pay_total = request.getParameter("1000"); // (필수) 결제요청금액
+		String pay_total = request.getParameter("6000"); // (필수) 결제요청금액
 		String pay_oid = request.getParameter("PCD_PAY_OID"); // 주문번호
 		String payer_no = request.getParameter("PCD_PAYER_NO"); // 결제자 고유번호 (파트너사 회원 회원번호)
 		String payer_name = request.getParameter(PCD_PAYER_NAME); // 결제자 이름
@@ -437,7 +420,7 @@ public class OrderController extends PaypleController {
 			bilingObj.put("PCD_PAYER_ID", PCD_PAYER_ID);
 			bilingObj.put("PCD_PAY_GOODS", "프리미엄 이용권");
 			bilingObj.put("PCD_SIMPLE_FLAG", "Y");
-			bilingObj.put("PCD_PAY_TOTAL", "1000");
+			bilingObj.put("PCD_PAY_TOTAL", "6000");
 			bilingObj.put("PCD_PAY_OID", pay_oid);
 			bilingObj.put("PCD_PAYER_NO", payer_no);
 			bilingObj.put("PCD_PAYER_NAME", PCD_PAYER_NAME);
@@ -472,23 +455,10 @@ public class OrderController extends PaypleController {
 			e.printStackTrace();
 		}
 
-		  // DB에 저장
-		 // http://localhost:8088/order/noautoScheduled2
-		 try {
-		 	orderservice.putReOrder(vo);
-		 } catch (NullPointerException e) {
-		 	e.printStackTrace();
-		 } catch (Exception e) {
-		 	e.printStackTrace();
-		 }
-
-		try {
-			memberservice.putRePreMember(mvo);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// DB에 저장
+		// http://localhost:8088/order/noautoScheduled2
+		orderservice.putReOrder(vo);
+		memberservice.putRePreMember(mvo);
 
 		return jsonObject;
 	}
