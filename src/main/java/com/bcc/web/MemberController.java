@@ -78,18 +78,10 @@ public class MemberController {
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(scri);
 			
-			// 일반회원, SNS 회원 구별(sns회원 -> id 영역에 이메일 저장)
-			if(id.indexOf("@") != -1) {
-				pageMaker.setTotalCount(service.getSNSThumbCount((String) session.getAttribute("id")));
-				model.addAttribute("thumbList", service.getSNSThumbList(scri));
-				
-			} else {
 				pageMaker.setTotalCount(service.getThumbCount((String) session.getAttribute("id")));
 				model.addAttribute("thumbList", service.getThumbList(scri));
 				
-			}
 
-			log.info(pageMaker + "");
 			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("scri", scri);
 
@@ -218,12 +210,16 @@ public class MemberController {
 			
 			String id = (String)session.getAttribute("id");
 			
-			int cnt = service.idCheck(id);
+			int cnt = service.snsCheck(id);
+			
+			log.info("id : "+ id);
+			
+			log.info("cnt : "+ cnt);
 			
 			if(id == null) {
 					return "redirect:/main";
 					
-				} else if(cnt != 1) {
+				} else if(cnt == 1) {
 					
 					request.setAttribute("msg", "sns 회원은 수정 불가");
 					request.setAttribute("url", "/member/mypage");
@@ -290,13 +286,13 @@ public class MemberController {
 			
 			String id = (String)session.getAttribute("id");
 			
-			int cnt = service.idCheck(id);
+			int cnt = service.snsCheck(id);
 			
 			if(id == null) {
 				
 					return "redirect:/main";
 					
-				} else if(cnt != 1) {
+				} else if(cnt == 1) {
 					
 					request.setAttribute("msg", "sns 회원은 접근 불가");
 					request.setAttribute("url", "/member/mypage");

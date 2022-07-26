@@ -39,8 +39,8 @@ public interface MemberDAO {
 	// id 중복 검사
     public int getIdCheck(String id);
     
-	// sns 중복 검사
-    public int getSnsCheck(String k_email);
+	// sns 체크
+    public int getSnsCheck(String sns);
     
 	// tel 중복 검사
     public int getTelCheck(String tel);
@@ -59,14 +59,12 @@ public interface MemberDAO {
     
 	// 좋아요 목록 조회
 	public List<BoardVO> getThumbList(SearchCriteria scri) throws Exception;
-	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception;
 	
 	// 좋아요 삭제
 	public void delThumb(int b_num, String id) throws Exception;
 	
 	// 좋아요 갯수 조회
 	public Integer getThumbCount(String id);
-	public Integer getSNSThumbCount(String id);
 	
 	// 카카오
 	public void putKakao(HashMap<String, Object> userInfo);

@@ -2,6 +2,7 @@ package com.bcc.persistence;
 
 import java.util.List;
 
+import com.bcc.domain.BoardVO;
 import com.bcc.domain.KakaoVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PreOrderVO;
@@ -36,9 +37,9 @@ public interface AdminDAO {
 	// 웹 회원 목록
 	public List<MemberVO> getAllWebMem();
 	
-	// 카카오 회원 목록
-	public List<KakaoVO> getAllSnsMem();
-	
 	// 회원 삭제
 	public void delMem(MemberVO vo);
+	
+	// 관광지 게시글 추가
+	public int putBoard(BoardVO vo);
 }

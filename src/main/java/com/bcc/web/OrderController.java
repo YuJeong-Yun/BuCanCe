@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.checkerframework.checker.units.qual.Length;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
@@ -121,8 +122,7 @@ public class OrderController extends PaypleController {
 	 */
 	@RequestMapping(value = "/goods")
 // http://localhost:8088/order/goods
-	public String goods(Model model, HttpSession session, HttpServletRequest request, PreMemberVO mo)
-			throws Exception {
+	public String goods(Model model, HttpSession session, HttpServletRequest request, PreMemberVO mo) throws Exception {
 
 		// db동작 호출을 위해서 서비스 동작을 호출 - loginCheck()
 		String id = (String) session.getAttribute("id");
@@ -144,7 +144,7 @@ public class OrderController extends PaypleController {
 			log.info("구독권 구매 페이지로 이동");
 
 			model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-			model.addAttribute("pay_total", "6000"); // 결제요청금액
+			model.addAttribute("pay_total", "100"); // 결제요청금액
 
 			return "/order/goods";
 
@@ -174,7 +174,7 @@ public class OrderController extends PaypleController {
 		model.addAttribute("payer_hp", memberservice.getTel(id)); // 결제자 휴대전화번호
 		model.addAttribute("payer_email", memberservice.getEmail(id)); // 결제자 이메일
 		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-		model.addAttribute("pay_total", "6000"); // 결제요청금액
+		model.addAttribute("pay_total", "100"); // 결제요청금액
 // 페이지 이동
 		return "/order/order1";
 	}
@@ -193,7 +193,7 @@ public class OrderController extends PaypleController {
 		model.addAttribute("payer_hp", memberservice.getTel(id)); // 결제자 휴대전화번호
 		model.addAttribute("payer_email", memberservice.getEmail(id)); // 결제자 이메일
 		model.addAttribute("pay_goods", "프리미엄 정기 구독권"); // 상품명
-		model.addAttribute("pay_total", "6000"); // 결제요청금액
+		model.addAttribute("pay_total", "100"); // 결제요청금액
 
 // 페이지 이동
 		return "/order/order2";
@@ -235,7 +235,7 @@ public class OrderController extends PaypleController {
 // 파트너 인증 후 결제요청 시 필요한 필수 파라미터
 		model.addAttribute("authKey", obj.get("AuthKey")); // 인증 키
 		model.addAttribute("payReqURL", obj.get("return_url")); // 결제요청 URL
-
+		
 		return "/order/order_confirm";
 	}
 
@@ -291,36 +291,33 @@ public class OrderController extends PaypleController {
 		model.addAttribute("pay_cardnum", request.getParameter("PCD_PAY_CARDNUM")); // 카드번호
 		model.addAttribute("pay_cardtradenum", request.getParameter("PCD_PAY_CARDTRADENUM")); // 카드 거래번호
 		model.addAttribute("pay_cardauthno", request.getParameter("PCD_PAY_CARDAUTHNO")); // 카드 승인번호
-		model.addAttribute("pay_cardreceipt", request.getParameter("PCD_PAY_CARDRECEIPT")); // 카드 매출전표 URL
-
+		model.addAttribute("pay_cardreceipt", request.getParameter("PCD_PAY_CARDRECEIPT")); // 카드 매출전표 URL 
+		
 		// DB에 저장
 
-		if ("PCD_PAY_OID".length() == 0) {
-			try {
-				orderservice.putOrder(pvo);
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
+					try {
+						orderservice.putOrder(pvo);
+					} catch (NullPointerException e) {
+						e.printStackTrace();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+					try {
+						memberservice.putPreMember(vo);
+					} catch (NullPointerException e) {
+						e.printStackTrace();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+			
+				return "/order/order_result";
 			}
-
-			try {
-				memberservice.putPreMember(vo);
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-
-		return "/order/order_result";
-	}
 
 	/*
 	 * payCertSend : 결제요청 재컨펌 (CERT)
 	 */
-// http://localhost:8088/order/goods
+// http://localhost:8088/main
 	@ResponseBody
 	@PostMapping(value = "/payCertSend")
 	public JSONObject payCertSend(HttpServletRequest request, PreOrderVO vo, PreMemberVO voo) {
@@ -387,7 +384,7 @@ public class OrderController extends PaypleController {
 		model.addAttribute("payer_name", PCD_PAYER_NAME); // 결제자 이름
 		model.addAttribute("payer_id", PCD_PAYER_ID); // 결제자 고유 ID (빌링키)
 		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-		model.addAttribute("pay_total", "6000"); // 결제요청금액
+		model.addAttribute("pay_total", "100"); // 결제요청금액
 		model.addAttribute("payer_no", "1234"); // 결제자 고유번호 (파트너사 회원 회원번호)
 		model.addAttribute("payer_email", "gjhs79@naver.com"); // 결제자 이메일
 
@@ -436,7 +433,7 @@ public class OrderController extends PaypleController {
 		String pay_type = request.getParameter("card"); // (필수) 결제수단 (card | transfer)
 		String payer_id = request.getParameter(PCD_PAYER_ID); // (필수) 결제자 고유 ID (빌링키)
 		String pay_goods = request.getParameter("프리미엄 이용권"); // (필수) 상품명
-		String pay_total = request.getParameter("6000"); // (필수) 결제요청금액
+		String pay_total = request.getParameter("100"); // (필수) 결제요청금액
 		String pay_oid = request.getParameter("PCD_PAY_OID"); // 주문번호
 		String payer_no = request.getParameter("PCD_PAYER_NO"); // 결제자 고유번호 (파트너사 회원 회원번호)
 		String payer_name = request.getParameter(PCD_PAYER_NAME); // 결제자 이름
@@ -456,7 +453,7 @@ public class OrderController extends PaypleController {
 			bilingObj.put("PCD_PAYER_ID", PCD_PAYER_ID);
 			bilingObj.put("PCD_PAY_GOODS", "프리미엄 이용권");
 			bilingObj.put("PCD_SIMPLE_FLAG", "Y");
-			bilingObj.put("PCD_PAY_TOTAL", "6000");
+			bilingObj.put("PCD_PAY_TOTAL", "100");
 			bilingObj.put("PCD_PAY_OID", pay_oid);
 			bilingObj.put("PCD_PAYER_NO", payer_no);
 			bilingObj.put("PCD_PAYER_NAME", PCD_PAYER_NAME);
@@ -528,17 +525,17 @@ public class OrderController extends PaypleController {
 	 * noautoScheduled.jsp : 수동 스케줄러
 	 */
 	// http://localhost:8088/order/noautoScheduled
-	
+
 	// 수동스케줄러 페이지
-	@RequestMapping(value = "/noautoScheduled",method = RequestMethod.GET)
+	@RequestMapping(value = "/noautoScheduled", method = RequestMethod.GET)
 	public String noautoScheduledGET(MemberVO vo, HttpSession session, HttpServletRequest request) throws Exception {
-		log.info(" noautoScheduledGET() 호출 ");
-		
+
 		// 페이지이동
 		return "/order/noautoScheduledForm";
 	}
-	
- ////////////////////////
+
+	////////////////////////
+
 	@RequestMapping(value = "/noautoScheduled1", method = RequestMethod.GET)
 	public String delPreMemberGET() {
 

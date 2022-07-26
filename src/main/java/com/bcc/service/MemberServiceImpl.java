@@ -107,6 +107,14 @@ public class MemberServiceImpl implements MemberService {
 
 		return cnt;
 	}
+	
+	@Override
+	public int snsCheck(String sns) {
+		
+		int cnt = dao.getSnsCheck(sns);	 
+		
+		return cnt;
+	}
 
 	@Override
 	public int telCheck(String tel) {
@@ -155,13 +163,6 @@ public class MemberServiceImpl implements MemberService {
 
 		return dao.getThumbList(scri);
 	}
-
-	@Override
-	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception {
-
-		return dao.getSNSThumbList(scri);
-	}
-
 	@Override
 	public void deleteThumb(int b_num, String id) throws Exception {
 
@@ -172,12 +173,6 @@ public class MemberServiceImpl implements MemberService {
 	public Integer getThumbCount(String id) {
 
 		return dao.getThumbCount(id);
-	}
-
-	@Override
-	public Integer getSNSThumbCount(String id) {
-
-		return dao.getSNSThumbCount(id);
 	}
 
 }

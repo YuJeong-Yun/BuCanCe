@@ -125,9 +125,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public int getSnsCheck(String k_email) {
+	public int getSnsCheck(String sns) {
 		
-		int cnt = sqlSession.selectOne(NAMESPACE + ".getSnsCheck", k_email);
+		int cnt = sqlSession.selectOne(NAMESPACE + ".getSnsCheck", sns);
 
 		return cnt;
 	}
@@ -183,12 +183,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<BoardVO> getSNSThumbList(SearchCriteria scri) throws Exception {
-		
-		return sqlSession.selectList(NAMESPACE + ".getSNSThumbList", scri);
-	}
-
-	@Override
 	public void delThumb(int b_num, String id) throws Exception {
 		Map thuMap = new HashMap();
 		thuMap.put("b_num", b_num);
@@ -201,12 +195,6 @@ public class MemberDAOImpl implements MemberDAO {
 	public Integer getThumbCount(String id) {
 		
 		return sqlSession.selectOne(NAMESPACE+".getThumbCount",id);
-	}
-
-	@Override
-	public Integer getSNSThumbCount(String id) {
-		
-		return sqlSession.selectOne(NAMESPACE+".getSNSThumbCount",id);
 	}
 	
 	// 카카오

@@ -63,4 +63,5 @@ public class roomDAOImpl implements roomDAO {
 		sqlSession.insert(NAMESPACE + ".putRfRoom", vo2);
 	}
 
+
 }

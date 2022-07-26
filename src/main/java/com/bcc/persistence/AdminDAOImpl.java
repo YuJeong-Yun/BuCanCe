@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.bcc.domain.BoardVO;
 import com.bcc.domain.KakaoVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PreOrderVO;
@@ -101,13 +102,13 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 	@Override
-	public List<KakaoVO> getAllSnsMem() {
-		List<KakaoVO> kakao = new ArrayList<KakaoVO>();
-		return session.selectList(NAMESPACE+".getAllSnsMem", kakao);
-	}
-
-	@Override
 	public void delMem(MemberVO vo) {
 		 session.delete(NAMESPACE+".delMem",vo);
+	}
+	
+	@Override
+	public int putBoard(BoardVO vo) {
+		
+		return session.insert(NAMESPACE+".putBoard",vo);
 	}
 }

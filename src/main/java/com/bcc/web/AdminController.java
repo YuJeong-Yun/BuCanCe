@@ -25,9 +25,6 @@ public class AdminController {
 
 	@Inject
 	private AdminService service;
-	
-	@Inject
-	private BoardService boardService;
 
 	// 차트 & 프리미엄 회원 조회 창으로 이동
 	@RequestMapping(value = "/profitChart", method = RequestMethod.GET)
@@ -44,7 +41,6 @@ public class AdminController {
 	@RequestMapping(value = "/memberMg", method = RequestMethod.GET)
 	public String allWebMemberGET(Model model) throws Exception{
 		model.addAttribute("mg", service.getAllWebMem());
-		model.addAttribute("kakao", service.getAllSnsMem());
 
 		return "admin/memberMg";
 	}
@@ -83,7 +79,7 @@ public class AdminController {
 	public String writeBoard(RedirectAttributes rttr, BoardVO vo, HttpServletRequest request) {
 		
 		//log.info(vo+"");
-		int result = boardService.putBoard(vo);
+		int result = service.putBoard(vo);
 		
 		return "redirect:/admin/addTour?result="+result;
 	}

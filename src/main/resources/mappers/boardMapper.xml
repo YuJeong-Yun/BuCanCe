@@ -116,10 +116,4 @@
 		limit 0,3
 	</select>
 	
-	<!-- 관광지 게시글 추가 -->
-	<insert id="putBoard">
-		insert into tourist_spot (title,lng,convenient,price,tel,img,trfc_info,hldy_info,contents,subtitle,usage_day,addr,addr_full,url,thumbnail,lat,t_category)
-		values (#{title},#{lng},#{convenient},#{price},#{tel},#{img},#{trfc_info},
-		#{hldy_info},#{contents},#{subtitle},#{usage_day},#{addr},#{addr_full},#{url},#{thumbnail},#{lat},#{t_category})
-	</insert>
 </mapper>
