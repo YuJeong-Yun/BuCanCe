@@ -6,10 +6,10 @@
 	<!-- 댓글 조회 -->
 	<select id="getComment" parameterType="Integer" resultType="CommentVO">
 		select  a.cno, a.content, a.writer, a.regdate, a.visit,  b.profile
-		from comment a left outer join bcc_member b
+		from comment a join bcc_member b
 		on a.writer = b.id
 		where a.num = #{num}
-    order by a.cno
+		order by a.cno;
 	</select>
 	
 	<!-- 댓글 작성 -->

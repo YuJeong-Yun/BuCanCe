@@ -9,13 +9,23 @@
                     <div class="col-lg-12">
                         <ul>
                             <li><a href="javascript:void(0)">Contact</a></li>
-                            <li><a href="javascript:void(0)">Terms of use</a></li>
-                            <li><a href="javascript:void(0)">Privacy</a></li>
-                            <li><a href="javascript:void(0)">Environmental Policy</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="margin-bottom: 30px; color: #fff; font-size: 17px;" >
+                    <div class="col-lg-12">
+                        <ul>
+                            <li style="width: 250px;">성치훈 - cookeyshop2@gmail.com</li>
+                            <li style="width: 250px;">이슬비 - iolagvi@kakao.com</li>
+                            <li style="width: 250px;">주혜림 - hyelim.zu@gmail.com</li>
+                            <li style="width: 250px;">하영득 - kld9223@kakao.com</li>
+                            <li style="width: 250px;">하혜진 - imjinius@kakao.com</li>
+                            <li style="width: 250px;">전상현 - shjeon510@gmail.com</li>
+                            <li style="width: 250px;">윤유정 - yyj1999@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row" >
                 	<div class="col-lg-7">
                 		<div>
                 			<a href="https://www.flaticon.com/kr/free-icons/" title="채점자 아이콘" style="color: #777;">채점자 아이콘  제작자: Pixel perfect - Flaticon</a>

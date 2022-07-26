@@ -126,7 +126,10 @@ public class KakaoServiceImpl implements KakaoService {
 		// 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
 		System.out.println("S:" + result);
 		if(result==null) {
-		// result가 null이면 정보가 저장이 안되있는거므로 정보를 저장.
+			// 1-10 랜덤 프로필
+			int profile = (int) (Math.random() * (10)) + 1;
+			userInfo.put("profile", "/resources/img/profile/profile" + profile + ".png");
+			// result가 null이면 정보가 저장이 안되있는거므로 정보를 저장.
 			dao.putKakao(userInfo);
 			// 위 코드가 정보를 저장하기 위해 Repository로 보내는 코드임.
 			return dao.getKakao(userInfo);
