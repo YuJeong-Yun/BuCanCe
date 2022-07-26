@@ -101,12 +101,6 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 	@Override
-	public List<KakaoVO> getAllSnsMem() {
-		List<KakaoVO> kakao = new ArrayList<KakaoVO>();
-		return session.selectList(NAMESPACE+".getAllSnsMem", kakao);
-	}
-
-	@Override
 	public void delMem(MemberVO vo) {
 		 session.delete(NAMESPACE+".delMem",vo);
 	}
