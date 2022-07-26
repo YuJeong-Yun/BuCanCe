@@ -335,7 +335,7 @@ background-position: center center;
                     <div class="testimonial-slider owl-carousel">
                			<c:forEach var="i" begin="0" end="${tour.size()-1 }" step="1">
                         <div class="ts-item">
-                            <p><img src="${tour[i].img }" onclick="location.href='/board/infoDetail?num=${tour[i].num}&page=1&perPageNum=12&t_category=${tour[i].t_category}&addr=all'"></p>
+                            <p><img src="${tour[i].img }" class="hotTour" onclick="location.href='/board/infoDetail?num=${tour[i].num}&page=1&perPageNum=12&t_category=${tour[i].t_category}&addr=all'"></p>
                                 <div class="row">
 					                <div class="col-lg-12">
 					                    <div class="section-title">
@@ -350,7 +350,7 @@ background-position: center center;
                 		</c:forEach>    
                 		<c:forEach var="i" begin="0" end="${eating.size()-1 }" step="1">
                         <div class="ts-item">
-                            <p><img src="${eating[i].img }" onclick="location.href='/board/infoDetail?num=${eating[i].num}&page=1&perPageNum=12&t_category=${eating[i].t_category}&addr=all'"></p>
+                            <p><img src="${eating[i].img }" class="hotTour" onclick="location.href='/board/infoDetail?num=${eating[i].num}&page=1&perPageNum=12&t_category=${eating[i].t_category}&addr=all'"></p>
                                 <div class="row">
 					                <div class="col-lg-12">
 					                    <div class="section-title">

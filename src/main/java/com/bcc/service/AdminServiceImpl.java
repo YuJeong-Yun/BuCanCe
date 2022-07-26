@@ -35,6 +35,9 @@ import com.bcc.persistence.AdminDAO;
 public class AdminServiceImpl implements AdminService {
 
 	private static final Logger log = LoggerFactory.getLogger(AdminServiceImpl.class);
+	
+	private static final int price = 6000;
+	
 
 	@Inject
 	private AdminDAO dao;
@@ -96,7 +99,7 @@ public class AdminServiceImpl implements AdminService {
 			months.put("v", month + "/" + day);
 
 			JSONObject money = new JSONObject();
-			money.put("v", dao.getTrendChart(year + " " + month + " " + day) * 6000); // 금액
+			money.put("v", dao.getTrendChart(year + " " + month + " " + day) * price); // 금액
 
 			JSONArray row = new JSONArray();
 			row.add(months);
@@ -153,7 +156,7 @@ public class AdminServiceImpl implements AdminService {
 			months.put("v", year + "." + month);
 
 			JSONObject money = new JSONObject();
-			money.put("v", dao.getMonthlyChart(year + " " + month) * 6000); // 금액
+			money.put("v", dao.getMonthlyChart(year + " " + month) * price); // 금액
 
 			JSONArray row = new JSONArray();
 			row.add(months);

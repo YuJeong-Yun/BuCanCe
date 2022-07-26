@@ -757,7 +757,7 @@ ul, ol {
 .testimonial-slider .ts-item {
 	text-align: center;
 }
-.testimonial-slider .ts-item img{
+.testimonial-slider .ts-item .hotTour{
 	cursor: pointer;
 	-webkit-transform: scale(1);
 	transform: scale(1);
@@ -765,7 +765,7 @@ ul, ol {
 	transition: .3s ease-in-out;
 }
 
-.testimonial-slider .ts-item img:hover{
+.testimonial-slider .ts-item .hotTour:hover{
 	cursor: pointer;
 	-webkit-transform: scale(1.1);
     transform: scale(1.1);
