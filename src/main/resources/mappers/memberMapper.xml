@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.bcc.mapper.memberMapper">
+  <mapper namespace="memberMapper">
 
   	<insert id="putPay" parameterType="PreOrderVO">
 		insert into premium_order
@@ -16,11 +16,11 @@
     </select>
     
     <insert id="putInsertMember">
-    	insert into bcc_member (id, pw, name, email, tel, zip, address1, address2) 
-    	values(#{id}, #{pw}, #{name}, #{email}, #{tel}, #{zip}, #{address1}, #{address2})    
+    	insert into bcc_member (id, pw, name, email, tel, zip, address1, address2, profile) 
+    	values(#{id}, #{pw}, #{name}, #{email}, #{tel}, #{zip}, #{address1}, #{address2}, #{profile})    
     </insert>
     
-    <select id="getLogin" resultType="com.bcc.domain.MemberVO">
+    <select id="getLogin" resultType="MemberVO">
         select * from bcc_member 
         where id=#{id} and pw=#{pw}
     </select>
