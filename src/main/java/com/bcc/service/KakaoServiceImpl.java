@@ -13,10 +13,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-import com.bcc.domain.KakaoVO;
-=======
->>>>>>> 201d481941e685a601b20bfa81cb52415a6380af
 import com.bcc.domain.MemberVO;
 import com.bcc.persistence.MemberDAO;
 import com.google.gson.JsonElement;
@@ -28,10 +24,6 @@ public class KakaoServiceImpl implements KakaoService {
 
 	@Inject
 	private MemberDAO dao;
-<<<<<<< HEAD
-	
-=======
->>>>>>> 201d481941e685a601b20bfa81cb52415a6380af
 	
     public String getAccessToken (String authorize_code) {
         String access_Token = "";
@@ -130,13 +122,8 @@ public class KakaoServiceImpl implements KakaoService {
 			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 			String name = properties.getAsJsonObject().get("nickname").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-<<<<<<< HEAD
-			
-	        userInfo.put("name", name);
-=======
 
 			userInfo.put("name", name);
->>>>>>> 201d481941e685a601b20bfa81cb52415a6380af
 			userInfo.put("email", email);
 
 		} catch (IOException e) {
@@ -151,11 +138,7 @@ public class KakaoServiceImpl implements KakaoService {
 		MemberVO result = dao.getKakao(userInfo);
 		// 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
 		System.out.println("S:" + result);
-<<<<<<< HEAD
-		if(result==null) {
-=======
 		if (result == null) {
->>>>>>> 201d481941e685a601b20bfa81cb52415a6380af
 			// 1-10 랜덤 프로필
 			int profile = (int) (Math.random() * (10)) + 1;
 			userInfo.put("profile", "/resources/img/profile/profile" + profile + ".png");
