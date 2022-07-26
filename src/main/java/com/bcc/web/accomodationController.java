@@ -49,8 +49,8 @@ public class accomodationController {
 	@RequestMapping(value = "/roomList", method = RequestMethod.GET)
 	public void roomListGET(Model model) throws Exception {
 
-		log.info(" roomListGET() 호출 ");
-		log.info(" 전체숙소목록 정보 ");
+//		log.info(" roomListGET() 호출 ");
+//		log.info(" 전체숙소목록 정보 ");
 
 	}
 
@@ -59,11 +59,10 @@ public class accomodationController {
 	@RequestMapping(value = "/roomList", method = RequestMethod.POST)
 	public void roomListPOST(Model model, roomSearch rs) throws Exception {
 
-		log.info(" roomListPOST() 호출 ");
-		log.info(" 입력한 정보를 바탕으로 숙소항목을 보여줌 ");
-		log.info("rs : " + rs);
-		log.info("검색어 : " + rs.getPlace_name());
-	
+//		log.info(" roomListPOST() 호출 ");
+//		log.info(" 입력한 정보를 바탕으로 숙소항목을 보여줌 ");
+//		log.info("rs : " + rs);
+//		log.info("검색어 : " + rs.getPlace_name());
 
 	}
 
@@ -73,8 +72,8 @@ public class accomodationController {
 	@RequestMapping(value = "/roomDetail", method = RequestMethod.GET)
 	public void roomDetailGET(Model model, @RequestParam("bno") String bno) throws Exception {
 
-		log.info("roomDetailGET() 호출");
-		log.info(" 숙소정보를 상세하게 보여주는 페이지 ");
+//		log.info("roomDetailGET() 호출");
+//		log.info(" 숙소정보를 상세하게 보여주는 페이지 ");
 
 		// 상세정보를 크롤링하여 저장함
 		JSONArray roomdetail0 = service.getRoomDetail0(bno);
@@ -111,15 +110,14 @@ public class accomodationController {
 	@RequestMapping(value = "/roomPrice", method = RequestMethod.GET)
 	public void roomPriceGET(Model model, @RequestParam("bno") String bno) throws Exception {
 
-		log.info("roomPriceGET() 호출");
-		log.info("가격 상세페이지 호출");
-		
+//		log.info("roomPriceGET() 호출");
+//		log.info("가격 상세페이지 호출");
+
 		// bno라는 크롤링할 사이트를 사용
 		JSONArray roomPrice = service.getRoomPrice(bno);
 
 //		log.info("roomPrice : "+ roomPrice);
-		
-		
+
 		model.addAttribute("roomPrice", roomPrice);
 	}
 
@@ -131,7 +129,7 @@ public class accomodationController {
 			@RequestParam("ano") String ano, @RequestParam("room_title") String room_title)
 			throws IOException, ParseException {
 
-		log.info("roomReserveGET() 호출");
+//		log.info("roomReserveGET() 호출");
 
 		// 날짜정보가져오기
 //		log.info(rd.getSel_date());
@@ -161,10 +159,11 @@ public class accomodationController {
 	// 대실예약페이지
 	// http://localhost:8088/accomodation/roomPayment
 	@RequestMapping(value = "/roomPayment", method = RequestMethod.GET)
-	public String roomPaymentGET(roomReVO vo, Model model,HttpSession session,HttpServletResponse response) throws Exception {
+	public String roomPaymentGET(roomReVO vo, Model model, HttpSession session, HttpServletResponse response)
+			throws Exception {
 
-		log.info("roomPaymentGET() 호출");
-		log.info("대실예약페이지 호출");
+//		log.info("roomPaymentGET() 호출");
+//		log.info("대실예약페이지 호출");
 
 		model.addAttribute("vo", vo);
 
@@ -179,7 +178,7 @@ public class accomodationController {
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('로그인이 필요합니다.'); location.href='/member/login';</script>");
 			out.flush();
-			
+
 			return "";
 		} else {
 			// 아이디 정보에 해당하는 유저정보를 가져오는 서비스
@@ -194,7 +193,7 @@ public class accomodationController {
 			model.addAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
 			model.addAttribute("zip", mvo.getZip());
 			model.addAttribute("license", mvo.getLicense());
-			
+
 			return "accomodation/roomPayment";
 		}
 
@@ -203,10 +202,11 @@ public class accomodationController {
 	// 숙박예약페이지
 	// http://localhost:8088/accomodation/roomPayment2
 	@RequestMapping(value = "/roomPayment2", method = RequestMethod.GET)
-	public String roomPayment2GET(roomReVO vo, Model model, HttpSession session,HttpServletResponse response) throws Exception {
+	public String roomPayment2GET(roomReVO vo, Model model, HttpSession session, HttpServletResponse response)
+			throws Exception {
 
-		log.info("roomPayment2GET() 호출");
-		log.info("숙박예약페이지 호출");
+//		log.info("roomPayment2GET() 호출");
+//		log.info("숙박예약페이지 호출");
 
 		// 숙박 주문번호 설정
 		String accId = service.SearchPayId();
@@ -221,7 +221,7 @@ public class accomodationController {
 			out.println("<script>alert('로그인이 필요합니다.'); location.href='/member/login';</script>");
 			out.flush();
 			MemberVO mvo = null;
-			
+
 			return "";
 		} else {
 			// 아이디 정보에 해당하는 유저정보를 가져오는 서비스
@@ -236,7 +236,7 @@ public class accomodationController {
 			model.addAttribute("address1", mvo.getAddress1() + " " + mvo.getAddress2());
 			model.addAttribute("zip", mvo.getZip());
 			model.addAttribute("license", mvo.getLicense());
-			
+
 			return "accomodation/roomPayment2";
 		}
 
@@ -248,7 +248,9 @@ public class accomodationController {
 	@RequestMapping(value = "/roomPayDB", method = RequestMethod.GET)
 	public void roomPayDBGET(roomPayVO vo, Model model) throws Exception {
 
-		log.info("roomPayDBGET() 호출");
+//		log.info("roomPayDBGET() 호출");
+
+		log.info("예약정보(저장) : " + vo);
 
 		service.insertRoomPay(vo);
 
@@ -261,9 +263,9 @@ public class accomodationController {
 	@RequestMapping(value = "/roomReComplete", method = RequestMethod.GET)
 	public void roomReCompleteGET(Model model, @RequestParam("accId") String accId) throws Exception {
 
-		log.info("roomReCompleteGET() 호출");
+//		log.info("roomReCompleteGET() 호출");
 		// 결제내역
-		log.info("accId : " + accId);
+//		log.info("accId : " + accId);
 
 		roomPayVO vo = service.getRoomPayInfo(accId);
 
@@ -271,40 +273,33 @@ public class accomodationController {
 		model.addAttribute("vo", vo);
 	}
 
-	
 	// 유저 예약 목록
 	// http://localhost:8088/accomodation/roomReList
 	@RequestMapping(value = "/roomReList", method = RequestMethod.GET)
 	public String roomReListGET(Model model, HttpSession session, HttpServletResponse response) throws Exception {
 
 		// 결제내역
-		log.info("roomReListGET() 호출");
+//		log.info("roomReListGET() 호출");
 
 		String id = (String) session.getAttribute("id");
 
 		List<roomPayVO> list = service.getRoomUserPayInfo(id);
 
-		log.info("payList : " + list);
+//		log.info("payList : " + list);
 
-		
-		
-		if(id==null) {
+		if (id == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('로그인이 필요합니다.'); location.href='/member/login';</script>");
 			out.flush();
-			
+
 			return "";
-		}
-		else {
+		} else {
 			// 해당 유저의 예약정보
 			model.addAttribute("UserPayList", list);
-			
+
 			return "accomodation/roomReList";
 		}
-		
-		
-		
 
 	}
 
@@ -314,11 +309,10 @@ public class accomodationController {
 	public void roomRefundPOST(roomPayVO vo, Model model) throws Exception {
 
 		// 결제내역
-		log.info("roomRefundPOST() 호출");
+//		log.info("roomRefundPOST() 호출");
 
 		// 환불고유아이디
 		String rfId = service.refundRoom();
-
 
 		model.addAttribute("vo", vo);
 		model.addAttribute("rfId", rfId);
@@ -332,15 +326,16 @@ public class accomodationController {
 			throws Exception, org.json.simple.parser.ParseException {
 
 		// 결제내역
-		log.info("roomRfDBGET() 호출");
+//		log.info("roomRfDBGET() 호출");
 
-		log.info(vo2.getAccId());
-		log.info(vo2.getAccAmount() + "");
+//		log.info(vo2.getAccId());
+//		log.info(vo2.getAccAmount() + "");
+		log.info("환불정보(저장) : " + vo);
 
 		// 아임포트 환불
 		String tf = service.payRefund(vo2);
 
-		log.info(tf);
+//		log.info(tf);
 
 		if (tf.equals("OK")) {
 			// 첫번째로 결제테이블의 정보를 환불됨으로 바꾸기(status)
@@ -350,14 +345,8 @@ public class accomodationController {
 			service.putRoomRefund(vo);
 		}
 
-
 		model.addAttribute("vo", vo);
 
 	}
-	
-	
-	
-	
-	
 
 }
