@@ -8,7 +8,7 @@
 		select  a.cno, a.content, a.writer, a.regdate, a.visit,  b.profile
 		from comment a join bcc_member b
 		on a.writer = b.id
-		where a.num = 1
+		where a.num = #{num}
 		order by a.cno;
 	</select>
 	
