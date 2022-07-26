@@ -27,6 +27,14 @@
                   <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <span>관광지 추가</span></a>
             </li>
+            
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/order/noautoScheduled">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <span>수동 스케줄러</span></a>
+            </li>
+            
      
         </ul>
         <!-- End of Sidebar -->     

@@ -23,6 +23,7 @@ public interface PreMemberDAO {
 	public void putRePreMember(PreMemberVO vo);
 
 	// 프리미엄 회원 id 가져오기
-	public String getid(String id);
+	public String getid(PreMemberVO vo);
+	
 
 }

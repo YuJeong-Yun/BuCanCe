@@ -29,8 +29,8 @@
     </select>
         
     <select id="getid" parameterType="PreMemberVO" resultType="string">
-        select id from premium_member
-        where id=#{id}
+        select PCD_PAYER_NAME from premium_member
+        where PCD_PAYER_NAME=#{PCD_PAYER_NAME}
     </select>
     
     <select id="getName" parameterType="MemberVO" resultType="string">
@@ -64,6 +64,7 @@
         set license_deadline = date_add(now(),interval 1 month), next_order_date = date_sub(date_add(now(),interval 1 month),interval 1 day)
         where next_order_date = curdate()
     </update>
+    
 
 </mapper>
   

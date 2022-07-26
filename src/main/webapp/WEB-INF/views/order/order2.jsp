@@ -177,17 +177,17 @@ h3 {
 										<tr>
 											<th>주문번호</th>
 											<td><input type="text" name="pay_oid" id="pay_oid"
-												value=""></td>
+												value="" readonly="readonly"></td>
 										</tr>
 										<tr>
 											<th>파트너사 회원번호</th>
 											<td><input type="text" name="payer_no" id="payer_no"
-												value="${payer_no}"></td>
+												value="${payer_no}" readonly="readonly"></td>
 										</tr>
 										<tr>
 											<th>이름</th>
 											<td><input type="text" name="payer_name" id="payer_name"
-												value="${payer_name}"></td>
+												value="${payer_name}" readonly="readonly"></td>
 										</tr>
 										<tr>
 											<th>휴대전화번호</th>
@@ -202,12 +202,12 @@ h3 {
 										<tr>
 											<th>상품명</th>
 											<td><input type="text" name="pay_goods" id="pay_goods"
-												value="${pay_goods}"></td>
+												value="${pay_goods}" readonly="readonly"></td>
 										</tr>
 										<tr>
 											<th>결제금액</th>
 											<td><input type="text" name="pay_total" id="pay_total"
-												value="${pay_total}"></td>
+												value="${pay_total}" readonly="readonly"></td>
 										</tr>
 									</table>
 								</div>
