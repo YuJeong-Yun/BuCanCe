@@ -43,9 +43,9 @@ public class PlanRESTController {
 	// http://localhost:8088/planREST/accept/8
 	@RequestMapping(value = "/accept/{grp_num}", produces = "application/json; charset=utf8")
 	public Map<String, Object> acceptREST(@PathVariable("grp_num") int grpNum, HttpSession session) throws Exception {
-		log.info("초대 수락 받아온 그룹 넘버 : " + grpNum);
-
 		String id = (String) session.getAttribute("id");
+
+		log.info(id + "회원 초대 수락 그룹 넘버 : " + grpNum);
 
 		// 초대 수락 리스트에서 제거
 		GrpAcceptVO vo = new GrpAcceptVO();
@@ -72,9 +72,9 @@ public class PlanRESTController {
 	// 그룹 초대 거절
 	@RequestMapping(value = "/refusal/{grp_num}")
 	public void refusalREST(@PathVariable("grp_num") int grpNum, HttpSession session) throws Exception {
-		log.info("초대 거절 받아온 그룹 넘버 : " + grpNum);
-
 		String id = (String) session.getAttribute("id");
+
+		log.info(id + "회원 초대 거절 그룹 넘버 : " + grpNum);
 
 		GrpAcceptVO vo = new GrpAcceptVO();
 		vo.setReceiver(id);
@@ -86,9 +86,10 @@ public class PlanRESTController {
 	// 플랜 삭제
 	@RequestMapping(value = "/delete/{grp_num}")
 	public void deletePlanREST(@PathVariable("grp_num") int grpNum, HttpSession session) throws Exception {
-		log.info("플랜 삭제 : " + grpNum);
 
 		String id = (String) session.getAttribute("id");
+
+		log.info(id + "회원 플랜 삭제 : " + grpNum);
 
 		// 플랜 멤버 삭제
 		PlanMemberVO vo = new PlanMemberVO();
@@ -103,7 +104,7 @@ public class PlanRESTController {
 	// 아이디 검색
 	@RequestMapping(value = "/memberID", produces = "application/json; charset=utf8")
 	public Map<String, Object> memberID(String id, int grpNum) throws Exception {
-		log.info("memberID() 데이터 받기 : " + id);
+//		log.info("memberID() 데이터 받기 : " + id);
 
 		Map<String, Object> total = new HashMap<String, Object>();
 
@@ -118,11 +119,12 @@ public class PlanRESTController {
 	}
 
 	// 그룹에 초대
-	@RequestMapping(value = "/invite",  produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/invite", produces = "application/text; charset=utf8")
 	public String inviteREST(String id, int grpNum, HttpSession session) throws Exception {
-		log.info("그룹에 초대 : " + grpNum + "그룹, " + id);
 
 		String sender = (String) session.getAttribute("id");
+
+		log.info("그룹에 초대 : " + grpNum + "그룹, " + sender + " 회원");
 
 		// 회원 초대
 		GrpAcceptVO vo = new GrpAcceptVO();
@@ -137,7 +139,7 @@ public class PlanRESTController {
 	// 초대 취소
 	@RequestMapping(value = "/inviteCancle")
 	public int inviteCancleREST(String id, int grpNum) throws Exception {
-		log.info("초대 취소 : " + grpNum + "그룹, " + id);
+		log.info("초대 취소 : " + grpNum + "그룹, " + id + " 회원");
 
 		// 초대 취소
 		GrpAcceptVO vo = new GrpAcceptVO();
@@ -150,7 +152,6 @@ public class PlanRESTController {
 	// 관광지 검색
 	@RequestMapping(value = "/searchTour")
 	public List<BoardVO> searchTourREST(String category, String keyword) throws Exception {
-		log.info("관광지 검색 : " + keyword);
 
 		return planService.getSearchList(category, keyword);
 	}
@@ -161,13 +162,15 @@ public class PlanRESTController {
 		String id = (String) session.getAttribute("id");
 		vo.setWriter(id);
 
+		log.info("플랜 저장 : " + vo);
+
 		planService.modTourPlan(vo);
 	}
 
 	// 선택한 플랜 정보
 	@RequestMapping(value = "/planList/{grp_num}")
 	public List<List<Object>> planListREST(@PathVariable("grp_num") int grp_num, HttpSession session) throws Exception {
-		log.info("플랜 정보 가져오기 ");
+//		log.info("플랜 정보 가져오기 ");
 
 		return planService.getTourPlanList(grp_num);
 	}
