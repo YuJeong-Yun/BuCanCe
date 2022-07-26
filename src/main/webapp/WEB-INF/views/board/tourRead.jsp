@@ -15,23 +15,29 @@
 				</div>
 				<div class="rd-text">
 					<div class="rd-title">
-						<h3 style="font-family: 'NanumSquareBold' !important;">${vo.title }
+						<h3>${vo.title }
 						</h3>
 					</div>
 					<table id="infos">
 						<tbody>
+							<c:if test="${not empty vo.tel }">
 							<tr>
 								<td class="r-o">전화번호</td>
 								<td>${vo.tel }</td>
 							</tr>
+							</c:if>
+							<c:if test="${not empty vo.usage_day }">
 							<tr>
 								<td class="r-o">운영시간</td>
 								<td>${vo.usage_day }</td>
 							</tr>
+							</c:if>
+							<c:if test="${not empty vo.addr_full }">
 							<tr>
 								<td class="r-o">상세주소</td>
 								<td>${vo.addr_full }</td>
 							</tr>
+							</c:if>
 							
 							<c:if test="${not empty vo.trfc_info }">
 							<tr>
@@ -181,6 +187,7 @@
 	const t_category = '${vo.t_category}';
 	const title = '${vo.title}';
 	const addr = '${vo.addr}';
+	const addr_full = '${vo.addr_full}';
 	const addr2 = '${param.addr}';
 	const lat = '${vo.lat}';
 	const lng = '${vo.lng}';
