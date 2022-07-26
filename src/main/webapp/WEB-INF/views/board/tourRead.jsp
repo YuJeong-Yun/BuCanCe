@@ -145,7 +145,7 @@
 							 <c:if test = "${not empty sessionScope.id }">
 							<p>
 								<label for="id">댓글 작성자</label>
-								<input type="text" name="id" id="id" value=" ${id }">
+								<input type="text" name="id" id="id" value=" ${id }" readonly="${id }">
 							</p>
 							<p>
 								<textarea rows="5" cols="250" name="content" id="contentArea"></textarea>
