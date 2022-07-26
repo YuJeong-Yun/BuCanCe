@@ -86,22 +86,21 @@ public class GrpServiceImpl implements GrpService {
 	}
 
 	@Override
-	public Integer inviteMember(GrpAcceptVO vo) {
+	public String inviteMember(GrpAcceptVO vo) {
 		// 그룹 멤버 + 초대중 멤버 10명 이상이면 초대 불가
 		if ((dao.getGrpMemberList(vo.getGrp_num()).size() + dao.getInvitingList(vo.getGrp_num()).size()) >= 10) {
-			// 초대 실패하면 0 반환
-			return 0;
+			// 초대 실패하면 no 반환
+			return "no";
 		}
 		// 이미 초대중인 회원일 경우
 		if (dao.getCheckInviteMember(vo) == 1) {
-			return -1;
+			return "ing";
 		}
 		// 초대 리스트에 추가
 		dao.putInviteMember(vo);
 
-		// 초대 성공하면 1 반환
-		return 1;
-
+		// 초대 성공하면 이름 반환
+		return dao.getMemberName(vo.getReceiver());
 	}
 
 	@Override

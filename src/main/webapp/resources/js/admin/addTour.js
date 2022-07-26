@@ -1,4 +1,5 @@
 
+/* 글쓰기 성공후 */
 if(result != 0 && result != ''){
 	if(confirm("지금 게시판으로 이동하시겠습니까?")){
 		var t_category = $('input[name="category"]:checked').val();

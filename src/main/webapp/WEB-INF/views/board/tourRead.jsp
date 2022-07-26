@@ -149,7 +149,7 @@
 								<input type="text" name="id" id="id" value=" ${id }">
 							</p>
 							<p>
-								<textarea rows="5" cols="50" name="content" id="contentArea"></textarea>
+								<textarea rows="5" cols="250" name="content" id="contentArea"></textarea>
 							</p>
 							<p>
 								<button type="button" class="commentWriteBtn">댓글 작성</button>

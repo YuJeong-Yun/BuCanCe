@@ -114,7 +114,16 @@
 																<span class="material-icons-outlined leader">star</span>
 															</c:if>
 															<div class="member--profile">
-																<img src="${pageContext.request.contextPath }/resources/img/who.jpg" />
+															 	<!-- 프로필 있을 경우 -->
+															 	<c:if test="${member.profile ne null }">
+												                    <img src="${pageContext.request.contextPath }${member.profile}"
+												                    width="60" height="60" style="border-radius : 90px">
+												                </c:if>
+												                <!-- 프로필 없을 경우 -->
+												                <c:if test="${member.profile eq null }">
+												                   <img src="${pageContext.request.contextPath }/resources/img/profile/profile1.png"
+												                   width="60" height="60" style="border-radius : 90px">
+												                </c:if>
 															</div>
 															<div class="member--id">${member.id}</div>
 															<div class="member--name">${member.name}</div>
@@ -198,7 +207,10 @@
 			planButtons[i].style.backgroundColor = '#777';
 			planButtons[i].style.color = '#ddd';
 			planButtons[i].style.cursor = 'not-allowed';
-			
+			// 초대 버튼 있으면 숨기기
+			if(planButtons[i].nextElementSibling.querySelector('li.invite-member') != null) {
+				planButtons[i].nextElementSibling.querySelector('li.invite-member').style.display = 'none'; 
+			}
 		} // for
 	};
 	

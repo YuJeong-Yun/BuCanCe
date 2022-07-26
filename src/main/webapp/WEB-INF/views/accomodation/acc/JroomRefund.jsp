@@ -4,7 +4,7 @@
 <script>
   function refundPay() {
 	  
-alert('확인후 24시간 이내에 환불이 완료됩니다.');
+
 var result = confirm("정말로 환불 하시겠습니까?");
 	
 if(result){ //result == true 
