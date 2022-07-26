@@ -113,40 +113,40 @@ public class OrderController extends PaypleController {
 	 */
 	@RequestMapping(value = "/goods")
 // http://localhost:8088/order/goods
-	public String goods(Model model) {
+	public String goods(Model model, HttpSession session, HttpServletRequest request) throws Exception{
+		
+		// db동작 호출을 위해서 서비스 동작을 호출 - loginCheck()
+		String id = (String)session.getAttribute("id");
+		
+		if(id == null) {
+			log.info("로그인 정보 없음! 페이지 이동");
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/member/login");
+			return "/member/alert";
+		}
+		
 		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-		model.addAttribute("pay_total", "6000"); // 결제요청금액
+		model.addAttribute("pay_total", "100"); // 결제요청금액
+		
 		return "/order/goods";
 	}
 
-	/*
-	 * orderInfo.jsp : 주문안내 페이지
-	 */
-	@RequestMapping(value = "/orderInfo")
-// http://localhost:8088/order/orderInfo
-	public String orderInfo(Model model, HttpSession session, MemberVO vo) {
-
-		model.addAttribute("payer_no", "1234"); // 파트너 회원 고유번호 > 선택사항 그거없셔
-		model.addAttribute("payer_name", vo.getId()); // 결제자 이름
-		model.addAttribute("payer_hp", vo.getTel()); // 결제자 휴대전화번호
-		model.addAttribute("payer_email", vo.getEmail()); // 결제자 이메일
-		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-		model.addAttribute("pay_total", "6000"); // 결제요청금액
-		return "/order/orderInfo";
-	}
 
 	@RequestMapping(value = "/order1")
 // http://localhost:8088/order/order1
 	public String order1(Model model, HttpSession session, MemberVO vo) throws Exception {
 		log.info("order1() 호출");
 		log.info("일반 결제 페이지 호출");
+		
+		String id = (String)session.getAttribute("id");
+		String payer_name = (String)session.getAttribute("id");
 
 		model.addAttribute("payer_no", "1234"); // 파트너 회원 고유번호 > 선택사항 그거없셔
-		model.addAttribute("payer_name", vo.getId()); // 결제자 이름
-		model.addAttribute("payer_hp", vo.getTel()); // 결제자 휴대전화번호
-		model.addAttribute("payer_email", vo.getEmail()); // 결제자 이메일
+		model.addAttribute("payer_name", memberservice.getName(id)); // 결제자 이름
+		model.addAttribute("payer_hp", memberservice.getTel(id)); // 결제자 휴대전화번호
+		model.addAttribute("payer_email", memberservice.getEmail(id)); // 결제자 이메일
 		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-		model.addAttribute("pay_total", "6000"); // 결제요청금액
+		model.addAttribute("pay_total", "100"); // 결제요청금액
 // 페이지 이동
 		return "/order/order1";
 	}
@@ -156,13 +156,16 @@ public class OrderController extends PaypleController {
 	public String order2(Model model, HttpSession session, MemberVO vo) throws Exception {
 		log.info("order2() 호출");
 		log.info("정기 결제 페이지 호출");
+		
+		String id = (String)session.getAttribute("id");
+		String payer_name = (String)session.getAttribute("id");
 
 		model.addAttribute("payer_no", "1234"); // 파트너 회원 고유번호 > 선택사항 그거없셔
-		model.addAttribute("payer_name", vo.getId()); // 결제자 이름
-		model.addAttribute("payer_hp", vo.getTel()); // 결제자 휴대전화번호
-		model.addAttribute("payer_email", vo.getEmail()); // 결제자 이메일
+		model.addAttribute("payer_name", memberservice.getName(id)); // 결제자 이름
+		model.addAttribute("payer_hp", memberservice.getTel(id)); // 결제자 휴대전화번호
+		model.addAttribute("payer_email", memberservice.getEmail(id)); // 결제자 이메일
 		model.addAttribute("pay_goods", "프리미엄 정기 구독권"); // 상품명
-		model.addAttribute("pay_total", "6000"); // 결제요청금액
+		model.addAttribute("pay_total", "100"); // 결제요청금액
 
 // 페이지 이동
 		return "/order/order2";
@@ -175,6 +178,9 @@ public class OrderController extends PaypleController {
 	@RequestMapping(value = "/order_confirm")
 // http://localhost:8088/order/orde_confirm
 	public String order_confirm(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		
+		String id = (String)session.getAttribute("id");
+		String payer_name = (String)session.getAttribute("id");
 
 		model.addAttribute("pay_type", request.getParameter("pay_type")); // 결제수단 (transfer|card)
 		model.addAttribute("pay_work", request.getParameter("pay_work")); // 결제요청 방식 (AUTH | PAY | CERT)
@@ -194,11 +200,6 @@ public class OrderController extends PaypleController {
 		model.addAttribute("payer_authtype", request.getParameter("payer_authtype")); // 비밀번호 결제 인증방식 (pwd : 패스워드 인증)
 		model.addAttribute("is_direct", request.getParameter("is_direct")); // 결제창 호출 방식 (DIRECT: Y | POPUP: N)
 		model.addAttribute("hostname", System.getenv("HOSTNAME"));
-// 임시
-		model.addAttribute("id", request.getParameter("id"));
-//model.addAttribute("credate_date", request.getParameter("credate_date")); 	
-//model.addAttribute("license_deadline", request.getParameter("license_deadline")); 	
-//model.addAttribute("next_order_date", request.getParameter("next_order_date")); 	
 
 // 파트너 인증
 		JSONObject obj = new JSONObject();
@@ -218,6 +219,9 @@ public class OrderController extends PaypleController {
 	@RequestMapping(value = "/order_result")
 	public String order_result(HttpServletRequest request, Model model, HttpSession session, PreOrderVO pvo,
 			PreMemberVO vo) throws Exception {
+		
+		String id = (String)session.getAttribute("id");
+		String payer_name = (String)session.getAttribute("id");
 
 		// 1. 결제결과 모두 출력
 		Enumeration<String> params = request.getParameterNames();
@@ -351,7 +355,7 @@ public class OrderController extends PaypleController {
 		model.addAttribute("payer_name", PCD_PAYER_NAME); // 결제자 이름
 		model.addAttribute("payer_id", PCD_PAYER_ID); // 결제자 고유 ID (빌링키)
 		model.addAttribute("pay_goods", "프리미엄 이용권"); // 상품명
-		model.addAttribute("pay_total", "6000"); // 결제요청금액
+		model.addAttribute("pay_total", "100"); // 결제요청금액
 		model.addAttribute("payer_no", "1234"); // 결제자 고유번호 (파트너사 회원 회원번호)
 		model.addAttribute("payer_email", "gjhs79@naver.com"); // 결제자 이메일
 
@@ -400,7 +404,7 @@ public class OrderController extends PaypleController {
 		String pay_type = request.getParameter("card"); // (필수) 결제수단 (card | transfer)
 		String payer_id = request.getParameter(PCD_PAYER_ID); // (필수) 결제자 고유 ID (빌링키)
 		String pay_goods = request.getParameter("프리미엄 이용권"); // (필수) 상품명
-		String pay_total = request.getParameter("6000"); // (필수) 결제요청금액
+		String pay_total = request.getParameter("100"); // (필수) 결제요청금액
 		String pay_oid = request.getParameter("PCD_PAY_OID"); // 주문번호
 		String payer_no = request.getParameter("PCD_PAYER_NO"); // 결제자 고유번호 (파트너사 회원 회원번호)
 		String payer_name = request.getParameter(PCD_PAYER_NAME); // 결제자 이름
@@ -420,7 +424,7 @@ public class OrderController extends PaypleController {
 			bilingObj.put("PCD_PAYER_ID", PCD_PAYER_ID);
 			bilingObj.put("PCD_PAY_GOODS", "프리미엄 이용권");
 			bilingObj.put("PCD_SIMPLE_FLAG", "Y");
-			bilingObj.put("PCD_PAY_TOTAL", "6000");
+			bilingObj.put("PCD_PAY_TOTAL", "100");
 			bilingObj.put("PCD_PAY_OID", pay_oid);
 			bilingObj.put("PCD_PAYER_NO", payer_no);
 			bilingObj.put("PCD_PAYER_NAME", PCD_PAYER_NAME);

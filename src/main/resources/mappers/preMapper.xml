@@ -29,7 +29,7 @@
     </select>
         
     <select id="getName" parameterType="MemberVO" resultType="string">
-        select name from bcc_member
+        select id from bcc_member
         where id=#{id}
     </select>
     
