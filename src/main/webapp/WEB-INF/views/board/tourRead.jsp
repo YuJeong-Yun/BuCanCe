@@ -87,7 +87,6 @@
 		<div id="writeReview">
 				<div id="comment1">
 					<div id="comment">
-					<!-- 로그인 안 했을 경우 alert -->
 						<ol class="commentList">
 							<c:forEach items="${commentList}" var="commentList">
 							 <div class="sc-author">
