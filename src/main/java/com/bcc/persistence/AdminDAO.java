@@ -36,9 +36,6 @@ public interface AdminDAO {
 	// 웹 회원 목록
 	public List<MemberVO> getAllWebMem();
 	
-	// 카카오 회원 목록
-	public List<KakaoVO> getAllSnsMem();
-	
 	// 회원 삭제
 	public void delMem(MemberVO vo);
 }

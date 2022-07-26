@@ -122,7 +122,6 @@ public class OrderController extends PaypleController {
 	 */
 	@RequestMapping(value = "/goods")
 // http://localhost:8088/order/goods
-
 	public String goods(Model model, HttpSession session, HttpServletRequest request, PreMemberVO mo) throws Exception {
 
 		// db동작 호출을 위해서 서비스 동작을 호출 - loginCheck()
@@ -295,6 +294,7 @@ public class OrderController extends PaypleController {
 		model.addAttribute("pay_cardreceipt", request.getParameter("PCD_PAY_CARDRECEIPT")); // 카드 매출전표 URL 
 		
 		// DB에 저장
+
 					try {
 						orderservice.putOrder(pvo);
 					} catch (NullPointerException e) {
@@ -529,13 +529,13 @@ public class OrderController extends PaypleController {
 	// 수동스케줄러 페이지
 	@RequestMapping(value = "/noautoScheduled", method = RequestMethod.GET)
 	public String noautoScheduledGET(MemberVO vo, HttpSession session, HttpServletRequest request) throws Exception {
-		log.info(" noautoScheduledGET() 호출 ");
 
 		// 페이지이동
 		return "/order/noautoScheduledForm";
 	}
 
 	////////////////////////
+
 	@RequestMapping(value = "/noautoScheduled1", method = RequestMethod.GET)
 	public String delPreMemberGET() {
 

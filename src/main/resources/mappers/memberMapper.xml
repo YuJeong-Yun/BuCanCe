@@ -65,9 +65,9 @@
     </select>
     
 	<select id="getSnsCheck" parameterType="String" resultType="int">
-		select count(k_email)
+		select count(sns)
 		from bcc_member 
-		where id = #{k_email}
+		where id = #{id} and sns = "Y"
     </select>
     
     <select id="getEmailCheck" parameterType="String" resultType="int">
@@ -125,30 +125,46 @@
     
     <!-- 카카오 로그인 -->
     <!-- 정보 찾기 -->
-    <select id="getKakao" parameterType="java.util.HashMap" resultType="KakaoVO">
-        select * from kakao_table
-        where k_name=#{nickname} and k_email=#{email}
+    <select id="getKakao" parameterType="java.util.HashMap" resultType="MemberVO">
+        select * from bcc_member
+        where name=#{name} and id=#{email}
     </select>
     
     <!-- 정보 저장 -->
     <insert id="putKakao" parameterType="java.util.HashMap">
-        insert into kakao_table(k_name, k_email)
-        values(#{nickname}, #{email})
+        insert into bcc_member(name, id, sns)
+        values(#{name}, #{email}, "Y")
     </insert>
+    
     <!-- 카카오 로그인 -->
     
-    <!-- 네이버 로그인 -->
-    <!-- 정보 찾기 -->
-    <select id="findNaver" parameterType="java.util.HashMap" resultType="NaverVO">
-        select * from naver_table
-        where n_name=#{nickname} and n_email=#{email}
-    </select>
-    <!-- 정보 저장 -->
-    <insert id="naverInsert" parameterType="java.util.HashMap">
-        insert into naver_table(n_name, n_email)
-        values(#{nickname}, #{email})
-    </insert>
-    <!-- 네이버 로그인 -->
+<!--     카카오 로그인 백업 -->
+<!-- 	 	정보 찾기 -->
+<!--     <select id="getKakao" parameterType="java.util.HashMap" resultType="KakaoVO"> -->
+<!--         select * from kakao_table -->
+<!--         where k_name=#{nickname} and k_email=#{email} -->
+<!--     </select> -->
+    
+<!--     정보 저장 -->
+<!--     <insert id="putKakao" parameterType="java.util.HashMap"> -->
+<!--         insert into kakao_table(k_name, k_email) -->
+<!--         values(#{nickname}, #{email}) -->
+<!--     </insert> -->
+<!--     카카오 로그인 백업 -->
+    
+    
+<!--     네이버 로그인 -->
+<!--     정보 찾기 -->
+<!--     <select id="findNaver" parameterType="java.util.HashMap" resultType="NaverVO"> -->
+<!--         select * from naver_table -->
+<!--         where n_name=#{nickname} and n_email=#{email} -->
+<!--     </select> -->
+<!--     정보 저장 -->
+<!--     <insert id="naverInsert" parameterType="java.util.HashMap"> -->
+<!--         insert into naver_table(n_name, n_email) -->
+<!--         values(#{nickname}, #{email}) -->
+<!--     </insert> -->
+<!--     네이버 로그인 -->
     
   </mapper>
   

@@ -16,14 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bcc.domain.KakaoVO;
 import com.bcc.domain.MemberVO;
 import com.bcc.domain.PageMaker;
 import com.bcc.domain.SearchCriteria;
 import com.bcc.service.BoardService;
 import com.bcc.service.KakaoService;
 import com.bcc.service.MemberService;
-import com.bcc.service.NaverService;
 
 @Controller
 @RequestMapping("/member/*")
@@ -40,14 +38,16 @@ public class MemberController {
     @Inject
     private KakaoService ks;
     
-    @Inject
-    private NaverService ns;
     
-	private String apiResult = null;
-
-	private void setNaverService(NaverService ns) {
-		this.ns = ns;
-	}
+// 네이버 로그인 
+//    @Inject
+//    private NaverService ns;
+//    
+//	private String apiResult = null;
+//
+//	private void setNaverService(NaverService ns) {
+//		this.ns = ns;
+//	}
 
 	// http://localhost:8088/main
 		@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -218,12 +218,16 @@ public class MemberController {
 			
 			String id = (String)session.getAttribute("id");
 			
-			int cnt = service.idCheck(id);
+			int cnt = service.snsCheck(id);
+			
+			log.info("id : "+ id);
+			
+			log.info("cnt : "+ cnt);
 			
 			if(id == null) {
 					return "redirect:/main";
 					
-				} else if(cnt != 1) {
+				} else if(cnt == 1) {
 					
 					request.setAttribute("msg", "sns 회원은 수정 불가");
 					request.setAttribute("url", "/member/mypage");
@@ -290,13 +294,13 @@ public class MemberController {
 			
 			String id = (String)session.getAttribute("id");
 			
-			int cnt = service.idCheck(id);
+			int cnt = service.snsCheck(id);
 			
 			if(id == null) {
 				
 					return "redirect:/main";
 					
-				} else if(cnt != 1) {
+				} else if(cnt == 1) {
 					
 					request.setAttribute("msg", "sns 회원은 접근 불가");
 					request.setAttribute("url", "/member/mypage");
@@ -380,7 +384,7 @@ public class MemberController {
 	    	System.out.println("#########" + code);
 	    	
 	    	String access_Token = ks.getAccessToken(code);
-	    	KakaoVO userInfo = ks.getUserInfo(access_Token);
+	    	MemberVO userInfo = ks.getUserInfo(access_Token);
 	    	
 //	    	System.out.println("###access_Token#### : " + access_Token);
 //	    	System.out.println("###nickname#### : " + userInfo.getK_name());
@@ -392,8 +396,8 @@ public class MemberController {
 	    	
 	    	// id는 실행한 앱에서만 고유값... 실행 위치마다 달라진다. 그러므로 사용 X
 	    	
-	    	session.setAttribute("k_name", userInfo.getK_name());
-	    	session.setAttribute("id", userInfo.getK_email());
+	    	session.setAttribute("name", userInfo.getName());
+	    	session.setAttribute("id", userInfo.getId());
 	    	session.setAttribute("kakao", "kakao");
 
 	    	// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
@@ -402,6 +406,38 @@ public class MemberController {
 	    	return "redirect:/main";
 			
 	    	}
+	    
+	    
+// 카카오 백업 
+//		// http://localhost:8088/member/login
+//		// http://localhost:8088/member/kakao_login
+//	    @RequestMapping(value="/kakao_login", method=RequestMethod.GET)
+//	    public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
+//	    	System.out.println("#########" + code);
+//	    	
+//	    	String access_Token = ks.getAccessToken(code);
+//	    	KakaoVO userInfo = ks.getUserInfo(access_Token);
+//	    	
+////	    	System.out.println("###access_Token#### : " + access_Token);
+////	    	System.out.println("###nickname#### : " + userInfo.getK_name());
+////	    	System.out.println("###email#### : " + userInfo.getK_email());
+//	    	
+//	    	// 아래 코드가 추가되는 내용
+//	    	// session.invalidate();
+//	    	// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
+//	    	
+//	    	// id는 실행한 앱에서만 고유값... 실행 위치마다 달라진다. 그러므로 사용 X
+//	    	
+//	    	session.setAttribute("k_name", userInfo.getK_name());
+//	    	session.setAttribute("id", userInfo.getK_email());
+//	    	session.setAttribute("kakao", "kakao");
+//
+//	    	// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
+//	    	// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.
+//
+//	    	return "redirect:/main";
+//			
+//	    	}
 	    
 //		//로그인 첫 화면 요청 메소드
 //		// http://localhost:8088/member/testlogin

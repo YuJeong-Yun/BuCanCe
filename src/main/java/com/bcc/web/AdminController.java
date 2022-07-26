@@ -44,7 +44,6 @@ public class AdminController {
 	@RequestMapping(value = "/memberMg", method = RequestMethod.GET)
 	public String allWebMemberGET(Model model) throws Exception{
 		model.addAttribute("mg", service.getAllWebMem());
-		model.addAttribute("kakao", service.getAllSnsMem());
 
 		return "admin/memberMg";
 	}
