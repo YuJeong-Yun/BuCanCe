@@ -34,12 +34,12 @@ public interface MemberDAO {
 	
 	// 전체 회원정보 조회
 	public List<MemberVO> getMemberList(String adminID);
-	
-	// sns email 조회
-	public MemberVO getEmail(String email);
-	
+
 	// id 중복 검사
     public int getIdCheck(String id);
+    
+	// sns 중복 검사
+    public int getSnsCheck(String k_email);
     
 	// tel 중복 검사
     public int getTelCheck(String tel);

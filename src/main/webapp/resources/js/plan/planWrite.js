@@ -988,8 +988,6 @@ function delLinePath() {
 	const seq = calcDateSeq();
 
 	for (let i = 0; i < straightPolyLine[seq].length; i++) {
-		console.log(straightPolyLine[seq].length);
-		console.log(straightPolyLine[seq]);
 		straightPolyLine[seq][i].setMap(null);
 	}
 	straightPolyLine[seq] = [];

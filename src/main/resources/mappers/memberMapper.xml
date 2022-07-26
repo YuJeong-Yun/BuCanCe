@@ -64,6 +64,12 @@
 		where id = #{id}
     </select>
     
+	<select id="getSnsCheck" parameterType="String" resultType="int">
+		select count(k_email)
+		from bcc_member 
+		where id = #{k_email}
+    </select>
+    
     <select id="getEmailCheck" parameterType="String" resultType="int">
 		select count(email) 
 		from bcc_member 

@@ -84,21 +84,21 @@
 								<p>
 									<input type="checkbox" name="checkOne" class="inp_chk_02"
 										id="checkOne"><i> <a href="javascript:void(0)"
-										onclick="openLayer('hd_pops_1',500,500)"><u>숙소이용규칙 및
+										onclick="openLayer('hd_pops_1',500,500)"><u style="color: black;">숙소이용규칙 및
 												취소/환불규정 동의</a></i><b style="color: red"> (필수)</u></b>
 								</p>
 								<p>
 									<input type="checkbox" name="checkOne" class="inp_chk_02"
 										id="checkTwo"> <span onclick="pop_agree_02();"><i><a
 											href="javascript:void(0)"
-											onclick="openLayer('hd_pops_2',540,540)"><u>개인정보 수집 및
+											onclick="openLayer('hd_pops_2',540,540)"><u style="color: black;">개인정보 수집 및
 													이용 동의</a></i><b style="color: red"> (필수)</b></span></u>
 								</p>
 								<p>
 									<input type="checkbox" name="checkOne" class="inp_chk_02"
 										id="checkThree"> <span onclick="pop_agree_03();"><i><a
 											href="javascript:void(0)"
-											onclick="openLayer('hd_pops_3',570,270)"><u>개인정보 제 3자
+											onclick="openLayer('hd_pops_3',570,270)"><u style="color: black;">개인정보 제 3자
 													제공 동의</a></i><b style="color: red"> (필수)</b></span></u>
 								</p>
 
@@ -106,7 +106,7 @@
 									<input type="checkbox" name="checkOne" class="inp_chk_02"
 										id="checkFour"> <span onclick="pop_agree_04();"><i><a
 											href="javascript:void(0)"
-											onclick="openLayer('hd_pops_4',600,600)"><u>만 14세 이상
+											onclick="openLayer('hd_pops_4',600,600)"><u style="color: black;">만 14세 이상
 													확인</a></i><b style="color: red"> (필수)</b></span></u>
 								</p>
 							</section>
