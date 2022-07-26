@@ -12,16 +12,16 @@
                         </ul>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom: 30px; color: #fff; font-size: 20px;" >
+                <div class="row" style="margin-bottom: 30px; color: #fff; font-size: 17px;" >
                     <div class="col-lg-12">
                         <ul>
-                            <li>성치훈 - cookeyshop2@gmail.com</li>
-                            <li>이슬비 - iolagvi@kakao.com</li>
-                            <li>주혜림 - hyelim.zu@gmail.com</li>
-                            <li>하영득 - kld9223@kakao.com</li>
-                            <li>하혜진 - imjinius@kakao.com</li>
-                            <li>전상현 - shjeon510@gmail.com</li>
-                            <li>윤유정 - yunyj99@gmail.com</li>
+                            <li style="width: 250px;">성치훈 - cookeyshop2@gmail.com</li>
+                            <li style="width: 250px;">이슬비 - iolagvi@kakao.com</li>
+                            <li style="width: 250px;">주혜림 - hyelim.zu@gmail.com</li>
+                            <li style="width: 250px;">하영득 - kld9223@kakao.com</li>
+                            <li style="width: 250px;">하혜진 - imjinius@kakao.com</li>
+                            <li style="width: 250px;">전상현 - shjeon510@gmail.com</li>
+                            <li style="width: 250px;">윤유정 - yyj1999@gmail.com</li>
                         </ul>
                     </div>
                 </div>
