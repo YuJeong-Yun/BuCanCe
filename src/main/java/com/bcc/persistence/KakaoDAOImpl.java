@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.bcc.domain.KakaoVO;
+import com.bcc.domain.MemberVO;
 
 @Repository
 public class KakaoDAOImpl implements KakaoDAO {
@@ -26,7 +26,7 @@ public class KakaoDAOImpl implements KakaoDAO {
 	}
 
 	@Override
-	public KakaoVO getKakao(HashMap<String, Object> userInfo) {
+	public MemberVO getKakao(HashMap<String, Object> userInfo) {
 		System.out.println("RN:"+userInfo.get("nickname"));
 		System.out.println("RE:"+userInfo.get("email"));
 		return sqlSession.selectOne(NAMESPACE+".getKakao", userInfo);
