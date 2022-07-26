@@ -13,7 +13,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="breadcrumb-text">
-					<h2 class="nanumFont" >나의 찜목록</h2>
+					<h2 id="favTitle" >나의 찜목록</h2>
 				</div>
 			</div>
 		</div>
