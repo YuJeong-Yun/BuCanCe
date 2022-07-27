@@ -121,6 +121,9 @@ body {
 	width: 90px;
 	padding-right: 10px;
 	text-align: center;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .member-list > li .member--name:before {
 	content: "|";
