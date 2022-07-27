@@ -209,7 +209,6 @@ public class OrderController extends PaypleController {
 
 		String id = (String) session.getAttribute("id");
 		String payer_name = (String) session.getAttribute("id");
-		service.liUp(id);
 		model.addAttribute("pay_type", request.getParameter("pay_type")); // 결제수단 (transfer|card)
 		model.addAttribute("pay_work", request.getParameter("pay_work")); // 결제요청 방식 (AUTH | PAY | CERT)
 		model.addAttribute("payer_id", request.getParameter("payer_id")); // 결제자 고유 ID (빌링키)
@@ -297,6 +296,7 @@ public class OrderController extends PaypleController {
 
 					try {
 						orderservice.putOrder(pvo);
+						service.liUp(id);
 					} catch (NullPointerException e) {
 						e.printStackTrace();
 					} catch (Exception e) {
