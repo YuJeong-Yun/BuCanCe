@@ -120,7 +120,25 @@ III. 개발 및 시연 영상
  
 <br>
  
- ### 3)
+ ### 3) 숙박 결제 & 환불 기능
+ - 결제수단과 약관동의를 선택 후 아임포트 API 이용해 결제 가능
+ <img src="https://user-images.githubusercontent.com/97975367/184124990-7694a4af-916b-4c24-b168-80bbddcae1e6.png" width="500" height="350" />
  
+ <br>
+ 
+ - 예약 내역에서 숙소 환불 가능
+ <img src="https://user-images.githubusercontent.com/97975367/184125187-c1428091-3e3e-44b6-b3a7-b89da9d971cc.png" width="200" height="400" />
+ 
+</details>
+
+##
+<details>
+ <summary>3. 행정구역별 지도  </summary>
+ <br>
+ 
+ - 행정구역 클릭시 해당 행정구역의 관광지 출력
+ 
+ [polygon.webm](https://user-images.githubusercontent.com/97975367/184126041-10fc5aa3-94f1-4e80-bd79-a28c03c8656e.webm)
+
  
 </details>
