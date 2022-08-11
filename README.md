@@ -147,6 +147,43 @@ III. 개발 및 시연 영상
  - 행정구역 클릭시 해당 행정구역의 관광지 출력
  
 [polygon.webm](https://user-images.githubusercontent.com/97975367/184126305-e1158cd0-75ef-4da2-88cc-a601aa08a31f.webm)
+ 
+ <br> 
+ 
+</details>
 
+##
+<details>
+ <summary>4. 구독권  </summary>
+ <br>
+ 
+ ### 1) 유료회원 구독권
+ - Payple을 이용하여 구독권 '1달 구독권' or '정기 구독권' 결제 구현
+ 
+    <img src="https://user-images.githubusercontent.com/97975367/184128319-5087077c-cc49-4fae-a82f-b32ce81bb746.png" width="400" height="300" />
+ 
+ <br>
+ 
+ ### 2) 스케줄러
+ - 수동 스케줄러 구현 => 기간 만료 회원 삭제 & 정기결제 회원 재결제
+ 
+  <img src="https://user-images.githubusercontent.com/97975367/184128735-01d19f35-a9f9-473f-8e4e-0e447ac2da1c.png" width="300" height="200" />
+
+   
+</details>
+
+
+
+##
+<details>
+ <summary>5. 플랜 작성  </summary>
+ <br>
+ 
+</details>
+
+##
+<details>
+ <summary>6. 관리자  </summary>
+ <br>
  
 </details>
