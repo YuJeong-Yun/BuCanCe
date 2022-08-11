@@ -31,7 +31,7 @@ I. 프로젝트 소개
 > Team3
 >> 하혜진 : DB 설계 / 행정구역 지도 / 맛집 게시판 / 관리자 페이지   
 >> 이슬비 : DB 설계 / 구독권 / 정기결제    
->> 윤유정[팀장] : DB 설계 / 랜덤 프로필 / 그룹 초대 / 플랜 작성
+>> 윤유정 : DB 설계 / 랜덤 프로필 / 그룹 초대 / 플랜 작성
 
 <br><br>
 <hr>
@@ -96,8 +96,9 @@ III. 개발 및 시연 영상
 - 조회수, 댓글수, 좋아요 수 확인 가능
 - 공공데이터Api 사용하여 부산 현재 날씨 출력
  
-[tour_board.webm](https://user-images.githubusercontent.com/97975367/184121276-0ef233c6-8742-4d22-8453-c156f6a1d64f.webm)
+ [tour_board.webm](https://user-images.githubusercontent.com/97975367/184169946-b9afac11-9ba3-4e53-95ea-86fb086bd695.webm)
 
+ 
 <br>
  
  ### 5) 관광지 상세정보
@@ -168,16 +169,38 @@ III. 개발 및 시연 영상
  - 수동 스케줄러 구현 => 기간 만료 회원 삭제 & 정기결제 회원 재결제
  
   <img src="https://user-images.githubusercontent.com/97975367/184128735-01d19f35-a9f9-473f-8e4e-0e447ac2da1c.png" width="300" height="200" />
-
    
 </details>
-
 
 
 ##
 <details>
  <summary>5. 플랜 작성  </summary>
  <br>
+ 
+ ### 1) 회원 초대
+ - 플랜 초대 수락 / 거절
+ 
+ [plan_invite.webm](https://user-images.githubusercontent.com/97975367/184174077-d59b4569-4c1c-4041-b053-ad915835d914.webm)
+
+ <br>
+ 
+ - 방장은 모달창을 통해 플랜에 회원 초대 / 초대 취소 가능
+ 
+ [plan_invite2.webm](https://user-images.githubusercontent.com/97975367/184174606-e37767ff-10bb-40ac-8471-ca9860572327.webm)
+
+<br>
+
+ ### 2) 플랜 작성
+ - 관광지 선택 / 관광지 검색
+ 
+ [plan_write.webm](https://user-images.githubusercontent.com/97975367/184175854-46723370-0f12-4f28-bd65-f5afab63f1da.webm)
+
+ <br>
+ 
+ - 직선 경로 확인
+ 
+ 
  
 </details>
 
