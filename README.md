@@ -64,11 +64,12 @@ III. 개발 및 시연 영상
 -----
 <details>
  <summary>0. 메인화면</summary>
- 
- [메인 화면](https://user-images.githubusercontent.com/97975367/184119317-f2e63857-b745-451c-bae6-df59ba7b98a0.webm)
- </details>
  <br>
+ 
+ [main](https://user-images.githubusercontent.com/97975367/184119317-f2e63857-b745-451c-bae6-df59ba7b98a0.webm)
+ </details>
 
+##  
 <details>
 <summary> 1. 회원 / 게시판</summary>
 
@@ -94,14 +95,32 @@ III. 개발 및 시연 영상
 ### 4) 관광지 게시판
 - 조회수, 댓글수, 좋아요 수 확인 가능
 - 공공데이터Api 사용하여 부산 현재 날씨 출력
+ 
+[tour_board.webm](https://user-images.githubusercontent.com/97975367/184121276-0ef233c6-8742-4d22-8453-c156f6a1d64f.webm)
 
-    <img src="https://user-images.githubusercontent.com/97975367/184117581-a5207af6-519d-4a3e-9200-c7a8cb87e7a7.png" width="600" height="450" />
 <br>
 
 </details>
-<br>
 
+## 
 <details>
 <summary>2. 숙박</summary>
 
+### 1) 숙박 목록
+- 숙박정보 크롤링으로 인한 페이지 지연 현상 => 로딩bar & 무한스크롤을 활용하여 자연스럽게 구현
+ 
+ [accomodation_list](https://user-images.githubusercontent.com/97975367/184119684-3e99573e-8523-4cfc-844b-aa5825bc2df5.webm)
+ 
+<br>
+ 
+ ### 2) 숙박 상세정보
+ - 크롤링해온 숙소 상세정보와 카카오 지도 API 활용하여 숙소의 위치정보+로드뷰 노출
+
+[accomodation_detail](https://user-images.githubusercontent.com/97975367/184120478-ef870a02-b74f-4e59-804e-33e3638a7a1a.webm)
+ 
+<br>
+ 
+ ### 3)
+ 
+ 
 </details>
