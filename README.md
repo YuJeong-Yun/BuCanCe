@@ -99,7 +99,15 @@ III. 개발 및 시연 영상
 [tour_board.webm](https://user-images.githubusercontent.com/97975367/184121276-0ef233c6-8742-4d22-8453-c156f6a1d64f.webm)
 
 <br>
+ 
+ ### 5) 관광지 상세정보
+ - 댓글 작성 가능
+ - 네이버 검색 api로 리뷰 노출
+ - 카카오맵 api로 길찾기 기능 제공
+ 
+[tour_detail.webm](https://user-images.githubusercontent.com/97975367/184127632-8bb86f68-22bc-42b5-84b4-26a0c63b8077.webm)
 
+ <br>
 </details>
 
 ## 
@@ -124,7 +132,7 @@ III. 개발 및 시연 영상
  - 결제수단과 약관동의를 선택 후 아임포트 API 이용해 결제 가능
  <img src="https://user-images.githubusercontent.com/97975367/184124990-7694a4af-916b-4c24-b168-80bbddcae1e6.png" width="500" height="350" />
  
- <br>
+ <br><br>
  
  - 예약 내역에서 숙소 환불 가능
  <img src="https://user-images.githubusercontent.com/97975367/184125187-c1428091-3e3e-44b6-b3a7-b89da9d971cc.png" width="200" height="400" />
@@ -138,7 +146,7 @@ III. 개발 및 시연 영상
  
  - 행정구역 클릭시 해당 행정구역의 관광지 출력
  
- [polygon.webm](https://user-images.githubusercontent.com/97975367/184126041-10fc5aa3-94f1-4e80-bd79-a28c03c8656e.webm)
+[polygon.webm](https://user-images.githubusercontent.com/97975367/184126305-e1158cd0-75ef-4da2-88cc-a601aa08a31f.webm)
 
  
 </details>
