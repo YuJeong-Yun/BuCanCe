@@ -63,6 +63,13 @@ I. 프로젝트 소개
 III. 개발 및 시연 영상
 -----
 <details>
+ <summary>0. 메인화면</summary>
+ 
+ [메인 화면](https://user-images.githubusercontent.com/97975367/184119317-f2e63857-b745-451c-bae6-df59ba7b98a0.webm)
+ </details>
+ <br>
+
+<details>
 <summary> 1. 회원 / 게시판</summary>
 
 ### 1) 회원가입
