@@ -200,8 +200,23 @@ III. 개발 및 시연 영상
  
  - 직선 경로 확인
  
+ [plan_write2.webm](https://user-images.githubusercontent.com/97975367/184177945-088d2e17-bad8-4ec9-b025-df1bc755eaef.webm)
+
+ <br>
  
+ - 최소 시간 자동차 경로 확인 (최대 7개까지 확인 가능 & 누적 출력)
  
+ [plan_write3.webm](https://user-images.githubusercontent.com/97975367/184178472-06b16b74-63f2-44b6-81a6-fee3b5de7424.webm)
+
+ <br>
+ 
+ ### 3) 저장된 플랜 확인
+ - 플랜 작성 회원 확인 가능
+ - 날짜별 순서대로 관광지 출력
+ 
+ ![image](https://user-images.githubusercontent.com/97975367/184178692-60dd7e8a-8c50-433a-acbd-f283da94d8c2.png)
+
+ <br>
 </details>
 
 ##
@@ -209,4 +224,14 @@ III. 개발 및 시연 영상
  <summary>6. 관리자  </summary>
  <br>
  
+ ### 1) 관리자 Dashboard
+ - 회원가입수 / 월별 매출 등 확인 가능
+ ![image](https://user-images.githubusercontent.com/97975367/184179346-ae24ed56-cc01-4c04-b25f-8bec00b6722a.png)
+ 
+ <br>
+ 
+ - 기간별 매출 조회 가능
+ ![image](https://user-images.githubusercontent.com/97975367/184179585-01da3d3d-6145-4741-a285-17f34958e081.png)
+
+
 </details>
