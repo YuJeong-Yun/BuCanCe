@@ -375,16 +375,70 @@ V. Trouble Shooting
 <details>
  <summary><b> 자동차 경로 확인 기능 횟수 제한 </b></summary>
  
+ <br>
+ 
  Tamp api를 이용해 다중 경로 확인 기능을 추가하려고 했다.   
  API에서 다중 경로 10 기능을 이용하면 10개까지의 경로를 확인할 수 있지만 무료 이용일 경우 하루 100회로 실행 횟수가 제한되었다.   
 
- _=> 자동차 경로 확인에 경유지를 넣는 방법을 이용해 1000회까지 실행 가능하게 함_
-
-But 이렇게 하면 최대 7까지 경로만 확인 가능하고, 선택 관광지가 7개 초과면 오류가 떴다.
+ 그래서 자동차 경로 확인에 경유지를 넣는 방법을 이용해 1000회까지 실행 가능하게 했는데,   
+ 이렇게 하면 최대 7까지 경로만 확인 가능하고, 선택 관광지가 7개 초과면 오류가 뜨는 문제가 발생했다.
+ 
+ <br>
 
  <b>`해결 방법`</b>
  
- 선택한 관광지가 7개 이하이면 그대로 선택 관광지 정보를 보내고, 7개 초과이면 뒤에 선택한 7개의 관광지 정보를 보내도록 했다.
+ 우선 시작점, 도착점 외 경유지가 있을 경우(length >= 3),    
+ 선택한 관광지 수에 따라 7개 이하이면 앞에서부터, 7개 초과이면 뒤에서부터 7개의 위도 경도를 하나로 연결했다.   
  
+ ```javascript
+// 경유지 있을 경우
+	let passList = '';
+	if (length >= 3) {
+		// 선택한 관광지 3~7개 일 경우 -> 경로 7개 까지만 확인 가능
+		if (length <= 7) {
+			for (let i = 1; i < length - 1; i++) {
+				const cNum = orderedTour[seq][i];
+				const lng = positions[seq][cNum].getPosition()._lng;
+				const lat = positions[seq][cNum].getPosition()._lat;
+				passList += lng + "," + lat + "_";
+			}
+			// 선택한 관광지 7개 초과일 경우
+		} else {
+			for (let i = length - 6; i < length - 1; i++) {
+				const cNum = orderedTour[seq][i];
+				const lng = positions[seq][cNum].getPosition()._lng;
+				const lat = positions[seq][cNum].getPosition()._lat;
+				passList += lng + "," + lat + "_";
+			}
+		}
+		passList = passList.substring(0, passList.length - 1);
+	}
+ ```
+                                      
+ <br>
+ 
+ 그리고 경로탐색 API 사용요청을 보낼 때 선택한 관광지의 개수에 따라서   
+ 7개 이하이면 앞에서부터, 7개 초과이면 뒤에서부터 계산해서 시작점과 도착점의 위도 경도를 보내도록 했다.   
+                                      
+ ```javascript
+	// 선택한 관광지 7개 이하일 경우
+	if (orderedTour[seq].length <= 7) {
+		startX = positions[seq][orderedTour[seq][0]].getPosition()._lng;
+		startY = positions[seq][orderedTour[seq][0]].getPosition()._lat;
+		endX = positions[seq][orderedTour[seq][length - 1]].getPosition()._lng;
+		endY = positions[seq][orderedTour[seq][length - 1]].getPosition()._lat;
+		// 선택한 관광지 7개 초과일 경우
+	} else {
+		startX = positions[seq][orderedTour[seq][length - 7]].getPosition()._lng;
+		startY = positions[seq][orderedTour[seq][length - 7]].getPosition()._lat;
+		endX = positions[seq][orderedTour[seq][length - 1]].getPosition()._lng;
+		endY = positions[seq][orderedTour[seq][length - 1]].getPosition()._lat;
+	}
+ ```
 
+ <br>
+
+ _즉 선택한 관광지가 7개 이하이면 그대로 선택 관광지 정보를 보내고, 7개 초과이면 뒤에 선택한 7개의 관광지 정보를 보내도록 했다._
+ 
+ <br>
 </details>
