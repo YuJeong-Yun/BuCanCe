@@ -1,13 +1,9 @@
 # :ocean: BuCanCe :ocean:
-
 ### :point_right: <a href="http://itwillbs5.cafe24.com/main" target="_blank">부캉스 이동하기</a>
+<br><br><hr>
 
-#### 기간 : 2022.06.23 ~ 2022.07.27   
-#### 팀원 : 윤유정, 주혜림, 성치훈, 전상현, 하영득, 하혜진, 이슬비
-
-<br>
-<hr>
-
+I. 프로젝트 소개
+-----
  ### :mag: 부산바캉스(부캉스)- 부산의 통합 관광 서비스 제공
  <details>
  <summary>비즈니스 모델 확인</summary>
@@ -21,9 +17,28 @@
 >> #### => 경쟁력 확보 
 </details>
 <br>
+ 
+#### 기간 : <i>2022.06.23 ~ 2022.07.27   (5 weeks) </i>
+#### 팀원 및 업무분장 : 
+> Team1
+>> 주혜림 : DB 설계 / 관광지 게시판 / 회원 관리 / 관리자 페이지   
+>> 성치훈 : DB 설계 / 로그인 / SNS로그인 / 회원 관리   
+
+> Team2   
+>> 하영득 : DB 설계 / 숙소 크롤링 / 숙소 결제   
+>> 전상현 : DB 설계 / 숙소 크롤링 / 숙소 결제
+
+> Team3
+>> 하혜진 : DB 설계 / 행정구역 지도 / 맛집 게시판 / 관리자 페이지   
+>> 이슬비 : DB 설계 / 구독권 / 정기결제    
+>> 윤유정[팀장] : DB 설계 / 랜덤 프로필 / 그룹 초대 / 플랜 작성
+
+<br><br>
 <hr>
 
-## :wrench: Development Environment
+ II. 개발환경 및 문서
+ -----
+### :wrench: Development Environment
 - `OS` : <img src="https://img.shields.io/badge/windows10-0078D6?style=for-the-badge&logo=windows&logoColor=white">
 - `DB` : <img src="https://img.shields.io/badge/MySQL5.5.17-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
 - `WAS` : <img src="https://img.shields.io/badge/Apache tomcat 8.5-F8DC75?style=for-the-badge&logo=Apache Tomcat&logoColor=black">
@@ -35,12 +50,16 @@
 <br><br>
 
 ## :wrench: ERD
-<img src="https://user-images.githubusercontent.com/97975367/184006127-baf77ec8-0900-4b31-8f71-3028040fb3a5.png" width="600" height="500"/>
+<img src="https://user-images.githubusercontent.com/97975367/184006127-baf77ec8-0900-4b31-8f71-3028040fb3a5.png" width="700" height="600"/>
 <br><br>
 
 ## :wrench: Usecase Diagram
-<img src="https://user-images.githubusercontent.com/97975367/184006446-1fb02b52-10b4-4b93-b14b-51deb92798bb.png" width="500" height="500"/><img src="https://user-images.githubusercontent.com/97975367/184006503-50c46c07-8c3f-4d09-8abc-31d1bbc22573.png" width="380" height="300"/>
-<br><br>
+<img src="https://user-images.githubusercontent.com/97975367/184006446-1fb02b52-10b4-4b93-b14b-51deb92798bb.png" width="500" height="500"/><img src="https://user-images.githubusercontent.com/97975367/184006503-50c46c07-8c3f-4d09-8abc-31d1bbc22573.png" width="400" height="300"/>
 
+<br><br>
 <hr>
+
+
+III. 개발 및 시연 영상
+-----
 
