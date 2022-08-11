@@ -166,10 +166,10 @@ III. 개발 및 시연 영상
  <br>
  
  ### 2) 스케줄러
- - 수동 스케줄러 구현 => 기간 만료 회원 삭제 & 정기결제 회원 재결제
+ - 수동 스케줄러 구현 => 관리자가 기간 만료 회원 삭제 & 정기결제 회원 재결제 실행
  
-  <img src="https://user-images.githubusercontent.com/97975367/184128735-01d19f35-a9f9-473f-8e4e-0e447ac2da1c.png" width="300" height="200" />
-   
+  <img src="https://user-images.githubusercontent.com/97975367/184180441-434071f5-01b4-40a6-aca0-b4f35ce60738.png" width="800" height="200" />
+
 </details>
 
 
@@ -232,6 +232,82 @@ III. 개발 및 시연 영상
  
  - 기간별 매출 조회 가능
  ![image](https://user-images.githubusercontent.com/97975367/184179585-01da3d3d-6145-4741-a285-17f34958e081.png)
+ 
+ <br>
+ 
+ ### 2) 회원 관리
+ - 가입 회원 목록 확인 / 탈퇴 가능
+![image](https://user-images.githubusercontent.com/97975367/184179946-cbdce296-576f-4ecf-ad03-e12152879d9d.png)
+
+ <br>
+ 
+ ### 3) 관광지 게시글 작성
+ ![image](https://user-images.githubusercontent.com/97975367/184180153-243f9a51-00ed-4a0e-b21c-7cf2834183a7.png)
+
+ <br>
+ 
+ ### 4) 수동 스케줄러 실행
+ ![image](https://user-images.githubusercontent.com/97975367/184180194-75817a6c-b4ba-43b9-a916-07286aaf06f6.png)
+
+ <br>
+
+</details>
+<br><br><hr>
+
+IV. 보완점
+------
+- 다양한 SNS로그인 추가 구현
+- 마이페이지 미구현 메뉴바 추가 구현 필요
+- 관리자 차트 페이지에서 데이터 가져오는데 걸리는 시간 단축 필요
+- 숙소 상세정보 크롤링 시간 단축 (AJAX 활용 등)필요
+- 수동 말고 자동 스케줄러 구현 필요
+- 구독권 결제 도중 취소 시, 완료되지 않음에도 DB에는 유료 회원으로 저장되는 오류 수정 필요
+- 플랜 작성 시 찜한 관광지 확인할 수 있는 카테고리 추가
+- 플랜 수정 시 선택한 관광지 불러올 때 삭제된 관광지 처리 필요
+- 현재 모든 예외를 throw Exception으로 던지고 에러 페이지로 이동하는게 전부임 => 예외를 로그로 남기고 상황에 따라 transaction roll back 하는 등의 처리가 필요
 
 
+<br><br><hr>
+
+V. Trouble Shooting
+-----
+<details>
+ <summary>플랜 작성 페이지에서 숙소 목록 크롤링에 시간이 오래 걸림 </summary>
+ 
+ <br>
+ 
+ `처음 방법`
+ 
+ 처음에 크롤링 해온 내용을 session에 담아서 사용했음   
+=> But 처음에 크롤링 할 때는 여전히 시간이 오래 걸리고, 사용자가 늘어날수록 서버의 부담이 증가하는 문제가 존재
+ 
+ `해결 방법`
+ 
+ 플랜 작성 페이지로 이동 시 AJAX를 이용해 비동기식으로 크롤링해온 숙소 정보를 추가해줌
+ 
+<img src="https://user-images.githubusercontent.com/97975367/184189247-26ed02f1-ca1d-49b3-bbe0-e027d5d67b31.png" width="250" hegith="600" /> => <img src="https://user-images.githubusercontent.com/97975367/184189254-f29dbf10-2743-4dad-8535-d19f49f5b3c2.png" width="250" hegith="600" />
+
+ <br>
+ 
+ ## 
+ 이 때 숙소 로딩이 완료되기 전까지 숙소 정보가 필요한 동작(관광지 삭제, 드래그로 순서 변경, 관광지 추가 등)을 하면 오류가 뜨는 문제 발생
+ 
+ `해결 방법`
+ 
+ 전역변수로 getHotelList = 0 변수를 두고, 숙소 로딩이 완료되면 1 값을 넣어줬음.   
+ getHotelList 값이 0일 때는 숙소 정보가 필요한 동작은 실행되지 않도록 해줌
+ 
+<img src="https://user-images.githubusercontent.com/97975367/184189943-01bf1f86-a746-45a1-ac88-cd36137ec021.png" width="300" height="150" />
+
+ <br>
+</details>
+
+<details>
+ <summary> </summary>
+</details>
+<details>
+ <summary> </summary>
+</details>
+<details>
+ <summary> </summary>
 </details>
