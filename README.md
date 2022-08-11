@@ -302,9 +302,41 @@ V. Trouble Shooting
  <br>
 </details>
 
+## 
 <details>
- <summary> </summary>
+ <summary>플랜 작성 - 일정별로, 순서대로 마커 지도에 출력 </summary>
+ 
+ <br>
+ 
+ #### 선택한 일정의 마커를 순서대로 지도에 띄우고 싶음. 즉 마커 하나에 관광지의 num값과 순서값이 필요한 상황
+ 
+ <br>
+ 
+`해결 방법`
+ 
+ 우선 일정별로 마커에 해당하는 num값을 저장하기 위해 Positions 전역 배열 변수를 두고, 사용자가 일정을 선택하면 해당 일정만큼 빈 Map을 배열에 추가.   
+ 관광지를 클릭하면 key는 해당 관광지의 cNum(카테고리+num), value는 마커로 해서 키-값 쌍을 Map에 추가함  
+ <br>
+ _=> 사용자가 4일의 일정을 선택했을 경우, positions안에 4개의 Map이 들어있고, 해당하는 일정의 Map에 cNum-마커 쌍으로 값이 들어있음_
+
+ <img src="https://user-images.githubusercontent.com/97975367/184190817-88677c5a-6690-4e6f-9e7a-257d0be6cd4a.png" width="870" height="140" />
+ 
+ <br>
+ 
+ 그리고 일정별로 마커의 순서를 담을 전역 배열 변수 orderedTour를 두고, positions과 마찬가지로 일정을 선택하면 일정 수 만큼 빈 배열을 orderedTour 배열에 추가.   
+ 관광지를 클릭하면 cNum(카테고리+num)이 배열에 추가되도록 했고, 드래그/관광지 삭제 함수 실행 시 활성화된 날짜칸의 배열에서 관광지 순서를 다시 계산하도록 했다.   
+ <br>
+ _=> 사용자가 4일의 일정을 선택했을 경우 orderedTour 안에 4개의 배열이 있고, 해당하는 일정의 배열안에 cNum값이 순서대로 들어있음._
+ 
+ <img src="https://user-images.githubusercontent.com/97975367/184191933-11434c8d-1d2d-405d-9ac0-7b38fb84cbcf.png" width="1000" height="150" />
+ 
+ ```
+ 즉 orderedTour에 일정별로 관광지의 순서를 저장하고, positions에서 일정별로 관광지에 해당하는 마커정보 저장
+ ```
+ <br>
 </details>
+
+## 
 <details>
  <summary> </summary>
 </details>
