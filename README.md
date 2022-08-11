@@ -276,12 +276,15 @@ V. Trouble Shooting
  
  <br>
  
- `처음 방법`
+ <b>`처음 방법`</b>
  
  처음에 크롤링 해온 내용을 session에 담아서 사용했음   
+ <br>
 => But 처음에 크롤링 할 때는 여전히 시간이 오래 걸리고, 사용자가 늘어날수록 서버의 부담이 증가하는 문제가 존재
  
- `해결 방법`
+ <br>
+ 
+ <b>`해결 방법`</b>
  
  플랜 작성 페이지로 이동 시 AJAX를 이용해 비동기식으로 크롤링해온 숙소 정보를 추가해줌
  
@@ -292,12 +295,14 @@ V. Trouble Shooting
  ## 
  이 때 숙소 로딩이 완료되기 전까지 숙소 정보가 필요한 동작(관광지 삭제, 드래그로 순서 변경, 관광지 추가 등)을 하면 오류가 뜨는 문제 발생
  
- `해결 방법`
+ <br>
+ 
+ <b>`해결 방법`</b>
  
  전역변수로 getHotelList = 0 변수를 두고, 숙소 로딩이 완료되면 1 값을 넣어줬음.   
  getHotelList 값이 0일 때는 숙소 정보가 필요한 동작은 실행되지 않도록 해줌
  
-<img src="https://user-images.githubusercontent.com/97975367/184189943-01bf1f86-a746-45a1-ac88-cd36137ec021.png" width="300" height="150" />
+<img src="https://user-images.githubusercontent.com/97975367/184189943-01bf1f86-a746-45a1-ac88-cd36137ec021.png" width="500" height="150" />
 
  <br>
 </details>
@@ -312,7 +317,7 @@ V. Trouble Shooting
  
  <br>
  
-`해결 방법`
+ <b>`해결 방법`</b>
  
  우선 일정별로 마커에 해당하는 num값을 저장하기 위해 Positions 전역 배열 변수를 두고, 사용자가 일정을 선택하면 해당 일정만큼 빈 Map을 배열에 추가.   
  관광지를 클릭하면 key는 해당 관광지의 cNum(카테고리+num), value는 마커로 해서 키-값 쌍을 Map에 추가함  
@@ -338,7 +343,30 @@ V. Trouble Shooting
 
 ## 
 <details>
- <summary> </summary>
+ <summary>플랜 정보 저장시 시간이 오래 걸리는 문제 발생 </summary>
+ <br>
+ 
+ 작성한 플랜 저장시 관광지/식당은 DB에 들어있는 정보이므로 cNum(카테고리+num)만을 구분자를 두고 연결해서 tour_plan 컬럼에 저장했다.   
+ 숙소는 크롤링해오는 정보인데 데이터가 많아서 크롤링에 시간이 오래 걸렸다.   
+ 플랜 확인 페이지로 이동 시 숙소 정보를 크롤링해오지 않으려고 필요한 정보 = cNum과 이미지, 위도, 경도, 타이틀을 모두 구분자를 두고 연결해서 tour_plan_extra 컬럼에 추가로 저장했다.
+ 
+ <br>
+ 
+ 그런데 플랜 확인 / 플랜 수정 페이지에서 저장된 플랜을 가져올 때 관광지 수가 많을 수록 로딩 시간이 오래 걸리는 문제가 있었다. [10초 가까이 걸림]     
+ 확인 결과 관광지/식당 정보를 가져오는데 많은 시간이 소요되고 있었다.   
+ <br>
+ _=> 숙소는 tour_plan_extra에 저장된 정보를 한 번만 select해 왔으나, 관광지/식당은 tour_plan 컬럼에 저장된 각각의 num에 해당하는 관광지 정보를 반복해서 select해와서 시간이 오래 걸렸던게 문제였다. _  
+
+ <br>
+ 
+ <b>`해결 방법`</b>
+ 
+ 관광지와 식당도 숙소와 마찬가지로 cNum과 이미지, 위도, 경도 타이틀을 모두 연결해서 컬럼에 저장했다.   
+ <br>
+ 
+ ![image](https://user-images.githubusercontent.com/97975367/184194287-0ad97f50-7401-46ca-a421-c8d94d1e34f8.png)
+
+
 </details>
 <details>
  <summary> </summary>
