@@ -62,4 +62,39 @@ I. 프로젝트 소개
 
 III. 개발 및 시연 영상
 -----
+<details>
+<summary> 1. 회원 / 게시판</summary>
 
+### 1) 회원가입
+- 유효성 검사 통과 후 회원가입 가능
+- 주소 검색 Daum API 이용
+
+    <img src="https://user-images.githubusercontent.com/97975367/184116785-3c9d600d-19d4-49f6-9da5-a574b55f5eaf.png" width="350" height="400" />
+<br>
+
+### 2) 로그인
+- 일반 로그인 or 카카오 로그인 가능
+
+    <img src="https://user-images.githubusercontent.com/97975367/184117021-3cf42046-64c1-470d-b74f-e3943f2282a1.png" width="300" height="200" />
+<br>
+
+### 3) 마이페이지
+- 찜목록(관광지 / 맛집) 확인 가능
+
+    <img src="https://user-images.githubusercontent.com/97975367/184117354-599f14c4-f5b3-4fd4-8a8f-5dda28c50572.png" width="600" height="450" />
+<br>
+
+### 4) 관광지 게시판
+- 조회수, 댓글수, 좋아요 수 확인 가능
+- 공공데이터Api 사용하여 부산 현재 날씨 출력
+
+    <img src="https://user-images.githubusercontent.com/97975367/184117581-a5207af6-519d-4a3e-9200-c7a8cb87e7a7.png" width="600" height="450" />
+<br>
+
+</details>
+<br>
+
+<details>
+<summary>2. 숙박</summary>
+
+</details>
