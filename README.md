@@ -1,5 +1,25 @@
 # :ocean: BuCanCe :ocean:
 ### :point_right: <a href="http://yyj1999.cafe24.com/main" target="_blank">부캉스 이동하기</a>
+테스트 회원 목록<br>
+<table>
+	<tr>
+		<td><b>ID</b></td>
+		<td><b>PW</b></td>
+	</tr>
+	<tr>
+		<td>test01</td>
+		<td>1234</td>
+	</tr>
+	<tr>
+		<td>test02</td>
+		<td>1234</td>
+	</tr>
+	<tr>
+		<td>test03</td>
+		<td>1234</td>
+	</tr>
+
+</table>
 <br><br><hr>
 
 I. 프로젝트 소개
