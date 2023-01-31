@@ -25,7 +25,7 @@
 <script type="text/javascript">
 const path = '${pageContext.request.contextPath}';
 </script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b3d692ed9e41ded5eedc5a2578cee55"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=99fbd6629cf7202febfa5d915b1ff3c3"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/board/TourMap.js"></script>
 <jsp:include page="../include/footer.jsp" />
