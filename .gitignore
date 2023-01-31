@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/java,eclipse,windows
-# Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse,windows
+# Created by https://www.toptal.com/developers/gitignore/api/windows,macos,java,eclipse
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,java,eclipse
 
 lecture
 target
@@ -19,6 +19,9 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+
+# Eclipse Core
+.project
 
 # External tool builders
 .externalToolBuilders/
@@ -73,21 +76,19 @@ local.properties
 # Spring Boot Tooling
 .sts4-cache/
 
-# Eclipse Core
-.project
-
-# IDT-specific (Eclipse Java Development Tools)
-.classpath
-
 ### Java ###
 # Compiled class file
 *.class
+
 # Log file
 *.log
+
 # BlueJ files
 *.ctxt
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+
 # Package Files #
 *.jar
 *.war
@@ -96,9 +97,45 @@ local.properties
 *.zip
 *.tar.gz
 *.rar
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### macOS Patch ###
+# iCloud generated files
+*.icloud
+
+
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -126,4 +163,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/java,eclipse,windows
+# End of https://www.toptal.com/developers/gitignore/api/windows,macos,java,eclipse
