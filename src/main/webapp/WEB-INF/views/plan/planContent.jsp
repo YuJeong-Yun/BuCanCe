@@ -113,6 +113,7 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
         <!-- 저장된 플랜 없을 경우 출력 -->
       	<c:if test="${planList eq null}">
       		<div class="no-plan">그룹 멤버들과 공유할 플랜을 작성해보세요!</div>
+      		<button class="write-plan" onclick="location.href='/plan/planWrite/${num}';">지금 작성하러 가기</button>
       	</c:if>
       	<!-- 플랜 출력 -->
         <c:forEach var="datePlan"  items="${planList }">
