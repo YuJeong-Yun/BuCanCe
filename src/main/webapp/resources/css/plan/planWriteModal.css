@@ -32,9 +32,12 @@
   right: 5%;
   bottom: 40px;
   margin: auto;
-  border: 1px solid #aaa;
+  border: 2px dashed #fff;
   color: #fff;
   font-weight: 700;
   cursor: pointer;
   z-index: 10;
+}
+#plan-write-modal .modal_body .btn-close-modal:hover {
+  background-color: #999;
 }
