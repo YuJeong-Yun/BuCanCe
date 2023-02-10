@@ -14,15 +14,19 @@ Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="styleshe
 		<div class="testimonial-slider owl-carousel">
           <div class="ts-item">
               <img src="${pageContext.request.contextPath }/resources/img/plan/modal1.jpg" alt="설명1" />
+              <button class="btn-close-modal">닫기</button>
           </div>
           <div class="ts-item">
               <img src="${pageContext.request.contextPath }/resources/img/plan/modal2.jpg" alt="설명2" />
+              <button class="btn-close-modal">닫기</button>
           </div>
           <div class="ts-item">
               <img src="${pageContext.request.contextPath }/resources/img/plan/modal3.jpg" alt="설명3" />
+              <button class="btn-close-modal">닫기</button>
           </div>
           <div class="ts-item">
               <img src="${pageContext.request.contextPath }/resources/img/plan/modal4.jpg" alt="설명4" />
+              <button class="btn-close-modal">닫기</button>
           </div>
           <div class="ts-item">
               <img src="${pageContext.request.contextPath }/resources/img/plan/modal5.jpg" alt="설명5" />
