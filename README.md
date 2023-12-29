@@ -1,5 +1,5 @@
 # :ocean: BuCanCe :ocean:
-### :point_right: <a href="http://yyj1999.cafe24.com/main" target="_blank">부캉스 이동하기</a>
+<!-- ### :point_right: <a href="http://yyj1999.cafe24.com/main" target="_blank">부캉스 이동하기</a> -->
 테스트 회원 목록<br>
 <table>
 	<tr>
